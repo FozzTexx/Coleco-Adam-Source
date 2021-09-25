@@ -1,0 +1,64 @@
+3°f
+
+  FILE:   EOSABS:EOS_    TF             HEWLETT-PACKARD:         EOS  MKDIR     (c)   Coleco     1983  Confidential                            Sat,     8  Sep   1984,     23:41          PAGE     154
+
+  LOCATION     OBJECT    CODE     LINE        SOURCE     LINE
+
+                 |               6355
+       F346                      6356    LOAD_DIR:
+       F346    7E                6357             LO           A,  [HL]                            ; GET   ASCII    CHAR  OF  VOULME     ID
+       F347    FEO3              6358             CP           ETX                                -:  IS  IF  ETX?
+                                 6359
+       F349    2808              6360             JR           Z,1TS_AN_ETX                        ;  YUP
+                                 6361
+       F34B    12                6362             LD           [DE},A                              > NOPE,PUT      IN  THE  1K  BUFFER
+                                 6363
+       F34C    23       |        6364             INC         HL
+       F34D    13                6365             INC          DE
+                                 6366
+       F34E    10F6              6367             DJNZ         LOAD_DIR
+                                 6368
+       F350    3E03              6369             LD             A,ETX
+       F352    18                6370             DEC            DE
+                                 6371
+       F353                      6372    ITS_AN_ETX:
+       F353    12                6373             LO           [OE],A                              ; ETX   TERMINATED     DIRECTORY      NAME
+       F354    FO2ZAFOFF         6374             LD           1Y,{FCB_DATA_ADDR)                  ; POINTER     TO   1K BUFFER
+                                 6375                 .
+       F358    3AFD86            6376             LD           A,  [SECTORS    TO_INIT])           ; GET   THE   NO  OF  SECTORS    TO   INTIALIZE
+       F358    FE8O              6377             OR          O80H                                 ; SET   HI  BIT
+       F35D    FD770C            6378             LO           (I1Y+VOL_OIRSIZE],A                 > SAVE   IN   FIRST   BYTE   OF  BUFFER
+                                 6379
+       F360    E1                6380             POP         HL
+       F361    D1                638 1            POP         DE
+       F362    Ci                6382             POP         BC
+                                 6383
+       F363    CS                6384             PUSH        BC
+       F364    D5                6385             PUSH        DE
+       F365    E5        |       6386             PUSH        HL
+                                 6387
+       F366    FD7311            6388             LD           [IY+VOL_SIZE+0],€
+       F369    FDO7212           6389             LO           [I¥+VOL_SIZE+1)},D
+                                 6390
+       F36C    D5                6391             PUSH        DE                                   ; GET   TO  FIRST    DIR  ENTRY
+       F36D    11004E            6392             LD          DE,   VOL_DES_   LENGTH+DIR_ENT_LENGTH*2               :  POINT   TO  FIRST    FILE   ENTRY
+       F370    FD19              6393             ADD         IY  ,DE
+       F372    Dt                6394             POP         DE
+                                 6395
+       F373    FDO71F7           6396             LD          [1¥Y+DIR_MAX_LENGTH-DIR_ENT_LENGTH],C                  -  BLOCKS   ALLOCATED      FOR   DIRECTORY
+       F376    FO71F9            6397             LD          {TY¥Y+OIR_USED_LENGTH-OIR_ENT_LENGTH],C                   ; MAKE   USED    BLOCKS    AS   ALRGE    AS  POSSIBLE
+                                 6398                                                                                         .
+       F379    OC                6399             INC         <<                                   ; FIRST    “FILE”    STARTS   AFTER
+       F37A    FD710D            6400             LO          [1¥Y+DIR_START_BLOCK],C             >   LAST   SECTOR     OF DIR
+                                 6401
+       F37D    O600              6402             LO          8,0                                 ;  WANT   BC   =  # SECTORS    USED
+                                 6403                                                              - (#  DIR   SECT   +  1 TO   COVER
+                                 6404                                                             ;   SECT   O)
+                                 6405
+       F37F    EB                6406             EX          DE  , HL                             >;HL  =  #  SECTORS    ON  DEVICE
+       F380    B7                6407             OR          A                                   -  CLEAR   CARRY
+       F381    ED42              6408             SBC         HL  ,BC                              >;HL  =  #  SECTORS    LEFT   FOR   FILES    77777
+                                 6409
+       F383    FI    14          6410             LD          [I¥+OIR_MAX_LENGTH+O],L
+       F386    Fu yy  2          6411             LD          {I  Y+DIR_MAX_LENGTH+1)],H
+                   Mats

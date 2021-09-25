@@ -1,0 +1,32 @@
+FILE: OS 7PRIME:pOS          HEWLETT-PACKARD: OPERATING  SYSTEM  (c)  Coleco,   1982   CONFIDENTIAL           Fri,  18  May  1984,    16:18       PAGE     9
+
+LOCATION  OBJECT CODE   LINE      SOURCE LINE
+
+                         379
+                         380  * RESTART VECTORS
+                         381
+                         382  * THE FOLLOWING ARE THE 8  PROGRAMMABLE   RESTARTS.   FOR EACH OF  THE
+                         383  * RESTART LOCATIONS BELOW  THERE  IS A  VECTOR   IN CARTRIDGE ROM.
+                         384  * TO USE A RESTART, THE PROGRAMMER   MUST  PLACE   THE ADDRESS OF  THE
+                         385  * ROUTINE WHICH HE/SHE WISHES   TO ACCESS  THROUGH   THE RESTART  AT  THE
+                         386  * CORRSEPONDING VECTOR. THEREAFTER   EVERY  TIME   THAT RESTART  IS
+                         387  * EXECUTED, THE CARTRIOGE  PROGRAMMER'S   ROUTINE   WILL BE CALLED.
+                         388
+    0006  FFFF           389                  HEX               FF,FF                    Filler
+    0008  ¢3800C         390  RST8H           JP RST8H  RAM
+                         391
+    0008  FFFFFFFFFF     392                  HEX               FF,FF,FF,FF,  FF         Filler
+    0010  C3800F         393  RST10H          JP RST 10H RAM
+                         394
+    0013  FFFFFFFFFF   © 395                  HEX               FF,FF,FF,FF,  FF         Filler
+    0018  C38012         396  RST18H          JP RST_18H_RAM
+                         397
+    0018  FFFFFFFFFF     398                  HEX               FF,FF,FF,FF,FF           Filler
+    0020  ¢38015         399  RST20H          JP RST_20H_RAM
+                         400
+    0023  FFFFFFFFFF     401                  HEX               FF,FF,FE,FF,  FF         ;Filler
+    0028  C38018        402   RST28H          JP RST28H  RAM
+                        403
+    0028  FFFFFFFFFF    404                   HEX               FF,FF, FF,FF, FE         Filler
+    0030  C3801B        405   RST_30H         JP RST30H  RAM
+                        406

@@ -1,0 +1,10 @@
+FILE: bUoABS:E0S_TF       HEWLETT-PACKARD:  UTILS       (c}) Coleco  1903 Conf identia!                   9at,  8
+                                                                                                                   Sep  1984,  25  4U      PAGE  14)
+
+LOCATION OBJECT CODE  LINE     SOURCE LINE
+
+    FI4A D1           5781         PoP      DE
+    F148 Ci           5782         POP      BC                    ;  REALLY AF  BUT NEED  TO  PRESERVE  ERR MSG.
+    F14C C1           §783         POP      BC
+    F140 C9           $784         RET
+                      8785

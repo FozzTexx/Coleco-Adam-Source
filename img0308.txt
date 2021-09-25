@@ -1,0 +1,61 @@
+FILE: OS 7PRIME:pOS            HEWLETT-PACKARD:   LOAD  NEXT  NOTE  (c) Coleco, 1982  CONFIDENTIAL              Fri,   18 May  1984,   16:19        PAGE    34
+
+LOCATION  OBJECT   CODE   LINE       SOURCE  LINE
+
+    O3A1  C30461          1391                JP MODBO                   sto load byte 0
+                          1392  ;         ENDIF
+                          1393  ;         - test for  special  sound  effect
+    03a4  E63C            1394  114       AND 001111008              smask irrelevant bits
+    03A6  FEO             1395            CP 000001008               ;test for B5 - B2 = 0001
+                          1396  ;         IF (PSW,1S, ZERO}          snote is a special effect
+    O3A8  2028            1397            JR WZ,L15                       .
+                          1398              :--CASE--  special  effect
+    O3AA  FOE1            1399  EFFECT      POP IY                     ;1Y := SONGNO
+    O3AC  FDES            1400              PUSH IY                    sput SONGNO back on  stack
+    O3AE  C5              1401              PUSH BC                    ssave header on stack;   NEXT NOTE  PTR    := SFX,  DE  :=  SFX
+    O3AF  23              1402              INC WL                     s-pt HL to next byte   (LSB  addr SFX)
+    0380  5E              1403              LD E,(HL)                  3-E := LSB SFX
+    0381  007301          1404              LO (IX+1),€                ;-put LSB of SFX  in byte  1  of SxXDATA   (NEXT  NOTE PTR)
+    0384  23              1405              INC HL                     s-pt HL to MSB SFX
+    0385  56              1406              LD D,(WL)                  3°-D:= MSB SFX
+    0386  007202          1407              LD (IX¢2) ,D               ;-put MSB SFX in byte  2  of  SxDATa
+    0389  23              1408              INC ML                     spoint WL to next note   (after  this   new  note)
+    O38A  FOES            1409              PUSH IY                    sA := SONGNO
+    O38C  Fi              1410              POP AF
+    0380  D5              1411              PUSH DE                    slY := SFX
+    O3BE  FDE1            1412              POP IY
+    03CO  1103C6          1413              LD DE,PASS1                screate “CALL [IY]"  with  RET  to PASS1    by storing
+    03C3  05              1414              PUSH DE                    sPASS1 on the stack
+    03C4  FDE9            1415              JP (TY)                    sist 7 bytes SFX will  save   addr next   note   & SONGNO
+    03€6  1600            1416  PASS1       LD D,0                     :in same fashion, create   a  “CALL  (1Y+7)"
+    03C8  107             1417              LD E,7                     sto allow SFX to load   initial  values
+    O3CA  FD19            1418              ADD IY,DE
+    O3CC  110461          1419              LD DE,40DB0                sRET to MODBO
+    OSCF  D5              1420              PUSH DE
+    0300  FDE9            1421              JP (IY)
+                          1422  ;         ENDIF
+                          1423  ;         - if here,  note  is type  0 - 3
+    0302  C5              1424  L15       PUSH BC                    s;saveheader on stack
+    0303  78              1425            LD A,B                     ;A := fresh copy header
+    0304  £603            1426            AND 000000118              smask all but type number
+    0306  FEOO            1427            cp 0                       stest for type 0
+                          1428  ;         IF (PSW,1S,ZERO)           snote is type 0: fixed  freq  and  atn
+    0308  2020            1429            JR NZ,L16
+                          1430  ;           --CASE--  note  type 0
+                          1431  ;           * set up  NEXT NOTE PIR
+    O3DA  23              1432  TYPEO       INC HL                     snext note [after this   new  note]  is  4  bytes  away,
+    0308  23              1433              INC HL                     spoint HL to it
+    O30C  23              1434              INC HL
+    0300  23              1435              INC HL
+    O30E  007501          1436              LD {IX+1),L                sput addr in NEXT_NOTE PTR
+    03E1  0D7402          1437              LD [IX*2],H
+                          1438  ;           * move new  note  data and  fill in bytes where  necessary
+    O3€4  2B              1439              DEC WL                     ;point HL back to Ist  ROM  data  to  move,   WLEN
+    03—E5 110005          1440              LO DE,0S                   spoint DE to destination:   bytes  5,  4,   and 3
+    03€8  CD0478          1441              CALL DE TO DEST
+    03€B  010003          1442              LO BC,3                    smove 3 bytes
+    O3EE  £088            1443              LDOR
+    03FO  DD360700        1444              LD [IX+FSTEP) ,0           s;setfor no freq sweep
+    03F4  00360800        1445              LD (IX+ASTEP) ,O           ;set for no atn sweep
+    O3F8  1867            1446              JR MODB0
+                          1447  ;         ENDIF

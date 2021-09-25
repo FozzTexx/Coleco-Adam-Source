@@ -1,0 +1,61 @@
+FILE: EOSABS:E0S   °°      HEWLC TT-PACKARD:   FNCLUDE   P DCB  EQu                                              Sat.    &  Ser  198¢
+
+LOCATION OBJECT CODE  LINE       SOURCE  LINE
+
+                       1094  THESE  OUR  EQUATES   THAT  ARE  USED  BY  THE  EOS  PROGRAMS   TO REFEFERNCE
+                       1095  ;PCB AND  DCB INFORMATION
+                       1096
+                       1097
+                       1098  ;PCB EQUATES
+                      1099
+             <O0000>  1100  P_COM STAT                 EQu       O          ; THIS  IS  THE COMMAND/STATUS     BYTE
+                      1101
+             <Q0001> .1102  P_REL_ADOR                 EQU        1         ; THIS  IS  THE RELOCATION    ADDRESS
+             <O0O1>   1103  P_REL_AODR_LO              EQU       P_REL_ADDR+O
+             <0002>   1104  P_REL_ADOR_ HI             EQU       P_REL_ADOR+1
+                      1105
+             <0003>   1106  P_NUM_DCBS                 EQU       3          ; THIS  IS  THE NUMBER   OF  DCBS  DEFINED
+                      1107
+                      1108
+             <0004>   1109  P_SIZE                     DEFL      4          ; THE NUMBER   OF  BYTES  IN  THE  PCB
+                      1110
+                      1111
+                      1112
+                      1113   ;O0CEQUATES
+                      1114
+             <O00O>   1115  D_COMSTAT                 EQU       Oo        ; THE  COMMANO   STATUS  BYTE
+                      1116
+             <O0001>  1117  D_BUF_ADR                 EQU       {         ; ADDRESS   OF  THE DATA   BUFFER
+             <O001>   1118  D0BUF _ADR_LO             EQU       DBUF   ADR+0
+             <0002>   1119  0BUF  ADR  HI             EQU       D BUF _AODR+1
+                      1120
+             <0003>   1121  D_BUF_LEN                 EQU       3         ; THE  LENGTH   OF THE  DATA  BUFFER
+             <0003>   1122  DBUF LEN_LO               EQU       OBUF_LENtO
+             <0004>   1123  D_BUF_LEN HI              EQU       DBUF  _LEN+1
+                      1124
+             <O0OS>   1125  D_SECT_NUM                EQU       5         ; THE  BLOCK  DEVICE   SECTOR   NUMBER
+                      1126
+             <0009>   1127  D_SEC_DEV_ID              EQU       9         ; SECONDARY   DEVICE   ID
+                      1128
+             <OOOE>   1129  D_RET_COUNT               EQu       14        ; THE  NUMBER   OF TIMES  A  COMMAND   WILL
+                      1130                                                 : BE  RETRIED.
+             <OOOE>   1131  D_RET_COUNT LO            EQU       D_RET COUNT+0
+             <OOOF>   1132  D_RETCOUNT   HI           EQU       D_RET_COUNT+1
+                      1133
+             <0010>   1134  D_DEV_ADDR                EQU       16        ; THE  DEVICE   ADDRESS  (1D)
+                      1135
+             <OO11>   1136  D_MAX_MSG LEN             EQU       17        ; THE  MAX  LENGTH  OF  A DATA   STRING
+                      1137                                                ; FOR  THE  DEVICE
+             <O0011>  1138  D_MAX_MSG LN  _LO         EQU       DMAX  MSG  LEN+tO
+             <0012>   1139  D_MAXMSG  _LN HI          EQU       DMAX  MSG  LEN+1
+                      1140
+             <OO13>   1141  0DEV TYPE                 EQU       19        ; THE  DEVICE   TYPE,  BLOCKED   OR CHARACTER
+                      1142
+             <O014>   1143  DSTATUS  FLAGS            EQU       20        ; DEVICE  DEPENDENT    STATUS  FLAGS
+                      1144
+             <O015>   1145  DSIZE                    DEFL       21        ; THE  NUMBER  OF  BYTES  IN  THE  DCB
+                      1146
+                      1147
+                      1148
+                      1149  ;DEVICE  ID‘S  FOR  THE KEYBOARD,    PRINTER,   AND  TAPE  DRIVE
+                      1150

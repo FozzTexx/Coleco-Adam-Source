@@ -1,0 +1,43 @@
+FILE: «sSABS:EOS   TF          HEWLETT-PACKARD:    EOS PRTR    (c)  Coleco  1yo3 Confidential                     Sat,  8 Sep  1984,  23:41          beac   171
+
+LOCATION  OBJECT   CODE   LINE      SOURCE  LINE
+
+                          7014
+    F543  18F3            7015         JR        WRITE_COMMAND_AGAIN          ; SEND ANOTHER  WRITE  COMMAND
+                          7016
+    F545                  7017  WRITE_DONE:
+    F545  EB              7018         EX        DE, HL                       ; DE = PTR  TO UNPRINTED   STRNG,   HL=PTR TO  UNPRNTED+16
+    F546  18DE            7019         UR        CHECK_FOR_ETX                ; GO CHECK  THE NEXT  CHARACTER
+                          7020
+                          7021
+    F548                  7022  ITS_ETX:
+    F548  EB              7023         EX        DE, HL
+    F549  AF              7024         XOR       A                            ; ZERO OUT  A
+    F54A  B9              7025         cP        c                            ; WAS THE  FIRST CHARACTER   CHECKED
+                          7026                                                ; AN ETX?
+    F54B  2808            7027         JR        Z,END_PRINT_ROUTINE          ; YUP, DON’T  BOTHER  PRINTING   IT
+                          7028
+    F54D                  7029  SEND_ANOTHER_WRITE:              .
+    F54D  3£02            7030         LO        A,PRINTER_ID                 ; WILL WRITE  TO THE  PRINTER
+    FS4F  CDFB75          7031         CALL      __WR_CH_DEV                  ; WRITE CHARACTERS
+                          7032
+    F552  2804            7033         JR        Z,COMMAND_FINISHED_     SUCCESSFULLY   ; ALL DONE
+                          7034
+    F554  FE86            7035         cP        PR_NAK                       ; DO WE HAVE  A NAK?
+    F556  28F5            7036         JR        Z,SEND_ANOTHER    WRITE      ; YUP
+                          7037
+                          7038                                                ; NOPE, MUST  BE AN  ERROR
+                          7039                                                                  :
+      .                   7040
+    F558               _  7041  COMMAND_FINISHED   SUCCESSFULLY:
+    F558                  7042  PRINT_CMND_FAILED:
+    F558                  7043  PRNT_CMND_FAILED:
+    F558                  7044  PRTR_DCB_ACTIVE:
+    F558                  7045  END_PRINT_ROUTINE:
+    F558  FDE!            7046         pop       IY
+    FSSA  E1              7047         PoP       HL
+    FS55B 01              7048         pop       DE
+    FSSC  C1              7049         pop       BC                           ; ON ERROR,  ZERO  FLAG SET  AND  A
+                          7050                                                ; CONTAINS  THE ERROR  CODE
+    F55D  C9              7051         RET
+                          7052

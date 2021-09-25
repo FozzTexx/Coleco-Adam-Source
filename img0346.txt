@@ -1,0 +1,61 @@
+FILE: OS  7PRIME:pOS              HEWLETT-PACKARD:     PUT  MOBILE   (c)  Coleco,    1982    CONFIDENTIAL                      Fri,   18 May  1984,     16:20        PAGE    72
+
+LOCATION    OBJECT   CODE   LINE        SOURCE  LINE
+
+    OB9E    CB38            3387                  SRL E                       ;DIVIDE    NAME  BY  8
+    OBAO    CB38            3388                  SRL E
+    O8A2   CB38             3389                 SRL  E
+    OBA4    1600            3390                 LD  D,0
+    OBA6   3E09             3391                 LD  A,9                      ;CALC   POSITION    IN  BUFFER    TO  MOVE   GEN  TO
+    OBAS   90               3392                 SUB  B
+    OBAD   4F               3393                 LD  C,A
+    OBAA   0600             3394                 LO  8,0
+    OBAC   09               3395                 ADD  WL ,BC
+    OBAD    FD210001        3396                 LD   1Y,1
+    0881   3604             3397                 LD  A,4                      ;COLOR   GENERATOR     TABLE   CODE
+    0883   CD1FBB           3398                 CALL  GET  VRAM
+    0886    1821            3399                 JR  END6
+   0888                     3400   ELSE6       7ELSE                          ;MUST   BE  MODE   I]
+    0888   CB2F            3401                  SRA  A  |                    ;DIVIDE    YPOS    BY 8
+    OBBA   CB2F            3402                  SRA  A
+    OB8C   CB2F            3403                  SRA  A                       sA :=   THIRD   OF  TABLE,   O=1ST,    1=2ND,    2=3RD
+   OBBE                     3404   PHM7           lf   (_A,LT,3)              slf  A  > 2,  THEN   Y“POS   >  23  ANO   THEREFORE     OFF  SCREEN
+    OBBE   FES              3405                 cp  3
+   0BCc0   3017             3406                 JR  NC, END7
+    0BC2   57               3407                    LD  0,A                   sDE  :=  256*A   +  MAME
+    08c3   05              3408                     PUSH  DE
+    oBc4   €5              3409                     PUSH   WL
+    0ecS   3€03            3410                     LD  A,3                   ;PATTERN    GENERATOR    TABLE   CODE
+    0BC7   CD1FBB         3611                      CALL  GET  VRAM
+    OBCA   £1              3412                     POP  HL                   ;HL  :=  PATTERN    BUFFER   ADDRESS
+    0BCB   110068          3413                     LO  DE,BK  CLR-BK_PTN     ;DISPLACEMENT     BETWEEN    PATTERN    AND   COLOR   BUFFERS
+    OBCE   19              3414                     ADD  HL ,OE               sHL  :=  POINTER    TO  COLOR   BUFFER
+    OBCF   D1               3415                    POP  DE
+    0800   F0210001         3416                    LD  IY,1
+    0B8D4  3£04            3417                     LD  A,4                   ;CODE   FOR  COLOR   TABLE
+    0806   CD1FBB         3418                      CALL  GET_VRAM
+    0BD9                    3419   END7          sENDIF
+    0809                    3420   ENDS        sENDIF
+    0809   C1              3421                POP  BC                        sRESTORE    REGISTERS
+    OBDA   E1               3422               POP  HL
+    O8DB   D1               3423               POP  DE
+                            3424   ;        ENDDO
+    OBDC   1086             3425            DJNZ   DLP2
+                            3426                                                                                                                                                                                 ,
+                            3427   ; NOW  THE PATTERN    AND  COLOR   GENERATORS    ARE   IN THEIR   RESPECTIVE      BUFFERS
+                            3428   ; SO  GET THE   FOUR  GENERATORS    FOR  THIS   FRAME   OF  THE  OBJECT
+                            3429
+    OBDE   DDE1           3430                       POP                   Ix                   ;RESTORE    GRAPHICS     POINTER
+                            3431
+    OBEO   D9               3432   PM8      EXX
+    OBE1   0D5603           3433            LD  D, [1X+3)
+   OBE4    DD5SE02          3434            LD  E, (1X+2)                  ;DE'  :=  NEW  GEN
+   OBE7    004605           3435            LD  B, (IX+5]
+   OBEA    DD4E04           3436            LO C,  CIX+4)                  ;BC'  :=  PTRN  POINTER
+   OBED    D9               3437            EXX                                                                                                                                            .
+   OBEE    DOES             3438            PUSH   IX
+   OBFO    £1               3439            POP  HL                        sHL  :=  ADDRESS    OF  GRAPHICS
+   OBF1    FD2A8006         3440            LD  IY, (WORK BUFFER]
+   OBF5    FD7E04           3441            LD  A, [1Y+FRM}             sA  :=  FRM  #
+   OBF8    87               3442            ADD  A,A                       7X2
+   OBF9    4F               3443            LD  C,A

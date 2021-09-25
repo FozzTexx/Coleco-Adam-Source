@@ -1,0 +1,63 @@
+FILE: EOSABS:EOS_TF         HEWLETT-PACKARD:     EOS _PRTR    (c)  Coleco    1983  Confidential                       Sat,   8  Sep  1984,    23:41          PAGE   170
+
+LOCATION OBJECT  CODE   LINE      SOURCE   LINE
+                                       @
+                        O57  See      ERE  ERE       EEE REE  REE EEE EEE     ERE EERE REEEEE   EEETERETE    ER EEE EEERE REE
+                        6958 *  PRINT_BUFFER    ALLOWS   THE  CALLER   TO  PRINT   AN  ASCII  ETX-TERMINATED     STRING
+                        6959 *        INPUT:    HL  ==>   ADDRESS    OF ETX-TERMINATED      STRING
+                        6960 *        OUTPUT:   CONDITION    FLAGS
+                        6961 *                  Z:        NO  ERROR
+                        6962 *                  NZ:       ERROR   OCCURED
+                        6963 *                               ===>    ERROR   CODE
+                        6964 *
+                        6965 SESSRESRESESSESSKEKSKAREKHEAARSEKES     CERES       ESSERERECESSES   SER EKEREK  ESSERE  KEES SE
+                        6966
+                        6967           GLOBAL   _PR_BUFF
+                        6968
+                        6969         ;EXT       __FIND_DCB,__WR_CH_DEV
+                        6970
+    F515                6971 _  PR_BUFF.
+    F515 CS             6972          PUSH      BC
+    F516 D5             6973          PUSH      DE
+    F517 ES             6974          PUSH      HL
+    F518 FDES           6975          PUSH      IY
+                        6976    |
+    FS1A                6977 PR_BUFF2:
+    FS1A 3E02           6978          LD        A,PRINTER_ID                    ; WANT  THE  PRINTERS   DCB
+    F51C CDF446         6979          CALL      __FIND_DCB                      ; GET  THE  DEVICE’S  OCB
+      |          |      6980
+    FS1F 2037           6981          JR        NZ,END_PRINT_ROUTINE            ; THERE  WAS  A PROBLEM   FINDING    THE  DCB
+                        6982
+    F521 COF496         6983          CALL      CHK_IF_INACTIVE
+    F524 2032.          6984          UR        NZ,PRTR_DCB_ACTIVE
+                        6985
+    F526                6986 CHECK_FOR_ETX:
+    F526 010000         6987          LO        BC ,O                           ; CHARACTER   COUNT
+    F529 5D             6988          LD        Sk                              ; SAVE  THE  STRING
+    F52A 54             6989          LD        0,H                             ; DE=HL=  PTR  TO UNPRINTED     STRING
+                        6990
+    F528                6991 GET_NEXT_ASCII:
+    F52B 3E03           6992          LD        A,ETX                      :    :
+    F520 BE             6993          cP        [HL]                            ; IS  IT AN  ETX?
+    FS2E 2818           6994          JR        Z,ITS_ETX                       ; VES
+                        6995
+                        6996                                                    ; NO
+    F530 23             6997          INC       HL                              - POINT  TO  NEXT CHARACTER
+    F531 OC             6998          INC       Cc                              ; INC  COUNT
+    F532 79             63999         LD        A,C                             ; HAVE  WE  LOOKED AT   16 BYTES?
+    F533 FE10           7000          cP        16                              ‘
+    F535 20F4           7001          JR        NZ,GET_NEXT_ASCII                 VES
+                        7002 ;:                                                   DE  = PTR  TO UNPRINTED    STRNG,   DE=PTR   TO UNPRNTED+    16
+    F537 EB             7003          EX        DE ,HL                          - HL  = PTR  TO UNPRINTED    STRNG,   DE=PTR   TO UNPRNTED+    16
+                        7004
+    F538                7005 WRITE  _COMMAND_ AGAIN:
+                        7006
+    F538 3EO2           7007          LD        A,PRINTER_ID                       .
+    F53A CDFB75         7008          CALL      __WR_CH_DEV
+                        7009
+    F53D 2806           7010          JR        Z,WRITE  DONE                   - WRITE  COMPLETED  WITH   NO   ERRORS
+                        7ON1
+    F53F F              7012          CP        PR NAK                          oe    TT A  NAK?
+    F541 7   '          7013          JR        N7,PRINT_CMND_FAILED            ;     \,AN  ERRGR
+
+ nD    Re      ee        eRe                         {RFE                          ‘He     ee‘       i         \ He       ee      Et          EF        GF          GB

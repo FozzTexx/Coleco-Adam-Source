@@ -1,0 +1,33 @@
+FILE:  EOSABS:EOS      TF            HEWLETT-PACKARD:     SOUND   EQU€S   (c)  Coleco,     1982    CONFIDENTIAL                     Sat,     8  Sep  1984,   23°39          PAGE    TO
+
+LOCATION    OBJECT     CODE    LINE        SOURCE  LINE
+
+                               2648
+                               2649   seSSSSS SSS SHH HEHESSEHTSEHHHEEEES
+                               2650   °8        UPATNCTRL                +
+                               2651    SSSSSHSHEHESSS  EES       EHEE EES
+                               2652
+                               2653   ;Perform  single    byte  update    of  the   snd  chip  notse   contro!    register      or  any
+                               2654   ;attenuation    register.    IX  is  passed    pointing    to byte    O of  a  song   data    area,    MSN
+                               2655   ;register   C  = formatted    channel    attenuation     code.
+                               2656
+    E328                       2657   UPATNCTRL
+    E328    DD7E0O4            2658            LD         A,([1X+4]            ;MSN   A  = ATN,   LSN  may   be  CTRL   data
+    E328    C861               2659            BIT        4,C                  ;test   for   AITN
+                               2660                                            >{f   PSW  is  non-zero    ATN   is  to  be  sent,
+                               2661                                            ; move    it  to  the  LSN
+    E32D    2804               2662            JR         Z,L24
+    E32F   OF                  2663            RRCA                            ;Swap   nibbles
+    E330   OF                  2664            RRCA
+    E331                       2665            RRCA
+    E332   OF                  2666            RRCA                            °>LSN  A  = ATN
+                               2667
+                               2668   ;        ENDIF
+                               2669
+    E333                       2670   L24
+    E333   EGOF                2671            AND        OFH                  ;mask   MSN
+    E335   B81                 2672            OR         C                    ;4   = formatted    registers       ATN   or  CTRL
+                               2673   sees     CALL       OUT_TO_SOUNO   PORT       ;Output   ATN  or  CTRL   data
+                               2674   Seeses   RET
+    E336   C3E600              2675            JP         QUT _TO_SOUND   PORT      ;output   ATN  or  CTRL   data
+                               2676

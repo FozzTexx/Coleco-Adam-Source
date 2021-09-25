@@ -1,0 +1,63 @@
+  ILE:  EOSABS:EOS_TF        HEWLETT-PACKARD: UTILS     (c) Coleco 1983 Confidential                Sat,    @  Sep  1984,  23:40       PAGE   138
+
+  OCATION  OBJECT CODE   LINE     SOURCE LINE
+
+                         5658
+                         SE59 poms                                            rrrcccrsrcnrrrncss
+                         S660 ;
+                         5661 ; MODECHECK:  sees if an attribute byte matches a permission request.
+                         S662 ;
+                         S663 ; ENTRY PARAMETERS: IX- FCB POINTER
+                         5664 ;                   HL- DIR ENTRY
+                         5665 ; EXIT PARAMETERS:  2=1=0K
+                         S666 ;                   Z=0=NO WAY
+                         5667 ;                   A=TRASH
+                         S668 ;                   IX AND HL PRESERVED
+                         S669 ; 0LS(8/30/83)
+                         BC7I0srr                                 rrr rrrrrrarrcrcrcrcrccsc nann
+                         5671
+                         5672 ; OK CHANGED TO U_OK TO PREVENT CONFLICT WITH IDENTICAL                                                                     ‘
+                         5673 ;LABEL ELSEWHERE
+                         5674
+      FOODS              S675   MODECHECK:
+      FOODS              S676 MODECHECK:
+                         6677
+      FOD9 FDES          5678         PUSH    IV                     ;SAVE REG IY
+      FODS ES            5679         PUSH    HL                     ;SAVE DIR ENTRY
+      FODC DO7E18        5660         Lo      A,[1X+FCB_MODE}        ;GET THE MODE THE USER PASSED IN
+                         5681 «+
+                         6682 *  RANGE CHECK THIS REQUEST
+                         5683 *
+      FODF E607          5684         AND     MODEMODE               ; AND OFF TEST BITS
+      FOE1 FEOO          5685         cP      Oo                     ;MAKE SURE HE’S IN RANGE
+      FOES 281F          5686         JR      Z,RANGE_NONO
+      FOES FEOS          5687         cP      MODEMAX+1
+      FOE7 3018          5688         JR      NC,RANGE_NONO
+                         S689 +
+      FOES 21F10A        5690         LD      HL,ATTRIB_TBL          ;INDEX INTO THE MASK TABLE
+      FOEC 8S            5691         ADO     A,L                         |
+      FOED 6F            5692         LD      L.A
+      FOEE 3001          $693         JR      NC,ADJUST
+      FOFO 24            $694         INC     H
+      FOF1               $695 ADJUST
+      FOF1 FDE1          5696         PoP     ly                     ;GET THE DIR ENTRY POINTER INTO  IY
+      FOF3 FDES          5697         PUSH    IV
+      FOFS FD7EOC        5698         LO      A,[IY+DIR_ATTR]        ;GRAB HIS ATTRIBUTE BYTE
+      FOF8 AG            5699         ANO     {Ht}                   ;COMPARE IT TO THE USER‘’SREQUEST
+      FOFS 2005          5700         JR      NZ,PROTECTFAULT
+      FOFB               5701 U_OK
+      FOFB £1            $702         PoP     HL
+      FOFC FDE1          $703         PoP     ly
+      FOFE AF            5704         xOR     A                      ;INDICATE ALL IS WELL
+      FOFF C9            5705         RET
+      F100               5706 PROTECTFAULT
+      F100 3614          5707         LD      A.PRT_ERR
+      F102 1802          5708         JR      PROTECT
+      F 104              5709 RANGE _NONO
+      F104 3E11          5710         LD      A,RANGEERR
+      F106               5711 PROTECT
+      FIO6 €1            §712         POP     Hi
+      FiO7 FOF?          $713         PoP     1¥
+      FiOS B             S714         OR      Be                      END    |  ‘tLTS NFG
+
+dindacecahia     _    soretinNaaaeentiiitaa                                                   eee

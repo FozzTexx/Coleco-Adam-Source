@@ -1,0 +1,61 @@
+       FILE: «».ABS:EOS  'F        HEWLETT-PACKARD:  RD_wWT       (c) Coleco  152-Confidential                         Sat,    8  Sep  1984,  23:40       rack    117
+
+       LOCATION OBJECT  CUDE   LINE     SOURCE LINE
+
+                               4608
+                               4609  ;Packed some code   to  allow  room for
+                               4610
+                               4611        ;GLB    - __READ_FILE,    WRITE FILE
+                               4612        sEXT      BUF START  ,BUF_END,USER BUF  BYTES   REQ,BYTES    TO GO
+.                              4613        ;EXT      FNUM
+                               4614        sEXT      FCB_HEAD  ADDR  ,FCBDATA_AOOR
+                               4615        ;EXT      READ BLOCK   ,WRITEBLOCK
+                               4616        ;EXT      MODE _CHECK
+                               4617                                  |
+                               4B1B pr mnm rrr                        em meme mentee           tee eee    cerns
+                               4619 ;                         .                                                  ;
+                               4620 ;  READ FILE   -- read   some  data from a file   into  the  user’s   buffer.
+                               4621 ;
+                               4622 ; ENTRY PARAMETERS:   device   number in A; buffer   address    in  HL;
+                               4623 ;                Gesired   number  of bytes  in BC.
+                               4624 ;
+                               4625 ; EXIT PARAMETERS:   no  errors  -- Z = 1; Az0O
+                               4626 ;                    {f  errors  -- Z = 0; A =  error  code;
+                               4627|;                BC  = number   of bytes transferred
+                               4628 ;
+                               QGQD                              rr      rrr  rrr rn  te    tenn  rrr   rerecee-
+                               4630                                                                    .
+                               4631 ; GET OUT CHANGED   TO R_GET_OUT   TO PREVENT CONFLICT    WITH
+                               4632 ; IDENTICAL LABEL   ELSEWHERE
+                               4633
+           EC17                4634  READ FILE
+           EC17 CS             4635         PUSH     BC                 ;SAVE REGISTERS
+           EC18 DS      |      4636         PUSH     DE
+           EC19 E5             4637         PUSH =   HL
+           EC1A ODES           4638         PUSH =   IX
+
+           4639 22FEO6         4640         LO       (USER  _BUF],HL    ;SAVE USER’S  BUFFER   ADDRESS
+           EC1F ED43FEO2       4641         LO       [BYTES  REQ].BC    ;SAVE REQUESTED   COUNT
+           EC23 32FE0!         4642         LO       [FNUM),A           ;SAVE FILE  NUMBER
+          -EC26 ED43FEO4    ©  4649         LO       (BYTES  TO_GO),8C   ;INIT COUNTER   (COUNTS   DOWN)
+                               4644
+           EC2A B7             4645         OR       A                  ;CHECK FILE  NUMBER
+           EC2B CAED7F         4646         uP       Z,READ_ERR2        ;BRANCH IF  ZERO
+           EC2E FEO3           4647         cP       NUM_FCBS           ;CHECK FOR  MAX  RANGE
+           EC30 D2E07F         4648         uP       NC ,READ_ERR2      ;BRANCH IF  TOO  LARGE
+                               4649
+           EC33 47             4650         LD       B.A                ;PUT IT INTO  B
+           EC34 DO2AFOFD   =:  4651         LO       IX,([FCB_HEAD  ADDR]  ;GET ADORESS   OF  OTH  FCB
+           EC38 2AFOFF         4652         LO       HL, [FCB  DATA  ADOR] ;GET ADDRESS   OF  OTH  BUFFER
+           EC38                4653 READ!
+           EC3B 110023         4654         LD       DE,FCB_LENGTH               POINTER   TO  NEXT   FCB
+           EC3E D019           4655         ADD      1X, DE
+           EC40 110400         4656         LO       DE, 1024           ;ADVANCE POINTER   TO  NEXT   BUFFER
+           EC43 19             4657         ADD      HL, DE
+           EC44 10F5           4658         DUNZ     READ               ;UNTIL WE GET  TO  THE  ONE   WE  WANT
+                               4659
+           EC46 22FEO8         4660         LO       [BUF _START],HL    ;SAVE ADORESS  OF  MY  BUFFER
+           EC49 19             4661         ADD      HL ,DE             ;POINT HL PAST   ENO  OF  MY  BUFFER
+           EC4A 22FEOA         4662         LO       [BUF_END]   Hi   ;SAVE IT TOC
+                               4663
+                               4664                                       peeCHECK  FOR  MODE  «#5

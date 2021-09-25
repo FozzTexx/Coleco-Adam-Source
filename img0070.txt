@@ -1,0 +1,63 @@
+FILE:     EOSABS:EOS      TF            HEWLETT-PACKARD:        SOUND    EQU€S     (c)  Coleco,     1982     CONFIDENTIAL                       Sat,     8  Sep   1984,     23:39             PAGE      66
+
+LOCATION       OBJECT     CODE    LINE        SOURCE    LINE
+
+                                  2520
+                                  2521   ,SSeS S SHE SESE  HEHEHE  SHES  EH HERS
+                                  2522   -2          FREQ  SWEEP                 *
+                                  2523   ,SSSSS  SSH   SEHHEHEHE   KES  EHHEHEED
+                                  2524
+                                  2525   -See  Users’    Manual      for  description
+                                  2526   -RETs   2 SET:    {f   note   over
+                                  2527   -RETs   2 RESET:      if  sweep    in  progress     or  note    not  over
+                                  2528
+      E2C7                        2529   FREQ_SWEEP
+                                  2530
+                                  2531             *   if  freq    not   swept,    dec   NLEN   and   RET   [setting     Z  flag]
+                                  2532
+      E2C7     DD7EO7             2533             LO           A, [IX+FSTEP]           ;check     for   no  sweep    code
+      E2CA     87                 2534             OR           A                       ;SET   Z  flag   if  FSTEP    =  O
+      E2CB     2009               2535             JR           NZ,L20                  ;if  PSW   is  zero   note    not   to   be  swept
+      E2CO     OD7EOS             2536             LD           A, [IX+NLEN]            ;dec   NLEN   and
+      E200     30                 2537             DEC          A                       ;SET   Z flag    if  NLEN   =  O
+      E201     c8                 2538             RET          2                       ;leave    if  note   over   with    Z  flag     SET
+      E202     DO7705             2539             LO           [IX+NLEN],A             ;store   decremented       NLEN
+      E2D5     c9                 2540             RET                                  ;RET   with   Z  flag   RESET    [note    not    over]
+                                  2541
+                                  2542             ENDIF
+                                  2543
+                                  2544             ¢  sweep     going.    so   dec   FPSV
+                                  2545
+      E206                        2546   L20
+      E206     DDES               2547             PUSH         IX                      ;point   HL   to  FPSV
+      E208     E1                 2548             PoP          HL
+      E2D9     110006             2549             LD           DE ,FPSV
+     -E20C     19                 2550             ADO          Ht ,DE
+      E200     CDOE355            2551             CALL         LOCL  DECLSN                   ;dec   FPSV
+                                  2552   Sees %    JR           NZ,L21                  -if  PSW   is  zero   FPSV   has    timed    out
+      E2EO     co                 2553             RET          NZ                      ;Added   u0S
+                                  2554
+                                  2555                *  dec    NLEN   and   leave    if  sweep    is  over
+                                  2556
+      E2E 1    CDE 369            2557             CALL         LOCL_MSNTOLSN                  :reload    FPSV   from   FPS
+      E2E4     28                 2558             DEC          HL                     ;point    to   NLEN   [#  steps    in   the   sweep]
+      E2E5     7E                 2559             LD           A, [HL]                ;dec   NLEN    and
+      E2E6     3D                 2560             DEC          A                      ;SET    Z flag    {tf NLEN   =  O
+      E2E7     c8                 2561             RET          2                       ;leave   if   sweep   over   with    Z   flag    SET
+                                  2562
+                                  2563                   *  sweep     not  over,    so   add   FSTEP   to  FREQ
+                                  2564
+      E2E8     77                 2565             LO           (HL},A                 ;store    decremented      NLEN
+      E2E9     28                 2566             DEC          HL                     ;poitnt   HL
+      E2EA     28                 2567             DEC          HL                     ;to   FREQ
+      E2EB     DD7E0O7            2568             LO           A, [IX+FSTEP]          ;A   = FSTEP    [two’s    complement       step    size]
+      E2EE     CDE374             2569             CALL         LOC_ADD8   16                ;FREQ    = FREQ    + FSTEP
+      E2F 1    23                 2570             INC          HL                     ;point    HL   to  hi  FREQ
+      E2F2     CB96               2571             RES          2, [Ht]                ;RESET    82   itn hi  FREQ    in  case    add    caused    >  10  bit   FREQ
+      E2F4     FGOFF              2572             OR           OFFH                   ;RESET    Z  flag,    sweep   not    over    yet
+                                  2573
+                                  2574             ENOIF
+                                  2575   ;@@@  121
+               cg                 2576             RET
+
+                                                                                                                                                                                                         \           i

@@ -1,0 +1,63 @@
+                      a
+
+FILE: OS7PRIME:pOS        HEWLETT-PACKARD: GRAPHICS PRIM PKG  (c)Coleco  1982 CONFIDENTIAL         Fri,  18  May  1984,  16:22      PAGE  139
+
+LOCATION  QBJECT CODE LINE     SOURCE LINE
+
+                      6859 *     GET _VRAM(COLOTABLE, SOURCE ,WORKBUFFER (0..7],1)
+    1DCE  CD1E89      6860                 CALL            GETCOLOR
+                      6861
+                      6862 *     MIRROR_UD( WORK BUFFER[O..7] ,WORKBUFFER (8..15))
+    1DD1  2A8006      6863                 LD              HL, (WORKBUFFER)
+    1004  010008      6864                 LD              BC,8
+    1007 E5           6865                 PUSH  |-        HL
+    1008 D1           6866                 POP             DE
+    1009 09           6867                 ADD             HL,BC
+    1DDA EB           6868                 EX              DE,HL
+    1008 CO1F4E       6869                 CALL            MIRRORUD
+                      6870
+                     6871  *     PUTVRAM(COLOR TABLE ,DESTINATION,WORK BUFFER (8..15],1)
+    1DDE CDIE9A      6872                  CALL            PUTCOLOR
+                     6873
+                     6874  *   ENDIF
+    1DE1             6875  ENDIF 2 GRAPHICS
+                     6876
+                     6877  *   DESTINATION := SUCC (DESTINATION)
+    1DE1 D9          6878                  EXX
+    1DE2 23          6879                  INC             WL
+                     6880
+                     6881  * END
+   1DE3  18A7        6882                  JR              RETURN HERE
+                     6883
+                     6884
+                     6885
+   1DE5              6886  ROT 90
+                     6887  * OPERATIONS SPECIFIC TO THE ROTATE_90 ROUTINE
+                     6888
+                     6889
+                     6890  * — ROTATE(WORKBUFFER [0..7],WORKBUFFER (8..15])
+   1DE5  2A8006      6891                  LO              Hi,(WORKBUFFER)
+   1DE8  010008      6892                  LO              BC,8
+   1DEB  E5          6893                  PUSH            HL
+   1DEC  01          6894                  POP             DE
+   1DED  09          6895                  ADD             HL,BC
+   1DEE  EB          6896                  EX              DE,HL
+   IDEF  CDIFI2      6897                  CALL            ROTATE
+                     6898
+                     6899  * —PUT _VRAM (TABLECODE ,DESTINATION,WORKBUFFER (8..15),1)
+   1DF2  CD1IE72     6900                  CALL            PUTTABLE
+                     6901
+                     6902  *   IF COLORTEST  THEN
+   10F5  CD1E50      6903                  CALL            COLORTEST
+   10F8  FEO1        6904                  cP              TRUE
+   IDFA  2006        6905                  JR              NZ,ENDIF 3  GRAPHICS
+                     6906
+                     6907  *     GETVRAM(COLOR TABLE, SOURCE,WORKBUFFER (0..7),1)
+   1DFC  CD1E89      6908                  CALL            GETCOLOR
+                     6909
+                     6910  *     PUTVRAM(COLOR TABLE ,DESTINATION,WORKBUFFER (0..7),1)
+   1DFF  CDIE9A      6911                  CALL            PUTCOLOR
+                     6912
+                     6913  *   ENDIF
+   1E£02             6914  ENDIF 3 GRAPHICS
+                     6915

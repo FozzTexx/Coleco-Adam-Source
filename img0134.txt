@@ -1,0 +1,63 @@
+         FILE: EOSABS:EOS   TF          HEWLETT-PACKARD:   UTILS       (c) Coleco    1983 Confidential                        Sat,    8  Sep  1984,   23:40        PAGE   130
+
+         LOCATION  OBYECT   CODE   LINE       SOURCE LINE
+
+             EFS1  £5              5288           PUSH  —s-HL                 ;GET  BUFFER  ADDRESS   INTO   IY TOO
+             EFS2  FDE1            5289           pop      ly
+                                   5290
+             EF54  FO7EOC          5291           LD       A,[IY+VOL_DIRSIZE]     ;GET  THE DIRECTORY    SIZE
+             EFS7  E67F            5292           AND      O7FH               ;ZERO  PERM  BIT
+                                   5293  ;        INC      A                  ;ADD   1 ‘CAUSE WE  START   IN BLOCK    1
+                                   5294  ;        DEC      A                  ;SUB   1 ‘CAUSE OF  PICKET   FENCE   PROBLEM
+             EFS   007710          5295           LD       [IX+FCB_LAST_BLOCK),A      ;SET LAST BLOCK    IN FCB
+             EFSC  DD361E00        5296           LO       [IX+FCB_LAST  BLOCK+1],0     ;(ALL MSBYTES   WILL   BE  0)
+             EF6O  DD361FOO        6297           LO       [IX+FCB_LAST_BLOCK+2]}.0
+             EF64  00362000        5298           LO       [IX+FCB_LAST_BLOCK+3],0
+                                   5299           |
+             EF68  COFO35          5300         " CALL     CHECK_IF_DIRECTORY               ;CHECK   IF DIRECTORY    EXIST
+             EF68  C2F0O26         5301           uP       NZ,SCAN_ERROR
+                                   5302                        |
+             EFGE  DD7E21          8303           LO       A,(IX¢FCB_POINTER)     ;ADVANCE  POINTER   TO  NEXT  ENTRY
+             EF71  CO1A            5304           ADO      A,OIR_ENT_LENGTH
+             EF72  007721          5305           LO       [1X+FCB_POINTER),A
+             EF76  DD7E22          5306           LD    ss A,[IX*FEB_POINTER+   1]
+             EF79  CEOO            5307           ADC      We)
+             EF7B  007722          5308           LD       (IX+FCB_POINTER+1).A
+                                   5308
+             EF7E  21F004          5310           LD       HL,FILE COUNT
+             EF81  34              5311           INC      (He)
+               |                   5312
+             EF82  0626            5313           LO       B,ENT_PER_BLOCK-1     ;SET DIR  ENTRY  COUNT   FOR  FIRST   BLOCK
+             EF84  1848            5314           JR    -—sSCAN2              ;JUMP  INTO  THE LOOP
+                                   5315
+             EF86                  5316  SCANI
+             EF86  003419          5317           INC      [IX+FCB_BLOCK]     ;INC  THE  BLOCK NUMBER
+                                   5318                                       ;WE CAN  ASSUME  THERE’S   NO  CARRY   OUT
+                                   5319                .
+                                   5320  ; SEE  IF THERE  IS MORE DIRECTORY:    I.E.  IS  FCB_BLOCK   > FCB_LAST_BLOCK?
+                                   5321  ; IF  TRUE, GO TO  NO_ENT.
+                                   5322
+             EF89  DD7E20          $323           LD       A,[IX+FCB_LAST_BLOCK+3]
+             EF8C  DOBEIC          5324           cP    sé CIX#FCB_BLOCK+3)
+             EFSF  DAFO2C          $325           JP     sé, NOO_ENT         ;BRANCH  IF  NO MORE  DIRECTORY
+             EF92  DOTEIF          5326           LO       A,({IX+FCB_LAST_ BLOCK+2)
+             EF9S  DDBE1B          5327           cP       [IX+FCB_BLOCK+2)
+             EF98  DAFO2C          $328           uP       C,NO_ENT          ;BRANCH  IF  NO MORE  DIRECTORY
+             EF9B  DOTEIE          53290          LO       A,[IX+FCB_LAST_BLOCK+1]
+             EFQE  DDBE1A          5330           cP       [IX+FCB_BLOCK+1]
+             EFA’  DAFO2C          $331           JP       C,NO_ENT         ;BRANCH   IF  NO MORE  DIRECTORY
+             EFA4  DD7E10          $332           LO       A,[IX*FCB_LAST_ BLOCK)
+             EFA7  DOBE19          5333           cP       [IX+¢FCB_BLOCK)
+             EFAA  DAFO2C          5334           uP       C,NO_ENT         ;BRANCH   IF  NO MORE  DIRECTORY
+                                   5335
+             EFAD                  5336  RD_TMEOUT!:
+             EFAD  DD7E17          5337           LD       A,[IX+FCB_DEVICE)    ;GET  THE  DEVICE  NUMBER
+             EFBO  2AFOFF          5338           LO       H.,([FCB_DATA_ADDR)   ;GET  BUFFER  ADDRESS
+             EFB3  DDSE19          5339           LD       E,(I1X+FCB_BLOCK]   ;GET  BLOCK  NUMBER
+             EFB6  DDS61A          5340           LD       O,[1X+FCB_BLOCK+1)
+             EFB9  DD4E1B          5341           LO       C,{IX+FCB_BLOCK+2)
+             EFBC  DD461C          5342           LD       8,(1X+FCB_BLOCK+3]
+             EFBF  ChE”            5343           CALL     READBLOCK          ;READ  THE  NFXT 2L0CK
+             EFC2  C               $344           uP       NZ,SCAN_ERROR    = ;BRANCH  IF
+
+mBRnmimeEeeHe                                   Heme            HEeE     HH                  He      HEH                  He       He          Ee         Ee      &         &

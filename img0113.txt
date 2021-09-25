@@ -1,0 +1,61 @@
+FILE:  .-3sABS:EOSTF          HEWLETT-PACKARD:   OPENS      (c)  Coleco  its  Confidential                    Sat,   8  Sep  1984,  23:40       c..a— 109
+
+LOCATION  OBJECT  CODE   LINE      SOURCE LINE
+
+    EA33   Fi            4280          POP       AF
+    EA34  D1             4281          POP       DE
+    EA3S  DDE1           4282          POP        IX
+    EA37  E1             4283          PoP       HL
+    EA38  FDE1           4284          POP        ly
+                         4285
+    EA3A  3E07           4286          LD        A,NO_FCB_ERR      ;SET  THE ERROR CODE
+    EA3C  B87            4287          OR        A                 ;SET  THE CONDITIONS
+    EA3D  C9             4268          RET
+              |          4289
+    EASE                 4290  GOT_ON
+    EASE  FD22FEO8       4291      .   LD        (BUF_START],IY    ;SAVE  THE FCB BUFFER’S  ADDRESS
+                         4292
+    EA42  Fi             4293          POP       AF                ;GET THE  MODE
+    EA43  0D7718         4294          LO        (IX+FCB_MODE},A   ;PUT  IT INTO FCB                                                                       '
+    EA46  Fi             4295          POP       AF                ;GET THE  DEVICE
+    EA47  007717         4296          LO        {IX+FCB_DEVICE].A    ;PUT IT INTO FCB
+                         4297
+    EA4A  CS             4298          PUSH      BC         |      ;SAVE  THE FCB NUMBER
+                         4299
+    EA4B  E5             4300          PUSH      HL
+    EA4C  D1             4301          POP       DE                ; ADDRESS  OF NAME STRING
+       .                 4302                            |
+    EA4D  DDES           4303          PUSH      IX                ;POINT  TO FCB NAME (ASSUME  OFFSET  =  0)
+    EA4F  E1             4304          POP       HL
+    EASO  DO7E17         4305          LO        A,[IX+FCB_DEVICE]   ;GET  DEVICE NUMBER
+    EAS3  CDEG1B         4306          CALL      __QUERYFILE       ;GET THE  FILE’S DIR  ENTRY
+    EASG  C2EAFS         4307          JP        NZ,OP_ERR         ;BRANCH  IF THERE WAS  AN ERROR
+                         4308                                      ;#** SET  PARAMS ees
+    EASS  COFODS         4309          CALL      MODECHECK         ;SEE IF  MODE MATCHES  ATTRIBUTES
+    EASC  C2EAFS         4310          JP        NZ,OP_ERR         ;BRANCH  IF NOT
+                         4311
+    EASF  DO7E13         4312          LD        A,(IX+FCB_USED_ LENGTH]    ;CALC. & SET  LAST BLOCK
+    EA62  DO8600         4313          ADD       A,[IX+FCB_FIRST BLOCK)
+    EA6S  0D7710         4314          LO        [IX+FCB_LAST BLOCK]),A
+    EAGB  DOTEOE         4315          LD        A,(IX+FCB_FIRST  BLOCK+1)
+    EAGE  DDSE14         4316          ADC       A,(IX+FCB_USED LENGTH+t1]
+    EAGE  DO771E         4317          LO        (IX+FCB_LAST BLOCK+1],A
+    EA71  OD7EOF         4318          LD        A,[IX+FCB_FIRST BLOCK+2]
+    EA74  CEOO           4319          ADC       A,O     |
+    EA76  DD771F         4320          LD        [IX+FCB_LAST_BLOCK+2),A
+    EA79  DOJVE10       4321           LD        A.(IX+FCB_FIRST_BLOCK+3}]
+    EA7C  CEOO           4322          ADC       A,O
+    EA7TE 007720         4323          LD        [IX+FCB_LAST BLOCK+3],A
+                         4324
+    EA81  DD7E10        4325           LO        A,[IX+FCBLAST  BLOCK+tO]
+    EAB4  DEO!           4326          SUB       1
+    EAB86 DD771D        4327           LO        {IX+FCB_LAST BLOCK+O],A
+                        4328
+    EA89  DO7TIE        4329           LD        A,[IX+FCB_LAST BLOCK+i]
+    EABC  DEOO          4330           SBC       A,O
+    EABE  DO77I1E       4331           LD        [IX+FCB_LAST BLOCKti],A
+                        4332
+    EA91  DOTEIF        4333           iD        A,({IX+FCLAST  BLOCK+t2]
+    —EA94 DEOO          4334           SBC       A,O
+    EA96  DD771F        4335           Lb        [I1X+FCBLAST BLOCK+2],A
+                        4336

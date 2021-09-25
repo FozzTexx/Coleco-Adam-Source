@@ -1,0 +1,61 @@
+FILE: OS 7PRIME:pOS         HEWLETT-PACKARD:  PUT SEMI  (c) Coleco,  1982   CONFIDENTIAL                 Fri,  18 May  1984,  16:19      PAGE   53
+
+LOCATION   OBJECT CODE LINE      SOURCE  LIWE
+
+                       2376
+    07B2   CD0898      2377          CALL  GETBKGRND
+                       2378
+    07B5   DDE1        2379                   POP              IX                 sRESTORE  OBJECT POINTER
+                       2380
+    0787   E1          2381          POP  HL                   ;WHERE  NAMES  ARE  IN CPU  RAM
+    0788  D1           2382          POP DE                    ;WHERE  TO  MOVE THEM  TO  IN VRAM (NAME TABLE)
+    0789  C1           2383          POP BC                    SHOW  MANY  TO MOVE
+                       2384
+    O7BA  DDES         2385                   PUSH             IX                 ;SAVE OBJECT  POINTER
+                       2386
+    O7B8C CD0808       2387          CALL  PUTFRAME
+                       2388
+    O7BF  DDE1         2389                   POP              IX                 ;RESTORE  OBJECT POINTER
+                       2390
+    07C1  005605       2391          LD D, [1X+5)              ;SEE  IF SAVED  BACKGROUND   TO BE MOVED TO VRAM
+                       2392
+    07C4  3E70         2393  SV2:             LD               A,70W
+    07C6  BA           239%                   cp               D
+   O7C7   2B1E         2395                   JR               Z,EMD IF 4
+   07C9   381C         2396                   JR               C,EMD IF 4
+                      2397
+                      2398   ;SV2::   IF  (.0,L1,70H)
+   07CB   DDSE04      2399             LD E, [1X+4)              ;DE  := OLD SCREEN   ADDR
+   O7CE   D9          2400             EXX                       SUSE  "REG  FOR CALCULATION
+   O7CF   2A8006      2401             LD HL, (WORK_BUFFER)      ;WHERE  NEXT  OLD SCREEN   DATA IS
+   O7D2   £5          2402             PUSH HL
+   07D3   23          2403             INC WL
+   07D4   23          2404             INC HL
+   0705   5E          2405             LD E, (HL)                jE  := XEXTENT
+   0706   1600        2406             iD 0,0
+   07D8   23          2407             INC HL
+   0709   46          2608             LD B, (HL)                3B  := YEXTENT
+   O7DA   EB          2409             EX DE,WL                  sHL  2= X_EXTENT
+   O7DB   1801        2410             JR M_XY2+1
+   0700   29          2411  M_XY2:    ADO  WL,HL                 sHL  := X_EXTENT*Y  EXTENT
+   O7DE   10FD        2412            DJNZ  M_XY2
+   O7EO  €5           2413             PUSH HL
+   O7E1  09           2414            EXX
+   O7E2  C1           2415            POP  BC                    ;BC  := NUMBER  OF BYTES  TO WRITE                                                                          >
+   O7E3  E1           2416            POP  WL                    ;HL  := FREE  BUFFER ADDRESS
+   O7E4  cD1D01       2417            CALL VRAM  WRITE
+                      2418
+   07E7               2419  END _I4
+                      2420
+                      2421  ;       ENDIF
+   O7E7  C9           2422          RET
+                      2423
+                      2426  RERKAAAKERKKEKRKARKE  PX.TO.PTRN.POS RaERRAKARARAKAKARKAKAEKAEKAARRAKKEKAERKRKKEKEE
+                      2425  ;DESCRIPTION:     DIVIDES  REG DE BY 8,  IF SIGNED   RESULT  > 127 THEN E := MAX  SIGNED
+                      2426  ;                POSITIVE  NUMBER.  IF RESULT  < -128,  THEN  E := MIN NEGATIVE NUM                                         ‘
+                      2427  ;INPUT:           DE  = 16 BIT SIGNED  NUMBER
+                      2428  ;OUTPUT:          DE/8  < -128     E =  -128
+                      2429  ;       -128  <= DE/B  <=+127     E = DE/8
+                      2430  ;       +127  <  0E/8             E = +127
+                      2431  RRARAKARAKAKRERAKEARREEEKRAAKKEKRKAKKRAREEAHKAKEAAAAAKAKRKKAKRKARARKKKEKAAKERAHEK
+                      2432 ;

@@ -1,0 +1,49 @@
+                                                                       ‘ew.
+FILE: .-2:a8S:E0TF         HEWLETT-PACKARD:  A_uOS OO    (c)  Coleco  1:5  Confidential                   Sat,   8 Sep   1984,  23:39        AGE       63
+
+LOCATION OBJECT CODE   LINE     SOURCE LINE
+
+                       2412 ;
+                       2413 ;UpdateSpinner   - Controller   spin   switch interrupt  service routine
+                       2414 ;
+                       2415 ;  This routine  processes   the  spinner  switch interrupt  and updates
+                       2416 ;    the data needed   by  both DECODER   and POLLER
+                       2417 ;
+                       2418 ; Ram area used:  Updates   SPIN _SWO_CNT  and SPIN SW1 CNT
+                       2419 ;
+                       2420 ; The spinner switch   maskable   interrupt  ts RST  38H
+                       2421 ;
+                       2422 ; Destroys AF, BC,  HL
+                       2423 ;
+             <O0020>   2424 DIR_MASK      EQU      00 1000008                     ;bit 5 tells us  the direction
+             <0004>    2425 INTBIT        EQU      4                              ;bit that tells which   spinner   interrupted
+                       2426
+    E2A4               2427 _UPDATE_SPINNER
+    E2A4 ED4BFC2B      2428         LO       BC,[CONTROLLER   _OPORT]             ;Get port values  for both  controllers
+    E2a8 ED78          2429         IN       A,{C]                                ;Input data from  controller   O
+    E2AA 21FE58        2430         LD       HL,SPIN SWO  CT                      ;Poitntto spinner  update  data
+    E2AD CB67          2431         BIT      INTBIT,A                             ;Was this the controller   that   interrupted   ?
+    E2AF 2007          2432         JR       NZ,GET CONTROLLER    1               ;If not then check  controller    1
+    E281 E620          2433         AND      DIR_MASK                             ;Check direction  bit
+    E283 2002          2434         JR       NZ,INCREMENT   O OIRECTION           ,If set then tncrement   direction
+    E285 35            2435         DEC      {Ht]                                 -Else decrement direction
+    E2B6 35            2436         DEC      [HL]                                 ;Decrement once more  to  fall  through   tncrement
+                       2437
+    E287               2438 INCREMENTO DIRECTION:
+    E287 34            2439         INC      (HL]                                 ;Increment direction
+                       2440
+    E288               2441 GETCONTROLLER 1
+    E2B8 48            2442         LD       C.B                                  ;Get controller  1 port  into  C
+    E289 ED78          2443         IN       A.{C)                                ;Get controller  1 data
+    E286 23            2444         INC      HL                                   ;Point HL to controller   1 update   area
+    E2BC CB67          2445         BIT      INTBIT,A                             ;Is thts the controller   that  interrupted    me?
+    E2BE CO            2446         RET      NZ                                   ;Return if not, Also  don’t   assume
+                       2447                                                       ; either controller  if  no bit  is  set
+    E2BF E620          2448         AND      DIR_MASK                             ;Check direction  bit
+    E2C1 2002          2449         JR       NZ,INCREMENT  1  DIRECTION           ;I1fset then go  increment  direction
+    E2C3 35            2450         DEC      [HL}                                 ;Else decrement direction
+    E2C4 C9            2451         RET                                           ;Then return
+                       2452
+    —E2C5              2453 INCREMENT1 DIRECTION
+    E2C5 34            2454        ‘INC      {HL]                                 ;Increment direction
+    E2C6 C9            2455         RET                                           ;Exit

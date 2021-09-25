@@ -1,0 +1,10 @@
+FILE:OS  7PRIME:pOS          HEWLETT-PACKARD:    SOUND  MANAGER (c) Coleco,   1982   CONFIDENTIAL              Fri, 18 May    1984,  16:19       PAGE   30
+
+LOCATION  OBJECT  CODE  LINE       SOURCE  LINE
+
+    O2FC  CD0295        1241                     CALL UP_CH_DATA_PTRS       ;to maintain  data  area   priority  system
+                        1262  ;               ENDIF
+                        1243  ;             ENDIF
+    O2FF  C9            12644 112           RET
+                        1245  ;        END  ;SMDMAN
+                        1246  PROG

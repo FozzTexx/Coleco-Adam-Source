@@ -1,0 +1,25 @@
+FILE: . 2.aBS:E0S_TF        HEWLETT-PACKARD: CONSOUT   (c) Coleco 1:_s Confidential                  Sat,   8  Sep  1984,  23:41        ~aGE  201
+
+LOCATION OBJECT  CODE   LINE     SOURCE LINE
+
+                        7866 ;
+                        7867 ; Subroutine
+                        7868 ; GET_CHAR_UNDER_CURSOR  -  This entry loads HL from CURSOR before
+                        7869 ;                           falling into GET_CHAR_UNDER
+                        7870 ;
+                        7871 ; GET_CHAR_UNDER  -  Reads the char where the cursor will go
+                        7872 ;                    and saves it in the variable OLDCHAR_
+                        7873 ;
+                        7874 ;Input Parameters:
+                        7875 ;  WL - Cursor position
+                        7876 ;
+                        7877 ; Destroys - Hi, BC, DE, A
+                        7878 ;
+    F7ED                7879 GET_CHAR_UNDERCURSOR:
+    F7ED 2AFEAS         7880                 LO      HL.[CURSOR}
+                        7881
+    F7FO                7882 GET_CHAR_UNDER:
+    F7FO CDFT7FC        7883                 CALL    CONVERTXY
+    F7F3 010001         7884                 LD      BC,OOO1H
+    F7FG621FE79         7885                 LD      HL,OLOCHAR
+    F7F9 C3FD1ID        7886                 JP      READVRAM        ;Return thru READ_VRAM

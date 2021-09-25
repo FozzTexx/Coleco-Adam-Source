@@ -1,0 +1,63 @@
+    ILE: OS7PRIME:pOS         HEWLETT-PACKARD:    GRAPHICS PRIM  PKG (c) Coleco   1982 CONFIDENTIAL           Fri,  18  May  1984,   16:22      PAGE  140
+
+    CATION  OBJECT  CODE LINE       SOURCE  LINE
+
+                         6916   *   DESTINATION   := SUCC (DESTINATION)
+       1£02 D9           6917                    EXX
+       1E03 23           6918                     INC              HL
+                         6919
+                         6920   * END
+       1E04 C31D8C       6921                     JP              RETURN  HERE
+                         6922                               a
+                         6923
+                         6924
+       1607              6925  ENLRG
+                         6926  *  OPERATIONS  SPECIFIC  TO THE ENLARGE  ROUTINE
+                         6927
+                         6928  *    MAGNIFY(WORK  BUFFER [0..7),WORK BUFFERS.   .39))
+       1E07 2A8006       6929                    LD               HL, [WORK BUFFER)
+       1E0A 010008       6930                    LD               Bc,8
+       1E0D £5           6931                    PUSH             HL
+       1E0E 01           6932                    PoP              DE
+       1E0F 09           6933                    ADD              HL,BC
+       1E10 EB           6934                    EX               DE,HL
+       1E11 CO1EAB       6935                    CALL             MAGNIFY
+                         6936
+                        6937   *    PUT _VRAM (TABLE CODE DESTINATION,  WORKBUFFERS.    .39],4)
+       1£14 08           6938                    EX               AF AF!
+      1615  F5          6939                     PUSH             AF
+      1E16  08          6940                     EX               AF AF!
+      1E17  F1          6941                     POP              AF
+      1E18  09          6942                     EXX
+      1€19  £5          6943                     PUSH             HL
+      1E1A  D9          6944                     EXX
+      1E18  D1          6945                     POP              DE
+      1E1C  248006      6946                     LD               HL, (WORKBUFFER)
+      1E1F  010008      6947                     LO               BC,8
+      1E22  09          6948                     ADD              HL,BC
+      1E23  FD210004    6949                     LO               1Y,4
+      1£27  €D1C27      6950                     CALL             PUT VRAM_
+                        6951
+                        6952   *    IF COLOR TEST  THEN
+      1E2A CD1E50       6953                     CALL             COLOR_TEST
+      1E2D  FEO1        6954                     cP               TRUE
+      1E2F 2024         6955                     JR               NZ,END IF 4  GRAPHICS                                                                                               ,
+                        6956
+                        6957   *  —   GET_VRAM(COLOR  TABLE, SOURCE,WORK BUFFER (0. .7),1)
+      1631 CD1E89       6958                     CALL             GETCOLOR
+                        6959
+                        6960   *      QUADRUPLE(WORK BUFFER(0..7]  ,WORK BUFFER (8. .39))
+      1E34 248006       6961                     LD               HL,(WORK BUFFER]
+      1E37 010008       6962                     LD               BC,8
+      1E3A E5           6963                     PUSH             HL
+      1638 01           6964                     POP              DE
+      1E3C 09           6965                     ADD              HL,BC
+      1E3D EB           6966                     EX               DE,HL
+      1E3E CDIEEA       6967                     CALL             QUADRUPLE
+                        6968
+                        6969  *  —-   PUT_VRAM(COLOR TABLE,DESTINATION,WORK    BUFFER (8..39) ,4)
+      1£41 3E04         6970                     LD               A,COLORTABLE
+      1£43 09           6971                     EXX
+      1644 E5           497?                     PUSH             HL
+
+et                                               ee        ee        ee                                                          ee                            ee         ee              =           GE

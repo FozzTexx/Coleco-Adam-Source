@@ -1,0 +1,12 @@
+FILE: t  .«BS:EOS TF         HEWLETT-PACKARD:   CONSOUT   (c) Coleco 1%...Confidential                    Sat,   8  Sep  1984,  23:41       .nvE   191
+
+LOCATION  OBJECT  CODE   LINE     SOURCE  LINE
+
+                         7612 |;
+                         7613 ; ERASETO  EOL    -  From cursor position fills rest of line
+                         7614 ;                    with BLANKINGCHAR,  to end of window only
+                         7615 ;                    Will blank char under cursor always.
+                         7616 ;
+    FGEC                 7617 ERASETO EOL:
+    FGEC  CDF766         7618                   CALL    ERASETHIS LINE
+    F6EF  C3F656         7619                   uP      PUT_CURSOR_ON

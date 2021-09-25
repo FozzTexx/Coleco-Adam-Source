@@ -1,0 +1,24 @@
+FILE: c.>ABS:EOS_TF         HEWLETT-PACKARD: CONSOUT   (c) Coleco 1%SusConfidential                     Sat,   8  Sep  1984,  23:41        vAGE  205
+
+LOCATION OBJECT CODE   LINE      SOURCE LINE
+
+                       8002  ;
+                       8003  ;               ;GLB     RETURN_RELATIVECURSOR
+                       8004  ;
+                       8005  ;RETURN_RELATIVECURSOR:
+                       8006  ;                LD      DE,{CURSOR}     ;get  absolute  position
+                       8007  ;                LD      a,(X_MIN]
+                       8008  ;                NEG
+                       8009  ;                ADO     A.O
+                       8010  ;                LD      D,A
+                       BO11  ;                LD      a.{YMIN]
+                       8012  ;                NEG
+                       8013  ;                ADD     A.E
+                       8014  ;                LO      EA
+                       8015S ;                RET
+                       8016  ;;
+                       BO1I7 5;Ses ewweweweseseer sees SSHSSTSSTSessesesssessssesessesersssssssse
+                       BOIG  5Ssesseewwezesatressessss erasessssssssssessssssssssrssesssssserssse
+                       BO1I9 5 essesewaneweesesesessseessesrssessesrrsssssssssssssssssssrssssssse
+                       8020  ;;
+                       8021

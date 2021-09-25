@@ -1,0 +1,63 @@
+‘ILE: OS  7PRIME:pOS            HEWLETT-PACKARD:      OPERATING    SYSTEM   (c)  Coleco,   1982     CONFIDENTIAL          Fri,   18  May  1984,    16:19        PAGE    16
+
+-OCATION   OBJECT CODE   LINE         SOURCE   LINE
+
+                           570   RRERAAARKARARSRAAKARRRARKEE        SYSTEM   RAR AREA   REKARTKARAARARKARAAARAEKAAERE
+                           571                        DATA
+   0000                    572                       DEFS                 73BAH   ;Added   to offset   to  first   location
+               <73BA>      573   SYSTEM  RAM  AREA    EQU                 $
+                           574   *  THIS  IS  THE  RAM   AREA  DEDICATED    TO THE  BASIC   OS  NEEDS.  IT   INCLUDES   THE
+                           575   *  STACK,  VARIOUS    STATUS   VARIABLES,    AND  ALL  THE  VARIABLES   USED   BY  OS
+                           576   *  ROUTINES.
+                           577
+               <7389>      578   STACK                Equ                 SYSTEM  RAM  AREA-1
+                           579   *  THIS  1S  THE  TOP  OF   THE  STACK
+                          580
+                           581   ;                    COMN
+                          582    ;                  DEFS                  9
+                          583                        DATA
+    738A                  584    PARAM AREA:
+   738A                   585    INIT SOUND   DATA:
+   738A                   586  PRM   AREA:
+   738A                   587    IWIT TIME  DATA:
+   T3BA                   588    TEMP1:
+   T3BA                   589                  DEFS   1
+   7388                   590                  DEFS   1
+   738C                   591    TEMP2:
+    738C                  592                  DEFS   1
+   7380                   593                  DEFS   1
+    73BE                  594   SIGNAL_NUM:
+    T3BE                  595                  DEFS   1
+    738F                  596   REPEAT  SIG   CODE:
+    738F                  597                 DEFS    1
+   73c0                   598   TIMER  LENGTH:
+   73CO                   599                 DEFS   1
+   73C1                  600                  DEFS   1
+   73C2                   601   TEST  SIG  _WUM:
+   T3C2                   602                 DEFS   1
+                          603
+                          604
+                          605   *  THIS  IS  THE  COMMON    PARAMETER   PASSING   AREA  AND   THE  HOLE  IN  THE  DATA
+                          606   *  AREA  THAT   IS  PROVIDED    TO MAKE  ROOM   FOR  IT.
+                          607
+  73C3                    608  VDP   MODE  WORD      EFS                 2
+                          609   *  THE  VDP  MODE   WORD  CONTAINS    A COPY  OF  THE  DATA   IN THE  FIRST   TWO  VOP           .
+                          610   *  REGISTERS.    BY  EXAMINING    THIS  DATA,  THE  OS  AND  CARTRIDGE    PROGRAMS
+                          611   *  CAN MAKE   MODE-DEPENDENT      DECISIONS   ABOUT   THE  SPRITE   SIZE  OR  VRAM
+                         612    *  TABLE  ARRANGEMENT.      THIS  WORD   IS MAINTAINED    BY THE  WRITE REGISTER
+                         613    *  ROUTINE   WHENEVER    THE  CONTENTS   OF  REGISTERS    0 OR  1 ARE  CHANGED.
+                         614
+                         615    *    IMPORTANT    NOTE   *****
+                         616
+                         617    *                    wane   IT  IS THE  RESPONSIBILITY     OF THE   ****
+                         618    *                    **8*  CARTRIDGE    PROGRAMMER    TO MAKE       “ee
+                         619    *                    *e*®  SURE   THAT  NON-STANDARD    USE  OF     ‘****
+                         620    *                    see®   THE  VDP REGISTERS    DOES  NOT  MAKE   ****                                                                              °
+                         621    *                    see%  THE   DATA  IN THIS  WORD   INVALID     ****
+                         622
+   73c5                  623    VDP_STATUS    BYTE   DEFS                1
+                         624    * THE  DEFAULT    HANDLER    FOR  THE  NMI,  WHICH  MUST   READ  THE  VDP  STATUS
+                         625    * REGISTER    TO  CLEAR   THE  INTERRUPT    CONDITION,   PLACES   ITS  CONTENTS
+                         626    * HERE.   THIS  BYTE   IS  THE   MOST  ACCURATE   REPRESENTATION     OF THE  ACTUAL
+
+                                                                                                                 /

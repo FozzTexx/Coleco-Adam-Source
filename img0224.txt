@@ -1,0 +1,35 @@
+FILE: EOSABS:EOS TF          HEWLETT-PACKARD:    EOSUTIL   (c) Coleco  1983 Confidential                  Sat,      8  Sep  1984,
+                                                                                                                                    23:42       PAGE  220
+
+LOCATION  OBJECT CODE   LINE      SOURCE   LINE
+
+                        8593
+                        8594  ; ENTRY:          __RELOC_PCB
+                        8595  > NEEDS:          (CURRENT PCB] SET  TO CURRENTLY OPERATING PCB
+                        8596                    HL = ADORESS OF WHERE  PCB SHOULD BE RELOCATED  TO
+                        8597  ; RETURNS:        PCB RELOCATED AS  REQUESTED
+                        8598                    [CURRENTPCB]  UPDATED  TO REFLECT NEW ADDRESS
+                        8599
+                        8600         ;GLB       __RELOC_PCB
+                        8601
+    FA2F                8602  __RELOC PCB
+    FA2F  FDES5         8603          PUSH    -_—i‘IY
+                        8604
+    FA31  FD2AFD70      8605          LD        IY,[CURRENTPCB}          :  i   ADDRESS OF CURRENT  PCB
+                        8606
+    FA35S FD7501        8607          LO        (I¥+P_REL_ADOR 10],L     ; PLACE ADDR OF NEW  PCB IN PLACE
+    FA38  F07402        8608          LO        {1¥+P_REL_ADOR_HI}.H     ;
+                        8609
+    FA3B  FD360003      8610          LD        [1¥+P_COM_STAT],PCB_SNA  ; TELL MASTER TO SET  NEW PCB  ADDRESS
+                        8611
+    FA3F                8612  LOOPS:
+    FA3F  FD7E0O        8613          LO        A,[IY¥+P_COSTAT}         ; CHECK FOR OPERATION  COMPLETE
+    FA42  FE63          8614          cP        PCB_SNA_ACK              ; ¢*¢¢* NEED PROTECTION  HERE
+    FA44  20F9          8615          JR        NZ,LOOPS                 : NOPE
+                        8616
+    FA46  22FD070       8617          LD        (CURRENT_PCB),HL         : REMEMBER WHERE PCB  IS (PLEASE...)
+                        8618
+    FA49  FDE1          8619          PoP       ly
+                        8620
+    FA4B  c9            8621          RET
+                        8622

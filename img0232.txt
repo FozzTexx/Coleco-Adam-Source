@@ -1,0 +1,64 @@
+FILE: EOSABS:ECS  TF          HEWLETT-PACKARD:    EOS BLK    (c)  Coleco   1983Confidential                       Sat,   8  Sep  1964,  23-42        PAGE   228
+
+LOCATION  OBJECT  CODE   LINE       SOURCE  LINE
+
+                         BBE    FHSSHESSSSH       EHERE REE  EEE EEEEEE EEEEEEHEHEHEEE EEEEERE   EERE  ERE  EERE EHS
+                         8886   *
+                         8887   *      __START_RD_1   BLOCK  WILL  SEND  A READ COMMAND   TO  READ   A BLOCK
+                         8888   «      OF  DATA  FROM A  BLOCK DEVICE  TO  A BUFFER  SPECIFIED    BY  REGISTER  HL
+                         8889  «+
+                         8890   +      INPUT:    A        DEVICE  ID
+                         8891   *                         LOW NIBBLE  - DEVICE  ADDRESS
+                         8892   *                         HI NIBBLE   -  SECONDARY  DEVICE   ID
+                         8893   *
+                         8894   *                HL       DESTINATION  ADDRESS   IN RAM
+                         8895   *
+                         8896   *                REGISTER  PAIR:
+                         8897  *                          BC DE       -  SECTOR NUMBER   ON  DEVICE
+                         8898  «+
+                         8899   *      THE  TRANSFER  BYTE  COUNT  IS DEFINED  BY  “DCB_MAX_MESS    LEN"   WHICH
+                         8900   *«     TS  FOUND  IN THE  DEVICE  DCB.
+                         8901
+                         8902   *¢     OUTPUT :
+                         8903   *                CONDITION  BITS:
+                         8904   +                         Z: NO  ERRORS
+                         8905   +                       NZ:  ERRORS  OCCURED
+                         8906  «+                                  A - ERROR  CODE
+                         8907   +
+                         8908   +      ALL  REGISTERS  ARE  PRESERVED
+                         8909   *
+                         B91IC  SHSSSEHSHSESEES  EEHESESE ESSERESHEESH    EEEEKER ERS                    EREREEEEEE ERE
+                         8911
+                         8912   ;
+                         8913   ;NO_DCB_FOUND!   CHANGED  TO BLK_NO_CB FOUND!   TO  AVOID  CONFLICT
+                         8914   ;WITH IDENTICAL   LABEL  ELSEWHERE
+                         8915         ;GLB      __START_RD_1_  BLOCK
+                         8916
+    FAC6~                8917   START_RD_1_  BLOCK:
+    FAC6  C5             8918          PUSH      BC
+    FAC7  DS             8919          PUSH      DE
+    FACS  ES             8920          PUSH      HL
+    FACS  FDES           8921          PUSH      ly
+                         8922
+    FACB  CDF446         8923          CALL      __FIND_DCB
+                         8924                                        |                       |
+    FACE  200C           8925          UR        NZ,8NO  _DCBFOUND!       ; COULD  NOT FIND   OCB  FOR  THIS  DEVICE
+                         8926
+    FADO  CDF496         8927          CALL      CHK_IF_ INACTIVE           ; IS DEVICE   IDOLE?
+    FAD3  2007           8928          JR        NZ,ACTIVE DCB!              ; NOPE,  GET  OUT
+                         8929
+    FADS  CDFB38         8930          CALL      PREP_DOCB                  ; SET  UP THE  DCB  FOR   READ
+                         8931
+    FAD8  FD360004       8932          LD        [I¥+D_COM_STAT],DCB_ RD    ; SEND  READ  COMMAND
+                         8933
+    FADC                 8934  ACTIVE DCB1:
+    FADC                 8935  B_NO DCB FOUND!1:
+    FADC  FDE1           8936          POP       IY
+    FADE  E1             8937          POP       HL
+    FADF  Di             8938          POP       DE
+    FAEO  C1             8939          POP       BC
+                         8940
+    FAE1  C9             6941          RET
+                                                                             imae
+
+        }        <                                             —       ama       am       a   |                                          ‘        \          ‘

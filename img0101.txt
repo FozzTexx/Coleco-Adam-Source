@@ -1,0 +1,61 @@
+FILE: .  sABS:EOS_TF           HEWLETT-PACKARD:     DIR_HANDL   (c)  Coleco   1:_J  Confidential                     Sat,   6 Sep  1984,  23:39        ,aGE    97
+
+LOCATION   OBJECT  CODE   LINE         SOURCE  LINE
+
+                          3640   Br           rr          rt        rr      cer     rere  rrr       -----------
+                          3641   ;
+                          3642   ;  _MAKE  FILE:   creates  a  file  in  the directory.
+                          3643   ;
+                          3644   ;  ENTRY  PARAMETERS:   called  with  device   ID  in A:  address   of name
+                          3645   ;                  string   in HL;  file  size   (in bytes)   in  BC DE.
+                          3646   ;
+                          3647   ;   NOTE:    IF FILE SIZE   = O (BC  DE),  THEN  THE  REMAINDER    OF THE  TAPE IS
+                          3648   ;            ALLOCATED  TO THE  FILE
+                          3649   ;
+                          3650   ;  EXIT  PARAMETERS:  CONDITION   FLAGS
+                          3651   ;                       Z    -   NO  ERRORS
+                          3652   ;                     NZ     -   ERRORS
+                          3653   ;                                 A  = ERROR   CODE
+                          3654   ;
+                          3655   ;        ALL  REGISTERS  ARE  PRESERVED   EXCEPT  AF
+                          3656   ;                                       |
+                          BEST   5mm   rrr             rr     rrr    rr   en  rr   rn nn   rere en rereeee  ----
+                          3658
+                <0000>    3659   FOUND_ENTRY        EQU      O         ; BIT   INOICATING   DELETED   FILE FOUND  FOR  OVERLAYING
+                          3660                                                                           |
+    E690                  3661    MAKE   FILE
+    E690  FDES            3662             PUSH     IY                 ;SAVE  REGISTERS
+    E692  DDES            3663             PUSH     IX
+    E694  E5              3664             PUSH     HL
+    E695  D5              3665             PUSH     DE
+    E696  C5              3666             PUSH     BC
+                          3667
+    E697  DD2AFOFD        3668             LD       IX,[FCB_HEAD_ADDR]     ;POINT  TO  SYSTEM   FCB
+    E69B  DD36  1800      3669             LD       [IX+FCB_MODE],0         >  INIT  IT IN  CASE   IT WAS SET
+                          3670
+    E69F  007717          3671             LD       [IX+FCB_DEVICE],A     ;SAVE  DEVICE  NUMBER
+    EGA2  22FE10          3672             LD       [USER_NAME],HL     ;SAVE  POINTER   TO  NAME
+                          3673
+    E6A5  78              3674             LD       A,B               ; CHECK   IF TO  ALLOCATE   REST  OF TAPE
+    E6GA6 B1              3675             OR       C
+    E6A7  200A            3676             JR       NZ,GOT_ FILE SIZE           ; NOPE,  GOT  SIZE
+                          3677
+    E6A9  78              3678             LD       A,E
+    E6AA  B82             3679             OR       D
+    EGAB  2006            3680             JR       NZ,GOT FILE  SIZE
+    E6AD  DDCBISEE        3681             SET      MODEREMAINDER   _BIT,[IX+FCB_   MODE]    ;  FLAG  IT
+                          3682
+    E681   1820           3683             JR       SET_UP_DIR
+                          3684
+                          3685
+                          3686  ;   SINCE  WE ARE  CALLED  WITH  A BYTE  COUNT,   DIVIDE  IT  BY  1024
+                          3687  ;   (SHIFT  RIGHT  10 BITS)  TO  GET  A BLOCK  COUNT.
+                         3688
+    E6B3                 3689   GOT  FILE  SIZE:
+    E6B3  5A             3690              LD       E.D                ;D0  A QUICK   SHIFT  BY  8
+    E6B4  51             3691              LO       D.C
+    E6B5  48             3692              LO       C.B
+    E6B6  0600           3693              LD       B,O
+    E6B8  CB39           3694              SRL      C                  ;SHIFT  ONE  MORE
+    E6BA  CB1A           3695              RR       D
+    F6BC  CBtB           3696              RR       E

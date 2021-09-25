@@ -1,0 +1,31 @@
+FILE: . sABS:E0S_TF        HEWLETT-PACKARD:  EOSPRTR   (c) Coleco  1.5   Confidential                   Sat,   8  Sep  1984,  23:41        eaGE  173
+
+LOCATION OBJECT CODE   LINE     SOURCE LINE
+
+                       TOBD SSeS   SEHKREEEE HERERO                                                  REESE
+                       7083 *
+                       7084 * _START_PR_CH   SETS UP PRINT _BUFFER ANO  THE  HL  REGISTER AND
+                       7085 * CALLS _START_PR_BUFF
+                       7086 *      INPUT:   A = ASCII CHARACTER
+                       7087 *      OUTPUT:   CONDITION FLAGS
+                       7088 *                 2:    NO ERROR
+                       7089 *                N2:    ERROR OCCURED
+                       7090 «                       A = ERROR CODE
+                       7091 *
+                       TOG] SEHK SSEHHSHEE  EHHSEHHAEEHEEHEKEHEHHEEE    ERE     EHEHEHEEHEHEEEET EEEHEHEHE
+                       7093
+                       7094       ;GLB      __START_PR_CH
+                       7095
+    F56D               7096 __START_PR_CH:
+    FS56D32FD76        7097        LO       (PRINT_BUFFER),A
+    F570 3E03          7098        LD       A,ETX
+    F572 32FD77        7099        LD       [PRINT_BUFFER+1},A
+                       7100
+    F575 21FO76        7101        LD       HL,PRINTBUFFER
+                       7102
+    F578 COF580        7103        CALL     __START_PR_BUFF
+                       7104
+    F57B C9            7105        RET
+                       7106
+                       7107
+                       7108

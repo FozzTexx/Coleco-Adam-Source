@@ -1,0 +1,32 @@
+FILE: OS  7PRIME:p0S              HEWLETT-PACKARD:      OPERATING    SYSTEM   (c) Coleco,    1982    CONFIDENTIAL          Fri,   18  May  1984,    16:18        PAGE     8
+
+LOCATION   OBJECT    CODE   LINE        SOURCE   LIWE
+
+                              350
+                              351   RAARARAARAAAKARAAARAAAAAAARARAKKRAKAARARARKAAAEARAERAEARARERERAARARRERAKARREEKE
+                              352   *                                                                                      ®
+                             353    *                          OPERATING    SYSTEM   ROM  CODE                             *
+                             354    *                                                                                      *
+                             355    RERARARAAAAARAAAARARAAAAAKARARAAEKKAKAAAREERAAARAREKRAREREARAREARAKRAREAAREEK
+                             356
+                             357    REAAAKRAKAARAAAARARAKARAARAARRAREEE  PAGE   ZERO  SREKRAARRESRAAAAARAARRARRRARARKAEE
+                             358    * PAGE  ZERO   CONTAINS   THE  RESTART   VECTORS,    INTERRUPT   VECTORS,   AND
+                             359    * THE  INTERRUPT   VECTORING    SOFTWARE,    AS  WELL  AS  THE  DEFAULT   HANDLERS
+                             360    * FOR  INTERRUPTS    AND  RESTARTS.
+                             361
+                             362    * BOOT-UP   ROUTINE
+                             363
+                             364    * THE  BOOT-UP   ROUTINE   HANDLES   POWER   ON  RESETS   AND  RESTARTS   TO  0. IT
+                             365    * INITIALIZES    THE  STACK   AND  JUMPS   TO  THE POWER   UP   ROUTINE.
+                             366
+                             367    * BEGIN   BOOT-UP
+                             368  BOOT  UP             PROG
+                             369
+                             370   *    KICK   STACK
+                             371                       LD                  SP,  STACK
+                             372
+                             373   *    JUMP   TOPOWER   _UP
+                             374
+                             375                       JP POWER   UP
+                             376   END  BOOTUP
+                             377   *  END  BOOT-UP

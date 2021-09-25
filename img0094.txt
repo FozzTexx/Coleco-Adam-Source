@@ -1,0 +1,61 @@
+FILE:   EGSABS:E0S    TF           HEWLETT-PACKARD:         SOUND   EQU€S     ic)  Coleco,     1982     CONF  IDENT  IAL                  Sat,   #  Sep  i9@4.    .     #3         PAGE      GO
+
+LOCATION    OBJECT   CODE    LINE          SQURCE   LINE
+
+     ES6E   007501           3350               LD          [IX+t]}.b               ;put  addr    in NEXT_NOTE_PTR
+     ES71   DD7402           3351               LD          {IX+2].H
+                             3352
+                             3353    :          * move    new   note   data    and   fill   in  bytes   where    necessary
+                            3354
+     E574   28              3355               DEC         HL                       ;point   HL  back    to  ist  ROM   data    to  move,   NLEN
+     E575    110005         3356                LD         DE  ,O5                  ;point   DE  to  destination:       bytes    5,  4,   and  3
+     E578   CDE6O03         3357               CALL        DE TO  DEST
+     E57B   010003          3358               LD          BC  3                    ;move  3  bytes
+     ES7E   EDBS            3359               LDDOR
+     E580   DDO360700       3360               LD           [IX+FSTEP}.0O           ;set  for   no  freq   sweep
+     €584   00360800        336 1              LO           {IX+ASTEP],0            ;set  for   no  atn   sweep
+     E588   1862            3362               JR          MODBO
+                            3363
+                            3364    ;          ENDIF
+                            3365
+     ESBA                   3366    Li6
+     ESBA   FEO!            3367               cP           1                       ;test  for   type    1
+     ES8C   201A            3368               JR          NZ,L17                   ;if  PSW  is  zero    note   is   type   1:  swept
+                            3369                                                   ;  freq,   fixed    attenuation
+                            3370    ;e@e@   TYPE!                                         ;  set  up   NEXT_NOTE    PTR
+     ESBE   110006          337  1             LO          DE ,6                    :note  after    this   note    is  6 bytes    away,
+     E591   19              3372               ADD         HL ,DE                   ;pt  HL  to  it
+     E592   007501          3373               LD          (IX+t).b                ;Store    in  NEXT_NOTE    PTR
+     E595   007402          3374               LD          {IX+2],H
+                            3375
+                            3376    ;          *  move    new  note    data    and  fill    in bytes    where    necessary
+                            3377
+     —€598  2B              3378               DEC         HL                      ;point   HL   back   to   ist  ROM   data   to   move,   FSTEP
+     E599   1C        |     3379               INC         E                       ;E;  point    DE  to  destination:       bytes    7   - 3
+     ES9A   CDEG6O3         3380               CALL        DE TO  DEST
+     ES59D  010005          338 1              LD          BC .5                   ;move   5  bytes
+     ESAO   EDBS            3382               LDDR
+     E5A2   DD36G0800       3383               LD          [IX+ASTEP],0            ;set   for  no   atn  sweep
+     ESAG   1844            3384               JR          MODBO                                      .
+                            3385
+                            3386    ;          ENDIF
+                            3387
+     ESAB                   3388    117
+     ESAS   FEO2            3389               cP          2                       ;test   for   type   2                                 |
+     ESAA   2026            3390               JR          NZ,TYPE3                ;if  PSW   is  zero   note    is  type   2:   fixed    freq,  swept  attenvation
+                            3391    ;@e@e   TYPE2                                         ;set   up  NEXT  _NOTE  PTR
+     ESAC   110006          3392               LD          DE ,6                   ;pt  HL  to   note   after    this   note,    since    it’s  6 bytes   away,
+     ESAF   19              3393               ADD         HL ,DE                  ;pt  HL  to   it  by  adding    6
+     ESBO   Fi              3394               POP         AF                      ;A  :=  header    this   note   [CH¢      SONGNO   }
+     ESB1   F5              3395               PUSH        AF                      ;put   back   on  stack
+     —E5B2  E6CO            3396               AND         110000008               ;mask   SONGNO,     leaving    CHA
+     E584   2001            3397               JR          NZ,L18          |       ;1f  PSW   is  zero   this    its a  noise   note,     which  is  only  5  ROM    bytes     iong
+     E586   28              3398               DEC         HL                      ;SO  move   HL  back    1 byte
+                            33939
+                            3400    ;          ENDIF
+                            3401
+     E587                   3402    118
+     —€587  007501          3403               LD          {IX+1],t                ;put   addr   in  NEXT_NOTE_PTR
+     ESBA   DD7402          3404               LO          {1X+2],H
+                            3405
+                            3406    ;          *  move    new  note   data     and  fill   int      ‘s  where   necessary

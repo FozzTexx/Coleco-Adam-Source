@@ -1,0 +1,56 @@
+FILE: OS7PRIME:pos          WEWLETT-PACKARD:  FREQ  SWEEP RTN  (c) Coleco 1982 CONFIDENTIAL             Fri,  18  May 1984, 16:19      PAGE   18
+
+LOCATION OBJECT  CODE  LIWE      SOURCE LINE
+
+                        659  ;         IDENT  FREQSWE            ;includes FREQ SWEEP
+                       660   oSRESAREARAAERAAAAARARKARRARRE
+                       661   s        FREQ  SWEEP         *
+                       662   ;
+                        663  :.COMMENT )
+                        664  ;See Users' Manual  for description
+                        665  ;RETs 2 SET:  if note over
+                        666  ;RETs Z RESET:  if sweep  in progress  or note not over
+                        667  ;)
+                       668           GLB FREQ SWEEP
+                        669         sEXT DECLSN ,MSNTOLSN,DECMSN ,ADD816
+                        670         ;INCLUDE  OSSR EQU:0S:0   ;equates
+    OFC                 671  FREQSWEEP
+                       672   ;       * if freq  not swept,  dec NLEN  and RET [setting  Z flag)
+    OOFC DD7E07        673           LD A, [IX*FSTEP)          ;check   for no sweep  code
+    OOFF FEOO          674           ce 0                      sSET 2  flag if FSTEP  = 0
+                       675   ;       IF (PSW, 1S,ZERO)         smote not  to be swept
+   0101  2009          676           JR NZ,L20
+   0103  DO7E05        677             LD A, [IX*NLEN)           sdec NLEN  and
+   0106  3D            678             DEC A                     sSET 2  flag if NLEN  = 0
+   0107  C8            679             RET 2                     sleave  if note over  with Z  flag SET
+   0108  007705        680               LD  (IX+NLEN),A           sstore  decremented  NLEN
+   0108  C9           681                RET                       sRET  with 2 flag RESET  [note  not over)
+                       682   ;       ENDIF
+                       683   ;       * sweep going,  so  dec FPSV
+   010C  ODES          684  120      PUSH IX                   spoint HL  to FPSV
+   O10€  €1            685           POP HL
+   O10F  1€06          686           LD E,FPSV
+   0111  1600          687           LO 0,0
+   0113  19            688           ADD HL,DE
+   0114 00190          689           CALL DECLSN               sdec FPSV
+                       690  ;        IF (PSW,1S, ZERO)         :FPSV has  timed out
+   0117 2015           691           JR WZ,L21
+                       692  ;          * dec WLEN  and  leave if sweep is over
+   0119 CD01A6         693             CALL MSNTOLSN             sreload FPSV  from FPS
+   O11C 28             6%              DEC HL                    spoint to NLEN  [# steps  in the sweep)
+   0110 7E             695             LD A,(HL)                 ;dec WLEN and
+   O11E 30             696             DEC A                     SET  2 flag  if NLEN = 0
+   O11F C8             697             RET 2                     jleave if sweep  over with  Z flag SET
+                       698  ;            * sweep  not over,  so add FSTEP to FREQ
+   0120 77             699               LD (HL),A                 ;Store decremented  NLEN
+   0121 28             700               DEC HL                    point  HL
+   0122 28            701                DEC HL                    ;to FREQ
+   0123 DD7E07        702                LD A, [IX+FSTEP)          ;A = FSTEP  [two's complement  step size)
+   0126 cD0181         703               CALL ADDB16               ;FREQ = FREQ +  FSTEP
+   0129 23             704               INC HL                    spoint HL to hi  FREQ
+   012A CB96           705               RES2,  (HL)               sRESET B2 in hi  FREQ in case  add caused  >10   bit FREQ
+   O12C FOFF           706              OR  OFFH                   *RESET Z flag,  sweep not  over yet
+                       707  ;       ENDIF
+   O12E C9             708  121     RET
+                       709  ;       END  ;FREQSWE
+                       710   PROG

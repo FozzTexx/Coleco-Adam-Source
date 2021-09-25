@@ -1,0 +1,45 @@
+                                                                       ©
+FILE:  -3an2:€0S_TF        HEWLETT-PACKARD:   A_uOSOO   (c) Coleco  {-_-s Jnfidential                 Sat.  8 Sep  1984, 2238       t       43
+
+LOCATION OBJECT CODE  LINE      SOURCE  LINE
+
+                      1631
+                      1632  .  Name::            GET_VRAM
+                      1633
+                      1634     Function:         Gets a block of data  from VRAM and  stores it  intoa user buffer.
+                      1635                       The following table  codes are used  to  itdentifwhich VRAM table
+                      1636                       is being referenced:
+                      1637
+                      1638                         O - SPRITE ATTRIBUTE  TABLE  (SAT).
+                      1639                         1 - SPRITE GENERATOR  TABLE  (SGT)
+                      1640                         2 - PATTERN NAME TABLE       (PNT)
+                      1641                         3 - PATTERN GENERATOR  TABLE (PGT)
+                      1642                         4 - PATTERN COLOR  TABEL     (PCT)
+                      1643
+                      1644     Entry:            A - table code (see  above)
+                      1645                       DE - starting index  into the table
+                      1646                       HL - address of user  buffer
+                      1647                       IY - block size (or byte  count)
+                      1648
+                      1649     Exit:             None.
+                      1650
+                      1651     Registers  used:  AF, DE, HL, IY
+                      1652
+                      1653     Routines  used:   SETCOUNT
+                      1654
+                      1655     Size:             ROM - O bytes
+                      1656                       RAM - O bytes
+                      1657
+                      1658     Comments:         This version of GET VRAM  is provided  for stand alone operation.
+                      1659
+                      1660     Comparision:      left out pascal entry  point
+                      1661                       code compacted
+                      1662                       edited for documentation
+                      1663
+    EOCF              1664  _GET_VRAM:
+    EOCF CDEODS       1665                   CALL    SETCOUNT                 ;setup  the actual byte count and the  absolute VRAM  address
+                      1666                   CALL    READ_VRAM                ;user buffer  = VRAM data
+                      1667                   RET
+    EOD2 C3FDO1D      1668                   JP      READ_VRAM
+
+                              @e@¢@e@eoeee@e @ee@eee@«@e@@e@e@e@e@ee@e eeeo@@e@e@e@eee@f

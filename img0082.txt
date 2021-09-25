@@ -1,0 +1,61 @@
+FILE  EQSAGS  EGS TF        HewieeclPACKARD  SOUND cuwi€S tc}  Coleco, 1982   CON?DENT TAL             Sat     R Seg   fGH4   3°
+
+LOCATION  OBJECT CODE  LINE      SOURCE LINE
+
+                       2860
+                       PRG1
+                       2862  ;:*      INIT_SOUND         ‘
+                       PHGI  ,eeeeeeseseverereseseesseess
+                       2864
+                       2865  ;See Users’ Manuai for description;   includes ENTRY POINT ALLOFF
+                       2866  ;addr iST_OFSND_ADDRS  passed   in HL
+                       2867  :n = # of song data areas to   init, passed in B
+                       2868
+                       286s .;       *¢* Sound chip register   code EQUATES **-*
+                       2870
+                       2871  ;       Tone generator frequency   and attenuation formatted register   codes
+                       2872
+              <OO08O>  2873  SRIFRQ      EQU  100000008        -BIT7 = 1, BIT6-4 = TONE GEN  1 FREQ  CODE
+              <O090>   2874  SRIATN      EQU  100100008        ;BIT7 = 1, BIT6-4 = TONE GEN  1 ATTN  CODE
+              <OOAO>   2875  SR2FROQ     EQU  101000008        ;BIT7 = 1, BIT6-4 = TONE GEN 2  FREQ  CODE
+              <OOBO>   2876 SR2ATN       EQU  101100008        -BIT7 = 1, BIT6-4 = TONE GEN 2  ATTN  CODE
+              <OOCO>   2877  SR3FRQ      EQU  110000008        -BIT7 = 1, BITG-4 = TONE GEN 3  FREQ  CODE
+              <QODO>   2878  SR3AIN      EQU  110100008        ;BIT7 = 1, BITG-4 = TONE GEN  1 ATTN  CODE
+                       2879
+                       2880  ;       Noise generator control!  and attenuation formatted register   codes
+                       2881                                                 .
+              <OOEO>   2882  SRNCTL      EQU  111000008        ;BIT7 = 1, BIT6-4 = NOISE GEN  CONTROL  CODE
+              <OOFO>   2883  SRNATN      EQU  111100008        ;BIT7 = 1, BIT6-4 = NOISE GEN  ATTN  CODE
+                       2884
+    E3AB               2885
+                       2886  ;eee INITSOUND
+                       2887
+                       2888  ;    :  ¢ inittalize PTR_TO_LST_OF  SND _ADORS with value passed  in  HL
+                       2889
+    E3AB  22FEG6E      2890          LD [PTR_TO_LST_OF_SND_ADDRS},HL
+                       2891            |
+                       2892  ;       * store inactive code   at byte O of each of the n data  areas  [B  = n)
+                       2893
+    E3AE  23           2894          INC     HL                ;pt HL to song 1 data area entry   in LST_OF_SND_ADDRS
+    E3SAF 23           2895          INC     HL                                                   ,
+    E380  SE           2896          LD      —.[HL]     |      ;pt DE to byte 0 in first song  data  area
+    E381  23           2897          INC     HL                                                    |
+    E382  56           2898          LO      0D{HL}
+    E3B3  EB           2899          EX      DEHL              ;pt HL to byte O in first song  data  area
+    E3B4  11000A       2900          LD      DE,10             ;set DE for 10 byte increment
+    E387  3EFF         2901          LD      A,OFFH            ;Added u0S
+    E389               2902  B1:|
+    E3B9  77           2903          LD      (HL],A            ;Geactivate area  *** Added u0S
+    E3BA  19           2904          ADD     HL.DE             ;pt HL to byte O next area (10  bytes  away)
+    E3BB  10FC         2905          DUNZ    B1                ;do this for the n (passed in B)  data  areas
+                       2906
+                       2907  ;       *¢store end of data  area  code (0) at first byte after  last  song  data  area
+                       2908
+    E3BD  3600         2909          LO      [HL].0            ;store end of data area code  in byte  O data   area  n+   1
+                       2910
+                       2911  ;       * set the 4 channel! data  area pointers to a dummy, inactive   data  area
+                       2912
+    E3BF  21E3E6       2913          LO   HL,DUMAREA           ;point HL to inactive byte below  [after   the  RET]
+    E3C2  22FE70       2914          LD   {PTR TOS ON _O],HL   ;store addr DUMAREA at PTR_TOS  ON  _O
+    E3C5S 22FE72       2915          LO   [PTR_TO_SON _1],HL   ;store addr DUMAREA at PTR_TO_S ON 1
+    E3C8  22FF         2916          LO   =6{PTR_TOON 2],HL    ;store addr f  ‘REA at PTR_TO_S ON  2

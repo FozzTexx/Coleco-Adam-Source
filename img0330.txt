@@ -1,0 +1,65 @@
+FILEO7PRIME:pOS WEWLETT-PAPUTSEMI(c)Colec1982CONFIDENTIAL     Fri18May19816:19  PAGE56
+
+LOCATIOBJECODLINE  SOURLINE
+
+   08593     2547       SUBE                                  '
+   085D5     2548       PUSDE
+   0855F     2549       LDE,A           7GETHINUMBEINTIY
+   0851600   2550       LOD,0
+  085705     2551       PUSDE
+  0858FDE1   2552       POPIY
+  08501      2553       PODE
+             2554
+  08581807   2555          JR        ENIF9
+             2556
+                ee     ELSE            ;BOTENDOFFRAMWITHPATTEPLANE
+
+  0850       255ELS9
+             2560
+  085C5      256PF3:    PUSBC
+  0850600    2562       LD8,0
+  086C5      2563       PUSBC
+  086FDE1    2564       POPIY
+  086C1      2565       POBC
+             256;     ENDIF
+             2567
+  0864       256ENIF_9
+             2569
+             257;    ENDIF
+             2571
+  0554       257END_8F
+             2573
+  0861£00   2574     LDE,0
+             257;    REPEAT          7Y_EXTENTIMES
+             2576
+  0866       257RP1
+             2578
+  0867A      257PF4:  LDA,D            ;GEYPAPOS
+  0868&3    2580      ADOA,E           s;AYD
+             258;      IF(.A,1S,PLUS)
+             2582
+  086CB7F   2583          BIT        7,A
+  0862019   2584          JR         N2,END10F
+             2585
+             258;       IF(.A,LE,23)    ;1O<=PATPOS+Y<=23                                               ,
+             2587
+  086FE18    2588         cP         24
+  0863015   2589          JR         NC,EIF10
+             2590
+  087C5      2591        PUSBC
+  08705      2592        PUSDE
+  08709     2593         EXX
+  087C5     2594         PUSBC
+  087DS     2595         PUSDE
+  087E5      2596        PUSHL
+  087FOES    2597        PUSIY
+  0873£02    2598        LOA,2          ;COFORPATTENAMTABLADDE4/20                         .
+  087CD1C27  2599        CALPUVRAM_
+  087FDE1    2600        POPIY
+  O87£1      2601        POPHL
+  08801      2602        POPDE
+  088C1      2603        POPBC
+
+                                                          é
+
+wae               ee    He    ee     HR    HE     Ee    Eee  eH           Ee     Eee   Eee   EE    lUElUrlClCUED

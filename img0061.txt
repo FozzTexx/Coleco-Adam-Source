@@ -1,0 +1,47 @@
+                                                                   ‘e
+FILE: « 5...9:€0S_TF       HEWLETT-PACKARD: A_uOS OO  (c) Coleco  i:_- Confidential                 Sat,    8  Sep  1984,   23:39        ak
+
+LOCATION OBJECT CODE  LINE      SOURCE LINE
+
+                      2164
+                      2165   __DECODER
+                      2166            Will read all the data, from both segments, for a given  controller
+                      2167            All data  isreturned in regtsters          .
+                      2168            Segment O data is returned the same as with 0S-7
+                      2169
+                      2170      NOTE - some operations are done in an odd order so that a certain
+                      2171             number of cycles (T states) pass between port addressing.
+                      2172             Turns off interupts if they were on at entry time for
+                      2173             195 T states (approx. 54.5 micro secs), the iterupts
+                      2174             are reenabled after this time if they were on before.
+                      2175
+                      2176      Callers  -  The input parameters are different than 0OS-7and
+                      2177                  both segments are returned so only one call is  required
+                      2178                  for all the data from a given controller.
+                      2179                  The values returned are the same for segment O  (H, L,  E)
+                      2180                  but segment 1 values are returned in B and OD.
+                      2181
+                      2182   ;StackUsage:
+                      2183   ; Uses 2 words (pushes only)
+                     2184    ;
+                      2185  ;Input Parameters:
+                      2186  ;   A  - controller number, O or 1
+                      2187
+                      2188  ;Returns:
+                      2189  ;   H  - fire button data
+                      2190      L  - joystick data
+                      2191      6  - arm button data
+                      2192      C  - raw data for segment O, (joystick, fire)
+                      2193      D  - keyboard data
+                      2194      E  - spinner count data
+                      2195      A  - raw data for segment 1, (keyboard, arm, super controller  buttons)
+                      2196
+                      2197      SPIN SWxCT   - reset to O after read
+                      2198
+                      2199      strobe port left in the reset condition
+                      2200
+                      2201  -Date:
+                      2202  ; 9/24/83   11:14    JKL
+                      2203  ;
+
+                             eee@¢@e@@@@eee@e@eet

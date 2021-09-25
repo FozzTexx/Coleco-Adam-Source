@@ -1,0 +1,55 @@
+[1LE: OS_7PRIME:pOS        HEWLETT-PACKARD: SOUND EQU'S (c) Coleco,  1982   CONFIDENTIAL               Fri, 18  May  1984,  16:18      PAGE    2
+
+-OCATION OBJECT CODE   LINE     SOURCE LINE
+
+                         55;        Operating system sound routine EQUATES
+                         56 ;       FILE NAME: OSSR.EQU
+                         57 ;       gan Equates sere
+                         58 ;       Dedicated Cartridge RAM locations
+             <7020>      59 DEDAREA EQU 7020H       sthe start of the RAM  area dedicated   to  sound  routines
+             <7020>      60 PTR TOLST OF  SND_ADDRS EQU DEDAREA+0
+             <7022>      61 PTR TO SON O  EQU;DEDAREA+2
+             <7024>      62 PTR TO SON.1  EQU DEDAREA+4
+             <7026>      63 PTR TOS OM _2 EQU DEDAREA+6
+             <7028>      64 PTRTO  SON 3  EQU DEDAREAtS
+             <702A>      65 SAVECTRL  EQU DEDAREA+10
+                         66 ;       Attenuation level codes
+             <000F>      67 OFF     EQU OFH         ;OFF (NO SOUND)
+                         68 ;       Sound outputport
+             <O0FF>      69 SOUND_PORT EQU OFFH    ;data to sound chip thru  this port
+                         70 ;       Special byte 0 codes
+             <OOFF>     Ti  INACTIVE EQU OFFH
+             <003E>      72 SEFFECT EQU 62
+             <0000>      73 ENDSDATA EQU 0
+                         74;        Offsets within an SxDATA song data area
+             <0000>      75 CH      EQu 0
+             <0000>      76 SONGNO  EQU 0
+             <0001>      77 WEXTNOTEPTR EQU 1
+             <0003>      78 FREQ    EQU 3
+             <0004>      79 ATW     EQU 4
+             <0004>      80 CTRL    EQU 4
+             <0005>      81 NLEN    EQu 5
+             <0006>      82 FPS     EQU 6
+             <0006>      83 FPSV    EQU 6
+             <0007>      84 FSTEP   EQU 7
+             <0008>      85 ALEN    Equ 8
+             <0008>      86 ASTEP   €EQu8
+             <0009>      87 APS     EQU 9
+             <0009>      88 APSV    EQU 9
+                         89 ;       song end codes
+             <0010>      90 CHOEND  EQU 000100008
+             <0050>      91 CHIEND  EQu 010100008
+             <0090>      92 CH2END  EQuU100100008
+             <0000>      93 CH3END  EQU 110100008
+             <0018>      94 CHOREP  EQU 000110008
+             <0058>      95 CHIREP  EQU 010110008
+             <0098>      96 CH2REP  EQU 100110008
+             <0008>      97 CH3REP  EQU 110110008
+                         98 ;       channel numbers, B7 -B6
+             <0000>      99 CHO     EQu 0
+             <0040>     100 CH1     Equ 010000008
+             <0080>     101 CH2     EQU 100000008
+             <00cO>     102 CH3     EQU 110000008
+                        103 ;       [page]
+                        104  PROG
+                        105

@@ -1,0 +1,63 @@
+FILE:    EOSABS:EOS      TF            HEWLETT-PACKARD:          SOUND   EQU¢S     (c)   Coleco,     1982       CONFIDENTIAL                       Sat,      8   Sep     1984,     23:39             PAGE       64
+
+LOCATION     OBJECT      CODE   LINE           SOURCE    LINE
+
+                                2579
+                                25BO    , eet  eeeeereeeeeeeeeeeeeeseres
+                                2581    ;*            ATN_SWEEP                  *
+                                2582     ee   eeeresereeeeeeereeesesers
+                                2583
+                                2584    :;See   User's     Manual!   for  description
+                                2585    :RETs     Z  SET:    tf byte    8  is  O  [means     sweep     is  over,    or   note    was    never   swept]
+                                2586    ;RETs     Z  RESET:     if sweep    in  progress
+                                2587
+     E2F7                       2588    ATN_SWEEP
+                                2589
+                                2590    ;            *  RET   with   Z  SET   if  byte    8  =  00
+                                2591
+     E2F7    DD7EOS8            2592                 LD         A,  [1X+8)               ;check    byte    8  for   no   sweep     code
+     E2FA    B87                2593                 OR         A                        -Z2  1s  set   if   byte   8   = O
+     E2FB    C8                 2594                 RET        2                        ;leave     if  Z  set,    sweep    not    going
+                                2595
+                                2596    ;            *  sweep   going,    so   dec   APSV
+                                2597
+     E2FC    DDES               2598                 PUSH       IX                       ;point    HL   to   APSV
+     EQFE    E1                 2599                 POP        HL
+     E2FF    110009             2600                 LO         DE  ,APSV
+     E302    19                 2601                 ADO        HL  ,DE
+     E303    CDE355             2602                 CALL       LOCL  DECLSN                    ;dec   APSV     [LSN   of   byte    9]
+                                2603    *eee8        JR         NZ,L22                   ;1f  PSW    ts  zero    APSV    has   timed     out
+     E306    CO                 2604                 RET        NZ                       ;Added    u0S
+                                2605
+                                2606    ;            *  dec   ALEN   to  see   if  sweep     over
+                                2607
+     E307    CDE369             2608                 CALL       LOCL  MSNTOLSN                  ;reload      APSV   from    APS
+     EJOA    28                 2609                 DEC        HL                      ;point     to  ALEN     [4  of   steps     in   the  sweep]
+     E30B    CDE355             2610                 CALL       LOCL_DECLSN                     ;dec   ALEN     [LSN   byte    8]
+     E30E    2815               2611                 JR         Z,L23                   ; if  PSW    is  non-zero      sweep    not    over    yet
+                                2612
+                                2613    ;            *  add   ASTEP   to  ATIN
+                                2614
+     E310    7E                 2615                 LD         A, {HL])                ;>MSN   A  =  ASTEP
+     E311    EGFO               2616                 AND        OF OH                   ;mask    USN
+     E313    SF                 2617                 LO         E,A                     ;E   =  ASTEP       O
+     E314    28                 2618                 DEC        HL                      ;point     HL  to   ATN
+     E315    2B                 2619                 DEC        HL
+     E316    28                 2620                 DEC        HL
+     E317    2B                 2621                 DEC        HL
+     E318    7E                 2622                 LO         A, (HL)                 ;>MSN   A  =  ATN
+     E319    E6FO               2623                 AND        OF OH                   ;A   =  ATN      Oo
+     E31B    83                 2624                 ADD        A,E                     ;MSN    A  =  [ASTEP     +  ATN]       Oo
+     E31C    SF                 2625                 LO         E.A                     -E   =  [ASTEP    +   ATN]       O
+     E310    7E                 2626                 LD         A,{HL]                  -A   =  ATTN.    freq    or   CTRL
+     E31E    EGOF               2627                 AND        OFH                     ;smask   old   ATN      A  =0      freq     or   CTRL
+     E320    B3                 2628                 OR         E                       ;OR   in   new   ATN
+     E321    77                 2629                 LO          {[HL],A                ;store     updated      value   back     into    song   data    area
+     E322    F6FF               2630                 OR         OF FH                   ;RESET     Z  flag.     sweep    not  over     yet
+                                26391   *ee08        JR         L22
+     E324    C9                 2632                 RET                                ;Added     uO0S
+                                2633
+                                2634    ;            ELSE       Z2 flag   is  SET:     sweep    over
+                                2635
+
+si      eat         sf           A           si          ef         =f       sO         ef          sf             efi         =sf#      =3              —=s      =s                 8       =e                 J           =

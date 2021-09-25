@@ -1,0 +1,61 @@
+FILE: OS 7PRIME=:pOs           HEWLETT-PACKARD:    CONTROLLER    SOFTWARE   (c) Coleco,   1982    CONFIDENTIAL       Fri,   18  May  1984,  16:21       PAGE   99
+
+LOCATION   OBJECT  CODE  LINE        SOURCE  LINE
+
+    1230   77            4841                LD                        sCLEAR  COUNTER
+    123                  4842   DECODE OX
+    123E   C9            4843                RET
+                         4844
+                         4845
+                         4846   *  DECODER   ROUTINE   FOR SEGMENT   1
+                         4847   *
+                         4848   *            INPUT:
+                         4849   *                 A  - DATA
+                         4850   *                 B  - DEVICE   STATUS   BYTE  FOR  CURRENT   PLAYER
+                         4851   *                 IX -  POINTER   TO CONTROLLER   MEMORY
+                         4852   *                 IY -  POINTER   TO DEBOUNCE   STATUS   BUFFER
+                         4853   *
+    123F                 4854   DECODE 1
+    1235   4F            4855                LD   =6CC,A              *SAVE   DATA
+    1240   CB58          4856                BIT  ARM,8               s1F  ARM  BUTTON   NOT  ACTIVE
+    1242  2804           4857                JR          KBD          sTHEN   CHECK  KEYBOARD
+                         4858   *  ARM  BUTTON  ACTIVE                sELSE
+    1244  CD12E9         4859               CALL  ARM  DBNCE          ;DEBOUNCE   ARM  BUTTON
+    1247   79            4860                LD   sA,C
+    1248                 4861   DEC_KBD
+    1248  CB60           4862               BIT   KBD,B               s1F  KEYBOARD   NOT  ACTIVE
+    124A  2803           4863                JR              1X       sTHEN  EXIT  DECODER
+                         4864   * KBD  ACTIVE
+    124C  (D1250         4865               CALL  KBD_DBNCE           ;DEBOUNCE   KEYBOARD
+    124F           |     4866  DECODE  1X
+    124F  C9             4867               RET
+                         4868
+                         4869
+                         4870
+                         4871   *  KEYBOARD  DEBOUNCE    ROUTINE    *
+                         4872   *
+                         4873  *             INPUT:
+                         4874  *                  A  - RAW  DATA
+                         4875  *                 IX  - CONTROLLER    MEMORY  POINTER
+                         4876  *                 IY  - DEBOUNCE    STATE  BUFFER
+                        4877   *
+   1250                 4878   KBD OBNCE
+   1250   C5            4879                PUSH  BC
+   1251   D5            4880                PUSH  DE
+   1252   £5            4881                PUSH  HL
+   1253   E60F          4882                AND  KBD  MASK            sMASK  OUT  VALID  DATA
+   1255   5F            4883                LD    E,A                 -SAVE  IT
+   1256   FD4608        4884                LD    8,{IY+KBD   OLD)    ;GET  OLD  DATA  AND  CURREN  STATE
+   1259   FO7EO9        4885                LO    A,(IY+#KBD  STATE)
+   125C   FEOO          4886                cp    60                  s1F  STATE  <> 0
+   125E   201A          4887                JR            ST1         *THEN  MUST  BE  STATE  1
+                        4888   *   STATE  = 0                         ELSE
+ - 1260   78            4889                LD    A,E                 *GET  CURRENT  DATA
+   1261   88            4890                cP    6B                  >1F OLD=NEW
+   1262   2805          4891                JR          REG           sTHEN  SAW  DATA  TWICE   IN SEQUENCE
+   1264   F07308        4892                LO    {IY*KBD  OLD],E     ;ELSE  FIRST  TIME,   SAVE  CURRENT  DATA
+   1267   181C          4893                JR    «BO EXIT
+                        4894   *   SAW DATA  TWICE   IN SEQUENCE
+   1269                 4895   KBD REG
+   1269  3601           4896                LD    A,1                 >SET  STATE=1
+   1268   FD7709        4897                LD             STATE),A

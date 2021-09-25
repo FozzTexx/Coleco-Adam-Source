@@ -1,0 +1,25 @@
+FILE: EOSABS EOSTF        HEWLETT-PACKARD: SOUND EQU@S (c} Coleco, 1982   CONFIDENTIAL               Sat    B  Sep  iGkR4  2.5.39       PAGE   ia
+
+LOCATION OBJECT CODE  CLINE    SOURCE LINE
+
+                      2749
+                      2750 ,tHeeeeeseceseseeeesereeress
+                      2751 ;*       LOCL_MSNTOLSN     :
+                      2752
+                      2753
+                      2754 :Copy MSN of the byte pointed to by HL to tne iSN of that byte      Hi  remains
+                      2755 ;the same.
+                      2756
+    E369              2757 MSNTOLSN
+    €369              2758 LOCi_MSNTOLSN
+    E369 7E           2759         LD      Aa(Ht)          ;A = MSN   LSN to be changed
+    E3GA EGFO         2760         AND     OFOH            >A = MSN   0
+    E36C 47           2761         LD      8A              ;save in B
+    E360 OF           2762         RRCA                    ;Swap nibbles
+    E36GEOF           2763         RRCA
+    E36F OF           2764         RRCA
+    E370 OF           2765         RRCA                    7A = 0   MSN
+    £371 BO           2766         oR      8               ;& = MSN   MSN
+    €372 77           2767         LD      {HiL}],Aa       ;(HtL]= MSN   MSN
+    €373 C9           2768         RET
+                      2769

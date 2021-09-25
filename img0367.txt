@@ -1,0 +1,61 @@
+FILE: OS 7PRIME:pOS           HEWLETT-PACKARD:       CONTROLLER     SOFTWARE    (c)  Coleco,    1982    CONFIDENTIAL          Fri,  18  May  1984,    16:20        PAGE    93
+
+LOCATION OBJECT   CODE  LINE          SOURCE   LINE
+
+                        4500    ;CONTROLLER     SOFTWARE
+              <0000>    4501    FIRE                 EQU                  0             ;BITS   IN  STATUS   WORD    TO  CHECK
+              <0001>    4502    JOY                  EQU                  1             sWHETHER    DEVICE    IS  ACTIVE
+              <0002>    4503    SPIN                 EQU                  2
+              <0003>    4504    ARM                  EQU                  3
+              <0004>    4505    KBD                  EQU                  4
+              <0002>    4506    PLYR_O               EQU                  2             ;OFFSET    TO  CONTROLLER     MEMORY
+              <0007>    4507    PLYR_1               EQU                  7
+              <0007>    4508    SEG 0                EQU                  07H           7B1T   MASK  IN  PLAYER    STATUS
+              <0018>    4509    SEG 1         .      EQU                  18H           FOR    SEGMENT   O  OR  1  DEVICES
+              <0000>    4510    FIRE  OLD            EQU                  0             ;OFFSETS    TO  DEBOUNCE     STATUS
+              <0001>    4511    FIRE  STATE          EQU                  1             ;BUFFER:    (OLD, STATE)
+              <0002>    4512    JOY OLD              EQU                  2
+              <0003>    4513    JOY STATE            EQu                  3
+              <0004>    4514    SPIN  OLD            EQy                  4
+              <0005>    4515    SPIN  STATE          EQU                  5
+              <0006>    4516    ARM OLD              EQU                  6
+              <0007>    4517    ARM STATE            EQU                  7
+              <0008>    4518    KBD OLD              EQU                  8
+              <0009>    4519   KBD  STATE            EQU                  9
+              <OO00F>   4520   KBD  MASK             EQU                  OFH         MASK    FOR   INPUT   DATA   BYTE
+              <0040>    4521    FIRE  MASK           EQU                  40H
+              <0040>    4522   ARM  MASK             EQu                  40H
+              <O000F>   4523   JOY  MASK             EQu                  OFH
+              <0080>    4524   SPWR_MASK             EQU                  101100008
+              <0005>    4525   NUM  DEV              EQU                  5           ;NUMBER    OF  POSSIBLE    DEVICES
+                        4526s  STACK                  EQU                  73FFH
+                        4527   ;MODE_  0 PORT         EQU                  OBEH          ;08
+                        4528   ;MODE   1 PORT         EQu                  OBFH          09
+              <O00F>    4529   KBD  NULL             EQU                  OFH
+              <OOFF>    4530   CTRL_1   PORT         EQU                  OFFH
+             <OOFC>     4531   CTRL_O   PORT         EQU                  OFCH
+             <O0CO>    4532    STRB  RST   PORT      EQU                 OCOH                   STROBE    RESET   PORT
+             <0080>    4533    STRB  SET   PORT     EQU                  080H                   ;STROBE   SET  PORT
+             <0000>    4534    CONTROLLER     0     EQU             |     0
+             <0001>    4535    CONTROLLER    1      EQU                 4
+             <0000>    4536    STROBE   RESET       EQU                  0
+             <0001>    4537    STROBE   SET         EQU                   1
+                       4538    RERRAARARARAEAAAARAEKAKEKE       MACRO   RAKAKAKAKERAKKKAHEKKAEKREKKKKKKKKK
+                       4539
+                       4540
+                       4541    DELAY   10     MACRO
+                       4542                   CALL  DELAY
+                       4543                   MEND
+                       4544
+                       4545    RARRAARARAKHAAAAAAAAARAREAHRKE)          ATARKRRKHARAERERAEKEKAAERERREREE
+                       4546    *
+                       4547   *    DECODER    TABLE   FOR  THE  KEYBOARD
+                       4548    *
+   10F5                4549   DEC_KBD_TBL
+   10F5 OF             4550                   DEFB  KBD WULL             ;  NULL   ENTRY                                                                                                 ‘
+   10F6 06             4551                   DEFB  6                    ;  6!
+   10F7 01             4552                   DEFB  1                    ;  {1
+   10F8 03             4553                   DEFB  3                    ;  ‘3!
+   10F9 09             4554                   DEFB  9                    ;  '9!
+   10FA 00             4555                   DEFB  0                    >  'QO!
+   10FB OA             4556                   DEFB  10

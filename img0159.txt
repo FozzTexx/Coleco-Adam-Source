@@ -1,0 +1,45 @@
+                                                                                                                                            é    ¥
+FILE: «-2aBS:E0OS_TF         HEWLETT-PACKARD:   EOSMKDIR   (c)  Coleco   {yuu Confidential                 Sat,  8 Sep 1984,  23:41        1   at 155
+
+LOCATION OBJECT  CODE   LINE       SOURCE LINE
+
+                        6412
+    F389 3E01           6413          LD       A,1                         ; FIRST SECTOR
+    F38B 32FD87         6414          LD       [SECTOR_NO],A
+                        6415
+    F38E CDF3C5         6416          CALL    WRITE_1 BLOCK                ; WRITE BLOCK TO TAPE
+                        6417
+    F391 2016           6418          SR       NZ,WE_GOT_ERRORS            ; CAME BACK WITH ERROR
+                        6419
+    F393 3AFD86         6420          #.LD     A,{SECTORS TO_INIT]         ; GET NO OF SECTORS TO  INITIALIZE
+                        6421                                   |
+    F396 47             6422          LO.      B.A
+    F397 OS             6423          DEC      B                           : ONE LESS BECAUSE ONE  WAS JUST INITIALIZED
+                        6424
+    F398 280E           6425          UR.      Z,NO_SECTORS TO_INIT        ; WAS ONLY ONE TO INIT
+                        6426               |
+    F39A CDF3AF         6427          CALL                                 ; CLEAR 1K BUFFER
+                        6428
+    F39D                6429   SECT_INIT_LOOP:
+    F39D 21FD87         6430          LD       HL,SECTOR_NO                ; SECTOR NO.
+    F3AO 34             6431          INC      (HL)                        ; NEXT SECTOR
+                        6432
+    F3A1 CDF3C5         6433          CALL             BLOCK               ; WRITE BLOCK OF ZEROS  OUT
+    F3A4 2003           6434          JR       NZ,WE_GOT_ERRORS            ; GOT A ERROR IN WRITE
+                        6435
+    F3A6 10F5           6436          DUNZ
+                        6437
+    F3A8                6438   NO SECTORS TO_INIT:
+          |             6439
+    F3A8 AF             6440          XOR      A                           ; ZERO CONDITION
+                        6441        |
+    F3A9                6442   WE_GOT_ERRORS:
+                |       6443
+    F3A9 E1             6444          Pop      HL
+    F3AA D1             6445          PoP      DE
+    F3AB C1             6446.         pop      BC
+    F3AC FDE1           6447    |     pop      ly
+                        6448
+    F3AE C9             6449          RET
+                        6450
+                       6451

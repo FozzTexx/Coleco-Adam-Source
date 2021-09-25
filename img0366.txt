@@ -1,0 +1,23 @@
+FILE:  OS_7PRIME:pOS             HEWLETT-PACKARD:     TIME  MANAGER  (c)   Coleco,  1982   CONFIDENTIAL               Fri,   18  May   1984,    16:20       PAGE   (92
+
+LOCATION   OBJECT   CODE   LINE        SOURCE   LIWE
+
+    10E9                   4480   SIGNAL_TRUE:                                              ;Here when   timer  is  finished
+    10€9   CB76            4481                 BIT REPEAT,    (HL)                         ;Check  for  repeating   timer
+    10EB   2002            4482                 JR =  WZ,SIGNAL_TRUE1                       ;If so  then  just  return   True
+    10E0   CBEE            4483                 SET   FREE,  (HL)                           ;free current    timer  since  not   repeating
+    10E F                  4484   SIGNAL_TRUE1:
+                           4485                                                             ;***** Start   add  4/30/82****
+    1OEF   CBBE            4486                RES   DONE,  [HL]                            ;Reset current    timer  to  not  done
+                           4487                                                             ;eeee® End   add  4/30/82****
+    10F1   3E01           4488                 LD     sA,!1                                 sPut a True   in  the Acc
+    10F3                   4489   TEST EXIT:                                                ;Return
+    10F3   87              4490                OR     A
+    10F4   C9              4491                RET
+                           4492
+                           4493                DATA
+                           4494
+    7303                   4495   TIMER TABLE   BASE:              2
+   7305                   4496   WEXT  TIMER  DATA   BYTE:   DEFS  2
+                          4497
+                          4496     PROG

@@ -1,0 +1,61 @@
+‘iL  %   €OSABS:°EOS      TF             HEWLETT    -PACKA™  :                       LOPrece    iS83   Conf  identia!                         Sat.     Be       na      624 OUR
+
+LOCATION      OBJECT      CODE     LINE         SOURCE    LINE
+
+                                   1670   ;
+                                   1671     CALLED     BY   PUT_VRAM_     AND  GET  VRAM_
+                                   1672
+                                   1673   ' SETS     BYTE   COUNT    AND  INDEX   FOR   WRITES     TO  AND   READS   FROM   VRAM.
+                                   1674
+                                   1675   ;   TABLE                BYTES/ITEM
+                                   1676   ;   SPRITE   NAME               4
+                                   1677   ;   SPRITE   GEN                8
+                                   1678   ;   PATTERN    NAME             1
+                                   1679   ;   PATTERN    GEN              #
+                                   1680   ;   COLOR    (MODE     1)       1
+                                   1681   ;   COLOR    (MODE    2)        a
+                                   1682   ;
+      EOODS                        1683   SET COUNT
+      EOOS    FDES                 1684                         PUSH       lY                                   -Save   count   on  stack
+      E007    4F                   1685                         LD         C,A                                  ;Get  table   code    4
+      EODS    FEO4                 1686                         cp         4                                    >See   if color    table
+      EODA    2008                 1687                         JR         NZ.NOT   COLOR   TBL_ACCESS          -If  not   then  check    for  name    table
+                                   1688                                                                        :;Color   Table
+      EODC    3AFDG61              1689                         LO         A, (VOP_MODE    WORD]               ;Get   mode   word   to  check    graphics     type
+      EOODF   E602                 1690                         AND        02H                                 ;Bit    1 indicates     mode   i  or  2
+      EOE1    2814                 1691                         JR         Z,ADD_TO_  BASE                     ;If   mode   1  then  start    index    is  not   modif   ted
+      EOE3    79                   1692                         LD         A.C                                 ;Get   table   code   back
+                                   1693                                                                        ;Fall    through    to  multiply     by  8  for   mode   2.
+      EOE4                         1694   NOT COLOR    TBL_ACCESS
+      EOE4    FEO2                 1695                         cP         2                                   ;Check    for  Name    table
+      EOE6    280F                 1696                         JR         Z,ADD  TO  BASE                     ;If   so  then   don’t   modify    start    index
+                                   1697                                                                        ;At   this  point    the   table   code    is:
+                                   1698                                                                           Sprite   attribute      table,    Sprite    gen   table,
+                                   1699                                                                        ;  Pattern    gen   table,   or   Color   table     in  Mode   2
+                                   1700
+      EOES    EB                   1701                         EX         DE .HL                              -Get   count    in HL
+      EOES    29                   1702                         ADD        HL ,HL                              3*2
+                                 1703
+      EOEA    29                   1704                         ADO        HL.HL                               +4
+      EOEB    87                   1705                         OR         A                                   ;Check    for  Sprite    attr   table
+      EOEC    2801                 1706                         JR         Z,HAVE_CNT                          ;If   so  then   Index*4    is  complete
+      EOEE    29                   1707                         ADD        HL, HL                              ;If  not   then   Index*8     is  required
+                                   1708                                                                        ;  this   is  for   the  pattern    gen   table,
+                                   1709                                                                        ;  sprite   gen   table,    or  color    gen   table
+                                   1710                                                                        ;  in  mode   2.
+      EOEF                         1711   HAVE CNT:
+      EOEF    ES                   1712                         EX         DE ,HL                              ;Put   updated    index    in  DE
+      EOFO    E3                   1713                         EX         {SP),HL                             ;Get   count   off   stack
+                                   1714                                                                        :-Put  address    of  RAM   buffer    on  stack
+                                   1715
+                                   1716                                                                        ;Now   modify    the  count    for:
+                                   1717                                                                        ;  Sprite   attribute      table,   Sprite     gen   table,
+                                   1718                                                                           Pattern    gen   table,   or   Color   table     in  Mode   2
+      EOF1    29                   1719                         ADD        HL.HL
+      EOF2    29                   1720                         ADD        HL.HL
+      EOF3    2801                 1721                         UR         Z,HAVE_CNT2                         ;If  Sprite    attr   table    then   +4  {is  enoungh
+                                   1722                                                                        ;  (the   zero   flag   is  still   set   from    earlier)
+      EOFS    29                   1723                         ADD        Ht,HL                               ;Count    *8  for  remaining      tables
+      EOF6                         1724   HAVE CNT2:
+      EOF6    E3                   1725                         EX         {SP} ,HL                            ;Save   updated    count    on  stack
+                                   1726                                                                        ‘Restore    RAM   buffer    off   stack

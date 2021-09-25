@@ -1,0 +1,66 @@
+FILE: OS 7PRIME:pos         HEWLETT-PACKARD: SOUND MANAGER (c) Coleco, 1982  CONFIDENTIAL           Fri,  18 May 1984, 16:19      PAGE   28
+
+LOCATION  OBJECT  CODE  LINE     SOURCE LINE
+
+                        W127;         -IDENT SNDMAN           ;includes SND MANAGER,PROCESS DATA_AREA,
+                        He                                   ;UP_CH DATA—_TRS
+                        1129 ;                                  oa -
+                        1130 ; eunvaceasabenconsavenesere
+                        1131 s
+                        1132 > COMMENT )
+                        1133 ;See Users’ Manual for description
+                        1134 ;)
+                        1135         GLB SNDMANAGER
+                        1136        sEXT PT_IX_TO_SxDATA,AREA SONG  IS
+                        1137        ;INCLUDE OSSREQU:0S   ;equates
+    027F                1138 SND_MANAGER
+                        1139 ;       * IX := addr of song #1 data area  [(SIDATA)
+    027F  0601          1140         LO B,1                  spt IX to byte 0 song data area  forsong  # 1
+    0281  CD01C1        1141         CALL PT_IX_TO SXDATA
+       ;                1142 ;       LOOP untilend  of song data areas
+    0284  3£00          1143 11        LO A,ENDSDATA           scheck for end of song data areas
+    0286  DDBE0O        1144           cP (1X40)               sset Z flag if  inactive
+    0289  C8            1145           RET 2                   steave (Z set], if all data areas have  been  processed
+                        1146 ;           * process active song data areas
+   028A   CD02D6        1147             CALL PROCESSDATA_AREA   ;update counters or call effect; get  next  note
+                        1148 ;           * point IX to byte 0 next song data area
+   0280   1E0A          1149             LD E,10
+   O28F   1600          1150             LD D,0
+   0291   D019          1151             ADD 1X,DE
+   0293   18EF          1152         JR L1 ;REPEAT LOOP
+                        1153 4RREERERAAKAERAAAARAKREEERER
+                        1154 8*     UP_CH DATA~PTRS     *
+                        1155 eRkRRekeaRaakaekekakaeeanake
+                        1156  ;.COMMENT)
+                        1157 >For each active data area, starting with SIDATA and proceeding in order,  load
+                        1158 “the associated channel data area pointer (PTR TO SON x)  with the address  of
+                        1159 s;byte0.  This routine is called by JUKEBOX,  when a song starts and
+                        1160 *PROCESS_DATA_AREA when the channel using a data area has changed as a result  of
+                        1161 “calling“LOAD NEXTNOTE  [this happens when a song finishes and when it switches
+                        1162 ;back and forth between noise and tone notes).
+                        1163 >)
+                        1164         GLB UP_CHDATA _PTRS
+                        1165        EXT  DUMAREA                                                                                                                     ,
+   0295                 1166 UP_CHDATA, PTRS
+   0295   DDE5          1167         PUSH IX                 ;save curent IX
+   0297   21024C        1168         LD HL ,DUMAREA          sset all 4 ch data ptrs to dummy inactive  area
+   029A   227022        1169         LD [PTR TO SON 0),HL
+   0290   227024        1170         LD (PTR_TO SOW  1],HL
+   O2A0   227026        1171         LD (PTR TO SON 2),HL
+   02a3   227028        1172         LD [PTRTO S ON 3),HL
+   02A6  0601           1173         LO B,1                  sset IX to byte 0 SIDATA
+   O02A8 CDOIC1         1174         CALL PT_IX_TO SxDATA    “RETs with IX addr byte 0 song 1
+                        1175 ;       LOOP untilend  of song data areas
+   02AB  DD7E00         1176 L2        LD A,[IX+0)             stest for end of song data araes
+   O2AE   FEOO          1177           cP ENDSDATA                                                                                                 ‘
+   0280  2821           1178           JR 2,DONESNDMAN           jleave loop if all data areas checked
+                        1179 ;           * if area active, set appropriate channel data area pointer
+   0282  FEFF           1180             CP INACTIVE             scheck for inactive data area: don't up  date ptr if so
+                        1181 ;           If (PSW,1S,NZERO)       sarea is active: update channel data ptrs
+   0284  2815           1182             JR Z,L9
+   0286  DD7E00         1183               LDA, (1X+0}             -get CHA in A
+
+                                                                                             ,
+
+                                                                                                                                                                         f          q
+                                                                                                                                                                                             >

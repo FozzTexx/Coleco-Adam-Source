@@ -1,0 +1,63 @@
+ FiLE:  EOSABS:E0S  TF          HEWLETT-PACKARD:     EOS _COMN    (c)  Coleco  1983 Conftdenia}                 Sat,    8 Sep  1984,  23:34       PAGE    14
+
+ LOCATION   OBJECT  CODE   LINE       SOURCE   LINE
+
+     FOD4                   528  FILE_COUNT
+     FOD4                   529          DEFS       ‘
+                            530
+     FDDS                   531  MOD_FILE  COUNT
+     FDDS                   532          DEFS       1
+                            533
+                            534          :GLB       RETRY COUNT,   FILE NUMBR
+     FDO6                   535  RETRY_COUNT
+     FDDG6                  536          DEFS       :
+                            537
+     FDD7                   538  FILE_NUMBR
+     FD07                   539          DEFS        1
+                            540
+                            541          ;GLB       FILENAME  CMPS
+     FDDS                   542 FILENAME   _CMPS
+     FODS8                  543          DEFS       1
+                            544
+                            545          ;GLB      DIR_BLOCK_NO,FOUND_AVAIL_ENT
+     FDD9                   546 DIR_BLOCK_NO
+     FDD9                   547          DEFS       2
+             |              548
+     FOD                    549 FOUND_AVAIL_ENT
+     FODS                   550          DEFS       1
+                            551
+                            552         ;GLB       VOL_BLK_SZ,BLK_STRT     PTR
+     FDDC                   553 BLK_STRT_PTR:
+     FDDC                   554 VOL_BLK_SZ:
+     FDDC                   555          DEFS      4
+                            556
+                            557  ; FILE  MANAGER   RAM  STORAGE
+                            558
+                            559                     ;GLB       EOS_YEAR,EOS   MONTH,EOSDAY
+     FDEO                   560 EOS_YEAR            DEFS       1         ;FMGR’S DATE STORAGE
+    FOE 1                   561 EOS MONTH           DEFS       1
+    FDE2                    562 EOS DAY             DEFS       1
+                            563
+                            564                     ;GLB       FMGR_DIR_ENT
+     FDE3                   565 FMGR_DIR_ENT                                     ;PLACEFOR FMGR TO PUT A DIR. ENTRY
+                            566
+.                           567                     GLB        FCB_HEAD_ADOR,FCB_DATA_ ADDR
+     FOFD                   568 FCB_HEAD    ADDR    EFS        2         ;POINTER TO START OF FCB HEADS
+    FOFF                    569 FCB DATA    ADDR    DEFS       2         ;POINTER TO START OF FCB BUFFERS
+                            570
+                            571                    GLB         FNUM, BYTES REQ,BYTES TO GO,USER BUF
+                            572                    GLB         BUF_START,BUF_ENO.BLOCKS  REQ
+                            573                    :GLB        USER_NAME  ,STARTBLOCK
+    FEO'                    574 FNUM                DEFS       {         ;FILE NUMBER GIVEN TO READ/WRITE ROUTINES
+    FEO2                    575 BYTES  REQ          DEFS       2         ;NUMBER OF BYTES REQUESTED BY CALLER
+    FEO                     576 BYTES  TO GO        DEFS       2         ;NUMBER OF BYTES STILL TO GIVE TO CALLER
+    FEO6                    577 USER_BUF            DEFS       2         ;ADDRESS OF CALLER’S BUFFER
+    FEOS                    578 BUF_START           DEFS       2         ;ADDRESS OF MY OWN BUFFER
+    FEOA                    579 BUF_END             DEFS       2         ;ADDRESS OF END + 1 OF MY BUFFER
+    FEOC                    580 BLOCKS  REO         DEFS       4         ;NUMBER OF BLOCKS REQUESTED (MAKEFILE)
+    FE10                    581 USER   NAME     ==  DEFS-      2         ;POINTER TO USER’S NAME STRING
+    FE12                    582 START  BLOCK                   4         ;START BLOCK # OF A FILE
+                            583
+                            584         ;GLB_      NEW_HOLE  START,NEW_HOLE    SIZE
+
+                              __—eacersstate...oeeaanrrneaerneaa        7  ooOS               ee       7     Bo    Oo   Be

@@ -1,0 +1,63 @@
+FILE:  EQSAGS:EOS TF        CROSS REFERENCE  TABLE             PAGE  252
+
+LINE#    SYMBOL          TYPE     REFERENCES
+
+ 8226   READAGAIN             8237,8240
+ 5867   READBLOCK             3748,38583901,  4058.4379, 4574, 4728 5050, 5283,5343
+ 5914   READ_COMMAND CO       5905
+ 4851   READ_ERR1             4669,4730
+ 4848   READ_ERR2             4646,4648
+ 5957   READERROR             5893,5912,5923
+ 7777   READ_FROM_CURSO       7750
+ 4567   READ_IT               4557
+ 4790   READ_LAST             4673
+ 4766   READ_LAST1            4755,4758,4761, 4806
+ 5877   READ_LOOP             5894
+ 2331   READ_N_DEBOUNCE       2326
+  294   READ_REGISTER
+ 4359   READTIMEOUT
+  290   READVRAM              1668,7789,7823, 7886
+ 8569   RECVDVALIO  STA       8557
+ 1080   RENAMEERR
+ 8298   REPEAT_SYNC1          8300
+ 8344   REPEAT_SYNC2          8346
+ 6653   REQUESTLOOP           6655
+ 4514   RES1                  4519
+ 4540   RES2                  4526
+  662  RESERVED BYTE
+ 4538   RESET_BIT       |
+ 4043   RESET THE POINT
+ 7527   RESTOREOLD            7541,7562,7570, 7582,7590, 7668
+ 4399   REST_REGS             4388
+  535   RETRY_COUNT           5876,5890,5926 ,5941,6011,6025
+ 5899 RETRY  _FOR_ERROR       5908,5910
+ 6036   RETRYWRITE            6046,6048
+ 7511   RETURN                7961
+  440   REV_NUM               Bi4t.
+ 7367   RIGHT                 7940
+ 5075   ROOM1OK
+ 5059   ROOMOK                4959
+ 6911   ROUTINEDONE           6884,6902,6906
+ 9316   ROUTINEFINISHE        9308
+ 4838   RQ_STAT_ERR
+ 1088   RQ_TP_STAT_ERR        4844
+ 4586   R_ERROR               4507,4509,4523
+ 4594   R_ERROR2              4536,4576
+ 4828   R_GET_OUT             4859
+  631   SAVECTRL              2924,3042
+ 7488   SAVE_CURSOR           7475,7481,7528, 7610
+ 5316   SCAN                  5392
+ 5355   SCAN2                 5314,5390
+ 5394   SCAN3                 5380
+ 5409   SCAN_ERROR            5284,5301,5344
+ 5252   SCAN_FORFILE          3558,3609
+ 7812   SCROLL_LOOP           7835
+ 7543   SCROLLPOSIBLE         7539
+ 7802   SCROLL_UP             7485,7546
+  508   SECTORSTO_INIT        6340,6376,6420
+  511   SECTOR_NO             6414,6430,6480
+ 6429   SECT_INIT_LOOP        6436
+ 7029   SEND_ANOTHER_WR       71036
+ 1683   SETC                  1625, 1665
+
+   >Pprprrrrrr>r>rrrrrrrrr?r          rrr   rrrrrrrrrPrrrrrrrrrrrrrrrrrprrrrrrrrr>r

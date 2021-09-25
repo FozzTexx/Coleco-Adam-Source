@@ -1,0 +1,44 @@
+                                       a                                                                   a
+
+FILE: EQSABS:EOSTF        HEWLETT-PACKARD: EOSSTART   (c) Coleco   1983 Confidential)               Sat,   8  Sep  1984,  23:41       PAGE  208
+
+LOCATION OBJECT CODE  LINE     SOURCE LINE
+
+                      8090 ;
+                      8091 ; external routines used
+                      8092 ;
+                      8093               7EXT     __FIND_DCB
+                      8094               sEXT     _REQUEST STATUS
+                      8095               sEXT     __HARD_INIT
+                      8096               ;EXT     __RD_1_BLOCK
+                      8097               sEXT    —__FMGR_INIT
+                      8098               :EXT     _GOTOwP
+                      8039               sEXT     FILLVRAM
+                      8100               ;EXT     JURN_OFF_SOUND
+                      8101               sEXT     SWITCHMEM
+                      8102               7EXT     PORTCOLLECTION
+                      8103 ;
+                      8104 ; external data structures used
+                      8105 ;
+                      8106               sEXT     REVNUM
+                    - 8107                EXT     CLEAR RAMSTART
+                      8108   |           ,EXT     CLEAR_RAM_SIZE
+                      8109                EXT     EOSSTACK
+                      8110               sEXT     DEFAULTBT _DEV
+                      Bit                sEXT     MEMCNFGOI
+                      8112               ;EXT     MEM_CNFGO3
+                      8113 ;
+                      8114 ; local equates
+                      8115 ;
+             <QO00S>  68116EOSREV         EQU     00SH         ;current  EOS revision number
+                      8117                                     ;---NOTE---    this is actually  rev.
+                      8118                                     :06  but to match the production  ROM
+                      8119                                     swhich  was labeled rev. 05  we fudge
+                      8120                                     ;just  a bit (two bits actually)
+                      6121
+             <C800>   8122 COLDSTART_ADDR  EQU    OC8OOH
+             <0004>   8123 OSK4           EQU     4
+             <0005>   8124 DSK5           EQU     5
+             <0001>   8125 ONE_SLOCK      EQU     1
+             <O000>   8126 BLOCKZERO      EQU     0
+                      6127

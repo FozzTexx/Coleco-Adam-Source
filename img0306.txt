@@ -1,0 +1,34 @@
+‘ILEOS_7PRIME:pOS HEWLETT-PACKPLAYSONG(c)Coleco1982CONFIDENTIAL         Fri,18 Ma1984,16:19   PAGE 32
+
+LOCATIOBJECTCODLINE  SOURCLINE
+
+               1305;    ELSE
+   033CD0164   1306L5     CALUPATWCTRL      ;senout curreATN
+   033DD7ED4   1307       LDA,CIX*CTRL)     sLSNA= currenCTRdata
+   O33E6OF     1308      AND OFH            smasMSN
+   03421702A   1309       LDWL,SACTRL       ;pointo lasCTRLdatasent
+   034BE       1310       CP(HL)            ;compare
+               1311;      IF(PSW,1S,NZERO)  sCTRhaschanged
+   0342806     1312       JRZ,L6
+   03477       1313        LD (WL),A         ;SAVE_CTR=newCTRLdata
+   034OEEO     1314        LDC,SRNCTL        ssendnewCTRLdata
+   034CD0164   1315        CALLUPATNCTRL
+               1316;     ENDIF
+               1317;    ENDIF
+   034C9       131816   RET
+   034E        1319TOOUT
+   034DD5E00   1320     LDE,[IX+0)        zlookforinactivcodeOFFH
+   0351C       1321     IncE              sthissetsZflagifE =OFFH
+               1322;    IF (PSW,1ZERO)    ssongdataareaisinactive
+   0352004     1323     JRNZ,L7
+   035D3FF     1324      OUT [SOUPORT],A    sturoffCHx
+   0351806     1325       JR18                          |
+               1326;    ELSE              ssendoutcurrenATNandFREQ
+   035CD0164   132717    CALLUPATNCTRL      3senoutattenuation
+   035CD0175   1328      CALLUPFREQ         ssenoutfrequency
+               1329;    ENDIF
+   O35C9       133018   RET
+      |        1331;    END;PLAYSON
+               1332PROG
+
+                                                                   4                                             ’

@@ -1,0 +1,63 @@
+ FILE:  coSaes   bag  TF       CROSS  REFERENCE   TABLE              PAGk   24a
+
+ LINE#     SYMBOL           TYPE      REFERENCES
+
+  9305    114                    3287
+  3338    L115                   3308
+  3366   Li6                     3343
+  3388   L17                     3368
+  9402   L18                     3397
+  3123   12                      3154
+  2546   120                     2535
+  3458    120LOAD_NEX            3455
+  2636    123                    2611
+  2670    124                    2662
+  9038    LS                     3032
+  2077    6                      2034, 3044, 3048
+  3063    L7                     3056
+  3067    18
+  3151    1.9                    3131
+  4787    LAST_BLOCK             4764
+  6198    LAST_ENTRY             6169
+  2237    LEAVE_THEM_OFF         2235
+  7369    LEFT                   7939
+  4107    LETS_GET_OUT
+  7358    LF                     7543,7931
+   654    LINEBUFFER_            7698 ,7728, 7784, 7822, 7830,7838,  7859
+   308    LOADASCII
+  6356  LOAD  DIR                6367
+  4179    LOADNEW  _ENTRY_       3938, 4011
+  3244    LOAD NEXT NOTE         2978 ,3224
+  2718    LOCL_DECLSN            2551, 2602 ,2610
+  2739    LOCLDECMSN
+  2758    LOCL_MSNTOLSN          2557, 2608
+  2780    LOC_AD0816             2569
+   977   -LOC_IN_ALPHA           1906
+  8444    LOOP!                  8462
+  8470    LoOP2                  8488
+  8544    LOOPS                  8563,8579
+  6551    LOOP,                  8553
+  8612    LOOPS                  8615
+  8401    LOOP7                  8405
+  8398    LOoPe                  8407
+  2076    LOOP_EVERY_BYTE        2080
+  2056    LOOP _EVERY_SPRI       2084
+   756    LOBOOT   ROMNA         771,783,795  ,807
+   758    LOEXPANSION   O_       777,789,801,813
+   757    LO_INTRINSIC_RA        774,786,798   ,810
+   759    LO_OS7_N_INTRIN        780,792,804  ,816
+  4108    MAKE_ERROR             3750, 3765 ,3859, 3902, 3940,4015,  4040,  4060, 4104,  4120,4125, 4129,4133
+  4213    MAKE_ERR_1             4186
+  5534    MATCH                  5515
+  5516    MATCHLESS              5510
+  1073.   MATCH_ERR              5544
+  1157    MAX _DEV_AODR          8562,86578
+   770    MEM_CNFGOO              1899,8720
+   773    MEM CNFGO1             8152
+   776    MEM _CNFGO2
+   779    MEM_CNFGO3              1969
+   782    MEM CNFGO4
+   785    MEM CNFGOS
+   788    MEM Cr    (1%
+
+PrP PrP PrPrPrPrPPrrPrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr                                                       rp

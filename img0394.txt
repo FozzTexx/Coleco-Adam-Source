@@ -1,0 +1,60 @@
+FILE:  OS_7PRIME  :pOS        HEWLETT-PACKARD:  GAME OPTION   (c) Coleco,   1982     CONFIDENTIAL                Fri,  18  May  1984,  16:21    =  PAGE  120
+
+LOCATION   OBJECT  CODE  LINE      SOURCE LINE
+
+     1A03  211AC4        5850                   LD HL,LINE 9
+    1A06   110265        5851                   LD DE,613
+    1A09   CD1AE4        5852                   CALL WRITE CHAR
+                         5853
+    AOC    211AC5        5854                   LD HL,LINE  10
+    1AOF   1102A5        5855                   LD DE,677 |
+    1A12  CDIAE4         5856                   CALL WRITE CHAR
+                         5857
+    1a15.  11010F        5858                   LD DE,271
+    1A18  CD1AD7         5859                   CALL WRITE_L4
+                         5860
+    1A1B   11014F        5861                   LD DE,335
+    1AIE  CD1ADC         5862                   CALL WRITE L5
+                         5863
+    1A21   11018F        5864                   LD DE,399
+    1A24  CD1AE1         5865                   CALL WRITE_L6
+                         5866
+    1A27   1101F1        5867                   LD DE,497
+    1A2A  CDIAEE         5868                   CALL WRITE  L111
+                         5869
+    1A2D  110231         5870                   LD DE,561
+    1A30  CDIAEE         5871                   CALL WRITE_L11
+                         5872
+    1a33  110271         5873                   LD DE,625
+    1A36  CDIAEE         5874                   CALL WRITE_L11
+                         5875
+    1039  110281         5876                   LD DE,689
+    1A3C  CDIAEE         5877                   CALL WRITE_L11
+                         5878
+    1A3F  11022F         5879                   LO DE,559
+    1A42  CD1AD7         5880                   CALL WRITE_L4
+                         5881
+    1A45  11026F         5882                   LD DE,623
+    1A48  CDIADC       5883                     CALL WRITE_L5
+                         5884
+    1A4B  1102AF         5885                   LD DE,687
+    1A6E  CD1AE1         5886                   CALL WRITE_L6
+                         5887
+    1A51  110168         5888                   LD DE,507                                                                                         ,
+    1A54  CDIAFB         5889                   CALL WRITE L12                                                                                                                          ;
+                         5890
+    1A57  110238         5891                   LD DE,571
+    1A5A  CDIAFB         5892                   CALL WRITE 112
+                         5893
+    1A50  110278         589%                   LD DE,635
+    1A60  CD1AFB         5895                   CALL WRITE  12
+                         5896
+    1A63  110288         5897           |  |    LD DE,699
+    1A66  CD1AFB         5898                   CALL WRITE  12
+                         at    RRARAARAKRAKRERARERRWRITE  OUT   COLOR NAME   TABLE   REKERARAKEKAKEAKE
+
+    1A69  2A73FA        55902                   LD HL,(COLORTABLE]
+    1A6C  110020        5903                    LD DE,32
+    AGF   3EF4           5904                   LD A,OF4H
+    1A71_ CD1F82         5905                   CALL FILL _VRAM
+                         £006

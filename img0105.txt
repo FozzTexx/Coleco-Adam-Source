@@ -1,0 +1,61 @@
+         FILE:   4 35ABS:EOS_1F          HEWLETT-PACKARD:      DIR_HANDL   (c)  Coleco     tS4   Confidential                          Sat,    8  Sep  1984,  23:39         raGE   101
+
+         LOCATION   OBJECT   CODE   LINE       SOURCE  LINE
+
+              E802  CAEQ9A          3868            uP         Z,FULL_DIR_EXIT                 ; NOPE,  EXIT
+              E805  1807            3869       |    JR         USE_ENTRY                       ; YUP,  CREATE   NEW   ENTRY    THERE
+                                    3870
+                                    3871  ; ARRIVE   HERE   WHEN  WE’VE   FOUND   THE  HOLE   ENTRY   IN  THE  OIRECTORY.
+                                    3872  ; IV  IS  STILL   POINTING   TO  THE  ENTRY    IN  THE  BUFFER.
+                                    3873
+              E807                  3874  FOUND_HOLE                                    |
+              E807  21FDD8          3875            LD         HL,FOUND  _AVAIL_ENTRY          |
+              ESOA  CB46            3876            BIT        FOUND ENTRY,   [HL]             ; HAVE  WE  FOUND    A DELETED     ENTRY   WE  COULD  USE?
+              ESOC  2864            3877            JR         Z,USE_HOLE                      ; NOPE,  STICK    IT  IN  THE   END
+                                    3678
+              EBOE                  3879  USE ENTRY:
+              EGOE  CBS6            3880            RES        FOUND_ENTRY,   [HL }            ; RESET  FOR   NEXT   TIME
+                                    3881
+              E810  DDGE19          3882            LO         L,(1X+FCB_BLOCK]                ; GET THE   CURRENT    BLOCK                                                             '
+              E813  DDGGIA          3883            LD         H,[IX+FCB_BLOCK+   1]                                                                            |
+                                    3884
+              E816  EDSBFOD9        3885            LD         DE,(OIR_BLOCK_NO]               ; BLOCK  NO  WHERE    WE  HAVE   ENTRY    TO  USE
+              EStA  87              3886            OR         A                               ;Clear  carry   flag
+              E@1B  ED62            3887            SBC        HL,DE                           ; SAME  BLOCK?
+                                    3688
+              E81D  2AFEOS          3689            LD         HL,[BUF  START]                 ; POINT  TO  START    OF  BLOCK
+              E820  0076521         3890            LD         {IX¢FCB_ POINTER)   .L
+.             E623  007422          3891            Lo         (IX+FCB_POINTERt1).H
+          |                         3892                          )
+              E826  2624            3893            JR         Z,GOT_BLOCK                   ; YUP,  DON’T    NEED   TO  READ   IN   ANOTHER   BLOCK
+                                    3894
+              E828  007319          3895            LD         {IX+FCB_BLOCK],E               ;  GET THIS   BLOCK
+              E828  DO721A          3896            LD         {IX+FCB_BLOCK+1)   ,D
+                                    3897
+              E82E  010000          3698            Lo         BC,O
+              E831  DO7E17          3899            LD         A,[IX+FCB_DEVICE    ]          ;  DEVICE  ID
+                                    3900
+              E834  COF178          3901            CALL       READ_BLOCK
+              E837  C2E9869         3902            JP         NZ,MAKE ERROR
+              EB3A  1810            3903            JR         GOT_BLOCK                      ;  READ  IN  NEW  DIRECTORY
+                                    3904
+              E83C                  3905  NEXT_DIR:
+              E83C                  3906  TOOSMALL:
+              E83C  DDG6E21         3907            LO         L,[IX+FCB_POINTER]             ;  GET POINTER    TO  DIR   ENTRY
+              ES3F  006622          3908            LO         H,(IX¢FCB_POINTER+1]
+                                    3909                               |
+              E842  11001A          3910            LO         DE,OIR_ENT_LENGTH              ;  LENGTH  OF   ENTRY
+                                    3911
+              E845  19              3912            ADD        HL,DE                          ;  POINT  TO  NEXT   ENTRY
+                                    3913
+              E846  007521          3914            LD         {IX+FCB_POINTER),L
+              E849  007422          3915            LD         [1X+FCB_POINTER+1),H
+                                    3916
+              E84C                  3917  GOTBLOCK:
+              EG4C  E5              3918            PUSH       HL
+              E84D  FOE1            3919            pop        ly
+                                    3920
+              EB4F  FOCBOC56        3921            BIT        ATTRDEL   BIT, [1Y+#DIR   ATIR)          ;  IS  IT  DELETED?
+              E853  26E£7           3922            UR         Z,NEXT_DIR                               ; NOPE,    LOOK   FOR   ANOTHER   DLETED    ENTRY
+                                    3923
+              E855  FO6E11          3924            LO         L,({1Y+DIR MAX  LENGTH]                  - GET   ALLOCATED     AMOUNT    OF  DELETED   File

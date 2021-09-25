@@ -1,0 +1,50 @@
+          \  4                                                              4  }
+FILE: «©At    .OS_TF        HEWLETT-PACKARD:   UTILS      (c)  Coleco  ttuy    fidentia:                  Sat,   8  Sep  1984,  23:40       oa       7
+
+LOCATION OBJECT  CODE  LINE      SOURCE  LINE
+
+    F200 281C          6028         JR        Z.WRITEERROR
+                       6029
+    F202 18EB          6030         JR        TRY_WRITE AGAIN
+                       6031
+    F204               6032  NO_WRITEERRORS:
+                       6033
+    F204 0602          6034         LO        B,ERROR_RETRY              ; MAX NO OF RETRIES
+                       6035
+    F206               6036  RETRY_WRITE:
+    F206 Fi            6037         PoP       AF                         ; RESTORE DEVICE ID
+    F207 F5            6038         PUSH      AF
+                       6039
+    F208 CDF473        6040         CALL      __REQUEST_STATUS
+                       6041
+    F20B 2808          6042         JR        Z,WRITE_COMMAND_COMPLETE           ; STATUS BACK
+                       6043
+    F200 FE9SB         6044         cP        TIMEOUT                    ; CHECK FOR TIMEOUT
+                       6045
+    F2OF 28F5          6046         JR        Z,RETRY_WRITE              ; TIMEOUT, NOT A ‘REAL’  ERROR
+                       6047
+    F211 10F3          6048         DUJUNZ    RETRYWRITE                 ; REAL ERROR, TRY AGAIN
+                       6049
+    F213 1809          6050         JR        WRITE_ERROR                ; DONE RETRYING, IT’S AN  ERROR
+                       6051
+    F215               6052  WRITE_COMMAND_COMPLETE:
+    F215 F1            6053         POP       AF                         ; RESTORE DEVICE ID
+    F216 F5            6054         PUSH      AF
+                       6055
+    F217 CDF225        6056         CALL      GET_STATUS FLAG            ; GET STATUS FOR SPECIFIED  DEVICE
+                       6057
+    F21A FEOO          6058         CP        0                          ; WRITE OK?
+    F21C 2802          6059         JR        Z,WRITEOK                  ; YUP
+                     -—6060
+    F21E               6061  WRITEERROR:
+    F21E 3E16          6062         LD        A,DEVICEDEPD_ERR
+                       6063
+    F220               6064  WRITEOK:
+    F220 Ci            6065         PoP       BC                     ;  REALLY AF , BUT PRESERVE  CURRENT  FLAGS
+    F221 FDE1          6066         PoP       IY
+    F223 Ci            6067         PoP       BC
+                       6068
+                       6069
+    F224 C9            6070         RET
+                      6071
+                       6072

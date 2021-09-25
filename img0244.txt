@@ -1,0 +1,43 @@
+FILE: EOSABS:EOS  TF          HEWLETT-PACKARD:   EOSCHAR    (c) Coleco   1983 Confidential                     Sat,  8  Sep 1984,  23:42       PAGE  240
+
+LOCATION   OBJECT CODE   LINE       SOURCE LINE
+
+                         QGQQ2  SHHSSSHESHESS   EEEEEEHERE EEREEER ERE    EEEEEE EEHEHE EEE  EEHE REESE        EEEE EOEEEES:
+                         9323   *«START_WR_  CH DEV  ALLOWS  THE  CALLER  TO SEND A PRINT  COMMAND   BY  SPECIFYING
+                         9324   * THE BUFFER OF  THE STRING  AND  THE  NUMBER OF BYTES  TO PRINT.
+                         9325   *      INPUT:   <A==>   DEVICE   ID
+                         9326   *               BC =>   NUMBER  OF  BYTES  TO WRITE
+                         9327   *               HL =>   SOURCE  OF  DATA
+                         9328   *      OUTPUT:
+                         9329   ¢               CONDITION  FLAGS
+                         9330   *                       x:        NO  ERRORS
+                         9331                           NZ:       ERROR  OCCURED
+                         9332   *                                   ===>  ERROR CODE
+                         GIG    SHSSSSSESEESSE HEHEHESEHEEHEHHEEHEEHESHEEEEE   SEEKHEEHEEHEEHEEEE SEEHEEEEEE  TEESE ES
+                         9334
+                         9335   :NO_DCB_FND3 CHANGED  TO C_NO DCB  _FND3  TO AVOID CONFLICT   WITH
+                         9336   ;IDENTICAL LABEL  ELSEWHERE
+                         9337
+                         9338         ;GLOBAL   —START _WR_CH_DEV
+                         9339
+    FBC2                 9340  _START_WR_CH_DEV:
+    FBC2  FDES           9341          PUSH     ly
+    FBC4  CDF 446        9342          CALL     __FIND_OCB        ; FINO  THE CORRECT  DEVICE  OCB
+                         9343
+    FBC7  2015           9344          JR       NZ,C_NO_OCB_FND3
+                         9345
+    FBC9  CDF 496        9346          CALL     CHK_IF_INACTIVE                ; IS OCB  ACTIVE?
+    FBCC  2010           9347          JR       NZ,O0CB_IS_ACTIVE3             ; YUP
+                         9348
+    FBCE FD7103          9349          LD       [Iv¥+DBUF_LEN_LO),C             ; LENGTH  OF  THE  BUFFER
+    FBD1  FD7004         9350          LD       [I¥+DBUF _LEN_HI).B             :
+                         9351                                          |
+    FBD4  FD7S01         9352          LD       [1¥+DBUF ADR  _LOJ,L           ; ADDRESS  OF  THE  STRING
+    F807  FD7402         9353          to       (I¥+DBUF ADR  _HI),H           :
+                         9354
+    FBDA  FD360003       9355          LO       (1¥Y+D_COMSTAT],0CB_  wR         ; INITIATE   THE  WRITE  DATA  COMMAND
+                         9356
+    FBDE                 9357  C_NO_DCB_FND3:
+    FBDE                 9358  OCB_IS ACTIVE3:
+    FBDE  FDE1           9359          Pop      ly
+    FBEO  C9             9360          RET

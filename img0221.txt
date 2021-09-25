@@ -1,0 +1,38 @@
+FILE: ~ ».ABS:EOSTF          HEWLETT-PACKARD: EOSUTIL   (c) Coleco   1-5  Confidential                 Sat.   8  Sep  1984,  23:41       ,nGE   217
+
+LOCATION OBVECT  CODE   LINE      SOURCE LINE
+
+    FOAG 7A             8472         LO      A.O
+    FSA7 B3             8473         OR
+   ~F9AB 200A           8474         JR      NZ,NOT_TIME2
+                        8475
+    F9AA 110000         8476         LO      DE,SYNC_DELAYDE
+                        8477
+    F9AD 1005           8478         OUNZ    NOTTIME2
+                        8479
+    FSAF 3E13           8480         LD      A,CANTSYNC2
+    F981 87             8481         OR      A                        ; ERROR
+                        8482
+    FO9B21811           84863        JR      ENDSYNC
+                        8484
+    F9B4                8485  NOTTIME2:
+    F9B4 FDO7EOO        8486         LD      A,{1Y+P_COMSTAT)            ; DID MASTER NODE ACKNOWLEDGE  ?
+    F9B7 FEB2           8487         CP      PCB_SYNC2_ACK
+    F9BS 20EA           8488         JR      NZ,LOOP2                  ; **#¢6eNEED PROTECTION HERE              ~
+                        8489
+    F9BB FDES           84390        PUSH    ly                        ; GET PCB ADDR INTO HL
+    FSBO E1             8491         POP     HL
+                        8492  -                                                        |
+    FO9BEFD7501         8493         LD      [1¥+P_REL_ADOR_10),L      ; IN CASE SOMEONE ACCIDENTALLY  DOES
+    F9C1 FO7402         B494         LD      {1¥+P_REL_ADDR_HI),H      ;  A&PCB RELOCATION COMMAND  -
+                        8495               .                           ;  IT WILL RELOCATE TO THIS  SPOT
+    8496 AF             8497         XOR     A                         ; NO ERROR
+                        6498
+    FSCS                8499  ENDSYNC:
+    FSCS Di             8500         POP     DE
+    F9OCECi             6501         POP —   BC
+    FOC7 E1             8502         PoP     HL                        ; RESTORE HL
+    F9CS FDE1           8503         POP     IY                        ;         IY
+                        8504
+    FECA C9             6505         RET
+                        8506

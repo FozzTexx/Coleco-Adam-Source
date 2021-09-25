@@ -1,0 +1,66 @@
+                ILE: OS 7PRIME:pOS          HEWLETT-PACKARD: DRIVERS FOR 9928 VDG (c)  Coleco   1982 CONFIDENTIAL         Fri,   18 May   1984,  16:21       PAGE  132
+
+                OCATION  OBJECT  CODE   LINE     SOURCE LINE
+
+                                        6465 * THIS IS THE PARAMETER DESCRIPTOR FOR  REG WRITEQ
+                                        6466
+                                        6467 * BEGIN REG WRITE
+                                        6468                 GLB             REG WRITEQ
+                              <1CBC>    6469 REG WRITEQ      EQuU            $
+                   1cBc  011CB6        6470                  LO              BC,REG WRITE  P
+                   1CBF   1173BA       6471                  LD        _ '   DE,PARAM_AREA
+                   1CC2  CD0098        6472                  CALL            PARAM_
+                   1CC5  2A73BA         6473                 LD              HL,[PARAM  AREA)
+                   1cc8  4C             6474                 LD              C,u
+                   1cc9  45             6475                 LO              B,L
+                                        6476
+                                       6477                  GLB             REGWRITE
+                              <1CCA>    6478 REG WRITE       Equ             $
+                                        6479
+                                        6480 *   VALUE =; CTRLPORT            .
+                   ICCA  79             6481                 LO              A,C
+                   1CCB  D038F         6482                  OuT             (CTRL_PORT],A
+                                        6483
+                                        6484 *   REGISTER + BOW =; CTRL_PORT
+                   1ccD  78             6485                 LD              A,B
+                   1CCE  C680           6486                 ADD             A,80H
+                   1000  038F          6487                 OuT              (CTRL PORT)  ,A
+                                        6488
+                                        6489 *   IF REGISTER = 0 THENVDP_MODE WORD[0)    := VALUE
+                   1cD2  78             6490                 LD              A,8
+                   10D3. FEOO           6491                 cP              0
+                   1CD5  2004           6492                 JR              WZ,NOT REG 0
+                   1c07  79             6493                 LD              A,C
+                   1008  3273C3         a49G                 LD              [VDP_MODE WORD]  ,A
+                              <1C@DB>   6495 NOTREG 0        EQu             $
+                                        6496
+                                        6497 *   IF REGISTER = 1 THEN VDP_MODEWORD[1]    := VALUE
+                 _—1c0B8 78             6498                 LD              A,B
+                   1CDC  FEO!           6499                 cP              1
+                   ICDE  2004           6500                 JR              NZ,NOT REG 1
+                   1cEO  79             6501                 LD              A,C
+                   1CE1  3273C4         6502                 LD              [VDP_MODE WORD+1),A
+                              <1CE4>    6503 NOTREG 1        EQu             $
+                                        6504
+                                        6505 * END REGWRITE
+                   1CE4  C9             6506                 RET
+                                        6507
+                                        oo   * PROCEDURE  VRAMWRITE  (VAR DATA:BUFFER; DEST: INTEGER; COUNT :INTEGER)
+                                        6509
+                                        6510 * VAR DATA (POINTER TO DATA BUFFER) IS  PASSED  IW  HL
+                                        6511 * DEST IS PASSED IN DE
+                                        6512 * COUNT IS PASSED IN BC
+                                        6513 * DESTROYS: ALL
+                                        6514
+                   1CE5  OOO3FFFE       6515 VRAMWRITE P      DEFW            B,-2,2,2
+                   1CE9  00020002
+                                        6516 * THIS 1S THE PARAMETER DESCRIPTOR FOR  VRAM WRITEQ
+                                        6517
+                                        6518 * BEGIN VRAMWRITE
+                                        6519                 GLB             VRAMWRITEQ
+                              <1CED>    6520 VRAMWRITEQ      EQu             $
+
+                                                                                                                 dé
+
+        mh                      Hee         Hee      ee        EET      eT        ECE                   lCUaelUMAUrlClC         rrTlC       LrTllCUChLceeTlUlUChelllCUeeelC                 eel           ele
+oenemn  —   oO                                eens                                                                                                                                                                      :

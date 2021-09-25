@@ -1,0 +1,61 @@
+FILE: OS_7PRIME:pOS          HEWLETT-PACKARD:    PLAY   SONG  (c)  Coleco,   1982   CONFIDENTIAL                   Fri,  18  May  1984,  16:19       PAGE    31
+
+LOCATION OBJECT  CODE   LINE       SOURCE  LIWE
+
+                        1248   ;         -IDENT  PLAYSON               ;Includes   TONE OUT
+                        1249   oBaRaneaaaeaasanananneannans
+                        1250   ;*        PLAY  SONGS |          *
+                        1251   -SERKRAAARARAAAARAREAERETARE
+                        1252   =.COMMENT  )
+                        1253   ;see Users'  Manual   for  description
+                        1254   ;)
+                        1255           GLB  PLAY  SONGS  ,TONE  OUT
+                        1256          ;EXT  UPATNCTRL   ,UPFREQ
+                        1257          ; INCLUDE  OSSR_EQU:0S     ;equates
+                        1258   ;       ***  Sound  chip   register   code  EQUATES
+                        1259   ;       Tone  generator    frequency   and  attenuation    formatted   register  codes
+                        1260  ;SRIFRQ   EQU   100000008               sBIT7  =  1,  BIT6-4   = TONE  GEN  1 FREQ CODE
+                        1261  ;SRIATN   EQU   100100008               “BIT7   = 1,  BIT6-4   = TONE  GEN  1 ATIN CODE
+                        1262  ;SR2FRQ   EQU   101000008               “BIT7   = 1   BIT6-4   = TONE  GEN 2  FREQ CODE
+                        1263  ;SR2ATN   EQU   101100008               “BIT7   =1,”  BIT6-4   = TONE  GEN 2  ATTW CODE
+                        1264  ;SR3FRQ   EQU   110000008               sBIT7   =     BIT6-4   = TONE  GEN 3  FREQ CODE
+                        1265  ;SR3ATN   EQU  110100008                *BIT7   = 1,  BIT6-4   = TONE  GEN 1  ATIN CODE
+                        1266  ;        Noise  generator    control   and  attenuation    formatted   register  codes
+                        1267  *SRNCTL   EQU  111000008                s;BIT7 =  1,  BIT6-4   = NOISE  GEN CONTROL  CODE
+                        1268  * SRNATN  Equ  111100008                ;BIT7  =  1,  BIT6-4  =  NOISE  GEN ATTN  CODE
+                        1269  ;        Noise  generator    formatted   control   codes
+             <0004>    1270   WHITE    QU   000001008                ;BIT2 =   1, WHITE   NOISE  CODE
+             <0000>    1271   PERIOO   EQu  000000008                *BIT2  = 0,  PERIODIC    NOISE CODE
+             <0000>    1272   NSRHI    EQu  000000008                sBITO-1   SET  FOR  HIGHEST  NOISE  SHIFT  RATE  (N/512)
+             <0001>    1273   NSRMED   €EQU 000000018                3B81T0-1  SET  FOR  MEDIUM  NOISE  SHIFT  RATE  (W/1024)
+             <0002>    1274   NSRLOW   EQU  000000108                ;BITO-1   SET  FOR  LOWEST  NOISE  SHIFT  RATE  [(N/2048)
+             <0003>    1275   NSRTG3   EQU  000000118                381T0-1   SET  FOR  SHIFT  FROM  TOWE  GEN 3 OUTPUT
+   0300                1276   PLAY  SONGS _
+                       1277   ;        *  output  CH1  attenuation    and  frequency
+   0300 3E9F           1278            LD  A,OFF+SRIAIN              3format  CH   OFF  byte   into A
+   0302 0€90           1279            LD  C,SRIATN                  :format  MSN  C  for  CH1  attenuation
+   0304  1680          1280            LD  D,SRIFRQ                  sformat  MSN  D  for  CH1  frequency
+   0306 DD2A7024       1281            LD  1X, {PTR TO  S ON.1})     ;point  IX  to  byte  0 data  area  of  song for  CH1
+   O30A CDO34E         1282            CALL  TONE  OUT
+                       1283   ;        * output   CH2  attenuation    and  frequency
+   0300 3EBF           1284            LD  A,OFF+¢SR2ATN             ;format  CH2  OFF  byte   into A
+   O30F O&B0           1285            LD  C,SR2ATN                  :format  MSN  C  for  CH2  attenuation
+   0311 16A0           1286            LD  D,SR2FRQ                  -format  MSN  D  for  CH2  frequency
+   0313 002A7026       1287            LO  IX,{PTR  TO. S ON 2)     ;point   IX  to byte   0 data  area  of  song for  CH2                                                                    ,
+   0317 CDO34E         1288            CALL  TOWNEOUT
+                       1289   ;        * output   CH3  attenuation    and  frequency
+   O31A 3EDF           1290            LD A,OFF+SR3ATN              ; format  CH3  OFF  byte   into A
+   O31C O&D0           1291            LD C,SR3ATN                  ; format  MSN  C  for  CH3  attenuation
+   O31E 16C0           1292            LD 0, SR3FRQ                 ;format   MSN  D  for  CH3  frequency
+   0320 002A7028  ==—s_1293            LD  IX,{PTR_ TO S  ON 3}   = ;point   IX  to byte   O data  area  of  song for  CH3
+   0324 CDO34E         1294            CALL  TONE OUT
+                       1295   ;        * output   CHO  [noise]  ATIN  [and  CTRL,  if  different   from  last  time)
+   0327 3EFF           1296            LD A,OFF+SRNATN              ;format   CHO  OFF  byte   into A
+   0329 OEFO           1297            LD C,SRNATN                  ;format   MSN  C  for  CHO  attenuation
+   032B DD2A7022       1298            LD  IX,{PTR_ TO S  ON 0)     ;point   IX  to byte   0 data  area  of song  for  CHO                                               ;
+   032F DDSE0O         1299            LD E, (1X+0)                 ;look   for  inactive   code,  OFFH
+   0332 IC             1300            INC  E                       “this  sets   2 flag   if E  = OFFH
+                       1301  ;         IF  (PSW,1S, ZERO)           .  song  data  area   is inactive
+   0333 2004           1302            JR NZ,L5
+   0335 D3FF           1303  :           OUT  [SOUND PORT]   ,A        ;turn  off  CHO
+   0337 1814           1304              JR  16

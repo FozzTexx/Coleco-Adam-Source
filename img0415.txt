@@ -1,0 +1,61 @@
+FILE: OS 7PRIME:pOS          HEWLETT-PACKARD: GRAPHICS  PRIM PKG (c) Coleco 1982 CONFIDENTIAL         Fri,  18  May  1984,  16:22       PAGE  141
+
+LOCATION  OBJECT  CODE  LINE      SOURCE LINE
+
+    1645  D9            6973                  EXX
+    1E46  01            6974                  PoP              DE
+    1E47  2A8006        6975                  LO               HL, (WORBUFFER)
+    1E4A  010008        6976                  LO               BC,8
+    1E40  09            6977                  ADD              HL,BC
+    1E4E   FD210004     6978                  LD               1Y,4
+    1E52  CD1C27        6979                  CALL             PUT VRAM_
+                        6980
+                        6981  *   ENDIF
+    1E55                6982  ENDIF 4 GRAPHICS
+                        6983
+                        6984  *   DESTINATION  := DESTINATION + 4
+    1E55  D9            6985                  EXX
+    1E56  23            6986                  INC              HL
+    1€57  23            6987                  Inc              HL
+    1E58  23            6988                   INC             ML
+    1E59  23            6989                   INC             WL
+                        6990
+                        6991  * END
+    1E5A  C31D8C        6992                  JP               RETURNHERE
+                        6993
+                        6994
+                        6995
+                        6996
+    1E5D                6997  COLORTEST                        3;TESTS WHETHER PATTERN GENERATORS ARE
+                        6998                                   ; BEING MANIPULATED AND WHETHER THE
+                        6999                                   ; GRAPHICS MODE IS 2. IF SO THE ABOVE
+                        7000                                   : ROUTINES NEED TO DEAL WITH THE COLOR
+                        7001                                   ; GENERATORS THAT CORRESPOND TO THE
+                        7002                                   s PATTERN GENERATORS THEY ARE OPERATING
+                        7003                                   3 ON.
+                        7004
+                        7005                                   ; WOT INPUTS, RETURNS WITH TRUE (1)  IN
+                       7006                                    ; A IF CONDITION IS TRUE, FALSE (0)  IF
+                        7007                                   ; WOT.
+                        7008
+                        7009
+                        7010  * BEGIN COLORTEST
+                        7011
+                        7012  * CHECK TABLE CODE  IN A’                                                                                                                      ’
+    1E5D  08            7013                  EX               AFAF!
+    1ESE  F5            7014                  PUSH             AF
+    1E5F  08            7015                  EX               AFAF!
+    1E60  F1            7016                  POP              AF
+    1661  FEO3          7017                  cP               PATTERNGEN
+    1€63  200A          7018                  JR               WZ,EXITFALSE
+                        7019
+                        7020  * CHECK MODE
+    1E65  2173C3        7021                  LD               HL,VDPMODE WORD
+    1668  CB4E          7022                  BIT              1,(HL)
+    1E6A  2803          7023                  JR               Z,EXI1FALSE
+                        7024
+                        7025  * EXIT WHEREIF TRUE
+    1E6C  3601          7026                  LD               A,TRUE
+    1E6E  C9            7027                  RET
+                        7028
+                        7029  * EXIT HERE IF FALSE

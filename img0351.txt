@@ -1,0 +1,61 @@
+FILE:OS7PRIME:pOS    HEWLETT-PACKARDPUT MOBILE(c)Coleco,1982 CONFIDENTIAL          Fri,18May1984,16:20     PAGE  77
+
+LOCATIONOBJECTCODLINE     SOURCELINE
+
+    005AC5       3672            PUSHBC              ;SAVECOUNTER
+    00583&09     3673            LDA,9               “TESTWHETHERTHIS PATTERPOSITIONIS
+    YP.BK0       3674            susB                >   ONTHE SCREENORNOT (I.E.IS
+        0600     3675            LD8,0               -   + (B-9)/BETWEENO AND23, ANDIS
+   0060 FEO3     3676 DVLP       cp3                 >         +(B-9)/3MOD 3 BETWEEO AND 31)
+   0062 3805     3677      |     JRC,DVEX                    |
+   0064D603      3678            sus3
+   0066 04       3679            INCB
+   0067 18F7     3680            JRDVLP
+   0069 FD8611  ——«-36~DVEX     ADDA, L1Y+XP_BK)     A  z=XPOS  +(B-9)/3MOD 3
+   0p6c FEZ0     3682            cP32
+   006E3017      3683            JRWC,WOTOS
+   007078        3684            LDA,B
+   0071FDB612    3685            ADDA,[1veY6K)       sh :=Y_POS+ (B-9)/3
+   0074 FE18     3686            CP26                “1S THISPOSITIONONSCREEN?
+   0076300F      3687            JRNC,NOTOS
+   0078DDES      3688            PUSHIX              ;     AND POINTERS
+   OO7AES        3689            PUSHHL                                   :
+   00783E04      3690            LDA4                CODE FOR COLORGENERATORTABLE
+   007DFO210001  3691            LD1Y,1              ;WUMBEROF ITEMSTOSEND
+   0081CD1FBE    3692           CALLPUT_VRAM
+   008 £1        3693           POP HL               RESTORE POINTERS
+   0085DDE!      3694           POP IX
+   0087C1        3695 MOTOS     POP BC               ;    AND COUNTER
+   008823        3696            INCHL               *INCREMENTPOINTERS
+   008913        3697            IWCDE
+   008A05       3698            DEC B                ;DECREMENTCOUNTER
+   008878       3699           LDA,B
+   OD8CFEOO      3700          cp0
+   QDs 2086   0——(iti‘é8SCt;éw=JRWZ,RPTI
+                 3702 ;        UNTIL{B,£Q,0)       ,
+   0090FD2A8006  3703        LD IY(WORKBUFFER] ;RESTOREBUFFERADDR
+   009%1854    — 3704         JREND04
+   0096          3705 ELSEO4
+   0096          3706 PM13—_;ELSE
+   00960600      3707          LDB,0
+  0098           3708 RPT2     REPEAT
+   0098C5        3709           PUSH BC           SAVE COUNTERANDINDEX
+   009979        3710           LD A,C            “ADD3xCOUNTETO INDEX,WHERENEXTGENsTO BE MOVED
+   009A80        3711           ADD A,B
+   009880        3712           ADD A,B
+   009C80        3713           ADD A,B
+   00904F        3714           LD C,             -C:= INDEXTOTABLELOCATIONFORNEXT 3GENs
+   009E210000    3715           LD WL,O           “CALCULATOFFSETSFROMSTARTOF PATTERN
+   0DA1110018    3716           LD DE24          :  AND COLORGENERATOTABLES
+   ODA478        3717           LD A,B
+   ODAS30        3718AD LP      DEC A
+   ODA6FAODAC    3719           JP M,AEXIT
+   ODA919        3720           ADD HL,DE
+   ODAA18F9      3721           JRADLP
+                 3722                            sHL :=OFFSETFROMSTART OFPTRN ANDCOLORBUFFERS                             .
+   ODACFD2A8006  3723 ADEXIT    LD IY,(WORBUFFER)
+   0080FD7E12    3724           LD A,{IY*YBK)    ;GET YPAT POSTO SEEWHICHTHIRDOF TABLESTOUSE
+   008380     .  3725           ADDA,8           ;EACHGROUPOF THREEIN NEXTPATTERNPLANEROW
+                 3726 ;         IF (A,LT,24]     ;'A*MUST CONTAINVALIDYPATPOS  [0-23]
+   00B4FE1B      3727           cP 24
+   0DB63028      3728           JR NC,END15

@@ -1,0 +1,16 @@
+FILE: EOSABS:E0S TF         HEWLETT-PACKARD:  CONSOUT   (c) Coleco  1983 Confidential                     Sat,   8  Sep  1984,  23:41        PAGE  186
+
+LOCATION OBJECT  CODE   LINE     SOURCE LINE
+
+                        7517 ;
+                        7518 ; MOVEUP   -  Moves  the cursor up  if not at top of window
+                        7519 ;
+    F673                7520 MOVE_UP:
+    F673 2AFEAS         7521                  LD      HL,[CURSOR]
+    F676 3AFETC         7522                  LD      A,{Y_MIN]
+    F679 BD             7523                  cP      L
+    FGE7A280F           7524                  JR      Z,EXIT           ;Forget request
+    F67C 2D             7525                  DEC     L                ;Move up
+                        7526
+    F67D CDF707         7527 RESTOREOLD:      CALL    PUT_OLD_ONSCREEN   ;Display char cursor    was  hiding
+    F680 C3FE6E50       7528                  JP      SAVE_CURSOR      ;Display cursor  in new   spot

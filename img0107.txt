@@ -1,0 +1,62 @@
+      {
+FILE: «-sABS:E0S_ TF           HEWLETT-PACKARD:    DIR_HANOL    (c)  Coleco   1s... Confidential                           Sat,    8  Sep  1984,  23:39         ,AGE  1023
+
+LOCATION  OBJECT  CODE   LINE       SOURCE   LINE
+
+    E68BO EDSBFEOC       3982            Lo        DE, {BLOCKS  REQ]    ;GET  THE  REQUESTED    SIZE
+    E884  87             3983            OR        A
+    E8BS  ED52           3984            SBC       HL ,DE               -COMPARE   THEM
+    E8B7  DAESSE         3985            JP        C,TAPE  FULL         ;BRANCH   IF  THE  HOLE   IS  TOO  SMALL
+    EBBA  22FEIA         3986            LD        (NEW HOLE  SIZE),HL      ;ELSE  SAVE   THE  RESULT
+                         3987
+                         3988
+                         3989   ; ADD BLOCKS  REQ   TO DIR_START    BLOCK    TO  FIND  THE  HOLE‘S    NEW
+                         3990   ; START  BLOCK.    NOTICE  HOW   STOOOPID    THE  Z80  IS  WITH   ADDITION!
+    E8BD  21FEOC         3991            LO        HL ,BLOCKS REQ      ;POINT    TO THE  NUMBER    TO  ADD
+    EBCO  FO7EO0D        3992            LO        A,[IY¥+DIR_START_BLOCK)
+    E8C3  86             3993      :     ADD       A,[HL]
+    E8C4  23             3994            INC       HL
+    ESCS  32FE16         3995            LD        (NEW_HOLE  START],A
+    E8C8  FD7EOE         3996             )        A,{IV+DIR_START_BLOCK+1)                                                                                                ‘
+    ESCB  BE         -   9997            ADC       A,(HL)
+    EBCC  23             3998            INC       HL
+    E8CD  32FE17         3999            LD        (NEW _HOLE START+1],A
+    E8DO  FO7EOF         4000            LD        A,(IY+DIR_START_BLOCK+2]
+    E8D3  BE             4001            ADC       A,{HL]
+    E804  23             4002            INC       HL
+    E805  32FE18         4003            LO        (NEW_HOLE  START+2],A
+    E808  FD7E10         4004            LD        A,[IY#DIR_START_BLOCK+3]
+    E808  SE             4005      .     ADC       A,(HL)
+    EsDC  23             4006            INC       HL
+    E8DD  32FE19         4007            LO        (NEW HOLE  START+3],A
+       :                 4008
+    ESEO  C5             4009            PUSH      BC                  ;SAVE   ENTRY   COUNT   (IN  B)
+                         4010                )
+    EBE1  CDESBF         4011            CALL      LOAD_NEW_ENTRY_INFO
+                         4012
+    ESE4  Ci             4013            POP       BC                  ;RESTORE    ENTRY   COUNT
+                         4014
+    ESES  C2E989         4015            uP        NZ,MAKE  ERROR
+                         4016
+    ESE8  DDGE21         4017            i)        L,(IX+FCB_POINTER)      ;GET   CURRENT   POINTER
+                         4018
+                         4019
+    ESEB  0D6622         4020            LO        H,[1X+FCB_POINTER+1]
+    EBEE  11001A         4021            LO        DE,OIR_ENT_LENGTH      ;GET  LENGTH   OF  AN  ENTRY
+    ESF1  19             4022            ADD       HL,DE               ;ADVANCE    POINTER   TO  NEXT   ENTRY
+    E6F2  007521         4023            LO        [IX+¢FCB_POINTER],L     ;AND   SAVE  IT  AGAIN
+    E8FS  007422         4024            LO        [I1X+FCB_POINTER+1),H
+                         4025
+    E8FS  1044           4026            DUNZ      NOT_END             ;UUMP   IF  THERE  ARE   MORE   ENTRIES
+                         4027
+                         4028   ;THIS LABEL  NOT   USED  IN THIS   ROUTINE,    NOT  DECLARED    GLOBAL
+                         4029   ;REMOVED  BECAUSE   IT CONFLICTS    WITH   IDENTICAL    LABEL   ELSEWHERE
+                         4030   ;WRITE_AGAIN:
+    ESFA  DD7VE17        4031            LD        A,{IX+FCB_ DEVICE]    ;GET   PARAMETERS    FROM   FCB
+    E8FD  2AFEOS         4032            LD        HL,(BUF START]
+    E900  DDSE19         4033            Lo        E,[1X+FCB_ BLOCK)
+    E903  DDS61A         4034            LD        D,[1X+FCB_BLOCK+1]
+    E906  DD4E1B         4035            LD        C,[1X+FCB_  BLOCK+2}
+    E909  DD461C         4036            LD        B,[1X+FCB_  BLOCK+3}
+                         4037
+    ESOC  CDF1E6         4033            CALL      WRITE BLOCK

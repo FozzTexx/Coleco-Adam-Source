@@ -1,0 +1,21 @@
+FILE:  OS 7PRIME:pOS              HEWLETT-PACKARD:        OPERATING    SYSTEM    (c)  Coleco,    1982     CONFIDENTIAL             Fri,   18  May    1984,   16:18        PAGE     13
+
+LOCATION    OBJECT   CODE   LINE          SOURCE  LINE
+
+                             489
+                             490    **ttteeanenetenaneeeneeRe            OS ROM   DATA  AREA   ***teunsenenennseeaneeennn
+                             491
+    0069    3C               492    AMERICA              DEFB                 60
+                             493    *  THIS  BYTE  SHOULD     BE  USED   WHENEVER    THE  CARTRIDGE    PROGRAMMER     WANTS    TO
+                             494    *  SET  UP  REAL-TIME     COUNTERS.    IT  HAS  A  VALUE   OF  60  FOR   COLECOVISIONS
+                             495    *  WARKETED   IN   THE  USA   ANO  50  FOR  EUROPEAN    UNITS.    USE  OF  THIS   BYTE
+                             496    *  EWSURES   CARTRIDGE     COMPATIBILITY      AT  LEAST   WHERE   REAL-TIME    COUNTING
+                             497    *  IS  CONCERNED.
+                             498
+    006A    16AB             499   ASCII_TABLE      —    DEFW   ASCII   TBL
+                             500   *   THIS   IS THE  ADDRESS     OF  THE  ROM  PATTERN    GENERATORS     FOR  UPPERCASE
+                           509     *   ASCII   WHICH  ARE   CONTAINED     WITHIN   THE  OPERATING     SYSTEM.
+                              02
+    006C   1623              503  NUMBER    TABLE              NUMBER    TBL
+                             504   *   THIS   IS THE  ADDRESS     OF  THE  ROM  PATTERN    GENERATORS     FOR  THE  NUMBERS
+                             3ie   *   0.9  WHICH  ARE   CONTAINED     WITHIN   THE   OPERATING    SYSTEM.

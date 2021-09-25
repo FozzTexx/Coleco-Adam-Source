@@ -1,0 +1,61 @@
+FILE: OS 7PRIME:pOS            HEWLETT-PACKARD:       ACTIVATE    (c)  Coleco,     1982    CONFIDENTIAL                         Fri,  18   May   1984,    16:19        PAGE    41
+
+LOCATION  OBJECT   CODE  LINE         SOURCE   LIWE
+
+    O53€  D5             1772                         PUSH                 DE
+    O53F  FOES           1773                         PUSH                  ly
+    0541  303            1774                         LD                   A,3                   sSIGNAL    PTRN   GEN   FILL
+    0543  CD1C27         1775                         CALL                 PUT_VRAM_
+    0546  C1             1776                         POP  BC    ;BC  :=  NUMGEN
+    0547  E1             1777                         POP  WL    ;HL  :=  FIRST  GEN   NAME
+    0548  50             1778                         LD  E,t
+    0549  54             1779                         LD  D,H    ;DE  :=  FIRST  GEN   NAME
+    054A  09             1780                         ADD  WL,BC   ;HL   :=  FIRST  GEN   NAME   +  NUMGEN
+    0548  28             1781                         DEC  HL
+    054C  CB3C           1782                         SRL  W
+    054E  CB1D           1783                         RRL
+    0550  CB3C           1784                         SRL
+    0552  CB1D           1785                         RRL
+    0554  CB3C           1786                         SRL  H
+    0556  CB1D           1787                         RRL        sHL  3=  (FIRST  GEN   NAME    + NUMGEN    -  1)/8
+    0558  C828           1788                         SRA  E
+    055A  C828           1789                         SRA  E
+    055C  CB2B           1790                         SRA  E    ;DE   :=  FIRST  GEN  NAME/8
+    055€  87             1791                         OR  A      sCLEAR   CARRY
+    O55F  £052           1792                         SBC HL  ,DE
+    0561  23             1793                         INC  HL   o;HL  :=  (F_G     N+ WGN    -  1)/8   - FG    N/8  +  1  =  NUMBER   COLR    GENS
+   0562   €5             1794                         PUSH  NL
+   0563   FOE            1795                         POP  IY
+   0565   £1             1796                        POP                   HL                    RESTORE     REG
+   0566   29             1797                        ADO                   WL, HL                7STEP   OVER   PTRN_GNRTRS
+   0567   29             1796                        ADO                   HL, HL
+   0568   29             1799                        ADD                   WL, HL
+   0569   C1        -    1800                        POP                   ac
+   056A   09             1801                        ADO                   Ht ,BC                cHL->COLOR     GNRTR   SOURCE
+   0568   3€04           1802                        LD                    A,4                   SIGNAL     PTRN  COLOR    TBL
+   0560   CD1C27         1803                        CALL                 PUT  _VRAM_
+   0570   F1             1804                        POP                   AF                    oFIX  STACK
+   0571   C9             1805                        RET
+                         1806   ;  Internal    routine   to  initialize     X Pat  Pos    in  Old Screen
+   0572  C5              1807   INIT_XP_OS:          PUSH                 BC
+   0573  FOE!            1808                        POP                   ly                    i1Y  ->  STATUS
+   0575  D5             1809                         PUSH                 DE                     SAVE    ->  GRAPHICS
+   0576  5E             1810                         LD                   E,  (HL)               ;DE  := OLD   SCREEN    ADDRESS
+   0577  23             1811                         Inc                  HL                                                                                                                                       '
+   0578  56             1812                         LD                   D,  (HL)
+   0579  CB7A           1813                         BIT                  7,0                   ;?  OLD   SCRN   IN  CROM
+   0578  2014           1814                         JR                   NZ,SM_BY    OLD
+   057D  7A             1815                         LO                   A,O                   ;OLD_SCREEN      IN  VRAM?
+   O57E  FE70           1816                         cp                   70H
+   0580  3806           1817                         JR                   C,OS_IN   VRAM
+   0582  3680           1818                         LD                   A, 80H                ; INIT  X_PAT_POS     =  80H
+   058   12             1819                         LO                    (DE),A                              7
+   0585  180A           1820                         JR                  SM  BY  OLD
+   0587  80             1821    INIT 80:             DEFB                 80H
+   0588  210587         1822   OS_IN_VRAM:           LD                   HL, INIT  80                                                                                                      ‘
+   0588  010001         1823                         LD                   BC, 1                 ;ONE   BYTE   TO  MOVE   TO  VRAM
+   O58E  CD1D01         1824                         CALL                 VRAM  WRITE
+              <0591>    1825    SMBY  OLD         EQU                  $
+   0591  D1             1826                         POP                  DE                    ;DE   ->  GRAPHICS
+   0592  13             1827                         Inc                  DE                    DE    ->  FIRST  GEN  NAME
+   0593  C9             1828                         RET

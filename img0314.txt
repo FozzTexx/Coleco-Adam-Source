@@ -1,0 +1,63 @@
+FILE:  OS_7PRIME:pOs           HEWLETT-PACKARD:       ACTIVATE     (c)  Coleco,    1982    CONFIDENTIAL                        Fri,   18  May  1984,  16:19        PAGE    40
+
+LOCATION   OBJECT   CODE LINE         SOURCE    LINE
+
+    O4FD   2831          1715                         JR                    Z,SEMI_  GRI          :>,  GO  GRI
+    O4FF   EG            1716                         EX                    DE ,HL                ;DE=FIRST   GEN  NAME
+    0500   44            1717                         LD                    8,4                   ;SV   -> NUMGEN
+    0501   40            1718                         LO                    C,L
+    0502   6€            1719                         LO                    L, (HL)               CALC    SOURCE   OFFSET
+    0503   2600          1720                         LO                    u,0
+    0505  €5             1721                        PUSH                   HL
+    0506  29             1722                        ADO                    HL, HL
+    0507  29             1723                        ADO                    Ht, HL
+    0508  29             1724                        ADD                    HL, HL
+    0509  €5             1725                        PUSH                   HL
+    050A  03             1726                         INC                   BC                    ;HL->SOURCE     BUFFER
+    0508  0A             1727                         LO                    A, (8C)
+    O50C  6F             1728                         LD                    L,A
+    0500  03             1729                         INC                   BC
+    O50€  OA             1730                         LO                    A, (BC)
+    O50F  67.            1731                         LD                    HA
+    0510  C1             1732                        POP                    BC
+    0511  FDE1           1733                        POP                    ly
+   0513   F1             1734                        POP                    AF
+                         1735   ;AT   THIS   POINT:
+                         1736   ;                     HL->SOURCE     BUFFER,    PTRN   GNRTRS
+                         17387  ;                     DE=INDEX    TO  START   OF  VRAM   ENTRIES
+                         1738   ;                     IY=WUMBER    OF   ITEMS   TO  READ  FROM   VRAM
+                         1739   ;                     BC=OFFSET    TO  COLOR    SOURCE   BUFFER   a
+                         1740   ;                    AF=08J   TYPE    (&  SUP   VRAN   FLG,  UNNEEDED)
+                         1741   ;  FILL  AS   NEEDED   TOP,   MID,   AND  BOT   PTRN_GNRTRS     & DITTO    FOR  COLOR GNRTRS
+   0514   C87F           1742                         BIT                   7,A                  ;1F   BIT  7 OBJ  TYPE   ON  (TOP)
+   0516   2803           1743    |                    JR                    2,SEMI] MID          :>.   GO HNDL   MID
+   0518   CD0594         1744                        CALL                  SUP_GEN   CLR
+               <051B>    1745 SEMI    MID            EQu                   %
+   0518   CD05E8         1746                        CALL                  SUP_UPDATE
+   O51E  C877            1747                        BIT            |      6,A                   ; IF BIT   6 OBJ  TYPE  ON   (MID)
+   0520  2803           1748                         JR                    Z,SEMI_  BOT
+   0522  CD0594         1749                         CALL                 SUP_GEN    CLR
+               <0525>   1750    SEMI_BOT             EQu                   3
+   0525  CDOSES         1751                         CALL                  SUP_UPDATE                                          |
+   0526  CaéF           1752                         BIT                   3,A                   ;1F  BIT   5 OBJ  TYPE  ON   (BOT)
+   052A  2803           1753                         JR                    Z,SEMI_  EXIT
+   052C  cD059%         1754                         CALL                  SUP_GEN_CLR                                                                                                                         ,
+              <O52F>    1755   SEMI  EXIT            EQu                   $
+   O52F  C9             1756                         RET
+                        1757    ;
+                        1758   ;  Handle    GRAPHICS    MODE   |
+              <0530>    1759   SEMI  _GRI            EQU                   8
+   0530  EB             1760                         EX                    DE ,HL                ;WL ->NUMGEN
+  0531   4E             1761                         LD                    C, (HL)               ;[Y=NUMGEN
+  0532   0600           1762                         LD                    8,0
+  0534   C5             1763                         PUSH                  BC
+  0535   FDE1           1764                         POP                   ly
+  0537   23             1765                         INC                   HL                    ;HL->PTRN   GNRTRS                                                                     ‘
+  0538   7E             1766                         LD                    A, (HL)
+  0539   23             1767                         INC                   HL
+  053A   66             1768                         LO                    H, CHL]
+  0538   6F             1769                         LD                    L,A
+  O53c   €5             1770                     '   PUSH                  HL                   ; SAVE  FOR   RESTORE
+  0530   CS             “771                        PUSH                   BC
+
+                                                                                                                      /

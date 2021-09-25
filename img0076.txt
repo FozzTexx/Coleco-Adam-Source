@@ -1,0 +1,24 @@
+FILE: EOSABS:EOS  TF          HEWLETT-PACKARD: SOUND EQU€S (c) Coleco,  1982    CONFIDENTIAL              Sat,      8  Sep  1984,   23:39        PAGE    72
+
+LOCATION  OBJECT  CODE   LINE      SOURCE LINE
+
+                         2707
+                         2708  ,eSSSESHHHSSSESEEHHESESHSEES
+                         2709  ;¢       LOCL_DECLSN       *
+                         2710  4SSSSSHESSHSSSHESSSHHHSHEEOS
+                         2711
+                         2712  ;Without affecting the MSN, decrement  the LSN of  the  byte   pointed to by   HL.
+                         2713  ;HL remains the same.
+                         2714  ;RET with Z flag set if dec LSN results  in O, reset   otherwise.
+                         2715  ;RET with C flag set if dec LSN results  in -f,  reset  otherwise.
+                         2716.
+    E355                 2717  __DECLSN:
+    E355                 2718  LOCL_DECLSN
+    E355  AF             2719          XOR     A
+    E356  ED67           2720          RRD                     ;& = 0    LSN [HL]
+    E358  D601           2721          SUB     1               :2 flag  set {tf dec  to O,  C  flag if dec   to  -!1
+    E35A  FS             2722          PUSH    AF              ;save  Z and C flags
+    E358  EDG6F          2723          RLD                     ;[Ht}) = old MSN    new  LSN
+    E350  Ft             2724          Pop     AF              ;restore  Z and  C flags.   A    O   new LSN
+    E3SE  C9             2725          RET
+                         2726

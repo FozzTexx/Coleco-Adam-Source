@@ -1,0 +1,61 @@
+FILE: ~-5ABS:E0S_TF          HEWLETT-PACKARD:  UTILS      (c)Coleco  it_sConfidential                     Sat,    8  Sep  1984,  23:40       raat  129
+
+LOCATION   OBJECT CODE   LINE     SOURCE LINE
+
+                         $231 ;---rrrr  Srmeme mmmt  mmm  temem mmrnme tree neeennner            en-
+                         $232 ;
+                         $233 ; SCAN_FOR_FILE  -- Look  inthe directory for a  file name.
+                         §234 ;                Reads each block of the directory   into a  buffer
+                         $235 ;                (in the system‘’sFCB) and scans  through   for a
+                         $236 ;                match with the caller’s string.
+                         $237 ;
+                         $238 ; ENTRY PARAMETERS:  address of name string  inHL;  device   # inA
+                         $239 ;         ASSUMES  FILENAME CMP SET UP FOR FILE  COMPARES
+                         $240 ;         O  - USE STRCMP ,  NOT O  -USE BASECMP   FOR  FILE  NAME COMPARISIONS
+                         $241 ;
+                         5242 ; EXIT PARAMETERS:  if match found  --Z =  1;A=   0; file’s   start
+                         6243 ;                block tm BCDE; directory block  left  in buffer,
+                         S244 ;                address of entry  left inFCB_POINTER.
+                         $245 ;
+                         6246 ;                   if mo match found -- Z = 0;  A = error   code;
+                         6247 ;                BCDE = junk; other stuff = junk.
+                         8248 ;
+                         B24  srr                               rr  rr rrr        tn       reer  rene
+                         $250
+    EFOS                 $251 SCAN  _FORFILE:
+    EFOS                 $252 SCAN_FOR_FILE
+    EFOB   E€5           6253         PUSH     HL               ;SAVEREGISTERS
+    EFOC  DDES           $254         PUSH     Ix
+    EFOE   FOES          6265         PUSH     ly
+                         $256
+    EF1O   22FE10        5257         LD       (USER_NAME],HL  ;SAVE USER’S STRING  ADDRESS
+                         5258
+    EF13  DO2AFDOFD      $289         LO       IX,[FCB_HEAD_ADOR] ;GET ADDRESS  OF SYSTEM'S   FCB
+                         $260
+                         6261 ; First, set  up as much of the FCB as we can.
+    EFI7  007717         $262         LD       [IX+FCB_DEVICE],A  ;SETTHE DEVICE  ADDRESS   PASSED TO  US
+                         5263
+    EF1A  DD361901       5264         LD       (IX+FCB_BLOCK),1  ;SETBLOCK TO  1
+    EF1E  D0D361A00      §265         LD       {IX+FCB_BLOCK+1),0
+    EF22  DD36 1800      $266         LD       (IX¢FCB_BLOCK+2],0
+    EF26  0D361C0O       8267         LO       (IX+FCB_BLOCK+3],0
+                         $268
+    EF2A   EDSBFOFF      $269         tO       DE,{FCB_DATA_ADDR] ;SET BUFFER ADDRESS
+    EF2E  007321         $270         LD       [IX+FCB_POINTER),E
+    EF31  DO7222         $271         LD       [IX+FCB_POINTER+1),D
+                         $272
+    EF34                 $273 RO_TMEOUT:
+    EF34   21FDD4        $274         LD       HL,FILECOUNT
+    EF37   3600          $275         LD       {HL},0
+                         §276
+    EF39@ DD7E17         §277         LD       A,{IX+FCBDEVICE]  ;:GETTHE DEVICE  NUMBER
+    EF3C   2AFDOFF       6278         LD       HL,[FCB_DATA_ADDR] ;GET BUFFER ADDRESS
+    EF3F  DDSE19         §279         LD       E,{IX+FCBBLOCK)  ;GET BLOCK NUMBER
+    EF42  DDS61A         $280         LD       D,[IX+FCBBLOCK+1]}
+    EF45  DD4E18         5281         LD       C.{IX+FCBBLOCK+2]}
+    EF48  DD461C         5282         LD       B,[IX+FCBBLOCK+3]
+    EF48  COF 178        §283         CALL     READBLOCK       ;READ FIRST BLOCK  OF DIRECTORY
+    EF4E   C2FO26        5264         JP       NZ,SCANERROR    ;BRANCH IF ERROR
+                         5285
+    EFS?                 5286 GETBUFF ADDR:
+                         5287

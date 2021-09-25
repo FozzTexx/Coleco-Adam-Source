@@ -1,0 +1,21 @@
+FILE: EOQSABS:E0S TF         HEWLETT-PACKARD:  EOSGEN      (c) Coleco  1983 Confidential                  Sat,    8  Sep  1984,  23:41       PAGE  162
+
+LOCATION OBJECT   CODE   LINE     SOURCE LINE
+
+                         6667
+                         6664       ;GLB     __RD_DEV_DEP_STAT
+                         6669
+    F488                 6670 __RD_DEV_DEP_STAT:
+    F488 FDES            6671        PUSH     —sidT'Y              ; SAVE THIS REGISTER
+    F48A CDF446          6672        CALL   __FIND   OCB           ; GET THE CORRECT DEVICE DCB
+                         6673
+    F48D 2004            6674        UR      NZ,END   RDO   S
+                         6675
+    F48F AF              6676        XOR     A                         ; NO ERROR
+                         6677
+    F490 FD7E14          6678        LD      A,(IY+D   STATUS FLAGS]   ; READ DEVICE-DEPENDENT  STATUS  FLAGS
+                         6679
+    F493                 6680 END_R_DD S:
+    F493 FDE1            6681        POP      LY                         ; RESTORE THE REGISTER
+    F495 C9              6682        RET
+                         6683

@@ -1,0 +1,61 @@
+FILE: OS7PRIME:pOS           HEWLETT-PACKARD:  PUT  SEMI  (c)  Coleco,  1982   CONFIDENTIAL                   Fri,  18  May  1984,   16:19       PAGE   51
+
+LOCATION OBJECT    CODE LINE      SOURCE  LIWE
+
+    0738 C5             2262           PUSH  BC          ;SAVE  REGS
+    073C 05             2263           PUSH DE
+    0730 E5             2264           PUSH  HL
+                        2265
+    O73E FE70           2266                    cp                70H
+    0740 2802           2267                    JR                Z,EQUAL_TO
+    0742 3807           2268                    JR                C,ELSE 1
+                        2269
+                        2270  ;        IF  (.A,GE,70H)            ;THEN  OLDSCREEN    IN CPU RAM
+    0744                2271  EQUAL_TO
+    0744 67             2272             LD H,A                                        .
+    0745 DO6E04         2273             LDL,  (1X4)                ;HL  := OLD SCREEN   ADDRESS
+    0748 7E             2274             LDA,  (WL)
+                        2275
+    0749 1835           2276                    4R                ENDIF 1
+    0748                2277  ELSE_1
+                        2278
+                        2279  ;        ELSE                       jOLD_SCREEN   IN VRAM
+    0748 2A8006         2280             LD HL, (WORK_BUFFER)       ;GET  ADDRESS  OF FREE  BUFFER  SPACE
+    074E 005605         2281             LD D, (1X+5)               ;DE  := OLD SCREEN  ADDRESS
+    0751 DOSEO4         2282             LD E, (1X4)
+    0754 €5             2283             PUSH  HL                   ;SAVE  2 COPIES  FREE  BUFFER  ADDR
+    0755 05             2284             PUSH DE                    ;SAVE  OLDSCREEN   ADOR
+    0756 £5             2285             PUSH  HL
+    0757 010004         2286             LD BC,4                    ;READ  4 BYTES  (X,Y PAT POSs,   X,Y EXTETNs)
+   O75A  CDID3E        2287              CALL VRAM READ
+   O75D  E1            2288              POP HL                     sWL :=  FREE BUFFER  ADDR
+   O75E  7E            2289              LD A,  (HL)
+   O75F  FE8O          2290              cP  80H
+   0761  2003          2291              JR  WZ,GET OLD
+   0763  D1            2292              POP  DE
+   0764  1819          2293              JR  SKIP_OLD
+   0766  23            2294  GET OLD     INC ML
+   0767  23            2295              INC HL
+   0768  46            2296              LDB,  (WL)                 38 := X_EXTENT   OF OLD SCREEN
+   0769  23            2297              INC HL
+   O76A  5E            2298              LO E, (HL)                 ;E := Y_EXTENT
+   0768  1600.         2299              LD D,0
+   076D 23             2300              INC HL
+   O76E EB             2301             EX  DE,HL                   sMULTIPLY  X_EXTENT*Y EXTENT    IN HL                                                                            ,
+                       2302
+   O76F  1801          2303                    JR                MXY+1
+   0771 29             2304  MXY:              ADD               HL,HL
+   0772 10FD           2305                    DJNZ              M_XY
+                       2306
+                       2307  ;          OJNZ  M.XY
+   0774 £5             2308             PUSH  HL
+   0775 C1             2309             POP  BC                    ;BC  := NUMBER  OF BYTES   TO READ
+   0776 EB             2310             EX  DE,HL                  ;HL  := FREE  BUFF ADDR  +  4
+   0777 01             2311             POP  DE                    ;DE  := OLD SCREEN  ADDR.
+   0778 13             2312             INC  DE                                                                                                                  ;
+   0779 13             2313             INC  DE
+   O77A 13             2314             INC  DE
+   0778 13             2315             INC  DE
+   O77C CD1D3E         2316             CALL  VRAM READ             ;READ  SAVED  NAMES  FOR BACKGROUND
+   O77F E1             2317  SKIP OLD   POP  HL                    ;HL  := FREE BUFF  ADDR.
+                       2318  ;        ENDIF

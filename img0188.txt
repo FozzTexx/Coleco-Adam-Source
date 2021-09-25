@@ -1,0 +1,45 @@
+FILE: EOSABS:EOS_TF       HEWLETT-PACKARD:     CONS OUT    (c) Coleco   1983 Confidential                   Sat,   8  Sep  1984,  23:41         PAGE  184
+
+LOCATION OBJECT CODE  LINE     SOURCE   LINE
+
+    F627              7462 __CONS_DISP:
+    F627 FS           7463                     PUSH      AF
+    F628 C5           7464                     PUSH      BC
+    F629 E5           7465                     PUSH      HL
+    F62A DDES         7466                     PUSH      IX
+    FG62CFOES         7467                     PUSH      LY
+    F62E DS           7468                     PUSH      DE
+    F62F              7469 NOT_SPECIAL:
+    F62F CDF7DA       7470                     CALL      PUT_CHAR_ON_SCREEN   ;Display char where cursor    is at
+    F632 2AFEAS       7471                     LO        HL,[CURSOR }
+    F635 24    |      7472                     INC       H                 ;Move cursor to right (+1)
+    F636 3AFE7B       7473                     LD        A,[X_MAX]         ;  but check for going out  of
+    F639 BC           7474                     cP        H                 ;    the window
+    F6E3A3014         7475               ,     JR        NC,SAVE_CURSOR    ;If taken then stayed in window
+    F6E3CSAFE7A       7476                     LD        A,(X_MIN]         ;Went out of window so set  X
+    F63F 67           7477                     LD        H,A   .           ;   to left edge
+    F640 2C           7478                     INC       L                 ; and move down one line
+    F641 3AFE7D       7479                     LO        A,[Y_MAX]         ;   but check to see if still
+    F644 BD           7480                     cP        L                 :      in the window
+    F645 3009         7481                     JR        NC,SAVE_CURSOR
+    F647 20           7482                     DEC       L                 ; Put back into window
+    F648 ES           7483                     PUSH      HL
+    F649 COF7ED       7484                     CALL      GET_CHAR_UNDER_CURSOR
+   F64C  CDOF794      7485                     CALL      SCROLL_UP
+    F64F E1           7486                     PoP       HL
+                      7487                              |
+    F650 22FEAS       7488 SAVE CURSOR:        LO        [CURSOR),HL
+    F653.CDF7FO       7489 NEWCURSOR:          CALL      GET_CHAR_UNDER
+    F656              7490 PUT_CURSOR_ON:
+    F656 3ESF         7491                     LD        A,CURSOR_CHAR
+    F658 CDF7DA       7492                     CALL      PUT_CHAR_ON_SCREEN
+                      7493
+    F65B 01           7494 EXIT:               PoP       DE
+    F6SC FDE1         7495                     POP       IY
+    F6SE ODE!         7496                     PoP       IX
+    F660 E1           7497                     PoP       HL
+    F661 C1           7498                     PoP       BC
+    F662 Fi           7499                     POP       AF
+    F663 C9           7500                     RET
+
+                                                                                                                                       oa      x

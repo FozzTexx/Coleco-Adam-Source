@@ -1,0 +1,22 @@
+FILE: .-SsABS:EOTF         HEWLETT-PACKARD:  CONS OUT   (c) Coleco tyuus Confidential                       Sat,   8  Sep  1984,  23:41        ravt  195
+
+LOCATION OBJECT CODE   LINE     SOURCE  LINE
+
+                       7689 ;
+                       7690 ; Subroutine
+                       7691 ; BLANKS       -  Fills  LINEBUFFER_ with  32 BLANKING CHAR‘s
+                       7692 ;
+                       7693 ;  A is destroyed
+                       7694 ;
+    F73C               7695 BLANKS:
+    F73C ES            7696                  PUSH     HL
+    F73D C5            7697                  PUSH     BC
+    F73E 21FE7E        7698                  LO       HL,LINEBUFFER_
+    F741 0620          7699                  LD       B32
+    F743 3E&20         7700 BLANK_REST:      LD       A,BLANKINGCHAR
+    F745 77            7701 BLANK_FILL:      LD       {HL}),A
+    F746 23            7702                  INC      HL
+    F747 10FC          7703                  DUNZ     BLANKFILL
+    F749 C1            7704                  POP      BC
+    FI4A E1            7705                  POP      HL
+    F748 CO            7706                  RET

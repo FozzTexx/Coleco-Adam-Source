@@ -1,0 +1,63 @@
+a               ee       ee          ee       ee        ee           ee                           en         ee             ee                              en                            a             ae
+
+    FILE: OS 7PRIME:pOS         HEWLETT-PACKARD:  PUT SPRITE RTN (c) Coleco,  1982   CONFIDENTIAL            Fri,  18  May  1984,  16:20       PAGE   65
+
+    LOCATION  OBJECT  CODE LINE       SOURCE LINE
+
+                           3032
+                           3033   *         X := BYTE(STATUS*.XLOCATION)
+        O9CA  DD6E02       3034                   LO              L,{THIS SPRITE+STATUS)
+        O9CD  006603       3035                   i)              H, (THIS SPRITE+STATUS+ 1}
+        0900   110001      3036                   LD              DE,XLOCATION
+        0903   19          3037                   ADO             HL,DE             ; (HL)  = X_LOCATION
+        0904  7E           3038                   LD              A, (HL)
+        0905  F07701       3039                   LO               (SPRITEPTR+X) ,A
+                           3040
+                           3041   *         COLOR AND TAG := GRAPHICS*.FRAME TABLE [STATUS*.  FRAME] .COLOR
+        0908  DD6E00       3042                   LD              L, {THISSPRITE+GRAPHICS)
+        0908  DD6601       3043                   tb              H, (THISSPRITE+GRAPHICS+1)
+        O9DE  110005       3044                   LD              DE,FRAME TABLE PTR
+        O9E1  19           3045                   ADD             WL,DE             7(HL) =  FRAME TABLE  PTR
+        O9E2  EB           3046                   EX              DE,HL
+       -Q9€3   1A          3047                   LO              A, (DE)
+        O9E4  6F           3048                   LO              L,A
+        0965   13—i«       3049                   INC             DE
+        O9E6  1A           3050                   LD              A, (DE)
+        O9E7  67           3051                   Lo              H,A              ; (HL) =  FRAME TABLE  PTR*
+        O9E8  £5          -3052                   PUSH            HE
+        O9E9  DDGE02       3053                   LD              L, (THISSPRITE+STATUS)
+        O9EC  DD6603       3054                   LO              H, (THISSPRITE*STATUS+1)
+        O9EF  110000       3055                   LO              DE,FRAME
+        O9F2  19           3056                   ADD             HL DE             s(HL) =  FRAME
+        O9F3  7E          .3057                   LO              A,CHL)           sCALCULATE   OFFSET  OF
+        O9F4  CB27         3058       |           SLA             A                >COLOR   ENTRY
+        09F6  010000       3059                   LO              BC,0
+        O9FO  4F           3060                   LO              C,A
+        OOFA  E1           3061                  PoP              WL
+        O9FB  09           3062                   ADD             ‘WL,BC           ; (HL) =  COLOR
+        O9FC  7E           3063                   LD              A,(HL)
+        O9FD  FO7703       3064                   LO              (SPRITE _PTR+COLORAND  TAG)  ,A
+                           3065
+                           3066  *        ENDIF
+        0a00               3067  PUT_Y_AND NAME
+                           3068
+                           3069  *        Y := BYTE(STATUS*.YLOCATION)
+        OAOO  DD6E02       3070                   LO              L,{THISSPRITE+STATUS)
+        OA03  DD6603       3071                   LD              H,(THIS SPRITE*STATUS+1]                                                                                         ’
+        OA06  110003       3072                   LD              DE,YLOCATION
+        OA09  19           3073                   ADD             HL,DE            ;  (HL) =  Y_LOCATION
+        OAOA  7E           3074                   LO              A,(HL)
+        Oads  FD7700       3075                   LD              (SPRITE PTR+Y],A
+                           3076
+                           3077  *        NAME := GRAPHICS*.FRAMETABLE [STATUS*. FRAME) .SHAPE
+                           3078  *                + GRAPHICS*.FIRSTGEN NAME
+        OAOE  DD6E00       3079                   LO              L,(THISSPRITE+GRAPHICS)
+        0A11  DD6601       3080                   LO              H,(THISSPRITE+GRAPHICS+1)
+        0A14  110005       3081                   LO              DE,FRAMETABLE  PTR
+        OA17  19           3082                   ADD             HL,DE            ;(HL)  =  FRAMETABLE  PTR                                                  ‘
+        0A18  £B           3083                   EX              DE,HL
+       OA19   1A           3084                   LO              A,(DE)
+       OA1A  6F            3085                   LO              LA
+        OA18  13           3086                   INC             DE
+        OAIC  1A           3087                   LO              A,(DE)
+        OA1D  67           3088                   LO              H,A              7(HL)  = FRAME TABLE  PTR*

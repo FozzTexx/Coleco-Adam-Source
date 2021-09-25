@@ -1,0 +1,61 @@
+FILE:  EOSABS:E0S  TF          HEWLETT-PACKARD:       OPENS       (c)  Coleco   1983  Confidential                  Sat,    8  Sep  1984,  23:40        PAGE  110
+
+LOCATION   OBJECT  CODE   LINE        SOURCE   LINE
+
+    EA98  DD7E20          4337             LD         A,{IX*FCB_LAST_BLOCK+3]
+    EASC  DEOO            4338             Sac        A.O
+    EASE  007720          4339             LO          [IX+FCB_LAST  BLOCK+3),A
+                          4340
+    EAA(   EOSBFEOS       4341             LO         DE, ({BUF_START)   ;INIT   BUFFER  POINTER
+    EAAS  0DO7321         4342             LD         [IX+FCB_POINTER],E
+    EAAS  D07222          4343             LD         (IX+FCB_POINTER+1),0
+                          4344
+    EAAB  DD7EOD          4345             LD         A, (IX+FCB_FIRST_  BLOCK}   ;SET  BLOCK   TO FIRST BLOCK
+    EAAE  007719          4346             to         {IX*FCB_BLOCK),A
+    EAB!  DD7EOE          4347             LD         A, [IX+FCB_FIRST  BLOCK+1]
+    EAB4  DDTTIA          4348             LD         (IX+FCB  BLOCK+1),A
+    EAB?  DDTEOF          4349             LO         A, (IX+FCB_FIRST_BLOCK+2]
+    EABA  007718          4350            LO          {IX+FCB  BLOCK+2],A
+    EABD  DD7E10          4351            LD          A, [IX*FCB_FIRST_BLOCK+3]                                                                                        :
+    EaCO  DO771C          4352            LD          {IX+FCB_BLOCK+3],A                                             .
+                          4353
+    EAC3  DO7E18          4354            LO          A,({IX+FCB_MODE]   ;LOOK  AT  THE  MODE
+    EAC6  E607            4355            AND         MODE MODE
+    EACS  FEO2            4356.           CP          MODE WRITE         ;IS  IT  WRITE  MODE?
+    EACA  2827            4387            JR          2,OPENS            ;JUMP   IF SO  --  NO PRE-READ  NECESSARY
+            :             4358
+    EACC                  4359   READ TIMEOUT:
+                          4360   *                    Tf FCB_USED  LENGTH    = 1  (file  size  of  one block)
+    EACC  AF              4361            XOR         A                                      ;load  Acc with zero
+    EACD  DDBE 14         4362            cP          [IX+FCB_USED_LENGTH+   1]              sHigh  order must be zero
+    EADO  200A            4363            JR          NZ,NOT_SIZE  1                         ;I1f not then past bitset
+    EaD2  3C              4364            INC         &                                      ;Inc  Acc to a  1
+    EAD3  DDBE 13         4365            cP          {IX+¢FCB_USED_LENGTH]                  ;Compare  with low order
+    EAD6  2004            4366            JR          NZ,NOT_SIZE_1                          ;If not  equal then exit
+                          4367
+                          4368   +                    Then  set  last block   bit  in mode
+    EADS  DOCBIGFE        4369            SET        MODE  LAST  BLOCK BIT,  [{IX+FCB_MODE]    ;Set  it
+                          4370   +                    Endif
+    EADC                  4371  NOT  SIZE 1:
+                          4372
+    EADC  DD7E17          4373            LD         A, (IX*FCB_DEVICE])   ;GET  THE  DEVICE   NUMBER
+    EADF  2AFEO8          4374            LO         HL,(BUF_ START]     ;GET  BUFFER  ADDRESS
+    EAE2  DDSE19          4375            LD          E,({IX+FCB_BLOCK])  ;GET  BLOCK  NUMBER
+    EAES  DDSG6GIA       4376             LO         O,(IX+FCB_BLOCK+   1)
+    EAEG  DD4E18         4377             LD         C,{IX+FCB  BLOCK+2)
+    EAEB  DD461C         4378             LO         8, (IX+FCB_BLOCK+3)
+    EAEE  CDF178         4379             CALL       READ  BLOCK         ;READ  THE  FIRST  BLOCK
+                         4380
+    EAFi  2005           4361             JR         NZ,OP_ERR           ; IT’S  AN  ERROR
+                         4362
+    EAFS                 4383   OPENS
+    EAF3  AF             4384             XOR        A                   ;SHOW  NO  ERROR
+    EAF4  C1             4365             POP        BC                  -GET  THE  FILE  NUMBER   IN B
+   EAFS   78             4386             LO         A.B
+                         4387
+   EAFG   1805           4388             JR         REST  REGS
+                         4389  .;         PoP        DE                  >RESTORE  REGISTERS
+                         43390   ;        PoP         IX
+                         4391;            pap        HL
+                         4392    ;        pop         ly
+                         4393.          _ RET

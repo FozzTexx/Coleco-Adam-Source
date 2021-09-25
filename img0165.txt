@@ -1,0 +1,43 @@
+FILE: '.SABS:E0S_TF           HEWLETT-PACKARD:   EOS GEN    (c)  Coleco 1-L3 Confidential                   Sat,   8 Sep   1984,  23:41       raat   161
+
+LOCATION OBJECT   CODE   LINE      SOURCE  LINE
+
+                         6627                                                             .
+                         GCE2QBHHH KAHHERRERA                    EEE TERETE EEE   EERE  REE                                EEEEE
+                         6629  * THIS ROUTINE   WILL  INITIATE  A STATUS REQUEST COMMAND,  AND WILL   RETURN
+                         6630  * THE RESULT  OF .THE  COMMAND.
+                         6631  *      INPUT:    A==      DEVICE  ID
+                         6632  *      OUTPUT:   CONDITION  BITS
+                         6633  «                Z:       NO ERRORS
+                         6634  »                         IY CONTAINS  START ADDRESS OF DCB
+                         6635  +                NZ:      ERROR  OCCURED
+                         6636  +                         A ==>  ERROR CODE
+                         6637  *                         IY IS  DESTROYED (MAY BE ADDRESS  OF DCB
+                         6638  «+                        UNDER  CERTAIN ERROR CONDITIONS)
+                         6639  +
+                         6640  *SFRSSeSsSee SSeS SseSesesseseSseSeeeeesSeeseeeeeseeseSSSeee seseaeeeee eeeeeeeee  eee¢
+                         6641
+                         6642        ;GLB       __REQUEST_STATUS
+                         6643
+                         6644
+    F473                 6645  _REQUEST_STATUS:
+    F473 COF446          6646         CALL      __FIND_DCB          ; GET THE CORRECT DEVICE  DCB
+                         6647
+    F476 200F            6648         UR        NZ,END_R_S
+                         6649
+    F478 FD360001        6650         LD        [1¥+D_COM_STAT],0CB_STATUS      ; SEND THE  COMMAND   TO REQUEST
+                         6651                                     ; A STATUS
+                         6652
+    F47C                 6653  REQUESTLOOP:
+    F47C FOCBOO7TE       6654         BIT       CMND_COMPLETE_BIT,[1Y+D  COM STAT]       ; HAS THE   COMMAND COMPLETED?
+    F480 28FA            6655         JR        Z,REQUEST_LOOP            ; NO LOOP TILL IT  DOES
+                         6656
+    F482 FD7E0O          6657         LD        A,(1Y+D_COM STAT]       ; CHECK THE STATUS
+    F485 FE8O            6658         cP        CMND_FIN STATUS           ; DID IT FINISH  WITH  NO  ERRORS?
+                         6659                                             ; IF ZERO EVERYTHING   IS  OK
+                         6660                                             ; IF NZ THERE WAS  AN  ERROR
+                         6661
+    F487    |            6662  END_RS:
+    F487 C9              6663         RET
+                         6664
+                         6665

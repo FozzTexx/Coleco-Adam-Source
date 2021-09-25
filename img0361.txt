@@ -1,0 +1,61 @@
+FILE:  OS7PRIME:pOS            HEWLETT-PACKARD:      TIME  MANAGER   (c)   Coleco,   1982    CONFIDENTIAL              Fri,   18 May  1984,  16:20      PAGE    87
+
+LOCATION   OBJECT  CODE   LIWE      SOURCE    LINE
+
+                          4196
+     OFB4                 4197  FREE_SIG PAR:
+     0FB4  00010001       4198                DEFW   1,1
+                          4199
+     OFes                 4200  FREE_SIGNALQ:
+     OFBS  010FB4         4201                LO  BC,FREE    SIG  PAR
+     OFBB  11738E         4202                LD    O€,SIGNAL_NUM
+     OFBE  CD0098         4203                CALL  PARAM_
+     OFC1  3A73BE         4204                LD =A,   (SIGWAL_NUM)
+                          4205
+     OFC4                 4206  FREESIGNAL    :
+     OFC4  4F             4207                LO     C,A                                      sPut Free  Code  into  C register
+     OFCS  2A7303         4208                LD     WL, (TIMER TABLE   BASE)                 ;Get Timer  Base  Address
+     OFC8  47             4209                LD     «6B,A                                    sTimer offset  already   available
+     OFC9  110003         4210                LD     OE,3                                     ;Setup offset  to  subsequent    timers
+     OFCC  87             4211                OR     A                                        sSee if  the first  timer   is  requested
+     OFCD  2808           4212                JR     2,FREE_MATCH                             ;1f so we  have  a match
+                          4213                                   |
+     OFCF                 4214  FREE1:                                                        s;Loopto  find requested    signal
+     OFCF  CB66           4215                BIT    EOT, (HL)                                sCheck  if end of  table
+     OFD1  206A           4216                JR     WZ, FREEEXIT                             ;1f so go  no further
+     OFD3  19             4217                ADD    UHL,DE                                   -If not  then offset   to next   timer
+     OFD4  OD             4218                DEC    C                                        sDecrement  signal  requested
+     OFDS  20F8           4219                JR     WZ,FREE1                                 ;1f requested  signal   not  zero  then  go try  the  next
+                          4220
+     OFD7                 4221  FREEMATCH:                                                    sHere when  the  requested   signal   matches  current  signal
+     OFO7  CB6E           4222                BIT  FREE,   (HL)                               ;Check  if already  free
+     OFD9  2062           4223                JR     WZ, FREESET.                            ;1f so then  just  reset  LONG
+     OFOB  CBEE           4224                SET    FREE, (HL)                               sSet current  timer  to  free
+     OFOD  C876           4225                BIT REPEAT,     (HL)                            sCheck for  repeating   timer
+     OFDF  285C           4226                JR     2,FREE SET                               sIf mot  then go  free  it
+     OFE1  CBSE           4227                BIT    LONG, (HL)                               ;Check also  for  long  timer
+     OFE3  2658           4228                JR            SET                               sIf not  long then  go  free  it
+                          4229  ;             CALL   FREE COUNTER_                             ;Release  timer  data  before   freeing  timer
+                          4230                                                                                      |
+                          4231  ;
+                          4232  ;                    FREE    (DELETE)    COUNTER
+                          4233  ;                           KENL  3/82
+                          4234  ;
+                          4235  ;          NEEDS      “TO-DELETE™:COUNTER      ADOR.IN    DE                                                                                                         a
+                          4236
+     OFES                 4237  FREECOUNTER                                 sHL should    contain  timer  to delete   addr.
+     OFES  23             4238                       INC                    HL         ;Get   next after  mode  byte
+     OFE6  5E             4239                       LO                     E, (Wt)             ; Into  DE.
+     OFE7  23             4240                       INC                    HL
+     OFES  56             4241                       LD                     D, (HL)
+     OFE9  D5             4242                       PUSH                   DE                  ;Save  them for  later.
+     OFEA  2A7303         4243                       LD                     HL,(TIMER   TABLE  BASE}
+     OFED  E5             4244                       PUSH                   HL                  ;Save  beginning  of  table.
+     OFEE »               4245  NEXT
+     OFEE  CB66           4246                       BIT                    EOT, (HL)           s;Endof  table?                                                                :
+     OFFO  202E           4247                       JR                     NZ,MOVE IT
+     OFF2  CB6E           4248                       BIT                    FREE, [HL]          ;Free?
+     OFF4  2023           4249                       JR                     NZ,GET NEXT         sIf so  we don't  want  it.
+     OFF6  7E             4250                       LD                     A,(HL)
+     OFF7  E648           4251                       AND                    48H                 ;Repeating  and  long?
+     OFFO  FE4B           4252                       cP                     48H

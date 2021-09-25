@@ -1,0 +1,23 @@
+FILE: « .ABS:EOS TF         HEWLETT-PACKARD:  CONSOUT   (c) Coleco 1%.. Confidential                  Sat,   8  Sep  1984,  23:41       _nuvE  189
+
+LOCATION OBJECT  CODE   LINE     SOURCE LINE
+
+                        7872 ;
+                        7573 ; MOVELEFT   -   Moves the cursor to the left and if at left edge of
+                        7874 ;                window will move up a line an to right edge if not
+                        7575 ;                at upper left corner of window
+                        7576 ;
+    F6B9 2AFEAS         7577 MOVELEFT:        LD      HL,[CURSOR}
+    F6BC 3AFETA         7578                  LD      A,{X_MIN]}
+    F6EBFBC             7579                  cP      H
+    FECO 2804           7580                  JR      Z,TRY_SCROLL_UP
+    F6EC225             7581               —  DEC     H               ;Move to left
+    F6C3 C3F67D         7582                  JP      RESTOREOLD
+                        75863;
+    F6EC63AFETC         7584 TRY_SCROLL_UP:   LD      A,[Y_MIN)
+    F6CS B80            7585                  cP      L
+    FECA 2868F          7586                  JR      Z,EXIT          ;Abort if at upper left corner
+    F6ECC2D             7587                  DEC     L
+    F6CD 3AFE7B         7588                  LD      A,[X_MAX]
+    F6DO 67             7589                  Lo      H,A
+    F6D1 C3F670         7890                  JP      RESTOREOLD

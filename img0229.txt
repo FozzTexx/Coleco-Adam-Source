@@ -1,0 +1,37 @@
+FILE:.   2.ABS:E0OTF           HEWLETT-PACKARD:     EOSUTIL     (c)  Coleco   1. s Confidential                       Sat,    8  Sep  1984,  23:42        .  .wE   225
+
+LOCATION  OBJECT  CODE    LINE       SOURCE   LINE
+
+                          8740          ;GLB       __READ_EOS
+                          8741
+    FAD                   8742  _READ_EOS:
+    FA9D  C9              8743           RET
+                          8744  ;
+                          8745  ;       CODE  FROM  HERE  TO  END  OF  EOSUTIL   WAS  INSERTED   AFTER  THE
+                          6746  ;       REV.  OG  ROM WAS  BURNED.     IT HAS  BEEN COMMENTED    OUT  TO MAINTAIN
+                          8747  ;       COMPATIBILITY    WITH  THAT  ROM
+                          8748  ;
+                          8749  ;        END
+                          8750  ;
+                          8751  ;
+                          8752  ;EOS CODE   START    QU   OO800H
+                          8753  ;€0S SIZE            EQU  O2000H  -800H
+                          8754  ;EOS DEST            EQU  OFD00H+B00H
+                          8755  ;
+                          8756  ;         LD        A,O                           ;BANK  SWITCH   IN  THE  BOOT  ROMS
+                          8757  ;         OuT       {7FH],A                       ;  (I HOPE)
+                          6758  ;
+                          8759  ;         LD        HL,EOS  CODE  START            ;WHERE   DOES  EOS  SIT  IN  BOOT  ROMS
+                          8760  ;         LD        DE,EOS  DEST                  ; WHERE   EOS  GOES
+                          8761  ;         LO        BC,E€OSSIZE                    ;HOW  BIG  EOS  IS
+                          8762  ;         LDIR                                    ;MOVE  EOS  INTO  PLACE
+                          8763  ;
+                          8764  :         LD        A,3                           ;BANK  SWITCH   IN  OS_7
+                          8765   ;        OUT       (7FH].A                       ;  (I KNOW)
+                          8766   ;
+                          8767  ;         RET  .             ,                    ;EOS  IS  IN
+                          8768   ;;
+                          8769   opBSSessesessssesseesesssessssesssss        ssssesss SSSSs SrssssessesssTssase
+                          8770   S[BERRA SRE ECS SSSSSSS SSSSSS  SSS SSSSSS SSSSSSSSS Sssssesesssssesacsssessse
+                          8771   spSBESESSERESSS   SSHSETS SSS SSS Ss seesssssssrrsr  essere  sssrssesessessrse
+                          8772   :;

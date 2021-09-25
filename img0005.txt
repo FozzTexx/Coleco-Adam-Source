@@ -1,0 +1,57 @@
+                                                                                                                                                                 LE
+
+FILE:   .aBS:€0S_?F          HEWLETT-PACKARD: EQS ABSOLUTE LISTING (cv,vcoleco1983                    Sat     &  Sep  ‘QA4       38
+      .
+
+LOCATION OBJECT  CODE   -INE      SOURCE LINE
+
+                              “Z860*
+                               NAME “Rev 06.1 - TF
+
+                                Project:  EOS 6 Absolute Listing
+
+                                    SSSSSOSSSSSSSSSSSSSSSSESSESHEHETSEHXETHSSSSSSSSESSSHEOSHSSssSESSS
+                                    esos                                                    Seeee
+                                    eees              EOS ABSOLUTE LISTING                  eee
+                           10       eees                                                    $e
+                           11       eeee            Electronic Development Group            eeee
+                           12       esse               Coleco Industries Inc.               eeee
+                           13       cose               999 Quaker Lane South                eee
+                           14       eees               West Hartford, Connecticut           soee
+                           15       sees                                  06110             eoe9
+                           16       Sese                                                    ees6
+                           17       SSOSSHSSHSSSSSSSHSSSHSSSSSHSSSSSSSSOHESSSSSESTSSSOHEESHESHSSEHSEHESEEEES
+                           18
+                           19       This ebsolute listing was generated to ease software
+                           20       development on ADAM.   This listing provides the location
+                         "24        of both released and unreleased entry points.  Released
+                           22       entry points begin immediately in this file with the  jump
+                           23       table and end before the first code segment listed.
+                           24       Released entry points include the jump table, common  data
+                           25       areas(EOSCOMN),  common data tables, and equates which
+                           26       describe the released data structures.  Direct access
+                           27       to code segments is STRONGLY DISCOURAGED and may make
+                           28       your application incompatable with some ADAMs.  there  is
+                           29       more than one version of EOS on the market at this  time
+                                    and updates are planned.
+                           31
+                           32       For further information on ADAM or EOS consult the
+                           33       ADAM Technical Reference Manual or send your questions
+                           34       in writing to:
+                           35
+                                                  Coleco Software Suppot
+                           37
+                           38       at the above address.
+
+                           40   COLECO MAKES NO REPRESENTATIONS OR WARRANTIES WHATSOEVER,  INCLUDING
+                           41   WITHOUT LIMITATION ANY IMPLIED WARRANTIES OR MERCHANTABILITY  AND
+                           42   FITNESS FOR A PARTICULAR PURPOSE, IN CONNECTION WITH THE  MATERIALS
+                           43   CONTAINED HEREIN, AND SUCH MATERIALS ARE DISCLOSED AS IS.   COLECO
+                           a4   SHALL HAVE NO LIABILITY FOR ANY LOSSES CAUSED TO RECIPIENTS  OF THESE
+                           46   MATERIALS BY REASON OF ANY CHANGES OR MODIFICATIONS MADE  BY COLECO  IN
+                           48   THESE MATERIALS AFTER THEIR DISCLOSURE HEREIN.  IN ADDITION,  COLECO
+                           47   SHALL HAVE NO LIABILITY FOR ANY CONSEQUENTIAL, SPECIAL, INDIRECT  OR
+                           4&   INCIDENTAL DAMAGES OR LOSSES WHATSOEVER, INCLUDING LOSS OF  PROFITS,  IN
+                           4%   CONNECTION WITH THE USE OF THE MATERIALS DISCLOSED HEREIN.
+
+                        @e@e@@@&ee@&@@f@F@e@6@@e@FBe2 @fO29@¢@F@@ @f@¢@F@oF O@8@&2@GOfOfSBwGs+GeSFReWa

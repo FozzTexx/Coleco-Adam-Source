@@ -1,0 +1,61 @@
+FILE: OS 7PRIME  :pOS     HEWLETT-PACKARD: GAME OPTION  (c) Coleco, 1982   CONFIDENTIAL            Fri,  18  May  1984,  16:21       PAGE  119
+
+LOCATION  OBJECT CODE LINE     SOURCE LIWE
+
+                      5793
+                      5794 RekanntankheaeaeaeekYOITE OUT  PATTERN NAME TABLE ReERKeRKERKRKRAKREH
+                      5795
+                      5796 *  WRITE OUT PATTERN NAMETABLE
+    1991  211A7C      5797                 LD WL,LINE1
+    1994   110025     5798                 LD DE,37_
+    1997  FD210016    5799                 LD IY,22:
+    1998  3E02        5800                 LD A,2
+    1990  CD1FBE      5801                 CALL PUT_VRAM
+                      5802
+    19A0  211A92      5803                 LD HL,LINE2
+    19A3  110065      5804                 LO DE,101
+    19A6  0210017     5805                 LO 1Y,23
+    19AA  3602        5806                 LD A,2
+    19AC  CDIFBE      5807                 CALL PUT_VRAM
+                      5808
+    19AF  1100C5      5809                 LD DE,197
+    1982  CD1ACA      5810                 CALL WRITE_L3
+                      5811
+    1985  110105      5812                 LO DE,261
+    1988  CDIACA      5813                 CALL WRITE_L3
+                      5814
+    1988  110145      5815                 LO DE,325
+    19BE  CD1ACA      5816                 CALL WRITE_L3
+                      5817
+    19C1  110185      5818                 LD DE,389
+    19C4  CDIACA      5819                 CALL WRITEL3
+                      5820
+    19C7  1101E5      5821                 LD DE,485
+    19CA  CD1IACA     5822                 CALL WRITEL3
+                      5823
+    19CD  110225      5824                 LD DE,549
+    1900  CD1ACA      5825                 CALL WRITE 13
+                      5826
+    1903  110265      5827                 LD DE,613
+    1906  CDIACA      5828                 CALL WRITEL3
+                      5829
+    1909  1102A5      5830                 LO DE,677
+    190C  CDIACA      5831                 CALL WRITEL3
+                      5832                                                                                                                                                ,
+    19DF  110105      5833                 LD DE,261                               .
+    1962  CD1AD7      5834                 CALL WRITE_L4
+                      5835
+    19€5  110145      5836                 LO DE,325
+    19€8  CD1ADC      5837                 CALL WRITE_L5
+                      5838
+    19€B  110185      5839                 LD DE,389
+    19EE  CDIAE1      5840                 CALL WRITEL6
+                      5841
+    19F1  211AC2      5842                 LD HL,LINE7
+    19F4  1101E5      5843                 LD DE,485
+    19F7  CDIAE4      5844                 CALL WRITECHAR
+                      5845
+    IDFA  211AC3      5846                 LD HL,LINE 8
+    19FD  110225      5847                 LD DE,549 —
+    1A00  CD1AE4      5848                 CALL WRITECHAR
+                      5849

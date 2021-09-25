@@ -1,0 +1,62 @@
+FILE:                        HEWLETT-PACKARD:   EOS UTIL   (c) Coleco  1983 Confidential                        8
+      COSABS:EOS TF                                                                                                Sep  1984,  23:41        PAGE  218
+
+LOCATION OBJECT  CODE   LINE      SOURCE  LINE
+
+                       8508
+                       8509   ; ENTRY:         __SCAN_ACTIVE
+                       8510   ; NEEDS:         [CURRENTPCB]   SET  TO CURRENTLY OPERATING PCB
+                       8511   ; RETURNS:       1 OCB ALLOTTED  FOR  EACH DEVICE ANSWERING A STATUS  REQUEST
+                       8512   ;                 CORRECTLY
+                       6513   ;                MASTER NODE  SCANNING  EACH OF THESE DCB’S FOR WORK  TO DO
+                       e514
+                       8515          ;GLB      __SCAN_ACTIVE
+                       8516
+    FOCB                8517   SCAN  _ACTIVE
+    FOCB C5            e518           PUSH  =  BC                        ; SAVE BC
+    FSCC 05            8519           PUSH     DE                        ;      DE
+    FOCD ES             8520          PUSH  =  HL                        :      Ht
+    FOCE FDES          8521           PUSH     IY                               ry
+    F9D0 DDES          8522           PUSH     IX                        ;      IX
+                       8523
+    F9D2 2AFD70        8524           LO       HL,[CURRENT PCB}          ; ZERO OUT DCB‘S
+    F9D5 110004        8525           LO       DE.P_SIZE                 ; POINT TO DCB’S
+    FOD8 19            8526           ADD      HL,DE
+    F9D9 5D            8527           LO       E.t                       ; WANT DE = [CURRENTPCB]+P  SIZE+t1
+    FODA 54            8528           LO       O,H
+    F908 13            8529           INC      OE
+    FODC 010134        8530           LD       BC,(15*DSIZE)-1
+    FODF 3600          8531           LD       [HL}.0
+    F9E1 EDBO          8532           LDIR
+                       8533                                                     .
+    F9E3 FD2AFD70      8534           LO       IY,[CURRENT PCB}          ; FIND START ADOR OF DCB’S
+    F9E7 110004        8535           Lo       DE.P_SIZE
+    FOEA FO19           8536          ADD      IY,DE                     ;
+          )            8537
+    FQEC DD2AFD70      ~=_:«8538      Lo       IX,[CURRENT PCB]          ; IX = [CURRENTPCB]
+    F9FO DD360301       8539          LD       [1x+P_NUMDCBS],   1       ; NEED AT LEAST 1 ACTIVE  OCB
+                       8540                                              ;  TO START CHECKING
+                       8541
+    FOF4 3E01          8542           LD       At                        ; START WITH DEV ADOR  1
+                       8543
+    FOF6               8544   LOOP3:                          .
+    FOF6 FS            8545           PUSH  =  AF                        ;,SAVE CURRENT DEVICE ADDR
+                       8546
+    FOF7 FO7710        8547           LD       [1¥+D_DEV_ADDR},A           SELECT A NEW ADDRESS
+                       8548                                                              |
+    FOFA FD360001      8549           LD       [1¥+D_COM STAT},DCB_STATUS        ; ISSUE A REQUEST  FOR  STATUS
+                       8550
+    FOFE               8551   LOOP:
+    FOFE FOCBOO7E      8552           BIT      CMNOCOMPLETE  BIT,  [1Y+D_COMSTAT]        ; 10 DONE  ?
+    FAO2 28FA           8553          JR       Z,L00P4                                   ; #9ee8  NEED PROTECTION   HERE
+                        8554
+    FAaO4FD7E00         6555          LD       A,[1¥+D_COM STAT]         ; CHECK IF VALID RESPONSE
+    FAO7 FE8O           8556          cP       CMND_FINSTATUS
+    FAO9 2808           8557          JR       Z,RECVDVALID  STAT        ; YES INDEED
+                        8558
+    FAOB F1             8559          POP      AF                          TRY NEXT DEVICE ADDR
+                        8560
+    FAOC 3C             8561          INC      A
+    FAOD FE10           8562          cP       MAXDEV ADDR+1             ; PAST LAST VALIO ADDR ?
+    FAOF 20E5           8563          UR       NZ,LOOP3                  ; NOPE - NEW ADOR
+                        8564

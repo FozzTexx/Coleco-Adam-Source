@@ -1,0 +1,64 @@
+FILE: EOSABS:€0S_TF          HEWLETT-PACKARD:   UTILS      (c)  Coleco  1983  Confidential                      Sat,    8 Sep  1984,  23:40        PAGE  146
+
+LOCATION OBJECT  CODE   LINE      SOURCE  LINE
+
+                        5971
+                        5SQ7QDSHR SSSEAS SESE SESSAEKEEHEEHEREEAEAER  REESE       EEE REE EERE   EERETERESA EERE  ERREE
+                        5FQ7QDSSS eSSeS  ESSERE       EREE AREEREAREREE  ERA  EEA EERE    ERR      REEEREEEEEE EEE EEE EEEE
+                        5974
+                        5975
+                        5976         WRITE_BLOCK:
+                        5977                   1)  WRITES  A BLOCK  OUT  TO  TAPE
+                        5978                   2)  AND  CHECKS  STATUS  AFTER   WRITE  IS  COMPLETED
+                        5979
+                        5980         INPUT:    SAME AS  FOR  _ WR 1 BLOCK
+                        5391
+                        5982                   A        DEVICE  ID
+                        5983                            LOW NIBBLE   - DEVICE   ADDRESS
+                        5984                            HI NIBBLE    - SECONDARY    DEVICE  ID
+                        5985
+                        5986                   HL       SOURCE  ADDRESS  OF  BUFFER
+                        5987
+                        5988                   REGISTER  PAIR   BC DE
+                        5989                            SECTOR  NUMBER  ON  DEVICE
+                        539390
+                        5991
+                        5992         OUTPUT:   CONDITION  FLAGS
+                        5993                            Z:  ‘NO ERRORS
+                        5994                           NZ:  ERRORS  OCCURED
+                        5995                                     A -  ERROR  CODE
+                        5996
+                        5997         ALL  REGISTERS   PRESERVED  EXCEPT  FOR  AF
+                        5998  *
+                        SQQGD  Eeeeee HEREHS  EKER          AER  EEE   ERE ERERERAEEEEHEREEEE    EEE             EREEERE EEHS
+                        GOOD  FERRE        RARE EERE EKER   EEE RHEE  EERE  EERE TERE EERE  ERE  REETHEEEER  ERE  EERE EEEEEE
+                        6001
+                        6002
+                        6003
+    F1E6                6004  __WRITE_BLOCK:
+    F1ES                6005  WRITE_BLOCK:
+    FIE6 C5             6006         PUSH      BC
+    F1E7 FDES           6007         PUSH      —siLY
+    FIEQ FS             6008         PUSH  =   AF
+                        6009
+    FIEA 3€02           6010         LD        A,ERROR RETRY
+    FEC  32FD06         6011         LD        [RETRY_COUNT],A
+    F1EF                6012  TRY_WRITE_AGAIN:
+    FIEF F4             6013         POP       AF
+    FIFO FS             6014         PUSH   =  AF
+                        6015
+    FiF1 CDFAB2         6016         CALL      __WR_1 BLOCK
+                        6017
+    FiF4 280E           6018         UR        Z,NO_WRITE_ERRORS           ; NO  ERRORS
+                        6019
+    FIF6 FESB           6020         cP        TIMEOUT
+                        6021
+    F1FB 280A           6022         JR        Z.NO_WRITE_ERRORS             ;  ERROR  OCCURED    IN  TRANSMISSION
+                        6023
+    FIFA ES             6024         PUSH      HL
+    FiFB 21FDD6         6025         LD        HL,RETRY_COUNT
+    FIFE 3°             6026         DEC       |
+    FIFF E,             6027         pop       HL
+          (y
+
+    nonee                                                       ee  #@ee &@eH  BHR   HHe HeHEH   HH   HHH   HeH FH *

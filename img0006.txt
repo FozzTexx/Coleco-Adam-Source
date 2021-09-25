@@ -1,0 +1,20 @@
+FILE: EOSABS:EOS  TF         HEWLETT-PACKARD: EOS ABSOLUTE LISTING (c) Coleco 1983                     Sat.   8  Sep  1984,  23:38       PAGE     2
+
+LOCATION  OBJECT  CODE   LINE     SOURCE LINE
+
+                           51 5SSSSSHSSEHSESHSSSESHEESSESHSESSTESHEHEHE  HEEEEHEEHESTHTHEEEHEESEEEEEE
+                           §2 ;
+                           53 ;       Rev History
+                           54 ;       Rev.  Date        Name       Change
+                           55 ;        6.1  21tjun0844   af        Merge sources for absolute listing.
+                           56 ;                                    No changes made to code.
+                           57 ;        6.0 O8oct  1545   yk        Code released for production.
+                           58 ;
+                           §9 ;[    code commented out by ¢;@¢ee’was removed before EOS
+                           60 :{ was grouped into one file, code commented out by simle  }
+                           61 ;( ¢:° was removed in the process of grouping E0S in order }
+                           62 ;[ to avoid assembier comlaints  or LOCAL/GLOBAL conflicts |]
+                           63 ;[    @;sescenussss...’ geperates code segments which were |
+                           64 ;[ ortginally in separate files                            ]
+
+                           67 +SSSSSSSSSSSSSSSSSSSSHSSSSRSSSRARSESETETSSSSSSSTARSSSSSerssessaesrs

@@ -1,0 +1,17 @@
+FILE. . sABS EQSTE        HEWLETT-PACKARD:  EOSCOMN    {c) Coleco  tts   Conftdential                  Sat.   8
+                                                                                                                 Sep  1984.  23°36      raul   1%
+
+LOCATION OBJECT CODE  LINE     SOURCE LINE
+
+                       585
+    FE6                586 NEwHOLE START
+    FE16               587        DEFS     4
+                       588
+    FETA               589 NEW_HOLESIZE;
+    FETA               590        DEFS     2
+                       591
+    FEIC               $92 STACK_START:
+    FEIC               $93        DEFS     60
+                       594
+                       595       ;GLB      EOSSTACK
+    FE58               596 EOSSTACK:

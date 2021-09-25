@@ -1,0 +1,55 @@
+                                                                                              ‘
+FILE:  ..3a0$:EOS_TF                HEWLETT-PACKARD:         A_uOS  OO    (c)   Coleco    1s 2s   Lonfidentia)                           Sat,     8  Sep   1984,    23.38              ot     ry
+
+LOCATION    OBJECT    CODE   LINE          SOURCE    LINE
+
+                              1318   ;
+                              1319   ;   Name:                   READ _VRAM
+                              1320   ;
+                              1321   ;   Function:               Reads   from  VRAM    and   puts    the  read   data    into  a  buffer    area.
+                              1322   ;
+                              1323   ;   Entry:                  BC  - number    of  bytes    to   be  read
+                              1324   ;                           DE  - starting     VRAM   address      to be   read   from
+                              1325   ;                           HL  - address    of   buffer     to  receive    the   read   data
+                              1326   ;
+                              1327   ;   Exit:                   None.
+                              1328   ;
+                              1329   ;   Registers      used:    AF,  BC,  DE,   HL
+                              1330   ;
+                              13931  ;   Size:                   ROM  - 22  bytes
+                              1332   ;                           RAM  - O  bytes
+                              1333   ;
+                              1334   ;   Comments:               This  version    of   READ  VRAM     its provided     for  stand    alone   operation.
+                              1335   ;                           NOTE:  The   {OOH   bug   found     tn OS   7 has   been   corrected.
+                              1336   ;
+                              1337   ;   Comparision:            left  out  pascal     entry   point
+                              1338   ;                           code  compacted
+                              1339   ;                           100H  bug  fixed
+                              1340   ;                           edited   for  documentation
+                             1341    ;
+    EQIA                     1942
+    EOIA    C5               1343                          PUSH       BC                                 ;BC  has   the  number    of  bytes    to  xfer
+    EO1B    EB                1344                         EX         DE ,HL                             ;HL<--vram     addr  ,DE<--source      address  .
+    EOIC    CDE1E7           1345                          CALL       SET READ                           ;pump   the  vram   addr    to  the   vdp
+    EOIF    69               1346                          LD         L,C                                ;save   C  (the   data_port_  addr)
+    EO20    Ct                1347                         POP        BC                                 ;restore    the   xfer  count
+    EO21    EB                1348                         EX         DE ,HL                            ;HL<--source      address,port       ine
+    EO22    79               1349                          LD         A.C                               :Save    low  order    of  count    inA
+    EO23    48               1350                          LO         C,E                               ;  And   get  the   port   into   C
+    EO24    50               1351                          LO         0.8                               ;Get   HI  order    count    in OD
+                             1352                                                                       ;  to  free   up  B  for   tow   order   count
+    EO25    14               1353                          INC        D                                  >Increment     Hi  count   to   cover
+                             1354                                                                       ;  for   O  tn  DEC  D  after    tow   loop
+    EO26    47               1355                          LO         B.A                               ;Put   low   order   in  86 for   OUTI
+    EO27    B87              1356                          OR         A                                 ;Check    if  tow   order   is   zero   the  first     time
+    EO28    2806             1357                          JR         Z,IN_DEC_HI_   BYTE               ;If   so  then   decrement     Hi  count    before     low   loop
+    EOQ2A                    1358    INPUT  LOOP:
+    EO2A    EDA2             1359                          INI                                          ;DATA_PORT      = buffer   data      read   the  data     from   to    the   VDP
+                             1360                                                                       ;for   INI:   [C]}  <--  [HL],    B  =  B  -  1 amd    HL  =  HL   +   1
+    EO2C    OO               1361                          NOP                                          ;delay    for   slow   VDP
+    EO2D    OO               1362                          NOP
+    EO2E    20FA             1363                          JR        NZ,  INPUT  _LOOP                  ;until    byte   count   low   (B  reg)    = O
+    E030                     1364    IN _DEC_HI  BYTE:
+    E030    15               1365                          DEC       D                                  ;byte   count    high   = byte    count    high   -   1
+    EO31    20F7             1366                          JR        NZ,INPUT    LOOP                   suntil    byte   count   high    (A  reg)   =  O
+    £033    C9               1367                          RET

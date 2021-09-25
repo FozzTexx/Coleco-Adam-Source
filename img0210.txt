@@ -1,0 +1,29 @@
+FILE: EOSABS:EOS  TF         HEWLETT-PACKARD: EOSSTART     (c)  Coleco 1983 Confidential               Sat,   8 Sep  1984,  23:41        PAGE  206
+
+LOCATION OBJECT   CODE   LINE     SOURCE LINE
+
+                         8023  NAME “Rev O7 - rfj~*
+                         8024
+                         8025 DeEOS START  MACRO                 ;Header Rev. 4
+                         8026                 .GOTO Ede EOS  START
+                         8027
+                         8028  Project:      EOS, 83-101
+                         8029
+                         8030  jekts                                 j&kos
+                         8031  pemets                                pSkos
+                         8032  pSkts   EOSSTART              DLS     pSkOs
+                         8033  pokts                                 jokos
+                         8034  ;,6ki1S                               ;&kOS
+                         8035
+                         8036        Rev History
+                         8037        Rev.  Date          Name        Change
+                         8038         T    24oct1951     rf j        Changed value for REV_NUM to 06
+                         8039         6    13oct1045a    RPD         added init of REV_NUM
+                         8040         5    toct100Sa     RPD         took out memory bank switch logic for GOTO wP
+                         8041         4    25septi000a   RPD         reworked for new boot from tape logic
+                         8042         3    24septiiiOa   RPD         moved clear ram logic
+                         8043         2    23septi2S55p  RPD         moved FCB’s and added cal!isA_u0S routines
+                         8044         1    O3SEP1445     OLS         MORE CODE
+                         8045         Oo   O2SEP0630     OLS         CODE
+                         8046
+                         8047 Ede_EOS_START  MEND

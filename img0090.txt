@@ -1,0 +1,34 @@
+FILE: EOSABS:  EOS TF         HEWLETT-PACKARD: SOUND EQU€S (c) Coleco,  1982  CONFIDENTIAL           Sat,   8 Sep   1984,   23:39       PAGE    86
+
+LOCATION  OBJECT   CODE   LINE     SOURCE LINE
+
+                          3162
+                          3163 SESS SSHHSESHER SHESHEHEEEE
+                          3164 :¢      LEAVE_EFFECT
+                          3165 SPSS  SSSSHHHESSESHEHEHEEEEE
+                          3166
+                          3167 ;LEAVEEFFECT,  called by a special sound effect routine when it’s finished,
+                          3168 ;restores the SONGNO of the song to which the effect note belongs to B5 - BO  of
+                          3169 sbyte 0 in the effect’s data area, and loads bytes 1 and 2 with the address  of
+                          3170 -the next note inthe  song.  The address of the 1 byte SONGNO (saved by the
+                          3171 ;effect when first called) is passed in DE.  The 2 byte address of the next  note
+                          3172 -in the song. also saved by the effect, is passed in HL.  IX is assumed to  be
+                          3173 ;pointing to byte O of the data area to which the song number is to be restored.
+                          3174 ;Bits 7 and 6 of the saved SONGNO are ignored, and therefore may be used by  the
+                          3175 ;effect to store flag information during the course of the note.
+                          3176
+    E468                  3177 __EFFECT_OVER
+                          3178 :@@@ LEAVEEFFECT
+    E488  007501          3179         LD      {IxX+t4],b      ;LSB NEXT_NOTEPTR     LSB addr next note  in song
+    E4B8  DD7402          3180         LD      {IX+2],H        ;MSB NEXTNOTE PTR  := MSB addr next note  in song
+    E4BE   1A             3181        LD       A,[0E)             >= =x=xSONGNO (i.e., the saved, original  SONGNO)
+    E46F  E63F            3182         ANO     O3FH               :® O O SONGNO
+    E4C1  47              3183         LD      B.A                := 0 O SONGNO (B now = ortginal SONGNO)
+    E4C2  DD7E0O          3184         LD      A,[1X+0]           .= CHA   62 (all effect notes have SONGNO  =  62)
+    E4C5  E6CO            3185         ANO     OCOH                  CH¥ O00 0000
+    E4C7  BO              3186         OR      B                     CHa   SONGNO
+    E4Cc8 007700          3187         LO      {IX+0O],A       ;restore the song number
+    E4CB   1816           3188         JR      EFXOVER
+                          3189
+
+                                                      > Pr> OP Y

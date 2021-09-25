@@ -1,0 +1,61 @@
+FILE: . .sABS:EOS_TF          HEWLETT-PACKARD:    UTILS       (c)   Coleco  i:  . Confidential                       Sat,   8 Sen   1984,  22:40        tear     {43
+
+LOCATION OBJECT    CODE   LINE     SOURCE  LINE
+
+                          SBIG Seeeeeeeee  AEKKKKERERERERE   KERR          REKEEEEE  RRRE RREERAEEAEEKKEEEEEKE              R  R
+                          SQZ7 Skeeeee SERS     KEKE   REET                                                        ERERES  EREEE
+                          5838 =
+                          5839 «
+                          5840 =      READ_BLOCK:
+                          5841 *                1)    READS  1  BLOCK  OFF  OF SPECIFIED    DEVICE   ,
+                          5842 *                2)    REQUESTS   FOR  THE  STATUS
+                          5843 *                3)    AND  SENDS  ANOTHER   READ  TO  THE  DEVICE
+                          5844 *
+                          5845 »      INPUT:    SAME   AS  FOR  _RD_1_ BLOCK
+                          5846                  A          DEVICE   ID
+                          5847 *                           LOW  NIBBLE  -  DEVICE  ADDRESS
+                          5848 «                           HI NIBBLE    -  SECONDARY   DEVICE   ID
+                          5849 «
+                          5850 +                HL         DESTINATION    IN RAM
+                          5851 «
+                          5852 *                REGISTER    PAIR    BC DE
+                          5853 *                           SECTOR   NUMBER  ON DEVICE
+                          5854 «
+                          5855 *
+                          5856 *      OUTPUT:   CONDITION    FLAGS
+                          5857 *                           Z:   NO  ERRORS
+                          5858 «                          NZ:   ERROR  OCCURED
+                          5859 *                                     A -  ERROR  CODE
+                          5860 *
+                          5861 x      ALL  REGISTERS    ARE  PRESERVED    EXCEPT  FOR  AF
+                          5862 *
+                          FBGEQHee    HHEHRHEEEEHERES    EAE  EEE    KEKE EERE             EKER       HEE REET  EEEEE EEE
+                          SBG4 Hee   SSH KHSH HERES    EE EEE   EEE  HEHE ERE EEE EERE EEE  EEE EE EEE EEE  EEE REEERE EE
+                          5865
+    F17B                  5866 __READ_BLOCK:
+    F17B                  5867READ BLOCK:
+    F17B C5               5868        PUSH  —   BC
+    F17C OS               5869        PUSH      _—iODE
+    F17D E5               5870        PUSH      ~—-HL
+    F17E DDES             5871        PUSH      IX
+    F180 FDES             5872        PUSH      IY
+    F182 F5               5873        PUSH      AF
+                          5874
+    F183 3E02             5875        LD        A, ERROR_RETRY                ;  RETRY  COUNT   FOR  ERRORS
+    F185 32FDD6           5876        LD        [RETRY_COUNT],A
+    F188                  5877 READ_LOOP:
+    F188 FI               5878        PoP       AF                             ; GET  DEVICE   ID BACK  IN  A
+    Fig9 FS               5879        PUSH   —s AF
+                          5880
+    F18A CDFASE           5881        CALL     __RD_1_   BLOCK
+                          5882
+    F18D 280E             5883        JR        Z,NO_READ_ERRORS               ; READ  WENT  OK
+                          5884
+    F18F FEQB             5885        cP        TIMEOUT                        ; WAS  IT A  TIMEOUT?
+                          5886
+    F191 280A             5887        JR        Z,NO_READ_ERRORS                 ; YUP,
+                |         5888
+    F193 E5               5889        PUSH      HL
+    F194 21FDD6           5890        LD        HL ,RETRY_COUNT
+    Fi97 35               5891        DEC       [HL]                         ; DEC  THE  NO  OF  RETRY’S   LEFT
+    F1i9BEt               9892        POP       HL

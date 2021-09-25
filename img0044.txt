@@ -1,0 +1,48 @@
+FILE: EOSABS:EOS    TF          HEWLETT-PACKARD:      A_uOS OO    (c)   Coleco    1983  Confidential                          Sat,   8  Sep   1984,    23:38           PAGE     40
+
+LOCATION  OBJECT    CODE   LINE      SOURCE    LINE
+
+                           1530  ;
+                           1531  ; special    case:   graphics   mode   2,  address    of  PGT
+                           1532  ;
+    EO89                   1533  CASEOF  _GEN:
+    E089  0604             1534                      LD       B.4                                -register   mumber  *  PGT   base  address    register
+    EO8B  70               1535                      LD       A.L                                ;if  PGT  address  =  QOOOH                                                                      |
+    EO8C  64               1536                      OR       H
+    EO8D  2004             1537                      JR       NZ,CASE   OF  GENIO
+    EO8F  OEO3             1538                      LD       C,3                                ;   data  byte  value  for   address   OOOOH
+    EOS!  1828             1539                      JR       INIT  TABLESO
+    EOS3                   1540  CASE_OF_GENIO:                                                  ;else    PGT address   <>  OOOOH
+    E093  OEF07            1541                      LD       C,7                                ;   data  byte  value  for   address   2000H
+    EO95  1824             1542                      JR       INIT _TABLES9O                     ;endif
+                           1543  ;
+                           1544  ; special    case:   graphics   mode   2,  address    of  PCT
+                           1545  ;
+    E097                   1546  CASEOF  COLOR:
+    EOS7  0603             1547                      LD       8,3                                ;register   number  =  PCT   base  address    register
+    —EOS9 7D               15486 .                   LD       AL                                  if  PCT  address  =  QOOQOH
+    EOSA  64               1549                      OR       H
+    EO9B  2004             1550                      JR       NZ,CASE   OF  CLR10
+    EOSD  OET7F            1551                      LO       C,7FH                              ;   data  byte  value  for   address   OOOOH
+    EOSF  161A             1552                      JR       INIT  _TABLE9O
+    EOA1                   1553  CASE OF _CLRIO:                                                 ;else    PCT address   <>  OOOOH
+    EOA1  OEFF             1554                      LD       C,OFFH                             ;   Gata  byte  value  for   address   2000H
+    EOA3  1816             1555                      JR       INIT  TABLE9O                      ;endif
+                           1556  ;
+                           1557  ; not  a  special    case  (i.e.  not   mode   2,  PGT  or    PCT)
+                           1558  ;
+    EOAS                   1559  INIT _TABLESO:                                                  ;base   address  = table   address    /  factor
+    EOAS  FD21EOB8F        1560                      LD       IY ,BASE  FACTORS                  ;potnt   to start  of  the   the  factor   table
+    EOAS  FDOS             1561                      ADD      TY ,BC                             ;index   into the  table   by  the  table    code
+    EOAB  FDOS             1562                      ADD      ly ,6C
+    EOAD  FDO7EOO          1563                      LD       A,[1V¥+0]}                         ;get  the  shift  count
+    EOBO  FD4601           1564                      LD       B,(1v+1)                           ;get  the  register   number
+    EOB3                   1565  DIVIDE:
+    E083  CB3C             1566                      SRL      H                                  :shift   hi-byte
+    EOBS5 CB10             1567                      RR       L                                  :shift   lo-byte
+    EOB7  3D               1568                      DEC      A                                  ;shift   count  = shift   count   -  1
+    EOBS  20F9             1569                      JR       NZ DIVIDE
+    EOBA  4D               1570                      LD       C,L                                :get  the  data  byte  value
+    E088                   1571  INIT _TABLESO:
+    EOBB  CDFD20           1572                      CALL     WRITE  REGISTER                    ;setup   the base  register
+    EOBE  C9               1573                      RET

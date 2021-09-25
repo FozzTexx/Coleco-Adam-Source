@@ -1,0 +1,44 @@
+FILE: EOSABS:EOS TF         HEWLETT-PACKARD:   EOSGEN     (c)  Coleco 1983 Confidential                    Sat,    8  Sep  1984,  23:41        PAGE  164
+
+LOCATION OBJECT  CODE   LINE     SOURCE  LINE
+
+                        6729
+                        6730 KESKTSHKHKSSKKSSSKHSAKKKK         KEKSSESESKESHSHKESEKEEKSKSKSKKERSEKKRSEKEHKSEKKEEEKREEEREE
+                        6731 i
+                        6732 .       CHK_FOR_IDLE  CHECKS  IF  THE REQUESTED DEVICE  IS  IDLE
+                        6733 as      SENDING  BACK AN ERROR   CODE
+                        6734 $
+                        6735 *       INPUT:   IY      POINTER   TO THE DCB,
+                        6736 5
+                        6737 e       OUTPUT:  CONDITION  FLAGS
+                        6738 a                        DEVICE   NOT IDOLE
+                        6739 €               NZ       DEVICE   IDLE
+                        6740 we
+                        6741 2SRSESSSSSEESSSSKSHKSSSKS SKSKHKEKHHKHEKESEKHKSEHEEKRSEKSSESHESESSHSEAESHKKEEEKEESSC
+                        6742
+                        6743
+                        6744        :GLB      CHK_IF_IDLE
+                        6745
+    F4AE                6746 CHK_IF_IDLE:
+                        6747
+    F4AE FD7E0O         6748         LD       A,[1Y+D_COM_STAT]         ; GET  STATUS BYTE
+                        6749
+    F461 B87            6750         OR                                   IS  IT IDLE(ZERO)?
+    F482 2004           6751         JR       NZ,NOT_IDLE               ; NOPE
+                        6752
+    F4B4 3EO3           6753         LD       A,DCB_IDLE_ERR              ERROR  CODE FOR  DEVICE  IDOLE
+                        6754
+    F4BG 87             6755         OR                                 ; CREATE  NZ CONDITION
+                        6756
+    F4B7 cg             6757         RET
+                        6758
+    F468                6759 NOT_IDLE:
+    F4B8 AF             6760         XOR                                  CLEAR  ZERO FLAG
+                        6761
+    F4B9 c9           ' 6762         RET
+                        6763
+                        6764
+                        6765
+                        6766                       ase@@
+                        6767
+                        6768

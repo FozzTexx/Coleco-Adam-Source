@@ -1,0 +1,63 @@
+FILE: OS_7PRIME:pOS           WEWLETT-PACKARD:   ACTIVATE    (c)  Coleco,  1982   CONFIDENTIAL                    Fri,  18  May  1984,  16:19       PAGE   38
+
+LOCATION  OBJECT   CODE  LIWE      SOURCE   LINE
+
+                         1602
+                         1603  ;PRM_AREA:       DEFS                3          ;Moved  to  OS
+                         1604  ; THIS  IS  THE COMMON   PARAMETER   PASSING  AREA
+                         1605                     |
+                         1606                    PROG
+    0482  O002FFFE       1607  ACTIVATE P:       DEFW                2,°2,1
+    0486  0001
+                         1608
+                         1609                    GLB                 ACTIVATEQ
+               <0488>    1610  ACTIVATEQ         EQU                 %
+    0488  010482         1611                    LD                  BC ACTIVATE  P
+    0488  11738A         1612                    LD                  DE ,PRM_AREA
+    O48E  CD0096         1613                   CALL                 PARAM_
+    0491  2A73BA         1614                    LD                  WL, [PRM_AREA]
+    0494 5E              1615                    LD                  E, (WL)
+   0495  23              1616                    Inc                 ML
+   0496  56              1617                    LO                  0, (HL)
+   0497  EB              1618                    EX                 DE ,HL
+   0498  3A738C          1619                    LD                  A, [PRM_AREA+2)
+   0498  FEOO            1620                   Cp                   0
+   0490  2803            1621                    JR                  Z2,NTZZ2_
+   O49F  37              1622                    SCF
+   04A0  1601            1623                    JR                  T222_
+   O4A2  87              1626 WTZZZ_:             OR                  A
+   04A3                  1625  1222_:
+                         1626
+              <O4A3>     1627 ACTIVATE_          EQU                 $
+                         1628  ;SUP POINTERS   ETC_  COMMON   TO ALL  SUBCASES
+                         1629  ;                 HL->OBJ   DEF  CROM
+                         1630  ;                 C  FLG=SUP  VRAM   FLG
+   04A3  5E              1631                    LO                  E,(HL)             ;°70BJ  GEN CROM
+   O4A4  23              1632                    INC                 HL
+   O4A5  56              1633                    LD                 D, (HL)
+   046   23              1634                    Inc                 HL
+   O4A7  4E             1635                     LD                 C, (HL)             572083  CRAM
+   048   23             1636                     Inc                 HL
+   04A9  46             1637                     LD                 B, (HL)
+   O4AA  23             1638                     INC                HL
+   04AB  3€00           1639                     LD                 A,0                 ;ZERO  FRAME                                                  |
+   O4AD  02             1640                     LD                  (BC),A                                                                                                                ,
+   O4AE  1A             1641                     LD                 A, (DE)             ;GET OBJ TYPE
+   O4AF  F5             1642                    PUSH                AF                  ;SVOBJ  TYPE  & FLG
+   0480  E60F           1643                    AND                 OFH                 ;GET OBJ_TYPE  NUM
+   0482  CAO4E7         1644                     JP                 Z,ACT_SEMI                      ;TYPE=0
+   0485  30             1645                     DEC                A
+   0486  CAO5F1         1646                     JP                 Z,ACT_ MOBILE                   ;TYPE=1
+   0489  3D             1647                     DEC                &
+   04BA  CA0600         1648                     JP                 Z,ACT_OSPRT                     ;TYPE=2
+   0480  30             1649                     DEC                A
+   O4BE  CA0600         1650                     JP                 Z,ACT_1SPRT                     ;TYPE=3
+   04C1  30             1651                     DEC                A
+   04C2  2802           1652                     JR                 2,ACT_CMPLX                     ;TYPE=4                                                             ‘
+   O4C4  FI             1653                     PoP                AF                 ;SUBCASE   ELSE
+   O4C5  C9             1654                     RET
+                        1655  ;ON  ENTRY  TO  SUBCASES:
+                        1656 ;                   STACK=OB8J TYPE   & SUP  VRAM  FLG
+                        1657  ;                  HL->OBJ  n+4
+
+                                                                                                          ¢

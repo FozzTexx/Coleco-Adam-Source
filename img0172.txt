@@ -1,0 +1,59 @@
+pee                                            IEEE                        TBS                   iA                    CC                                  cc   ce
+
+       FILE:      EQSABS:EOS       TF             HEWLETT-PACKARD:             EOS  KBD         (c)   Coleco       1983   Confidential                               Sat,     8   Sep   1984,     23:41             PAGE      168
+
+       LOCATION        OBJECT      CODE     LINE           SOURCE      LINE
+
+                                            6864
+                                           S:i- bE      RSE  SESS   SESE   SS SESE   ES ESSERE    ESE  SESS  EEE    SESE  SS SESESESE  SERS  ESTERS  SESE  SEE ESE  ES SS SF
+                                            6866    *  THIS     ROUTINE      WILL    CHECK      THE   RESULT       OF   A COMMAND      THAT   WAS   SENT.      IF  THE
+                                           6867     *  RESULT       IS  A  NAK    THEN    THE    ROUTINE       WILL     ISSUE    A NEW   READ    COMMAND.
+                                           6868     *           INPUT:       NOTHING
+                                           6869     *           OUTPUT:      CONDITION        FLAG
+                                           6870     *                        ¢   ;        COMMAND       HAS    FINISHED
+                                          6871      ¢                        NC:          COMMAND       HAS    NOT    BEEN   FINISHED
+                                           6872     *                        a:           NO    ERROR    OCCURED
+                                           6873     *                        NZ:          ERROR     OCCURED
+                                           6874     *                                     A   ===>      ERROR      CODE
+                                           GA75H    SHeSee    SSeS   eS SASS   SSS  HEHEHE    AEEE   SESE    EEE   EERE   HEE  ESHEETS           HEE  EEE EEE   EERE   RE REED
+                                           6876
+                                           6877               GLB     .      __END_RD_KBD
+                                           6878               SEXT           ~_END_RD_CH_DEV
+                                           6879                         ,                           ,
+              F4EO                     _   6880     __END_RD_KBD:
+              F4EO     3E01                6881                 LD           A,  KEYBOARD_ID                          ;  SEND   THIS    PARM   TO   _EN   RD   CH  DEV
+              F4E2     CDFBAS              6882                 CALL         __END_RO_CH_DEV                          ;  CHECK    THE   RESULT
+                                           6883
+              F4E5     3014                6884                 JR           NC  ,ROUTINE_DONE                        ;  CARRY    FLAG   IS   CLEARED,     CMND    IS   NOT   COMPLETE
+                                           6885                                                                       ;  THE   COMMAND     IS  COMPLETE
+              F4E7     280C                6886                 JR           2,  HAVE_THE_KEY                         ;  ROUTINE     COMPLETED      WITH  NO    ERRORS,
+                                           6887                                  |                                    ;  CARRY    FLAG   IS   SET,   ZERO    CONDITION
+                                           6888                                                                       ;  THERE    WAS   AN  ERROR
+              F4E9     FEBC                6883                cP            KBD_NAK                                  ;  WAS   THE   ERROR    A NAK?
+              F4EB     2005                6890                 JR           NZ,NO_NAK                                ;  NO,   GO  SET   C  FLAG    TO  SHOW    COMMAND     COMPLETED
+                                           6891                                                                        >;YES,   TRY   THE   COMMAND     AGAIN
+              F4ED     COF4D0              6892                CALL          __START_RD_KBD
+              F4FO     2808                6893                 JR           Z,  SHOW  COMPLETE                       ;
+                                           6894                                                                       ;  THERE    WAS   AN  ERROR    IN   THE   COMMAND     RETRY
+                                           6895                                                                       ;  SET   THE   CARRY    FLAG   TO   SHOW   THAT    THE
+                                           6896                                                                       ;  OPERATION      COMPLETED.        THE   FLAG
+                                           6897                                                                       ;  CONDITION      WILL   BE   NON-ZERO     TO
+                                           6898                                                                       ;  INDICATE     AN   ERROR   OCCURED.        A  CONTAINS
+                                           6899                                                                       ;  THE   ERROR    CODE
+              F4F2                         6900     NO_NAK:
+              F4F2     37                  6901                SCF
+              F4F3     1806           ~    6902                JR            ROUTINE    DONE
+                                           6903
+              F4F5                         6904     HAVE_THE_    KEY:
+              F4F5     3AFD75              6905                LD            A,  [KEYBOARD     BUFFER}                ;  PUT   THE   KEY   IN  THE   KEYBOARD      BUFFER
+              F4F8     1801                6906                JR            ROUTINE    DONE                          :
+                                           6907
+              F4FA                         6908     SHOW  COMPLETE:
+              F4FA     B7                  6909                OR            A                                        ;  CLEAR    CARRY    FLAG   BECAUSE     THE   RETRY     WAS   STARTED
+                                           6910                                                                       ;  WITH   NO   PROBLEMS,      THE   COMMAND     IS   NOT   COMPLETE
+              F4FB                         6911     ROUTINE    DONE:
+              F4FB     C9                  6912                RET
+                                           6913     ;
+                                           6914     sESSSSSe     esses   ssesssesssrs        esses     Sess     sssesssssssrsssesessesesssSsrsse
+                                           6915     ,sseceweesseesessstssenrsesesssssestrreeesessssssrssesssrssssseszess
+                                           6916     ,SS SSSR     SS  Sees  e eset   SSS es esses    SSS  ST ST  SSS   rare  esSeesse  esas  sesssssrsrssse

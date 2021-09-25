@@ -1,0 +1,65 @@
+FILE:  OS 7PRIME:pOs             HEWLETT-PACKARD:     PUT  SEMI   (c) Coleco,    1982    CONFIDENTIAL                      Fri,  18   May  1984,  16:19         PAGE    58
+
+LOCATION   OBJECT    CODE   LINE        SOURCE  LIWE
+
+    OBAE   £1              2661                POP  HL
+    OBAF   D1               2662               POP  DE
+    0880   C1               2663               POP  BC
+    0881   C5               2664               PUSH  BC
+    0882   0600            2665                LO B,0                      ;BC  :=  X_EXTENT
+    0884   09              2666                ADD  HL,BC                  sPOINT   HL  TO BEGINNING   OF  NEXT  ROW
+    0885   010020          2667                LD 8C,32
+    0888   EB              2668                EXDE,  HL
+    0889   09              2669                ADD  HL,BC                  7INCREMENT    OFFSET  BY  32
+    O8BA   EB              2670                EX DE, WL                                        .
+    0888   C1              2671                POP  BC
+    08Bc   05              2672                DEC  B
+                           2673   ;        UNTIL    [.B,EQ,0)
+                           2674
+    O88D   20€3            2675                       JR.                 NZ,RPT  2
+                           2676
+    O8BF   C9              2677             RET
+                           2678   ;
+                           2679   ;          -COMMENT  )}
+                           2680   SARARARAAASAAARR    CALC .OF FSET  SSRAAKAAAKAARKARKAARERAAARARAAAAAAAAEKRAARAAERAEKER
+                           2681   ;DESCRIPTION:        THIS   ROUTINE  CALCULATES     THE  PROPER   OFFSET   INTO  THE  NAME  TABLE
+                           2682   ;                   FOR  THE  PATTERN   POSITION    GIVEN   BY XPAT   POS,   YPAT  POS.     THE
+                           2683   ;                   FORMULA   USED  IS:  OFFSET    = 32*Y PAT_POS    +  XPAT  POS
+                           2684   ;INPUT:              D  = Y PAT POS
+                           2685   ;                   —  = X PAT POS
+                           2686   ;QUTPUT:             DE  =  OFFSET
+                           2687  SEKAASKKLAKARAKAAAAEATAAAKAARAAAAKAARARAKARAARAAARAKAERKREKAAEEKAARAKERAARARAEKAAKEE
+                           2688   ;
+   08co                    2689  CALC_OFFSET:
+   086CO  E5               2690             PUSH  HL
+                           2691  ;          IF  (.0, 1S,MINUS)            EXTEND     SIGN
+                           2692                      |
+   08C1   CB7A             2693                       BIT                 7,0
+   08C3   2804             2694                       JR                  Z,ELSE  11
+                           2695
+   08C5   26FF             2696                LD H,OFFH
+                           2697
+   08C7    1802            2698                       JR                  END IF  11
+                           2699
+                           2700  ;          ELSE
+                           2701
+                           2702  ELSE  11
+                           2703
+                           2704                LD H,0
+                           2705  ;          ENDIF
+                           2706        |
+                           2707  END    IF_11
+                           2708
+                           2709             LD  1,0                       ;   OFFSET   =  32*Y PAT  POS   + XPAT  POS
+                           2710             ADD HL, HL                    ;HL=2*Y  PAT  POS
+                           2711             ADD HL,  HL                   +    4k                                                                                                      ‘
+                           2712             ADD  HL,HL                    >    Be     om
+                           2713             ADD  HL,HL                    ;   %4*
+                           2714             ADD  HL,HL                    -   328     4
+                           2715  :          IF  (.£,1S,MINUS)             -EXTEND   SIGN
+                           2716
+   081    CB78             2717                       BIT                 7,E
+
+                         eae      wemeEBe                             HeeHee                                           eHe                        Ee         e            ee           eE             &S            &:            FF
+
+            SIISIIEF            §       B&    §

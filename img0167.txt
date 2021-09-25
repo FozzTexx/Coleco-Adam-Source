@@ -1,0 +1,47 @@
+FILE: ctuSABS:E0S_TF         HEWLETT-PACKARD:    EOS_ GEN     (c)  Coleco 1»yo3 Confidential                     Sat,   8  Sep  1984,  23:41        reaE   163
+
+LOCATION OBJECT  CODE   LINE      SOURCE   LINE
+
+                        GEBH  FERRER                 ERE       EERE    EERE  EEE KERR    EERE            EEE               H
+                        6686  * THIS   ROUTINE  WILL  CHECK   AND  SEE IF THE  DEVICE  DCB IS  CURRENTLY  ACTIVE.
+                        6687  * IF IT   IS THEN  A  NZ CONDITION    WILL BE SENT  BACK  TO THE  CALLING  PROGRAM
+                        6688  *        INPUT:   IY  ===>  POINTS   TO START OF  DEVICE  DCB
+                        6689  *       OUTPUT:   CONDITION   FLAGS
+                        6690  *                 Z  :      DCB  IS  INACTIVE, IN  OTHERWORDS   IT IS AVAILABLE
+                        6691  *                             ===>   IS PRESERVED
+                        6692  *                 NZ:       DCB  IS  ACTIVE
+                        6693  *                           A ===     ERROR CODE
+                        6694  *
+                        GEQ5  EHH    HERRERA        EERE       EEE EEEEEREHEHEHE  TERETE HEHE  HEEEEEEEE KERER  ESHERREE   ES
+                        6696
+                        6697  ; OK CHANGED    TO G OK  TO  PREVENT   CONFLICT  WITH  IDENTICAL
+                        6698  ; LABEL   ELSEWHERE
+                        6699
+                        6700         ;GLB       CHK_IF_INACTIVE
+                        6701
+    F496                6702  CHK_IF_INACTIVE:
+    F496 C5             6703           PUSH  —  BC
+                        6704                   |
+    F497 4F             6705           LD       C.A                         ;  PRESERVE  A
+    F498 FD7E00         6706           LO       A,{1Y+D_COM   STAT]         ;  IS THE  DCB AVAILABLE?
+    F49B FEOO           6707           cP       DCB_IDLE                    ;
+    F49D 2806           6708           UR       2,G_OK                      ;  YES IT  IS INACTIVE
+                        6709                                                ;  NO IT  IS NOT
+    F49F FDCBOO7E       6710           BIT      CMND_COMPLETE_BIT,[IY+D_COM     STAT]          ; HAS THE  COMMAND   BEEN
+                        6711                                                ;  PROCESSED
+    F4A3 2804           6712           UR       Z,DEVICE_BUSY               ;  NO, THE  DEVICE  IS STILL  BUSY
+                        6713                                                ;  YES, THE  DCB  IS AVAILABLE
+    F4AS                6714  G_OK:
+    F4A5 AF             6715           XOR      A                           ;  INSURE  ZERO CONDITION
+    F4A6 79             6716           LD       A.C                         ;  RESTORE  A
+    F4A7 1803           6717           UR       DONE                        ;
+                        6718
+    F4A9                6719  DEVICE_BUSY:
+    F4A9 3C             6720           INC      A                           ;  INSURE  A NON_ZERO  CONDITION    FOR FLAG
+    F4AA 3E02           6721           LD       A,DCB_BUSY                  ;  SEND BACK  THE  ERROR CODE
+                        6722
+    F4AC                6723  DONE:
+    F4AC C1             6724           PoP      BC
+    F4a0 C9             6725           RET
+                        6726
+                        6727

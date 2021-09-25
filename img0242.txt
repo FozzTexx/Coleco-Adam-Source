@@ -1,0 +1,47 @@
+FILE:                       HEWLETT-PACKARD:  EOS CHAR   (c) Coleco  1983 Confidential                 Sat,   8 Sep  1984,   23:42       PAGE  238
+      EQSABS:EOS TF
+
+LOCATION OBJECT  CODE   LINE     SOURCE LINE
+
+                        9237
+                        9238 SSESHEEHSESESEHESEREEKER    EEESEER EHEHERESEHETHESEEEEEERESETHEHEEEEEEEE EEEHEE EE
+                        9239 * THIS ROUTINE  IS RESPONSIBLE  FOR  SETTING UP A DEVICE DCB TO DOOA READ.
+                        9240 ¢ THE LAST THING  DONE  IN THIS ROUTINE  IS TO ISSUE THE COMMAND TO READ
+                        9241 * A KEY FROM  THE KEYBOARD.
+                        9242 &      INPUT:   A  ===>  CONTAINS  THE DEVICE ID
+                        9243 x               DE ===>  DESTINATION  ADDRESS
+                        9244 @               BC ===>  NUMBER OF  BYTES TO READ
+                        9245 e      OUTPUT:   CONDITION  FLAGS
+                        9246 e               Z:       THE READ DATA  FROM KEYBOARD COMMAND HAS BEEN SENT
+                        9247 %               NZ:      ERROR OCCURED
+                        9248 &                        A ===>  ERROR  CODE
+                        9249 &CESSSESSESSSSESHEHEHE      SSSHESSESESEHSEEEHSEKEEEESTEEEEESEHEEHEHEHEEHEEEEEE TERS
+                        9250
+                        9251       ;GLB      __START_RD_CH_DEV
+                        9252       ;EXT      CHK_IF_INACTIVE
+                        9253
+    FB86                9254 __START_RD_CH_DEV:
+    FB86 FDES           9255        PUSH     LY
+    FBB8 CDF446         9256        CALL     __FINO_DCB                ; FIND THE OCB
+                        9257
+    FBS8 2015           9258        JR       NZ,NO_DCB_DEFINED
+                        9259
+    FBSD CDF496         9260        CALL     CHK_IF_INACTIVE            ;SEE IF THE KEY BOARD IS AVAILABLE
+                        9261
+    F890 2010           9262        JR       NZ,DCB_IS_ ACTIVE          ;DCB IS CURRENTLY ACTIVE
+                        9263
+    FB92 FD7301         9264        LD       [1¥+D  BUF_ADR_LOJ,E   ;LOAD THE DESTINATION ADDRESS INTO  DCB
+    FB95 FD7202         $265        LD       [1¥+D_BUF_ADR_HI),0
+                        9266
+    FB98 FD7103         9267        LO       [1¥+D BUF _LEN_LO},C        ;LOAD THE BYTE COUNT
+    FB98 FO07004        9268        LD       [1¥+O0 BUFLEN  _HI).B8
+                        9269
+    FB9E FD360004       $270        LD       (1¥+D_COM_STAT},0CB_RD          ; INITIATE THE COMMAND TO  READ
+                        9271                                              ;ZERO FLAG WAS SET ABOVE
+                        9272
+    FBA2                9273 OCB_IS_ACTIVE:                             ;NZ IS ALREADY THE CONDITION OF  THE  FLAG
+    FBA2                9274 NO_DCB_DEFINED:                            ;A CONTAINS THE ERROR CODE
+    FBA2 FDE1           9275        PoP      Ty
+                        9276
+    FBA4 c9             9277        RET
+                        9278

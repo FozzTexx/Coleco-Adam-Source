@@ -1,0 +1,36 @@
+                                                                                  ‘ae
+FILE:   sSABS:EOS_TF              HEWLETT-PACKARD:    SOUND   EQU#€S (c) Coleco,    tog      CONF  IDENTIAL               Sat,   8  Sep  1984,  23.39        iat       7}
+
+LOCATION  OBJECT     CODE   LINE       SOURCE  LINE
+
+                            2828
+                            2829   ,seeteeeeasereseereeresesece
+                            2830   ;*      AREA SONG   _IS         «
+                            2B31    eeeeeeeeeseeseeeereseseresce
+                            2832
+                            2833   ;The address   of  byte  0  of a song  data   area   is passed    in  IX.   The  song  number  of
+                            2834   ;the song  using   that  area  is returned    in  A  [OFFH   {f  inactive].     If a  special
+                            2835   :effect was  using   that   area, 62   is returned    in  A  and  HL  {ts returned   with the
+                            2836   ;address of  the   special   sound  effect  routine.
+                            2837
+    E397                    2838   AREA_SONG_IS
+    E397  DD7EOCO           2839           LD         A,[1IX+0]          7A  := CHA      SONGNO   or  62,  or  A  := FF
+    ES9A  FEFF              2840           CP         OFFH
+    E39C  CB                2841           RET        2                  ;leave   with   A =  FF  if  area   inactive
+    E39D  EG3F              2842           ANO        00111111B          smask  CHA
+    E39F  FESE              2843           cP         62
+    E3A1  CO                2844           RET        NZ                 ;leave   with  A  =  SONGNO   if  not  a  special  effect   [62]
+                            2845       |
+                            2846   ;       special   effect,    so set  Hl to  addr   effect,    stored  in   bytes  1&2
+                            2847
+    E3A2  DDES              2848           PUSH       IX                 ;point   HL  to  byte   1
+    E3A4  E1                2849           POP       HL
+    E3A5  23      .         2850           INC       HL
+    E3A6  SE                2851           LD        E,[HL)              ;save  LSB   effect   addr   ine
+    EJA7  23                2852           INC       HL                  ;HL  to  byte  2
+    E3A8  56                2853           LD        D, {HL}             ;save  MSB   effect   addr   inoO
+    E3A9  EB                2854           EX        DE ,HL              ;HL  :=  addr  special    effect
+    E3AA  C9                2855           RET
+                            2856
+                            2857   ;       END  UTIL
+                            2658

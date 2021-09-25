@@ -1,0 +1,68 @@
+COLECOVISION  PROGRAMMERS'       MANUAL
+
+Rev. 5
+©Coleco  Industries,    Inc.    1982
+
+CONFIDENTIAL  DOCUMENT     -   DO  NOT   COPY
+
+     SESey
+
+                                   APPENDIX      E
+
+                                  *JUMP    TABLE
+
+                              PLaY_SOncs            trot
+                              activatrP             1%64
+                              PuTORIP               1F6?
+                              REFLECT _VERTICAL     1F6a
+                              REFLECT_w0e1ZONTAL,   1 oD
+                              ROTATE_96     -       1F70
+                              emaact                1°73
+                              CUNTROLLER_GCA        1F7%
+                              DECODER               1779,
+                              Cand_OPT              1°7C
+                              LOad_aserr            1 OF
+                              FILL Vaan             1F62
+                             ae EM|e                17eS
+                              UPDATE_&PTekR         iFes
+                              LMIT_TABLEP           iFeB
+                              CET_VRane             1%eC
+                              PUT_vaare             1FO14
+                              INIT_Spa_oedeeP       iF94
+                              we_SPR_wm TRL         169?
+                              IMIT_TrmeuP           1F9a
+                              FREESI Cuaip          1F98
+                              REQUEST SICNALP       1Fae
+                              TESTSiCuacp           1Fa3
+                              UaITEREGISTERP        1Ftb
+                              wRITE“vane            1Fae
+                              READVaan’             1Fac
+                              Cuttwa rvTeap         1FAF
+                              SUUND_12 TP           1FB2
+                              Praytre               1FBS
+                              INITTam.e             1FBe
+                              GCET_VRan             17BD
+                              PuT_vRan              1FsE
+                              LuITt_spe_oapen       1FC%
+                             d02SPR mm TR.          1FCe
+                              INTT_TINER  -         1FC?
+                              FREESIGwAL            1FCA
+                              REQUEST_SiGrad.       1FCD
+                              TEST_SiGo,            iFDe
+                              TIME_MGR              1°D3
+                              TUKM_OFF_SOUND        1 Be
+                              werrTeee icter        1FDe
+                              READ_GEGISTER         ieee >
+                              weité_vaan            1¢DOF
+                              REAS_VRAN             1FE2
+                              Lut’_waITER           iFES
+                              we17E8                1FE@
+                              POLLER                1°EB
+                              SOuND_101i            IFEE
+                              PLAY_av               1°Fs
+                              sound                 iFFe
+                              actTyarg              16F?
+                              PuTOBs                TFA.
+                              RandGEM               1FFD
+
+                    tee    re  =tBe

@@ -1,0 +1,62 @@
+      |
+FILE: « ».ABS:E0S_TF          HEWLETT-PACKARD:  EOSBLK    (c) Coleco 1t_. Confidential                   Sat,    8  Sep  1984,  23:42       .muE   231
+
+LOCATION OBJECT  CODE   LINE       SOURCE LINE
+
+                        GOO1    HEHESSE   SHEE  EEEEEEEEE EEEHEHEEEEHEEEEHEHHEHEHEHEHEEHEEETEHEEHEHE HEHEESD
+                        9002   *
+                        9003   *      __START_WR_ 1 BLOCK WILL SEND A WRITE COMMAND  TO  WRITE A BLOCK
+                        9004   +      OF DATA  TO A BLOCK DEVICE FROM A LOCATION SPECIFIED   BY REGISTER  HL
+                        9005   *¢
+                        9006   «      INPUT:
+                        9007   ¢               A       DEVICE ID
+                        9008   *¢                      LOW NIBBLE - DEVICE ADDRESS
+                        9009   +                       HI NIBBLE  - SECONDARY DEVICE  ID
+                        9010   «
+                        9011   «               HL      SOURCE ADDRESS IN RAM
+                        9012   «
+                        9013   +               REGISTER PAIR:
+                        9014   *                       BC DE  -  SECTOR NUMBER ON DEVICE
+                        9015   «
+                        9016   =
+                        9017   «      THE TRANSFER  BYTE COUNT IS DEFINED BY “DCB _MAX_MESS LEN"
+                        9018   +      WHICH  IS FOUND IN THE DEVICE OCB
+                        9019   +
+                        9020   ¢      OUTPUT:
+                        9021   *               CONDITION BITS:
+                        9022   *                       Z:  NO ERRORS
+                        9023   +                      NZ:  ERRORS OCCURED
+                        9024   «+                              A - ERROR CODE
+                        9025   *
+                        9026   «      ALL REGISTERS  ARE PRESERVED
+                        9027   +
+                        QGOQH  SESS SSSHHSSEHEHEHHESHESHEEEHEEEEHEHEEEEEESETHEEHEHEHE   EEEEEOEHEHEHE
+                        9029
+                        9030   ;NO_DCB_FOUND3  CHANGED TO B_NODCB FOUND3  TO AVOID CONFLICT   WITH
+                        9031   ;IDENTICAL LABEL  ELSEWHERE
+                        9032
+                        9033         ;GLB      __START_WR_1BLOCK
+                        9034
+    FAFF                9035   _START_WR_1 BLOCK:
+    FAFF C5             9036          PUSH  —  BC
+    FBOO D5             9037          PUSH     ODE
+    FBO1 ES             9038          PUSH     —s-HL
+    FBO2 FDES           9039          PUSH     IY
+                        9040
+    FBO4 CDF446         9041          CALL    __FIND DCB
+                        9042
+    FBO7 200C           9043          JR       NZ,B_NO_OCB_FOUND3    ; NO OCB FOUND
+                        9044
+    FBO9 CDF496         9045          CALL     CHK_IF_INACTIVE         ; IS DEVICE ACTIVE?
+    FBOC 2007           9046          JR       NZ,ACTIVEDCB3           ; NOPE, GET OUT
+                        9047
+    FBOE CDFB38         9048          CALL  —- PREP_DCB                ; SET UP DCB  FOR  WRITE
+                        9049
+    FB11 FD360003       9050          LD       [1¥+D_COMSTAT],0CB_     WRSEND WRITE  COMMAND                           ‘
+                        9051
+    FB15                9052   BNO DCB _FOUND3:
+    FB15                9053   ACTIVE_DCB3:
+    FB1S FDE%           9054          PoP      ly
+    FB17 Ef             9055          PoP      HL
+    FB18 D1             9056          PoP      DE
+    FBI9 C1             9057          Pap      BC

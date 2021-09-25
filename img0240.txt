@@ -1,0 +1,45 @@
+FILE: EOSABS:E0S TF         HEWLETT-PACKARD :  EOSCHAR    (c) Coleco 1983 Confidential                    Sat,   8 Sep  1984,   23.42         PAGE  236
+
+LOCATION OBJECT  CODE   LINE     SOURCE  LINE
+
+                        9168
+                        9169 ;REV O            (V/D  8-24-83)
+                        9170
+                        9171        sEXT      DEVICE_ID
+                        9172
+                        9173 SSSHKSSSSESHSSSSHESKESSHESHSSESSHSSESSHESESHSHSHHESHEHESHEETSSSSEHESEEESEKEEEESEEHEEHEERE
+                        9174 * THIS ROUTINE   WILL INITIATE  A READ COMMAND ON  A CHARACTER   DEVICE.   THE
+                        9175 * ROUTINE  WILL  WAIT FOR THE  COMMAND TO BE COMPLETED.    If  THE COMMAND
+                        9176 * COMPLETED  WITH  NO ERRORS,  THEN THE FLAG WILL  BE ZERO.    IF THERE
+                        9177 * WERE ERRORS   THEN THE FLAG  WILL BE NON-ZERO.
+                        9178 ®       INPUT:   A ==>   DEVICE  ID
+                        9179 .                DE =>   DESTINATION  ADDRESS
+                        9180 5                BC =>   NUMBER  OF BYTES TO READ
+                        9161 »      OUTPUT:
+                        9182 >                CONDITION FLAGS
+                        9183 .                        Z:       NO ERROR
+                        9184 *                                 A ===> KEY READ
+                        9185 °                       NZ:       ERROR OCCURED
+                        9186 .                                 A ===> ERROR CODE
+                        9187 SSSSESSSSSSSSSSSSSHSSSSSESSESSE SESSESESCSHSSSHESSSHSSEHSEHSSESSHESESHSHEKSESESKEETERERES
+                        9188
+                        9189        GLOBAL    __RD_CH_DEV
+                        $190        EXT       __FIND_DCB
+                        9191
+    FB64                9192 __RD_CH_DEV:
+    FBG4 32FD72         9193         LO       [DEVICE_1D},A              SAVE  DEVICE ID
+                        9194
+    FBG67COFB86         9195        CALL      __START_RO_CH_DEV
+    FBGA 2008           9196        UR         NZ,GOOD_BYE
+                        9197
+    FBG6C               9198 RD_DEV_LOOP:
+    FB6C 3AFO72         9199        LD        A,(DEVICE_ID]                       RESTOR   THE DEVICE  ID
+    FBGF CDFBAS         9200        CALL      __ENO_RD_CH_DEV
+    F872 30F6           9201        JR        NC,RD_DEV_LOOP
+                        9202
+    FB74                9203 GOOD_BYE:
+    FB74 c9             9204        RET
+                        9205
+
+                                                                                                                                                                        |
+ae               He      Hae     Eee      EP      mee             ae“     Ss       Re       ee               Hep                  He      ee        GS

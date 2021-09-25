@@ -1,0 +1,63 @@
+FILE:    EQSABS:EOS     TF            HEWLETT-PACKARD:      A  uwOS00     (c)   Coleco    1983 Conf    identiai                         Sat,    8  Sep    1984,  23:38          PAGE     34
+
+LOCATION     OBJECT     CODE    LINE         SOURCE   LINE
+
+                                1260
+                                1261   SSESSSSSSeSSe  soe eseseSeseeeee  seeseseee ee eee eee seeseeeoee eee  eeaseee
+                                1262
+                                1263                        ORG    EOS CODE
+                                1264
+                                12GH   SSSSHSSHSSHHS   SESHSSHHEHEHSH ESE  ESE  SEHEHEHESEEEE  HEHEHE    SRESEESESE  EEE
+                                1266
+                                1267   ;   Name:                WRITE  VRAM
+                                1268   ;
+                                1269   ;   Function:            Writes    to  VRAM   the   contents    of   the  data    ina   buffer    area.
+                                1270   ;
+                                1271   ;   Entry:               BC  -  number    of  bytes    to  be  written
+                                1272   ;                        DE  -  starting     VRAM   address    to  be  written     to
+                                1273   ;                        HL  -  address    of  buffer    containing      the   data
+                                1274   ;
+                                1275   ;   Exit:                None.
+                                1276   ;
+                                1277   ;   Registers    used:   AF,  BC,   DE,   HL
+                                1278   ;
+                                1279   ;   Size:                ROM  -  28  bytes
+                                1280   ;                        RAM  -  O  bytes
+                                1261   ;
+                                1282   ;   Comments:            This   version    of  WRITE   _VRAM   is  provided     for  EOS   operation.
+                                1283   ;                        NOTE:   The   100H   bug   found   in  OS  7  has   been   corrected.
+                                1284   ;
+                                1285   ;   Comparision:         left  out   pascal    entry    point
+                                1286   ;                        code  compacted
+                                1287   ;                        100H  bug   fixed
+                                1288   ;                        edited   for   documentation
+                                1289   ;                        reference     port   table
+                                1290
+     EOOO                       1291    WRITE    VRAM:
+     EOOO    C5                 1292                      PUSH       BC                                ;BC   has   the  number    of  bytes    to  xfer
+     EOO!    EB                 1293                      EX         DE ,HL                            ;>HL<--vram     addr  ,0E<--source     address
+     EOO2    CDE1ES             1294                      CALL       SET WRITE                         :pump    the  vram   addr   to  the   vdp
+     EOOS    69                 1295                |     LO         L.c                               ;save    C  (the  data  _port_addr    )
+     EOO6    Ct                 1296        |             PoP        BC                                ;restore     the  xfer   count
+     EOO7    EB                 1297                      EX         DE ,HL                            ;HiL<--source     address,port       in€
+     EOO8    79                 1298                      LO         A.C                               ;Save    low  order   of  count     in A
+     EOOS    48                 1299                      LD         C,.€                              ;  And  get   the   port   into   C
+     EOOA    50                 1300                      LD         0.8                               ;Get   HI  order    count   in  DO
+                                1301                                                                   ;  to  free   up  B  for   low  order    count
+     EOOB    14                 1302                      INC        D                                 ;Increment      Hi  count   to  cover
+                                1303                                                                   ;  for  O   in  DEC  D  after    low  loop
+     EOOC    47                 1304                      LO         B.A                               ;Put   low   order   in  86 for   OUTI
+     EOOD    87                 1305                      OR         A                                 ;Check    tf  low   order   is  zero   the    first   time
+     EOOE    2806               1306                      JR         Z,O0UT  DEC_HI   BYTE             ;If   so  then   decrement     Hi  count   before     low  loop
+     EO10                       1307   OUTPUT  LOOP:
+     EO1O    EDA3               1308                      OUuTI                                        ;DATA  PORT     = buffer   data      write    the   data  to  the   VOP
+                                1309                                                                   >for   OUTI:    [C]  <--   [HL],   B  =  B  -   1 and  HL  =  HL  +  1
+     E012    OO                 1310                      NOP                                          ;Gelay    for   stow  VOP
+     E013    OO                 1311                      NOP
+     EO14    20FA               13142                     JR         NZ,OUTPUT    LOOP                 ;until    byte   count   low   (B  reg)   =  0
+     EO16                       1313   OUT DEC   HI BYTE:
+     EQ16    15                 1314                      DEC        D                                 ;>byte  count    high   = byte    count   high    -  1
+     EO17    20F7               1315                      JR         NZ,OUTPUT    LOOP                 ;until    byte   count   high   (A  reg)   =   O
+     E019    C9                 1316                      RET
+
+   i     sf             seS       eS         e@           $i     et         et         St      oH           elt                lll                           lll   elceDlhlUDC

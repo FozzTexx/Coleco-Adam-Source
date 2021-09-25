@@ -1,0 +1,56 @@
+        COLECOVISION PROGRAMMERS'   MANUAL
+        Rev. 5
+        ©Coleco Industries,  Inc.  1982                                "
+        CONFIDENTIAL DOCUMENT  =- DQ NOT  COPY           .       Page  2
+
+                   POLLER            EQU  01FEBH             0s:0S
+                   PUTOBJ            EQU  01FFAH             0s:OS
+                   PUTOBJP    |      EQU  01F67H             os:0Ss
+                   PUT_VRAM          EQU  01FBEH           ~0S:0S
+                   PUT_VRAMP         EQU  01F91H             0s:0S
+                   RAND_GEN          EQU  01FFDH             os:os
+                   RAND_NUM          EQU  073C8H             0s:Os
+                   READ_REGISTER     EQU  O1FDCH             os:o0s
+                   READ_VRAM         EQU  01FE2H             os:os
+                   READ_VRAMP        EQU  01FACH             os:0s
+                   REFLECT_HORIZON   EQU  01F6DH             os:Os
+                   REFLECT_VERTICA   EQU  01F6AH             0s:0S
+                   REQUEST_SIGNAL    EQU  01FCDH             Oos:os
+                   REQUEST_SIGNALP   EQU  01FA0H             0os:o0s
+                   ROTATE_90         EQU  01F70H             0s:O0S
+                   RST_10H_RAM       EQU  0800FH             0Ss:os
+                   RST_16H_RAM       EQU  08012H             0s:OS
+                   RST_20H_RAM       EQU  08015H             0s:os
+                   RST_28H_RAM       EQU  08018H             os:o0s
+                   RST_30H_RAM       EQU  0801BH             0s:os
+                   RST_BH_RAM        EQU  0800CH             os:0S
+                   SOUND_INIT        EQU  01FEEH             0os:0S.
+12                 SOUND_INITP       EQU  01FB2H             0s:0S
+                   SOUND_MAN         EQU  01FF4H             os:os
+13                 SPRITE_ORDER      EQU  08004H             0s:Os
+                   STACK             EQU  073B9H             os:0Ss
+14                 START_GAME        EQU 0800AH              Oos:d0S
+                   TEST_SIGNAL       EQU  01FDOH             0s:aQs
+15                 TEST_SIGNALP      EQU  01FA3H             os:os
+                   TIME_MGR          -EQU 01FD3H             0s:0S
+16                 TURN_OFF_SOUND    EQU  01FD6H             0s:Os
+                   UPDATE_SPINNER    EQU  01F88H             0os:0s
+17                 VDP_MODE_WORD     EQU  073C3H             0s:0s
+                   VDP_STATUS_BYTE   EQU  073UCSH            os:O0S
+18                 WORK BUFFER       EQU  08006H             0s:0OS
+                    WRITER            EQU  01FEBH             0$s:os
+19                 WRITE_REGISTER     EQU  01FD9H            0s:os
+                    WRITE_REGISTERP   EQU  01FA6H            0s:o0s
+20                 WRITE_VRAM         EQU  01FDFH            os:os
+                    URITE_VRAMP       EQU  01FA9H            Os:o0S
+21                 WR_SPR_NM_TBL      EQU  01FC4H            0OS:0S
+                   WR_SPR_NM_TELP     EQU  01F97H             Oos:OS
+22
+
+ 23
+
+24
+
+26
+
+                 wWewWeWeWwe VOUVOTPweVweWEWOWeWwe weVeweoWweWeweWEHVewe pweRyGeGeSeretnYtYoteere

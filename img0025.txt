@@ -1,0 +1,36 @@
+FILE: v-oa8S:E0S_TF       HEWLETT-PACKARD: SWITCTBL    (c)Coleco ilo  oomf ;>dential                e      8  Sep  1984,   23:38         ak   >1
+
+LOCATION OBJECT CODE  LINE     SOURCE LINE
+
+                       734
+                       735
+                       736 ; NOTE: these are defined globa! in EQSCOMN
+                       737
+                       738 :             ;GLB     SWITCHTABLE
+                       739 ;             ;GLB     MEM CNFGOO
+                       740 :             ;GLB     MEMCNFGO!I
+                       741 ;             ;GLB     MEM CNFGO2
+                       742 :             ;GLB     MEMCNFGO3
+                       743 :             ;GLB     MEMCNFGO4
+                       744 ;             ;GLB     MEMCNFGOS
+                       745 :             ;GLB     MEMCNFGO6
+                       746 :             ;GLB     MEMCNFGO7
+                       747 ;             ;GLB     MEMCNFGOS
+                       748 :             ;GLB     MEMCNFGOS
+                       749 :             ;GLB     MEMCNFGOA
+                       750 :             ;GLB     MEMCNF GOB
+                       751 :             ;GLB     MEMCNFGOC
+                       752 :             ;GLB     MEMCNFGOD
+                       753 ;             ;GLB     MEMCNFGOE
+                       754 :             ;GLB     MEM_CNFGOF
+                       755
+                       756 LO_BOOTROM _N_ALPHA_MASK               EQU
+             <0001>    757 LO_INTRINSICRAM  _TO_7FFFH_MASK        EQU     0001B
+             <0002>    758 LO_EXPANSION_O_TO_7FFFHMASK            CQU     00108
+             <Q003>    789 LO_OS7_N_INTRINSIC_2000H_7FFFH_MASK    EQU     001186
+                       760
+                       761 HI_INTRINSIC8000H_TO_OFFFFH MASK       EQU
+             <0004>    762 HI_AUXILLIARYSLOT  8000H_OFFFFH        EQU     01008
+             <0008>    763 HI_EXPANSION8000H_TO_OFFFFH MASK       EQU     10008
+                       764 HI_COLECOVISIONCARTRIOGE SLOT          EQU     11008
+                       765

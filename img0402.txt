@@ -1,0 +1,61 @@
+ILE:  OS7PRIME:pOs          HEWLETT-PACKARD:   TABLE   MANAGER   (c) Coleco,    1982    CONFIDENTIAL              Fri,  18  May  1984,  16:21       PAGE  128
+
+OCATION  OBJECT  CODE LINE        SOURCE LINE
+
+    1€66 47           6252               LD    8B,A                ;SAVE  SPRITE   COUNT
+   1C67  AF           6253               KOR   A
+   1068  2A8004       6254               LD    HL, [SPRITE  ORDER)
+   1C68               6255   INIT SPR10
+   1C68  77          6256                LD    [WL),A
+   1C6C  23          6257                INC   WL
+   1C6D  3C           6258               INC   A
+   1C6E  88           6259               CP    6B
+   1C6F  20FA         6260               JR    NZ, INIT_SPR1O
+   1€71  C9          6261                RET
+                      6262
+                      6263   * PROCEDURE  WR  SPR_NM  TBLQ    (SPRITE  COUNT:BYTE);
+                      6264
+                      6265   * THIS  IS THE PASCAL   ENTRY  POINT   TO  THE WR_SPR_NM   TBL_   ROUTINE.
+                      6266
+   1C72 00010001      6267 WR  SPR  P          DEFW                1,1
+                      6268
+             <1C76>   6269  WR_SPR_NM  TBLQ    EQU                $
+   1€76 011C72       6270                      LD                 BC, WR SPR  P
+   179   11738A       6271                     LD                 DE ,PARAM  AREA
+   1c7C cp0098        6272                     CALL               PARAM
+   1C7F 3A73BA       6273                      LD                 A, ([PARAM_AREA}
+                     6274
+   1082              6275   WR_SPR  NM TBL_                         ;WRITES   SPRITE NAME  TABLE    TO VRAM
+                     6276                                         ;USING   THE  SPRITE   ORDER  LIST.
+                     6277                                         ;
+                     6278                                         ;      NUMBER  OF  SPRITES   TO WRITE   IN   ‘A!
+                     6279
+                     6280   ;MODE 0  PORT       EQU                OBEH
+                     6281   ;MODE 1  PORT       EQU                OBFH
+                     6282                                               .
+  1C82  DD2A8004     6283                LD =X,    (SPRITE ORDER]     ;LIST  OF  DISPLAY   ORDERS
+                     6284   ;            LD    [SPRITE  CT],A     ;SAVE   COUNT
+  1C86  F5           6285               PUSH  AF                  ;SAVE   COUNT
+  1C87  FO2173F2     6286               LD  =IY,VRAM_   ADDR TABLE
+  1C8B  FOSE00       6287               LO    CE,[1¥+0)
+  1C8E  FD5601       6288               LD   soOD(1¥+1)           ;VRAM   SPRITE NAME  TABLE   ADDRESS   NOW   IN DE.
+                     6289
+                     6290               3**   SET  UP  VDP  TO RECEIVE   DATA
+                     6291
+  1c91  78          6292                LD    A,E
+  1C92 D38F          6293               OUT   [MODE  1 PORT),A
+  1094  7A           6294               LD    A,O
+  1C95  F640        6295                OR    40H
+  1C97 O38F          6296               OUT   {MODE 1  PORT],A
+                     6297
+  1C99  FI           6298               POP   AF                  ;RESTORE   COUNT
+  1C9A               6299  OUTPUT  LOOP TABLE  MA
+  1C9A 2A8002        6300               LO  = HL, (LOCAL_SPR_TBL]     ;RESTORE  RAM   SPRITE NAME  TABLE   POINTER
+  1C9D DD4E00        6301               LDC,  {1X+0)              sDISPLAY   ORDER
+  1CAO DD23          6302               INC   IX                  ;ADVANCE   DISPLAY   ORDER  POINTER
+  1CA2 0600          6303               LD    8,0
+  1ca4 09            6304               ADD   HL,BC
+  1CA5 09            6305               ADD   HL,BC
+  1CA6 09            6306               ADD   HL,BC
+  1CA7 09            6307               ADD   HtL,BC
+                     6408

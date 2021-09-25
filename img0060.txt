@@ -1,0 +1,35 @@
+FILE: EQSABS:EOS   TF         HEWLETT-PACKARD: A_uOS OO    (c) Coleco  1983Conf identia}                  Sat,  8 Sep  1984,   23  39       PAGE    56
+
+LOCATION   OBJECT  CODE   LINE     SOURCE LINE
+
+                          2132 ;CONTROLLER SOFTWARE
+                          2133 ;
+                          21QS SHHSSH SeeSSSSeSSee eeseeseseseeMATAeseeeeeeeeeeeeeeeeHeeeeeeeese
+                          2135 *
+                          2136 *  DECODER TABLE FOR  THE  KEYBOARD
+                          2137
+                          2138 *
+    E1F6                  2139 DEC_KBD_TBL
+    E1F6  OF              2140            DEFB KBD_NULL          ; NULL ENTRY
+    EIF7  O06             2141            DEFB 6                 ; *°6’
+    EIFS  Ot              2142            DEFB 1                 ; ft’
+    E1FS  O3              2143            DEFB 3                 ; °3°
+    EIFA  O9              2144            DEFB 9                 ; *9’
+    E1FB  OO              2145            DEFB O                 ; °O’
+    EFC   OA              2146            DEFB 10                ; fe!
+    E1FD  OC              2147            DEFB 12                ; Purple Action  Controller  key (third  one down)
+    EIFE  02              2148            DEFB 2                 ; °2°
+    EIFF  O08             2149            DEFB 11                ; fw?
+    E200  07              2150            DEFB 7                 ; ‘7’
+    E201  OD              2151            OEFB 13                ; Blue Action  Controller  key (fourth  (or last)  one down
+    E202  O05             2152            DEFB 5                 ; ‘5’
+    E203  04              2153            DEFB 4                 ; 14!
+    E204  O08             2154            DEFB 8                 ; ‘8’
+    E205  OF              2155            DEFB KBDO_NULL         ; NULL ENTRY
+                          2156
+                <OOOF>    2157 KBD_NULL        EQU               OFH
+                <OOOF>    2158 KBD_MASK        EQU               OFH      ;MASK  FOR  INPUT DATA BYTE
+                <O040>    2159 FIREMASK        EQU               40H
+                <0040>    2160 ARM_MASK        EQU               40H
+                <OOOF>    2161 JOY_MASK  |     EQU               OFH
+                          2162

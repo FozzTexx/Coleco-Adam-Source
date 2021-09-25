@@ -1,0 +1,63 @@
+FILE: OS 7PRIME:pOS          HEWLETT-PACKARD:    GRAPHICS   PRIM  PKG  (c)  Coleco  1982  CONFIDENTIAL            Fri, 18  May  1984,  16:21       PAGE  136
+
+LOCATION  QBJECT CODE  LINE        SOURCE  LINE
+
+                       6688
+                       6689   *   CONTINUE  BELOW
+    105E  1810        6690                       JR                CONTINUE   GRAPHICS
+                       6691
+                       6692
+                       6693   * PROCEDURE   REFLECT  WORIZONTAL    (TABLE  CODE{A},  SOURCE(DE}  ,DESTINATIONCHL)   ,COUNT{BC))
+                      6694
+                       6695   * REFLECT  WORIZONTAL    REFLECTS   EACH  OF  A BLOCK  OF  GENERATORS   FROM  VRAM
+                       6696   * AROUND  THE  WORIZONTAL    AXIS.  IF  THE GENERATORS    ARE FROM  THE  PATTERN
+                       6697   * PLANE  ANDTHE   GRAPHICS   MODE  IS 2  THEN  IT REFLECTS   THE  CORRESPONDING
+                       6698   * COLOR  GENERATORS   AS  WELL.
+                       6599                  )      |
+                       6700   * BEGIN  REFLECT  HORIZONTAL
+                       6701                      GLB                RFLCT HOR
+    1D60               6702   RFLCT HOR                             ; ACTUAL   ROUTINE   NAME EXISTS   IN  OS
+                       6703                                         ;  JUMP  TABLE  ONLY
+                       6704
+                      6705   *   SET  OPERATION   CODE
+    1D60 DD211DB7     6706                       LD                 IX,RFLCT  HOR_
+                      6707
+                      6708   *   CONTINUE   BELOW
+    1064 180A         6709                       JR                 CONTINUE  GRAPHICS
+                      6710
+                      6711
+                      6712
+                      6713
+                      6714   *  PROCEDURE   ROTATE 90   (TABLE  _CODE{A}, SOURCE (DE},DESTINATIONCHL),    COUNT{BC))
+                      6715
+                      6716   *  ROTATE 90   ROTATES  EACH  OF  A  BLOCK  OF GENERATORS    FROM VRAM  90  DEGREES
+                      6717   *  CLOCKWISE.   IF  THE GENERATORS    ARE  FROM  THE PATTERN   PLANE  AND  THE
+                      6718   *  GRAPHICS  MODE   IS 2  THEN  THE  ROUTINE  COPIES   THE CORRESPONDING    COLOR
+                      6719   *  ENTRIES  AS  WELL.
+                      6720
+                      6721   *  BEGIN  ROTATE  90
+                      6722                      GLB                 ROT 90
+   1066               6723   ROT 90                                 ; ACTUAL  ROUTINE   NAME  EXISTS   IN OS
+                      6724                                          ; JUMP  TABLE  ONLY
+                      6725
+                      6726   *   SET OPERATION    CODE
+   1066  DD211DE5 =   «46727                    LD                  1X,ROT _90_
+                      6728
+                      6729   *   CONTINUE  BELOW
+   1D6A  1804         6730                      JR                  CONTINUE GRAPHICS
+                      6731
+                      6732
+                      6733
+                      6734
+                      6735   *  PROCEDURE  ENLARGE   (TABLE  CODE{A),  SOURCE (DE},DESTINATIONCHL},    COUNT(BC})
+                      6736
+                      6737   *  ENLARGE  TAKES  EACH  OF  A BLOCK   OF GENERATORS   AND  ENLARGES   IT  INTO
+                      6738   *  A BLOCK  OF  FOUR  GENERATORS   WHEREIN  EACH  PIXEL   OF THE  ORIGINAL
+                      6739   *  GENERATOR   1S EXPANDED   TO  FOUR  PIXELS  IN  THE NEW  ONES.  IF  THE
+                      6740   *  GENERATORS   ARE FROMTHE   PATTERN   PLANE  AND  THE GRAPHICS   MODE  IS  2
+                      6741   *  THE THE  ROUTINE  ALSO  QUADRUPLES    EACH  OF  THE CORRESPONDING    COLOR
+                      6742   * GENERATORS    AS WELL.
+                      6743
+                      6744   *  BEGIN ENLARGE
+
+                                                                                                                                                                                                           |

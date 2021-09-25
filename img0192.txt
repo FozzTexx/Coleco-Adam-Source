@@ -1,0 +1,25 @@
+FILE: EQSABS:EOS TF         HEWLETT-PACKARD:  CONS OUT  (c) Coleco  1983 Confidential                  Sat,   8  Sep  1984,  23:41       PAGE  188
+
+LOCATION QBVECT  CODE   LINE     SOURCE LINE
+
+                        7550 ;
+                        7551 ; MOVE_RIGHT  -   Moves the cursor to  the right, and if at window’s
+                        7552 ;                 edge will move down  a line to the left edge, unless
+                        7553 ;                 at the lower right corner  of the window in which case
+                        7554 ;                 nothing ts down
+                        7555 ;:
+    F6ESE               7556 MOVERIGHT:
+    F6E9S2AFEAS         7557                  LO      HL,{CURSOR]
+    FGA! 3AFE7B         7558                  LD     A, [X_MAX]
+    FG6A4BC             7559                  cP      H
+    F6AS 2804           7560                  JR      Z,TRY_MOVEDOWN
+    FEAT 24             7561                  INC     H                ;Move to right
+    F6A8 C3F67D         7562                  JP      RESTOREOLD
+                        7563 ;                    .
+    F6AB 3AFE7D         7564 TRY_MOVEDOWN:    LO      A.LY_MAX]
+    F6AE BD             7565                  CP      L
+    FGAF 28AA           7566                  JR      Z,EXIT           ;At bottom of window so abort
+    F6B1 2C             7567                  INC     L
+    F6B2 SAFETA         7568                  LO      A,(X_MIN]
+    F685 67             7569                  LD      HA
+    F686 C3F670         7570                  JP      RESTOREOLD

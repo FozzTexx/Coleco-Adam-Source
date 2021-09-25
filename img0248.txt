@@ -1,0 +1,65 @@
+      FILE:   EOSABS:E0OS  TF           CROSS   REFERENCE    TABLE               PAGE  244
+
+      LINE#     SYMBOL             TYPE         REFERENCES
+
+       9358  DCB_IS    ACTIVE3             9347
+       9314    OCB_IS  IDL                 9304
+       8992    DCB_IS_IDLES                8978
+       6601    OCB_LOOP                    6606
+       1065    OCB_NOT_  FOUND             6616
+       6615    OCB_NO  FIND                6592, 6608
+       1189    OCB_RD                      8932,9270
+       1187    OCB_RESET                   8663
+       1186    OCB_STATUS                  6650, 8549
+       1188    OCB WR                      7245 9050,   9355
+       9228    OCB _WRITE_LOOP             9231
+       2393    DEBOUNCE                    2338
+        316    DECLSN
+        318    DECMSN
+       2139    DEC_KBD_TBL                 2246
+        477    DEFAULT_BT_DEV              8170, 8225  ,8229, 8234, 8244
+       1629    DEL                         1854
+       1081    DELETE_ERR                  5826
+       8221    DEVO_OK                     8206
+       8224    DEV1_OK                     8182,8194,8215
+       6719    DEVICE_BUSY                 6712
+       1089    DEVICE  _DEPD_ERR           5965 ,6062
+        488    ODEVICE_ID                  6337 ,6485  ,9193,9199   ,9223,9229
+       3469    DE TO DEST                  3357 ,3380,  3410
+       6497    DIRECTORY_CHECK             5453
+        994    DIR_ATTR                    3783 ,3921,  4086 ,.4191,5362  ,5698 ,6192 ,6232
+        546    DIR_BLOCK_NO                3715,3812,   3885
+       1001    DIR_DAY                     4209
+       1002    DIR_ENT_LENGTH              521,525,565,   3567,  3615, 3772, 3910,  4021,5304  ,5384,  6178, 6348  ,6392,6396,6397
+        998    DIR_LAST_COUNT              4201, 4202
+       2424    OIR_MASK                    2433, 2448
+        996    DIR _MAX_LENGTH             3796 ,3797  ,3924, 3925,  3968, 3969, 4074, 4075, 4194, 4195,   6245, 6246, 6251,  6252,6396,6410,6411
+       1000    DIR_MONTH                   4207                                                                                                       :
+        993    DIR_NAME
+        995    DIR_START_BLOCK             3992 ,3996  ,4000, 4004  4078  ,4080, 4082 ,4084 ,5398 ,5399   ,5400, 5401 ,6254  ,6255 ,6260,  6261, 6400
+        997    DIR_USED_LENGTH             4198 ,4199,6397                                                                                              .
+        999    DIR_YEAR                    4205
+       1565    DIVIDE                      1569
+       6723    DONE                        6717
+       3156    DONE_SNOMAN                 3126
+       7368    DOWN                        7938
+       3849    00 READ  _AGAIN
+       8123    DSK4                        8172,8176,8181
+       8124    DSKS                        8164 ,8188,8193
+       2942    DUMAREA                     2913,3115
+       1117    D_BUF_ADR                   1118,1119
+       1119   DOBUF   _ADR_HI              9157,9265,9353
+       1118    0BUF   _ADR_LO              9156 ,9264  ,9352
+       1121    D_BUF_LEN                   1122, 1123
+       1123    D_BUF_LEN_HI                91499268,    9350                                                                                           ‘
+       1122   DOBUF   _LEN_LO              9147 ,9267  ,9349
+       1115    DCOM   STAT                 6650, 6654  ,6657 ,6706.6710,6748,    7245, 8549, 8552, 8555,   8663, 8666, 8669,  8706, 8932  ,8981,8985,9050,9103,9106,9270
+                                           9307 ,9310,9355   ,9393 ,9396
+       1134    D_DEV_ADDR                  6602 ,8547
+       1141    DDEV_TYPE
+       3825    DFILE                       3789 ,3802  ,3806 ,3813
+       1196    DMAX        ~_LEN           1138,1139
+                                                                                             ee  !                                                                           <a                      |
+                                                                                            .
+               hae       aAartCUHUarlCUCMPMUrhlClC       hrOOCUlCUrhrOrOUlClhrrTUlUlChOOCOlllCrUelUrhaeerlUretllCUrheaerllUCUraeaeeUCUrreeeUlUreeeelCraelUrelClr
+i  a    >>   PPPF   >PrPPrrrrrrrr?r?rrrrr?rr?rrrrrrrrrrrrrrrrrrrrrrrrrPrrPrrrrrPrr?                                                 ndYrpp

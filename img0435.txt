@@ -1,0 +1,63 @@
+                 5.  a                                                                                                       4                                                                                                         -
+
+   FILE:    OS  7PR:.   €:pOS           CROSS     REFERENCE     TABLE                PAGE   161
+
+   Limeg@      SYMBOL               TYPE          REFERENCES
+
+    6533      STR    SET  PORT     «= A     4633,  4734
+    5053      SIROBE  FLG             D
+    4536      SIROBE   RESET          A
+    4537      SIROBE   SET            A     4703
+    4266     SUBIRACT   4             P     4259
+    18531   SUP   GEM   CLR           P     1764,1749,    1754
+    109%     SuP_UPDAIE               P     1766,1751
+   2347      Svi                      P
+   2393      sv2                      Pp
+    S73      SYSTEM   RAM   AREA      OD   578
+   2260      $ OLD  SCRN              P     2255
+   1973      TAIL  ADORESS            D     2071,2101,2130,2142
+   3961      ¥e10                     P     3978
+    588      TEMP)                    D    4178
+    591      TEmMP2                    dD  41799
+   4463      TESTI                    P    4468
+   4489      TEST  EXIT               P    4478
+   T383      TEST  SIGHAL             A    226
+   7368      TEST  SIGWALP            A    231
+   4449      TEST  SIGNAL             P    4065,  7368
+   4455      TEST  SIGMAL_            P   46064,  7383
+    601      TEST  SIG  wun           D    4451,4453
+   4446      JEST  SIG   PARAM        P    46450
+   2802      THIS  SPRITE             $
+   4343      TimERI                   P    4413,4428
+   4399      TimER2                   P
+   S724      Timen  1                 P    5289,5732
+   $725      TimeR  2                 P    5728
+   4167      TIMER  EXIT              P    4132,4157                   |
+    $98      TIMER  LENGTN            D    4334
+   4495      TIMER   TABLE   BAS      D    4030,  6069,4181,4208,      4263,  6340, 4457
+   7384      IME    MGR               A    227
+   4067      TIME  mGRO               P    4047
+:  6068      TIME   MGR               P    6046,  7384
+   1319      TOME  OUT                P     1255,  1282,  1288,  1294
+   5322      IRADEMARK                P    5190
+   7254      TRANSP  10               P     7273
+   7274      IRANSP  X                P
+    527      TRUE                     A  6818,    6856,   6904  ,6954  ,7026
+   7385      TURN  OFF   SOUND        A    216,548
+   1432     TyPEO                     P     1342
+   1653     TYPED                     P     1342
+   1472      TYPE2—                   P     1342
+   1501      TYPES                    P     1342,  1469
+   1625      222_           |         P    1623
+     703     UPATHCTRE                P    781,  1306,  1315,   1327
+   4665   UPDATE      RO              P    4660
+   4679    UPDATE     Al              P    4674
+   4668    UPOATE     St              P    6657,  6663
+   7359    UPDATE     SPINNER         A    211
+   4653    UPDATE     SPINNER         P.   4652,  7359
+   4681   UPDATE      SPINX           P    4670,4677
+    805      UPFREQ                   P    605,1328°
+   1166    UP    CH  DATA    PIRS     P     1923,1166,   1241
+    608    VDP    MODE    WORD        =D   235,  1713,  3216,6015,    6120,  6496 6502,  7U21
+     623     VWOP  STATUS    RYIE     D    234        |
+   6332      VRAM_ADOR     TABLE      D  6009,    6114,6286     6325

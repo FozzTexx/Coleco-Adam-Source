@@ -1,0 +1,64 @@
+FILE:  OS_7PRIME:pOS             HEWLETT-PACKARD:       PUT   MOBILE    (c)  Coleco,     1982    CONFIDENTIAL                       Fri,   18  May    1984,  16:20         PAGE      7%
+
+LOCATION    OBJECT    CODE  LINE  |     SOURCE   LINE
+
+     0c55                  3501   ELSE9   —_    ELSE                           ;NAME   =>  NUMGEN,     THEREFORE     NOT  PART   OF  ROMED    GENS
+    0c55   009601          3502                   SUB   [1X+1]                    ;SUBTRACT     NUMGEN    FROM   NAME
+    0c58   D9              3503                   EXX
+    0c59   87              3504                   ADD  A,A
+    OCSA   87              3505                   ADD  A,A
+    0c5B   87              3506                   ADD  A,A                        7A  :=  B*NAME
+    OCSC   6F              3507                   LD  L,A
+    C50    2600            3508                   LO  4,0
+    OCSF   19              3509                   ADD UL  ,DE                    ;HL   :=  POINTER    TO   PATTERN
+    060    £5              3510                   PUSH   W
+    0C61   D9              3511                   EXX
+    0c62   01              3512                   POP  DE
+    0c63                   3513   PM10            ;1F   (0,LT,    70H)           ;THEN   PATTERN     IN  VRAM
+    0C63   7A              3514                   LD  A,D
+    0C64   FE70            3515                   cP  704
+    0C66   3014            3516                   JR  WC,ELSE10
+    0C68   C5              3517                     PUSH   BC
+    0C69   E5              3518                     PUSH    HL                   ;SAVE   BUFFER    ADDRESS
+    OC6A   DS              3519                     PUSH   DE                    ;SAVE   GENERATOR     ADDRESS
+    0C6B8  010008          3520                     LO  BC,8                     ;MUMBER    BYTES    TO  MOVE
+    OC6E   CDIFE2          3521                     CALL   READ   VRAM                         }
+    0C71   010008          3522                     LD  BC,8                     ;INCREMENT     POINTERS     BY  8
+    OC74   E1              3523                    POP    HL
+    0Cc75  09              3524                     ADD  HL ,BC                  ;GEN   ADDR   :=  GEN   ADDR   +  8
+    0c76   EB              3525                     EX  DE,  WL
+ _ 0C77    £1              3526                     POP   HL
+   0C78    09              3527                     ADD HL,   BC                 ;BUF   ADDR   :=  BUF   ADDR   +  8
+   0c79    C1              3528                     POP   BC
+   OC7A    1809            3529                     JR  END10
+  oc7c                    3530   ELSE10          ;ELSE                           ;PATTERN    IN  CPU   RAM
+   Oc7c   EB              3531                      EX  DE, HL
+   0c7D   C5              3532                      PUSH   BC
+   OC7E   010008          3533                      LO  BC,8
+   0C81   EDB0            3534                      LOIR
+   Oc83   C1              3535                      POP  BC
+   OCs    EB              3536                      EX  DE, HL
+   0ces                   3537   END10          ENDIF
+   oc85                   3538   ENDD   =;    ENDIF
+   Oc8S   D1              3539                POP  DE
+   0C86   13              3540                INC  DE
+                          3541   ;         ENDDO
+   OC87   10AF            3542             DJNZ   DLP4
+                          3543
+                          3544   ;  COMBINE   OBJECT    PATTERN    GENERATORS      WITH   BACKGROUND
+   OC89   FD2A8006     =  3545   PM11.—s   LD‘ TY,  [WORK  BUFFER}                                       .
+   OC8D   ED5B8006        3546             LD  DE,  (WORK  BUFFER)           ;DE   = BUFFER    BASE   ADDR_
+   0C91   21001C          3547             LD  WL,BK  PTW                                                   :
+   0C%    19              3548             ADD  HL ,DE                       ;HL   POINTS   TO   START   OF  BACKGROUND      GENERATORS
+   0C95   FD4E00          3549             LD C,  (1Y+YDISP)                 >BC=
+   0C98   0600            3550             LD  6,0                           ;   DISPLACEMENT      OF   OBJECT    BELOW   PATTERN    BOUNDARY
+   OC9A   09              3551             ADD  HL, BC                       ;HL  POINTS    TO   FIRST   ROW   IN  BACKGROUND     TO  BE   OVERLAYED
+   OC9B   £5              3552             PUSH   HL
+   OC9C   DDE1            3553             POP  IX                           ;1X   :=  POINTER    TO  ROW   IN  PATTERN    BUFFER
+   OC9E   210064          3554             LD  HL,OBJ  PTN
+   OCA1   19              3555             ADD  HL,DE                        ;HL  POINTS    TO  FIRST    BYTE   IN  OBJECT'S     PATTERN    GENS
+   OCA2   €5              3556             PUSH   HL
+   OCA3   3£10            3557             LD  A,16                          ;USE   A‘  AS  LOOP   COUNTER
+
+                                                                                                                         ,                                                                                     .                 pee
+                                                                                                                    ‘|                                                  I                1                            é             4             4

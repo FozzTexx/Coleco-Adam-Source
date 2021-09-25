@@ -1,0 +1,63 @@
+    LE: OS 7PRIME:pOS           HEWLETT-PACKARD:     CONTROLLER  SOFTWARE   (c)  Coleco,   1982  CONFIDENTIAL      Fri,  18  May  1984,   16:21       PAGE   98
+
+    CATION   OBJECT  CODE  LINE   |    SOURCE  LINE
+
+      11F3                 4784   CHKPLYR   1
+      11F3   DOE}          4785                POP   IX
+      11f5   0D7E01        4786                LD   A, [1X#1)          7GET  PLAYER   1 STATUS
+      11F8   CB7E          4787                BIT   7,A               >1F  PLAYER  1  1S NOT  ACTIVE
+      11FA   2823          4788                JR   2, POLLER_X         sTHEN  EXIT,   ALL DOWE
+                           4789   *  PLAYER   1 IS ACTIVE
+      11FC  47             4790                LD   B,A                ;SAVE  PLAYER   1 STATUS
+      11FD   11000A        4791                LD  DE,2*NUM   DEV      ;COMPUTE  ADDRESS   OF  DEBOUNCE  BUFFER
+      1200   FD19          4792                ADD   1Y,DE             FOR   PLAYER   1
+      1202   110007       4793                 LD   DE,PLYR_1          ;COMPUTE  ADDRESS   OF  CONTROLLER MEMORY
+      1205  0019          4794                 ADD   IX,DE             FOR  PLAYER    1
+      1207  £607          4795                 AND  SEG 0              -1F SEGMENT   0  1S NOT  ACTIVE
+      1209  2809          4796                 JR          SEG  11     -THEN  CHECK  SEGMENT   1
+            ~             4797   *   SEGMENT   0 IS ACTIVE             sELSE
+      1208  3A73EF        4798                 LD   A, {S0_C1}
+      120E  2173EC      = «4799                LD   HL,SPIN  Swi CT
+      1211. CD1220        4800                 CALL DECODE  0          ;DECODE  DATA   FOR SEGMENT  0
+      1214                4801   CHK SEG  11
+      1214  78            4802                 LD   A,B                RESTORE   STATUS   FOR  PLAYER  1
+      1215  £618          4803                AND   SEG 1              ;1F SEGMENT   1  IS NOT  ACTIVE
+      1217  2806          4804                 JR   2, POLLER_X         ;THEN  EXIT,  ALL  DONE
+                          4805   *   SEGMENT   1 IS ACTIVE             ;ELSE
+      1219  3A73F1        4806                LD    A, £S1.C1)
+      121C  CD123F        4807                CALL  DECODE  1          ;DECODE  DATA  FOR  SEGMENT  1
+      121F                4808   POLLER  x
+      121F  C9            4809                RET
+                          4810
+                          4811   *   DECODER  ROUTINE   FOR  SEGMENT 0
+                          4812   *
+                          4813   *             INPUT:
+                          4814   *                  A  - DATA
+                          4815   *                  B  - DEVICE  STATUS  BYTE  FOR  CURRENT  PLAYER
+                          4816   *                 HL  - ADDRESS  OF SPINNER   DATA
+                          4817   *                 IX  - POINTER  TO CONTROLLER   MEMORY
+                          4818   *                 LY  - POINTER  TO DEBOUNCE   STATUS   BUFFER
+                          4819   *
+     1220                 4820   DECODE 0
+     1220   4F            4821                LD    C,A               ;SAVE  DATA
+     1221   CB48          4822                BIT   JOY,8             ;1&  JOYSTICK   NOT  ACTIVE
+     1223   2804          4823                JR    2,DEC_FIRE        ;THEN  CHECK   FIRE  BUTTON
+                          4824   *   JOYSTICK  ACTIVE
+     1225   cD12B9        4825                CALL  JOY DBNCE         ;DEBOUNCE   JOYSTICK   DATA
+     1228   79            4826                LD    AC
+     1229                 4827   DEC_FIRE
+     1229   cB40          4828                BIT   FIRE,B            ;EF  FIRE  BUTTON   NOT ACTIVE
+     122B   2804          4829                JR.   2,DEC_SPWR        ;THEN  CHECK   SPINNER
+                          4830   *   FIRE  BUTTON  ACTIVE             ELSE
+     122D  cD 1289        4831                CALL  FIRE DBNCE        ;DEBOUNCE   FIRE  BUTTON
+     1230   79            4832                LD    A.C
+     1231                 4833  DEC  SPNR
+     1231  cB50           4834                BIT   SPIN,8            IF   SPINNER   NOT  ACTIVE
+     1233  2809           4835                JR    2,DECODE_OX       7THEN  EXIT  DECODER
+                          4836   *   SPINNER  ACTIVE
+     1235  7E             4837                LDA,     CHL}           =SAVE  SPINNER   COUNT
+     1236  DD8602         4838                ADD  A,LIX*SPIN]
+     1239  007702         4839                LD    (IX*SPIN],A       >IN  CONTROLLER   MEMORY
+     123C  AF             4840                XOR   A
+
+nap      Eee          ee           ae         ese        ee         ee                      Ee         HE       ee         es         FF           as          a           '           |           \           {

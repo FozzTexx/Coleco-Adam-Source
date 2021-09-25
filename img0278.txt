@@ -1,0 +1,61 @@
+“ILE: OS  7PRIME  :pOs           HEWLETT-PACKARD:   OPERATING     SYSTEM   (c) Coleco,     1982     CONFIDENTIAL          Fri, 18 May 1984,  16:18         PAGE     4
+
+-OCATION  OBJECT    CODE   LINE        SOURCE  LINE
+
+                             164                   EXT    RFLCT HOR
+                             165                   EXT   ROT  90
+                             166                   EXT   EWLRG
+                             167                   EXT   PUTOBJO                               ;  PASCAL   CALLS
+                             168                   EXT   ACTIVATEQ
+                             169
+                             170                   ;EXT  GAME  OPT                             ;DISPLAYS    THE  GAME  OPTION SCREEN
+                             171                   ;EXT  LOAD  ASCII                           LOADS    ASCII   CHARACTER  GENERATORS
+                             172                   EXT   FILL  VRAM_                           FILLS    DESIGNATED    AREA OF VRAM WITH VALUE
+                             173                   EXT   MODE  1                               ;SETS   UP  A DEFAULT   GRAPHICS MODE 1
+                             174
+                             175
+                             176  *  “HIDDEN  EXTERNALS”
+                             177
+                            178                    3EXT                  DISPLAY  LOGO
+                             179                   sEXT                  CONTROLLER   INIT
+                            180                    sEXT                  ASCII  TBL
+                            181                    sEXT                  WUMBER  TBL
+                            182
+                            183
+                            184   SRAKASAATAEAAAEAAAEEEAKAARRERER        EXPORTS   SRARAARAARARAEKRARARAREEERAKRERKEE
+                            185
+                            186   *  ENTRY  POINTS TO OS  ROUTINES
+                            187
+                            188                     GLB  INIT  TABLE                           TABLE    MA
+                            189                     GLB  GET  VRAM
+                            190                     GLB  PUT  _VRAM
+                            191                     GLB  INIT  SPR  ORDER
+                            192                     GLB  WR_SPR_WM   TBL
+                            193                     GLB  INIT  TABLEP                          PASCAL    CALLS
+                            19%                     GLB GET  VRAMP
+                            195                     GLB  PUT_VRAMP
+                            196                     GLB  INIT  SPR  ORDERP
+                            197                     GLB  WR_SPR_NM   TBLP
+                            198
+                            199                     GLB  WRITE  REGISTER                       ; VIDEO   DRIVERS
+                            200                     GLB  READ  REGISTER                   |
+                            201                     GLB  WRITE  _VRAM
+                            202                     GLB  READ  VRAM
+                            203                     GLB  INIT  WRITER                                                                                                                              ,
+                            204                     GLB  WRITER
+                            205                     GLB  WRITE_REGISTERP                       ; PASCAL   CALLS
+                            206                     GLB  WRITE  VRAMP
+                            207                     GLB  READ  VRAMP
+                            208                     GLB  INIT  _WRITERP
+                            209
+                            210                     GLB  POLLER                                ; CONTROLLER    ROUTINES
+                            211                     GLB  UPDATE  SPINNER
+                            212                     GLB  CONTROLLER   SCAN
+                            213                     GLB  DECODER
+                            214
+                            215                     GLB  SOUND INIT                           ;  SOUND  ROUTINES
+                           216                      GLB  TURN OFF  SOUND
+                           217                      GLB  PLAY IT
+                           218                      GLB  SOUND MAN
+                            219                     GLB  PLAY SONGS
+                            220                     GLB  SOUND  INITP                         ; PASCAL    CALLS

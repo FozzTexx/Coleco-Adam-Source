@@ -1,0 +1,64 @@
+FILE: OS_7PRIME:pOS          HEWLETT-PACKARD:    PUTSPRITE    RTN (c)  Coleco,   1982  CONFIDENTIAL            Fri,  18  May  1984,  16:20       PAGE   66
+
+LOCATION  OBJECT  CODE   LINE      SOURCE  LINE
+
+    OAIE  E5            3089                     PUSH              HL
+    OA1F  DD6E02        3090                     Lo                L, (THIS SPRITE+STATUS)
+    QA22 006603         3091                     LD                H, (THIS SPRITE+STATUS+1)
+    0A25  110000        3092                     LD                DE,FRAME
+    0A28  19            3093                    ADD                HL ,DE             ; (HL)=  FRAME
+    0A29  7E            3094                    LD                 A, (HL)            CALCULATE   OFFSET  OF
+    OA2ZAC827           3095                    SLA                A                  SHAPE   ENTRY
+    OA2C 010000         3096                    LD                 BC,0
+    OA2F 4F             3097                    Lo                 C,A
+    OA30 E1             3098                    poe                HL
+    0A31 09             3099                    ADD                HL,BC
+    OA32 23             3100                     INC               HL                 ;(HL) =  SHAPE
+    0A33 7E             3101                    LD                 A, (HL)
+   0A34  DD6E00         3102                    LD                 L, (THISSPRITE+GRAPHICS)
+   0A37  006601         3103                    \0.                H, (THISSPRITE+GRAPHICS+1)
+   OA3A  110001         3104                    Lo                 DE,FIRST  GEN NAME
+   0A30  19             3105                    ADD               HL  ,DE             ;(HL] =  FIRST GEN NAME
+   OA3E  86             3106                    ADD                A, (HL)                 |
+   OA3F  FD7702         3107                    LD                 [SPRITE  _PTR+NAME) ,A
+                        3108
+                        3109  *        PUT VRAM   (0,THIS SPRITE*.SPRITE_INDEX,     SPRITE _PTR,1)
+   OA42  AF             3110                    XOR                A
+   0A43  1600           3111                    Lo                 D,0
+   OA45  DDSEOS         3112                    LD                 E, [THISSPRITE+SPRITE_   INDEX)
+   OA48  FDES           3113                    PUSH               SPRITE PTR
+   OAGA  E1             3114                    pop                HL
+   OA4B  FD210001   =   3115                    LO                 1Y,1               COUNT  OF  ONE  ITEM
+   OAGF  CDIFBE         3116                    CALL               PUT_VRAM
+                        3117
+   OA52  1832           3118                    JR                 EXIT_PUT_SPR
+                        3119  *      ‘ELSE
+   0A54                 3120  DONT PUT    ; PUT SPRITE  OFF  THE  SCREEN  BY SETTING   ITS X AND  EARLY  CLOCK
+                        3121
+                        3122  *        GET VRAM   (0,THIS SPRITE*.SPRITE_INDEX,SPRITE      PTR, 1)
+   OAS4  FDES           3123                    PUSH               SPRITE PTR         ; SAVE INDEX  REGS.
+   0AS6  DDES           3124                    PUSH               THISSPRITE
+   OAS8  FDES           3125                    PUSH               SPRITE PTR
+   OASA  FOES           3126                    PUSH               SPRITE PTR
+   OASC  AF             3127                    OR                 A
+   ASD   1600           3128                    LD                 D,0                                                                                                                ,
+   OASF  DDSEOS  ©  =   3129                    LD                 E,(THIS SPRITE*SPRITE_INDEX]
+   OA62  E1             3130                    PoP                HL
+   0A63  FD210001       3131                    LD                 1Y,1              ;COUNT  OF ONE  ITEM
+   0A67  CD1FBB         3132                    CALL
+                        3133
+                        3134  *        SPRITE_PTR.X  :=  0
+   OA6A  3€00           3135                    LD                 A,0
+   OA6C  FDE1           3136                    Pop                SPRITE PTR
+   OASE  FO7701         3137                    LD                 [SPRITE PTR+X},A
+                         138
+                       3139   *        SPRITE_PTR.COLOR  AND  TAG   := 80H                                                                                        ,
+   0A71  3€80          3140                     LO                A, 80H
+   OA73  FO7703        3141                     LD                 [SPRITE PTR+COLOR_AND_  TAG) ,A
+                       3142
+                       3143   *        PUT VRAM   (0,THIS SPRITE*.SPRITE_INDEX,     SPRITE PTR, 1)
+   OA76  AF            3144                     XOR               A
+   0A77  1600          3145                     LD                D,0
+
+                                                                                                      ;                                                                                      a
+       a          i                                             {          \  |       ee         1          4       ee i          4ee         i                       {           ‘            q

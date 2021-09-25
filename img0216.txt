@@ -1,0 +1,62 @@
+FILE:    EOSABS:EOS       TF             HEWLETT-PACKARD:          EOS UTIL       (c)   Coleco    1983   Confidential!                              Sat,     8   Sep     1984,     23:41             PAGE     212
+
+LOCATION       OBJECT     CODE     LINE         SOURCE     LINE
+
+                                  8254    ;
+                                  8255    ;         Rev    History
+                                  8256    ;         Rev.      Date               Name           Change
+                                  8257    ;           3       Soctii35a          RPD            WP  equate     changed     to   100H
+                                  8258    ;           2   .   2oct155p           RPD            added     initialization       of   reserved      byte    at  OFFFFH        to  O
+                                  8260    ;           oO      aug/sept           VB             original
+                                  8261    ;
+                                  8262
+                                  8263    ;  ENTRY:              __HARD_INIT
+                                  8264    ;  NEEDS:              NOTHING
+                                  8265    ;  RETURNS:            DEFAULT     PCB   ADDRESS     SET  UP   FOR   USE   ([CURRENT     PCB]     =  PCB)
+                                  8266    ;                      HARD   RESET    APPLIED     TO   NETWORK
+                                  8267    ;                      NETWORK     MASTER    NODE    IN  SYNC   WITH    280
+                                  8268    ;                       1 OCB   ALLOTTED      FOR  EACH   DEVICE     ANSWERING      A  STATUS     REQUEST
+                                  8269    ;                       CORRECTLY
+                                  8270    ;                      MASTER    NODE    SCANNING     EACH   OF   THESE    DCB’S    FOR   WORK    TO  DO
+                                  8271
+                                  8272             ;GLB          __HARD_INIT
+                                  8273
+                                  8274             >EXT          CURRENT   PCB
+                                  8275             sEXT          PCB
+                                  8276
+     _FBFE                        8277    _HARD_INIT                             ‘
+      FEFE    CS                  8278              PUSH         BC                                  ; SAVE    BC
+      F8F7    DS                  8279              PUSH         DE                                 :          DE
+      FEFS    ES.                 8260              PUSH         HL                                 :          HL
+      FSFOS   FOES                8281              PUSH         ly                                 ;          LY
+                                  8282
+      F8FB    21FECO              8283              LD           HL ,.PCB                           ;  INIT    OUR   IDEA   OF   CURRENT    PCB
+      FSFE    22FD70              8284              LD           {CURRENT    PCB]   .HL             :
+                                  8285
+      F901   COF94B               8286              CALL         __HARD_RESET_NET                   ;  HARD    RESET    NETWORK
+                                  8287
+      F904    CDFSSF              8288              CALL         __DLY_AFT_HRD_RES                  ;  GOOD    DELAY    AFTER    HARD
+                                  8289                                                              ;   NET    RESET
+                                  8290
+      F907    21FECO              8291              LD           HL ,PCB                            ;  ZERO    OUT   PCB/DCB’‘S
+      FOOA    11FEC1              8292              LD           DE ,PCBti                          ;
+                                  8293    ;         LD           BC,P_SIZE+(15*D       SIZE)-1      ;
+      F90D    01013F              8294              LD           BC ,P_SIZE+(15*D      SIZE)        ; this   byte    count    will   zero    out   PCB,    OCB’s      and    the    reserved        byte
+      F910    3600                8295              LD           {Hi},0                             ;
+      F912    EDBO          _     8296              LOIR                                            ;
+                                  8297
+      F914                        8298    REPEAT   SYNC1:
+      F914    CDF970              8299              CALL         __SYNC
+      F917    20FB                8300              JR           NZ,REPEAT_SYNCt
+                                  8301
+      F919    CDF9SCB             8302              CALL         __SCAN_ACTIVE                         FIND   ALL    THE  ACTIVE     DEVICES     ON   THE   NET
+                                  8303
+      F91C    FDE1                8304              POP          ly                                 ;  RESTORE     IY
+      FOIE    E1                  8305              POP          HL                                 ;              HL
+      FOIF    D1                  8306              PoP          DE                                 :              DE
+      F920    Ci                  8307              PoP          BC                                 ;              BC
+                                  8308
+      F921    C9                  8309              RET
+                                  8310
+
+           i            \                                                                                 \                      {                      \             4                          4            q

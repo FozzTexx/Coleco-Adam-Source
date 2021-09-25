@@ -1,0 +1,48 @@
+HP 640._ Linker                                                  Tue, 10 vous1984,   2:32            Page   7
+
+  READBLOCK          F178       UTILS:N_EOS                    EQSCMNO6:N_EOS
+  READ_EOS           FA9D       EOSUTIL:N_EOS                  EQSCMN_O6:NEOS
+  READFILE           EC17       RD_WT:N_EOS                    EOSCMN_O6:NEOS
+  READ_REGISTER      EO4F       A_uOS0O:N_EOS                  EQSCMN_O6:N_EOS
+  READ_VRAM          EOIA       A_uOS_0O:N_EOS                 EOSCMN_O6:N_EOS
+  RELOC_PCB          FA2F       EOS_UTIL:NEOS                  EOSCMN_O6:NEOS
+  RENAMEFILE         F10F       UTILS:N_EOS                    EOSCMNO6:N EOS
+  REQUESTSTATU       F473       EOS_GEN:N_EOS                  EQSCMN_O6:N_EOS   EOSSTART:N  EOS   EOS TAPE:-NEOS    EOS PRTR-N EOS
+                                                               EOSKBO:N EOS   UTILS:N_EOS
+  REQKBD_STAT     P  F4CB       EOSKBD:N_EOS                   EOSCMN O6:N_E0S
+  REQPR_STAT      P  F502       EOSPRTR:N_EOS                  EQSCMNO6:N_EOS
+  REQTAPE STAT    Pp F507       EOSTAPE:N_EOS                  EOSCMN_O6:N_EOS
+  RESETFILE       p  EB6C       OPENS:N_EOS                    EQSCMN_O6:N_EOS
+  SCAN_ACTIVE     Pp FOCB       EOSUTIL:N_EOS                  EOSCMN O0:N_EOS
+  SCAN_FOR_FILE   P  EFOB       UTILS:N_EOS                    EOSCMN_O6:N_EOS
+  SETUP_PR_BUFF   Pp FSSE       EOSPRTR:N_EOS
+  SETDATE         P  EECS       DATES:N_EOS                    EOSCMN 06:N_EOS
+  SET_FILE        p  E651       DIR_HANOL:N_EOS                EOSCMN 06:N_EOS   UTILS:N_EOS   OPENS:N_EOS
+  SOFT_INIT       Pp F922       EOSUTIL:N_EOS                  EOSCMN_O6:N_EOS
+  SOFT_RESDEV     Pp FASD       EOSUTIL:N_EOS                  EOQSCMO6:N_EOS
+  SOFT_RESKBD     P  FAS1       EOS_UTIL:N_EOS                 EOSCMN06:N_EOS
+  SOFT_RESPR      p  FASS       EOS_UTIL:N_EOS                 EOSCMN_O6:N_EOS
+  SOFT_RES_TAPE   Pp FASS       EOS_UTIL:N_EOS                 EOSCMN_O6:N_EOS
+  SOUNDS          Pp E406       A_uOS_00:N_EOS                 EOSCMN_O6:NEOS
+  SOUND_INIT      Pp E3AB       A_u0S_00:N_EOS                 EOSCMN_O6:N_EOS
+  START_PR_BUFF   Pp F580       EOSPRTR:N_EOS                  EOSCMN_O6:N_EOS
+  START_PR_CH     P  F560       EOSPRTR:N_EOS                  EOSCMN_O6:N_EOS
+  START_RD 1 BL   Pp FAC6       EOSBLK:N_EOS                   EOSCMN_O6:N_EOS
+  START_RD_CH_D   P  FB86       EOS_CHAR:N_EOS                 EOSCMN_O6:N_EOS   EOSKBD:N_EOS
+  START_RD_KBD    P  F4D0       EOSKBD:N_EOS                   EOSCMN_O6:N_ECS
+  START_WR1  BL   Pp FAFF       EOSBLK:N_EOS                   EQSCMNO6:N_EOS
+  START_WR_CH_D   p  FBC2       EOSCHAR:N_EOS                  EQSCMN_O6:N_EOS   EOSPRTR:N EOS
+  SWITCHMEM       p  E185       A_uOS_00:N_EOS                 EOSCMN_O6:N_EOS
+  SYNC            Pp F970       EOSUTIL:N_EOS                  EOSCMNO6:N EOS
+  TRIM_FILE       P  F241       UTILS:N_EOS                    EOSCMNO6:N_EOS
+  TURN_OFF_SOUN   P  E3D1       A_uO0S_00:N_EOS                EOSCMNO6:N EOS
+  UPDATE_SPINNE   p  E2A4       A_uOS0O:N_EOS                  EOSCMNO6:N_EOS
+  WRITEBLOCK      Pp FIE6       UTILS:N_EOS                    EOSCMNO6:N_EOS
+  WRITEFILE       +) ED8SF      RDWT:N_EOS                     EOSCMN_O6:N_EOS
+  WRITE_REGISTE   P  E034       A_uOS_00:N_EOS                 EOSCMNO6:N EOS
+  WRITE_VRAM      Pp EOOO       A_uOS_00O:N_EOS                EOSCMN_O6:N_EOS
+  wR1 BLOCK       P  FAB2       EOSBLK:N_EOS                   EOSCMNO6:N EOS    UTILS:N_EOS
+  wR_CH_DEV       p  FB75       EOSCHAR:N_EOS                  EOSCMNO6:N EOS    EOSPRTR:N_EOS
+  wRSPR_ATTRIB    p  E1C5       A_u0S_00:N_EOS                 EOSCMN_O6:N_EOS
+
+                                                                                             vu  vvVyT wv

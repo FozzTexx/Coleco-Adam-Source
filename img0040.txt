@@ -1,0 +1,51 @@
+FILE.   EOSABS:  EOS TF           HEWLETT-PACKARD    -  A ape 3fy                  1983   Conf  identia!                        Sat,     8  Sep  1984,    23   38        PAGE     6
+
+LOCATION    OBJECT   CODE   LINE       SOURCE    LINE
+
+                            1369   :
+                            1370      Name:                 WRITE REGISTER
+                            1371
+                            1372      Function:             Writes  a data   byte   vaiue    to  a destred    VDP  registe:
+                            1373
+                            1374      Entry:                8 - register    number    to  write   to
+                            1375                            C - data  byte   value    to  be  written
+                            1376
+                            1377      Exit:                 if register   number    =  0  or  ft, the  respective    byte
+                            1378                            of the  VDP_MODE   WORD    is  updated.
+                            1379
+                            1380      Registers     used:   A,BC,E
+                            1381
+                            1362      Size:                ROM  - 27  bytes
+                            1383                            RAM - O  bytes
+                            1384
+                            1385      _Comments:            This version    of  WRITE  REGITER      1s provided    for  stand    alone    operation.
+                            1386
+                            1387      Comparision:          left out  pascal    entry   point
+                            1388                           code  compacted
+                            1389                           edited   for  documentation
+                            1390
+     E034                   1391   __WRITE_REGISTER:
+     E034   59              1992                      LD        E,C                               ;Move   data  to  E— register
+     £035   3AFC29          1393                      LD        A,{VDOP_CTRL_  PORT]              -Get  the  control    port    value
+     E038   4F              1394                      LD        C,A                               ;Put   in Cc
+     E039   EDSS9           1395                      ouT       (C},E                             ;Output   data   value.
+     E038   78              1396                      LO        A,B                               ;Get  port   #  INA
+     EO3C   F680            1397                      OR        80H                               ;Set  high   bit  for   277772?
+     EO3E   ED79            1398                      OUT       [C],A                             ;Out  to  VOP
+     E040   768             1399                      LD        A.B                               ;Get  back   port  value
+     E041   B7              1400                      OR        A                                 ;Check   for  zero
+     E042   78              1401                      LD        A,E                               ;Put  data   in  accumulator
+                            1402
+     E043   2004            1403                      JR        NZ,CHK_REG   1                    :1f  not  zero   then   see   if  register     1
+     E045   32FO061         1404                      LD        [VDP_MODE_WORD].A                 ;If  register    zero   was   written     to then
+                            1405                                                                  ; Save   data   in VDP_MODE    WORD
+     E048   c9              1406                      RET                                         sExit
+                            1407
+     E049                   1408   CHK_REG_1:
+     E049                   1409                      DEC       B                                 ;Check   for  register     1  in  B
+     EO4A                   1410                      RET       NZ                                -If  not  then   return
+     E046                   1411                      LO        {VDOP_MODE  WORD+1],A             >If  so  then  store   data    in  VOP_MODE    WORD?!
+     EO4E                   1412                      RET                                         -Exit
+                            1413
+
+                                                                   @e@¢@e @e@e @e@¢ @e @e@eae me @e@+Ge @¢@ewe @e@e @e

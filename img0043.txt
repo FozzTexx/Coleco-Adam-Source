@@ -1,0 +1,55 @@
+                                                                                          ¥
+FILE:  ©.se  sv:EOS TF            HEWLETT-PACKARD:        A_uOS   OO    {(c) Coieco    1.5)    onfidentia}                         Sat.     8  Sep  1984,   22°38                   3g
+
+LOCATION  OBJECT    CODE     LINE        SOURCE    LINE
+
+                             1478   ;
+                             1479   .
+                             1480   ;   Name:                  INIT TABLE
+                             1481 =;
+                             1482   ;   Function:              INIT TABLE     initializes     the addresses     cf  the  VRAM    tabies.
+                             1483   ;                          The passed    address    is  converted    to  tre   correct    format    needed
+                             1484   ;                          to setup    the  VOP  address    registers.     ‘he  following     tabie    codes
+                             $485   ;                          are use   to   itndentify  which   table    address    is being    setup:
+                             1486   ;
+                             1487   ;                            O  - SPRITE    ATTRIBUTE    TABLE    (SAT)
+                             1488   ;                            1  - SPRITE    GENERATOR    TABLE    (SGT)
+                             1489   ;                            2  - PATTERN    NAME   TABLE         (PNT)
+                             1490   ;                            3  - PATTERN    GENERATOR    TABLE   (PGT)
+                             1491   ;                            4  - PATTERN    COLOR   TABEL        (PCT)
+                             1492   ;
+                             1493   ;   Entry:                A  -  table   code   (see  above)
+                             1494   ;                         HL  -  table   address
+                             1495   ;
+                             1496   ;   Exit:                 None.
+                            1497    ;
+                             1496   ;   Registers     used:   AF,  BC,   HL,  IX,   IY
+                            1499    ;
+                            1800    ;   Size:                 ROM  -  99  bytes
+                            1501    ;                         RAM  -  O  bytes
+                            #502    ;
+                            1503    ;   Comments:             This   version    of  INIT_TABLE    is  provided    for   stand   alone    operation.
+                            1504    ;
+                            1505    ;   Comparision:           jleft out  pascal    entry   point
+                            1506    ;                         code  compacted
+                            1507    ;                         edited   for   documentation
+                            1506    ;
+    E066                    1SO9     INIT   _TABLE:
+    EO66  4F                Sti                         LD         C,A                             ;BC   =  tndex   into  VRAM_ADDR_TABLE         table   code
+    EO67  0600              1912                        LO         8,0
+    E068  0021FDE64         1513                        LD         IX,VRAM_ADDR_TABLE              ;point    to  start   of  VRAM_ADOR_TABLE
+    EO6D  DODOS             1514                        ADD        IX, BC                          ;add   in  the   index
+    EO6F  ODO0S             1515                        ADD        IX,BC
+    E071  DD7500            1516                        LO         {IxX+0]}],L                     -save   the  address
+    EO74  DD7401            1917                        LO         [IX+1],H
+                            1518                                                                   ;CHECK   VDP   GRAPHICS    MODE
+    EOQ77T3AFO61            1519                        LO         A,{VDP_MODE    WORD]            ;'f  VDOP_MODE  WORD    bit   t   mode   bit   3   =  1
+    EQ7TA CB4F              1520                        BIT        1,8
+    EO7C  2827              1521                        JR         Z,INIT_TABLE8O
+                            1522                                                                   ;   ts   graphics     mode   2,  look   for   PGT  or  PCT   first
+    EO7E  79                15293                       LO         A,C                             ;   get  the   table   code
+    EO7F  FEO3              1524                        cP         3                               ;   if  table   code   =  PGT
+    E081  2806              1525                        JR         Z,CASE  OF  GEN                 :      then  setup   PGT   address
+    E083  FEO4              1526                        CP         4                               :      {f  table   code   = PCT
+    EQ6S  2810              1§27                        JR         Z,CASE  OF  COLOR               :      then  setup   PCT   address
+    EO87  181C              1528                        JR         INIT  TABLE8O                   :     else   not   a special     case,   use   normal   setup

@@ -1,0 +1,57 @@
+               COLECOVZISION  PROGRAMMERS’     AANJAL
+               Rev.  5                          .
+               ©Coleco  Industries,    fre.   1982                                     .
+               CONFIDENTIAL   DOCUMENT    ~ DO  NOT COPY                       Page    1
+
+                                                    APPENDIX    FP
+
+                                                    OS  SYMBOLS
+
+                              ACTIVATE            EQU  01FF7H         3     os:o0s
+                              ACTIVATEP           EQU  01F64H         3     0S:0S
+                              ADD816              EQU  001B1H         $     0S: 0s
+                              AMERICA             EQU  00069H         3     0S:0S
+                              ASCII_TABLE         EQU  00046AH        3     0S:OSs
+                              ATN_SWEEP           EQU  0012FH         }     os:os
+                              CARTRIDGE           EQU  08000H         5     os:os
+                              CONTROLLER_MAP      EQU  08008H         3     os :os
+                              CTRL_PORT_PTR       EQU  01D43H
+                              DATA_PORT_PTR       EQU  01D47H
+                              DECLSN              EQU  00190H         ;     os:os
+                              DECMSN              EQU  0019BH         3     os:os
+                              DECODER         |   EQU  01F79H         j     os:OS
+       10                     DEFER_WRITES        EQU  073C6H.        }     0S:0S
+                              EFXOVER             EQU  O02EEH         }     os:OS
+       I]                     ENLARGE             EQU  01F73H         }     os:os
+                              ENLRG               EQU  01D6CH         3     0s:OS
+       12                     FILL_VRAM           EQU  01F82H         F     os:os
+                              FREE_SIGNAL         EQU  01FCAH         ;     os:0S
+       15                     FREE_SIGNALP        EQU  01F9DH         }     os:os
+                            FREQ    SWEEP         EQU  OOOFCH         }     0s:OS
+       14                     GAME_NAME           EQU  08024H         ;     0s:os
+                              GAME _OPT           EQU  01F7CH         ;     oS:0S
+       15                     GET_VRAM            EQU  01FRBH         ;     oSs:os
+                              GET_VRAMP           EQU  01FS8EH        3     0S:0S
+       16                     INIT_SPR_ORDER      EQU  O1FC1H         }     0S:0S
+                              INIT_SPR_ORDERP     EQU  01F94H         }      os:os
+       7                      INIT  TABLE         EQU  01FBS8H        }     os:os
+                              INIT_TABLEP      -  EQU  01FS8BH        }     oS :0Os
+       18                     INIT_TIMER          EQU  01FC7H         3     os:os
+                              INIT_TIMERP        -EQU  O1F9AH          3     os:OS
+       19                     INIT_WRITER         EQU  O1FESH         ;     0s:0Ss
+                              INIT_WRITERP        EQU  O1FAFH          3     0s:OS
+      20                      IRQ_INT_VECT        EQU  0G01EH          }     os:os
+                              LEAVE  _EFFECT      EQU  001DS5H         3     0s:OS
+       21                     LOAD_ASCII       ~       01F7FH          3     o0s;0s
+                              LOCAL  _SPR_TBL     EQU  08002H          }     os:0S
+       22                     MODE_1              EQU  01F85H          ;     os:os
+                              MSNTOLSN            EQU  001A6H          3     os:os
+       23                     MUX_SPRITES         EQU  073C7H          }     os:os
+                               NMI_INT_VECT       EQU  08021H          ;     os:0S
+       24                     NUMBER_  TABLE      EQU  0006CH          }     os:0Ss
+                              PLAY_IT             EQU  O1FF1IH         3     0s: 0S
+       25                     PLAY_ITP            EQU  O1F BSH         }     os:0S
+                               PLAY_SONGS         EQU   01F61H         ;     0s:OS
+       26
+
+s&s     ¢€   j£&     €§   &       F&F   F&F    SF   F&F    FSF     EF     o6oow   F&F     Ehaw  ehF &!   NWF  ow

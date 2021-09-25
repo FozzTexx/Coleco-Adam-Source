@@ -1,0 +1,63 @@
+FILE: OS_7PRIME:pOS           HEWLETT-PACKARD:   PUT_SEMI  (c)  Coleco,   1982  CONFIDENTIAL                    Fri,  18  May  1984,  16:19       PAGE    52
+
+LOCATION  OBJECT  CODE  LINE       SOURCE  LINE
+
+                        2319
+    0780                2320   END iF_1
+                        2321
+    0780  7E            2322           LD  A, (HL)                 7A  := KXPAT POS
+                        2323
+                        2324
+    0781  FEBO          2325                     cP                80H
+    0783  280F          2326                     JR                Z,END_IF  2
+                        2327
+                        2328   ;       IF  [.A,WE, 80H)            7THEN  THERE   IS ANOLD  SCREEN
+    0785  5E            2329             LD E,  (WL)                 ;E  :=  XPAT  POS
+    0786  23            2330              TwC WL
+    0787  56            2331             LO  D, CHL)                 ;D  :=  Y_PAT_POS
+    0788  23            2332              INC WL
+    0789  4E            2333             LO  C, (Hi)                 3C  := X_EXTENT
+    076A  23            2334              INC WL
+    078B 46             2335             LD  B, (WL)                 7B  := Y_EXTENT
+    078C 23             2336              INC WL                     sHL  POINTS  TO  FIRST  NAME  IN LIST
+                        2337
+   078   DDES           2338                   PUSH                Ix                 ;SAVE  OBJECT  POINTER
+                        2339
+   078F  CD0808        2340              CALL  PUTFRAME              RESTORE   OLD  SCREEN   TO  DISPLAY
+                       2341
+   0792  DDE1          2342                    POP                 IX                 ;RESTORE   OBJECT  POINTER
+                       2343
+   a7,                 2344   END IF 2
+                       2345
+                       2346   ;        ENDIF
+   0794  E1            2347   Sv1:     POP WL                      sHL  := ADDR  OF  FIRST  NAME  IN ERAME
+   0795  D1            2348            POP DE                      ;DE :=  Y,X PAT _POSs
+   0796  C1            2349            POP BC                      ;BC :=  Y,X EXTENTs
+   0797  cS            2350            PUSH  BC
+   0798  DS            2351            PUSH  DE
+   0799  £5            2352            PUSH  HL
+   O79A  006605        2353            LD H, [IX+5)                sHL :=  OLD SCREEN   ADDRESS
+   O79D  DD6E04        2354            LDL,  (1X+4)
+                       2355
+   O7A0  3€70          2356                     LD                A,70H
+   O7A2  BC            2357                     cP                H
+   O7A3  3803          2358                     JR                C,END  IF 3                                                                                                            >
+                       2359
+                       2360   ;        IF (.4,LT,  70H)           ;THE  OLD SCREEN   NOW  IN  FREE  BUFFER
+   O7A5  2A8006        2361              LD HL, (WORK BUFFER)        ;THEREFORE,   MOVE  BACKGROUND   TO  BUFFER
+                       2362
+   O7A8                2363   END_IF3
+                       2364
+                       2365   ;       ENDIF
+   O7A8  73            2366           LD  {HL),E                  ;OLD SCREEN   +    0  := X_PAT_POS
+   O7A9  23            2367           INC  WL
+   O7AA  72            2368           LD  (HL),D                  ;         "        1  := Y_PAT POS
+   O7AB  23            2369           INC  HL                                                                                                                        ‘
+   O7AC  71            2370           LO  (WL},C                  ;         "        2  := X_EXTENT
+   O7AD  23            2371           INC  HL
+   O7AE  70            2372           LO  (HL1,8                  :         "        3  := Y_EXTENT
+   O7AF  23            a              IWC  WL                     sHL  := ADDRESS   TO STORE   NAMES
+                       2374
+   0780  DDES          2375                     PUSH              1x                 sSAVE  OBJECT  POINTER
+
+                                        |                                                                                                                                             Ss           SS      |

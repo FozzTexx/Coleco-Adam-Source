@@ -1,0 +1,10 @@
+FILE: OS_7PRIME:pOs            HEWLETT-PACKARD:    ACTIVATE   (c)  Coleco,    1982   CONFIDENTIAL                     Fri,  18  May  1984,   16:19       PAGE   44
+
+LOCATION  OBJECT   CODE   LINE       SOURCE  LIWE
+    0618  FI              1943                    Pop                 AF
+    061C  00              1944                     RET                Te
+    061D  3€01            1945                     LD                 A,1                  ;SIGNAL   SPRITE  PRIN  GEN  FILL
+    061F  CD1C27          1946                    CALL               PUT  _VRAM”
+    0622  C9              1947                     RET
+                          1948
+                          1949   PROG

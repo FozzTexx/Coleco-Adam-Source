@@ -1,0 +1,61 @@
+FILE:  EOSABS:E0S_TF              HEWLETT-PACKARD:     EOS  MKDIR    (c)  Coleco    1983  Confidential                        Sat,    8  Sep  1984,  23:41         PAGE  156
+
+LOCATION   OBJECT   CODE    LINE        SOURCE  LINE
+
+                            6453
+    F3AF                    6454    ZERO OUT BUFFER:
+                            6455
+    F3AF   C5               6456           PUSH       BC
+    F3BO   05               6457           PUSH       DE
+    F381   €5               6458           PUSH       HL
+                            6459
+    F3B2   2AFDFF           6460           LO         HL,{FCB_DATA_ADOR}               ; POINTER TO   1K BUFFER
+    F3BS   EDSBFOFF         6461           LD         DE, ([FCB_DATA_ADDR}
+    F3B9   13               6462           INC        DE
+    FIBA   O103FF           6463           LD         BC, 1023
+                            6464
+    F3BD   3600             6465           LD         {HL]},0                          ; ZERO IT OUT
+                            6466
+   F3BF    EDBO             6467           LDIR
+                            6468
+    F3C1   E1               6469           POP        HL
+    F3C2   D1               6470           POP        DE
+    F3C3   Ci.              6471           POP        BC
+                            6472
+    F3C4   C9               6473           RET
+                            6474
+                            6475
+    F3C5S                   6476    WRITE 1 BLOCK:
+    F3C5   C5               6477           PUSH       BC
+                            6478
+    F3C6   2AFDFF           6479           LO         HL,[FCB_DATA_   ADDR)           ;  ADDRESS OF  1K  BUFFER
+    F3C9   3AFD87           6480           LD         A, [SECTOR_NO}                  ;  GET SECTOR  NUMBER
+    F3CC   SF               6481           LD         E,A                  .
+    F3CD   1600             6482           LD         0,0
+    F3CF   010000           6483           LO         BC,O
+                    |       6484
+    F3D2   3AFD72           6485           LD         A,{DEVICE   ID)
+                            6486
+    F305   CDF1E6           6487           CALL       WRITE  BLOCK                    ;  WRITE IT OUT
+                            6488
+    F3D8   C1               6489           PoP        BC
+                            6490
+    F3D9   C9               6491           RET
+                            6492
+                            6493
+    F3DA                    6494    INITIAL_DIRECTORY:
+    F3DA   2020202020       6495           DEFB       ,
+    F3DF   2020202020
+    F3E4   2020
+    F3E6   80               6496           DEFB       100000008
+    F3E7                    6497   DIRECTORY CHECK:
+    F3IE7  SSAAOOFF         6498           DEFB       O55H, OAAH  ,OOOH, OF FH
+    F3EB   0000             6499           DEFB       0,0
+    F3ED   O000             6500           DEFB       0,0
+    F3EF   O0O00            6501           DEFB       0,0
+    F3F1   O00000           6502           DEFB       0,0,0
+                            6503
+    F3F4   424F4F5403       6504           DEFB       ‘BOOT’  ,ETX,’
+    F3F9   2020202020
+    F3FE   2(
+    F400   8%               6505           DEFB       ATTR PERMANENT     92  ATTR_  SYS.

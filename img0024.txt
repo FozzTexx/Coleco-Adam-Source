@@ -1,0 +1,47 @@
+FILE: EOSABS:EOS TF         HEWLETT-PACKARD: INT_VCTRS  (c) Coleco 1983 Confidential                       Sat.   8  Sep  1984,  23:38        PAGE   20
+
+LOCATION OBJECT  CODE   LINE     SOURCE LINE
+
+                         689  NAME “Rev OO - RPD*
+                         690
+                         691
+                         692 SAHSSSSSEHSSSESSHESSHSESHSSEHSHSHSHKESESHSKESSHETHESCHSESSESHE
+                         693
+                         694                 ORG EOSGiB_TBL
+                         695
+                         GIG SesseeesseeeeesSSSSHH SSH HSSSHEHHEHHEHESHESS
+                         697 ;
+                         698 ; NOTE: these are defined globa! in £0S_COMN
+                         699 ;
+                         700°;                     ;GLB     VECTOR_O8H
+                         701;                      ;GLB     VECTOR 10H
+                         702 ;                     ;GLB     VECTOR_18H
+                         703 ;                     ;GLB     VECTOR20H
+                         704 ;                     ;GLB     VECTOR28H
+                         705 ;                     ;GLB     VECTOR30H
+                         706 ;                     ;GLB     VECTOR38H
+                         707 ;                     ;GLB     VECTOR66H
+                         708 ;
+    FBFF C9              709 VECTOR_O8H      RET             irst 8
+    FCOO OO              710                 NOP
+    FCO! OO              711   |             NOP
+    FCO2 C9              712 VECTOR_10H      RET             ;rst 10
+    FCO3 OO              713                 NOP
+    FCO4 OO              714                 NOP
+    FCOS C9              715 VECTOR_18H      RET             :rst 18
+    FCO6 OO              716                 NOP
+    FCO7 OO              717                 NOP
+    FCOB C9              718 VECTOR20H       RET             ;rst 20
+    FCOS OO              719                 NOP
+    FCOA OO              720                 NOP
+    FCOB C9              721 VECTOR_28H      RET             :rst 28
+    FCOC OO              722                 NOP
+    FCOO OO              723                 NOP
+    FCOE C9              724 VECTOR_30H      RET              ;rst30
+    FCOF OO              725                 NOP
+    FC10 OO              726                 NOP
+    FC11 C9              727 VECTOR38H       RET              :rst38
+    FC12 OO              728                 NOP
+    FC13 OO              729                 NOP
+    FC14 ED45            730 VECTOR 66H      RETN             ;nmivector
+    FC16 OO              731                 NOP

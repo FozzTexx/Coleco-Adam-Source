@@ -1,0 +1,63 @@
+FILE:  OS 7PRIME:pOS              HEWLETT-PACKARD:     PUT  SPRITE    RTN  (c)  Coleco,    1982    CONFIDENTIAL               Fri,  18 May  1984,    16:20        PAGE    60
+
+LOCATION   OBJECT    CODE    LINE      SOURCE    LIWE
+
+                            2747
+                            2748   * THIS  MODULE   CONTAINS    CODE   FOR  THE   PUTISPRITE    AND  PUTOSPRITE
+                            2749   * ROUTINES.    THESE   ROUTINES    TURN  OUT   TO  BE ESSENTIALLY     THE  SAME   CODE
+                            2750   * WITH  TWO   SLIGHTLY   DIFFERENT     ENTRY   POINTS
+                            2751
+                            2752
+                            2753  *  IT  IS CALLED   WITH   THE  ADDRESS    OF  THE   SPRITE   OBJECT   IN  THE  IX  REGISTER.
+                            2754
+                            2755  *  THE  FORMAT   FOR  SPRITE   OBJECTS    IS
+                            2756
+                            2757  * SPRITE   OBJECT    = RECORD
+                            2758  *  GRAPHICS:     “SPRITE  GRAPHICS
+                            2759  *    STATUS:“SPRITE  STATUS
+                            2760  *   SPRITE    INDEX:BYTE                          {SPRITE   NAME  TABLE    INDEX  OF  THIS   SPRITE)
+                            2761  *  END  SPRITE  OBJECT
+                            2762
+                            2763  * SPRITE   GRAPHICS    =  RECORD
+                            2764  *  OBJECT    TYPE:BYTE
+                            2765  *    FIRST  GEN   NAME :BYTE                      (WAME   OF  FIRST   SPRITE  GENERATOR)
+                            2766  *    PTRN _POINTER:“PATTERN      GENERATOR        (POINTER    TO  ROM'ED   GENERATORS)
+                            2767  *    WUMGEN:BYTE                                  (WUMBER   OF  ROM'ED   GENERATORS)
+                            2768  *    FRAME  TABLE   PTR:“ARRAY[O..nn)        OF  FRAME   {TABLE   OF ANIMATION    FRAMES)
+                            2769  * END   SPRITE  ROM  GRAPHICS
+                            2770
+                            2771  *  SPRITE_STATUS      =  RECORD
+                            2772  *    FRAME:BYTE                        {CURRENT    ANIMATION    FRAME)
+                            2773  *    X_LOCATION:    INTEGER
+                            2774  *    Y_ LOCATION:   INTEGER
+                            2775  *   WEXT  GEW:BYTE                     CINDEX   OF  FREE   SPACE   IN  GENERATOR   TABLE)
+                            2776  * END  SPRITE    STATUS
+                            277
+                            2778  *  FRAME  =  RECORD
+                            2779  *                                      {SPRITE'S    COLOR   FOR  THIS   FRAME)
+                            2780  *                                      (THIS   FRAME'S   OFFSET    FROM  NAME  FROM   FIRST  GEN NAME)
+                            2781  * END   FRAME
+                            2782
+                            2783  * SPRITE   =  RECORD
+                            2784. *    Y:BYTE
+                            2785  *    X:BYTE
+                            2786  *    WAME:BYTE                                                                                                                                                             >
+                           2787   *    COLOR_AND_TAG:BYTE
+                            2788  * END  SPRITE
+                           2789
+                           2790   *keedenaaaTanasadeeeeeeeeNAAeeneeAeKAeeeeAeeeehaeeeteeeeeeeeeanteene
+                           2791
+                           2792   Sheeneaewnnnenenneeeeeenete         DICTIONARY     **teeeeneeeneneneeeneneeeanee
+                           2793
+                           2794  ;                    EXT                 WORK   BUFFER
+                           2795   * WORK BUFFER     IS  A POINTER    IN  CARTRIDGE    ROM,   LOCATED   AT  8006H,   TO THE
+                           2796   * FREE   BUFFER   AREA  TO  BE  USED   BY  THE  GRAPHICS    ROUTINES.
+                           2797
+               <OO0F>      2798   SPRITE PTR          EQu                   ly                                                                                                          .
+                           2799   * SPRITE   PTR   IS A  POINTER   TO  THE   NEW  SPRITE   NAME   TABLE  ENTRY   BEING
+                           2800   * BUILT   BY  THIS  ROUTINE.
+                           2801
+               <OOOE>      2802   THIS SPRITE         EQu                   Ix
+                           2803   * THIS  SPRITE    IS A  POINTER    TO  THE  SPRITE   OBJECT   BEING   PUT
+
+                                                                                            {                       ‘                                    |  Sse       ee          {ee           ee           el          Oa

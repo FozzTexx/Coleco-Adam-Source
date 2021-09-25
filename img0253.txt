@@ -1,0 +1,64 @@
+             |
+       FILE:  ~-5ABS:EOS  TF          CROSS REFERENCE   TABLE               PAGE  24.
+
+      LINES     SYMBOL            TYPE      REFERENCES
+
+         791   MEM CNFGO7
+         794   MEM_CNFGOS
+         797   MEM CNFGO9
+         800   MEM_CNFGOA
+         803   MEM _CNFGOB
+         806   MEM CNFGOC
+         809   MEM CNFGOD
+         812   MEM _CNFGOE
+         815   MEM CNFGOF
+         841   MEM SWITCH   PORT        1953
+        3445   MODBO                    3281,3300, 3330, 3362,  3384, 3419
+        5676   MODE CHECK               4309,4668 ,4936
+        1041   MODEDIRTY                4443,4525
+        1040   MODEDIRTY   BIT          4539 4983, 5021,5073
+        1036   MODEEXEC                 1037
+        1043   MODELAST
+        1042   MODE LAST  BLOCK         4369,4541, 4672,4745,   4788 ,4947, 4986
+        1037   MODEMAX                  5687
+        1044   MODE MODE                4355,4555 ,5039, 5594  ,5642,5684
+        1033   MODE READ                1034
+        1039  MODE  _REMAINOER          3681,3788 ,3971,3979
+        1032   MODEUNUSED               1033 4396 ,4466  ,5222
+        1035   MODEUPDATE               1036,5040
+        1034   MODEWRITE                1035,4356, 4556
+         531   MOD_FILE_COUNT           6200,6236
+        3967   MOREBLOCKS               3950,3953, 3956, 3959
+        5005  MORE FILE                 4987
+        5009  MORE FILE1                5007
+        7534   MOVEDOWN                 7953,7960
+        7608   MOVEHOME                 7958
+        7577   MOVE _LEFT               7952,7962
+        7556   MOVE RIGHT               7951
+        7520   MOVE_UP                  7954
+         320   MSNTOLSN
+        1059   NAME_LENGTH              5503,5605
+        1821   NEGTV                    1813
+        8363   NET_DELAY_COUNT          8374
+         844 NET  RESET   PORT          8369
+        8376  NET_RES  DELAY            8381
+        7489   NEWCURSOR                7515,7548
+         589   NEW_HOLE SIZE            3986,4073,6161,6248
+         586   NEW HOLE START           3995,3999 ,4003 ,4007  ,4077 ,4079 ,4081, 4083
+        5504   NEXTCHAR                 5513
+        5607   NEXT_CHAR1               5616
+        5457   NEXT_CHECK               5464
+        3905 NEXT  DIR                  3922
+        3769   NEXT_ENT                 3826
+        2345   NEXT_IX                  2341
+        2492   NLEN                     2536,2539, 3278
+        1694  NOT COLOR_TBL_A           1687
+        9402 NOT  COMPLETED             9394
+        2348  NOT _CONTROLLER_          2324
+        5825   NOTDELETED               5811
+        5475 NOT  DIR                   5460
+        4066   NOT_END                  4026
+        6263 NOT  HOLE                  6193
+        6759   NOT_IDLE                 6751
+
+rPPPrPPPrPrrPrrrPrYrrrrrrPrrrrrrrrrrrrrr>r?>ryrrrrr>r?rrrrrrrrrrr>rrrrrrrr>>rr>                                                            r>

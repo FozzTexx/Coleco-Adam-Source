@@ -1,0 +1,52 @@
+FILE:  EOSABS:E0S    TF         HEWLETT-PACKARD:      UTILS       (c) Coleco   1983   Confidential                       Sat,    8  Sep  1984,  23:40       PAGE  128
+
+LOCATION   OBVECT    CODE  LINE         SOURCE  LINE
+
+                           §182   ;
+                           §183   ;   Rev.   1   O7octSiSp    RPD   made  _ DELETE  FILE    check   for  protected    file
+                           §1864  ;
+                           §185
+                           § 186           ;GLB      __FMGR_INIT,SCAN    FOR_FILE,STRCMP,MODE       CHECK
+                           § 187           ;GL8      READ_BLOCK   WRITE  BLOCK  ,BASECMP,    WRITE   BLOCK
+                           $188            ;GL8      __ MODE CHECK,   READ   BLOCK,   SCAN   FOR_FILE
+                           $189            ;EXT      __RD_1  BLOCK,   WR   1 BLOCK,   REQUEST    STATUS
+                           $190            ;EXT      _  QUERY FILE,   SET   FILE
+                           §191            sEXT      QUERY BUFFER,FILENAME     CMPS
+                           $192             EXT      FCB_HEAD_ADOR,FCB_DATA_ADDR
+                           §193            sEXT      USER  _NAME ,BUFSTART
+                           $194             EXT      RETRY  COUNT
+                           §195            sEXT      FILE COUNT   ,MOD_FILE  COUNT
+                           $196                                                                                                                                              ;
+                           §197
+                           S198   ;----- enon room nenee- wt tt     nn     ne  nr       ee     ne     eee eee  eee
+                           §199   ;
+                           $200   ;  __FMGR_INIT:   sets  up  everything   to  start  with.
+                           $201   ;
+                           6202   ;  ENTRY  PARAMETERS:   DE  contains  address    to place   FCB  buffers,
+                           $203   ;                  and  HL contains   address    to place   FCS  headers.
+                           $204   ;
+                           $205   ;  EXIT  PARAMETERS:   none.
+                           $206   ;
+                           BQOT   srr                                   rr       rr        tec   re rete   nnneen-
+                           $208
+    EEEA                   5208
+    EEEA   EDS3FOFF        5210             LD       [FCB_DATA_ADDR),DE     ;SAVE   BUFFER   ADDRESS
+    EEEE   22FDFD          $211             LO       {[FCB_HEAD_ADDR).HL    ;SAVE   HEADER   ADDRESS
+                           8212
+    EEFt   CS              $213             PUSH     BC                  ;SAVE  REGISTERS
+    EEF2   DS              $214             PUSH     DE
+    EEFS   ODES            §215             PUSH     Ix
+                           $216
+    EEFS  0603             §217             LO       8,NUM_FCBS          ;SET TO  #  FCBS
+    EEFT   110023          $218             LO       DE ,FCB_LENGTH      ;SET FOR   AODITION
+    EEFA   DD2AFOFD        $219             LO       IX,{FCB_HEAD   ADOR]   ;GET  AODR   OF  OTH  FCB
+                           $220
+    EEFE                  $221   INIT_LOOP
+    EEFE  00361800        §222              Lo       [IX+FCB_  MODE], MODE UNUSED    ;SHOW   THE  FCB  IS  EMPTY
+    EFO2  0D19            §223              ADD      IX ,DE             ; ADVANCE   POINTER   TO  NEXT  FCB
+    EFO4   10F8           §224              OUNZ     INIT _LOOP         ;LOOP   FOR  ALL  FCBS
+                          §225
+    EFO6  DDE!            $226              POP      IX                 ;RESTORE    REGISTERS
+    EFOS8 D1              5227              PoP      DE
+    EFOS  Ci              5228              POP      BC
+    EFOA  C9              $229              RET

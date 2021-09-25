@@ -1,0 +1,34 @@
+             sss                                   eee                             eee                              ee                                eS
+
+FILE: OS 7PRIME:pOS         HEWLETT-PACKARD:  PUTSEMI   (c) Coleco, 1982   CONFIDENTIAL                  Fri,  18  May 1984,  16:20        PAGE   59
+                                                                                                                                                                                                              |
+LOCATION OBJECT  CODE  LINE       SOURCE LINE
+
+    0803 2804          2718                   JR               2,ELSE12
+                       2719
+    0805 16FF          2720             LO D,OFFH
+                       2721
+    0807 1802          2722                   UR               END_IF12
+                       2723
+                       2726  ;        ELSE
+                       2725
+                       2726  ELSE12
+                       2727
+    08D9 1600          2728             LO 0,0
+                       2729  ;        ENDIF
+                       2730
+                       2731  ENOIF  12
+                       2732
+    0808 19            2733           ADDHL ,DE                ;HL=32*Y PAT _POS  + XPAT POS
+    O8DC EB            2734           EX DE,HL
+    080  £1            2735           POP WL
+    O8DE C9            2736           RET
+                       2737
+                       2738  BRARAAAAAAAAAERAAAERARKER   EXTERMALS SRASSSRALARRAAARARAARERARARAKAEERE
+                       2739
+                       2740  ;EXT   GET VRAM_
+                       2741  ;EXT   PUT_VRAN_
+                       2742  ;EXT   RAM  READ
+                       2743  ;EXT   VRAM WRITE
+                       2744  ;EXT   WORKBUFFER
+                       2745   PROG

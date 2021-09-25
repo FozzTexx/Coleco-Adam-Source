@@ -1,0 +1,54 @@
+FILE: EOQSABS:EOSTF         HEWLETT-PACKARD:   EOS START    (c) Coleco   1983 Confidential                   Sat,   8 Sep 1984,  23:41       PAGE  210
+
+LOCATION OBJECT  CODE   LINE      SOURCE LINE
+
+                        8166  ;
+                        8167  ;    CHECK FOR  BOOT   LOADER IN ANY MASS   STORAGE   DEVICE
+                        8168  ;
+    F86GA3E€08          8169                  LO        A,TAPE_ID                   ;set the  default boot  device  to tape
+    F86C 32FD6F         8170                  LD        (DEFAULTBT_DEV).A
+                        8171
+    F86F 3E04           8172                  LD        A,DSK4                      ;check  for DISK 4 device  active
+    F871 COF473         8173                  CALL      __REQUESTSTATUS
+    F874 2010           8174                  JR        NZ,CHK_D5
+                        8175
+    F876 3E04           8176                  LD        A,DOSK4
+    F878 COF446         8177                  CALL      __FIND_DCB
+    F878 FOTE14         8178                  LO        A,({I¥#DSTATUS FLAGS}
+    FE7E EGOF           8179                  AND       OFH
+    FB8O FEO3           8180                  cP        3
+    F882 3E04        -  8161                  LD        A,OSK4
+    F884 3842           8182                  JR        C,DEV1OK
+          :             8183
+    F886 3EOS           8184  CHK_DS:         LD        A,DSKS                      ;check  for DISK 5 device  active
+    F888 CDF473         8185                  CALL      __REQUESTSTATUS                                            ;
+    F88B 2010           8186                  JR        NZ,CHKTAPE
+                        8187
+    F88D 3E05           8188                  LD        A,OSKS
+    FESF COF446         8189                  CALL      __FINO_DCB
+    F892 FOTE14         8190                  LO        A,(I¥+D_STATUS FLAGS]
+    F895 EGOF           8191                  AND       OFH
+    F897 FEOS3          8192                  cP        3
+    F899 3E05S          8193                  LD        A,OSKS
+    F898 3828           8194          |       JR        C,DEV1_OK
+    F89D                8195  CHK_TAPE:
+    F89D 3E08           8196                  LD        A,TAPE_ID                   ;check  if TAPE device  active
+    FE9F COF473         8197     |            CALL      __REQUEST_STATUS
+    F@A2 201E           8198                  JR        NZ,CALL_WP
+                        8199
+    FBA4 3E08           8200                  LD        A,TAPE_ID
+    FRAG COF446         8201                  CALL      __FIND_OCB
+    FEAS FD7E14         8202                  LD        A,{I¥+D_STATUS  FLAGS]
+    FBAC FS             8203                  PUSH      AF
+    FBAD EGOF           8204                  AND       OFH
+    FBAF FEO3           8205                  cP        3
+    FBB1 3812           8206                  JR        C ,DEVO_OK
+                        6207
+    F6B3 F1             8208                  PoP       AF
+    FBB4 CB3F           8209                  SRL       a
+    F8B6 CB3F           8210                  SRL       A
+    FBBS CB3F           8211                  SRL       A
+    FBBA CB3F           8212                  SRL       a
+    F8BC FEO3           8213                  cP        3
+    FBBE 3E18           8214                  LD        A,TAPE_ID+10H
+    F8CO 3806           8215                  UR        C,DEVOK

@@ -1,0 +1,61 @@
+FILE:O7PRIME:pOS    HEWLETT-PACKAACTIVATE(c) Coleco,1982 CONFIDENTIAL          Fri,18 May1984, 16:19   PAGE 39
+
+LOCATIOOBJECTCODELIWE   SOURCELIWE
+
+                 1658;           DE->OBJGRAPHICS+0
+                 1659;           BC->08JSTATUS+0
+                 1660;           A=0
+                 1661;
+           <04C6>1662ACT_CMPLEQU           $
+                 1663;SUBCASEComplex
+   O4C61A        1664            Lo            A,(0E)        ;GETCOMPCNT
+   O4C71F        1665            RRA
+   O4C8IF        1666            RRA
+   O4C91F        1667            RRA
+   O4CA1F        1668            RRA
+   O4CBE6OF      1669           AND            OFH
+   O4CD47        1670            Lo            B,A           ;SETCNTR
+   O4CE5E        1671            LD            E,(HL)        ;DE->COMPTRSLIST
+   OACF23        1672            INC           ML
+   04D056        1673            LO            D,(HL)
+   040123       1674             INC           WL
+   040287        1675           OR             A             3?EMPTY
+   04D32810     1676             JR            2,CHPLX9
+          <O4D5>1677 CMPLX4     EQU           4
+   0405F1       1678            PoP            AF            ;SUPCALL,COMPOBJ
+   0406F5       1679            PUSH           AF
+   0407£5       1580            PUSH           WL
+   0408CS       1681            PUSH           BC
+   0409£6       1682             EX            D,HL
+   O4DACD04A3   1683            CALL           ACTIVATE_
+   0400C1       1684            PoP            BC            ;RESTORPNTRS
+   O4DE£1       1685            PoP            WL
+   O4DFSE       1686             LD            E,(HL)
+   O4E023       1687             INC           HL
+   04E156       1688             LO            D,(HL)
+   04E223       1689             INC           HL
+   O4E310F0     1690             DJNZ         CMPLX4        3?MORE,RELOOP
+   O4E5F1       1691CMPLX9:     PoP            AF            ;CLEASTACKFORRTW
+   O4EC9        1692             RET           ;TECHNICALLSHOULDJMPTORTN
+                1693;
+          <O4E7>1694ACTSEM]  QU           $
+                1695; SUBCASSemi_Moile
+  04E7cD0572    1696             CALL          INI_XP_OS    ;X_PATPOS :=80H
+  O4EA1A        1697             LD            A,(DE)       ;A :=FIRSTGENNAME                                                    ,
+  O4EB6F        1698             LD            L,A
+  O4EC13        1699             INC           DE
+  O4EO1A        1700             LD            A,(DE)       ;A :=NUMGEN
+  O4EE85        1701            ADD            A,L
+  O4EFFD7705    1702            LD             (1¥#5,A      ;NEXT_GEN:=FIRSGEN NAME+ NUMGEN
+  O4F22600      1703            LD             H,0          ;HL=FIRSGENNAME =
+                1704;ATTHISPOINT:
+                1705;           STACK=08TYPE  &SUP VRAMFLG
+                1706;           HL=FIRSGEN NAME
+                1707;           DE->NUMGEN
+                1708;           BC:FREE                                                                            ,
+                1709; SUPFORVRAMINIT
+  O4F4FI        1710            POP           AF            ;1FSUP VRAMFLGON
+  O4F53038      1711            JR            NC,SEMIEXIT
+  O4F7F5        1712            PUSH          AF
+  O4F83A73C3    1713            LD            A,(VDP_MODWORD] ;SEEWHICHGRAPHICMODE
+  O4FBCB4F      1714            BIT           1,A           lf GR IlMODE

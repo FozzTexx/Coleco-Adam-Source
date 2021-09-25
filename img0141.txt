@@ -1,0 +1,57 @@
+      (
+FILE: «~3sA8S:EOSTF         HEWLETT-PACKARD:  UTILS     {c}) Coleco  isusuConfidential                Sat,  8 Sep  1984,  23  40       “AGE  137
+
+LOCATION OBJECT  CODE   LINE     SOURCE LINE
+
+    FOAS 01000C         5605        LO       BCNAME LENGTH             - NO. OF CHARACTERS IN NAME
+                        5606                                           - HE = FILE NAME STRING
+    FOAC                5607 NEXT CHAR}:
+    FOAC 1A             5608        LD       A,(DE)                    ; DE = FCB FILE NAME
+    FOAD FEO3           $609        cP       ETX                       ; IS IT EFX?
+                        5610
+    FOAF 2813           S611        JR       Z,1TS_ETX1                ; YUP
+                        $612
+    FOB’ EDA            $613        CPI                                ; DO CHARS MATCH ([HL]}= A)?
+                        $614
+    FOB3 13             6615        INC      DE
+    FOB4 28F6           6616     _  oR       2,NEXTCHARI               ; YUP,CHECK NEXT CHAR OF FILE NAME
+                        8617
+    FOBE6E1             $618        POP      HL                        ; pointer to FCB
+    FO87                68619ENDFCB:                                                                                                               ,
+    FOB? 3AFDO7         $620        LO       A,(FILE_NUMBR]}           ; ARE WE AT 2ND FILE(FCB)?
+    FOBA FEO2           6621        cp       NUMFCBS-1                 ; NO. OF FCB’S - SYSTEM FCB
+                        $622
+    FOBC 2003           6623 —      JR       NZ,U_NEXT_FCB             ; NOPE, NOT YET,
+                        $624
+    FOBE                6625 NOMATCH!:
+    FOBE £1             $626        POP      HL                        ; HL = ORIGINAL POINTER TO FILE NAME
+                        $627
+    FOBF 3£05          5628         LD       A,NO_FILE_ERR             ; NO MATCH FOUND
+    FOC! 87             6629        OR       A
+    FOC2 1811          8630         JR       GET_OUT_ERR
+                        8631
+    FOC4                6632 ITS_ETX1:
+    FOC4 7E             6633        LD       A,{HL]                    ; GET ASCII CHAR
+    FOCS FEOS3          5634        cep      ETX                       ; IS IT ETX?
+    FOC] E1             6635        PoP      HL                        ;*pointerto  FCB
+    FOCS 20F4           6636        JR       NZ,NO_MATCHi              ; NOPE
+                        $637
+                        6638 ;      PUSH     HL                        ; Copy pointer to FCB so can index to mode
+                        68639;     POP       Ix
+                        8640
+    FOCA DOTE18         564{        LD       A,[1X+FCB_MODE )          ; GET MODE THIS FILE WAS ORIGINALLY
+    FOCD E607           $642        ANO      MODEMODE                  ; OPENED FOR AND MASK OFF FLAG BITS
+    FOCF 47             6643        LO       BA                        ; PASS IT BACK IN B
+                        5644
+    FODO AF             6645        XOR      A                        "; INDICATE Z CONDITION
+    FOOD’3AFDD7         8646        LO       A.{FILE _NUMBR)           ; GET FILE NUMBER
+                        6647
+    FOD4                6648 U_GET_OUT:
+    FOD4 Di             5649        POP      DE                        >*clean off pointer to name
+                        6650 ;      POP      6C
+    FOODS               $651 GETOUT ERR:
+    FOOS D1             $652        PoP      DE
+    FOO6 DDE1           $653        PoP      Ix
+                        $654
+    FOO8 C9             6655        RET
+                        $656

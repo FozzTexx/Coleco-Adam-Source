@@ -1,0 +1,29 @@
+FILE: .  .aBS:EOSTF        HEWLETT-PACKARD:  EOSUTIL    (c) Coleco   it  |  Confidential                        Sat,   8  Sep  1984,  23:41          4E  215
+
+LOCATION  OBJECT CODE  LINE     SOURCE  LINE
+
+                       8389
+                       8390        ;GLB     __DLY_AFT_HRD_RES
+                       8391
+    FOSF               8392               RES:
+    FOS5F CS           8393         PUSH    BC
+    F960  05           8394         PUSH    DE
+                       8395
+    F961  0601         8396         LD        |
+                       8397
+    F963               6398 LOOPS:
+    F963  110001       8399         LD      DE,OOO1H
+                       8400
+    F966               8401 LOOP7:
+    F966  18           8402         DEC     DE
+    F967  7A           8403         LO      A.D
+    F968  B83          8404         OR      E
+    F969  20FB         8405         JR      NZ,LOOP7
+                       6406
+    F968  10F6         8407         OJUNZ   Loors
+                       8408
+    F960  D1           8409         POP     DE
+    FOGE  C1           8410         POP     BC
+                       8411
+    FOGF  C9           8412         RET
+                       6413

@@ -1,0 +1,45 @@
+FILE: « ».ABS:E€OTF           HEWLETT-PACKARD: EOSCHAR   (c)  Coleco 1_s  Confidential                 Sat,  8 Sep 1984,  23:42        vmuk  239
+
+LOCATION OBJECT  CODE   LINE       SOURCE LINE
+
+                        G2BO   SHSHHERE EEE    EEREEEE EEEREEREREEEEEEEEHEEEEEEEEEHEEEEEEEEHEREEEEEEEHEE  EEE
+                        9281   * THIS ROUTINE WILL CHECK THE  DEVICES OCB COM/STATUS BYTE AND RETURN
+                        9282   * THE RESULT OF THE CHECK.
+                        9283   *      INPUT:  A  ===> DEVICE  ID
+                        9284   *      OUTPUT: CONDITION FLAGS
+                        9285   *              Cc:     COMMAND  HAS FINISHED
+                        9286   *¢            NC :     COMMAND  HAS NOT BEEN PROCESSED
+                        9287   «+             Zz:     NO ERROR  OCCURED
+                        9288   *             NZ:      ERROR OCCURED
+                        9289   *                      A ===>   ERROR CODE
+                        9290
+                        9291   SSESESSSEEESSEKEKEEHRHEERKESKEHEHEEASEKSEHKRSEKEEKRESESRSHEEKEHKHEREKEEEEEEEEDESKEEHR
+                        9292
+                        9293         ;GLB     __END_RD_CH_DEV
+                        9294         SEXT     CHK_IF_IDLE
+                        9295
+    FBAS                9296   __ENDRD _CH_DEV:
+    FBAS FDES           9297          PUSH  ==‘
+    FBA7 CDF446         9298          CALL    __FIND_OCB
+    FBAA 37             9299          SCF
+                        9300                 |
+    FBAB 2012           9301          JR      NZ,NO_OCB                ; THERE WAS NO KEYBOARD OCB
+       :                9302
+    FBAD CDF4AE         9303          CALL    CHK_IF_IDLE             ; IS DEVICE IDL?
+    FBBO 2000           9304          UR      NZ,0CB_IS_IDL           ; YUP
+                        9305
+    FBB2 87             9306          OR      A                        ; CLEAR THE CARRY FLAG
+    FBB3 FOCBOO7E       $9307         BIT     CMND_COMPLETE_BIT,[IY+D_COM_STAT]        ; WAS THE COMMAND  PROCESSED?
+    FBB7 2806           9308          UR      2,ROUTINE FINISHED       ; NO, RETURN WITH THE CARRY FLAG  CLEARED
+                        9309                                           ; YES, THE COMMAND WAS PROCESSED
+    FBB9 FD7EOO         9310          LD      A,[1¥+D_COM_STAT]        ; DID ANY ERRORS OCCUR?
+    FBBC FESO            9311         cP      CMND_FINSTATUS
+    FBBE 37             9312          SCF
+                        9313                                           ; NO ERROR, SET THE CARRY FLAG,  ZERO FLAG CONDITION
+    FBBF                9314   OCB_IS_IDL:
+    FBBF                9315   NODCB:
+    FBBF                9316   ROUTINE_FINISHED:
+    FBBF FDE1           9317          PoP     IY
+                        9318
+    FBC1 C9             9319          RET
+                        9320

@@ -1,0 +1,60 @@
+FILE: .-sABS:E€0S_TF            HEWLETT-PACKARD:     UTILS        (c)  Coleco   tbus  Confidential                        Sat,   8 Sep     1984,   23:40        craGt  133
+
+LOCATION  OBJECT   CODE    LINE       SOURCE   LINE
+
+                           5425
+                           $426  SSSCSSHSESTSSEESSEHSSSHSHSSE   SHSHSE   SESH HESS  EHEHEHESEHEKEHRSEHK          HERERO
+                           $427  SSSESSSSSESSSESSESSHSSSESHSSSESHESHEHHESEHTEESHEHEEHSETESEESSE    HESTHEEEREHESEHEHEHRESES
+                           $428
+                           $429         CHECK_IF_DIRECTORY       VERIFIES   THE  EXISTENCE    OF  A  DIRECTORY
+                           $430                     ON  THE MEDIA    IN THE  DEVICE
+                           $431
+                           $432           INPUT:     Ivy  -   POINTS   TO  THE VOLUME    ENTRY   (FIRST   ENTRY   INTO  THE OITRECTORY)
+                           $433
+                           5434           OUTPUT :   CONDITION    FLAGS       |
+                           5435                           2  - DIRECTORY    EXISTS
+                           6436                          NZ  - NO  OIRECTORY
+                           6437                                    A  = ERROR  CODE
+                           $438
+                           6439
+                           5440                     ALL  REGISTERS    PRESERVED   EXCEPT   AF
+                           5441
+                           6442  SSCSSSSSHSSSSCSSSSSHSSSSSESSSSSEHESESSEHSKSSESESTSESSSESEHESCHEESE  RESESEHEHEKESESEEES
+                           6443  SSOSSSSHESSSHSSSESSSSSSESESSSSSSSSSESCHSSSESSTSESHESEHHOSSESCHESESESE  SSESEHSSHEHHEESHEESH
+                           6444
+                           5445           ;GLB       CHECK_IF_DIRECTORY
+                           6446           sEXT       DIRECTORY   CHECK
+                           $447
+    FO3S                   5448  CHECK_IF_DIRECTORY:
+    FO3S  FOES             5449            PUSH      ly
+    FO37  cs               6450            PUSH      BC
+    FO38  Es               $451            PUSH      HL
+                           $452
+    FO39  21F3E7           6453            LO        HL ,DIRECTORY  CHECK          ;  4  UNIQUE   BYTES   PLACE   IN  VOLUME ENTRY
+                           5454                                                       AT  CREATION    TIME   (BYTES   DEFINED IN  EOS  MKDIR)
+                           6455
+    FO3C  0604             5456            LO        8,4                              COMPARE    4 BYTES
+    FO3E                   8457  NEXT_CHECK:
+    FO3E  7E               5458            LD        A, (HL)                          GET  THE   FIRST   UNIQUE   BYTE
+    FO3F  FOBEOD           6459            ce        [1Y¥+VOL_DIR_CHECK]              SAME  AS  ON   TAPE?
+    FO42  2008             8460            JR        NZ,NOT_DIR                    ;  NOPE
+                           6461
+    FO44  23               6462            INC       Hi                               YUP,  CHECK   NEXT   BYTE
+    FO45  FD23             5463            INC       ly
+    FO47  10FS             5464            DJUNZ     NEXT_CHECK
+                           $465
+    FO49  AF               5466            XOR       A                                DIRECTORY    EXISTS
+                           §467
+    FO4A                   5468  GET_OUT_HERE:
+    FO4A  E1               5469            Pop       HL
+    FO48  Ci               $470            PoP       BC
+    FO4C  FDE1             $471            POP       Ty
+                           5472
+    FO4E  c9               §473            RET
+                           5474
+    FO4F                   §475  NOT_DIR:
+    FO4F  3E18             5476            LD        A.NO_DIR_ERR
+    FOS1  16F7             5477            JR        GET OUT  HERE
+                           5478
+
+                                                                                     oe   @9%* &@# &@ #&@@   &#@ ©

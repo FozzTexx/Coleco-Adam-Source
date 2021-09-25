@@ -1,0 +1,29 @@
+FILE: EOSABS:E0STF        HEWLETT-PACKARD:  INCLUDEFMGR_EQUs                                        Sat,   8  Sep  1984,  23:38        PAGE    28
+
+LOCATION OBJECT CODE  LINE     SOURCE LINE
+
+                      1038 *
+             <0005>   1039 MODEREMAINDER BIT  EQU  5         ; INDICATES TO ALLOCATE REST  OF  TAPE
+             <O006>   1040 MODEDIRTY  BIT  EQU     6         ; TEST BIT 6
+             <O040>   1041 MODEDIRTY       EQU     010000008 .INOICATES MODIFIED BUFFER
+             <O007>   1042 MODELAST  BLOCKBIT   EQU  7       ; TEST BIT 7
+             <OO80>   1043 MODELAST        EQU     100000008 ;INDICATES LAST BLOCK OF FILE
+             <OOO7>   1044 MODEMODE        EQU     000001118 ;BITS TO STORE MODES
+                      1045
+                      1046 ; File attribute bits.
+             <OO80>   1047 ATTR_PERMANENT  €£QU    100000008
+             <O040>   1048 ATTR_WRITEPROT  EQU     010000008
+             <0020>   1049 ATTR_READPROT   EQU     001000008
+             <0010>   1050 ATTR_USER       EQU     000100008
+             <OO0O08> 1051 ATTR_SYSTEM     EQU     000010008
+             <O004>   1052 ATTR_DELETED .  EQU     000001008
+             <0002>   1053 ATTRDEL BIT     EQU     2
+             <OOO02>  1054 ATTREXECUTE     EQU     000000108
+             <O000>   1055 ATTR HOLEBIT   EQU      O
+             <OOO01>  1056 ATTRHOLE        EQU     00000001B
+                      1057
+                      1058 ; System-wide file name length.
+             <OOOC>   1059 NAMELENGTH      EQU     12
+                      1060
+                      1061 ; Numbers of things we nave.
+             <O003>   {1062NUM_FCBS        EQU     3       ;1 FOR THE SYSTEM, 2 FOR THE USER

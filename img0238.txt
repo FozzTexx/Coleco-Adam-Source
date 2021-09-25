@@ -1,0 +1,7 @@
+FILE: EOSABS:EOS  TF        HEWLETT-PACKARD: EOSBLK      (c)  Coleco  1983  Confidential                   Sat,   8  Sep  1984,  23:42      PAGE  234
+
+LOCATION OBJECT   CODE  LINE     SOURCE LINE
+
+    FB35                9118 CMNDNOT COMPLETED:
+    F835 FOE            9119        PoP     ly
+    F837 C9             9120        RET

@@ -1,0 +1,47 @@
+FILE: EOSABS:EOS   TF           HEWLETT-PACKARD  :  EOSUTIL    (c)  Coleco    1983 Confidential                       Sat,    8  Sep  1984,   23:42        PAGE  222
+
+LOCATION  OBJECT   CODE   LINE        SOURCE  LINE
+
+                          8635
+                          8636          GLB        __SOFT_RES KBD,   SOFT   RES_  PR,SOFT   _RESTAPE
+                          8637
+                          8638          EXT       __FIND_DCB,CHK_IF_INACTIVE
+                          8639
+    FAS1                  8640   _SOFT_RES   KBD:
+    FAS1  3EO1            8641           LD        A,KEYBOARDID                   RESET  KBO
+    FAS3  1808            8642           JR        __SOFT_RESDEV
+                          8643
+    FASS                  8644   _SOFT_RES   PR:
+    FASS  3E02            8645           LO        A.PRINTER_ID                 ; RESET  PRINTER
+    FAS7  1804            8646           JR        __SOFT_RESDEV
+                          8647
+    FASS                  8648   _SOFT_RES   TAPE:
+    FASS  3EO08           8649           LD        A,TAPE_ID                      RESET  TAPE
+    FASB  1800            8650           JR        __SOFT_RESDEV
+                          6651
+                          8652          ;GLB       __SOFT_RES_DEV
+                          8653
+    FASD                  8654   _SOFT_RES_DEV:
+    FASO  FDES            8655           PUSH      ly                           : SAVE  IY
+                          8656
+    FASF  CDF446          8657           CALL      __FIND_DCB                     FIND  APPROPRIATE   DEVICE
+    FAG2  2014            8658           JR        NZ,NO_DCB_FOUND                BAD DEVICE  I.0.
+                          8659
+    FAG4  CDF496          8660           CALL      CHK_IF_INACTIVE                IS DEVICE  IDLE?
+    FAG7  200F            8661           JR        NZ,ACTIVE_DCB                ; NOPE    . OOPS  ...
+                          8662
+    FAG69 FD360002        8663           LD        [1¥+D_COMSTAT],0CB_RESET              ; SOFT RESET   DEVICE
+                          aGe4
+    FAG6D                 8665   DCB_CMND_LOOP:
+    FAGD  FOCBOO7E        8666   —       BIT       CMNDCOMPLETE  BIT,[{IY+D_COM    STAT]   ; WAS  COMMAND   COMPLETE?
+    FA71  28FA            8667           JR        Z,DCB_CMND_LOOP                         ; NOPE,  CHECK   AGAIN
+                          8668
+    FAT73 FD7EOO          B6E9           LD        A,{1Y¥+0_COM_STAT)             YUP
+    FA76  FE8O            8670           cP        CMND_FIN_STATUS
+                          8671
+    FA78                  8672   ACTIVE_DCB:
+    FAT7T8                8673   NO_DCB_FOUND:
+    FA78  FOE!            8674           PoP       IY                           :
+                          8675
+    FATA  c9s             8676           RET
+                          8677

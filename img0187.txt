@@ -1,0 +1,51 @@
+                                                                                            4
+
+FILE: tssABS:E0S_TF             HEWLETT-PACKARD:      CONS  OUT     (c) Coleco    1403  Confidential                           Sat,    8 Sep   1984,  23:41         PAGE    183
+
+LOCATION   OBJECT  CODE   LINE        SOURCE   LINE
+
+                          7416    ;
+                          7417    ; __CONS_ OUT      -   This   entry  point   will   check   special    chars   such  as
+                          7418    ;                     Carriage     Return   and  performs     their   normal   functions
+                          7419    ;                     all   other,   printable,     chars   are   put  onto  the   screen
+                          7420    ;
+                          7421    ; _ CONS OISP      -   This   entry  point   will   put  all   chars   onto  the   screen
+                          7422    ;                     no   matter   what,   no  checking     is done   for  control    chars
+                          7423    ;
+                         7424     |
+                        . 7425    ;Input  Parameters:
+                          7426    ;   A  - character     to  emit
+                          7427    ;
+                          7428    ;  optionally
+                          7429    ;   E  - Y  location    to  goto   (must  be   in  window)
+                          7430    ;   O  - X  location    to  goto   (must  be   in  window)
+                          7431   =;
+                        7432      ;
+                          74393   ;   Saves   all   registers
+                          7434  ;
+                          7435                       ;GLB        __CONS_ OUT
+                          7436                       ;GLB        __CONS_DISP
+    FGEOA                 7437    _CONS  OUT:
+    FEOA   FS             7438                        PUSH     AF
+    F6EOB  C5             7439                        PUSH       BC
+   ~F6EOC  E5             7440                        PUSH       HL
+    F6OD   DDES           7441                        PUSH       IX
+    FEOF   FDES        .  7442                        PUSH       LY                °
+    F611   05.            7443                        PUSH       DE                   ;This   may   contain   the  X-Y   coord    of  goto xy
+                          7444               .
+    F612   21F80E         7445                        LO         HL,SPECIAL_  CHARS
+    F615   01000C         7446                        LD         BC,NUM_SPCL_CHARS
+    F618   EDB1           7447                        CPIR
+    FE1A   2013           7448                        JR         NZ,NOT_ SPECIAL
+                          7449
+    FE1C   21FB1A         7450                        LD         HL,SPCL_VECTOR_TBL
+    F61F   O9             7451                        ADD        HL,BC
+    F620   09            7452                         ADD        HL,BC
+                         7453
+    F621   47            7454                         LD         B.A                  ;Save   char   in B
+                          7455
+    F622   7E             7456                        LD         A,{HL}
+    F623   23            7457                         INC        HL
+    F624   66            7458                         LD         H,[HL]
+    F625   6F            7459                         LD         L.A
+    F626   E9            7460                         JP         {HL J                -Vector    to  special   char   handler

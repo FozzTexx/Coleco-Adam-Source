@@ -1,0 +1,64 @@
+FILE: OS 7PRIME:pOS           HEWLETT-PACKARD:  PUT/DEFRD  PUT  OBJ (c)Coleco   1982  CONFIDENTIAL              Fri,  18  May  1984,  16:19       PAGE   48
+
+LOCATION   OBJECT  CODE  LINE      SOURCE LINE
+
+    06a2   BE            2121                   cP                 (HL)
+    06a3   200€          2122                   JR                WZ,WRTR ELSE
+                         2123
+                         2124  *       QUEUE TAIL   :=0
+    06a5  3£00           2125                   LD                A,0
+    06A7  3273CC         2126                   LD                 (QUEUTAIL]  ,A
+                         2127
+                         2128  *       TAIL_ADDRESS   := BUFFER
+    O6AA  2A7301         2129                  LD                 HL, (BUFFER)
+    O6AD  2273CF         2130                  LD                  (TAIL_ADORESS), HL
+    0680  £1             2131                  POP                HL                 RESTORE  STACK   POINTER
+                         2132
+    0681  1807           2133                   JR                WRTR ENDIF
+                         2134  *     ELSE
+               <06B3>    2135  WRTR_ELSE       EQU                $
+                         2136
+                         2137  *       STORE NEW  QUEUETAIL
+    0683  3273CC         2138                  LO                 (QUEUETAIL)  ,A
+                         2139
+                         2140  *       TAIL_ADDRESS   := TAIL_ADDRESS  + 3
+    0686  E1             2141                  POP                HL
+    0687  2273CF         2142                  LD                 (TAIL_ADDRESS) , HL
+                         2143                                          |
+                         2144  *     ENDIF
+               <O6BA>    2145  WRIR_ENDIF      EQU                $
+                         2146
+    O6BA  18C6           2147                  JR              — «WRTR_WHILE
+                         2148  *   ENDWHILE
+               <06B8C>   cas   WRTR_END WHILE  EQU                $
+                          150  *                  FLAG         |
+                         2151    RESTORE DEFERAL
+    O68C  Fi             2152                  POP                AF
+    06BD  3273C6         2153                  LO           |     (DEFERWRITES)   ,A
+
+                         2154                                                                                                                                       e
+                         2155  * END WRITER_
+    06C0  C9             2156       |          RET
+                         2157
+                         2158                  GLB                PUTOBJ_
+                         2159
+                         2160                                                                                                                                                             :
+                         2161         sEXT PUTSEMI,PUT MOBILE   ,PUTOSPRITE,PUTISPRITE   ,PUTCOMPLEX
+                         2162
+                         2163         EXT  DEFER  WRITES
+                         2164         EXT   PARAM_
+                         2165          GLB  PUTOBJQ
+    06C1  00020002       2166  PUTOBJPAR:      DEFW   2,2,1
+    06C5  0001
+                         2167
+                        chen   * PROCEDURE PUTOBJP   (VAR  DATA: BUFFER;PARAM:BYTE);
+                          169  *                                          PUTOBJ   ROUTINE
+                         oer     THIS IS THE PASCAL  ENTRY  POINT  TO THE                                                                                            ‘
+                          171
+                         2172          PROG
+    06C7                 2173  PUTOBJQ:
+    06C7  0106C1         2174          LD   BC,PUTOBJ PAR
+    O6CA  1173BA        2175           LD   DE,PARAM AREA
+    06CD  CD0098        2176           CALL PARAM
+
+                                                                                                                                                                                                 !            {

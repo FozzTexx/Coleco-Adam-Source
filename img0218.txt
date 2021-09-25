@@ -1,0 +1,36 @@
+FILE: EOSABS:E0STF          HEWLETT-PACKARD: EOSUTIL    (c)  Coleco   1983 Confidential                   Sat.   8 Sep   1984,  23:41        PAGE  214
+
+LOCATION OBJECT CODE   LINE      SOURCE LINE
+
+                       8358
+                       8359  :;ENTRY:       __HARDRESET_NET
+                       8360  ; NEEDS:       NOTHING
+                       8361  ; RETURNS:     HARD RESET APPLIED    TO NETWORK
+                       8362
+             <QO000>   8363  NETDELAY COUNT  EQU     oO
+                       8364
+                       8365        ;GLB     __HARD_RESET_NET
+                       8366
+    F94B               8367   HARD RESET NET:
+                       8368        sEXT     NETRESET PORT
+    F948 3AFC28        8369         LO      A,(NERESET PORT]
+    FO4E 4F            8370         LO      C,A
+    FO4F 3EOF          8371         LD      A,OFH                       ; RESET NETWORK
+    F951 EDT79         8372         OUT     {C].A
+                       8373
+    F953 3E00          8374         LO      A,NETDELAY COUNT            ; DELAY (*«**¢+PROBABLY   TOO  LONG)
+                       8375
+    F955               8376  NET_RESDELAY:
+    F958 OO            8377         NOP
+    F956 00            8378         NOP
+    F987 OO            8379         NOP
+    F956 30            8380         DEC     A
+    F959 20FA          8381         JR      NZ,NET_RESDELAY
+                       8382
+    F958 AF            8383         XOR       A                        ;  HELLLLLLLOOOOOO  NETWORK  .....
+    F9SC E079          83864        OuT      [C].a
+                       6385
+    FOOSEC9            6386         RET
+                       8387
+
+ap     at      at        at       lCUaeaaEtlUaSlUcUeEDTllClUeTtlUDOCOCOlC   el     eDTlCU   eel      Ueeel   UlC      eel       j                            ee

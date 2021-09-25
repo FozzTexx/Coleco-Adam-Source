@@ -1,0 +1,22 @@
+FILE: EOSABS:E0S TF         HEWLETT-PACKARD: EOS KBD    (c)  Coleco  1$83 Confidential                 Sat,    8  Sep  1984,  23:41       PAGE  166
+
+LOCATION OBJECT  CODE  LINE      SOURCE LINE
+
+                       6816  SHESESSHHEKEKESSEKRKERSKKREKRSKKEKRKCKREKEKKRKKEKREKEKREKEREKRKEKEEKEREKREREEERKREA
+                       6817  * THIS ROUTINE WILL  REQUEST  A STATUS  ON THE KEYBOARD
+                       6818  .      INPUT:  NOTHING
+                       6819  :      OUTPUT: CONDITION  FLAG
+                       6820  ’              Z:       NO ERRORS
+                       6821  ‘              NZ:      ERROR  OCCURED
+                       6822  *                       A ===>    ERROR CODE
+                       6823  e
+                       6824  SKFSSSESeKAKHKKSKSKSSKKSEESSHSKSSSHKESESKEKCSEESSsSSseEsSeseseseesseeseeeveasese
+                       6825
+                       6826         GLOBAL __REQ  KBD STAT
+                       6827
+                       6828        EXT      __REQUEST_STATUS
+                       6829
+    F4CB               6830  __REQ_KBD_STAT:
+    F4CB 3E01          6831         LD      A,KEYBOARD_ID   .          ; WANT STATUS ON  THE KEYBOARD
+    F4CD C3F473        6832         UP      __REQUEST_STATUS
+                       6833

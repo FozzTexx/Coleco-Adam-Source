@@ -1,0 +1,13 @@
+                          HEWLETT-PACKARD: EOS         (c)  Coleco  1983  Confidential                    Sat,   8  Sep  1984,  23:41      PAGE  160
+FILE: EOSABS:EOSTF                            GEN
+
+LOCATION OBJECT CODE  LINE     SOURCE LINE
+
+                      6618
+    F470              6619 FINISHED:
+    F470 Df           6620        PoP     DE
+    F471 Ci           6621        PoP     BC
+                      6622
+    F472 CS           6623        RET
+                      6624
+                      6625

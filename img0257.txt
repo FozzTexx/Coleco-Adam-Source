@@ -1,0 +1,65 @@
+ Ree                SE           as       se  enq5crtk-     &8&ke-   f&-       &         &        EF,
+
+           FILE:  tusaBS:E0S  TF          CROSS REFERENCE    TABLE                PAGE  253
+
+           LINE#    SYMBOL            TYP E     REFERENCES
+
+            7667   SET_CURSOR               7665
+            2112   SET_REuD                 1345
+            4948   SET_UP                   4942,4945
+            3548   SET_UP_A                 3545
+            3712   SET_UP_DIR               3683
+            3752   SET_UP_FCB
+            2121   SET_WRITE                1294, 1467, 2046
+            6908   SHOW COMPLETE            6893
+            1217   SKIP
+            3078   SNO_MANAGER
+             865   SOUNDPORT                2930,3489
+             330   SOUNDS
+             324   SOUND_INIT
+            9233   SO_LONG                  9226
+            7950   SPCL_VECTOR_TBL          7450
+            7928   SPECTAL_CHARS            7445,7942
+            2318   SPINNER  _ENABLE         2340
+             617   SPIN_SWO_CT              2214,2430
+             618   SPIN_SW1_CT
+             455   SPRITEATTRIBL            2045
+             457   SPRITEGENTBL
+            2874   SRIATN                   2932,3003,  3004
+            2873   SRIFRO                   3005
+            2876   SR2ATN                   2934,3011,3012
+            2875   SR2FRQ                   3013
+            2878   SR3ATN                   2936,3019,  3020
+            2877   SR3FROQ                  3021
+            4152   SRCH_LOOP                4159
+            2883   SRNATN                   2938,3027, 3028
+            2882   SRNCTL                   3046
+             592   STACK_START
+             582   START BLOCK
+            5496   STRCMP                   5378
+             862   STROBE_RESET  PO
+             859   STROBE_SET_ PORT         2211
+            6862   STRT_RD_KBD_LOO
+              91   SUPERGAME                444,485
+             279   SWITCH_MEM               1902,1913,  1970, 2000, 8153,8721
+             768   SWITCH TABLE
+            B4a24  SYNC_DELAY_B             8442,8468
+            8423   SYNC_DELAY_DE            8441,8450, 8467  ,8476
+            3631   S_ERROR                  3610
+            4131   TAPE_FULL                3965,3976, 3985
+            1183   TAPE_ID                  7300,8169,8196   ,8200,8214,8223,    8236, 8649  ,8693
+            3618   TAPE_TIMED  OUT
+             621   TEMP_STACK               1894
+            1196   THREE1K_BLKS             8162
+            4528   TIMEDOUT
+            1211   TIMEOUT                  $885,5907 ,6020,  6044 ,8239
+            4050   TIMEOUT _IN_READ
+            4095   TIMETO  WRITE            3942
+            3053   TONE_OUT                 3007,3015, 3023
+            4118   TOOBIG                   3705,3709
+            1076   TOOBIG_ERR               4119
+            3906   TOOSMALL                 3934
+              87   TRUE                     96
+            6167   TRY_AGAIN                6170
+
+rPrPrPPrPrPprprrrrrrrrrr?PPr                PPP    PrPPrPPrPPrPrrrrrrrrrr?>rrr>?>rrrrrrrrrr>>r                               > pp     pb >»

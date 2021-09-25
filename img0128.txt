@@ -1,0 +1,61 @@
+ILE:  EQSABS: EOS TF         HEWLETT-PACKARD:     RD_WT        (c) Coleco   1983  Confidential                        Sat,   8  Sep  1984,  23:40        PAGE  124
+
+OCATION   OBJECT  CODE  LINE        SOURCE  LINE
+
+   EE2A   C9            5000            RET
+                        5001
+                        §002   ; WE  COME  HERE  IF WE  HAVE  A  FULL  BUFFER   ANO  THERE’S   MORE
+                        5003   ; DATA  TO  WRITE  AND  THERE  ARE  MORE  BLOCKS   TO  THE  FILE.
+                        5004
+   EE28                 S005   MORE FILE
+   EE2B  003413         5006             INC      [IX+FCB_USED_  LENGTH]        ; INCREMENT    SECTORS   WRITTEN   TO
+   EE2E  2003           5007            JR        NZ,MORE  FILE!
+   EE30  003414         5008             INC      (IX*FCB_USED_LENGTHt1}
+   EE33         ,       S009   MORE FILE1:
+   EE33  DD7E17         5010            LD        A,[IX+FCB_DEVICE])    ;GET  THE  DEVICE   NUMBER
+   EE36  2AFEOG   8 8=—s50111           LO        Hi, (BUF START)     ;GET  BUFFER   ADDRESS
+   EE39  DDSE19         $012            ‘LO       E,(1X+FCB_BLOCK]     ;GET  BLOCK   NUMBER
+   EE3C  DDSG61A        5013            LD        D,[1X+FCB_BLOCK+1)
+   EE3F  DD4E 18        5014            LD        C,(1X*FCB_BLOCK+2)
+   EE42  DD461C         $015            LO        6B(1X+FCB_BLOCK+3]             ,                                                                                        '
+   EE45  CDFIEG         5016            CALL      WRITE BLOCK          ;WRITE  OUT   THE  FULL  BLOCK
+                        5017
+   EE48  C2EEBE         6018            uP       NZ,WRITE_ERRt     |  ;BRANCH   IF ERROR
+                        5019
+   EE4B                 5020   CLEAR_DIRTY_BIT:                      ,
+   EE4B  DDCB 1686      5021            RES      MODE  _DIRTY_BIT..   .A+FCB_MODE)    ;CLEAR   THE  DIRTY  BIT
+   EE4F  2AFEOS         5022            LO       HL,(BUF_START]       ;RESET  THE  BUFFER   POINTER
+   EES2  0D7521         5023            LD        [IX+FCB_POINTER),L
+   EESS  007422         5024            LD        [IX+FCB_POINTER+1).H
+                        $025
+   EES8  00361500       5026        .   £0        [IX+FCB_LAST_COUNT],0
+   EESC  00361600       5027            LD        [IX*FCB_LAST_COUNT+1),0
+                        5028                    |
+   EEGO  003419         $029            INC       {IX¢FCB_BLOCK]     ;INC  THE  BLOCK   NUMBER
+   EE63  2000           5030            UR       NZ,WRITE4           ;BRANCH   IF  NO  CARRY   OUT
+   EE6S  DD341A         5031            INC       [IX+FCB_BLOCK+  1)
+   EE6B  2008           $032            UR       NZ ,WRITE4      .
+   EEGA  003416         5033            INC       [IX+FCB_BLOCK+2]
+   EEGD  2003           5034            JR       NZ, WRITE4
+   EEGF  00341C        5035             INC      ( IX+FCB8_BLOCK+3)
+                       $036
+   EE72                5037   WRITE4
+   EE72  DD7E18      , $038             LD       A, [IX+FCB_MODE]    ;LOOK  AT  THE  MODE   BYTE
+   EE7&  E607          5039             AND      MODE_MODE           ;GET  RIO  OF  EXTRA   BITS
+   EE77  FEO3          $040             cP       MODE UPDATE         ;00  WE  HAVE  TO  PRE_READ   THE  NEXT  BLOCK?
+   EE79  C2EDD1        5041             uP       NZ, WRITES          ;LOOP  TO  TOP  IF  NOT
+                       $042
+   EE7C                $043   WRITE_AGAIN:
+   EE7C  DO7E17        5044             LD       A,{IX+FCB_DEVICE)      ;GET  THE  DEVICE   NUMBER
+   EE7F  2AFEO8        5045             LD       HL,{BUF  START)     ;GET  BUFFER   ADDRESS
+   EEB82 DDSE19        5046             LD       E,(IX+FCB   BLOCK]   ;GET  BLOCK   NUMBER
+   EE8S  DDSGIA        5047             LD       D, (IX+FCB BLOCK+  i}
+   EEas8 DD4E 1B       5048             LO       C.{1X+FCB   BLOCK+2]
+   Eise  00461C        5049             LD       B,{IX*¢FCB BLOCK+3]
+   Etsé  COFI7B        $050             CALL     READ BLOCK          ;PRE-READ   THE  NEXT   FILE  BLOCK
+                       5051
+  EE91   2028          §052             JR       NZ. WRITE ERR}      ;BRANCH   IF  ERROR
+                       §053
+                       5054
+                       5055   |; ARRIVE  HERE  IF THE  DATA  BEING   WRITTEN   WILL  NOT  FILL   THE BUFFER
+                       S056   :  EVERYTHING   IS VERY  EASY    --JyUST COPY   IT Ff       "  USER‘’S ADDRESS

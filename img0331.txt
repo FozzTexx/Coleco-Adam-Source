@@ -1,0 +1,61 @@
+FILE:  OS_7PRIME:pOS                HEWLETT-PACKARD:      PUT  SEMI     (c)  Coleco,    1982    CONFIDENTIAL                           Fri,   18 May   1984,    16:19          PAGE    5/7
+
+LOCATION    OBJECT    CODE    LINE         SOURCE   LINE
+
+    0882    D9                2604                      EXX
+    0883    D1                2605                      POP  DE
+    0884    Ci                2606                      POP  BC
+                              2607    ;              ENDIF
+                              2608    ;           ENDIF
+                              2609
+    0885                      2610   END  IF  10
+                             2611
+    0885    D9               2612                 EXX
+    0886    C5               2613                 PUSH   BC
+    0887    0600             2614                 LO  8,0                           ;INCREMENT     POINTER     INTO   FRAME   BY   X_EXTENT
+    0889    09               2615                 ADD  Hi ,BC
+    088A    EB               2616                 EX  DE, WL
+    0888    010020           2617                 LD  BC, 32                        ;INCREMENT     OFFSET    BY  32
+    O88E    09               2618                 ADD   HL,BC
+    O88F    EB               2619                 EX  DE, WL
+    0890    C1               2620                 POP   BC
+    0891   D9                2621                 EXX
+    08692   1C               2622                  INC  E
+                             2623    ;         UNTIL    [.E,EQ,.B)               sUNTIL    Y=Y_EXTENT
+                             2624
+    0893    78               2625                         LO                     A,E
+    0694   88                2626                         cp                     8
+    0895   20cF              2627                         JR                    WZ,RPT_1
+                             2628
+    0897   C9                2629              RET
+                             2630    ;
+                             2631    ;          COMMENT     }
+                             2632    SREKKARAERAERARE     GET.  BKGRND   SARERRAEAARERERAAKERAKAAAAAERERAEREERKKREKEKKERKEKE
+                             2633    ;DESCRIPTION:          THIS   ROUTINE    GETS   THE  NAMES    FROM   THE  NAME    TABLE   WHICH    CONSTITUTE
+                             2634    ;                    THE   BACKGROUND     ON  WHICH    AN  OBJECT    IS  TO  BE   MOVED
+                             2635    ;INPUT:                HL  =  LOCATION    IN  CPU   RAM  TO   WHICH   THE   NAMES   ARE   MOVED
+                             2636    ;                     D  =  Y PAT  POS     [TOP  ROW   OF  PATTERN)
+                             2637    ;                      E—=  X_PAT_POS      [LEFT  HAND   COLUMN)
+                             2638    ;                     B  =  Y EXTENT     OF  PATTERN
+                             2639    ;                      C =  X EXTENT     OF  PATTERN
+                             2640    SHAAAAAEAAEAAARAARAEARATARAARAAAKERAAAAARAREKARAEAKAEARAAERAEAKAAREAKREREKRAKEAKRKEKEREE
+                             2641    ;
+                             2642                         GLB                   GET  _BKGRND
+   0898                      2643   GET  BKGRND:                                                                                                                                                                             d
+   0898    CD08C0            2644              CALL   CALC_OFFSET               sOFFSET     INTO  NAME    TABLE   OF   POSITION    OF  UPPER   LEFT
+   0898    C5               2645               PUSH   BC                        ;                                 HAND   PATTERN
+   089C    0600             2646               LD  B,0                          ;GET   X EXTENT     INTO   IY
+   O89E    C5               2647               PUSH   BC                        ;     NUMBER   OF   NAMES   PER   ROW
+   OB9F    FDE1             2648               POP   IY
+   O8A1    C1               2649               POP   BC
+                            2650    ;          REPEAT                           7Y_EXTENT-1      TIMES
+                            2651
+   O8A2                     2652    RPT  2
+                            2653
+   O8A2   C5                2654                  PUSH   BC                                                                                                                                           ‘
+   08A3   D5                2655                  PUSH   DE
+   O8A4   E5                2656                  PUSH   HL
+   O8AS   FDES              2657                  PUSH   IY
+   O8A7   3€02              2658                  LD     A,2                    ; TABLE   CODE   FOR  PATTERN     NAME   TABLE
+   O8A9   CD1IBA3           2659                  CALL   GET VRAM
+   OBAC   FDE1              2660                  POP   IY

@@ -1,0 +1,61 @@
+FILE:  OS_7PRIME:pOS            HEWLETT-PACKARD:      GRAPHICS   PRIM  PKG  (c)  Coleco   1982  CONFIDENTIAL            Fri,  18  May  1984,   16:21        PAGE  137
+
+LOCATION   OBJECT   CODE   LINE        SOURCE   LIWE
+
+                           6745                      GLB                  ENLRG
+     1D6C                  6746   ENLRG                                   s ACTUAL   ROUTINE   NAME  EXISTS  IN OS
+                           6747                                           ; JUMP  TABLE  ONLY
+                           6748
+                           6749
+                          6750    *   SET OPERATION    CODE
+    1D6C   DD211E07   =   6751                       LD         —         IX,ENLRG_
+                          6752
+                          6753
+                          6754    *   CONTINUE  EXECUTION    HERE
+    1070                  6755    CONTINUE  GRAPHICS
+                          6756
+                          6757    *   SAVE  ALL ENTRY   PARAMETERS
+    1D70   D9             6758                       EXX
+    1D71   08             6759                       EX                  AF AF!
+    1D72   ODES           6760                       PUSH                 Ix                  ; (SP]  = OPERATION   CODE
+                          6761
+                          6762    *  REPEAT
+    1D74                  6763   MAIN  LOOP
+                          6764
+                          6765    *    GET  VRAM_   (TABLE  CODE,  SOURCE  ,WORK BUFFER   (0..7),1)
+    1074   08             6766                       EX                  AF AF!
+    1075   F5             6767                       PUSH                AF
+    1076   08             6768                       EX                  AF AF‘
+    1077   F1             6769                       POP                 AF
+    1078   D9             6770                       EXX
+    1079   D5             6771                       PUSH                DE
+    1ID7A  O09            6772                       EXX
+    1078   D1             6773                       POP                 DE
+    107C   F0210001       6774                       LO                  ly,1
+    1D80   2A8006         6775                       LD                  HL, (WORK  BUFFER)
+    1083   CD1BA3         6776                      CALL                GET  _VRAM_
+                          6777
+                          6778   *      EXECUTE  ENCODED   OPERATION    BELOW
+    1D86   DDE1           6779                      PoP                  Ix
+    1088   DDES           6780                      PUSH                 Ix
+    1D8A   DDE9           6781                       Jp                   (1X)
+                <1D8C>    6782   RETURN  HERE        EQu                 $
+                          6783
+                          6784   *      SOURCE  :  SUCC  (SOURCE)
+    1D8C   13             6785                       INC                 DE
+                          6786
+                          6787   *      COUNT  := PRED   (COUNT)
+    1D8D) 08              6788                       DEC                 BC
+                          6789
+                          6790   *   UNTIL  COUNT   = 0
+    1D8E   78             6791                       LD                  A,B
+    108F  81              6792                      OR                   Cc
+    1D90  D9              6793                       EXX
+    1091  2061            6794                       JR                  NZ,MAIN  LOOP
+                          6795
+                          6796   *  END  (ALL)
+    1D93                  6797   ALL  X
+    1093  DDE1            6798       -               Pop                 Ix                  ; CLEAR  STACK
+    1095  C9              6799                       RET
+                          6800
+    1D96                  6801   RELCT  VERT_

@@ -1,0 +1,61 @@
+FILE: OS 7PRIME:pOS            HEWLETT-PACKARD:    PUT  MOBILE  (c) Coleco,   1982   CONFIDENTIAL                  Fri,  18 May  1984,  16:20       PAGE   79
+
+LOCATION   OBJECT  CODE  LINE        SOURCE  LINE
+
+    OE1E   110013        3786            LD  DE,YP_BK+1              ;POINT   TO NAMES   FOR  OBJECT
+    0E21   19            3787            ADD HL, DE
+    0E22   FOSE11        3788            LD E,  {1¥*XP_BK)
+    0E25   FD5612        3789            LDD,  [1Y*YP  BK)           ;DE  :   X AND  Y PAT _POS
+    0E28   010303        3790            LD BC,0303H                 sBC  :   X AND  Y EXTENT
+    0&28   CD0808        3791            CALL  PUTFRAME
+                         3792   SARARAAAAAAAERARAEE  END OF  PuT  MOBILE  RRAERKARAARAEKAARARARAKKAAKAARKKERARARRARKKEKKKKKE
+    OE2E   C9            3793            RET
+                         379%
+                         3795   ; REGS  A, H  AND  L CONTAIN   24 BIT PATTERN   TO  BE COMBINED   WITH  BACKGROUND    GENERATORS
+                         3796   ; IX  POINTS  TO THE  FIRST   OF THREE GENERATOR   BYTES   TO  BE COMBINED   WITH  A,  H AND L
+   0E2F                  3797   COMPAT  COL
+    OE2F   FDCB0346      3798            BIT  0, [IY+FLAGS)          "OR    GENS  OR  REPLACE
+                         3799   ;        IF  (PSwW1S, ZERO)          -TWEN  "OR!
+    0E33   2016          3800            JR NZ, ELSEI8
+    0€35   008600        3801              OR  [1X+0)                   ;'OR*  LEFT  BYTE  WITH  BACKGROUND
+    0£38  007700         3802              LD  {1X+0),A                 AND  SUBSTITUTE    FOR  THAT  GENERATOR   BYTE
+    0E38   7C            3803              LD  A,H                      ;NOW DO  MIDDLE   BYTE
+    OE3C  0DB608         3804              OR  {1X+8)
+    OE3F  007708         3805              LD  [1X8]  ,A
+    0€42   7D           3806               LD  A,L                     ;RIGHT   HAND  BYTE
+    0£43  008610         3807              OR  [1X+16]
+    0E46  007710        3808               LD  [1X+16},A
+    0E49   1814          3809              JR  EW018
+   0E48                  3810  ELSE18    ;ELSE                       REPLACE    BACKGROUND   WITH  NON-ZERO   BYTES
+    0E48  87            3811               OR  A                       71S  BYTE  NON-ZERO
+                         3812  ;           IF  (PSW,1S,NZERO)
+   0E4C   2803          3813               JR  Z,END19
+   OE4E   007700        3814                 LD  [IX+0},A              7VES,   THEN REPLACE   BACKGROUND   WITH   OBJECT
+   0651                 3815   END19   «=;  ENDIF
+   0€51   7C            3816               LO  A,W                     sSAME   FOR MIDDLE   BYTE
+   0€52   87            3817               OR  A
+                        3818   ;           IF  (PSW,1S,NZERO)
+   0E53   2803          3819               JR  2,€N020
+   0E55   007708        3820                 LD  (IX+8),A
+  0€58                  3821   EWD20   2s;  ENDIF
+   0€58   7D            3822               LD A,L                      7SAME  FOR  RIGHT  HAND   BYTE
+   0€59   87            3823               OR A
+                        3824   ;           IF  [PSW,1S,NZERO)
+   OESA   2803          3825               JR 2,END21
+   OE5SC  007710        3826                 LD  (IX+16),A
+  OE5F                  3827   END21       ENDIF
+  OESF                  3828   END1B  =;  ENDIF
+   OESF   FOCBO37E      3829   PM15 =    BIT7,  (IY*FLAGS]           ;FIND OUT  WHICH   GRAPHICS   MODE USED
+                        3830   ;         IF (PSW, 1S, NZERO)         ;THEN MODE   2 (MODE   1 COLORS  DONE  AFTER  COMBINELOOP]
+   0€63   283C          3831             JR 2,E022
+   OE65  DDES          3832                PUSH  IX                    ;SAVE  BACKGROUND   POINTER
+   0E67  010068         3833               LD BC,BK  CLR-BK  PIN       ;CHANGE   IX TO POINT   TO  COLOR GENERATORS
+   OE6A  D009           3834               ADD  1X,BC
+   OE6C   FD4602        3835               LDB,  [IY#COLR)             ;GET OBJECT   COLOR
+   OEGF   FOCBO34E      3836               BIT  1,[1Y*FLAGS}           ;COLORO  = BACKGROUND    OR  TRANSPARENT   ?
+                        3837   ;           IF  (PSW,1S, ZERO}          THEN   USE BACKGROUND    COLORO
+   0E73  2004           3838               JR NZ,ELSE23
+   0E75  OEOF           3839                 LD  C,OFH                   ;MASK  FOR  COLORO   OF BACKGROUND
+   0E77   1802          3840                 JR  END23
+   0E79                 3841  ELSE23       ELSE
+   0E79  0£00           3842                 LD  C,0                     ;MASK  REPLACE   COLORO  WITH  TRANSPARENT

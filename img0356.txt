@@ -1,0 +1,62 @@
+FILE:  OS _7PRIME:pOS             HEWLETT-PACKARD:        PUT  COMPLEX   (c)  Coleco,    1982      CONFIDENTIAL                   Fri,  18  May   1984,   16:20        PAGE     82
+
+LOCATION    OBJECT   CODE    LINE         SOURCE   LIWE
+
+    OEB9    23               3934              INC  WL                        sPOINT    TO  FIRST   OF   FRA_OFFSET    PNIR   PAIRS
+    OEBA    19               3935              ADD HL  ,DE                    ;POINT    TO  FRAME   POINTER
+    OEBB    4E               3936              LD  C, (HL)
+    OEBC    23               3937              INC  HL
+    OEBD    46               3938              LD B,  (WL)                    ;BC   :=  FRAME   POINTER     (POINTER   TO   LIST  OF  FRAME   #'S)
+    OEBE    23              3939               INC  HL
+    OEBF    SE              3940               LO  E, (HL)
+    OECO    23              3941               INC  WL
+    0EC1    56              3942               LDD,   (HL)                    ;DE   := OFFSET    POINTER     [PNTR   TO  LIST  OF  OFFSETS)
+    OEC2    60              3943               LO  H,B
+    OEC3    69              3944               LO  L,C                        ;HL   :=  FRAME   POINTER
+           .                3945    ;        |
+                            3946    ;  DE‘  =  YLOC,    BC'   = XLOC,    HL  = PNTR   TO  FRAME   LIST,    DE  =  PWTR   TO  OFFSET   LIST
+                            3947    ;  IX  = ADDR   OF  OBJ,   [SP]  =  COMP CNT   &  SELECTOR
+                            3948    ;  FOR  n=0  TO  COMP  _£NT-1:  COMP  OBJ  IN)   FRAME   :=  FRAME#(N]     FROM   FRAME   LIST
+                            3949    ;                               COMP  |OB J(N)   X_LOCATION     :=  CMPLX  OBJ   X LOCATION     +  XOFFSET   IN)
+                            3950    ;                                COMP OBJ(M)     YLOCATION      :=  CMPLX  OBJ    YLOCATION     +  YOFFSET    (WN)
+    OEC4   C1               3951              POP   BC
+    OECS    79              3952              LD   A,C                        ;GET   COMPONENT    COUNT    INTO   B
+    OEC6   48               3953              LO   C,8                        SAVE    SELECTOR    IN   C
+    OEC7   CB3F             3954              SRL   A                         ;GET   COUNT   INTO   LOW  NIBBLE
+    OEC9   CB3F             3955              SRL   A
+    OECB   CB3F             3956              SRL   A
+    OECD   CB3F             3957              SRL   A            :
+   OECF    47               3958              LD    8B,A                      3B  :=  component     count
+   OEDO    C5                                 PUSH   BC                        SAVE   COUNTER    AND  SELECTOR
+                            3959                                                                                   ON  STACK
+   0ED1    ODES             3960              PUSH   IX                       ;SAVE   ADDR   OF  OBJ
+   OED3    £5               3961   LP1        PUSH   HL                       *SAVE   PNTR   TO  FRAME   LIST
+   OED4    D5               3962              PUSH   DE                       ;SAVE   PNTR   TO  OFFSET    LIST
+   OEDS    DD6E04           3963              LD  L,  [1X+*4)
+   0ED8    DD6605           3964              LD  H, CIX*5)                   sHL  :=  ADDR   OF  COMPONENT     OBJ
+   OEDB    0023             3965              INC   IX                        sPoint   to  next   object    pointer
+  -QEDD    DD23             3966              INC   IX
+   OEDF    23               3967              INC   HL
+   OEEO    23               3968              INC   WL                        7HL  POINTS    TO  STATUS   POINTER
+   O£E1    5E               3969              LD  E, (HL)
+   OEE2    23               3970              INC   HL
+   OEE3    56               3971              LD D,  (HL)                     ;DE  :=  ADDR   OF  STATUS    FOR  COMPONENT     OBJECT
+   OEE4    D5               3972              PUSH   DE
+   O£ES    FDE1             3973              POP   IY                        7;1¥ <=  ADDR   OF  STATUS    FOR  COMPONENT     OBJECT                                                                               >
+   OEE7.  01                3974              POP   DE                        ;DE  :=  PNTIR  TO  OFFSET    LIST
+   OEES    £1              3975               POP   HL                        ;HL  :=  PWIR   TO  FRAME   LIST
+   OEED    7E              3976               LD  A, (HL)                     °GET  FRAME   NUMBER
+   OEEA    FOCBOO7E        3977               BIT   7, (1Y+0)                 Preserve     bit  7  of   frame
+   QEEE    2802            3978               JR    2,T8L0                    “used  by  mobile    objects     to  indicate    which
+                           3979                                              ;VRAM    tables   in  use.
+   OEFO    CBFF            3980               SET   7,A
+  OE  F2                   3981    TBLO:
+   OEF2    FD7700          3982               LD  []¥+0),A                   ;MOVE    TO COMPONENTS      STATUS   AREA
+   OEF5S   23              3983               INC  HL                        ;POINT    TO  NEXT   FRAME   NUMBER
+   OEF6    1A              3984               LD A,  (0E)                    ;GET   X_OFFSET                                                                                                 ,
+   OEF7   09               3985               EXX
+   OEF8   OF               3986               LD  L,A
+   O€F9   2600             3987               LD  4,0                        ;HL*   :=  XOFFSET
+   OEFB   09               3988               ADD  HL,BC                     ;HL*   :=  X  OFFSET   +  X LOCATION
+   OEFC    FD7501          3989               LD  C(1Y+1),L                              7
+   OEFF    FO7402          3990               LD  (1¥+*2),H                  ;COMPONENT'S      XLOCATION      :=  X_OFFSET    +  XLOCATION

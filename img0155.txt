@@ -1,0 +1,61 @@
+FILE: . ».aBS:E0OS_TF         HEWLETT-PACKARD:     UTILS       (c)  Coleco    1. - confidential                       Sat,    8  Sep  1984,  23:46           aE  151
+
+LOCATION OBJECT   CODE   LINE       SOURCE  LINE
+
+    F2B2 11F428          6217          LO         DE,HOLE_ FILE NAME            ; NAME OF HOLE
+                         6218
+    F2B5 DS              6219          PUSH       DE
+    F286 FS              6220          PUSH       AF                             ;SAVE DEVICE   ID
+                         6221
+    F2B7 21FDOBA         6222          LD         HL,FCB BUFFER
+                         6223
+    F2BA CDE61B          6224          CALL       __QUERY FILE
+    F2BD OD2AFDFD        6225          LO         IX, {FCB_HEAD_ADOR)
+    F2C1 DD6E21          6226          LO         L,(IX+FCB_ POINTER]            ;GET ADDRESS   OF  HOLE   IN DIR  BLOCK
+    F2C4 DD6622          6227          LD         H,[IX+FCB_POINTER+1]
+                         6228
+    F2C7 ES              6229          PUSH       HL
+    F2C8 FOE!            6230          PoP        ly
+                         6231
+    F2CA FDCBOC46        6232          BIT        ATTR_HOLE  BIT,  [IY+DIR_ATTR)       ;WAS  IT  A  HOLE
+    F2CE 284A            6233          JR         Z,ERROR
+                         6234
+    F2D0 21FDD4          6235          LD         HL,FILE  COUNT
+    F2D3 3AFDDS          6236          LD         A,{MOD_FILE_ COUNT)
+                         6237
+    F2D6 3C              6238          INC        A
+                         6239
+    F207 BE              6240          cp         {HL]
+    F208 2037            6241          JR         NZ,.NO_TRIM
+                         6242
+                         6243
+    F2DA                 6244  ITS_HOLE:
+    F2DA FDG6E11         6245          LO         L.[1Y+DIR  MAX  LENGTH)       ; GET CURRENT   HOLE  SIZE
+    F2DD FD6612          6246          LO         H,{1Y+OIR  MAX  LENGTH+1]
+                         6247
+    F2EO EDSBFEIA        6248          LD         DE, {NEW _HOLESIZE]           ; BLOCKS TO  BE  RETURNED    TO HOLE
+    F2E4 19              6249          ADD        HL ,DE                        ; NEW HOLE  SIZE
+                         6250
+    F2E5 FD7511          6251          LD         [1¥+DIR_MAX_LENGTH],L
+    F2E8 FD7412          6252          LO         [I¥+DIR_MAX_LENGTH+1),H
+                         6253
+    F2EB FD6EOD          6254          LD         L,{1Y¥+DIR_START  BLOCK]
+    F2EE FD660E          6255          LD         H,[IY+DIR_ START  BLOCK+1)
+                         6256
+    F2F1 B7              6257          OR         A
+    F2F2 EDS2            6258          SBC        HL,DE
+                         6259
+    F2F4 FO7500          6260          LO         {I1Y¥+DIRSTART  BLOCK],L
+    F2F7 FO740E          6261          LD         {l¥+OIR START   BLOCK+1],H
+                         6262
+    F2FA                 6263  NOT_HOLE:
+                         6264
+    F2FA DD7E17          6265          LO         A,([IX+FCBDEVICE]            ; DEVICE NUMBER
+    F2FD 2AFOFF          6266          LD         HL,[FCB_DATA_ADODR]}         ; GET ADDR OF  MY  BUFFER
+    F300 DD5E19          6267          LD         E,[IX+FCB BLOCK}             ; GET BLOCK  ADDRESS   IN  BCDE
+    F303 DDS61A          6268          LO         O,{1X+FCB BLOCK+1]
+    F306 DD4E1B          6269          LD         C,{1X+FCB BLOCK+2]
+    F309 DD461C          6270          LD         B,[1X+FCB_ BLOCK+3]
+                         6271
+    F30C CDFI1E6         6272          CALL       WRITEBLOCK                    > RE-WRITE  THE  DIRECTORY    BLOCK
+    F30F 2009            6273          JR         NZ,ERROR

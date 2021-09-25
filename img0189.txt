@@ -1,0 +1,18 @@
+FILE: ~.sABS:EOS_TF        HEWLETT-PACKARD: CONSOUT   (c) Coleco 1-4   Confidential                    Sat,   8 Sep 1984,  23:41       PAGE  185
+
+LOCATION OBJECT CODE   LINE     SOURCE LINE
+
+                       7502 ;
+                       7503 ;Special Character Handlers
+                       7504 ;
+                       7505 ;
+                       7506 ; RETURN_WITH_ERASE -  moves cursor to  right edge of  window on current    line
+                       7507 ;           after clearing to end of line
+                       7508 ;
+                       7509 ;RETURN_WITH_ERAS:
+                       7510 ;                CALL    ERASETHIS LINE
+    F664 CDF707        7511 RETURN:         CALL    PUT_OLD_ON_SCREEN                 ;Display  char   cursor  was hiding
+    F667 SAFET7A       7512                 LD      A,[X_MIN]
+    FE6A 32FEA6        7513                 LO      {CURSOR_X],A
+    F66D 2AFEAS        7514                 LD      HL,[CURSOR}
+    F670 C3F6ES5S3     7515                 JP      NEW_CURSOR

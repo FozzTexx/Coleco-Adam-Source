@@ -1,0 +1,40 @@
+FILE: w5ABS:EOS_TF           HEWLETT-PACKARD: EOSPRTR   (c)  Coleco  1yu3  Confidential                    Sat,   8  Sep  1984,  23:41        PAGE  169
+
+LOCATION  OBJECT  CODE  LINE      SOURCE LINE
+
+                        6920
+                        6921  ;REV 1          (v/D   8-24-83)
+                        C922  SHH EKHHEHEHE     EREREEEEE                                             KS
+                        6923  * PRINT_CHAR ALLOWS THE CALLER  TO PRINT   ONE CHARACTER
+                        6924  +      INPUT:    ===> CHARACTER  TO  BE PRINTED
+                        6925  *      OUTPUT: CONDITION FLAGS
+                        6926  *              Z:      NO ERROR
+                        6927  *              NZ:     ERROR OCCURED
+                        6928  *                        ===>  ERROR  CODE
+                        6929  *
+                        GF9IO SHeeeeeeMSKRKHSSHAKHERESESHEEE   EKTEER EER  HERRERA         EREERE
+                        6931
+                        6932        ;GLOBAL  _PR_CH
+                        6933        ;EXT     PRINT_BUFFER
+                        6934        ;EAT     CHK_IF_INACTIVE
+                        6935
+    F4FC                6936  __PR_CH:
+    F4FC  C5            6937         PUSH    BC
+    F4FD  D5            6938         PUSH    DE
+    F4FE  E5            6939         PUSH    HL
+    F4FF  FOES          6940         PUSH    LY
+                        6941
+    F501  32FD76        6942         LD      [PRINT _BUFFER],A
+    F504  3E03          6943         LD      A,ETX                     ;  TERMINATE STRIN W/ETX
+    F506  32F077        6944         LO      (PRINT_BUFFER+1],A        ;
+    F509  21FD76        6945         LD      HL,PRINTBUFFER            ;  ADDRESS OF PRINT BUFFER
+                        6946
+    FSOC  CDF515        6947         CALL    __PR_BUFF
+                        6948
+    FSOF  FOE!          6949         POP     IY
+    F511  Ef            6950         POP     HL
+    F512  D1            6951         POP     DE
+    F513  C1            6952         POP     BC
+                        6953
+    F514  C9            6954         RET
+                        6955

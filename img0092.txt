@@ -1,0 +1,63 @@
+FILE:    EOSABS:EOS     TF            HEWLETT-PACKARD:        SOUND   EQU@S    (c)  Coleco,      1982      CONF  IDENT IAL                  Sat,     8   Sep   1984,     23.39           PAGE      on
+
+LOCATION     OBJECT     CODE    LINE         SOURCE    LINE
+
+                                3236
+                                3237    eee  eeeeeereeeeeseseeeeseges
+                                3238   ;*        LOAD  _NEXT  NOTE           .
+                                3299   ,eeeeeseeeereseseeseeeeeeees
+                                3240
+                                3241   ;see   Users’    Manual    for  description
+                                3242   :SFX   refers    to  the   beginning     address     of  a  special     sound   effect    routine
+                                3243
+      E4F2                      3244   LOAD  NEXT  NOTE
+                                3245
+                                3246   ;          *  deactivate     area,    save   SONGNO    on   stack
+                                3247
+      E4F2   DOTVEOO            3248              i)         A,[1x+0]                ;A  :=  byte   O
+      E4F5   EGSF               3249              AND        00111111B               ;mask   CH#,    if  any
+      E4F7   FS                 3250              PUSH       AF                      ;save   SONGNO    on   stack
+      E4F8   ODSGOOFF           3251              Lo         [IX+O0]),  INACTIVE     ;deactivate      area
+                                3252
+                                3253   ;          *  A  :®  header    new   note
+                                3254
+      E4FC   DDGEO              3255              LO         L, [1X+1]               -HL   := addr    new   note    in ROM
+      E4FF   DD6602             3256              LD         H, [1X+2]
+      €502   7E                 3257              LD         A, (HL)                -A   :=  header    new   note
+                                3258
+                                3259   ;          *  save   header    of  new   note   in  song    on  stack    and   load    its  data  CASE     note    type
+                                3260
+      E503   47                 3261              LO         B.A                    ;save    header    new   note    in  B
+      E504   CBG6F              3262              BIT        5,A                    ;test    for   rest
+      E506   281C               3263              JR         Z,L13                  ;1f   PSW   is  non-zero     note    is  a  rest
+                                3264
+                                3265   ;@@@   REST
+      ESOo8  C5                 3266              PUSH       BC                     ;save    header    on   stack
+      ESOS   EGIF               3267 .            AND        000111118              ;mask    al!   but   duration     bits
+                                3268
+                                3269   ;          *  set   up NEXT_NOTE     PTR
+                                3270
+      E508   23                 3271              INC        HL                     ;HL   =  address     of  the   header    of  the   note    after     this   note
+      ESOC   0D7501             3272              LO         (IxX+t),b              ;Store    in  NEXT_NOTE     PTR
+      ESOF   DD7402             3273              LD         {1X+2),H
+                                3274
+                                3275   ;          *  move   this   note’s    data   and   fill   in   bytes   where    necessary
+                                3276
+      E512   DO3604FO           3277              LD         { IX+ATN]   ,OFOH      ;set   atn   off
+      E516   DD7705             3278              LD         [ IX+NLEN],A           ;NLEN    :=  5  bit   duration
+      E519   DD360700           3279              LD         [ IX+FSTEP],O          ;indicate      freq   not   to  be  swept
+      E51D   DD360800           3280              LO         [ IX+ASTEP],0          ;indicate      atn   not  to   be  swept
+      E521   C3ES5EC            3281              JP         MODBO
+                                3282                                                         .
+                                3283   ;          ENOIF
+                                3284
+      E524                      3285   113
+      E524   CB67               3286              BIT        4,8                    -test    for  end
+      E526   280E              3287               JR         Z,L14                  ;if  PSW    is  non-zero     end   of  song
+      —528   CBSF              3288               BIT        3,A                    ;test    for   repeat
+      E5S2A  2804              3289               JR         2, ENONOREP            ;1f  PSW    is  non-zero     repeat    song
+                               3290    ;@@@   ENDREP
+      E52C   Ct                 3291              POP        BC                     ;B  :=  SONGNO
+      ES2D   C3E°~              3292              JP         JUKE  BOX              ;to  reload     is*   note   of   this   song
+
+          a   eta trates   sheen     tame                    ie

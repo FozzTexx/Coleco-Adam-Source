@@ -1,0 +1,64 @@
+FILOS7PRIME:pOSHEWLETT-PAPUT/DEFPUOBJ(c)Col198CONFIDENTIAL  Fri18May19816:19  PAGE46
+
+LOCATOBJECCOLINE© SOURLINE
+
+  0633A73CB 2008         LD        A,(QUEHEAD)
+  0633c     2009         INC       A          ;NEWHEAIA
+            2010
+            201*  IQUEUHEADQUEUSIZETHEN
+  0632173CA 2012         LD        HLQUESIZE
+  063BE     2013         cp         (HL)
+  0632000   2014         JR        NZ,NTOOBIG
+            2015
+            201*  QUEU_HEA:=0
+  0633€00   2017         LO        A,0
+  0633273cB 2018         LO         (QUHEAD,A
+            2019
+            202* —-HEAD_ADD:=BUFFER
+  06327301  2021         Lo        HL(BUFFER)
+  0642273cD 2e2          LD         (HEADDRE,HL
+            202
+  0641807   2024         JR        SET_UP_ENDIF
+            202*  ELSE
+        <064202NOTOOBIG =EQU       $
+            2027
+            202* § STORNEQUEUHEAD
+  0643273CB 2029         LD        [QUEHEAD,A
+            2030
+            203*   STOHEAADDRESS
+  064ED5373C2032         Lp        [WEAD_ADD,DES)
+            2033
+            203*  ENDIF
+  064E      203SEUPENDIF
+            2036
+            203*ENSETUP_WRITE
+  064C9     2038         RET
+            2039
+            204*PROCEDUINIQUEU(SIZE:BYTEA_QU:QUEUE)
+            2041
+            204*SIZPASSEINA,LOCATPASSEIWHL
+            204*DESTROAS:
+            2044
+  0640002000204INIQUEUP  ——DEFW    2,1,-2
+  065FFFE
+            204*THIISTHEPARAMEDESCRIPFORINQUEUEQ                                               ,
+            2047
+            204*BEGIINIQUEUE
+            2049         GLB       INIQUEUEQ
+        <065205INIQUEUEQ=EQU       $
+  06501064F 2051         LD        BCINIQUEPE
+  0651173BA 2052         LD        DEPARAREA
+  065c00098 2053         CALL      PARAM.
+  0653A73BA 2054         LD        A,[PAAREA)
+  0662A73BB 2008         LD        HL[PARAREAt1]
+
+            2057         GLB       INIQUEUE                                            ,
+        <066205INIQUEUE  EQU       5
+            2059
+            206* QUEUSIZE:SIZE
+  0663273CA 2061         LO        [QUESIZ,A
+            2062
+            206* QUEUHEAD:QUEUTAIL:0
+
+                                                                                           |       .
+nme        He    HerlUCUArMrlrCrCUlCUCU CUCU    rCrCThlCOCUlrcrCCLrlrTThLcClCTcaOCOCUlUrULeETlClCLelCeC

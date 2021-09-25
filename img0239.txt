@@ -1,0 +1,49 @@
+FILE: tuSABS:EOS  TF          HEWLETT-PACKARD: EOSBLK    (c) Coleco  1453 Confidential                Sat,     8  Sep  1984,  23:42        PAGE   235
+
+LOCATION OBJECT   CODE   LINE      SOURCE LINE
+
+                         QGI2D SHEESH HEHEHE  EEE  HEHEHE EKEREEE  ERE EEEEEE EEEHEHEHERHEREE EREREREE EEE
+                         9123  *
+                         9124  *      PREP _OCBLOADS THE OCB BUFFER  WITH THE PROPER VALUES FOR
+                         9125  «      A READ OR WRITE COMMAND
+                         9126  *
+                         9127  *      INPUT:
+                         9128  *              IY      START OF SPECIFIC  DCB
+                         9129  +              HL      ADDRESS OF RAM  DESTINATION(READ)/SOURCE(WRITE)
+                         9130  *
+                         9131  *              BC DE   DEVICE SECTOR  NUMBER
+                         9132  ¢
+                         9133  *      OUTPUT:    NONE
+                         9134  *
+                         Q1IQ5 SHES SHEESH EEE EHHEKER   HEHEHE    EEE  EEE EEEEEEEE EERE  HEREET EES
+                         9136
+    FB38                 9137  PREP_DCB:
+    FB38 FS              9138         PUSH    AF
+                         9139
+    F839 CB3F            9140         SRL     A                                ; EXTRACT SECONDARY DEVICE   ID
+    FB3B CB3F            9141         SRL     A
+    FB30 CB3F            9142         SRL     A
+    FB3F CB3F            9143         SRL     A
+                         9144
+    FB41 FD7709          9145         LO      [1¥+D_SEC_DEV_ID],A            ; ... AND PLACE IN DCB
+    FB44 FD7E11          9146         LD      A,(1Y+DMAX MSG LN LO]        ; GET BLOCK LENGTH AND PLACE  ...
+    F847 FD7703          9147         LO      [1¥+D_BUF_LEN_LO],A           ; .... IT IN BUFFER LENGTH  ..
+    FB4A FD7E12          9148         LD      A,(I1Y¥+MAXMSG _LNHI]        ; .... FOR READ
+    FB4D FD7704          9149         LD      [1¥+D_BUF_LENHI].A
+                         9150
+    FB5O FD7305          9151         LO      {1¥+D_SECT_NUM],E              ; LOAD UP A 4 BYTE SECTOR....
+    FB53 FD7206          9152         LD      {[I¥+D_SECT_NUM+1],D           ; .... NUMBER FROM REGISTERS....
+    FB56 FDO7107         9153         LD      [1¥+D_SECTNUM+2]},C            ;      PAIR BC DE
+    FB59 FD7008          9154         LD      [1¥+D_SECT_NUM+3],8
+                         9155
+    FBSC FD7501          9156         LD      {I¥+DBUF ADR _LO),L          ; ADDRESS OF SOURCE/DESTIATION
+    FBSF F07402          9157         LD      [1Y¥+BUF_ADR_HI},H           ; .... IN RAM
+                         9158
+    FB62 F1              9159         POP     AF
+    FB63 C9              9160         RET
+                         9161  ;
+                         9162  SESSSSTASSSSSSSSSSSTSSSRSSSSeeresssessssrsesrsrsssssrssssssssssesrseszse
+                         9163  ,ESRBERTSSSTASSTSSTTTSesseessessssseassrrssressesssszsssessssesssssse
+                         9164  ;ssssuenasrassscecesssesesestresesseers sesrssssessssrsessssssssssse
+                         9165  ;
+                         9166

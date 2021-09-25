@@ -1,0 +1,31 @@
+FILE: EOSABS:EOS   TF         HEWLETT-PACKARD: CONS OUT    (c) Coleco   1983 Confidential)                   Sat.     8  Sep  1984,  23:41        PAGE   196
+
+LOCATION  OBJECT   CODE   LINE     SOURCE LINE
+
+                          7708 ;
+                          7709 ; Subroutine
+                          7710 ; BLANK_SCREEN  -  Will   blank a  given  number of lines  on the  screen
+                          7711 |
+                          7712 ; Input Parameters:
+                          7713 ;   8  - Number of  lines  to blank
+                          7714 ;   HL - Absolute X-Y   coords of  start  position of tst  line  to blank
+                          7715 ;
+                          7716 ;   Destroys C, A, DE
+                          7717 ;   User must reset  cursor
+                          7718 ;
+    F74C                  7719 BLANK_SCREEN:
+    F74C  CDF73C          7720                 CALL      BLANKS            :Fill buffer  with BLANKING  CHAR
+    F74F  3AFEAO          7721                 LD        A,[NUM_COLUMNS  }
+    F752  4F              7722                 LD        C,A
+                          7723
+    F753  CS              7724 BLNK_SCRN_LOOP: PUSH      BC
+    F754  €5              7725                 PUSH      HL                ;Save K-Y coord  of  tine
+    F755  CDF7FC          7726                 CALL      CONVERTXY
+    F758  0600            7727                 LD        8,OOH             ;C has number  of bytes  to  read
+    F75A  21FE7E          7728                 LD        HL,LINEBUFFER_
+    F75D  CDFDIA          7729                 CALL      WRITEVRAM
+    F760  E1              7730                 POP       HL
+    F761  2C              7731                 INC       L                 ;To next line  below
+    F762  C1              7732                 POP       BC
+    F763  10€E            7733                 DJUNZ     BLNK_SCRN_LOOP
+    F765  CS              7734                 RET

@@ -1,0 +1,61 @@
+FILE: ..3ABS:E0S_TF         HEWLETT-PACKARD: RD_WT     (c) Coleco  1243Confidential                       Sat,     8  Sep  1984,   23:40       real  123
+
+LOCATION OBJECT CODE   LINE      SOURCE LINE
+
+    EDD9 DD7E13        4943           )      A,[IX+FCB_USED_LENGTH+O]
+    EDDC DDBE11        4944          cP      [1X+FCB_MAX_LENGTH)
+    EDOF 3804          4945          UR      C,SET_uP
+                       4946
+    EDE1 DOCBISFE      4947          SET     MODE_LAST_BLOCKBIT, [1X+FCB_MODE }
+    EDES               4948  SET_UP:
+    EDES 2AFEOA        4949          LO      Ht,(BUF_END]    ;GET LAST ADDR  +  1OF BUFFER
+    EDE8 DDSE21        4950          LD      E,[IX+FCB_POINTER]  ;GETCURRENT  POINTER
+    EDEB 005622        4951          LO      D,[IX+FCB_POINTER+1)
+    EDEE 87            4952          OR      A               ;CLEAR CARRY
+    EDEF E052          4953          SBC     HL,DE           ;CALC. ROOM LEFT  IN BUFFER
+    EDF1 44            4954      .    Oo     B,H             ;SAVE IT IN CASE  WE NEED   IT
+    EDF2 4D            4955          LO      Cyt
+    EDF3 EDSBFEO4      4956          LD      DE,(BYTESTO  GO) ;GET BYTES LEFT  TO TRANSFER
+    EDF] 87            4967          OR      A
+    EOFS E052          4958          SBC     HL,DE           SEE  IF WE HAVE  ROOM FOR   IT ALL
+    EDFA D2EE93        4959          uP      NC,ROOM_OK      ;BRANCH IF YES
+                       4960
+                       4961  ; WE FALL THROUGH HERE IF THE NUMBER OF BYTES  TO BE WRITTEN
+                       4962  ; IS MORE THAN THE SPACE WE HAVE IN THE CURRENT  BLOCK.
+                       4963  ; FILL THE BLOCK, WRITE IT OUT, THEN DECIDE WHAT  TO DO.
+                       4964
+    EOFD 78            4965          Lo      A.B             ; CHECK IF ANY  BYTES AVAILABLE
+    EDFE B1            4066          OR      Cc
+    EDFF 2818          4967          JR      2,CHECK_LAST_BLOCK  ; NOPE, EMPTY  BUFFER  FIRST
+                       4968
+    EEO! 2AFEO4        4969          LD      HL,{BYTES TOGO)  ;GET THE COUNT
+    EEO4 87            4970          OR      A
+    EEOS ED42          4971          SBC     HL,BC           ;SUB THE ROOM  IN BUFFER  TO  UPDATE   IT
+    EEO? 22FEO4       4972           LD      {BYTESTO_GO),HL
+              |        4973
+    EEOA DDSE21        4974          LO      E,[I1X+FCB_POINTER];GET POINTER  INTO BUFFER
+    EEOD 005622        4975          LD.     D,[1X+FCB_POINTER+1)
+    EE10 2AFEO6        4976          LO      HL,(USER_BUF]        POINTER TO  USER DATA
+                       4977                                  ;B8CSTILL HAS COUNT  FROM  ABOVE
+    EE13 EDBO          4978          LDIR                    ;MOVE DATA INTO  THE BUFFER
+                       4979
+    EE1S 22FEO6        4980          LO      [USER_BUF),HL   ; SAVE WHERE WE  LEFT OFF
+                       4981
+                       4962
+    EE18 DOCB18F6      4983          SET     MODE_DIRTY_BIT,(IX+FCBMODE)   ;SET THE DIRTY   BIT
+                       4984
+    EE1C               4985  CHECK_LAST_BLOCK:
+    EE1C DDCB1IB7E     4986          BIT     MODELAST BLOCK _BIT,[IX+FCBMODE]   ;CHECK  FOR  LAST   BLOCK
+    EE20 2809          4987          JR      2,MOREFILE      ;JUMP IF THIS  ISN‘T LAST  BLOCK
+                       A986
+                       4989  ; IF THIS IS THE LAST BLOCK (AND IT’S NOW FULL)  THERE’S  NOTHING
+                       4990  ; MORE WE CAN DO.  WE LEAVE THE DATA IN PLACE  (IT WILL  GET
+                       4991  ; FLUSHED WHEN THE FILE IS CLOSED) ANO REPORT AN  EOF ERROR.
+                       4992  ; MEANING THAT WE COULDN’T WRITE ALL THE DATA.
+                       4993
+    EE22 ODE           4994          POP     IX              -RESTORE REGISTERS
+    EE24 £1            4995          PoP     Hi.
+    EE25 Dt            4936          POP     DE
+    EE26 Ct            4997          PoP     BC
+    FEQ273EOR          43998         ip      A,EOFERR        SHOW  THE ERROR
+    EE29 87             4399         OR      A               >SET CONDITIONS

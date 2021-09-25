@@ -1,0 +1,61 @@
+Fite:  EOSABS:  EOS TF          HEWLETT-PACKARD:   SOUND   EQU€S   (c)  Coleco,    1982    CONFIDENTIAL                 Sat,     3 Sep   1984, 23:39       PAGE   84
+
+LOCATION   OBJECT   CODE   LINE      SOURCE  LINE
+
+                           3101
+                           3102  ;Seeeeeaeeeeseeeeeeeeeseserss
+                           3103  ;*     UP_CH DATA   _PTRS       -
+                           3104
+                           3105
+                           3106  :For each active   data  area,   starting    with   SIDATA  and  proceeding     in order,    toad
+                           3107  ;the associated   channel!  data   area  pointer    [PTR_TO_S  ON x}   with   the  address    of
+                           3108  ;byte O.This  routine    is called    by JUKE BOX,    when  a  song  starts   and
+                           3109  ;PROCESSDATA_AREA     when  the  channel    using  a  data  area  has  changed    as  a  result   of
+                           3110  ;calling LOAD_NEXT_NOTE     [this   happens   when   a song  finishes    and  when   it switches
+                           3111  :back and forth   between   noise   and   tone notes].
+                           3412
+    E47A                   3113  UP_CHDATA _PTRS
+    E47A   DDES            3114          PUSH      IX                   ;Save  curent   IX
+    E47C   21€3E6          3115          LD        Hi ,DUMAREA          ;set  all  4 ch  data  ptrs   to dummy    inactive    area
+    E47F   22FE70          3116          LD        {PTR_TO_S  ON  _O}),HL
+    E482   22FE72          3117          tD        {PTR_1O_  SON  1),HL
+    E485   22FE74          3118          LD        {PTR_TO_S  ON  2),HL
+    E488   22FE76          3119          LO        {PTR _TO_S ON  3).HL
+    E48B   O601            3120          LD        a                    ;set  IX  to byte   O SIDATA
+    E480   CDE383          3121          CALL      PTIX_TO_SxDATA       ;RETS  with   IX addr  byte  O  song   1
+                           3122
+    E4390                  3123  L2                             |       ;LOOP  until   end  of song  data   areas
+    E490  DD7EOO           3124          LD        A,[1IX+0]            ;test  for  end  of  song  data  araes
+    £493  87               3125          OR        A              ; #00   CP        ENDSDATA
+    E494   281F            3126          JR        Z,O00NE_SNOMAN       ;leave  loop   if all  data  areas   checked
+                           3127
+                           3128  ;       *  {f area  active,   set   appropriate    channel!  data  area   pointer
+                           3129
+    E496   3C              3130          INC       A ; #888    cP         INACTIVE            ;check   for  inactive    data   area:   don’t  up date   ptr if  so
+    E497   2815            3131          JR        Z,.L9                ;tf PSW   is non-zero   area   is active:    update    channe!   data  ptrs
+    E499  DD7E00           3132          LO        A,(1X+0]}            ;get  CHW  in  A
+    E49C  E6CO             3133          AND      OCOH                  ;87  - BE   tn  A   = CHA
+    E49E  O7               3134          RLCA                           ;form  CH¥   *  2   inaA,  t.e.,   the  offset   from
+    E49F  O7               3135          RLCA                           ;PTR_TO  S ON_O    of  the   channel    data  area   pointer
+    E4A0  O07              3136          RLCA                           >that  points    to  channel    CH”
+    E4A1  SF               3137          LO        E.A                  ;add  offset   to addr  of  PTR_TO_S  ON_O
+    E4A2   1600            3138          LO       0,0
+    E4A4   21FE7O          3139          LO       HL,PTR  TO   _SON  O
+    E4A7   19              3140         -ADD      HL ,DE                ;-HLpoints   to   proper   channel    data   area   pointer
+    E4A8  DDES             3141          PUSH      IX                   ;store  this  song   data  area’s   byte   O   addr    there
+    E4AA  D1               3142          POP      DE
+    E4A8  73               3143          LO        {HL],€
+    E4AC  23               3144          INC      HL
+    E4A0  72               3145          LO        (HL},O
+                           3146
+                           3147  ;       ENOIF
+                           3148
+                           3149  ;       ¢ point   IX to  byte  O  next   song  data  area
+                           3150
+    E4AE                   3151  9
+    E4AE   11000A          3152          LO       DE ,10
+    —€4B1 D019             3153          ADD       IX,DE
+    E483   1806            3154          JR       L2                    -REPEAT  Loop
+                           3155
+    E485                   3156  DONESNOMAN
+    E485  ODE1             3157          POP       IX                   ;restore   Ix

@@ -1,0 +1,61 @@
+ ILE:   OS 7PRIME:pOS          CROSS  REFERENCE   TABLE              PAGE   158
+
+ INE#     SYMBOL            TYPE   ——-REFERENCES
+
+ 3545    PMI                  p
+ 3644    PMI2                 P
+ 3706    PM13                 p
+ 3761    PM14                 p
+ 3829    PM15                 p
+ 3264    PM2                  p
+ 3291    PM3                  p
+ 3328    PMG                  P
+ 3347    PMS                  p
+ $372    PMS1                 P  3369
+ 5368    PM52                 p  3371
+ 5377    PMO                  p
+ 5404    PMT                  p
+ 5432    PMB                  p
+ 5473    PHO                  p
+ 7392    POLLER               A  210
+ 1759    POLLER_              P  4758, 7392
+ »808    POLLER_X             P  4788, 4804
+  888    POS                  P  886
+  531  POWER   UP             P  375
+  586  PRM   AREA             D  1612, 1614, 1619
+ 1215  PROCESS    DATAAR      P  1147,1213
+ B12     PTRN POINTER         A
+   60    PTR TO LST  OF   S   A  909,1028
+   61    PIR.TOS   ONO        A  1045,1169,  1190, 1298
+   62    PTRTOS    ON  1     <A 1046,1170,   1281
+   63    PIRTOS    ON  2      A  1047,1171,  1287
+   64    PIR  TOS  ON  3      A  1048,1172,1293
+  906    PTIX  TO SxDATA      P  905,1105,1141,1174
+7856     PUTOSPRITE           P  2197,2853
+ 944    PUTISPRITE            P  2199, 2853
+ 1913   PUTCOMPLEX            P  2200,3911
+ 673    PUTFRAME              P  2257, 2340, 2387, 2472, 3780, 3791
+ "397   PUTOBJ                A  261,4018
+ 348    PUTOBUP               A  247
+ ‘173   PUTOBJQ               P  2165, 7348
+ 182    PUTOBJ_               P  2158, 7397
+ ‘166  PUTOBJ   PAR           P  2174
+ 1216   PUTSEMI               P  2193,2213
+ 070   PUT  COLOR             P  6825,6872,6911
+ 212   PUT  _MOBILE           P  2195,3196
+ 035    PUT_TABLE             P6814,   6852, 6900
+ 377    PUT_VRAM              A  190,3116,  3150,3654,  3692, 3742, 3749, 5160, 5181,5187,5194,5201,     5209,  5255,  5274,5280, 5286, 5685,  5692, 5720,  5801
+                                 5807 ,5944 5956,  5962, 5968
+ 362    PUT_VRAMP             A  195
+ 1176  PUT  _VRAMQ            P  5980, 7362
+ 1185  PUT  _VRAM_            P  1775, 1803, 1838, 1853, 1882, 1946, 2599, 5979, 6950, 6979, 7051,  7081,  7377
+ 1173   PUT_VRAM  P           P  6177
+ 067    PUT  Y AND  WAME      P 2938,  3026
+ 435    PX TO  PTRN  POS      P  2222,2227,2434,3242,3251
+ 698    P LOOP         -  —   —p -5703
+ 162    QUADRUPLE             P  6967, 7093
+ 179   QUAD   LOOP            P  7204
+ 968  QUEUE    HEAD           D  2008, 2018, 2uz9, 2065 ,2096
+ 964   QUEUE   SIZE           D  2012, 2061, 2120
+ 969   QUEUE   TAIL           D  2066, 2095, 2116, 2126, 2138
+ 398    RAND  GEN             A  239

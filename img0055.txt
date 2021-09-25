@@ -1,0 +1,47 @@
+                                                                         ’
+FILE: «2 5a8S:E0S_TF         HEWLETT-PACKARD:    A_uOS OO   {(c)Coleco   tour Confidential                     Sat,  8  Sep  1984,  23  38       AGE       51
+
+LOCATION  OBJECT   CODE  LINE       SOURCE  LINE
+
+                          1919 ;
+                          1920 ;    Switch_mem:  memory bank  switching  routine
+                         1921  ;
+                         1922  ;    Inputs:
+                         1923 :;                 A = Appropriate   tnput from  SWITCH TABLE
+                         1924
+                         1925                    Example:
+                         1926       Switch Table  Offset    Memory  configuration
+                         {927      “eweaeeweweeeewveaeewreeweereerwrtenreweenwweenwrnawxenenWuewewweeaewvnweeeeenwweexe
+                         1928
+                         1929                -          Boot  ROM and  Alpha  Roms
+                         1930                -          Intrinsic   RAM (OOOOH  thru  7FFFH)
+                         1931                           Expansion   memory (OOOOH   thru 7FFFH)
+                         1932                -          OS_7  and  Intrinsic  RAM (2000H   thru 7FFFH)
+                         1933
+                         1934
+                         1935
+                         1936
+                         1937
+                         1938
+                         1939  ;   *¢+¢Note: The values in  the table  are subject   to change  in future
+                         1940  ;             releases of ADAM  hardware.
+                         1941  ;
+                         1942  ;   For an example  of the use  of SWITCH MEM   see PORT COLLECTION    below.
+                         1943  ;
+                         1944  ;
+                         1945  ;    Outputs:
+                         1946                    CUR_BANK,  a defined  memory  location  will  contain
+                         1947                    the updated  input  parameter  for  applications  and
+                         1948                    EOS routines  which  need to  determine  which
+                         1949                    memory space  is currently   active.
+                         1950
+    E165                 1951   SWITCH  MEM
+    E185  47             1952            LO      B A                                 ;SAVE THE  PORT DATA   TO WRITE
+    E186  3AFC27         1953            LD      A (MEMSWITCH  PORT]                 ;GET THE  PORT NUMBER
+    E189  4F             1954            LD      CcA
+    E18A  ED41           1955            OUT     (CJ»B                               ;SWITCH  MEMORY BANKS
+    E18C  78             1956            LD      AB
+    E18D  32FD6E         1957            LD      {CUR_BANK],A                        >REMEMBER  WHAT WAS   SWITCHED  TO.
+    E190  C9             1956            RET
+
+                                                               @e@#@e@eeeaeH=a1@e@eee eeee@0@ea

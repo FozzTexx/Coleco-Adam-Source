@@ -1,0 +1,46 @@
+FILE:  OS  7PRIME:pOS             HEWLETT-PACKARD:     TABLE  MANAGER    (c) Coleco,    1982     CONFIDENTIAL              Fri,  18  May  1984,   16:21         PAGE  129
+
+LOCATION    OBJECT   CODE   LINE        SOURCE   LINE
+
+                            6309                 ;**   QUTPUT   TO  VRAM  THROUGH   VDP
+                            6310
+     1CA8   0604            6311                 iD    B,4                 sELEm.  «tTCOUNT    FOR  OWE  SPRITE
+     1CAA   OEBE            6312                 LD    C,MODE  0  PORT     OUTPUT    PORT   IN  'C'
+     1CAC                   6313  OUTPUT   LOOP10
+     1CAC   EDA3            6314                OuT]
+     1CAE   00              6315                woP              ;         ;DELAY
+     ICAF   00              6316                nop
+     1CBO   20FA            6317                 JR               LOOP10
+                            6318   ;             LD    A, [SPRITE_CT)
+                            6319   ;            DEC    A
+                            6320   ;             LO  (SPRITE    CT},A
+     1CB2   30              6321                DEC    A
+     1CB3   20€5            6322                 JR               LOOP   TABLE  MA
+     1cB5   C9              6323                RET
+                            6324
+                            6325                       GLB                 VRAM_ ADDR  TABLE
+                            6326                       GLB                 SPR ITEMNAME TBL
+                            6327                       GLB                 SPRITEGENTBL
+                            6328                       GLB                 PAT TRNNAME  TBL
+                            6329                       GLB                 PATTRNGENTBL
+                            6330                       GLB                 COLORTABLE
+                            6331                      DATA
+   73F2                     6332  VRAM  ADDR  TABLE
+   T3F2                     6333  SPRITENAMETBL        DEFS                2
+    T3F4                    6334  SPRITEGENTBL        DEFS                 2
+    73F6                    6335  PATTRNNAMETBL       DEFS                 2
+    73F8                    6336: PATTRNGENTBL        DEFS                 2
+    T3FA                    6337  COLORTABLE          DEFS                 2
+                            6338  *  THIS  TABLE   HOLDS  THE  BASE  ADDRESSES    OF  ALL  THE   VRAM  TABLES.
+                           6339
+                            6340
+    73FC                   6341   SAVE TEMP           DEFS   2
+    73FE                   6342  SAVED   COUNT        DEFS   2
+                           6343  ©
+                           6344   >                   COMN
+                           6345
+                           6346   ;PARAM   AREA         DEFS                6
+                           6347   *  THIS IS   THE  PARAMETER   PASSING    AREA  FOR  THE  PASCAL   ENTRY   POINTS  TO
+                           6348   *  ROUTINES   IN  THIS  MODULE.   IT  IS  HELD  IN  COMMON   WITH   OTHER  SUCH  ENTRY
+                           6349   *  POINTS   FOR  OTHER  MODULES.
+                           6350    PROG

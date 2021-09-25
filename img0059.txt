@@ -1,0 +1,47 @@
+                                                                         \
+FILE: tromdS:EOS_TF          HEWLETT-PACKARD:   A_uOS 00   (c) Coleco  {iS-.Confidential                   Sat,     8  Sep  1984,  23:39        .aGE     55
+
+LOCATION  OBJECT CODE   LINE      SOURCE  LINE
+
+                                 Name:             SET_READ  / SET WRITE
+
+                                 Function:         Initiates   the VDP for reads  or writes.
+
+                                 Entry:            HL  - VRAM address  to start  read / writes
+
+                                 Exit:             C register  contains  the VDP_DATA_PORT  vatue
+                                                   HL remains  unchanged
+
+                                 Registers  used:  AF,  BC, HL,
+
+                                 Data  structures  accessed:
+
+                                                   PORT_TABLE  (CTRL_PORT_PTR,  DATA_PORT PTR)   for
+                        2103  ;                    VDP  port access.
+
+                                 Size:             ROM  - xx bytes
+                              ;                    RAM  - xx bytes
+
+                                 Comments:
+
+                                 Compar ision:
+
+    E1E7                2112  SSET_READ:
+    E1E7  AF            2113      .       XOR   A                 ;Clear accumulator  for later OR  which
+                        2114                                      ; Getermines a  read or write
+
+    E1E8  C2            2116              DEFB  OC2H              :This is the beginning  of a JP  NZ which
+                        2117                                      ; will never be  true but leaves  the
+                        2118                                      ; accumulator  intact over the  next
+                        2119                                      ; two bytes (  the LD A,40H  is decoded
+                        2120                                      ; as the last  two bytes of the  jump
+    E1E9                2121  SETWRITE:
+    E1E9  3&40          2122              LD    A,40H             ;Set bit to tell  VDP that write  is requested
+
+    E1EB  ED4BFC29      2124              LO    BC,[VDP_CTRL_PORT]   ;Get BOTH port  addresses
+    E1EF  ED69          2125              OUT   [C].L             ;Output low 8 bits  of address
+    E1Fi  84            2126              OR   4H                 ;OR read/write  bit (Bit 6) into  the high    8 bytes
+    E1F2  ED79          2127              OuT   [CJ.A             ;Output result
+    E1F4  48            2128              iD    C,B               ;Put DATA_PORT  value into the  C register
+
+    E1FS  C9            2130              RET                     ;Exit to caller

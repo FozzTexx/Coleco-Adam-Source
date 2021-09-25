@@ -1,0 +1,8 @@
+                                                                      pee
+FILE: c-sabs:€0S_TF       HEWLETT-PACKARD:  SOUND  EQU€¢S (c)  Coleco.  1982    CONFIDENTIAL              Sat,    8  Sep  1984,   23:39      PAGE    85
+
+LOCATION OBJECT CODE  LINE     SOURCE LINE
+
+                      3158 ;@@@ L112
+    E487 C9           3159         RET
+                      3160

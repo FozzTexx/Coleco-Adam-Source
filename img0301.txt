@@ -1,0 +1,6 @@
+FILE: OS 7PRIME:pOS         HEWLETT-PACKARD:   JUKEBOX   (c)  Coleco,  1982    CONFIDENTIAL                    Fri,  18  May  1984,  16:19      PAGE   27
+
+LOCATION  OBJECT CODE  LIWE       SOURCE LIWE
+
+                       1124   ;       (page)
+                       1125    PROG

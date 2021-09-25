@@ -1,0 +1,61 @@
+FILE:  OS _7PRIME:pOs          HEWLETT-PACKARD:      PUT  MOBILE    (c)  Coleco,   1982   CONFIDENTIAL                   Fri,  18  May   1984,  16:20       pace     78
+
+LOCATION   OBJECT   CODE LINE        SOURCE   LINE
+
+     ODB8  CB3F          3729                     SRL  A                    ;THIS   NUMBER  /  8  INDICATES   WHICH   1/3 OF
+     ODBA  CB3F          3730                     SRL  A                    ;     TABLES   TO  USE
+    ODBC   CB3F          3731                     SRL  A
+    OoBE   57            3732                     LD  D,A
+    ODBF   59            3733                     LD  E,C                   ;DE  :=  INDEX   INTO  PATTERN   AND  COLOR  TABLES
+    0DC0  D5             3734                     PUSH   DE                 SAVE    INDEX
+    00c1  01001C         3735                     LD  BC,BK  PIN            ;FORM  POINTER    TO GENERATORS     IN HL
+    00c%  09             3736                     ADD HL,  BC
+    ODC5  £D488006       3737                     LO  BC, (WORK  BUFFER]    ;GET  BUFFER   BASE  ADOR
+    ODc9  09             3738                     ADD  HL,BC
+    ODCA  E5             3739                     PUSH   HL                 SAVE   THIS  POINTER
+    QOCB  FD210003       3740                     LD  1Y,3                  ;NUMBER   OF ELEMENTS    TO  MOVE
+    ODCF  3£03           3741                     LD  A,3                   ;PATTERN   GENERATOR    TABLE   CODE
+    0DD1  CD1FBE         3742                    CALL   PUT  _VRAM
+    ODD4  £1             3743                     POP  HL                   ;GET  POINTER   BACK|
+    0005  110068         3744                     LD  DE,BK _CLR-BK_PTN     ;OFFSET   BETWEEN   BUFFERS
+    0008  19             3745                     ADD HL ,DE                ;HL  POINTS  TO  START   OF  NEXT  3  COLOR  GENERATORS
+    0009  01             3746                     POP  DE                   ;GET  INDEX  INTO   GEW  TABLES
+    ODDA  FD210003       3747                     LD  1Y,3
+    ODDE  3€04           3748                     LD A,4                    ;CODE  FOR  COLOR   GENERATOR    TABLE
+    ODEO  CD1FBE         3749                     CALL PUT   VRAM
+  ODE3                   3750  END15           ENDIF
+    ODES  C1             3751                  POP  BC                   ;RESTORE   COUNTER   AND   INDEX
+   ODES   06             3752                  INC  8
+   ODES   78             3753               LD  A,B
+   ODE6   FEO3           3754               cP  3
+   ODEB   20AE          3755                JR  NZ,RPT2
+                        3756   ;            UNTIL   {8,£0,3)       | ;REPEAT   3  TIMES
+  ODEA                  3757   END04   «=; ENDIF                  |
+                  :     3758
+                        3759   ; RESTORE    OLD SCREEN     IF  IT'S  Y_PAT_POS   AND  X PAT  POS   DIFFERS    FROM  THE
+                        3760   ;  YPAT   POS   AND  X PAT  POS   FOR  THE  OBJECT
+   ODEA   FD2A8006      3761   PM14      LD   LY, (WORK BUFFER)
+   ODEE   FD4606        3762             LO  8, [1Y+XP  OS)              ;TEST  FOR  VALID   OLD SCREEN    DATA
+                        3763   ;          IF  {8,WE,  80H)               ;THEN  THERE   IS VALID   DATA
+   ODF 1  78            3764             LD  A,B
+   ODF2   FEBO          3765             cP  80H
+   ODF4  2821           3766             JR  2,END16
+   QDF6  FD4E07         3767                LO C,  [1¥+YP_OS)              ;TEST   IF OS  POSITION   SAME   AS  CURRENT  POSITION
+   ODF9  FD6611         3768                LD H,  [IY+XP_BK)
+   OOFC  FD6E12         3769                LD L,  (1Y+¥P_BK)
+   ODFF  87             3770                OR  A                          ;CLEAR   THE CARRY
+   0E00  ED42           3771                SBC  HL,BC                     1S   THERE  ANY  DIFFERENCE?
+                        3772 ;              IF  [PSW,1S,NZERO}             ;THEN  POSTION   HAS  CHANGED
+   002   2813           3773                JR  2,END17
+   0E04  248006         3774                  LO  HL,  [WORK BUFFER)         ;GET  BUFFER   BASE
+   0€07  110008         3775                  LD  DE, YP OS+1
+   OE0A  19             3776                  ADD  HL ,DE                    ;POINT   TO OLD  SCREEN    NAMES
+  OE08   FDSE06         3777                  LD E,  [1Y+XP_ OS)
+  OEOE   FD5607         3778                  LD  D, [1Y+¥P  OS)             ;DE  :=  X AND  Y  PAT POS
+  0£11   010303         3779                  LD  BC,0303H                   ;BC  :=  X AND  Y  EXTENT
+  0E14   cD0808         3780                  CALL  PUTFRAME                                                                                                                   .
+ 0£17                   3781  END17    ~—s  sENDIF
+  0E17                  3782  END16   =;  ENDIF
+                        3783  ;  PLACE   OBJECT   ON  SCREEN
+  0E17   FD2A8006       3784             LD 1Y,  (WORK BUFFER)
+  0E1B   2A8006         3785             LD  HL, (WORK BUFFER)          ;HL  :=  BUFFER  BASE   ADDR

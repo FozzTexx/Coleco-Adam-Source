@@ -1,0 +1,64 @@
+   FILE: OS 7PRIME:pOS          HEWLETT-PACKARD:    ACTIVATE (c)   Coleco,  1982   CONFIDENTIAL                   Fri,   18  May  1984,   16:19       PAGE   42
+
+   LOCATION   OBJECT  CODE LIWE       SOURCE  LINE
+_
+
+                            1829  ;
+                           1830   ;Internal  rout  to setup Ptrn   Gen VRAM  &  Color Gen  VRAM
+                   <0594>  1831  SUP_GEN CLR     EQU                $
+       0594   F5           1832                    PUSH               AF                 ;SAVE  FOR RESTORE
+       0595   c5           1833                    PUSH               BC
+       0596   FDES         1834                    PUSH               IY
+       0596  D5            1835                    PUSH               DE
+       0599  £5            1836                    PUSH               HL
+       059A  3E03          1837                    LO                 A,3                ;SIGNAL  PTRN GEN  FILL
+       059C  CD1C27        1838                    CALL               PUT _VRAM_
+       O5S9F E1            1839                    POP                HL                 ;RESTORE
+       O5A0  01            1840                    POP                DE
+       OSA1   FDE1         1841                    POP                ly
+       O5a3  C1            1842                    POP                BC
+       O5A4  F1            1843                    POP                AF
+       O5a5   F5         — 1844                    PUSH               AF
+       05A6  C5            1845                    PUSH              BC                  ;SAVE  FOR RESTORE
+       O5Aa7 FOES          1846                    PUSH               ly
+       O5a9  D5            1847                    PUSH               DE
+      O5AA   E5            1848                    PUSH               WL
+      O5AB8  CB67          1849                    BIT                4,A                7HOW MANY  COLOR  GEN  BYTES?
+      O5AD   2000          1850                    JR                 NZ,ONE BYTE
+      O5AF   09            1851                    ADD.               Mt,BC              ;HL->COLOR  GEN SOURCE
+      0580   3E04          1852                    LO                 A,4   ~            ;SIGNAL  PTRN COLOR  FILL
+      0582   CD1C27        1853                    CALL              PUT  _VRAM_
+      0585   €1            1854  0 B RET:         Por                HL
+      0586   01            1855                    PoP                DE
+      0587   FDE1          1856                    POP  |             ly
+      0589   C1            1857                    PoP                BC
+      O5BA   Fi            1858                    POP                AF
+      0588   C9            1859                    RET
+                           1860   ; For each  item to  send, duplicate   the  color  byte  8 times  [in C_BUFF)
+                           1861   ; then send  this  generator to   VRAM color   table  indexed  by DE
+      058C                 1862  ONE BYTE:
+      058C   09            1863           ADD  WL,BC                  sHL  -> COLOR  BYTE
+      058D   4D            1864           LD C,L
+      OSBE   44            1865           LD B,H                      :BC  -> COLOR  BYTE
+      OSBF   FDES          1866           PUSH  IY
+      05C1   £1            1867           POP  HL                     sHL =  ITEM COUNT
+      05C2                 1868  NEXT COLOR:
+      05C2   £5            1869           PUSH  HL                    sSAVE  COUNTER
+      05C3   OA            1870           LDA,  (BC)                  :GET COLOR  BYTE
+      05C4   C5            1871           PUSH  BC                    sSAVE  POINTER  TO  COLOR
+      05C€5  010008        1872           LO BC,8                     sCREATE  8 DUPLICATES
+      05C8   2A8006        1873           LD WL, (WORK BUFFER)
+      0S5CB  09            1874           ADD HL ,B8C                 sPLACE  THEM HERE,   STARTING  AT END  OF BUFFER
+      O5CC   0608          1875_       ~  D0 8,8
+      OSCE   28            1876  DUPLI:   DEC HL
+      OSCF   77            1877           LD (HL],A
+      0500   10FC          1878           DJNZ DUPLI
+      0502  D5             1879           PUSH DE                     ;SAVE  INDEX INTO   TABLES
+      0503   FD210001      1880           LD 1Y,1                     :1 ITEM  TO SEND                                                                                 :
+      0507   3€04          1881           LD A,4                      ;COLOR  TABLE CODE
+      0509   CD1C27        1882           CALL PUT VRAM_
+      050C  01             1883           POP DE                      :GET INDEX  BACK
+      0500   C1            1884          POP  BC                      :POINTER  TO COLOR   BYTE
+      OSDE   13            1885           INC DE                      >INCREMENT  INDEX
+
+                                                                                                         é                                                                       ‘               os

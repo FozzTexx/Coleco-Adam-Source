@@ -1,0 +1,28 @@
+       .~5anS:E€OS_TF       HEWLETT-PACKARD:   EOS COMN   (c) Coleco tyus confidential                     Sat,    8  Sep  1984.   23  38
+FILE:
+
+LOCATION  OBJECT CODE  LINE       SOURCE  LINE
+
+                        665  ;
+                        666  ; this  is  the PCB/DCB  area
+                        667  ;
+                        S68  SHSSSHESSSEHHESHESEHSSEHSHSHSESSHSEHEHESSHHEHEHSEEHHEESE:HH
+                        669
+                        670          ORG      EOS _PCB_OCB
+                        671
+                        G7Q  SHSEHSSHSEHSS  HEHEHE  ESETEHEHSEHEHTEEESETHSEHEEHEEHHEEHS
+                        673
+                        674         ;GLB      PCB
+                        675
+     FECO               676  PCB:
+     FECO               677          DEFS     P_SIZE           ; PCB
+                        678
+     FEC4               679  DCBS:
+     FEC4               680          DEFS      15*DSIZE        ; 1 OCB PER NETWORK  ADORESS
+                        66 1
+     FFFF               682  RESERVED BYTE:
+     FFFF               683          DEFS      {               ; SAVED IN CASE WE OO  FAST  DMA HERE
+                        684  ;
+                        GBH  ,cesc excesseseee  ERTSRSTSUTESSELESRTERSETEESSTTSSHS TTRSSSSSSS SSSSESE
+                        686  ,SRE  SSSSSTAST SST  AEBS ERTRASPESSoS SSSTSTTHSTHHSSLS SSS STHSSSSSSEES
+                        687  ,SSSRSSSSESSSTSRSTSSSSR   SETSSSPESRTASTSTSSHSSSTSSSR PSSST  ESTESSTSEEE

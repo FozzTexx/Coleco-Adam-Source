@@ -1,0 +1,64 @@
+‘ILE:  EOSABS:    EOS   TF           HEWLETT-PACKARD:        UTILS          (c)  Coleco     1983  Confidential                             Sat,     8  Sep   1984,  23:40        PAGE   140
+
+CATION      OBVECT      CODE    LINE       SOURCE    LINE
+
+                               5724
+                               §725   <PRSSCSSSSS  SSS  HS SSEOSHSSE   SESE  ESSERE    EE SHEE  RESSES   SESESESE   HREREHEEE  EEE    EEE   EEEESS
+                               5726   ,seseseceeoeseesesee            EQS  RENAME   FILE     9seesveeeessseresresesseereseseses
+                               $727   ;
+                               5728   ;    ON  ENTRY:      A   = DEVICE    NUMBER    (8=TAPE1)
+                               5729   ;                  DE    = POINTER     TO  OLD  FILENAME
+                               $730   ;                  HL    = POINTER     TO  NEW  FILENAME
+                               5731   ;                               |
+                               5732   ;    ON  EXIT:       Z2 =   1,  FILE   RENAMED,     A  = 0
+                               $733   ;                    Z  =  O,   FILE   NOT   RENAMED,    A   = ERROR    CODE
+                               5734   ;
+                               $735
+                               5736            ;GLB          __RENAME   FILE
+                               5737
+    F 10F                      5738    RENAME   FILE:                :
+    FIOF    CS                 $739             PUSH         BC
+    F110    FS                 5740             PUSH         AF                         ;  AF   = DEVICE     ID
+    F1ti    05                 S741             PUSH         DE                         ;  DE   = POINTER     TO  OLD   FILENAME
+    F112    ES                 5742             PUSH         HL                         ;  HL   = POINTER     TO  NEW   FILENAME
+    F113    EB                 $743             EX           DE ,HL                     ;  FIRST   CHECK     IF  A  FILE   EXIST    W/NEW    FILE   NAME
+    F114    21FDAO             5744             LD           HL ,QUERY  BUFFER
+    Fit7    CDE618             $745             CALL            __QUERY   FILE
+    FI1A    282C               5746             JR           Z,NOT_RENAMED            ;  YUP,    THE  NEW    FILE   NAME   ALREADY     EXISTS
+    Flic    E1                 $747             PoP          HL
+    F110    D1                 5748             PoP          DE
+    FItE    Ft                 5749             POP          AF
+    FIlF    FS                 5750             PUSH         AF
+    F120    05                 $751             PUSH        DE
+    F121    ES                 $752             PUSH        HL
+                               $753
+    F122    21FDAO             $754             LD          Ht  ,QUERY  BUFFER
+    F125    COEG  1B           $755             CALL        __  QUERY  _FILE              >;NOW   CHECK    IF  OLD   FILE   EXISTS
+    F128    201E               5756             JR          NZ,NOT_   RENAMED          ;   NOPE
+    FiI2A   11FDAO             $757             LD          DE  ,QUERY_  BUFFER        ;   DE  =  DESTINATION
+    F120    Et                 5758             POP         HL                         ;   HL  =  PTR   TO  NEW   FILENAME
+    FI2E    ES                 5759             PUSH        HL
+    F12F    01000C             $760             LO          BC,  12                    ;   NUMBER    OF  BYTES    TO  REPLACE
+    F132    EDBO               5761             LOIR
+    F134    E1                 3762             PoP         HL
+    F135    01                 $763             POP         DE                         ;   DE  =  POINTER     TO  OLD   FILENAME
+    F136    Fi                 $764             PoP         AF                         ;   A  = DEVICE     IO
+    F137    FS                 5765             PUSH        AF
+    F138   D5                  5766             PUSH        DE                         ;   RESTORE    STACK
+    F139    ES                 5767             PUSH        HL
+    FI3A    21FDAO             5768             LO          HL  ,QUERY  BUFFER
+    F130   CDE651              5769             CALL           __SET   FILE            ;   CHANGE    FILENAME
+    F140    2006               5770             JR          NZ,NOT_   RENAMED
+    F142    AF                 5771             XOR         &                          ;   GOOD   RETURN
+    F143    E1                 $772             POP         HL
+    F144   D1                  5773             PoP         DE
+    F145   Ct                  5774             POP         BC                         >;  REALLY    AF  BUT   NEED   TO   PRESERVE     FLAGS    FOR  RET
+    F146   C1                  5775             PoP         BC
+    F147   C9                  5776             RET
+    F148                       S777  NOT  RENAMED:
+                               5778         ;   0           A.RENAME    ERR            ;   ERROR   RETURN
+    F148   87                  5779             OR          a
+    FI49    €                  5780             POP         HL
+
+                                                                                                   .
+   s        =            =        oa         ta          .

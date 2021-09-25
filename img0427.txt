@@ -1,0 +1,66 @@
+=            S&S       |           &            FE         cz        —         =—_            &€&         &            Co            ge                                                                                               :
+                                                                                                                                                    :.        &            8S          g-
+
+  FILE: OS  7PRIME:pOS           CROSS   REFERENCE   TABLE            PAGE  153
+
+  LINE#     SYMBOL           TYPE        REFERENCES
+
+   3815   END 19                   3813
+   3284   END2                     3280
+   3821   END20                    3819
+   3827   ENO21                Pp  3825
+   3872   END22                P   3831
+   3843   END23                Pp  3840
+   3852   END24                P   3847
+  3861    END25                P   3856
+  3870    END26                P   3865
+  3321    END3                 Pp  3308
+  3313    END4                 Pp  3311
+  3341    ENDS                 P   3338
+  3420    END6                 P   3399
+  3419    END?                 Pp  3406
+  3466    ENDS                 p   3462
+  3538   ENDO                  Pp  3500
+  1389   ENDNOREP              P   1342, 1382
+  1384   ENDREP                Pp  1342
+    3    ENDSDATA              A   1143, 1177
+  6147   END  ADJ  COUNT       Pp 6140
+  6135   END  ADJ INDEX        Pp
+   376   END  BOOTUP          P
+  6232   END  1F22Z           Pp  6225
+  2320   EMD  IF  1           P   2276
+  2610   EMO  IF  10          P   2584 ,2589
+ 2707    ENO  IF  11          Pp  2698
+ 2731    END  IF  12          P   2722
+ 6828    END  _IF_GRAPHI      P   6819
+ 2344    END  IF 2            P   2326
+ 6875    END  IF 2 GRAPHI     Pp  6857
+ 2363    END  IF3             Pp  2358
+ 6914    END _IF3  GRAPHI     P   6905
+ 2419    END  IF4             Pp  2395, 2396
+ 6982    EWD_IF 4 GRAPHI      P   6955
+ 2572   END   IF8             P   2532
+ 2568   END_IF9               P   2555
+ 6611   END  INPU             P   6607
+ 6562   END OUTPUT            P   6558
+ 7352   ENLARGE               A   246
+ 6746   ENLRG                 P   6745, 7352
+ 6925   EWLRG_                P  6751
+ 4051   EOT                   A  4073,  4215, 4246, 4407, 4425,4464
+ 2271   EQUAL TO              Pp 2267
+ 4305   EXIT                 P   4264
+ 7030   EXIT FALSE           P   7018,  7023
+ 3155   EXIT PUT  SPR        P   3118
+ 7129   EXP 1                P   7134
+ 7136   EXP 2                P   7141
+  526   FALSE                A   558, 2090,  7030
+5616    FILL                 P   5621
+7357    FILL VRAM            A   252, 5780, 5905
+5610    FILL VRAM            P   50845129,   7357
+4501    FIRE       7         A   4828, 4945
+4926    FIRE DBNCE           Pp  4831
+4955    FIRE EXIT            Pp  4940, 4946, 4951
+4521    FIRE MASK            A   4726, 4929
+4510    FIRE OLD             A   4931, 4939, 4952
+
+                                                    | Pol       a  deb   ob totoydb    dg

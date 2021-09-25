@@ -1,0 +1,63 @@
+FILE: EGSABS:EGS TF         HEWLETT-PACKARD:    EQSCORN    (c)  Coiaco    1983  Confidential                   Sat,
+
+LOCATION  OBJECT CODE   LINE     SOURCE  LINE
+
+              <FO1>      277 PORTCOLLECTION                        EQU  $
+    FO    C3E191         278         JP       __PORT_ COLLECTION
+              <FD14>     279 SWITCH MEM                            EQU  $
+    FO14  C3E185         280        JP        __SWITCH_ MEM
+              <FDI7>     281 PUTASCII                              EQU  $
+    FOI7  C3E153         282        JP        __PUT _ASCII
+                         283
+                         284 ;
+                         285 ; micro  OS7 entries
+                         286 ;
+                         287
+              <FD1A>     288 WRITEVRAM                             EQU
+    FOIA  C3EOCOO        289        JP        __WRITE VRAM
+              <FD10>     290 READVRAM                              EQU
+    FD1ID CIEOIA         291        JP        __READ_VRAM
+              <FD20>     292 WRITE REGISTER                        EQU
+    FD20  C3E034         293        JP        __WRITE REGISTER
+              <FD23>     294 READREGISTER                          EQU
+    FD23  C3IEO4F        295        JP        __READ_REGISTER
+              <FO26>     296 FILLVRAM                              EQU
+    FO26  C3E059         297        JP        __FILL_VRAM
+              <FD29>     298 INITTABLE                             EQU
+    FO29  C3IEO66        299        JP        __INIT_TABLE
+              <FD2C>     300 PUTVRAM                               EQU
+    FO2C  C3EOCS         301        JP        __PUT_VRAM
+              <FD2F>     302 GETVRAM                               EQU
+    FOQF  C3EOCF         303         JP       __GET_VRAM
+              <FD32>     304 CALC_OFFSET                           EQU
+    FD32  C3E10A         305         uP       __CALC_OFFSET
+              <FD35>     306 PX_TO_PTRN_POS                        EQU
+    FDO35 C3E129         307         JP       __PX_TO_ PTRN_POS
+              <FD38>     308 LOAD_ASCII                            FQU
+    FD36  C3E149         309         JP       __LOAD_ASCII
+              <FD3B>     310 WR_SPR_ATTRIBUTE                      EQU
+    F038  C3E1C5         Jit         JP       __WR_SPR_ATTRIBUTE                        ;same as  wrspr_nm_tbl
+              <FDIE>     312 POLLER                                EQU
+    FD3E  C3E253         313         JP       __POLLER
+              <FD041>    314 UPDATESPINNER                         EQU
+    FD41  C3E2A4         315         JP       __UPDATE SPINNER
+              <FD44>     316 DECLSN                                EQU
+    FO44  C3E355         317         JP       __DECLSN
+              <FD47>     318 DECMSN                                EQU  $
+    F047  C3E35F         319         JP       __DECMSN
+              <FD4A>     320 MSNTOLSN                              EQU  $
+    FD4A  C3E369         321         JP       __MSNTOLSN
+              <FD4D>     322 ADDS16                                EQU  $
+    F040  C3E374       323           JP       __ADDS 16
+              <FD50>     324 SOUND_INIT                            EQU  $
+    FOSO  C3IE3AB        325        JP        __SOUND_INIT
+              <F—D53.    326 TURN_OFF_SOUND                        EQU  $
+    FOS3  C3E301         327         JP       __TURN OFF  SOUND                         snot globalized    in os7?
+              <FD56>     328 PLAY_IT                 )             EQU  $
+    FOS6  C3E3E7         329         JP       __PLAY_IT
+              <™059>     330 SOUNOS                                EQU  $
+    FD59  C3E406         331         JP       __SOUNDS                                  ;equals  calls  to  play songs   and  sound_man
+              <FD5C>     332 EFFECT _OVER                          EQU  $
+    FOSC  C3t“"~*        333         JP       __EFFECT OVER
+
+                                      oeollhthROUlAHACUCUCUOGOClClClCOOPhOOMRMGHIaa

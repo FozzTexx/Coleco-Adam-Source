@@ -1,0 +1,25 @@
+   FILE: t-.ABS:E0S    TF          HEWLETT-PACKARD:       SOUND  EQU¢S   (c)  Coleco,    1982   CONFIDENTIAL                      Sat,     8  Sep   1984.   23:39          AGE       93
+
+   LOCATION  OBJECT    CODE   LINE       SOURCE    LINE
+
+                              B4BO   5 rrr                      rr      re        rrre  ee ee  ee   eee  ee eeee ee   eee
+                              3481   ;
+                              3482   ;  Out_to_sound_    port
+                              3483   ;                   input:   a=sound   port   data  to  output
+                              3484   ;                  register    usage:  n.a.
+                              3485   ;
+       E60D                   3486   OUT_TO SOUND   PORT:
+       E600  C5               3487             PUSH       BC                            ;SAVE  BC
+       E60E  47               3488             td         B,A                           ;THE  IDEA   IS  TO  GET  THE
+       EGOF  3AFC2F           3489             LD         A,[SOUNDPORT }              —; INDIRECT    PORT  ADDRESSING
+       E612  4F               3490             LD         C,A                           ;THRU  THE   PORT   TABLE  IN   EOS
+       E613  ED41             3491             OUT        {cC}.8                                                             |
+       E615  78               3492       |     LD         A,B
+'      E616  Cf               3493             PoP        BC
+       E617  C9               3494             RET
+                              3495   ;
+                              3496   ,SSRSHS ST SSSR  SSSCESTESTSS  SSSSS SSSSS SSS SSSSS SSS STS SSS  SsSlsessSessssrze
+                              3497   »SSSSSSSSESSSSSSPSSSSESSSSSSSSS       SSS SPSSTssssssescssessssssezseeszer=2et2zee2
+                              3498   ,BBSSPSSSSECTPTPSFESSSSSSSSSSP SHSSS STSST SSSSSSSSTessersersesstestsseeexse22eze22222
+                              3499   ;
+                              3500

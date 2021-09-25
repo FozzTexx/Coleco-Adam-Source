@@ -1,0 +1,64 @@
+FILE: OS 7PRIME:pOS           HEWLETT-PACKARD:      JUKEBOX   (c)   Coleco,    1982    CONFIDENTIAL                      Fri,  18  May  1984,  16:19       PAGE    26
+
+LOCATION   OBJECT  CODE LINE       SOURCE    LINE
+
+                        1067   ;          -IDENT   JUKEBOX                 includes    JUKE  BOX
+                        1068   ‘aeeeeeneeeageeraneeneeneees                                 ~
+                        1069   -          JUKE BOX                *
+                        1070   geeeeeeeeeneeenenesereneene
+                        1071   >COMMENT    }
+                        1072   ;see  Users'   Manual   for  description
+                        1073   ;SONGNO  passed    in  B
+                        1074   ;)
+                        1075            GLB   JUKE BOX
+                        1076           ;EXT   PT_IX_TO    SxDATA,LOAD     NEXT  NOTE,UP    CHDATA   _PTRS
+                        1077           = INCLUDE   OSSR EQU:0S       ;equates
+                        1078
+                        1079  *  PROCEDURE    JUKE BOXQ    (SONG  NUM:BYTE)
+                        1080
+                        1081  *  THIS  IS  THE  PASCAL    ENTRY   POINT   FOR   JUKE BOX
+                        1082
+    024D  00010001      1083  JUKE BOX  PAR        DEFW                  1,1
+                        1084  *  THE  PARAMETER    DESCRIPTOR     FOR   JUKE BOXQ
+                        1085
+                        1086                      sEXT                   PARAM_
+                        1087  *  THE  PARAMETER    PASSING    ROUTINE
+                        1088
+                        1089  ;                    COMN
+                        1090  PARAM   |AREA         DEFS                  1
+                        1091 *   THIS  IS  WHERE   THE  SONG   NUMBER   TS  ACTUALLY    PASSED
+                        1092
+                        1093                       PROG
+                        1094                      GLB                    JUKE BOXQ
+   0251                 1095  JUKE BOxa
+   0251   01024D        1096                LD     8C,JUKE  BOX  PAR
+   0254   1173BA        1097                LD   DE,PARAM    AREA
+   0257   cp0096        1098                CALL   PARAM_
+   025A   3A736A        1099                LD  =A,   (PARAM_AREA)
+   0250   47            1100                LD     =B,A
+                       1101
+   025E                1102   JUKE BOX
+                       1103   ;         *  RET  if  song   already    in  progress
+   O25€   C5           1104             PUSH   BC                       save    SONGNO   on stack
+   025F   CD01C1       1105             CALL  PT_IX    TO  SxDATA       ;point    IX to  SONGNO's   song  data  area
+   0262   DD7E00       1106             LD  A, (1X0)                    ;A   := CH#  [if  any)   | SONGNO   [if any)                                                                                ‘
+   0265   E63F         1107             AND  3FH                        ;A  :=  0 0  SONGNO
+   0267   C1           1108             POP  BC                         7B  :=  SONGNO
+   0268   B88          1109             CP  B                           “test   if  already   in progress
+   0269   C8           1110             RET  2                          if   so,   leave
+                       1111   ;           *  load   first   note  and   set  NEXT _WOTE  PTR   (thru  LOAD NEXT  NOTE)
+   026A  007000        1112               LD   (1X+0)   ,B                 sstore SONGNO    in  byte  0
+   026D  28            1113               DEC   HL                         ;-WL  left  by  PT_IX_TO_SXDATA     pointing   to  MSB  SxDATA
+   026E  2B            1114               DEC   HL                         ;-entry   in  LSTOF   SND ADORS;    point  HL  to  note  list
+   026F  56            1115               LD  D, (HL)                      ; starting    addr  entry  in  LST_OF SND  _ADORS   and  save  this
+   0270  28            1116               DEC   HL                         ;-addr   in DE
+   0271  SE            1117               LO E,  (HL)                      “DE  now  has  the  initial   value  for  NEXT NOTE  PTR                                            ‘
+   0272  DD7301        1118               LD   (IX+*1),€                   ;set  NEXT  NOTE PTR    for  first  note  in  song
+   0275  0D7202        1119               LD   (1X+2),D
+   0278  CD035F        1120               CALL   LOAD  NEXT  NOTE          ;load  note,   byte  0  := CH#|SONGNO,    set  new  NEXT NOTE  PTR
+   0278  CD0295        1121               CALL   UP_CH  DATA_PIRS          New   song,   so update   channel   data  ptrs
+   O27E  C9            1122               RET
+                       "123   ;        END   ;JUKEBOX
+
+                                                                                                                3
+                                                                                                                                                                    ‘           {            |             f            {

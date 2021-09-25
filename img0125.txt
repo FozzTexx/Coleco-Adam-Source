@@ -1,0 +1,54 @@
+FILE: .  sABS:EOS TF         HEWLETT-PACKARD:     ROD_WT     (c)  Coleco   t:_sConfidential                          Sat,   8  Sep  1984,  23:40       .nuc   121
+
+LOCATION  OBJECT  CODE   LINE       SOURCE  LINE
+
+    E075  cCotitit«s     4836
+                      RET
+                         4837
+    ED76                 4838  RQ STAT_ERR:
+    ED76  DDE!           4839           PoP      IX
+    E078  E1             4840          PoP       Hi
+    E079  01            4841           Pop       DE
+    ED7A  Ci             4842          PoP       BC
+                         4843                                ,
+    ED7B  3E15           4844          LO        A,RQ_TP_STAT_ERR
+    ED70  B7          —  4845          OR        A
+    ED7E  C9             4846          RET
+                         4847
+    ED7F       ,         4846  READ_ERR2:
+    ED7F  3E09           4849           LO     -
+        |    |         ' 4650          ,
+    E081                 4851  READ_ERR!
+    ED81  2AFEO2   —     4852           LO        HL.(BYTES REQ]     ;GET # BYTES  REQUESTED
+    E084  ED4BFE04       4853           LO        BC,(BYTES TO  GO}    ;GET# BYTES  WE  DIDN’T   00
+    ED88  B7             4854           OR        A
+    EDS9  E042           4665                     HL,BC              ;CALC. # OF  BYTES   WE  DID  DO
+    ED8B  44             4656           LD        B.H                ;PUT IT INTO  BC
+    EDSC  40             4657           LD        Cyt
+    .                    4658
+    EDSD  18DF           4859           JR        R_GETOUT
+                         4860                              :
+                         4861  +        pop       IX  |              RESTORE  REGISTERS
+                         4862  *        pop       HL
+                         4863  +        pop       DE
+                         4864  «        INC       SP                 ;DISCARD OLD  BC
+                         4865  »        INC       sP
+                         4866  *        OR        A                  ;SET CONDITION   CODES
+                         4867 *»        RET        |
+                         4868  +
+                         4869  *READ_ERR2
+                         4870  +        LO        HL,(BYTES REQ]     ;GET # BYTES  REQUESTED
+                         4871  *        LD        BC,[BYTES TO  GO)   ;GET # BYTES  WE  DION’T   DO
+                         4872  *        OR        A
+                        4873   +        SBC       HL,BC              ;CALC. # OF BYTES    WE DID  DO
+                         4874  +        LD        BH                 ;PUT IT INTO  BC
+                         4675  «        LD        c.t
+                         4876  +
+                         4877  *        PoP       IX                 ;RESTORE REGISTERS
+                         4878  +        PoP       HL
+                         4879  *        pop       DE
+                         4880  «        INC       SP                 ;DISCARD OLD  BC
+                         4881  +        INC       SP
+                         4882  »        LD        A,BAD_FNUM_ERR     ;SET THE ERROR   CODE
+                         4883  *        OR        A                  ;SET CONDITIONS
+                         4884  +        RET

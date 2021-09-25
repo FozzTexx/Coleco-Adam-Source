@@ -1,0 +1,59 @@
+FILE:  OS_7PRIME=:pOS           HEWLETT-PACKARD: MIRROR/ROTATE     RIN  (c) Coleco   1982 CONFIDENTIAL              Fri,  18  May  1984,  16:22        PAGE  147
+
+LOCATION   QBJECT    CODE  LINE      SOURCE LINE
+
+    1F30   DDCB0616        7267             RL =  (IX+6)
+    1F41   CBIE            7268             RR    (HL)
+    1F43   D0DCBO716       7269             RL =  (IX+*7)
+    1F47   CBIE            7270             RR =  (HL)
+    1F49   23              7271             INC  HL
+    1F4A   OO              7272             DEC  C
+    1F4B   20CC            7273             JR               10
+    1F4D                   7274  TRANSP_X
+    1F40   C9              7275             RET
+                           7276
+                           7277
+                           7278
+    1F4E                   7279  MIRRORU D                            REFLECT  8X8  PIXEL  BLOCK  AROUND    THE
+                           7280                                      + HORIZONTAL   AXIS
+                           7281                                                                 |
+                           7282                                      ; SOURCE   IN HL,  DESTINATION   IW  DE
+                           7283                                      ; DESTROYS   AF,BC,DE,HL
+                           7284
+                           7285  * SOURCE  := SOURCE    + 7
+    1F4E   010007          7286                  LO                  BC,7
+    151    09              7287                  ADD                 HL,BC
+                           7288
+                           7289  * BYTE COUNT :=  8
+    1F52   03              7290                  INC                 BC
+                           7291
+                           7292  * REPEAT
+                <1F53>     7293  REFLECTLOOP     EQu                 $
+                           7294
+                           7295  *   (DESTINATION)  :=  (SOURCE)
+    1F53   7E              7296                  LD                  A, (HL)
+    1754   12              7297                  LD                   {DE,A
+                           7298
+                           7299  *    DESTINATION   :=  SUCC (DESTINATION)
+    1755   13              7300                  INC                 DE
+                           7301
+                           7302  *    SOURCE  := PRED   (SOURCE)
+    1—56   28              7303                  DEC                 HL
+                           7304
+                           7305  *    BYTE COUNT :=  PRED  BYTE  COUNT
+    1F57   08              7306                  DEC                 BC
+                           7307
+                           7308  * UNTIL BYTE COUNT  = 0
+    1F58   78              7309                  LD                  A,B
+    1F59   B1              7310                  OR                  Cc
+    1F5A   20F7            7311                  JR                  NZ2,REFLECTLOOP
+                           7312  * END
+    1F5C   C9              7313                  RET
+                           7314
+                           7315                  sModified   February   14,  1983.   Filler   locations   were
+                           7316                  ;changed   to OFFH   to reflect   OS7PRIME.
+                           7317
+    1F5D   FFFFFFFF        7318   HEX FF,FF,FF,FF                  Filler
+                           7319
+                           7320
+                           7321

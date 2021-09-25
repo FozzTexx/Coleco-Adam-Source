@@ -1,0 +1,19 @@
+FILE: EOSABS:EOS TF        HEWLETT-PACKARD:    SOUND   EQU€S  (c)  Coleco,  1982   CONFIDENTIAL              Sat,   8  Sep  1984,   23:39        PAGE    92
+
+LOCATION OBJECT  CODE  LINE      SOURCE  LINE
+
+                       3464 ;         ENDIF
+                       3465
+                       3466 ;@ee@ 119
+    E602 C9            3467           RET
+                       3468
+    E603               3469 DETO  DEST                             :DE  passed = offset  from byte  0,  RETed w  addr  byte  offset
+    E603 DDES          3470           PUSH      _—IX
+    E605 FDE1          3471           POP       LY                 -1Y     addr byte  O [and DE  = offset]
+    E607 FD19          3472           ADD       IY,DE              -1Y     addr byte  O + offset
+    E609 FDES          3473           PUSH      —si‘TY
+    E608 D1            3474           POP      DE                  ;DE     addr of destination   byte  in SxDATA
+    E6OC C9            3475           RET
+                       3476
+                       3477           END LOADNEX
+                       3478

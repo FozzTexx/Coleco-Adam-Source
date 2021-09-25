@@ -1,0 +1,18 @@
+FILE: .s..88:E0S_TF       HEWLETT-PACKARD:  A_uOSOO    (c) Coleco 1s... Confidential                 Sat,    8  Sep  1984,  23.38       wack   41
+
+LOCATION OBJECT CODE  LINE     SOURCE LINE
+
+                      1575 ;
+                      iS76 ; base factor  table, used  to calculate base  addresses
+                      1577 ;
+    EOBF              1576 BASEFACTORS:
+    EOBF O7           1579                 DEFB    7                          ;table code O base factor
+    EOCO O05          1580                 DEFB    5                          ;register 5, SAT base address
+    EOC! O8           1581                 DEFB    11                         ;table code 1 base factor
+    EOC2 O6           1582                 DEFB    6                          ;register 6, SGT base address
+    EOC3 OA           1583                 DEFB    10                         ;table code 2 base factor
+    EOQC402           1584                 DEFB    2                          ;register 2, PNT base address
+    EOCS O86          1585                 DEFB    11                         ;table code 3 base factor
+    EOC6 O04          1586                 DEFB    4                          :register 4, PGT base address
+    EOC] O6           1587                 DEFB    6                          ;table code 4 base factor
+    EOCB O3           1588                 DEFB    3                          ;register 3, PCT base address

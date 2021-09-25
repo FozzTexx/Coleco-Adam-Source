@@ -1,0 +1,55 @@
+FILE:   . sABS:EOS   TF          HEWLETT-PACKARD:      EOS  PRTR      (c)   Coleco      1:  s Confidential                         Sat,   8  Sep   1984,   23:41        ‘,   ae     177
+
+LOCATION   OBJECT    CODE   LINE      SOURCE    LINE
+
+                            7207
+                            TIOB  SPSS   SS SSeS       SHEESH     EEEEHEEEEKHEREREREEEEKEREREEEEEREEEREEREAREKEEEKEEERETR                EES
+                            7209  *
+                            7210  *        __END_PR_BUFF       CHECKS    THE   DCB    COMM/STATUS     BYTE  AND  RETURNS     THE  RESULT
+                            7211  ¢        OF  THE   CHECK
+                            7212  *
+                            7213  *        INPUT:     NONE
+                            7214  *
+                            7215           OUTPUT:    CONOITION      FLAGS
+                            7216  ¢                   C:          COMMAND    COMPLETED
+                            7217  *                  NC:          COMMAND    NOT    COMPLETED
+                            7218  *                   2:          NO  ERRORS    OCCURED
+                            7219  ¢                  NZ:          ERRORS
+                            7220                                  A  =  ERROR   CODE
+                            7221  ®
+                            7222  *        ALL        REGISTERS      ARE.  PRESERVED
+                            7223  *
+                            T2244 SHSHESSSSSESEHRESHE    HEHEHE   EHREHEHEHEK    EERE    HEHEHE  EEE  EEKE HEE  ESTEE SESE   ESHER ERE EEESS
+                            7225
+                            7226          ;GLB        __END_PR_BUFF
+                            7227          sEXT        __END_WR_CH_DEV
+                            7228
+     F588                   7229  __END_PR_BUFF:
+                            7230
+     F588  FDES             7231           PUSH       LY
+                            7232
+     F5BA  3E02             7233           LO         A,PRINTER_ID
+     FSBC  CDF446           7234           CALL       __FIND_  OCB
+     FSBF  CDFBE1           7235           CALL       __END_WR_CH_DEV                     ;  CHECK  STATUS   BYTE
+                            7236
+     F5C2  3008             7237           JR         NC ,CMNO_NOT_PROCESSED              ;  COMMAND   NOT  COMPLETED
+                            7238
+     F5C4  2809             7239           JR         Z,FINISHED     WO_ERROR             ;  COMMAND   COMPLETED,    NO   ERROR
+                            7240
+     F5C6  FEBE6            7241           cP         PR_NAK                              ;  WAS  IT  A NAK?
+                            7242
+     F5C8  2005             7243           JR         NZ,NOT_PR_NAK                       ;  NOPE,  MUST  BE  AN   ERROR
+                            7244
+     F5CA  FO360003         7245           LD         (1¥+D_COM    STAT],0CB       WR     ;  SEND  ANOTHER   WRITE   COMMAND
+                            7246
+     FS5CE B7               7247           OR         A                                   ;  CLEAR  CARRY   TO  INDICATE     COMMAND
+                            7248                                                          ;  HAS  NOT  BEEN  FINISHED
+                            7249
+     F5CF                   7250  NOT_PR_NAK:
+     FSCF                   7251  CMND_NOT  PROCESSED:
+     FSCF                   7252  FINISHED  WO  ERROR:
+                            7253
+     FSCF  FDE1             7254           PoP        ly
+                            7255
+     F501  C9               7256           RET
+                            7257

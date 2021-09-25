@@ -1,0 +1,61 @@
+FILE:  OS7PRIME:pOS         HEWLETT-PACKARD:     PUT  MOBILE  (c)  Coleco,   1982   CONFIDENTIAL                   Fri,  18  May 1984,   16:20       PAGE   69
+
+LOCATION  OBJECT  CODE LIWE        SOURCE  LIWE
+
+    Oa8B8 3A73C3       3216            LD  A, {VOP_MODE WORD)          sFIND  OUT  WHICH  GRAPHICS   MODE  WE  ARE  IN
+    OABE  CB4F         3217            BIT  1,A
+                       3218   ;         IF (PSW,1S, ZERO)           ;THEN  MODE   I
+    0A90  2004         3219            JR  WZ,ELSE1
+    OA92  CBBS         3220              RES  7,8
+    Gas   1802         3221            JR  END1
+                       3222 ;          ELSE                         ;MODE   II
+    OA96  CBFS         3223   ELSE1       SET 7,8
+                       3224   ;        ENOIF
+    0A98  FD7003       3225   END1     LD  {I¥+FLAGS) ,B            ;SAVE  SELECTOR
+    OA9B  E5          3226             PUSH  HL                     ;SAVE  GRAPHICS   ADDRESS
+    OQA9SCDD6603       3227            LD  H,(1X+3)                 sHL  3= ADDR    OF  STATUS
+    OA9SF DD6ED2       3228            LD  L,(IX+2)
+    OAA2  7E           3229            LD A, (WL)                   ;GET  FRAME  #
+    OAA3  FO7704       3230            LD  (IY+FRM) A             3AND  SAVE
+    OAA6  EEBO         3231            XOR  80H                     ;COMPLEMENT    TABLE  INUSE    FLAG
+    OAAB  77           3232            LD  (HL),A                   sSAVE  BACK   IN STATUS   AREA
+    OAAD  23           3233            INC  WL                      “POINT   TO XLOCATION
+    OAAA  5E           3234            LO  E,(HL)                   E   := LOW  __LOCAT  ION
+    OAAB  78           3235            LO  A,E
+    QAAC  £607        3236             AND  7                       A   := @PIXELS   TO  RIGHT  OF  PATTERN   BOUNDARY
+    OAAE  £044         3237            NEG
+    OaB0  C608         3238            ADD  A,8                     ;AMOUNT   TO SHIFT   PATTERN   LEFT FROM  NEXT   PAT   BOUNDARY
+    OQAB2 FD7701       3239            LD  (IY¥*XDISP),A            3SAVE
+    OAB5  23           3240            EWC  OWL
+    OAB6  56           3241            LD D, (HL)                   ;DE :=  X  LOCATION
+   OaB7   CDO7E8      3242             CALL  PX_TO  PTRN POS        *CALCULATE   X_PAT_POS    OF BACKGROUND
+   QABA   FD7311       3243            LD  {IY+XP BK)   ,E-         >AND  SAVE
+   OABD   23           3244            INC  WL                      sPOINT  TO  YLOCATION
+   OABE   5E           3245            LD E, (HL)                   ;E  := LOW  YLOCATION
+   OABF   7B           3246            LD A,E         |
+   OQACO  £607         3247            AND  7                            = #PIXELS   TO  RIGHT  OF  PATTERN  BOUNDARY
+   OQAC2  FD7700      3248             LD  (1¥+YDISP] ,A           . SAVE
+   OACS   23          3249             INC  WL
+   OAC6  56           3250             LD D, (WL)                   ;DE  := YLOCATION
+   OAC7  CDO7ES8      3251             CALL  PX_TO  PTRN_POS        ;CALCULATE   Y_PAT POS
+   OACA   FD7312      3252             LD  (IY+¥P_BK),€
+                      3253
+                      3254   ;  WOW  GET THE  NINE  NAMES  THAT  CONSTITUTE    THE BACKGROUND    ON  WHICH  THE  MOBILE   OBJECT
+                      3255   ;  WILL  BE SUPERIMPOSED                                                                                                                                       ,
+ ' QACD  2A8006       3256   PM        LD HL, (WORK BUFFER)
+   QADO  110013       3257             LD DE, YP_BK+1               ;POINT  TO  SPACE  FOR  BACKGROUND   NAMES
+  OAD3   19           3258             ADD HL,DE
+   OAD4  FD5612       3259             LD D, (1Y+yP  BK)            ;D :=  Y PAT POS
+   OAD7  FDSE11       3260             LD E, (1Y*XP BK)             ;E :=  X PAT POS
+ ~ OADA  010303       3261             LO BC,303                   38  :=  YEXTENT,    C :=  X“EXTENT
+   OQADD CD0898       3262             CALL  GET_BKGRNOD           3GET   BACKGROUND   NAMES
+                      3263 ;   READ   OLD_SCREEN   INTO BUFFER  AND   GET  COLOR  AND  FIRST GEN  NAME
+   OAEO  005605       3264   PM2       LDD,  (1X+5)}               ;DE   := OLD  SCREEN  ADDRESS
+   OAE3  DD5E04       3265             LD E, [1X+4]
+   OAE6  DD7E06       3266             LDA,  (1X+6)                ;GET   FIRST  GEN  NAME                                         |                                    ‘
+   OAE9  DOE1         3267             POP IX                      7 1X :=  ADDRESS   OF GRAPHICS
+   OAEB  FD2A8006     3268             LD IY, (WORK BUFFER)
+   OAEF  FD7705       3269             LO {IY+F GEN)  ,A           7SAVE   IN BUFFER
+   OAF2  05           3270             PUSH DE                     ;SAVE   OLDSCREEN    ADDRESS
+   OAF3  2A8006       3271             LD HL, (WORK  BUFFER)       ;HL  z=  ADDR  OF  START  OF  BUFFER
+   OAF6  010006       3272             LD BC,XP OS                 ;SPACE   TO MOVE  OLD SCREEN    10

@@ -1,0 +1,23 @@
+FILE: EOSABS:E0S_TF       HEWLETT-PACKARD:  CONSOUT   (c) Coleco 1983 Confidential                  Sat,  8 Sep 1984,  23:41      PAGE  190
+
+LOCATION OBJECT CODE  LINE     SOURCE LINE
+
+                      7592 ;
+                      7593 ; MOVE HOME  -   Moves cursor to the upper left corner  of the window
+                      7594 ;
+                      7595 ;
+                      7596 ; FORM_FEED  -   Clears the screen and puts the cursor  at the upper left
+                      7597 ;                corner of the window
+    F6D4              7598 FORMFEED:
+    F6D4 3AFES9F      7599                  LD      A,(NUMLINES]
+    F6D7 47           7600                  LO      BA
+    FGEDS2AFEAI       7601                  LD      HL,[UPPER_LEFT]
+                      7602
+    F608 CDF74C       7603                  CALL    BLANKSCREEN
+                      7604
+    FEDE 3E20         7605                  LD      A,BLANKINGCHAR
+    F6EEO32FE79       7606                  LD      [OLDCHAR_}.A
+                      7607
+    FG6E3CDF7D7       7608 MOVEHOME:        CALL    PUT OLDON SCREEN   ;Needed only  for MOVE_HOME  not FORM_FEED
+    FGEG 2AFEA1       7609                  Lo      HL,[UPPER_LEFT)
+    FG6ESC3F650       7610                  JP      SAVE_CURSOR

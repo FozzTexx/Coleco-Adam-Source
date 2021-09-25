@@ -1,0 +1,64 @@
+FILE:    EQSASS:E0S    TF          CROSS   REFERENCE     TABLE              PAGE  254
+
+LINE#      SYMBOL              TYPE        REFERENCES
+
+ 7564     TRY_MOVE   DOWN        A    7560
+ 7584     TRY_SCROLL_UP          A    7580
+ 6012     TRY  WRITE   AGAIN     A    6030
+  326     TURN_OFF_   SOUND      a    8145
+ 3425     TYPES                  A    3390
+ 6092     UNIT                   A    6086
+ 7366     UP                     A    7937
+ 2657     UPATNCTRL              A    3039 ,3047  ,3064
+  314     UPDATE_SPINNER         A
+ 2687     UPFREQ                 B    3065
+  657   UPPER    _LEFT           A    7394 ,7601,  7609,  7804
+ 3113     UP_CH  _DATA_PTRS      :    2979 ,3230
+  577     USER  BUF              a    3553, 3564  ,3603  ,3612, 4640, 4700, 4704, 4772, 4815,   4904 ,4976,4980, 5068
+  581     USER  NAME             A    3672 ,3822,4183,5257     ,5370
+ 3879     USE ENTRY              A    3869
+ 3947  USE    HOLE               A    3877
+ 5648     UGET   OUT             A
+ 5583     U_NEXT  FCB            A    5623
+ 5701     U_OK                   A
+  847     VDP_CTRL_PORT          A    1393,  1435,2124
+  850     VOP_DATA_PORT          A
+  449     VOP_MODE   WORD        z    1404, 1411,  1519,  1689
+  451     VOP_STATUS   BYTE      A    1438
+  709     VECTOR_O8H             A
+  712     VECTOR  10H            A
+  715     VECTOR  18H            ®
+  718    VECTOR   20H            A
+  721   VECTOR    28H            4
+  724   VECTOR    30H            A
+  727     VECTOR  38H            A
+  730     VECTOR  66H            A
+  984     VOL_ATTR               A
+  554   vOL_BLK    Sz            A
+  989   VOL   DAY                A
+  990    vVOL_DES  LENGTH        A   6348  ,6392
+  983   VOL   _DIRSIZE           A   3755  ,5291,6378
+  985     VOL_DIR_CHECK          A   5459
+  988     VOi_MONTH              A
+  9682    VOL NAME               A
+  986  VOL    SIZE               A   6388  ,6389
+  987     VOL_YEAR               A
+  453    VRAM_ADOR    TABLE      A   1513,1729
+ 6801    WAITING                 A   6806                                                                                                                                                    °
+ 6442  WE   GOT   ERRORS         A   6418  ,6434
+ 8715    wP                     &    8737
+ 4917    WRITE1                 A    4919
+ 4924    WRITE2                 A    4926
+4939     WRITE3                 A    5041
+ 5037    WRITE4                 a    5030,  5032.5034
+6476     WRITE_1_   BLOCK       &    6416  ,6433                                                                                                  ‘
+5043    WRITE   AGAIN           A
+6005     WRITE  BLOCK           A    3625  ,4038  ,4102, 4454, 4535, 5016,6272   ,6487
+7196   WRITE_CMND      SENT     A    7184
+ 7005    WRITE  COMMAND    A    A    7015
+6052   WRITE    COMMAND    C    A    6042
+7017     WRITE   DONE           A    7010
+5080     WRITE       ‘1         A    4937  ,5018  ,5052
+                                                                                      AeaBB,
+
+ nH                   Hae                   aelClrUerlUMAlCrUrTULhlClC            OrOCOCUlClCrUlClC    rCUlC  hcl       hrUlC       eC        el                   |          \          =a

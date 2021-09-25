@@ -1,0 +1,16 @@
+FILE: OS  7PRIME:pOS            HEWLETT-PACKARD:    PUT  SPRITE    RIN  (c)  Coleco,   1982   CONFIDENTIAL                Fri,  18  May  1984,   16:20        PAGE    67
+
+LOCATION   OBJECT  CODE   LIWE        SOURCE   LIWE
+
+    OA79   DDE1           3146                       PoP                 THIS   SPRITE
+    OA7B   DD5E04         3147                      LD                   E, (THIS  SPRITE+SPRITE    INDEX]
+    OA7E   1              3148                      PoP                  HL       -                -
+    OA7F   FD210001       3149                      LD                   1Y,1                ;COUN POF  ONE   TEN
+    OA83   CDIFBE         3150                      CALL                 PUT  _VRAM
+                          3151                                               ~
+                          3152   *      END _IF
+                          3153
+                          3154   * END  PUTOSPRITE,PUTISPRITE
+   OA86                  3155   EXIT  PUT SPR
+   0A86   C9             3156                       RET
+                         3157     PROG

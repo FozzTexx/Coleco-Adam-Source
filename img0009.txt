@@ -1,0 +1,48 @@
+FILE: clondS:EOSTF        HEWLETT-PACKARD:   FOSCOMN    (c)  Coleco {>b.~ Confidential                          Sat,   8  Sep  1984,  23:38        Lk        "
+
+LOCATION OBJECT CODE  LINE      SOURCE LINE
+
+             <FC78>    170 RD_TAPE  RET  CODE                  EQU $
+    FC78 C3FAB3        174        JP       __RD_TAPERET  CODE
+             <FC78>    172 RELOC_ PCB                          EQU $
+    FC7B C3FA2F        173        JP       __RELOCPCB
+             <FC7E>    174 REQUEST  STATUS                     EQU $
+    FC7E C3F473        175        JP       __REQUESTSTATUS
+             <FC81>    176 REQ   KBO_STAT                      EQU $
+    FC81 C3F4CB        177        JP       __REQKBD STAT
+             <FCB4>    178 REQ  PR_STAT                        EQU $
+    FC84 C3FSD02       179        JP       __REQPR_STAT
+             <FC87>    180 REQ  TAPE STAT                      EQU $
+    FC87 C3F507        181        JP       __REQTAPE STAT
+             <FCBA>    182 SCAN_ACTIVE                         EQU $
+    FC8A C3F9CB        183        JP       __SCAN_ACTIVE
+             <FC8D>    184 SOFT  INIT     :                    EQU $
+    FC8D C3F922        185        JP       __SOFT_INIT
+             <FC90>    186 SOFT  RES DEV                       EQU $
+    FC9O C3FASD        187        JP       __SOFT_RESDEV
+             <FC93>    186 SOFT  RES KBD                       EQU $
+    FC93 C3FAS1        189        JP       __SOFT_RES_KBD
+             <FC96>    190 SOFT_RES  PR      |                 EQU $
+    FC96 C3FAS5S       191        Jp       __SOFT_RESPR
+             <FC99>    192 SOFT  _RESTAPE                      EQU $
+    FC99 C3FAS5S9      193        JP       __SOFT_RESTAPE
+             <FCOC>    194 START  _PR_BUFF                     EQU $
+    FC9C C3FS80        195        JP       __START_PR_BUFF
+             <FC9OF>   196 START  PR_CH                        EQU $
+    FCOF C3FS60        197        JP       __START_PR_CH
+             <FCA2>    1968START  _RD_1 BLOCK                  EQU $
+    FCA2 C3FAC6        199        JP       __START_RD_1 BLOCK
+             <FCAS>    200 _START_RD_CH DEF                    EQU $
+    FCAS C3FB86        201        JP       __START_RO_CH_DEV
+             <FCA8>    202 _START_RD_KBD                       EQU $
+    FCA8 C3F4D0        203        JP       __START_RD_KBD
+             <FCAB>    204            1 BLOCK                  EQU $
+    FCAB C3FAFF        205        Jp       __START_WR_1 BLOCK
+             <FCAE>    206 START  _WR_CHDEV                    EQU $
+    FCAE C3F8C2        207        JP       __START_WR_CH DEV
+             <FCB1>    208_SYNC                                EQU $
+    FCB1 C3F970        209        JP       __SYNC
+             <FCB4>    210 WR_1_  BLOCK                        EQU $
+    FCB4 C3FAB2        211        JP       __WR_1_BLOCK
+             <FCB7>    212 WR_CH  DEV                          EQU $
+    FCB7 C3F875        213        uP       __WR_CH_DEV

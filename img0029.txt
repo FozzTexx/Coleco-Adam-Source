@@ -1,0 +1,60 @@
+FILE: ~ onsS:E€OSTF        HEWLETT-PACKARD. GLOBALS                                                        Sat,  B Sep  1984,  223 38       eek      PD
+
+LOCATION  OBJECT CODE  LINE     SOURCE LINE
+
+                        908 ;
+                        909 ; external data areas   used
+                        910 ;
+                        911               ;EXT       VDP_MODEWORD
+                        912               ;EXT       VDP_STATUSBYTE
+                        913               ;EXT       VRAM_ADDR [FABLE
+                        914               ;EXT       SPRITEATTRIBL
+                        915 ;eee          ;EXT       SPRITEGENTBL
+                        916 ;eee          ;EXT       PATTRNNAMETBL
+                        917                EXT       PATTRNGENTBL
+                        918 ,eee          ;EXT       COLORTABLE
+                        919               ;EXT       CUR_BANK
+                        920
+                        921                                                       ; controller  data  area
+                        922               sEXT       SPIN _SWO_CT                 ;THESE TWO BYTES   MUST  BE IN THIS ORDER!!!
+                        923 ;ee@e         sEXT       SPIN SwfCT
+                        924               sEXT       PERSONALDEBOUNCE   TABLE
+                        925               sEXT       TEMP STACK                    ;Used by put_ascii    when bank switching
+                        926                                                       ; sound data  areas
+                        927               sEXT       PTR_TO_LST OF _SNO_ADDRS
+                        928               ,EXT |     PTR _TS  ON O
+                        929               sEXT       PTR_TOS ON _1
+                        930               ,EXT       PTR_TO_SON  2
+                        931               ;EXT       PTR_TO_SON_3
+                        932               ;EXT       SAVE_CTRL
+                        933 ;
+                        934 ;    Port address and  bank  select  externals    follow
+                        935 ;
+                        936               ;EXT       PORTTABLE
+                        937               ;EXT       MEMSWITCH  PORT
+                        938 ;eee          ,EXT       NETRESET PORT
+                        939               sEXT       VDP_CTRL_PORT
+                        940 ;eee          sEXT       VDP_DATA_PORT
+                        941               ;EXT       CONTROLLER O PORT
+                        942 ;ee@e         sEXT       CONTROLLER1  PORT
+                        943               ;EXT       STROBESET  PORT
+                        944 -ee           ;EXT       STROBERESET  PORT
+                        945               ;EXT       SOUNDPORT
+                        946
+                        947 ;eee          ;EXT       SWITCHTABLE
+                        948               ;EXT       MEMCNFGOO
+                        949 ;ee@          ;EXT       MEMCNFGO1
+                        950 ;eee          ;EXT       MEMCNFGO2
+                        951               sEXT       MEMCNFGO3
+                        952 ;eee          ;EXT       MEMCNFGO4
+                        953 ;eee          sEXT       MEMCNFGOS
+                        954 ;eee          ;EXT       MEMCNFGO6
+                        955 ;,eee         sEXT       MEMCNFGO7
+                        956 ;eee          ;EXT       MEMCNFGOS8
+                        957 ;eee          -EXT       MEMCNFGOS
+                        958 ;eee          -EXT       MEMCNFGOA
+                        959 :ee¢@         SEXT       MEMCNF GOB
+                        960 ;ee@          -EXT       MEMCNFGOC
+                        961 ;ee@          -EXT       MEMCNF GOD
+                        962 ;ece@         -EXT      MEM CNFGOE
+                        S63 ,ee¢          ;EXT       MEMCNFGOF

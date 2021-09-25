@@ -1,0 +1,63 @@
+ FILE: OS 7PRIME:pOS          HEWLETT-PACKARD:   PUT SPRITE   RTN   (c)  Coleco,  1982  CONFIDENTIAL             Fri, 18  May  1984,  16:20       PAGE    62
+
+ LOCATION   OBJECT  CODE LINE       SOURCE LINE
+
+                         2861   *   WITH THISSPRITE*,SPRITE     PTR®   DO
+                         2862
+                         2863   *     IF (STATUS*.X  LOCATION    >  -8)  AND (STATUS*.X LOCATION    <  256) AND
+                         2864   *        (STATUS*.Y  LOCATION    >  -8)  AND (STATUS*.Y LOCATION    <  192) THEN
+     O8E3   DD6E02       2865                    Lo                  L, (THIS.SPRITE+STATUS)
+     OBE6   DD6603       2866                    LO                  H, [THISSPRITE+STATUS+1)
+     O8E9   110001       2867                    LD                  DE,X LOCATION
+     O8EC   19           2868                    ADD                 HL ,DE            ;  (HL) =  XLOCATION
+     OBED   4E           2869                    TT                  C, (HL)
+     O8EE   23           2870                    INC                 HL
+     OBEF  46            2871                    Lo                  B, (HL)           ; BC  = X LOCATION
+     O8FO   78           2872                    LO                  A,B               ; COMPARE   BC  WITH -8
+     O8F1   FEOO         2873                    cP                  0
+     O8F3   2808         2874                    JR                  Z,0K_ 1
+     O8F5   FEFF         2875                    cP                  -4
+     O8F7  C2054         2876                    JP                  NZ,DONT PUT
+     O8FA   79           2877                    LD                 A,C
+     OBFB   FEF9         2878                    cP                  -7
+     OBFD  FAOAS4        2879                    JP                 N,DONT  PUT
+    0900                 2880 OK  1
+     0900  23            2881                    INC                HL                 ; [HL]  =  Y_LOCATION
+     0901  4e            2882                    LD                 C, (HL)
+     0902  23            2883                    INC                HL
+     0903  46            2884                    LD                 B, (HL)            ; BC  = YLOCATION
+     0904  78            2885                    LO                 A,B                ; COMPARE   BC WITH  -8
+     0905  FEOO          2886                    cP                 0
+     0907  2808         2887                     JR                 2,0K_  2
+    0909   FEFF         2888                    cp                   -1
+    0908   C20A54       2889                     JP                 N2,DONT  PUT
+    O90E   79           2890                     LD                 A,C
+    O90F   FEF9         2891                    cP                   -7
+    0911   FAQAS4       2892                     JP                 M,DONT  PUT
+   0914                 2893  OK  2
+                        2894
+                        2895   *        IF STATUS*.X  LOCATION    < 0  THEN
+    0914   28           2896           |        DEC                 HL
+    0915   28           2897                    DEC                 HL                 ; (HL)  = HIQX_LOCATION)
+    0916   7E           2898                    Lo                  A, CHL)            ; COMPARE  WITH   0
+    0917   FEOO         2899                    cP                  0
+    0919   CAOSCA       2900                    JP                  2, CONTINUE
+                        2901
+                        2902   *          X := BYTE(STATUS*.X    LOCATION)    + 8
+    091C   28           2903                    DEC                 HL                 ;(HL)  = *X_LOCATION
+    0910   4E           2904                    LD                  C, (HL)
+    O91E   23           2905                    INC                 WL
+    O91F  46            2906                    LD                  B, (HL)
+    0920  210008        2907                    LO                  HL,8
+    0923  09            2908                    ADD                 HL, BC
+    0924  7D            2909                    LD                  A,L
+    0925   FD7701       2910         |          LD                  [SPRITE  PTR+X},A
+                        291                                                                                                                                           ‘
+                        2912   *         COLOR  AND TAG    :=GRAPHICS*.   FRAME TABLE (STATUS*.FRAME)]  .COLOR  OR 80H
+    0928  DD6E00        2913                    LD                  L, {THISSPRITE+GRAPHICS)
+    0928  006601        2914                    LD                  H, [THIS SPRITE+GRAPHICS+1)
+    092E   110005       2915                    LD                  DE, FRAME TABLE PTR
+    0931   19           2916                    ADD                 HL,DE             (HL)   =  FRAME TABLE PTR
+    0932  EB            2917                    EX                  DE,HL
+
+map       Ee          ese           FE      Se          Se         ee           SE       Be                     ee                    ee         ee           es           {es          {=           ts             =e

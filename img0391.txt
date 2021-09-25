@@ -1,0 +1,33 @@
+FILE: OS  7PRIME:pOS            HEWLETT-PACKARD:     DISPLAY  LOGO  (c)  Coleco,  1982  CONFIDENTIAL             Fri,  18   May  1984,   16:21       PAGE  117
+
+LOCATION   OBJECT   CODE   LINE       SOURCE  LINE
+
+    1952   FDE1            5706                      POP  IY                  1Y=   #ITEMS  TO BE TRANSFERED IN PUT VRAM
+    1954   3E20            5707                      LD A,32                  DE=   LOCATION  OF START OF STRING
+    1956   99              5708                      SBC A,C                  ;  A=32-C
+    1957   1F              5709                      RRA                      ;  DIV 2
+    1958   0600            5710                      LD 8,0
+    195A   4F              5711                      LOCA,
+    1958   09              5712                      ADD HL, BC
+    195C   44              5713                      LD B,W
+    1950   4D              5714                      LD CL
+    195E   62              5715                      LD H,D
+    195F   68              5716                      LD L,E
+    1960   50              5717                      LD 0,8
+    1961   59              5718                      LO £,C
+    1962   3€02            5719                      LD A,2
+    1964   CD1FBE          5720                      CALLPUT  VRAN
+    1967   C9              5721                      RET
+                           5722
+    1968   211700          5723  DELAY 10            LD HL,1700H
+    1968   1100FF          5724  TIMER 1             LD DE,255
+    196E   18              5725  TIMER 2             DEC DE
+    196F   7A              5726                      LD A,D
+    1970   B3              5727                      OR E
+    1971   2068            5728                      JR WZ,TIMER 2
+    1973   28              5729                     DEC  HL
+    1974   7C              5730                      LD A,H
+    1975   B5              5731                      OR L
+    1976   20F3            5732                      JR NZ,TIMER 1
+    1978   C9              5733                     RET
+                          5734    PROG

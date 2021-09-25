@@ -1,0 +1,63 @@
+FILE: EOSa@S £05 aes       HEWLETT-PaCKARD:   EOSCOMN    (¢} Coleco   1983 Confidentia!                   Sat,   68 Sep  1984,  29-38      PAGE    4
+
+LOCATION  OBJECT CODE  LINE     SOURCE  LINE
+
+                         W43;
+                         114;  jump tebie area
+                         115;
+                         11GSSSHSSHSSSHSSHSESS  SHEEHEEEHEHHREEHRESHEREHEEEHEEESEEVERES
+                         117
+                         118          ORG EOS JMP_TBL
+                        119
+                        12D                         EEEEHSHESEHTESEREESEHESHEHEEEEEEKE
+                        121
+             <FC30>     122 EOS START                          EQU  $
+    FC30 C3F832         123       uP       __EOS START
+             <FC33>     124 CONS  _DISP                        EQU  $
+    FC33 C3F627         125       JP       __CONSDISP
+             <FC36>     126 CONS INIT                          EQU  $
+    FC36 C3F50C         127       JP       __CONS_INIT
+             <FC39>     128 _CONS_OUT      |                   EQu  $
+   FC39  C3F60A         129        ie      __CONS_OUT
+             <FC3C>     130 _DLY_AFT_HRO RES                   EQu  $
+   FC3C  C3FOSF         131       or       __DOLY_AFT_HRD_RES
+             <FC3F>     132 _END_PR_BUFF                 |     EQU  $
+   FC3F  C3FS88         133       uP       __END_PR_BUFF
+             <FC42>     134 _ENDPR_CH                          EQU  $
+   FC42  C3FS7C         135       ue       __END_PR_CH
+             <FC45>     136 _END_RO_1BLOCK                     EQu  $
+   FC45  C3FAE2         137       uP       __END_RD_1_BLOCK
+             <FC46>     138 _END_RD_CH_DEV                     EQU  $
+   FC48  C3FBAS         439       uP       __END_RD_CH_DEV
+             <FC4B>     140 _END_RD_KBD                        EQU  $
+   FC4B  C3F4EO         141       uP       __END_RD_KBD
+             <FC4E>     142 END _WR_1BLOCK                     EQu  $
+   FC4E  C3FB81B        143       uP       __END_WR_1 BLOCK       |
+             <FCS1>     144 END _WR_CH_DEV                     EQU  $
+   FCS1  C3FBE1         145       uP       __END_WR_CH_DEV
+             <FC54>     146 FIND DCB                           EQu  $
+   FCS4  C3F446         147       up       __FIND_DOCB
+             <FCS7>     148 -GET_OCB_ADOR                     EQu   $
+   FCS7  C3F446         149       JP       __GET_DCB_ADOR
+             <FCSA>     150 GET _PCBADOR                      EQU   $
+   FCSA  C3FA4C         151       uP       __GET_PCB_ADDR
+             <FCSD>     152 HARD_INIT                         EQu   $
+   FCSO  C3F8FEG        183       JP       __HARD_INIT
+             <FC6O>     154 HARD RESET  NET                   EQU   $
+   FC60  C3F948         155       uP       __HARD_RESET_NET
+             <FC63>     156 PR_BUFF                           EQU   $
+   FC63  C3F515         157       uP       __PR_BUFF
+             <FC66>     158 PR_CH                                   $
+   FC66  C3F4FC         159       uP       __PR_CH
+             <FC69>     160 ROD_1BLOCK                        EQU   $
+   FC69  C3FA9E         161       uP       __RD_1BLOCK
+             <FC6C>     162 RD KBD                            EQU   $
+   FC6C  C3F4BA         163       uP       __RD_KBD
+             <FC6F>     164 RD_KBD RET CODE                   EQU  $
+   FC6F  C3FA7B         165       JP       __RD_KBD_RET_CODE
+             <FC72>     166 RD PR_RET CODE                    EQU  $
+   FC72  C3FATF         167       uP       __RD_PR_RET_CODE
+             <FC75>     168 RD_RET CODE                       EQU  $
+   FC75  C3F            169       uP       __RD_RETCODE
+
+                           iti          Oe      tttt        a            aercmaar

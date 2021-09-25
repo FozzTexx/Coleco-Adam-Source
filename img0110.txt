@@ -1,0 +1,28 @@
+‘ILE: EOSABS:E0S   TF          HEWLETT-PACKARD:    DIR_HANOL  (c)  Coleco   1983  Confidential                  Sat,  8  Sep 1984,  23:40       PAGE  106
+
+-OCATION  OBJECT   CODE   LINE       SOURCE LINE
+
+    EQA7  7E              4153                     LD        a,{HL]                     ;GET FN(1)
+    E9A8  FEO3            4154 -                   cP        03                         SETX
+    EQAA  2809            4155                     UR        2,GOT_IT
+                          4156  *
+    E9AC  OC              4157                     INC       c
+    E9AD  23              4158                     INC       HL                         ;ADVANCE POINTER  TO FILE  NAME  STRING
+    EQAE   10F7           4159                     DUNZ      SRCH_LOOP
+                          4160  ¢
+    E9B0                  4161  ERR_GFN
+    E9BO  3E0E            4162                     LD        A,FILE_NM_ERR
+    E982  87              4162                     OR        A                          ;SHOW ERROR
+    E983  E1              4164                     Pop       HL                      |
+   £984   C9              4165                     RET
+                          4166  *
+    Fees                  4167 GOT_IT
+    E985  79              4168                     LD        A.C
+    E986  FEO!            4169                     cP        1                          ;ETX ALONE  IS NOT VALID
+    E988  26F6            4170                     UR        2,ERR_GFN
+    E9BA  0600            4171                     LO        8,0
+    E9BC  AF              4172,                    XOR       A                          ;SHOW OK
+    EQGD  £1              4173                    pop        HL
+    E9BE  CO              4174                    RET
+                          4175
+                         4176

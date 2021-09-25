@@ -1,0 +1,41 @@
+         gem,
+                                                                         “4                                                              °
+
+FILE: ~-sABS:EOS_TF        HEWLETT-PACKARD:  EOS _MKDIR(c) Coleco  1:yusConfidential                   Sat,   8  Sep  1984,  23:41       raAGE  157
+
+LOCATION OBJECT CODE   LINE     SOURCE LINE
+
+    F401 OO0000000     6506        DEFB    0,0,0,0
+    F405 0001          6507        DEFW     1
+    F407 OOO01         6508        DEFW     1
+    F409 0000          6509        DEFW    0
+    F40B O00000        6510        DEFB    0,0,0
+                       6511
+    F40E 4449524543    6512        DEFB     ‘DIRECTORY’,ETX,’  ”
+    F413 544F525903
+    F418 2020
+    F41A CB            6513        DEFB     ATTR_PERMANENT.OR.ATTR_WRITE_PROT.OR.ATTR SYSTEM
+    F41B 01000000      6514        DEFB     1,0,0,0
+    F41F 0080          6515        DEFW     128
+    F421 0001          6516        DEFW     1
+    F423 0400          6517        DEFW     1024
+    F425 000000        6518        DEFB     0,0,0
+                       6519
+    F428               6520 HOLE_FILENAME:
+    F428 424C4F434B8   6521        DEFB     “BLOCKS LEFT’,ETX
+    F42D 53204C4546
+    F432 5403
+    F434 O1            6522        DEFB     ATTR_HOLE
+   .F435 OO0000000     6523        DEFB    0,0,0,0
+    F439 0000          6524        DEFB    0,0
+    F43B 0000          6525        DEFB     0,0
+    F43D 0000          6526        DEFB    0,0
+    F43F 570711        6527        DEFB     57H,0O7H11H
+                 |     6528
+             <O068>    6529 INIT_INFOSIZE   EQU $-INITIAL_DIRECTORY
+                       6530 ;
+                       6531 ;ESRSSSSRSSSASSSS SHSSSHTSsSSSSSsssssHHsessessesssssesssssesssssessss=e
+                       6532 ,SSSRTSSSSSESTSS SSSTSSSseSPSsSessss  sessssssrsscsssesessssssrsstssssee
+                       6533 ,SSSSSSSSSESSSsSsstseeoSsSseSeSeseseeseeSssesseseseSeSaseeseSseseseqsaqeqar2aaeeereeezezeqneeezeeqa5eeee5
+                       6534 ;
+                       6535

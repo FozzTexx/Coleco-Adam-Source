@@ -1,0 +1,54 @@
+FILE:EQSABS:EOTF       HEWLETT-PACKARDSWITCTBL  (c)Coleco 1983Conidentia}             Sat, 8 Sep1984,23:38    PAGE  2?
+
+LOCATIONOBYECTCODE LINE     SOURCELINE
+
+                    767
+   FC17             768 SWITCHTABLE:
+                    769
+   FC17             770 MEM_CNFGOO
+   FC17 00          771              DEFB   HI_INTRINSIC_8OO0H_TO_OFFFFH_MASK.OBOOTROM NALPHA MASK
+                    772
+   FC18             773 MEM_CNFGO1
+   FC18 Of          774              DEFB   HI_INTRINSIC_8000H_'O_OFFMASK.OR.LOINTRINSIRAM O TO_7FFFMASK
+                    775
+   FC19             776 MEM_CNFGO2
+   FC19 02          777              DEFB § HI_INTRINSIC_8O00H_TO_OFFMASK.OR.LOEXPANSION©TO 7FFFHMASK
+                    778
+   FCIA             779 MEM_CNFGO3
+   FCIA 03          780              DEFB   §HI_INTRINSIC_8000H_TO_OFFFFH_MASK.OR.LO_OS7_N_IN20007FFFHMASK
+                    781
+   FC1B             782 MEMCNFGO4
+   FC1IB04          783              DEFB  HI _AUXILLIARSLOT8000H_OFFFFH.OR.LBOOT ROM_NALPHAMASK
+                    784
+   FCIC             785 MEMCNFGOS
+   FCIC OS          786              DEFB §HI_AUXILLIARYSLOT_8000H_OFFFFH.OR.INTRINSICRAM_OTO_7FFFMASK
+                    787
+   FC1D             788 MEMCNFGO6
+   FC1D 06          789              DEFB $HI_AUXILLIARYSLOT_8000H_OFFFFH.OR.EXPANSIONOTO _7FFFMASK
+                    790
+   FCIE             791 MEM_CNFGO7
+   FCIE 07          792              DEFB  $HI_AUXILLIARY_SLOT_8000H_OFFFFH.OR.LO_OS7_N_INTRINSIC_200MASKFFFH_
+                    793                                             :
+   FCIF             794 MEM_CNFGO8
+   FCIF 08          795              DEFB § HI_EXPANSION_8000H_TO_OFFMASK.OR.LBOOT ROM NALPHAMASK
+                    796
+   FC20             797 MEM_CNFGOS
+   FC20 09          798              DEFB § HI_EXPANSION_8000H_TO_OFFMASK.OR.LOINTRINSI_RAMOTO_7FFFHMASK
+                    799                      .
+   FC21             800 MEM_CNFGOA
+   FC21 OA          801              DEFB § HI_EXPANSIO_8000H_TO_OFFFMASK.OR.LEXPANSIONO TO_7FFFMASK
+                    802
+   FC22             803 MEM_CNFGOB
+   FC22 OB          804              DEFB = HI_EXPANSION_8000H_TO_OFFFFH_MASK.OR.LO_OS7_N_IN2000H_7FFFMASK
+                    805
+   FC23             806 MEM_CNFGOC
+   FC23 OC          807              DEFB   HI_COLECOVISIOCARTRIDGSLOT.OR.LOBOOT_ROMN ALPHAMASK
+                    808
+   FC24             809 MEM_CNFGOD
+   FC24 OD          B10              DEFB §HI_COLECOVISIONCARTRIDG_SLOT.OR.LO_INTRINSRAMO TO_7FFFMASK
+                    811
+   FC25             812 MEM_CNFGOE
+   FC25 OE          813              DEFB $HI_COLECOVISIONCARTRIDGSLOT.OR.LEXPANSION OTO_7FFFHMASK
+                    814
+   FC26             815 MEM_CNFGOF
+   FC26 OF          816              DEFB   HI_COLECOVISIOCARTRIDGSLOT.OR.LO_OS7_INTRINSIC2000H_7FFFMASK

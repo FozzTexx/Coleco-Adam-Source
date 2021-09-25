@@ -1,0 +1,63 @@
+  “ILE: OS7PRIME:pOS        HEWLETT-PACKARD: DRIVERS FOR 9928 VDG (c) Coleco 1982 CONFIDENTIAL     Fri,   18  May  1984,   16:21       PAGE  130
+
+  -OCATION OBJECT CODE  LINE     SOURCE LINE
+
+                        6352
+                        6353 * The video drivers provide a standard protocol for low-level comunication
+                        6354 * with the 9918/28 VDP. There are four basic driver routines which between
+                        6355 * them allow the programmer to write a value to a VDP register, read the
+                        6356 * VDP status register, write a RAM or ROM buffer to a specified address
+                        6357 * in VRAM, and read a RAM buffer from a specified address in VRAM.
+                        6358 *
+                        6359 * The four routines outlined above are:
+                        6360 *
+                        6361 *   Procedure RegWrite
+                        6362 *
+                        6363 *     Reg Write takes a VDP register number (0..7) in the B register
+                        6364 *     and a byte value to be written to it in the C register. It writes
+                        6365 *     the value to the given VDP register and returns.
+                        6366 *
+                        6367 *     If the specified register is one of the VDP mode control registers,
+                        6368 *     ie. 0 or 1, then RegWrite  also writes the given value to the
+                        6369 *     corresponding half of the VDP_ModeWord  in RAM. All mode dependant
+                        6370 *     decisions made by the operating system are made by referencing the
+                        6371 *     contents of this word. Thus it is important for the cartridge
+                        6372 *     programmer to maintain it should he/she choose not to use
+                        6373 *     RegWrite  in accessing the VDP registers.
+                        6374 *
+                        6375 *     In addition to the BC pair, Reg Write also makes use of AF.
+                        6376 *
+                        6377 *   Function RegRead
+                        6378 *
+                        6379 *     RegRead  reads the VDP status register and returns its contents
+                        6380 *     in the A register.
+                        6381 *
+                        6382 *     It uses no other registers.
+                        6383 *
+                        6384 *     NOTE ****** While this routine has no side effects with respect to
+                        6385 *                 the CPU, it should be used with caution since reads
+                        6386 *                 to the status register have the effect of resetting the
+                        6387 *                 VOP interrupt flag and may cause field interrupts to be
+                        6388 *                 missed.
+                        6389 *
+                        6390 *   Procedure VramWrite
+                        6391 *                                                                                                                                              ’
+                        6392 *     Vram Write takes a pointer to the beginning of a data buffer in the
+                        6393 *     HL pair, the VRAM destination address in the DE pair, and a byte
+                        6394 *     count in the BC pair.
+                        6395 *
+                        6396 *     It writes the specified number of bytes from the buffer to VRAM
+                        6397 *     starting at the destination address.
+                        6398 *
+                        6399 *     The AF,8C,DE, and HL register pairs are all affected.
+                        6400 *
+                        6401 *     NOTE ****** This procedure is not re-entrant.
+                        6402 *
+                        6403 *   Procedure Vram_Read
+                        6404 *
+                        6405 *     Vram Read takes a pointer to the beginning of a data buffer in the
+                        6406 *     HL pair, the VRAM source address in the DE pair, and a byte count
+                        6407 *     count in the BC pair.
+                        6408 *
+
+meFET              we        ee        Eee      ee        ee        HF        eS       EF        SF        E          &            &F       EF

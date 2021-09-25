@@ -1,0 +1,35 @@
+FILE: EOSABS:€0S TF         HEWLETT-PACKARD: CONS GUT   {cc}Coleco  1983 Confidential                    Sat.   8  Sep  i984,  23:41        PAGE  198
+
+LOCATION OBJECT  CODE   LINE     SOURCE LINE
+
+                        7763 ;
+                        7764 ;Subroutine
+                        7765 ;READ_FROM_CURSORTO  EOL   -  reads the  line on screen from the
+                        7766 ;                             cursor position  to the right edge  of  the
+                        7767 ;                             screen
+                        7768 ;
+                        7769 ;Input Parameters:
+                        7770 ;  None
+                        7771 ;
+                        7772 ;Returns:
+                        7773 ;   BC - number of chars  read
+                        7774 ;   HL - address of LINEBUFFER_
+                        7775 ;   DE - VRAM address of  place cursor  is
+                        7776 ;
+    F779                7777 READ_FROMCURSOR _TOEOL:
+    F779 2AFEAS         7778                 LO       HL,{CURSOR}
+    F77C 3AFE7B         7779                 Lo       A.(X_MAX]
+    F77F 3C             7780                 INC      A                ;Calc # chars to read
+    F780 94             7781                 SUB      H
+    F781 4F             7782                 Lo       CA
+    F782 CDFT7FC        7783                 CALL     CONVERTXY
+    F785 21FETE         7784                 LD       HL.LINEBUFFER_
+    F788 0600           7785                 Lo       8,OOH
+    F78A CS             7786                 PUSH     BC
+    F78B ES             7787                 PUSH     HL
+    F76C DS   :         7788                 PUSH     DE        |
+    €78D CDFD1ID        7789                 CALL     READ_VRAM
+    F790 D1             7790                 POP      DE
+    F791.E1             7794                 POP      HL
+    F792Ci              7792                 PoP      BC
+    F793C9              7793                 RET

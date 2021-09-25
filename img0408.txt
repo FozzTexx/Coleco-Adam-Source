@@ -1,0 +1,59 @@
+FILE: OS7PRIME:pOS         HEWLETT-PACKARD: DRIVERS FOR 9928 VDG  (c)Coleco  1982 CONFIDENTIAL      Fri,  18  May  1984,  16:21     PAGE  134
+
+-OCATION  OBJECT CODE LINE       SOURCE LINE
+
+              <102A>  6577   VRAMREADQ      EQU             $
+    1D2A  011D22      6578                  LD              BC,VRAMREAD P
+    1D2D  1173BA      6579                  LD              DE ,PARAM_AREA
+    1D30  cD0096      6580                  CALL            PARAM_
+    1033  2A73BA      6581                  LD              HL,(PARAM AREA]
+    1036 EDSB73BC  88=6582                  LD              DE,[(PARAM_AREA+2)
+    1D3A ED4B73BE     6583                  LD              BC,[PARAM_AREA+4]
+                      6584
+                      6585                  GLB             VRAMREAD
+              <1D3E>  6586  VRAM_READ       EQu             o
+                      6587
+                      6588  * LOW BYTE OF  SRCE=; CTRL_PORT
+    1D03E7B           6589                  LD              A,E
+    103F O38F         6590                  OUT            (CTRL_PORT],A
+                      6591
+                      6592  * HIGH BYTE OF SRCE =; CTRL_PORT
+    1D41 7A           6593                  LD              A,D
+    1042 D3BF         6594                  OUT            (CTRLPORT] ,A
+                      6595
+                      6596  * DATA =; DATA PORT
+    1044 C5           6597                  PUSH            BC
+   1045  D1           6598                  POP             DE
+   1046  OEBE         6599                  LD              C,DATA_PORT
+   1048  43           6600                  LO              B,E
+              <1049>  6601  INPUT LOOP     EQU             $
+   1049  EDA2         6602                  INI
+   1048  00           6603                  NoP
+   104C  00           6604                  woP
+   1D4D  €21D49       6605                  Jp           .  WZ,INPUTLOOP
+   1050  15           6606                  DEC       :     D
+   1D51  FA1D56      6607                   JP              M,ENDINPUT
+   1054  20F3         6608                  JR              NZ,INPUTLOOP
+                      6609
+                      6610  * END VRAM_READ
+             <1D56>   6611  ENDINPUT       EQU             3
+   1056  C9           6612                  RET
+                      6613
+                      6614  * FUNCTION   REGREAD:BYTE
+                      6615
+                      6616  * FUNCTION OUTPUT RETURNED IN A
+                      6617  * DESTROYS A ONLY
+                      6618
+                      6619  * BEGIN REGREAD
+                      6620                  GLB             REG_READ
+             <1D57>   6621  REGREAD         EQU             $
+                      6622
+                      6623  *  REG READ  ;= CTRLPORT
+   1057 DBBF          6624                  IN              A,(CTRL_PORT)
+                      6625
+                      6626  * END REGREAD
+   1059 C9           6627                   RET
+                      6628
+                     6629    PROG
+
+                                                                                            -

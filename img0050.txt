@@ -1,0 +1,46 @@
+FILE:   EOSABS:EOS      TF            HEWLETT-PACKARD:       A_uOS OO     (c)   Coleco    1983  Conf  ident ia!                         Sat,    8  Sep   1984,    23.38         PAGE     46
+
+LOCATION     OBJECT     CODE    LINE         SOURCE   LINE
+
+                                1747   eeoecesesesesese      CALC  OFFSET    sere  eeeree eee  eee eee  ereee  eeee eeeeeeeeeeeeenesesretes
+                                1748
+                                1749   ;DESCRIPTION:         THIS  ROUTINE    CALCULATES     THE   PROPER    OFFSET     INTO  THE  NAME    TABLE
+                                1750                         FOR  THE  PATTERN     POSITION    GIVEN   BY  X PAT   POS,    Y_PAT   POS.     THE
+                                1751                         FORMULA   USED   IS:   OFFSET   =  32*Y  PAT  POS    +   XPAT   POS
+                                1752
+                                17593  ;INPUT:               D     _PAT_POS
+                                1754                         E     _PaT_POS
+                                1755   ;
+                                1756   -OUTPUT  -            DE    OFFSET
+                                1757
+                                1758   RHSHSSEHASESHES  HEHEHE  ESAS       EHAH  EASE     EHH   EHH                                RE  KEERE EEE
+                                1759   ;
+     E10A                       1760   __CALC_OFFSET:
+     E10A    E5                 1761                        PUSH     HL                                ;save   HL
+     E 108   CB7A               1762                        BIT      7.D                               ;1f   Y_PAT  POS     is minus
+     E 100   2804               1763                        JR       Z,ELSE_11
+     E 10F   26FF               1764                        LD       H,OFFH                            ;   extend     negative    sign
+     Eitt    1802               1765                        JR       END_IF_11
+     E113                       1766   ELSE_11:                                                        ;else
+     E113    2600               1767                        LD       H,O                               ;   extend     positive    sign
+     E115                       1768   END_IF_11:                                                      ;endif
+                                1769
+     E115    6A                 1770                        LD       L.D                               ;OFFSET    =   32*Y PAT   POS    + X PAT   POS
+     E116    29                 1771                        ADD      HL ,HL                            sHL=2*Y   PAT   POS
+     E117    29                 1772                        ADD      HL HL                             ;     4+     .
+     E118    29                 17793                       ADD      HL, HL                            >     Of     *
+     E119    29                 1774                        ADD      HL ,HL                            ;   16       .
+     E11A    29                 1775                        ADD      HL ,HL                             >; 32s      °
+                                1776
+     E116    C878               1777                        BIT      7,€                               > 1f  X_PAT_POS     is  minus
+     E11D    2804               1778                        JR       Z,ELSE_12
+     E1tF    1GFF               1779                        LD       D,OFFH                             >; extend    negative     sign
+     E121    1802               1780                        JR       END_IF_12
+     E123                       1781   ELSE  12:                                                       ;else
+     E123    1600               1782                        LD       0,0                               ;   extend    positive     sign
+     E125                       1783   ENO_IF_12:                                                       endif
+                                1784
+     E125    19                 1785                        ADD      HL ,DE                            ;HL=32¢Y   PAT    POS   +  XPAT_POS
+     E126    EB                 1786                        EX       DE ,HL
+     E127    Ef                 1787                        POP      HL                                ;restore    HL   intact
+     E128    cg                 1788                        RET

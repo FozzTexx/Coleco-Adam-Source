@@ -1,0 +1,61 @@
+ILE:  OS7PRIME:pOS           HEWLETT-PACKARD:     JUMP   TABLE  (c)  Coleco,  1982    CONFIDENTIAL              Fri,  18  May  1984,   16:22       PAGE   148
+
+CATION   OBJECT CODE   LINE        SOURCE   LINE
+
+                       7324   REKARAAKAAEAAAKEAKARKRKEAKKER     Hie  JUMP  TABLE RAERAKAKRRARRAKRAKKAAKKKEKKKKARE
+                       7325 ;
+                       7326   ;JUMP  TABLE    THIS   IS  THE  JUMP  TABLE  TO BE USED  IN ACCESSING CODE
+                       7327   ;               RESIDING    IN  THE  0.S. ROM.   THIS TABLE  MUST HAVE ITS
+                       7328   ;               ORIGIN   REDEFINED    TO ACCOUNT  FOR GROWTH.  PILE NEW ROUTINES
+                       7329   ;               AT  THE  BEGINNING    OF THE  TABLE MAKING  SURE TO  INCREMENT
+                       7330   *               THE  WO OF  ROUTIRES    VALUE.
+                       7331
+                       7332   * NOTE   ****
+                       7333
+                       7334   *                   #*&*  NO  DELETIONS   SHOULD  BE MADE  FROM ****
+                       7335   *                   #ee*   THIS  TABLE                          ane
+                       7336
+             <2000>    7337   ROM  END            EQU                 2000H
+                       7338   * THIS   IS THE  END  OF  OS  ROM
+                       7339
+             <0035>    7340  WO  OF ROUTINES      EQU  53
+                       7341   * THIS  NUMBER   KEEPS   COUNT  OF  THE  NUMBER  OF ROUTINES  ACCESSED THROUGH
+                       7342  *  THE  JUMP   TABLE.
+                       7343
+                       7344   JUMP TABLE          ORG   ROM_END-(WO_OF    ROUTINES*3)
+                       7345
+   1F61 C30300         7346  PLAY  SONGS          JP  PLAY SONGS
+   1F64 C30488         7347  ACTIVATEP            JP  ACTIVATEQ
+   1f67 C306C7         7348  PUTOBJP              JP  PUTOBJO
+   1F6A C31D5A         7349  REFLECT  VERTICAL     JP  RFLCT VERT
+   1F6D C31D60         7350  REFLECT  HORIZONTAL      JP RFLCT  WOR
+   1F70 C31D66         7351  ROTATE  90           JP  ROT90
+   1F73 C31D6C         7352  ENLARGE              JP  ENLRG
+   1F76 C3114A         7353  CONTROLLER   SCAN    JP  CONT SCAN
+   1F79 C31188         7354  DECODER             JP  DECODER_
+   1F7C C31979         7355  GAME OPT             JP GAME  _OPT_
+   1F7F C31927         7356  LOAD  ASCII          JP  LOAD_ASCII_
+   1F82 C318D4         7357  FILL_VRAM            JP  FILL VRAM_
+   1F85 C318E9         7358  MODE   1             JP MODE  1
+   1F88 C3116A         7359  UPDATE  SPINNER     JP  UPDATE  SPINNER
+   1F8B C31B0E         7360   INIT TABLEP        JP   INIT TABLEQ
+  1F8E  C31B8C         7361  GET VRAMP           JP  GET  VRAMQ
+  1F91  C31C10         7362  PUT VRAMP           JP  PUT  VRAMQ
+  1F94  C3ICSA         7363  INIT SPR  ORDERP    JP   INIT  SPRORDER
+  1F97  C31C76        7364   WR_SPR   NM  TBLP   JP  WR  SPR  NM  TBLQ
+  1F9A  C3OF9A        7365   INIT   TIMERP       JP   INIT  TIMERQ
+  1F90  C30FB8        7366   FREE  SIGNALP       JP  FREE  SIGNALQ
+  1FAO  C31044        7367   REQUEST  SIGNALP    JP  REQUEST  SIGNALQ
+  1FA3  C3108F        7368   TEST  SIGNALP       JP  TEST  SIGNALQ
+  1FA6  C31CBC        7369   WRITE  REGISTERP    JP  REG WRITEQ
+  1FA9  C31CED        7370   WRITE  VRAMP        JP  VRAM  WRITEQ
+  TFAC  C31D2A        7371   READ_VRAMP          JP  VRAM  READQ
+  1FAF  C30655        7372   IWIT  WRITERP       JP   INIT QUEUEQ
+  1FB2  C30203        7373   SOUND  INITP        JP  INIT  SOUNDQ
+  1FB5  C30251        7374   PLAY ITP            JP  JUKE BOX
+  1FB8  C31B1D        7375   INIT TABLE         JP  INIT  TABLE.
+  1FBB  C31BA3        7376   GET VRAM           JP  GET VRAM_
+  1FBE  C31C27        7377   PUT  VRAM          JP  PUT  VRAM_
+  1FC1  C31C66        7378   INIT  SPR   ORDER  JP  INIT  SPR ORDER_
+  1FC4  C31C82        7379   WR  SPR  NM  TBL   JP  WR  SPR  NM  TBL|
+  1FC7  C30FAA        7380   INIT TIMER         JP  INIT _TIMER_

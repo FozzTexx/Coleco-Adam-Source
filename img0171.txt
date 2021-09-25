@@ -1,0 +1,32 @@
+FILE: « ».ABS:EOS_TF       HEWLETT-PACKARD:  EOSKBD    (c)  Coleco it_s Confidential                Sat,   8  Sep  1984,  23:41       .auc   167
+
+LOCATION OBJECT CODE   LINE     SOURCE LINE
+
+                       F895 SeeeeeK REHEAT                         EEEREEE              EEK            EEEK
+                       6836 * THIS ROUTINE  WILL START A  READ DATA COMMNAD ON THE KEYBOARD
+                       6837 *      INPUT:   NOTHING
+                       6838 *      OUTPUT:  CONDITION FLAGS
+                       6839 *               Z  :    NO ERROR
+                       6840 *               NZ:     ERROR  OCCURED
+                       6841 *                         ===    ERROR CODE
+                       GFB42SHERHHERSKA        EEREERE      EEE EREEEEEEETEEEEREEKEE  EERE EEREREEEEE  REESE
+                       6843
+                       6844       ;GLB      __START_RD_KBD
+                       6845
+                       6846       ;EXT      __START_RD_CH_DEV
+                       6847
+    F4D0               6848 _ START_RDKBD:
+    F4D0 C5            6849        PUSH     BC                          .
+    F401 05            6850        PUSH     DE
+                       6851
+    F4D2               6852 STRT_RD_KBD_LOOP:
+    F402 3EO!1         6853        LD       A,KEYBOARD_ID                    ;
+    F404 11FD75        6854        LD       DE ,KEYBOARD_BUFFER              ; DESTINATION OF WHERE TO  PLACE  KEY
+    F407 010001        6855        LD       BC,1                             ; GET 1 CHARACTER
+    F4DA COFB86        6856        CALL    __START_RD_CH_DEV                 ; GO INITIATE THE COMMAND
+                       6857    |
+    F400 D1            6858        POP      DE
+    F4DE Ci            6859        POP      BC
+                       6860
+    F4DF C9            6861        RET
+                       6862

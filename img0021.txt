@@ -1,0 +1,24 @@
+FILE: «  2a8S:EOS} F       HEWLETY-PACKARD    €0S  CORK   fc}  Coteco  tro.  Cont:  dential                Sat.  © Sep 1984.  24   38       at       1:
+
+LOCATION  OBJECT CODE  LINE     SOURCE  LINE
+
+                        613 ;SAVEDCOUNT      DEFS      2
+                        614 ;
+                        615 ; controller  data  area
+                        616 ;
+    FE58                617 SPINSWO_CT       DEFS                §                   THESE  TwO BYTES MUST BE  INTHIS ORDER!!!
+    FESS                618 SPINSWi CT       DEFS                1
+    FESA                619 PERSONALDEBOUNCE   TABLE             DEFS                O8
+    FE62                620                  DEFS                12                  ;USED BY TEMPSTACK
+              <FE6E>    621 TEMPSTACK        EQU                 $                   ;Used by put_ascti when bank switching
+                        622
+                        623 ;
+                        624 ; sound data  areas
+                        625 ;
+    FE6E                626 PTRTO_LST  OF SND_ADORS    DEFS         2
+    FE7O                627 PTR_TO_SON_O              DEFS          2
+   FE72                 628 PTR_TO_SON  1             DEFS          2
+    FE74                629 PTR_TO_SON  2             DEFS          2
+    FE76                630 PTR_TO_SON  3             DEFS          2
+    FE78                631 SAVECTRL                  DEFS          1
+                        632

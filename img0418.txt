@@ -1,0 +1,63 @@
+FILE: OS 7PRIME:pOS          HEWLETT-PACKARD:     EXPANSION  ROUTINES  (c)  Coleco,  1982    CONFIDENTIAL          Fri,  18  May  1984,  16:22       PAGE  144
+
+LOCATION  OBJECT  CODE LINE    |   SOURCE   LINE
+
+                       7142
+                       7143   *      WRITE   IT  TO DESTINATION
+    1ED4  FD7400       7144                       LD               [DEST INATION+0)  ,H
+    1E07  £07510       7145                       LD               [DESTINATION+  16),L
+    1EDA FO23          7146                       INC              DESTINATION
+    1EDC FD7400        7147                       LD               [DESTINATION+0)  ,H
+    1EDF FD7510        7148                       LD               [DESTIWATION+  16],L
+    1EE2 FD23          7149                       INC              DESTINATION
+                       7150
+                       7151   *  —   DECREMENT    BYTE COUNT
+    1EE4 08            7152                       DEC              BYTE COUNT
+                       7153
+                       7154   *   UNTIL   BYTE COUNT    = 0
+    1EE5 79            7155                       LD               a,c
+    1EE6 80            7156                       ca               B
+    1EE7 208           7157                       JR               NZ,MAG LOOP
+                       7158
+                       7159   * END
+    1EE9 C9            7160                       RET
+                       7161
+    1EEA               7162  QUADRUPLE                             ; PERFORM   A QUADRUPLING    ON  AN
+                       7163                                        ; 8-BYTE   BLOCK OF  DATA.
+                       7164
+                       7165                                        ; SOURCE   POINTER  IN HL,   DESTINATION
+                      7166                                         ; POINTER   IW DE.
+                       7167
+                      7168                                         ; DESTROYS   AF,BC,DE, HL, IY
+                      7169
+                      7170   *  BEGIN
+                      7171
+                      7172   *   BYTE   COUNT    := 16
+   1EEA  010010       7173                       LD               BYTE COUNT,   16
+                      7174
+                      7175   *    SAVE   SOURCE
+   1EED  E5           7176                       PUSH             HL
+                      7177
+                      7178   *    REPEAT
+   1EEE               7179   QUAD LOOP
+                      7180
+                      7181   *       GET  A BYTE   FROM SOURCE
+   1EEE  7E           7182                       LO               A, (HL)
+   1EEF 23            7183                       INC              HL
+                      7184
+                      7185   *      WRITE   IT  TWICE  TO DESTINATION
+   1EFO  12           7186                       LD                (DE),A
+   1EF1  13           7187                       INC              DE
+   1EF2  12           7188                       LD                (DE),A
+   1EF3  13           7189                       INC              DE
+                      7190
+                      7191   *  —   DECREMENT    BYTE COUNT
+   1EF4 0B            7192                       DEC              BYTE COUNT
+                      7193
+                      7194   *        IF BYTE  COUNT   = 8 THEN RESTORE  SOURCE
+   1EF5 79            7195                       LD               a,c
+   1EF6 FEO8          7196                       cP               8
+   1EF8 2001          7197                       JR               NZ,SKIPZZ
+   1EFA E1            7198                       POP              HL
+
+                                                                                                                                                                                                    .

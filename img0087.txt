@@ -1,0 +1,35 @@
+       f“                                                                   ad
+                                                                           ‘apes,
+FILE: .-5ABS:EOS_TF            HEWLETT-PACKARD:  SOUND EQU¢S  (c)  Coleco,    1¥u2   CONFIDENTIAL                Sat.   8   Sep  1984,   23  39        rAGE    B83
+
+LOCATION  OBJECT   CODE   LINE      SOURCE LINE
+
+                          JBOT1i;eeeeeeeeeeseseseeeeerereseese
+                          3072  ;:¢      SNO_MANAGER         ‘
+                          JOTI  ,Heeeeeeeeeeseereeereeseress
+                          3074
+                          3075  ;See Users’ Manual  for description
+                          3076
+    E465                  3077  16
+    E465                  3078  SNO_MANAGER
+                          3079
+                          3080  ;       * IX  :* addr of song  #1  data  area  [SiDATA]
+                          3081
+    E465  0601            3082          LD       B,1               :pt  IX  to byte  O song   data  area  for  song 14
+    E467  CDE383          3083          CALL     PT_[X_TO_SxDATA
+                          3084
+    E46A                  3085  Li                                 ;LOOP  until  end  of  song  data   areas
+    E46A  3E00            3086          LD       A,ENOSDATA        ;check  for  end  of  song  data  areas
+    E46C  DOBEOO          3087          cP       {1X+0]            :set  Z flag  if  inactive
+    E46F  C8              3088          RET      Zz                :leave   [Z set],  if  all  data  areas   have been  processed
+                          3089
+                          3090  ;       * process  active song   data areas
+                          3091
+    E470  CDE4CD          3032          CALL     PROCESSDATA_AREA;   update   counters   or call   effect  get  next  note
+                          3033
+                          3094  ;       * point  IX to byte  O next  song  data  area
+                          3095
+    E473  11000A          3096          LD       DE,10
+    E476  DD19            3097          ADD      IX,DE
+    E478  18FO            3098          JR       Lf                ;REPEAT  LOOP
+                          30939

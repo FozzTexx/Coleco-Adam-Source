@@ -1,0 +1,65 @@
+ILE: OS 7PRIME:pOS       HEWLETT-PACKARD: DISPLAY LOGO (c) Coleco,  1982  CONFIDENTIAL            Fri,  18  May  1984,  16:21      PAGE  108
+
+OCATION  OBJECT CODE LINE     SOURCE LINE
+
+                     5323
+                     5324
+                     5325
+                     5326
+                     5327 REAARARAAAARARRARRAARAPATTERN GENERATOR  TABLES RRAREKRKERARARKERRKKEK
+                     5328
+             <14C3>  5329 LOGOGEN         Eus
+                     5330
+                     5331 *GRO
+   14C3  0000000000  5332                 HEX             00,00,00,00, 00,00,00,00
+   14C8& 000000
+                     5333 *GR1
+   14CB  3F7FFFFFF3  5334                 HEX             3F,7F,FF,FF,F3,F3,FO, FO
+   1400  F3FOFO
+                     5335 *GR2
+   1403 OO8OCOCOCO   5336                 HEX             00,80,C0,C0,CO,C0,00,00
+   14D8 C00000
+                     5337 *GR3
+   1408 3F7FFFFFF3  5338                  HEX             3F,7F,FF,FF,F3,F3,F3, 3
+   14E0 F3F3F3
+                    5339  *GR4
+   14E3 O0B8OCOCOCO 5340                  HEX             00,80,C0,C0,C0,cO0,c0,cO
+   14€8 COCOCO
+                    5341  *GR5
+  14EB  FOFOFOFOFO  5342                  HEX             FO,FO,FO,F0,FO,FO,FO,FO
+   14FO FOFOFO
+                    5343 *GR6
+  14F3  FFFFFFFOFO  5344                  HEX             FF,FF,FF,FO,FO,FF,FF,FF
+  14°68 FFFFFF                                                                                                            :
+                    5345 *GR7
+  14FB  COCOCO0000  5346                  HEX            CO,CO,C0, 00,00,00,00,00
+  1500  000000
+                    5347 *GR8
+  1503  FIFIFI7B7B  5348                 HEX             F1,F1,F1,7B,7B,7B,3F,3F
+  1508  7B3F3F
+                    5349 *GR9
+  1508  EOEOEOCOCO  5350                 HEX             E0,£0,£0,C0,C0,CO, 80,80
+  1510  C08080
+                    5351 *GR10
+  1513  VFSF7F7978  5352                 HEX             1F,3F,7F, 79,78,7F,7F,3F
+  1518  7F7F3F
+                    5353 *GRi1
+  1518  BOCOEQE000  5354                 HEX             80,C0,£0,£0,00,80,C0,E0
+  1520  80COEO
+                    5355 *GRI2
+  1523  F3F3FBFBFB  5356                 HEX             F3,°3,F8, FB,FB,FF,FF,FF
+  1528  FFFFFF
+                    5357 *GR13
+  152B  COCOCOCOCO  5358                 HEX             cO,C0,C0,C0,C0,c0,c0, co
+  1530  COCOCO
+                    5359 *GR14                                                                                                                       ‘
+  1533  FSFSFFFF7F  5360                 HEX             F3,F3,FF,FF,7F,3F,00,00
+  1538  3F0000
+                    5361 *GR15
+  153B COCOCOCO80   5362                 HEX             cO,CO,CO,CO,80,00,00,00
+  1540 000000
+                    “"*3 *GR16
+
+                                                                                          st
+
+                                                                                                                                                                      '          ¥

@@ -1,0 +1,41 @@
+                                                                SYSTEM  (c)   Coleco,     1982    CONFIDENTIAL           Fri,  18  May  1984,  16:18        PAGE     5
+FILE: OS  7PRIME:pOS             HEWLETT-PACKARD:   OPERATING
+
+LOCATION   OBJECT    CODE   LINE      SOURCE  LINE
+
+                             221                    GLB  PLAY ITP
+                             222
+                             223                    GLB  INIT TIMER                           ; TIME  MGMT  ROUTINES
+                             224                    GLB  FREE SIGNAL
+                             225                    GLB  REQUEST SIGNAL
+                             226                    GLB  TEST SIGNAL
+                             227                    GLB  TIME MGR
+                             228                    GLB  INIT _TIMERP                         ; PASCAL  CALLS
+                             229                    GLB  FREE SIGNALP
+                             230                    GLB  REQUEST  SIGMALP
+                             231                    GLB  TEST SIGNALP
+                             232
+                             233                    GLB  STACK                                ; MISC  GLOBALS
+                             234                    GLB  VDPSTATUS   BYTE
+                             235                    GLB VDP_MODE_  WORD
+                             236                    GLB  AMERICA
+                             237                    GLB MUX  SPRITES
+                             238                    GLB DEFER   WRITES
+                             239                    GLB RAND  GEN                             3Can be  called  from   Pascal
+                             240                                                              ; or assembly    language
+                             241                    GLB  PUTOBJ                               3 GRAPHICS  ROUTINES
+                             242                    GLB  ACTIVATE
+                             243                    GLB  REFLECT VERTICAL
+                             264                    GLB  REFLECT  _WORIZONTAL
+                             245                    GLB  ROTATE_90
+                             246                    GLB  ENLARGE
+                             247                    GLB  PUTOBJP                              : PASCAL  CALLS
+                             248                    GLB  ACTIVATEP
+                             249
+                             250                    GLB  GAME_OPT                             GAME  OPTIONS   DISPLAY
+                             251                    GLB  LOAD  _ASCII                         sLOADS  ASCII  CHARACTER    GENERATORS
+                             252                    GLB  FILL_VRAM                            ;FILLS  DESIGNATED   AREA   OF  VRAM   WITH  VALUE
+                             253                    GLB  MODE 1                               7SETS UP  A DEFAULT    GRAPHICS    MODE  1
+                             254                    GLB ASCIT  TABLE                          ;POINTER  TO  TABLE  OF  ASCII   GENERATORS
+                             255                    GLO NUMBER  TABLE                         POINTER   TO  TABLE  OF  0-9   PATTERN   GENERATORS
+                             256

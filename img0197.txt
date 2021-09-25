@@ -1,0 +1,32 @@
+                                               t
+
+FILE: . »,ABS:EOS_TF      HEWLETT-PACKARD:  CONSOUT   (c) Coleco  1:_s Confidential                        Sat,    8  Sep  1984,   23:41       . aGE  193
+
+LOCATION OBJECT CODE  LINE     SOURCE LINE
+
+                      7643 ;
+                      71644; GOTO xy  -   Puts cursor to desired  X-Y coord  if  in  window
+                      7645 ;
+                      7646 :Input Parameters:
+                      7647 ;  D - X location
+                      7648 ;  E€- ¥ location
+                      7649
+    F710              7650 GOTOXY:
+    F710 SAFETA       7651                  LO      A,([X_MIN}
+    F713 BA           7652                  cp      D
+    F714 2803         7653                  JR      Z,CHK_X_WITH_MAX
+    F716 02F6S8       7654                  JP      NC EXIT
+    F719 3AFE7B       7655 CHK_X_WITH_MAX:  LD      A(X MAX]
+    FT71IBA           7656                  cP      0
+    F710 2803         7657                  JR      2,CHK_Y_COORD
+    F71F DAF658       7658                  JP      C,EXIT
+    F722 SAFETC       7659 CHK_YCOORD:      LO      A.({Y_MIN)
+    F725 88           7660                  cP      E
+    F726 2803         7661                  JR      2,CHK_Y_WITH MAX
+    F728 D2F6S8       7662                  JP      NC EXIT
+    F728 3AFETO       7663 CHK_Y_WITH_MAX:  LO      A.[Y_MAX]
+    F72E 88           7664                  cp      E
+    F72F 2803         7665                  JR      Z,SET_CURSOR
+    F731 DAF6S8       7666                  JP      C,EXIT
+    F734 Es           7667 SET_CURSOR:      EX      DE,Hi
+    F73S C3F67D       7668                  JP      RESTOREOLD

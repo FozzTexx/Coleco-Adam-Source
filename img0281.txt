@@ -1,0 +1,38 @@
+FILE: OS_7PRIME:pOS          HEWLETT-PACKARD:  OPERATING   SYSTEM   (c)  Coleco,   1982   CONFIDENTIAL         Fri,  18  May  1984,   16:18       PAGE     7
+
+LOCATION OBJECT  CODE   LINE       SOURCE LINE
+
+                         315
+                         316                   GLB                RST 28H  RAM
+              <8018>     317   RST28H  RAM     EQU                8018H
+                         318   * THIS  ISTHE RESTART  28  SOFT  VECTOR.
+                         319
+                         320                   GLB                RST 30H  RAM
+              <B01B>     321  RST 30H  RAM =   EQU                8016H
+                         322  *  THIS IS THE RESTART 30  SOFT   VECTOR.
+                         323
+                         324                   GLB               IRQ_INT  VECT
+              <BO1E>     325   IRQ_INTVECT     EQuU               BOTEH
+                         326  *  THIS IS THE MASKABLE  INTERRUPT   SOFT   VECTOR
+                         327
+                         328                   GLB               WMI INT  VECT
+              <8021>     329  NMI INT VECT     EQU                8021H
+                         330  *  THIS IS THE NMI SOFT  VECTOR.
+                         331
+                         332                   GLB                GAME NAME
+              <8024>     333  GAME  NAME       EQU                8024H
+                         334  *  FROM HERE TO STARTGAME   THERE   SHOULD  BE  A  STRING OF  ASCII  CHARACTERS
+                         335  *  WAMES THAT HAS THE FOLLOWING    FORM:
+                         336  *
+                         337  *                 GAME/MAKER_OF    THIS  GAME/COPYWRITE   YEAR.
+                              &
+                         339  *    FOR EXAMPLE:
+                         340  *
+                         341  *       “DONKEY KONG/NINTENDO/  1982"
+                         342
+                         343  *  IMPORTANT NOTE *****
+                         3446
+                         345  *                #ees IT  1S  THE RESPONSIBILITY     OF THE  ****
+                         346  *                *#** CARTRIDGE   PROGRAMMER    TO  PLACE   ****
+                         347  *                **#* THESE  CODES   IN  CARTRIDGE   ROM
+                         348

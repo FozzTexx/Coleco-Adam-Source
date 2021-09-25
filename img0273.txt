@@ -1,0 +1,60 @@
+        COLECOVISION  PROGRAMMERS'   MANUAL
+        Rev. 5
+        ©Coleco Industries,   Inc.  1982
+        CONFIDENTIAL  DOCUMENT  =  DO NOT   COPY                     -Page  3
+
+            REDS epgpwet}mnete,
+
+                    CLB  ACTIVATE                   0s:0S
+                    GLB  ACTIVATEP                  os:OSs
+                    GLB  ADDSB16                    os:0s
+                    GLB  AMERICA                     0s:0S
+                    GLE  ASCII_TABLE                0s:0Ss
+                    GLB  ATN_SWEEP                   os:0S
+                    GLE  CARTRIDGE                  0s:o0s
+                    GLB  CONTROLLEK_MAP             os:os
+                    GL3  CTRL_PORT_PTR
+                    GLB  DATA_PORT_PTR
+                    GLB  DECLSN                      os :0S
+                    GLE  DECMSN                      0s:O0Ss
+                    GLB  DECODER                     os:os
+                    GLB  DEFER_WRITES                0os:o0s
+                     GLB EFXOVER                     0s:0Ss
+                    GLB  ENLARGE                     0os:o0s
+                     GLB ENLRG                       Oos:OSs
+                     GLB FILL_VRAM                   0os;:0s
+10                   GLB FREE_SIGNAL                 os:0S
+                     GLB FREE_SIGNALP                Oos:O0S
+                     GLB FREQ_SWEEP                  os:oS
+                     GLB GAME _NAME                  os:o0s
+12                   GLB GAME _OPT                   os:0S
+                     GLB GET_URAM                    060s:0s
+13                   GLB GET_VRAMP                   os:os
+                     GLE  INIT_SPR_ORDER             os:0s
+i4                   GLB INIT_SPR_ORDERP             0s:0S
+                     GLB  INIT_TABLE                 0s:os
+15                   GLB  INIT_TABLEP                0s:os
+                     GLE  INIT_TIMER                 os:os
+ 16                  GLB  INIT _TIMERP               0s:O0S
+                     GLE  INIT  WRITER               os:o0s
+ 17  |               GLB  INIT_WRITERP               os:oSs
+                     GLB  IRQ_INT_VECT               0s:0S
+ 18                  GLB  LEAVE _EFFECT              os:os
+                     GLB  LOAD_ASCITI                Oos:0s
+ i9                  GLB  LOCAL_SPR_TBL              0Os:o0s
+                     GLE  MSNTOLSN                   0s:0S
+20                   GLB  MODE_1                      os:os
+                     GLB  MUX SPRITES                 0S:0S
+ 21                  GLB  NMI_INT_VECT                os:0S
+                     GLB  NUMBER_ TABLE               0s:0S
+22                   GLB  PLAY_IT                     os:o0s
+                     GLB  PLAY_ITP                    0s:0S
+ 23                  GLB  PLAY_SONGS                  os:0S
+                     GLB  POLLER                      os:o0Ss
+ 24                  GLB  PUTOBJ                      os:os
+                     GLB  PUTOBJP                     0os:os
+ 25
+
+ 26
+
+ . woVOwweWwoVSwWeYeweYeYweVYeeWSwoWOwWO weGwo WWsWewe WoYWO weWe WoBVweVYWoo  wwwwteweGeGegWo

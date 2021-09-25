@@ -1,0 +1,54 @@
+FILE:       .BS:EOS  TF           HEWLETT-PACKARD:     EOS CHAR    (c)  Coleco  1_    Confidential                   Sat,   8  Sep  1984,23:42        ~aGE    24%
+
+LOCATION   OBJECT    CODE   LINE       SOURCE   LINE
+
+                            GIGQD  FHKE SHEE   ERE REE  REE    EERE  HEE HEREEE ERE  EEE                           REED
+                            9363   * END   WR  CH  DEV   WILL  CHECK  THE  DEVICES   DCB COM/STATUS  BYTE AND  RETURN
+                            9364   * THE  RESULT   OF  THE CHECK.
+                            9365   *       INPUT:    A   ===>  DEVICE   ID
+                            9366   *       OUTPUT:   CONDITION    FLAGS
+                            9367   *                 C :       COMMAND   HAS FINISHED
+                            9368   *                 NC :      COMMAND   HAS NOT  BEEN  PROCESSED
+                            9369   *                 Zz:       NO  ERROR  OCCURED
+                            9370   *                 NZ:       ERROR  OCCURED
+                            9371   *                           A  ===>   ERROR CODE
+                            9372
+                            QITD   SESS  HEHEHE  SEHR         AETHER   EEE EEE  EHERERHERERE  EEREEERE EEE  EERE  EEEREE EEEEE
+                            9374
+                            9375   ;NO_OCB_FND4                C_NO_DCB_FND4
+                            9376   ;DCB_IS_JDL4    CHANGED   TO CHAR_DCB  IS _IDL4   TO AVOID CONFLICT  WITH
+                            9377   ;IDENTICAL   LABEL   ELSEWHERE
+                            9378
+                            9379          ;GLB       __END_WR_CH_DEV
+                            9380
+     FBE1                   9381    END  _WR_CH_DEV:
+     FBE1  FDES             9382           PUSH       Ty
+                            9383
+     FBE3  CDF446           9384           CALL      __FIND_OCB
+     FBE6  37               9385           SCF
+                            9386
+     FBE7  2012             9387           UR        NZ,C_NO_DCB_FND4              ; THERE WAS NO  PRINTER DCB
+                            9388
+     FBE9  COF4AE           9389           CALL‘     CHK_IF_IDLE                 ;  IS DEVICE IDL?
+     FBEC  2000             9390           UR        NZ,CHAR_DCB_IS_IDL4
+                            9391
+     FBEE  B7               9392           OR        A                             ; CLEAR THE CARRY  FLAG
+     FBEF  FDCBOOTE         9393           BIT       CMND_COMPLETE   BIT,[{IY+D  COM_STAT]           >WAS THE COMMAND    PROCESSED?
+     FBF3  2806             9394           JR        2,NOT  COMPLETED             ;  NO, RETURN WITH  THE CARRY  FLAG   CLEARED
+                            9395                                                   >;YES, THE COMMAND  WAS PROCESSED
+     FBFS  FOT7EOO          9396           LO        A, [1Y¥+D_COM_STAT]          ;  DID ANY ERRORS  OCCUR?
+     FBF8  FEBO             9397           cP        CMNO_FIN   STATUS
+     FBFA  37               9398           SCF
+                            9399                                                  ;  NO ERROR, SET  THE CARRY FLAG,   ZERO  FLAG  CONDITION
+     FBFB                   9400   CHAR_DCB_IS_IDL4:
+     FBFB                   9401   C_NO DOCB_FND4:
+     FBFB                   9402   NOTCOMPLETED:
+     FBFB  FDE1             9403           POP       ly
+    FBFD   C9               9404           RET
+                            9405   ;
+                            9406   SSBB  STEERS HSS Se SSssreseresrsssosssessessrssrsssssssesesssseszezeszrs=
+                            9407   ¢BRSB See T SSST SSS TSHsesrersssesr  esrsessssessssssssesssssssssserszrrze
+                            39408  »BSSSSSSHETSSSSSSSSSSSSSSSSSSRSSSSSTS     SSS SSS SSSSessssssssssessseesszsszs
+                            9409   ;
+
+Errors=      oO

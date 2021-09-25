@@ -1,0 +1,39 @@
+FILE:  EOSABS EOSTF        HEWLETT-PACKARD. GLOBALS                                                    Sat.   a Sep   1984.  23 38         PAGE     24
+
+LOCATION  OBJECT CODE  LINE     SOURCE LINE
+
+                        S874;
+                        875 ; globals routinesdef   tned
+                        876 ;
+                        877               ;GLB      __WRITEVRAM                 ;VDP support routines
+                        878               ;GLB      __READ_VRAM
+                        879               :GLB      __WRITEREGISTER
+                        880               ;GLB      __READ_REGISTER
+                        881               ;GLB      __FILL_VRAM
+                        682               ;GLB      __INIT_TABLE
+                        883               ;GLB      __PUT_VRAM
+                        864               ;GiB      __GET_VRAM
+                        685               ;GL8B     __CALC_OFFSET
+                        886               ;GLB      __PX_TO_PTRN_POS
+                        887               ;GLB      __LOAD_ASCTII
+                        888               ;GLB      __PuT_ASCII
+                        689               ;GLB      __WR_SPR_ATTRIBUTE
+                        890
+                        891               ;GLB      __DECODER
+                        892               ;GLB      __POLLER                    ;controller support routines
+                        893               ;GLB      __UPDATE_SPINNER
+                        894
+                        895               ;GLB      __DECLSN                    ;s:und chip support routines
+                        896               ;GLB      __DECMSN
+                        897               ;GLB      __MSNTOLSN
+                        898               ;GLB      __ADD816
+                        899               ;GLB      ___SOUND_INIT
+                        900               ;GLB      __TURN_OFF_SOUND
+                        901               ;GLB      __PLAY_IT
+                        902               ;GLB      ___SOUNODS
+                        903               ;GLB      __EFFECT_OVER
+                        904
+                        905               ;GLB      __SWITCH_MEM                ;memory bank switch support  routine
+                        906               ;GLB      __PORTCOLLECTION            ;STORE THE PORT ADDRESSES  FROMOS  7
+
+a          a       ee       ee       ee       ee      ee    ee     ee           ee      ee      ee    ee       ee          ee       ee           ee

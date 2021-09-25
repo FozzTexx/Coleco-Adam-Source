@@ -1,0 +1,61 @@
+FILE: OS7PRIME:pOS       HEWLETT-PACKARD: OPERATING  SYSTEM (c)Coleco,  1982  CONFIDENTIAL       Fri,  18  May  1984,  16:18      PAGE    6
+
+LOCATION OBJECT CODE LINE     SOURCE LINE
+
+                      258  RBRERRAEKAERAARAAAARAKCARTRIDGE ROM DATA AREA RRAKAKRAKEARARERARAKERKAREE
+                      259
+                      260                 GLB             CARTRIDGE
+             <8000>  261  CARTRIDGE       EQU             8000H
+                     262  * THIS  ISTHE MEMORY LOCATION TESTED TO SEE  IFA CARTRIDGE IS PLUGGED
+                     263  *  IN.IF IT CONTAINS THE PATTERN AASSH THE OS ASSUMES THAT A GAME
+                     264  * CARTRIDGE IS PRESENT. IF  ITCONTAINS THE THE PATTERN 55AAH, THE OS
+                     265  * ASSUMES THAT A TEST CARTRIDGE  ISPRESENT.
+                     266
+                     267                  GLB             LOCALSPR  TBL
+             <8002>  268  LOCAL SPR TBL   EQU-.           8002H
+                     269  * THIS IS A POINTER TO THE CPU RAM COPY OF THE SPRITE NAME TABLE. THE
+                     270  * TABLE COPY IS USED WHENEVER ONE LEVEL OF  INDIRECTIONIS DESIRED IN
+                     271  * ADDRESSING THE VRAM TABLE. FOR EXAMPLE WHEN.USING THE OS SPRITE
+                     272  * MULTIPLEXING SOFTWARE.
+                     273
+                     274                  GLB             SPRITEORDER
+             <8004>  275  SPRITEORDER     EQU             8004K
+                     276  * THIS IS A POINTER TO THE CPU RAM SPRITE ORDER TABLE. THIS TABLE IS
+                     277  * USED TO ORDER THE LOCAL SPRITE NAME TABLE.
+                     278
+                     279                  GLB             WORKBUFFER
+            <8006>   280  WORK BUFFER     EQU             8006H
+                     281  * THIS IS A POINTER TO A FREE BUFFER SPACE IN RAM. THE OBJECT ORIENTED
+                     282  * GRAPHICS ROUTINES USED THIS BUFFER FOR TEMPORARY STORAGE.
+                     283
+                     284                  GLB             CONTROLLERMAP
+            <B8008>  285  CONTROLLER MAP  EQU             8008H:
+                     286  * THIS IS A POINTER TO THE CONTROLLER MEMORY MAP THAT IS MAINTAINED BY
+                     287  * THE HIGH-LEVEL CONTROLLER SCANNING AND DEBOUNCE SOFTWARE.
+                     288
+                     289                  GLB             STARTGAME
+            <800A>   290  STARTGAME       EQU             800AH
+                     291  * THIS IS A POINTER TO THE START OF THE GAME.
+                     292 —
+                    (293  RRAARARKRARRKARURKER RESTART AND INTERRUPT VECTORS RERKEKEKRKAKKKKKRKKKRAEK
+                     294  * THESE ARE ADDRESSES IN CARTRIDGE ROM OF VECTORS WHICH MUST BE PLACED
+                     295  * THERE BY THE CARTRIDGE PROGRAMMER. WHEN AN INTERRUPT OR RESTART
+                     296  * OCCURS, THE OS VECTORS IT THROUGH THIS AREA. THE CARTRIDGE PROGRAMMER
+                     297  * SHOULD PLACE A JUMP TO HIS OWN INTERRUPT HANDLER IN THE APPROPRIATE
+                     298  * LOCATION.
+                     299
+                     300                  GLB             RST BHRAM  ~
+            <800C>   301  RST8H RAM       EQU             800CH
+                     302  * THIS IS THE RESTART 8 SOFT VECTOR.
+                     303        |
+                     304                  GLB             RST_10H_RAM
+            <800F>   305  RST10H  RAM                     B00H
+                     306  * THIS IS THE RESTART 10 SOFT VECTOR.
+                     307
+                     308                - GLB             RST 18HRAM
+            <8012>   309 RST  18H RAM     EQU             8012H
+                     310 *  THIS IS THE RESTART 18 SOFT VECTOR.
+                     311
+                     312                  GLB             RST 20HRAM
+            <8015>   313 RST  20H RAM     EQU             8015H
+                     314 *  THIS IS THE RESTART 20 SOFT VECTOR.

@@ -1,0 +1,63 @@
+FILE: OS  7PRIME:pOS      CROSS REFERENCE TABLE               PAGE  155
+
+LINE#    SYMBOL        TYPE     REFERENCES
+
+ 6061   INIT TABLE9O        6031,6034,6041,6044
+ 7360   INIT TABLEP         193
+ 5990   INIT TABLEQ         5980,7360
+ 5997   INIT TABLE          5979,7375
+ 5967   INIT TABLE          5991
+ 7380   IMIT TIMER          223
+ 7365   INIT TIMERP         228
+ 4174   INIT TIMERQ         4039,7365
+ 4180   INIT TIMER          4038,7380
+ 4430   INIT TIMER  EXI     4370,4396,4404
+  587   INIT_TIMEDATA       4176
+ 4171   INIT_TIMEPAR        4175
+ 7390   INIT WRITER         203
+ 7372   INIT_WRITERP        208
+ 1807   INITXP_OS           1696,1905
+ 6601   INPUT_LOOP          6605,6608
+  423   1RQ_INTERRUPT
+  325   IRQ_INTVECT         324,424
+ 4502   JOY                 4822,4986
+ 4967   JOY_DBNCE           4825
+ 4996   JOY_EXIT            4981,4987,4992
+ 4523   JOY_MASK            4722,4970
+ 4512   JOY_OLD             4972,4980,4993
+ 4983   JOY_REG             4979
+ 4989   JOY_ST1             4975
+ 4513   JOYSTATE            4973,4985,4995
+ 1102   JUKE BOX            1075,1385,7394
+ 1095   JUKE BOX            1094,7374
+ 1083   JUKE BOX_PAR        1096
+ 7344   JUMP_TABLE
+ 4505   Keo                 4862,4903
+ 4878   KBD _DBNCE          4865
+ 4913   KBD EXIT            4893,4904,4909
+ 4520   KBD MASK            4738,4882
+ 4529   KBD NULL            4550,4557,4561,4565
+ 4518   KBD OLD             4884,4892,4910
+ 4895   KBD REG             4891
+ 4906   KBD ST1             4887
+ 4519   KBD STATE           4885,4897,4912
+ 1143   U1                  1152
+ 1229   L10                 1222
+ 1244   L12                 1232,1240
+ 1377   L13                 1361
+ 1394   L14                 1379
+ 1424   L15                 1397
+ 1448   L16                 1429
+ 1467   L17                 1450
+ 1482   L18                 1479
+ 1534   L19
+ 1176   L2                  1202
+        120                 676
+ 1528   L20LOAD NEX         1526
+  708   L21                 691
+  766   L22                 737,761
+  763   L23                 743
+  793   L24                 787
+ 1306   L5                  1302
+
+TVTVGV    GVTVVG  VGTV  VGV  VG  VTVUV\SPVGVTSP VP RVI      SEVSUCTVGTSP  VIS     VO VVGVG\SVFUVGVCTyFPPVSGT     VG   UTS VPrVTU    SPD

@@ -1,0 +1,64 @@
+LE:  OS7PRIME:pOs         HEWLETT-PACKARD:     MIRROR/ROTATE    RIN  (c) Coleco   1982  CONFIDENTIAL            Fri,  18  May  1984,   16:22       PAGE 146
+
+CATION  OBJECT  CODE LINE        SOURCE   LINE
+
+                     7210
+                     7211   * THE  ROUTINES   IN  THIS  FILE TAKE  A SINGLE   8-BYTE  BLOCK   AS INPUT
+                     7212   * AND  OPERATE   ON  IT PRODUCING  A  SINGLE  8-B8YTE  BLOCK  AS OUTPUT.
+                     7213   * THEY  PERFORM   MIRRORING   AROUND  THE  VERTICAL  AXIS,   MIRRORING
+                     7214   * AROUND   THE  HORIZONTAL   AXIS, AND  90  DEGREE  ROTATION.
+                     7215
+                     7216                      GLB         ‘MIRROR       LR
+                     7217                      GLB                ROTATE
+                     7218                      GLB                MIRROR  UD
+                     7219
+                     7220
+  1F00               7221. MIRROR  LR                 |           ; REFLECTS   AN 8X8  PIXEL   DATA  BLOCK
+                     7222                                         ; AROUND   THE VERTICAL   AXIS.
+                     7223
+                     7224                        |                ; SOURCE   IN HL,  DEST  IN DE
+                     7225                                         ; DESTROYS   AF,BC,DE, HL
+                     7226
+  1F00  010008       7227                LD    BC,8               ;SET BLOCK   BYTE  COUNT
+  1F03               7228  MIR  L_R10
+  1F03 46            7229                LD   B,  [HL]            ;GET SOURCE   BYTE
+  1F04 3E80          7230                LO    A,80H              ;SET WORK  REGISTER   MASK
+  1F06               7231  MIR  L_R20
+  1F06 CB10          7232                RL    OB                 ;PUT SOURCE   IN CARRY
+  1F08  1F           7233                RRA                      ;PUT CARRY   INTO  WORK  REGISTER
+  1F09 30FB          7234                JR    WC,MIR  L_R20   =;  CONTINUE  UNTIL   MASK  BIT  IS IN  CARRY
+  1F08  12           7235                LD                       WRITE   MIRRORED   BYTE  TO DESTINATION
+  1FOC 23            7236                INC   HL                 ADVANCE   POINTERS
+  1FOD  13           7237                INC   DE
+  1FOE OD            7238                DEC   C
+  1FOF 20F2          7239                JR    WZ,MIR-L_R10       CHECK   COUNT
+  1F11               7240  MIR L_RX
+  1F11 C9            7241                RET
+         |           7242
+                     7243
+                     7244
+ 1F12                7245  ROTATE                                 ; ROTATE  OBJECT  90  DEGREES
+                     7246
+                     7247                                        ;  SOURCE  IN  HL DESTINATION    IN DE.
+                     7248                                        ;  DESTROYS  AF,BC,DE,HL
+                     7249
+ 1F12  £5            7250                PUSH  HL
+ 1F13  DOE?          7251                POP   IX
+ 1F15  €8            7252                EX    DE,HL
+ 1F16  010008        7253                LD    8C,8
+ 1F19               7254   TRANSP_10
+ 1F19  DOCBO016  =  7255                 RL    [1X+0)            ;PUT  HI  BIT  OF FIRST  SOURCE   BYTE  IN CARRY
+ 1F1D  CBIE         7256                 RR    CHL)              ;PUT  CARRY   IN DESTINATION   BYTE
+ 1FIF  DDCBO116  =  7257                 RL    (1X#1)
+ 1F23  CBIE         7258                 RR    {HL}
+ 1F25  DDCBO216  =  7259                 RL    [1X+#2)
+ 1F29  CBIE         7260                 RR    (HL)
+ 1F2B  DOCBO316     ©7261               RL     CIX#3)
+ 1F2F  CBIE         7262                RR     (HL)
+ 1F31  DDCBO416  =  7263                 RL    [1X+4)
+ 1F35  CBIE         7264                RR     (HL)
+ 1F37  DDCBOS16  =  =—_7265             RL     [1X+5)
+ 1F38  CBIE         7244                RR     (HL)
+
+                                                                                                       ~                                                                            .
+                                                                                                       =~@         og          ——          -~——g       an  |           fs     f=~          ween       _antec

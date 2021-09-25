@@ -1,0 +1,61 @@
+FILE:  ‘.-5ABS:E0S_TF      HEWLETT-PACKARD:   EOSMKDIR  (c)  Coleco  iz-o Confidential                    Sat,   8  Sep   1984,  23:41         reauc  153
+
+LOCATION  OBJECT CODE  LINE     SOURCE  LINE
+
+                       G29QBKHERKERKESEEEREREREAEEEEEEREE    EH REKEEEARARESKEKEEEKEKREEREERERERE   EERE
+                       6299 *
+                       6300 *      __INIT_TP_DIR   INITIALIZES   THE TAPE DIRECTORY
+                       6301 *
+                       6302 *      INPUT:    A       DEVICE  ID
+                       6303 *                        LOW NIBBLE   - DEVICE ADDRESS
+                       6304 *                        HI NIBBLE    — SECONDARY DEVICE  ID
+                       6305 *
+                       6306 *                C       NUMBER  OF  SECTORS IN DIRECTORY
+                       6307 *                OE      NUMBER  OF  SECTORS ON DEVICE
+                       6308 *
+                       6309 *                HL      POINTER  TO  ASCII ETX TERMINATED  STRING  |
+                       6310 *                        ( VOLUME   ID) (SHOULD BE BLANK-PADDED    IF
+                       63i1 *                        LESS THAN   12 CHARACTERS)
+                       6312 ¢      OUTPUT:
+                       6313 *                CONDITION FLAGS
+                       6314 *                2       NO ERROR
+                       6315 *               NZ       ERROR
+                       6316 *                        A = ERROR  CODE
+                       6317 *
+                       G631BSHeeKKHKSHEHHSKEKRAEHRESESEEHERRERA        EEEEEE  EEE EERE   RES ER EEEEKER
+                       6319
+                       6320       ;GLB       __INIT_TAPE_DIR
+                       6321       ;GLB       HOLE FILENAME
+                       6322       ;GLB       DIRECTORY_CHECK
+                       6323
+                       6324       ;EXT       SECTOR_NO
+                       6325       3EXT       DEVICEID
+                       6326       sEXT       FCB_DATA_ADOR
+                       6327       sEXT       SECTORS_TO_INIT
+                       6328       sEXT       WRITEBLOCK
+                       6329
+    F323               6330 __INIT_TAPE_DIR:
+   |                   6331
+    F323  FDES         6332        PUSH      IY
+    F325  C5           6333        PUSH      BC
+    F326  DS           6334        PUSH      DE
+    F327  £5           6335        PUSH      HL
+           |           6336
+    F328  32FD72       6337        LD        (DEVICE_ID),A             ; SAVE THE  DEVICE ID
+                       6338
+    F32B  79           6339        LO        A,C
+    F32C  32F086       6340        LD        [SECTORS TO_INIT],A       ; NO OF SECTORS  TO  INITIALIZE
+                       6341
+    F32F  E5           6342        PUSH      HL
+                       6343
+    F330  CDF3AF       6344        CALL      ZEROOUT BUFFER            ; ZERO OUT  THE 1K BUFFER
+                       6345
+    F333  21F3DA       6346        LD        HL,INITIAL DIRECTORY       ; POINTER  TO INITIAL  SETUP
+    F336  EDSBFOFF     6347        LD        DE.[FCB_DATA_ADDR)        ; ADDRESS OF  1K BUFFER
+    F33A  010068       6348        LD        BC,DIR_ENT_LENGTH*3+VOL_DES  LENGTH    ; # BYTES  TO  MOVE  INTO  BUFFER
+    F330  EDBO         6349        LDOIR
+                       6350
+    F33F  E1           6351        POP       HL                        ; GET ADDR  OF ETX TERMINATED    ASCII  STRING
+                       6352
+    F340  EDSEFDFF     6353        LD        DE,{FCB BATAADDR]         - GET ADDRESS  ©F  “kKBUFFER
+    F344  O50C         6354        LD        B,i2                      ; MAX OF  72 BYTES IN  STRING

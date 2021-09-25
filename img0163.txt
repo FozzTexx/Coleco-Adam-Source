@@ -1,0 +1,63 @@
+                                                                                    .                                                                      :
+      (                                                                                                                                                         .
+FILE: .  sABS:E0S_TF         HEWLETT-PACKARD:    EOSGEN       (c)  Coleco    1:_4 Confidential                        Sat,    8 Sep   1984,  23:41         race   159
+
+LOCATION  OBJECT CODE  LINE       SOURCE   LINE
+
+                       6561   ;REVO     (V/D   8/24/83)
+                       6562
+                       6563
+                       G5HG4  SHSMeeSSS  SERHEHREEEKEEEE   REHEARSE         RESETESE SHEER  EKER    KERR        EHEEREEEE   EEESE
+                       6565   * THIS ROUTINE    WILL FIND   THE   DCB  FOR   THE DEVICE  DESIRED
+                       6566   *
+                       6567   *      INPUT:     A ==>  POINTS    TO THE   DEVICE  IDO
+                       6568   +      OUTPUT:
+                       6569   *                 CONDITION   FLAG:
+                       6570   *                           Z  : NO  ERRORS
+                       6571   *                                TY  ==>  POINTS   TO THE  START  OF  THE  DEVICE    DCB
+                       6572   *                         NZ   : ERROR   OCCURED
+                       6573   *                                IY  ==>  IS   DESTROYED
+                       6574   *
+                       6575    eeeeeeene    AEREK EKER    HEE EEEEAEKEEEEARAEAEKERRERREREEEER        EEK    EKRETERE ES
+                       6576
+                       6577
+                       6578    .    ;GLB        __GET_DCB_ADDR
+                      -6579          GLOBAL     __FIND_DCB
+                       6580         ;EXT        CURRENT PCB
+                       6581
+    F446               6582   _ GET_DCB_ADDR:
+    F446               6583   _FIND _OCB:
+    F446  C5           6584          PUSH       BC
+    F447  O05          6585   _      PUSH       DE
+                       6586
+   F448   4F           6587          LD         CA                             ; SAVE THE  DEVICE   ID
+    F449  FD2AFD70     6588          LD         ITY[CURRENT_PCB]               ; GET THE  START   ADDRESS  OF   PCB
+    F44D  FD4603       6589          LD         B,{1¥+P_NUM_DCBS]              ; GET THE  NUMBER   OF OCB‘S
+    F450  AF           6590          XOR        A
+    F451  B8           6591          cP         B                              ; ARE THERE  ZERO   DCBS?
+    F452  2819         6592          JR         Z,0CB_NO_FIND                  ; YES
+                       6593                                                    ; NO
+    F454  110004       6594          LD         DE,P_SIZE                      ; GET THE  SIZE  OF  THE  PCB
+    F457  FD19         6595          ADD        Ty,DE                          ; ADD TO  IY TO  GET  TO  THE  START    OF  THE  OCB
+    F459  110015       6596          LD         DE,D_SIZE                    ; GET THE  DCB SIZE
+    F45C  79           6597          LD         A,C                            ; RELOAD  THE DEVICE   ID
+    F45D  E6OF         6598          AND        OFH                            ; AND OF  THE HIGH   BITS  TO  GET   ONLY
+                       6599                                                    ; THE DEVICE   ID
+                       6600
+    F45F               6601   DCB_LOOP:
+    F45F  FOBE10       6602          CP         [1¥+D_DEV_ADDR}              ; IS THIS  THE CORRECT   DEVICE    DCB?
+    F462  2806         6603          JR         Z,FOUND_IT                     ; YES
+                       6604                                                    ; NO
+    F464  FDIS         6605          ADD        IY,DE                          ; GET TO  THE  NEXT  DCB  AND  CHECK     I¥
+    F466  10F7      *  6606          DUNZ       DCB_LOOP                       ; GO CHECK  THEM   ALL UNTIL   ONE   IS   FOUND
+                       6607
+    F468  1803         6608          JR         DCB_NO_FIND                  :
+                       6609
+                       6610
+    F46A               6611   FOUND_IT:
+    F46A  79           6612          LOD        A,C                            - RESTORE  A TO   ITS ORIGINAL    STATE
+    F46B  1803         6613          JR         FINISHED
+                       6614
+    F46D               6615   DCB_NOFIND:
+    F46D  3E01         65616         LD         A,DCB_NOT_FOUND
+    F46F  B7           6617          OR         A

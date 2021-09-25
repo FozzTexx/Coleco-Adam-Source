@@ -1,0 +1,33 @@
+FILE:  EOSABS:EOS    TF          HEWLETT-PACKARD:     SOUND  EQU€S    (c) Coleco,    1982   CONFIDENTIAL                    Sat,     8  Sep  1984,  23  39        PAGE    R2
+
+LOCATION   OBJECT    CUDE   LINE       SOURCE   LINE
+
+    E446   E6OF             304 1           ANO       OFH                  ;mask  MSN
+    E448   21FE78           3042            LD        HL ,SAVE CTRL        ;point  to  last CTRL    data  sent
+    E448   BE               3043            cP        [Ht J                compare
+    E44C   2817             3044            JR        7,16             >if PSW   is zero  CTRL  has   not  changed     (done)
+    E44E   77               3045            LD        {HLJ),A              ;SAVE CTRL   = new  CTRL   data
+    E44F   OEEO             3046            LO        C,SRNCTL             ;send  new CTRL  data
+    E451   CDE328           3047            CALL      UPATNCTRL
+    E454   160F             3048            JR        L6                   SNO_ MANAGER
+                            3049
+                            3050  ;         ENDIF
+                            3051  ;         ENDIF
+                            3052
+    E456                    3053  TONE OUT
+    E456   DDS5SE0O         3054            LD        E,{1x+0]            ;look   for  inactive  code,   OFFH
+    E459   1C               3055            INC       E                   ;this  sets  Z  flag   if  E = OFFH
+    E45A   2003             3056            JR        NZ,L7               ;if  PSW  is zero  song    data  area    is  inactive
+                            3057  #448      CALL      OUT_TO_  SOUND PORT     =;turn off  CHx
+                            3058  *ees      JR      ~—~6t8s
+    E45C   C3IE6OD          3059            JP        OUT_TO_SOUND_PORT       ;turn  off  CHx
+                            3060
+                            3061  ;         ELSE  send  out  current    ATN and  FREQ
+                            3062
+    E45F                    3063  L7 .
+    E4S5F  COE328           3064            CALL      UPATNCTRL           :send  out  attenuation
+    E462   C3E339           3065            JP        UPFREQ              ;send  out  frequency
+                            3066  *ee8      CALL      UPFREQ              ;send  out  frequency
+    E465        .           3067  L8                 |
+                            3068  sess      RET                                                                                              -
+                            3069  ;         ENDIF

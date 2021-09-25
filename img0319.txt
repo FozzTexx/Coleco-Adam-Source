@@ -1,0 +1,61 @@
+FILE: OS  _7PRIME:pOS            HEWLETT-PACKARD:   PUT/DEFRD   PUT  OBJ   (c)Coleco    1982  CONFIDENTIAL              Fri,  18  May  1984,   16:19       PAGE   45
+
+LOCATION   OBJECT   CODE   LINE       SOURCE   LIWE
+
+                            1951
+                            1952  RaESRAAERAARKAKERAKRER     PUTOB J   RARAARAERRAAAKAAKAAKAAEAAKAEKKAKRRARKERKAREKAKANEE
+                            1953  ;DESCRIPTION:      PUTOBJ   VECTORS   TO  ONE  OF  5  SPECIFIC   ROUTINES   FOR  PLACING   THE
+                           1954   ;                 DIFFERENT   OBJECT    TYPES  ON  THE  DISPLAY
+                           1955   ;INPUT:             IX = ADDRESS   OF  OBJECT   TO  BE  PROCESSED
+                           1956   ;                  B  = PARAMETER    TO  BE PASSED    SPECIFIC   PUT  ROUTINES
+                           1957
+                           1958   * IN ADDITION,   THIS  MODULE   CONTAINS   ROUTINES    WHICH  ALLOW   VRAM  OPERATIONS
+                           1959   * TO BE  DEFERRED,   TYPICALLY   UNTIL   AN  INTERRUPT   OCCURS,   AND  PERFORMED
+                           1960   * IN A  BLOCK  BY A  CENTRAL  WRITER   ROUTINE.
+                           1961   RRAKAKEARAKRALKSERAAAARAARERARAEARARAAERARARARAARARAHARARERAERAARAERAARKEAKAAAHKAKKEE
+                           1962
+                           1963                     DATA
+   T3CA                    1964   QUEUE  SIZE       DEFS                1
+                           1965   * THIS  1S  THE SIZE  OF  THE DEFERRED    WRITE  QUEUE.    IT IS  SET  BY  THE
+                           1966   * CARTRIDGE   PROGRAMMER.   IT WAS   RANGE  0  - 255.
+                           1967
+    73CB                   1968   QUEUEHEAD         DEFS                1
+    73CC                   1969   QUEUETAIL         DEFS                1
+                           1970   * THESE  ARE  THE  INDICES  OF THE   WEAD  AND  TAIL   OF THE  WRITE   QUEUE.
+                           1974
+    73CD                   1972   HEAD ADDRESS      DEFS                2
+    73CF                   1973   TAIL ADDRESS      DEFS                2
+                           1974   * THESE  ARE  THE ADDRESSES   OF  THE  QUEUE   WEAD  AND  TAIL
+                           1975
+                           1976   ;TRUE              EQU                 1
+                           1977   ;FALSE             EQU                 0
+                           1978   * VALUES  FOR  BOOLEAN  DEFERAL  FLAG
+                           1979
+    7301                   1980   BUFFER            DEFS                2
+                           1981   * THIS  IS A  POINTER  TO  THE BEGINNING    OF  THE  DEFERRED   WRITE   QUEUE.   THE
+                           1982   * CARTRIDGE   PROGRAMMER   IS RESPONSIBLE     FOR PROVIDING    A RAM   AREA  TO  WOLD
+                           1963   * THE QUEUE,   AND PASSING   ITS  LOCATION   AND  SIZE   TO  INIT QUEUE.
+                           1984
+                           1988   ;                 COMN
+                           1986   ;PARAM AREA        DEFS                3
+                           1987   * PARAM AREA   IS THE  COMMON  PARAMETER    PASSING   AREA   FOR PASCAL   ENTRY   PTS
+                           1988
+                           1989
+                           1990                     PROG                                                                                                                                           ‘
+                <0623>     1991   SETUP  WRITE                          $
+                           1992
+                           1993   * SETUP  WRITE   SETS  UP A  DEFERRED   VRAM   OPERATION.
+                           1994
+                           1995   *   PUT  DATA  AT QUEUE HEAD
+    0623  DDES             1996                    PUSH                 IX
+    0625  2A73CD           1997                     LD                  HL, [HEAD ADDRESS)
+    0628  D1               1998                    POP                 DE
+   0629   73               1999                     LO                  (HL),E              > PUT  DATA   POINTER
+   062A   23              2000                      INC                HL
+   0628   72              2001                      LD                  (HL),D                                                                                                ‘
+   062C   23              2002                      INC                HL
+   0620   70              2003                      tO                  {Hi} ,8             ;STORE   PUTOBJ  PARAMETER
+   062E   23              2004                      INC                HL
+   O62F   EB              2005                      EX                 DE, HL               ; HEAD  ADDRESS    IN DE
+                          2006
+                          2007    *   INCREMENT  QUEUE  HEAD

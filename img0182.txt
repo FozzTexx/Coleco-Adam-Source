@@ -1,0 +1,23 @@
+                       72593  SHERMER   EKAR EERE    MEER  EERE       RARE TRAE      ERS  RARER    AREER EEEEATS HSER EKER  SES
+                       7260   * THIS  ROUTINE  REQUESTS    THE  STATUS   ON  THE  PRINTER
+                       7261   *       INPUT:   NONE
+                       7262   *       OUTPUT:
+                       7263   *                CONDITION    FLAGS
+                       7264   *                           Zz:       NO  ERROR
+                       7265   «                           NZ:       ERROR  OCCURED
+                       7266   *                                     A ===>    ERROR   CODE
+                       7267   «
+                       7268   SERSESHSSSESHSSSHESSESESESESEHEHEHE    HSESHEE SHES EEE SSESHEESHEEESHEHHEHEHSESEESSESHESEEEE ES
+                       7269           GLOBAL  __REQ   PR_STAT
+                       7270
+                       7271          sEXT  -
+                       7272               |
+F502                   7273   __REQ_PR_STAT:
+FSD2   3£02            7274           LD       A,PRINTER_ID
+F504   C3F473          7275           uP       __REQUEST_STATUS
+                       7276   ;
+                       7277   sERRRSESESSSTESSSSSSR    SSH ASE ST SsSSS SSTSSS SSS SSS SS SS SessSessa  sssssase
+                       7278   ,SSSSTSASSETAASEKSSTSSHSSSSTSS       SSSSS STS SSSST SSS SSS  SSSSSSS SSS STSSSSSS
+                       7279   sSESRSSSASSSTSASSSSSTSEHSSSSSSSSSs      ess Sr ssssSsessssessesesses      Ssssese
+                       7280   ;
+                       7281

@@ -1,0 +1,18 @@
+FILE: EOSARS:EOSTF        HEWLETT-PACKARD: GLOBALS                                                     Sat.  8  Sep  1984,  23.38      PAGE    2€,
+
+LOCATION OBVECT CODE  LINE     SOURCE LINE
+
+                       965 ;
+                       966 ; externals used
+                       967 ;
+                       968               ;EXT      WRITEREGISTER
+                       969 ;See          ;EXT      INIT_TABLE
+                       970               ;EXT      SWITCHMEM
+                       971  She          sEXT      PUT_VRAM
+                       972               sEXT      WRITE_VRAM
+                       973                EXT      READ_VRAM
+                       974 ;
+                       975 ; local equates
+                       976 ;
+             <0102>    977 LOC_IN_ALPHA   QU      0102H                       ;potnter  to  ascii  gens in rev  28+  alpha
+                       978

@@ -1,0 +1,65 @@
+“TLE:OS 7PRIME:pOs        HEWLETT-PACKARD:  DISPLAY   LOGO  (c) Coleco,  1982 CONFIDENTIAL              Fri,  18  May  1984,   16:21       PAGE  112
+
+ OCATION OBJECT CODE  LINE     SOURCE LINE
+
+    16FB BB9OAOCOAO   5480                  DEFB               88H,90H,OAOH,OCOH,OAOH,90H, 88H,0
+    1700 908800
+                      5481 * L=4C
+    1703 8080808080   5482                  DEFB               80H,80H,80H,80H,80H,80H, OFBH,0
+    1708 80F800
+        |             5483 * M=4D
+    1708 BSDBABAB88   5484                  DEFB        | |    88H, CD8HOABH,OASH,88H,88H, 88H,0
+    1710 888800
+                      5485 * N=4E
+    1713 BBB8CBA89B   5486                  DEFB               88H,88H,OC8H,OASH,98H,88H ,88H,0
+    1718 888800
+                      5487 * O=4F
+    1718 7088888888   5488                  DEFB               70H,88H,88H,88H,88H,88H, 70H,0
+    1720 887000
+                      5489 * P=50             |
+    1723 FOB888F080   5490                  DEFB               OFOH,88H,88H,OFOH,80H,80H, 80H,00
+    1728 808000
+                      5491 * a=51        ,
+    1728 7OB88888A8   5492                  DEFB               70H,88H,88H,88H,OABH,90H,68H, 0
+    1730 906800
+                ,    5493  * R=52
+    1733 FOBBSBFOAO  5494                   DEFB               OFOH,88H,88H,OFOH,OAQH,90H, 88H,0
+    1738 908800
+                     5495  * S=53
+    1738 7088807008  5496                   DEFB-              70H,88H,80H,70H,O8H,88H,70H, 0
+    1740887000
+                     5497  * 1254
+   1743  820202020   5498                   DEFB               OF8H,20H,20H,20H,20H,20H,20H,0
+   1748 202000
+                     5499  * U=55
+   1748 8888888888   5500                   DEFB              88H, 88H,88H,88H,88H,88H,70H,0
+   1750 887000
+                     5501  * v=56
+   1753 8888888888   5502                   DEFB              88H, 88H,88H,88H,88H,50H,20H,0
+   1758 502000
+                     5503  *w=57
+   175B 888888ABA8   5504                   DEFB              88H, 88H,88H,OABH,OASH,ODBH,88H, 0
+   1760 D88800
+                     5505 *   x=58
+   1763 8888502050   5506                   DEFB              88H ,88H,50H,20H,50H,88H,88H,0
+   1768 888800
+                     5507 * y=59
+   1768 8888502020   5508                  DEFB               88H ,88H,50H,20H,20H,20H,20H,0
+   1770 202000
+                     5509 * 2=5A
+   1773 808102040    5510                  DEFB                     08H,10H,20H,40H,80H,OFBH,0
+   1778 80F800
+            |        5511 *  [=58
+   177B FBCOCOCOCO   5512                  DEFB               OFBH, OCOH,OCOH,OCOH,OCOH,OCOH,OFBH, 0
+   1780 COFB00
+                     5513 * \=5C                                                                                                                              ‘
+   1783 0080402010   5514                  DEFB               0,80H, 40H,20H,10H,08H0, 0
+   1788 080000
+                     5515 * }=5D
+   1788 F818181818   5516                  DEFB               OF8H, 18H,18H,18H,18H,18H,OFBH,0
+   1790 18F800
+                     5517 * “=S5E
+
+                                                                                                a?
+
+                                                                                                                                                                                           '

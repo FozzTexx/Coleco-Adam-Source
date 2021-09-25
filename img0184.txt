@@ -1,0 +1,50 @@
+FILE: EOSABS:EOS_TF          HEWLETT-PACKARD:  CONS OUT   (c) Coleco    1983 Confidential                   Sat,    8  Sep 1984,  23:41        PAGE   180
+
+LOCATION OBJECT CODE    LINE       SOURCE LINE
+
+                        7308   NAME    “Rev 18  -  RPD*
+                        7309  ;
+                        7310  ;                Rev  History
+                        7311  ;                Rev     Date         Name       Change
+                        7312  ;                18   30sept400p      RPD        extracted RAM  areas   and put   into EOS COMN
+                        7313  ;                17)  21Sept83_ 1440  JKL        take out stuff  that   EQS does  not  need,  put  CR   back  to normal
+                        7314  ;                                                take out flashing  cursor
+                        7315  ;                16   19Sept83_1730   JKL        CR now does  a clear   to EOL  and  LF
+                        7316  ;                15   18Sept83_1800   JKL        CR now does  a CLEAR   to EOL
+                        7317  ;                14   15Sept83_1600   JKL        added routine  to flash   cursor   .
+                        7318  ;                13      1SSepts3     JKL        XOR cursor with  char   that  is under,   take  out    print  screen
+                        7319  ;                12      14Septs3     JKL        include print  screen
+                        7320  ;                11      14Sept83     JKL        return cursor  position   in DE
+                        7321  ;                10      O6Septs3     JKL        added routine  to return   cursor   position   in window
+                        7322  ;                 9      osSepts3     JKL        fix for SHIFT  LOCK  back  space,   to  be removed    later
+                        7323  ;                 8      O4Septs3     JKL        added delete  char and   shift  left
+                        7324  ;                 7      O4Septs3     JKL        added insert  blank,   made LINEBUFFER_    33  chars   long
+                        7325  ;                 6      O3Septs3     JKL        INIT will set  cursor   pos
+                        7326  ;                 5      O3Septs3     JKL        Added return  cursor   pos routine
+                        7327  ;                 4      01Septs3     JKL        Fixes and speedups,    Major rewrite
+                        7328  ;                 3      27Aug83      RPD        new case implementation    (jump   table)
+                        7329  ;                 2      27Aug83      RPD        added scrol!
+                        7330  ;                  1     26Aug83      RPD        moved to EOS,  contains   window   and  XY logic
+                        7331  ;                 Oo     26Aug83      RPD        copied from old  EOS,   uses WRITE   and  READ  VRAM
+                        7332;       2          ef   27© 2 FF     -  se   see
+                        7333
+                        7334  ;
+                        7335  ;External  Routines
+                        7336  ;
+                        7337                  ;EXT      WRITE _VRAM        ;0S-7
+                        7338                  ;EXT      READ_VRAM          ;0S-7
+                        7339  ;
+                        7340  ;External  data structures  used
+                        7341  ;
+                        7342                  3EXT      OLOCHAR_
+                        7343                  ;EXT      X_MIN
+                        7344                  ;EXT      X_MAX
+                        7345                  ;EXT      Y_MIN
+                        7346                   EXT      Y_MAX
+                        7347                   EXT      LINEBUFFER_
+                        7348                  ;EXT      NUM_LINES
+                        7349                  >EXT      NUM_COLUMNS
+                        7350                  >EXT      UPPER_LEFT
+                        7351                  >EXT      PTRN_NAME_TBL
+                        7352                  ;EXT      CURSOR
+                        7353

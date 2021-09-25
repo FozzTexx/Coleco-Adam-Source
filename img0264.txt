@@ -1,0 +1,61 @@
+HP 64000 Linker                                                       Tue,  id Jul 1984,  2.32            Page    6
+
+  CONS_INIT          F50C        CONSOUT:N EOS                      EOSCMN_O6 -(N_EOS
+  CONSOUT            FG6EOA      CONSOUT:N EOS                      EQSCMNO6  ‘(N_EOS
+  CV_A               F442        EOSRET:N_EOS                       EOSCMNO6  -N_EOS
+  DECLSN             E355        A_uOS_00:N_EOS                     EOQSCMN06 -N_EOS
+  DECMSN             E35F        A_uOS_0O:N_EOS                     EQSCMN06  -(N_EOS
+  DECODER            E206        A_uOS_00:N_EOS
+  DELETEFILE         F14E        UTILS:N_EOS                        EOSCMN06  -(N_EOS
+  DLY_AFT_HRD_R      FOSF        EOSUTIL:N EOS                      EOSCMNO6  -(N_EOS
+  EFFECTOVER         E468        A_uOSOO:N_EOS                      EOSCMN O06°-(EQS
+  ENOPR BUFF         F568        EOSPRIR:N EOS                      EOSCMN06  7-(EOS
+  ENO_PR_CH          F57C        EOSPRTR:N_EOS                      EOSCMN 06 -N_EOS
+  END_RD_1BLOC       FAE2        EOSBLK:N_EOS                       EOSCMN06  -(N_EOS
+  END_RD_CH_DEV      FBAS        EOSCHAR:N_EOS                      EOSCMN_O6 -(N_EOS EOSKBD:N_EOS
+  END_RD_KBD         F4EO        EOSKBD:N_EOS                       EOSCMN06  -N_EOS
+  ENDWR 1 BLOC       FB1B        EOSBLK:N EOS                       EOSCMNO6  -(N_EOS
+  END_WR_CH DEV      FBE1        EOSCHAR:N_EOS                      EOSCMN06  -(NEOS  EOSPRTR:N_EOS
+  Eos1               F442        EOSRET:N_EOS                       EOSCMNO6  -(N_EOS
+  EOS2               F442        EOSRET:N_EOS                       EOSCMN06  :N_EOS
+  Eos3               F442        EOSRET:N_EOS                       EOSCMN_O6 -N_EOS
+  EOS_START          F832        EOS_START:N_EOS                    EOSCMN06  -N_EOS
+  FILEQUERY          E618        OIR_HANDL:N_EOS                    EOSCMN O06-(N_EOS
+  FILL_VRAM          EOS9        A_uO0S_0O:N_EOS                    EQSCMN06  -(N_EOS
+  FIND_DCB           F446        EOS_GEN:N_EOS                      EOSCMNO6  -N_EOS  EOSCHAR:N EOS    EOSBLK:N_EOS      EOS_UTIL:N_EOS
+                                                                    EOSSTART  -N_EOS  EOSPRTR:N EOS
+  FMGR_INIT          EEEA        UTILS:N_EOS                        EOSCMN06  "N_EOS  EOSSTART:N  EOS
+  GETDATE            EED4        DATES:N_EOS                        EOSCMN O06-(N_EOS
+  GET_OCB_ADDR       F446        EOSGEN:N_EOS                       EOSCMN06  -(N_EOS
+  GET_PCB_ADOR       FA4C        EOSUTIL:N_EOS                      EQSCMN06   -(EOS
+  GET_VRAM           EOCF        A_u0S_00:N_EOS                     EOSCMN_O6 -N_EOS
+  GOTO_wP            FAS4        EOSUTIL:N_EOS                      EOSCMN_06 -N_EOS
+  HARD_INIT          FEF6        EOSUTIL:N_EOS                      EOSCMN O06-N_EOS   EO_START:NEOS
+  HARD_RESET_NE      F94B        EOSUTIL:N_ EOS                     EOSCMN06  :N_EOS
+  INIT TABLE         EO6G6       A_uw0S_00:N_EOS                    EOSCMN_O6 -N_EQOS
+  INIT_TAPE_DIR      F323        EOSMKDIR:N EOS                     EQSCMN_06 :N_EOS
+  LOAD_ASCIT         E149        A_uOS_00:N_EOS                     EQSCMN_O6 -N_EOS
+  MAKEFILE           E690        DIR_HANOL:N_EOS                    EOQSCMN_O6-N_EOS
+  MODE_CHECK         FOODS       UTILS:N_EOS                        EOSCMN06  -N_EOS
+  MSNTOLSN           E369        A_u0S_00:N_EOS                     EOSCMN_O6 -N_EOS
+  OPENFILE           EAOO        OPENS:N_EOS                        EOSCMN O06:-N_EOS
+  PLAY_IT            E3E7        A_u0S_O00OEOS                      EOSCMN O06‘N_EOS
+  POLLER             E253        A_u0S_00:N_EOS                     EOSCMN06  -N_EOS
+  PORTCOLLECTI       E191        A_u0S_00:N_EQS                     EOSCMN06  -N_EOS
+  POSIT_FILE         F442        EOSRET:N_EOS                       EOSCMN06  -(N_EOS
+  PR_BUFF            F515        EOSPRTR:N_EOS                      EOSCMN06  -N_EOS
+  PR_CH              F4FC        EOSPRTR:N_EOS                      EOSCMN O06-(N_EOS
+  PuT_ASCII          E153        A_uOS_O00O:N_EOS                   EOSCMN 06 -N_EOS
+  PUT_VRAM           EOCS        A_uO0S_00O:N_EOS                   EOSCMN_O6  -(EOS
+  PXx_T_PTRN_PO      E129        A_u0S_00:N_EOS                     EOSCMN_O6 -N_EOS
+  QUERY_FILE         ES1B        DIR_HANOL:N_EOS                    EOSCMNO6  -N_EOS  UTILS:N_EOS   OPENS:N EOS
+  RD_1_BLOCK         FASE        EOS_BLK:N_EOS                      EQSCMN_O6 -(N_EOS EOSSTART:N  EOS   UTILS:N_EOS
+  RD_CH_DEV          FB64        EOSCHAR:N EOS                      EOSKBD:N  —EOS
+  RD_DEV_DEP_ST      F488        EOSGEN:N_EOS                       EOSCMN_O6 -NEOS
+  ROKBD              F4BA        EOSKBD:N EOS                       EOSCMN_06 -N_EOS
+  RD_KBD_RET_CO      FA7B        EOS UTIL:NEOS                      EOSCMN06  :N_EOS
+  RDPR_RET_COD       FATF        EOS_UTIL:NEOS                      EOSCMN 06 -(N_EOS
+  RD_RET_CODE        FA87        EOS _UTIL:EOS                      EQSCMN_O6 -(EQS
+  RD_TAPE_RET_C      FA83        EOS UTIL:NEOS                      EOSCMN_O6 -N_EOS
+
+    |cTVUVVVV    Ve VVV  Veee     VeUVCVCUCU UCVUUC VU VU VU UT UTCVeV  Ue      vuvVv  UV  VV Vee    VeVTeC  eCeC UTCee

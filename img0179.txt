@@ -1,0 +1,61 @@
+FILE:      ~-5sABS:EOS_   TF             HEWLETT-PACKARD:        EOS  PRTR      (c)   Coleco     1s 4    Confidential                             Sat,      8  Sep    1984,    23:41           raaE      175
+
+LOCATION       OBJECT     CODE     LINE         SOURCE    LINE
+
+                                   713G   SEERA               EEE   EKER          EERE  EEE      EEE  ERE  EERE  EERE   EERE    ERE   REET    KER EERE      EE
+                                   7137   *  __START_PR_BUFF        ALLOWS     THE   CALLER     TO  PRINT     AN  ASCII   ETX-TERMINATED         STRING
+                                   7138   *        INPUT:       HL  ==>     ADDRESS     OF   ETX-TERMINATED         STRING
+                                   7139   ©        OUTPUT:      CONDITION      FLAGS
+                                   7140   *                     Zz:         NO  ERROR
+                                   7141   *                     NZ:         ERROR    OCCURED
+                                   7142   *                                 A  ===>     ERROR    CODE
+                                   7143
+                                   7144   SSSTACSSSSHRASSESSEKEKSSARESSSHSHSHEKEKREKRHEHSESEKEKEKRSKTKREKEESTSHKHESKARSESEESHKESEKRESEKEHRHE          KEK  ERES
+                                   7145
+                                   7146           ;GLB          __START_PR_BUFF
+                                   7147
+                                   7148    |      sEXT          __START_WR_CH_DEV
+                                   7149
+        F580                       7150   __START_PR_BUFF:
+        F580   CS                  7151            PUSH     _—  BC
+        F581   D5                  7152            PUSH         _—sODE
+        F582   E5                  7153            PUSH    =    HL
+        F583   FDES                7154            PUSH         iY
+                                   7155
+        F585   3602                7156            LO           A,PRINTER_ID                        ;   WANT   THE   PRINTERS     DCB
+        F587   CDF 446             7157            CALL         __FIND_DCB                          ;   GET   THE   DEVICE'S    DCB
+                                   7158
+        F58A   2026                                JR           NZ,NO_DCB_FOUND1                    ;   THERE    WAS  A  PROBLEM     FINDING     THE    OCB
+                                   7160
+        FS58C  CDF496              7161            CALL         CHK_IF_INACTIVE
+        FS8F   20C7                7162            UR           NZ,PRTR_DCB_     ACTIVE!                                                                                          ;
+                                   7163
+        F591   010000              7164            LD           BC,O                                ;   CHARACTER     COUNT
+        F594   5D                  7165            LD           E.L          -                      ;   SAVE   THE   STRING
+        F595   54                  7166            LD           D.H                                 ;   DE=HL=    PTR   TO  UNPRINTED      STRING
+                                   7167
+        F596                       7168   GET_NEXT_ASCII2:
+        F596   3E03                7169            LD           A,ETX
+        F598   BE                  7170            cP           (HL)                                ;   IS  IT   AN  ETX?
+        F599   280F                7171            JR           Z,1TS_ETX2                            :  YES
+                                   7172
+                                   7173                                                             ;   NO
+        F59B   23    ~~            7174            INC          HL                                  ;   POINT    TO  NEXT   CHARACTER
+        F59C   OC                  7175            INC          c                                   ;   INC   COUNT
+        F59D   79                  7176            LD           A,C                                 ;   HAVE   WE   LOOKED    AT  16  BYTES?
+        FS9E   FE10                7177            cp           16
+        FS5AO  20F4                7178            UR           NZ,GET_NEXT_ASCI12                  >   YES
+                                   7179   ;                                                             DE  =  PTR   TO  UNPRINTED      STRNG,    DE=PTR      TO   UNPRNTEDt    16
+        FSA2   EB                  7180            EX           DE ,HL                              ,   HL  =  PTR   TO  UNPRINTED      STRNG,    DE=PTR      TO   UNPRNTED¢+   16
+        F5A3   3E02                7181            LD           A,PRINTER_ID
+        F5A5   CDFBC2              7182            CALL         §__START_WR_CH_DEV
+                                   7183
+        F5A8   1808                7184            JR           WRITE   _CMND_SENT
+                                   7185
+        FSAA                       7186   ITS_ETX2:
+        FSAA   EB                  7187            EX           DE ,HL
+        F5AB   AF                  7188            XOR          A                                   ;   ZERO   OUT   A
+        F5AC   B9                  7189            cP           c                                   ;   WAS   THE   FIRST   CHARACTER      CHECKED
+                                   7190                                                             :   AN  ETX?
+                                   7191
+        F5AD   3EO2                7192            LD           A,PRINTER_ID                        ;   WILL   WRITE    TO  THE   PRINTER

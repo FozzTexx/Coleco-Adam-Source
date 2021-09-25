@@ -1,0 +1,56 @@
+FILE: EGSAHS  £OS TF          HEWLETT-PACKARD.  €OS COMN   (ccColeco    1983 Conf ident ial                       Leg     BR Sep   1984,  23:35       PAG     12
+
+LOCATION  OBJECT  CODE   LINE      SOURCE LINE
+
+                           420
+                           421 ;RAM DEFINITIONS  FOR EOS
+                           422
+                           423 ;REV O          (v/D     8-24-83)
+                           424
+                           425
+                           HQG SHSSSHSSSHSSSSSSHSHSSSEESHEHHEHHEHEHEHEHEHEHESE
+                           427
+                           428          ORG    €0S_GiB_RAM
+                           429
+                           49D SHHSSHSSSHSESSSHSHSEHHHSSEHESEEHEEE RHEE   EEEE
+                           431
+                           432       ;GLB      CLEAR_RAMSTART
+                           433
+    FO6O                   434 CLEAR_RAM_START:
+                         435
+                           436 ;
+                           437 ; EOS revision  number initialized  by  EOS START
+                           438 ;
+                           439       ;GLB      REV_NUM
+    FD6O                   440 REV_NUM
+    FO6O                   441        DEFS     1
+                           442
+                           443
+                           RGR        IF       .NT.SUPERGAME
+                           445 ;
+                           446 ; 0S7 equivalent  global data structures
+                           447 ;
+                           448                   :GLB     VDP_MODE WORD
+    FD61                   449 VOP_MODEWORD       DEFS    2
+                           450                   ;GLB     VOP_STATUS  BYTE
+    FO63                   451 VOP_STATUSBYTE     DEFS    1
+                           452                   ;GLB     VRAM_ADDR_ TABLE
+    FD64                   453 VRAM_ADDR_TABLE
+                           454                   ;GLB     SPRITEATTRIBL
+    FD64                   455 SPRITEATTRIBL      DEFS    2
+                           456                   ;GLB     SPRITEGENTBL
+    FD66                   457 SPRITEGENTBL       DEFS    2
+                           458                   ;GLB     PATTRNNAME TBL
+    FD68                   459 PATTRNNAMETBL      DEFS    2
+           -               460                   ;GLB     PATTRNGENTBL
+    FDGA                   461 PATTRNGENTBL       DEFS    2
+          |               462                    ;GLB     COLORTABLE
+    FO6C                   463 COLORTABLE         DEFS    2
+                           464                 ELSE
+                           465                    DEFS    2*6+1
+                           466                 ENDIF
+                  |        467      |            ;GLB     CUR_BANK
+    FOGE                   468 CURBANK            DEFS    {
+                           469
+
+                               ee                                                et         ee                                oe           a

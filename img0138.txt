@@ -1,0 +1,61 @@
+FILE: EQSABS:  EOS TF         HEWLETT-PACKARD:  UTILS        (c})Coleco   1983 Conf  identiai                      Sat.     6  Sep  1984,  23:49       PAGE  {34
+
+LOCATION   OBJECT CODE   LINE      SOURCE  LINE
+
+                            |@                                                                      ~7-=====
+                         $481  ;
+                         5482  ; STRCMP   --compare  two  strings   (file names).
+                         $463  ;    |
+                         5484  ; ENTRY  PARAMETERS:  address   of name  string   in HL;  address    of
+                         $485  ;                name  within   dir entry   in DE.   NOTE:   string
+                         S486  ;                pointed   to  Dy HL must  be  terminated    with  ETX.
+                         $487  ;                Maximum   Of  NAMELENGTH   characters    are  compared.
+                         $4668 ;
+                         $469  ; EXIT  PARAMETERS: Z  =  1; A  = O  1fmatch   or
+                         5490  ;                Z2= 0;  A  *  error code   if no  match.
+                         $49!  ;
+                         BADD  frm                  rr              rrr     ren  nn  en ners    enn ennn nnn
+                         $493
+               <FO5S4>   8494  BASECMP:  EQU    $t1                 ;EXECUTES    SCF  (37H)  - COMPARE    ONLY  THE  BASE                                             .
+                         $495                                      ;  OF  THE  FILE  NAME
+    FOS3                 $496  STRCMP:                             ;  “AND   INSTRUCTION    CLEARS   CARRY   - COMPARE    BASE   &
+    F033   E637          $497           AND     037H       |       ;      EXTENSION
+    FOSS   ES            $498           PUSH    Hi                 ;PRESERVE   REG‘S
+    FOOSE 0S             8499           PUSH    DE
+    FOS7  CS             $500           PUSH    BC
+    FOBS   FS            58501          PUSH    AF                 ; SAVE  CARRY   FLAGGING   EXECUTED    ABOVE
+                         §$02
+    FO59  O6O0C          $503           LD      B.NAME_ LENGTH     ;INIT  MAX  COUNT
+   FOSS                  S504  NEXT_CHAR
+    FOSB  7E             8508           LD      A,(HL)             ;GET  CHAR  FROM  STRING
+    FOSC  FEOS           6806           cP      ETX                ;HAVE  WE  REACHED   END  OF  STRING?
+    FOSE  2617           $807           JR      Z,EOS              ;BRANCH   IF YES
+    FOGO   1A            §508           LD      A,(OE)             ;GET  CHAR  FROM  DIR  ENTRY
+    FO61  BE             8508           cP      {HL}               ;COMPARE   TO STRING
+    FO62  2007           5510           JR      NZ,MATCHLESS       ;BRANCH   IF DIFFERENT
+    FO64  23             $811           INC     HL                 ;ELSE  INC.  POINTERS
+    FO6S   13            $312           INC     DE                        ;
+    FO66   10F3          6813           DUNZ    NEXT CHAR          ;LOOP  IF  MORE  CHARS  TO  LOOK   AT
+    FO6S  Ci             $514           POP     ac                 ; POP  AF  INTO  BC
+    FO6S   1812          5515           JR      MATCH              ;ALL  12 MATCH   IF WE  GET  HERE!
+    FOG6E                S516  MATCHLESS
+    FO6GS Fi             $517           POP     AF                 ; COMPARE   BASE  OR  BASESEXTENSION
+    FO6C  3014           5616           JR      NCNO  MATCH        ; NEEDED   TO COMPARE   THE  WHOLE   FILE  NAME
+                         5519                                      ; ONLY  COMPARE   THE  BASE
+    FOGE  23             §820           INC     Hi                 ;POINT  TO  NEXT  CHAR  OF  NAME   STRING
+    FOGF   13            $521           INC     DE                 ;  AND  DIR  ENTRY  NAME
+    FO7O  7E             $522           LO      A,{Ht]
+    FO71  FEOS           §$23           cP      ETX                ; IS  IT ETX?
+    FO73  2000           $524           JR      NZ,NO_MATCH        ; NOPE,  DOES  NOT  MATCH
+    FO7S   1601          5325           JR      ARQUNO POP
+                         $526
+    FO77                 $527  EOS
+    FOTT  Ci             5528           POP     BC                 ; AF  INTO  8C TO  PRESERVE    AF
+    FO78                 5529  AROUNDPOP:
+    FO78   ia            §530           id      A,(DE}             ;LOOK  AT  CHAR  IN DIR  ENTRY
+                         $531                                      ;0L8(8/29/83)    CHANGED   SPACE   TO  ETX.
+    FO7S  FEO3           §532           cp      ETX                -END OF  FILE  NAME?
+    FO7B  2005           $532           UR      NZ,NO_MATCH        [BRANCH  IF  NOT
+    FO7D                 $534  MATCH
+    FO7D  Ct             5535           PoP     BC                 RESTORE    REG‘S
+    FOTE  §              BSgé           POP     BE

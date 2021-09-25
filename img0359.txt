@@ -1,0 +1,61 @@
+FILE: OS 7PRIME:pOS         HEWLETT-PACKARD: TIME MANAGER (c) Coleco,  1982   CONFIDENTIAL              Fri,  18  May  1984,  16:20      PAGE   8&5
+
+LOCATION  OBJECT  CODE LINE      SOURCE LINE
+
+                       4083
+                       WOR     icici iciiscctiisccccaacaccccccccccccsctcccccccarebebaceeaaceeaes
+                       4085
+    OF49               4086  DCRTIMER
+    OF49  E5           4087                 PUSH               HL                ;Save  current  timer.
+    OF4A  CBSE         4088                  BIT               LONG, (HL)        Long?
+    OF4C  2828         4089                  JR                2,0CR_S MODE TBL;Short  ,non- repeating
+    OF4E  CB76         4090                  BIT               REPEAT, (HL)      ;Repeat?
+    0F50  2000         4091                  JR                WZ,O0CRt RPT  TBL;Long,   repeating
+    OF52               4092  DCR_LMODE TBL                                     ;Longnon-  repeating
+    OFS2  23           4093                  INC               HL
+    OFS3  5E           4094                  LO                E, (HL)           s;Move counter  to DE
+    0F54  23           4095                  INC               HL
+    OF55  56           4096                  LO                D,(WL)
+    OF56  18           4097                  DEC               DE                ;Decrement.
+    OF57  7B           4098                  LD                A,E
+   OF58   B2           4099                 OR                 D                 sCheck  if 0.
+   OF59   2034         4100                  JR                NZ,SAVE_2 BYTES   ;If not,  save'm.
+   OF5B   E1           4101                 POP                HL                sOtherwise,  get  mode byte
+   OFSC   £5          4102                  PUSH               WL                ; and  set it's  done bit.
+   OF5D   182C        4103                   JR               SET DOWE  BIT
+   OFSF               4104  DCR _LRPT TBL                             |
+   OF5F   23          4105                   INC               HL                ;Long-repeating   timer.
+   OF60   5E          4106                   LO                E,(Wi)            slLoadaddr.  into  DE.
+   OF61   23          4107                   INC               WL
+   OF62   56          4108                   LO                0,(HL)
+   OF63   EB          4109                   EX                DE,HL             Exchange   and
+   OF64   5E          4110                   LD                E,(HL)            ; load  counter  into DE.
+   OF65   23          4111                   INC               HL
+   OF66   56          4112                   LD               D, (HL)
+   OF67   18          4113                  DEC               DE                 ;Decrement.
+   OF68   7B.         4114                   LO               A,E
+   OF69   82          4115                  OR                D                  *Check  for 0.
+   OF6A   2023        4116                   JR               NZ,SAVE  2 BYTES   ;Save  if not.
+   OF6C   23          4117                   IMC              HL                 sOtherwise,  reload
+   OF6D  5E           4118                  LD                E, (HL)            ; original  counter  #.
+   OF6E  23           4119                   Inc              HL
+   OF6F  56           4120                  LD                D, (HL)            ;Jockey  all over  to
+   OF70  28           4121                  DEC               HL                 ; perform  said task!
+   OF71  28           4122                  DEC               HL                                                                                                              ’
+   OF72  72           4123                  LD                 (HL},D
+   OF73  28           4124                  DEC               HL
+   OF74  73           4125                  LD                 (HL),E
+   OF7S  E1           4126                  POP               HL
+   OF76  E5           4127                  PUSH              HL
+   OF77   1812        4128                  JR                SET DONE BIT       ;Then set  done bit.
+   OF79               4129  DCR_S MODE TBL
+   OF79  23           4130                  INC               HL
+   OF7A  35           4131                  DEC                (HL)
+   OF7B  2010         4132                  JR                NZ, TIMER EXIT
+   OF7D  £1           4133                  POP               HL                                                                                           .
+   OF7E  €5           4134                  PUSH              HL
+   OF7F  CB76         4135                  BIT               REPEAT,  (HL)     ;Repeat?
+   0F81  2808         4136                  JR                Z,SET DONE  BIT   ;If  not,  leave.
+   OFB3  23           4137                  INC               HL                ;Otherwise,   jockey
+   OFB4  23           4138                  INC               HL                ; around  again  and
+   OF85  7E           4139                  LO                A, (HL)           ; reload  original  &#.

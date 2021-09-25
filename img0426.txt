@@ -1,0 +1,61 @@
+ ILE:   OS _7PRIME:pOS            CROSS   REFERENCE   TABLE             PAGE   152
+
+ INE#      SYMBOL             TYPE        REFERENCES
+
+ 4549   DEC  KBD   TBL          P   4739,4899
+ 4715   DEC  PLYR               P   4713
+ 4733    DEC_SEG1               P   4704
+ 4833    DEC SPWR               P   4829
+   59    DEDAREA                A   60,61,62,63,64,65
+ 2181    DEFER                  A   2184
+  630  DEFER    WRITES          D   238, 559,  2086, 2091, 2153,2183:
+ 4599    DELAY                  P   4542
+ 5723  DELAY    10              P   5258
+ 7109    DESTINATION            S
+ 1535    DE TO  DEST            P   1343,  1441, 1461, 1487
+ 5126    DISPLAY   LOGO         P   566,5082
+ $054    DIVIDE                 P   6058
+ $304    OLP1                   P   3324
+ $355    DLP2                   P   3425
+ $479    DLP4                   P   3542
+ $613    DLP5                   P   3619
+ $638    DLP6                   P   3642
+ 1048   DONE                    A   4473,4486
+ 5167  DONE   LOGO              P   5147
+ 1203  DONE   SNDMAN            P   1178
+ $120   DONT  PUT               P   2876, 2879,  2889, 2892 ,2964,2967, 2977 ,2980
+ 2188  00  PUTOBJ               P   2113,2185
+ 1063   DUMAREA                 P   992,1044,1168
+ 1876   OUPLI                  P    1878
+ $681   DVEX                   P    3677
+ 1676   DVLP                   P    3680
+ 1399   EFFECT                 P    1342
+ 1233   EFXOVER                P    1213
+ 5705   ELSEO4                 P    3646
+ b223                          P    3219
+ 5530   ELSE10                 P    3516
+ 1608   ELSE13                 P    3605
+ 810    ELSE18                 P    3800
+ '282   =ELSE2                 P   3278
+ 5841   ELSE23                 P   3838
+ 5339   ELSES                  P   3336
+ 4400   ELSE6                  P   3378
+ 4463   ELSES                  P   3460                                                                                                                        .
+5501    ELSED                  P   3483                                                                                                                                                                        °
+227     ELSEZZ                 P   6198,6201
+'277    ~ELSE1                 P   2268
+702    ‘ELSE 11                P   2694
+‘726    ELSE  12               P   2718
+536     ELSE  8                P   2503
+'559    ELSE  9                P   2543,  2544
+757     ENDO,                  P   3704
+i225    END1                   P   3221
+537     €nND10                 P   3529
+‘587    END11                  P   3584
+1620    END12                  P   3598
+‘610    €END13                 P   3607
+628     END14                  P   3626
+‘750    EnD15                  P   3728
+‘782    END16                  P   3766
+781     END17                  P   3773
+1828    END18                  P   3809

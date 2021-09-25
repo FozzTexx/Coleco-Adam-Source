@@ -1,0 +1,61 @@
+FILE: OS7PRIME:pOS      HEWLETT-PACKARD:  INITSOUND  (c)Coleco,  1982  CONFIDENTIAL            Fri,  18 May  1984,  16:19      PAGE   24
+
+LOCATION OBJECT CODE LINE    SOURCE LINE
+
+                     983 ;         IDENT INITSOU           ;includes INISOUND, ALL OFF
+                     984 eatraat hetactaatintmaatatininiiiaaiaataiaeel
+                     985 ;*        INITSOUND        *
+                     986 éRESARARaRakakenakeneantakee
+                     987 ;.COMMENT }
+                     988 ;See Users’ Manual for description;  includesENTRY POINT ALL_OFF
+                     989 ;addr LSTOF SND ADDORS passed in WL
+                     990 ;n = # of song data areas to init, passed  iB
+                     991 -)
+                     992         GLB INITSOUND,ALL OFF ,DUMAREA
+                     993        ;INCLUDE OSSREU:  os  -equates
+                     994 ;      ‘*®® Sound chip register code EQUATES
+                     995 ;       Tone generator frequency and attenuation formatted register codes
+             <0080>  996 SRIFRQ  EQU 100000008           ;BIT7 = 1, BIT6-4 = TONE GEN 1 FREQ CODE
+                     997 SRIATN  EQU 100100008           “BIT7 =1,  BIT6-4 = TOWE GEN 1 ATIN CODE
+             <QO0A0> 998 SR2FRQ  EQU 101000008           “BIT7 = 1, BIT6-4 = TOWE GEN 2 FREQ CODE
+             <0080>  999 SR2ATN  EQU 101100008           sBIT7 = 1, BIT6-4 = TONE GEN 2 ATTN CODE
+             <00C0> 1000 SR3FRQ  EQU 110000008           ;BIT7 = 1, BIT6-4 = TONE GEN 3 FREQ CODE
+            <0000>  1001 SR3ATN  EQU 110100008           ;BIT7 = 1, BIT6-4 = TONE GEN 1 ATTN CODE
+                    1002 ;       Noise generator control and attenuation formatted register codes
+            <00E0>  1003 SRNCTL  EQuU111000008           sBIT7 = 1, BIT6-4 = MOISE GEN CONTROL CODE
+            <00F0>  1004 SRNATN  EQU 111100008           sBIT7 = 1, BIT6-4 = NOISE GEN ATTN CODE
+                    1005
+                    1006 * PROCEDURE INITSOUNDQ  (AREA_COUNT:BYTE;LISTOF ADDR: INTEGER)
+                    1007
+                    1008 * THIS IS THE PASCAL ENTRY POINT TO INITSOUND
+                    1009
+                    1010           7EXT  PARAM
+                    1011            GLB  INITSOUNDQ
+   01FD 00020001    1012 INITSOUND PAR:      DEFW  2,1,2
+   0201 0002
+                    1013
+                    1014;           COMM
+                    1015 =IMIT_SOUNDDATA:     DEFS  3    ;Moved to OS
+                    1016.
+                    1017            PROG
+   0203             1018 INITSOUNDQ:
+   0203 0101FD      1019            LD   BC,INITSOUND  PAR
+   0206 1173BA      1020            LD   DE,INITSOUND DATA
+   0209 C0098       1021            CALL PARAM
+   020C 3A738A      1022            LD =A,CINIT SOUND DATA)
+   O20F 47          1023            LD   =B,A
+   0210 2A7388      1024            LD =oWL,(INITSOUND DATA+1)
+                    1025
+   0213             1026 INITSOUND
+                    1027 ;       * initialize PTR TO LST OF SNDADDRS  with value passed in HL
+   0213 227020      1028         LD [PTR_TO LSTOF SND ADORS)  ,HL
+                    1029 ;       * store inactive code at byte 0 of each of the n data areas [B = n)
+   0216 23          1030         INC HL                  ;pt WL to song 1 data area entry in LST_OF SNDADDRS
+   0217 23          1031         INC HL
+   0218 5€          1032         LO €,(HL)               ;pt DE to byte 0 in first song data area
+   0219 23          1033         INC WL
+   O21A 56          1034         LDD, (HL)
+   0218 £8          1035         EX DE,HL                ;pt HL to byte 0 in first song dataarea
+   021C 1E0A        1036         LD £,10                 ;set DE for 10 byte increment
+   021E 1600        1037         iD 0,0
+   0220 36FF        1038 BI:     LO (HL),OFFH            ;deactivate area

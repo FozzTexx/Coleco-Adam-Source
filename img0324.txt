@@ -1,0 +1,61 @@
+FILE: OS 7PRIME:pOS          HEWLETT-PACKARD:    PUT SEMI   (c) Coleco,   1982   CONFIDENTIAL                    Fri, 18  May  1984,   16:19       PAGE   50
+
+LOCATION  OBJECT   CODE LINE       SOURCE  LIWE
+
+                        2205
+                        2206   REARKRALAAKKAARREAARREE   PUT SEMI  RETACAAAAAACAKCKAAACAKEKAEARAAEAEKAERARKARAAAAAARE
+                        2207   ;DESCRIPTION:      PUTS  SEMI MOBILE   OBJECTS   ON SCREEN
+                        2208   ;
+                        2209   ;INPUT:            IX  = ADDRESS  OF OBJECT   TO  BE PROCESSED
+                        2210   ;                 HL =  ADDRESS  OF OBJECT'S   GRAPHICS   TABLES   IN RON
+                        2211   AERRERECRARAAARERERERARARERERARARAAAAAARARARARAAREAREREAERERERAREAEAAREREREES
+                        2212
+                        2213                     GLB               PUTSEMI
+                        2214
+                        2215
+    O6FF  005603        2216   PUTSEMI:   LOD,  (1X+*3)            ;GET  ADDRESS   OF  STATUS
+    0702  DDSE02        2217           LD  E, (IX*2)
+    0705  D5            2218           PUSH  DE                    ;                   AND  PUT INTO   IY
+    0706  FOE1          2219           POP  IY
+    0708  FDS602        2220           LD  D,[1¥+#2)               GET   XLOCATION
+    0708  FD5E01        2221           LD  E,(1Y¥+1)
+    O70E CDO7ES         2222           CALL      PXTO  PTRW POS
+                        2223
+   0711  48             2224           LO  C,E                          = PATTERN   PLANE  COL.
+   0712   FD5604        2225           LDD,  (1¥+4)                eet   YLOCATION
+   0715   FOSEO3        2226           LD E, (1¥+3)
+   0718  CDO7ES         2227           CALL     -PX_TO PTRN_POS
+                        2228
+   0718  43            2229            LD B,E                      3B  := PATTERN   PLANE  ROW
+   O71C  FOSEOO                        LD E, (1¥+0)                sGET  FRAME  NUMBER
+                       2231   ;                                            .
+                       2232.2       = GRAPHICS  n,  IX  = OBJ_n,  JY =  STATUS_n,   C  = COL.,  B  = ROW,  E = FRAME
+                       2233   ;
+   071F  1600          2234            10 D,0                      ;DE  HAS  FRAME  WUMBER
+   0721  19            2235            ADD  W,DE
+   0722  19            2236            ADDHL  ,DE                  ;2*FRAME   WUMBER  +  ADDR OF GRAPHICS   rn
+   0723  1€05          2237            LO E,5                      ;FRAME  POINTER   OFFSET
+   0725  19            2238            ADD  WL,DE                  ;HL NOW  POINTS   TO  LOCATION   HOLDING  ADDRESS
+                       2239                                        cOF  FRAME
+   0726  5E            2240            LD E, (HL)                  ;GET  ADDRESS   INTO  DE
+   0727  23            2241            INC WL
+   0728  56            2242            LOO,  (HL)
+   0729  EB            2243           EX  DE, WL                   ;HL  := ADDRESS   OF  FRAME
+   072A  C5            2244           PUSH   BC
+   0728  01            2245           POP  DE                      ;0E <=  YPAT  POS   &  XPAT_POS
+   072C  4E            2246           LD C,  (HL)                 ;C  :=  K_EXTENT
+   0720  23            2247            INC WL
+   O72E  46            2248           LD  B, (HL)                 7B :=   YEXTENT
+   O72F  23            2249            INC HL                     7HL  POINTS   TO  FIRST  WAME  IN  LIST
+                       2250   ;
+                       aes    ; TEST TO  SEE  IF OLD SCREEN   IS TO  BE  SAVED
+
+   0730  007E05        2253           LD  A, (1X+5)               *GET   HIGH  BYTE  OF OLD  SCREEN  ADDRESS
+   0733  CB7F          2254           BIT  7,A                    sTEST   BIT  15 OF  OLD_SCREEN   ADDRESS
+   0735  2804          2255           JR  2,S OLD SCRN
+                       2256   ;
+   0737  CD0808        2257           CALL  PUTFRAME
+   O73A  C9            2258           RET
+                       2259
+   0738                2260  S OLD SCRN
+                       2261

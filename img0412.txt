@@ -1,0 +1,63 @@
+ILE: OS_7PRIME:pOS      HEWLETT-PACKARD: GRAPHICS  PRIM PKG (c) Coleco  1982 CONFIDENTIAL          Fri,  18  May  1984,  16:21       PAGE  138
+
+OCATION OBJECT CODE LINE     SOURCE LINE
+
+                    6802 * OPERATIONS SPECIFIC  TO REFLECTVERTICAL   ROUTINE
+                    6803
+                    6804 *   MIRROR_L_R(WORK BUFFER(O..7) ,WORK BUFFERI8..15))
+   1096 2A8006      6805                 LO               HL, (WORKBUFFER)
+   1099 010008      6806                 LO               Bc,8
+   1D9C £5          6807                 PUSH             AL
+   109  01          6808                 PoP              DE
+   1D9E 09          6809                 ADD              HL,BC
+   1D9F EB          6810                 EX               DE,HL
+   1DAO CD1F00      6811                 CALL             MIRRORLR
+                    6812
+                    6813 *   PUTVRAM  (TABLE CODE DESTINATION, WORK BUFFER(8..15),1)
+   1DA3.CD1E72      6814                 CALL             PUTTABLE
+                    6815
+                    6816 *   IF COLORTEST  THEN
+   1DA6 CD1E5D     6817                  CALL             COLOR_TEST
+   1DA9 FEO1       6818                  cP               TRUE
+   1DAB 2006       6819                  JR               WZ,END_IF1  GRAPHICS
+                   6820
+                   6821  * —   GET_VRAM(COLOR_TABLE,SOURCE ,WORKBUFFER(0..7),1)
+   1DAD CD1E89     6822                  CALL             GETCOLOR
+              |    6823
+                   6824  * —   PUT_VRAM(COLOR TABLE ,DESTINATION,WORK BUFFER[0..7),1)
+   1080 CDIE9A     6825                 CALL             PUT_COLOR
+                   6826
+                   6827  *  END IF
+   1083            6828 END IF 1 GRAPHICS
+                   6829
+                   6830 *   DESTINATION  := SUCC  (DESTINATION)
+  1083 D9          6831                  EXX
+  1DB4 23          6832                  INC             HL
+           /       6833
+                   6834 * END
+  1085 18D5        6835                  JR              RETURN HERE
+                   6836
+                   6837
+                   6838
+  1087             6839 RFLCT HOR
+                   6840 * OPERATIONS  SPECIFIC TO REFLECT HORIZONTAL  ROUTINE
+                   6841
+                   6842 *  MIRROR   UD(WORK BUFFER[O..7] ,WORK BUFFER (8..15])
+  1DB7 2A8006      6843                  LD              HL, (WORKBUFFER)
+  1DBA 010008      6844                  LD              BC,8
+  1DBD £5          6845                  PUSH            HL
+  1DBE D1          6846                  PoP             DE
+  1DBF 09          6847                 ADD              HL,BC
+  10C0 EB          6848                 EX               DE,HL
+  1DC1 CDIF4E      6849                 CALL             MIRROR UD
+                   6850
+                   6851 *  PUT _VRAM  (TABLECODE DESTINATION, WORK BUFFER (8..15],1)
+  1DC4 CD1E72      6852                 CALL             PUTTABLE
+                   6853
+                   6854 *   IF COLOR TEST  THEN
+  10C7 CD1E50      6855                 CALL             COLORTEST
+  1DCA FEO1        6856                 cP               TRUE
+  1DCC 2013        6857                 JR               NZ,END_IF 2 GRAPHICS
+                   ‘org
+
+                                                                                                                                                   {                    \          =i

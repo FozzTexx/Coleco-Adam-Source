@@ -1,0 +1,12 @@
+FILE: «~sABS:EOS_TF       HEWLETT-PACKARD:   UTILS     (c)  Coleco  tsu.  Confidential                      Sat,   8  Sep  1984,  23:40      reuc  139
+
+LOCATION OBJECT CODE  LINE     SOURCE LINE
+
+    FIOA C9           5715         RET
+             <FIOA>   65716ATTRIB_TBL  EQU      $-1
+    F108 20           «+8717       OEFB      ATTR_READPROT
+    F10C 40           5718         DEFB      ATTR_WRITE_PROT
+    F100 80           8719         DEFB      ATTR_PERMANENT
+    FIOE O02          6720         DEFB      ATTR_EXECUTE
+                      6721
+                      6722

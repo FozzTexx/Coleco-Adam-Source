@@ -1,0 +1,61 @@
+FILE:  OS 7PRIME:pOS            HEWLETT-PACKARD:   CONTROLLER   SOFTWARE   (c)  Coleco,  1982  CONFIDENTIAL           Fri,  18  May  1984,    16:21        PAGE  101
+
+LOCATION   OBJECT   CODE   LINE      SOURCE  LINE
+
+     12B6                  4955  FIRE EXIT
+     12B6  D1              4956              POP   DE
+     12B7  C1              4957              pop   BC
+     1288  C9              4958           -  RET      |
+                           4959
+                           4960  *  JOYSTICK  DEBOUNCE   ROUTINE    *
+                           4961  *                              ee
+                           4962  *           INPUT:
+                           4963  *                 A  - RAW DATA
+                           4964  *                IX  - CONTROLLER   MEMORY  POINTER
+                           4965  *                IY  - DEBOUNCE   STATE  BUFFER
+                           4966  *
+     1289                  4967  JOYDBNCE
+     1289  C5       |      4968              PUSH  BC
+     12BA  D5              4969              PUSH  DE
+     12BB  E60F            4970              AND   JOY  MASK           sMASK OUT  VALID  DATA
+     1280  5F              4971              LD    €,A                 sSAVE  IT
+     12BE  FD4602          4972              LD   B,{IY+JOY   OLD)     ;GET OLD  DATA AND  CURRENT   STATE
+     12C1  FO7E03          4973              LD   A,  LIY+JOY STATE)
+     12C4  FE0O            4974              cp    60                  s1F STATE  <> 0
+     12C6  2013            4975              JR    WZ,JOY ST1          *THEN MUST  BE STATE  1
+                           4976  *  STATE  = 0                         *ELSE
+     12C8  78              4977              iD    A,E                 sGET CURRENT  DATA
+     12C9  88              4978              cP    6B                  °1F OLD=NEW
+     12CA  2805            4979              JR          REG           >THEN SAW  DATA TWICE  IN   SEQUENCE
+     12CC  FD7302          4980              LO     {1¥+JOY OLD],E     ;ELSE FIRST  TIME,  SAVE  CURRENT    DATA
+     12CF  1815 —          4981              JR    JOY_ EXIT                            .
+                           4982  *  SAW  DATA TWICE   IN SEQUENCE
+     1201                  4983  JOYREG                          .       .
+     1201  3E01            4984              LD    A,1        |        sSET STATE=1
+     12D3  FD7703          4985              LD             STATE),A                                 |
+     1206  0D7301          4986              LD                        sSAVE  IN CONTROLLER  MEMORY   @JOY
+     1209  1808            4987              JR
+                           4988  *  STATE  = 1
+     1208                  4989  JOYST1
+     1208  78              4990              LD    A,E                 sGET CURRENT  DATA
+     12DC  88              4991              cP    OB                  >1F OLD=NEW
+     12D0  2807            4992              JR          EXIT          *NO CHANGE  IN STATE
+     12DF  FD7302          4993              LO             OLD),E     ;ELSE SAVE  CURRENT  DATA
+     12E2  AF              4994              XOR   A                   sSET STATE=0                                                                                                                   ,
+     12E3  FD7703          4995              LO             STATE]  ,A
+     12E6                  4996  JOYEXIT
+     12E6  D1              4997              POP   DE
+     12€7  C1              4998              POP   BC
+     12E8  C9              4999              RET
+                           5000
+                           5001  *  ARM  BUTTON DEBOUNCE   ROUTINE     *
+                           5002  *
+                           5003  *           INPUT:
+                           5004  *                 A  - RAW DATA
+                           5005  *                IX  - CONTROLLER   MEMORY  POINTER                                                                                             ‘
+                           5006  *                1Y  - DEBOUNCE   STATE  BUFFER
+                           5007  *
+     12E9                  5008  ARMDBNCE
+     12E9  C5              5009              PUSH  BC
+     12EA  DS              5010              PUSH  DE
+     12EB  E640            5011              AND   ARM MASK            7MASK OUT  VALID DATA

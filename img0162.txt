@@ -1,0 +1,27 @@
+FILE:    EOSABS:EOS     TF            HEWLETT-PACKARD:        EOS RET        (c)  Coleco     1983   Confidential                              Sat,     8   Sep    1984,   23:41            PAGE      158
+
+LOCATION     OBJECT     CODE    LINE        SOURCE    LINE
+
+                                6537    NAME    “REV  1  -  RPD*
+                                6538   *
+                                6539   *    RETURN    ERROR     CODES    UNTIL   THESE   ROUTINES      ARE   WRITTEN
+                                6540   *
+                                6541   *     10/12/83      VSB
+                                6542   «     10/14/83      RPD    changed     _E0S   4   to  _CV_A
+                                6543   «                                .
+                                6544
+       :                        6545            :GLB         __POSIT     FILE,    €0S   1,   _€0S   2,  _€0S_3,_CV_A
+      F442                      6546   _POSIT_FILE:
+      F442                      6547   __E0S_1:
+      F442         |            6548    EOS   2:
+      F442                      6549   __E0S_3:
+     F442                       6550   __CV_A:
+      F442   3E17               6551              LO        A,PROG    NON_EXIST       ;  SIGNIFIY     PROGRAM      DOES    NOT  EXIST
+      F444   B7                 6552              OR        A                         ;  NZ  CONDITION                   .
+      F445   C9                 6553              RET
+              |                 6554   ;
+                               -6555   gSSS SS  SSS STSESTSSSTSSSSSSS       SASS SSS SSS SS SsSSsssssssssssssessssssssesss
+                                6556   SESSSSTSSSASSSSSS      ST SPSS  SSS  SSsss sss sss  ssssesssrssssresssesessssesssssss
+                                6557   gS SSSSSSTSSTESTCESSSESSTISTSCSTESSLSSSSISISSSSSSSSSSSSSSSESSSSSSSESES                 SESS   SE
+                                6558   ;
+                                6559

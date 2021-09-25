@@ -1,0 +1,61 @@
+E: OS 7PRIME:pOS           HEWLETT-PACKARD:     DISPLAY   LOGO   (c)   Coleco,   1982   CONFIDENTIAL               Fri,   18  May  1984,  16:21         PAGE  116
+
+ATION  OBJECT   CODE LINE       SOURCE   LINE
+
+  18FC CD1FBS        5649                       CALL   INITTABLE
+                     5650
+                     5651   * PATTERN   COLOR   TABLE
+  18FF 304           5652                       LD A,4
+ 1901  212000        5653                       LD  HL,2000H
+ 1904  CD1FB8        5654                       CALL  INIT TABLE
+                     5655                                    ;
+                     5656   * PATTERN   GENERATOR    TABLE
+ 1907  3&03          5657                      LD  A,3
+ 1909  210000        5658                      LD  HL,O
+ 190C  CD1FB8        5659                      CALL   INIT TABLE
+                     5660                       |
+                     5661  *  SPRITE   ATTRIBUTE   TABLE
+ 190F 3£00          5662                       LD A,0
+ 1911  211800        5663                      LD  HL, 1B00H
+ 1914  CD1FB8        5664                      CALL   INIT TABLE
+                     5665
+                     5666  *  SPRITE   GENERATOR   TABLE
+ 1917  3601          5667                      LD  A,1
+ 1919  213800        5668                      LD  HL, 3800H
+ 191C  CD1FB8        5669                      CALL   INIT TABLE
+                     5670
+                     5671  *   SET  UP  BLACK  BACKGROUND
+ 191F  0607          5672                      LD  B,7
+ 1921  0€00          5673                      Lo  C,0
+ 1923  CD1FD9        5674                      CALL   WRITE REGISTER
+ 1926  C9            5675                      RET
+                     5676
+                    5677   *   LOAD ASCII]    WRITES   OUT  ASCII    CHARACTER    GENERATORS   TO  THE PATTERN
+                    5678   *                GENERATOR    TABLE.      INIT TABLE    MUST BE  USED   TO SET UP
+                    5679   *                 THE  TABLE  ADDRESS.
+                    5680
+ 1927 211588        5681   LOAD ASCII          LD  WL,ASC_TABLE                          ;LOCATION   OF GENERATORS
+ 192A  11001D       5682               _       LD DE,  10H                              ;OFFSET   TO  PLACE ASC TABLE
+ ‘42D FD210060      5683                       LD  1Y,96                                ; IN THE  CORRECT  LOCATION
+ 1931 3E03          5684                       LD  A,3
+ 1933 CD1FBE        5685                       CALL  PUT _VRAM
+                    5686
+                    5687   * WRITE   OUT  A BLANK   PATTERN   FOR   ASCII_0
+1936  2115A3        5688                       LD HL,  SPACE
+1939  110000        5689                       LD  DE,0
+193C  FD210001      5690                       LD  1Y,1
+1940  3E03          5691                       LD  A,3
+1942  CD1FBE        5692                       CALL PUT  _VRAM
+1945  C9            5693                       RET
+                    5694
+                    5695   SRAARAAARAAAKKEKKRKKRKREEK    LOCAL  SUBROUTINES      REKAAARKAKRHARKKKKKKKKKEE
+                    5696
+1946  010000        5697   PARSE               LD  BC,0                     ;FROM   HL INCREMENT   BC  UNTIL
+1949  7E            5698   P_LOOP              LD  A, [HL]                  ; (HL) =  "7"
+194A  FE2F          5699                       cp  “ys
+194C  C8            5700                       RET  2
+1940  23            5701                       INC  HL
+194E  03            5702                       INC  8C
+194F  1868          5703                       JR  P_LOOP
+                    5704
+1951  C5              ~~   CENTER  PRT         PUSH  BC                     ;BC=LENS$

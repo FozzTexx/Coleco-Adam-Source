@@ -1,0 +1,5 @@
+FILE: .L-2ABS:E0S_TF      HEWLETT-PACKARD:  EOSBLK      (c)  Coleco  1bus  Confidential                   Sat,   8  Sep  1984,  23:42      rnGE  229
+
+LOCATION OBJECT CODE  LINE   |=SOURCE LINE
+
+                      8942

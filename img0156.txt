@@ -1,0 +1,27 @@
+FILE: EOSABS:EOSTF        HEWLETT-PACKARD: UTILS        (c) Coleco 1983  Confidential                     Sat,   8  Sep  1984,  23:41       PAGE  152
+
+LOCATION OBJECT CODE  LINE     SOURCE LINE
+
+                      6274
+    F311              6275 NO_TRIM:
+    F311 D1           6276        pop     DE                 ; REALLY WAS  AF
+    F312 01           6277        pop     DE
+    F313 FDE1         6278        pop     ly
+    F315 ODE1         6279        PoP     IX
+    F317 €1           6280        PoP     HL
+                      6281
+    F318 AF           6282        XOR     A
+                      6283
+    F319 C9           6284        RET
+                      6285
+    F31A              6286 ERROR:
+    F31A B7           6287        oR  °»~=—soA
+    F31B Dt           6288        Pop     DE        ;  REALLY AF
+    F31C D1           6289        pop     DE
+    F31D FDE1         6290        pop     IY
+    F31F DDE!         6291        pop     IX
+    F321 Et           6292        pop     HL
+                      6293
+    F322 C9           6294        RET
+                      6295
+                      6296

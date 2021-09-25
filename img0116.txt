@@ -1,0 +1,61 @@
+FILE: EQSABS:EOS  TF          HEWLETT-PACKARD:    OPENS        (c)  Coleco   1983 Confidential                         Sat,    8  Sep  1984,   23:40        PAGE   112
+
+LOCATION  OBJECT  CODE   LINE      SOURCE   LINE
+
+                         BOQ0G                     rr rrr mr  rrr  rrr parr rrr  tr rrner etter erent     etn ne
+                        4407   ;
+                         4408  ; _CLOSE   FILE    --does   the  necessary   clean-up   and  marks   the  FCB
+                         4409  ;                  as unused.
+                         4410  ;
+                         4411  ; ENTRY   PARAMETERS   --  file  number    inA,
+                         4412  ;
+                         4413  ; EXIT   PARAMETERS   --  if no  error   -- Z=    1;A#®0O
+                         4414  ;                         if error    -- Z = 0;  A * error   code
+                         4415  ;
+                         ROAR, 5.0ttt   tt    nt eemewn     nee  mee see eee  eee  seems  ames  tenet  nanan aee
+                         4417
+    EBO4                 4418   CiLOSé  FILE
+    EBO4  DOES         —64419            PUSH     Ix              |    ;SAVE REGISTERS
+    EBOSG ES             4420            PUSH     HL       7
+    E607  05            4421             PUSH     DE
+    EBOS  cs             4422            PUSH     BC
+                         4423
+    E809  87             4424            OR       A                    ;CHECK  FILE NUMBER
+    EBOA  2850           4425            JR       Z,C_ERROR            ;BRANCH  IF ZERO
+   ~EBOC  FEO3           4426            CP       NUM FCBS     |       ;CHECK  FOR MAX  RANGE
+    EGOE  304C           4427            JR       NC,C_ERROR           ;BRANCH  IF TOO  LARGE
+                         4428          mt         |      a
+    EB10  47         ~   4429            LO       BA .                 ;PuT IT  INTO 8B
+    E811  DD2AFOFD       4430            LO       IX,[FCB_HEAD_ADDR}       ;GET ADDRESS  OF  OTH  FCB
+    EB15  2AFOF F        4431            to       HL,{FCB_DATA_ADOR]      ;GET  ADDRESS  OF  OTH  BUFFER
+    E818               4432    CLOSE2    _                  |
+    £618  110023         4433            LO       DE ,FCB_LENGTH       ;SET OFFSET
+    E818  DD19          4434             ADD      IX,DE   -         -  sADVANCE  POINTER  TO  NEXT   FCB
+    EB1D  110400         4435            LO       DE,1024
+    E820  19             4436            AOD      HL ,.DE              ;ADVANCE  POINTER  TO  NEXT   BUFFER
+    B21   10F5           4437            DUNZ     CLOSE2               ;UNTI“L WE GET TO  THE  ONE   WE  WANT
+                         4438             a
+    EB23  DO7E18         4439            Lo       A,(IX+FCB_MODE]      ;LOOK AT  THE MODE  BYTE
+    EB26  87             4440            OR       A
+    E827  2833           4441            JR       Z,C_ERROR            ;BRANCH  IF FCB  NOT  IN  USE
+                         4442
+    EB29  E640           4443            AND      MODE DIRTY           ;ZERO UNWANTED   BITS
+    E628  2825           4448S           JR       Z,CLOSE3             ;BRANCH  IF BUFFER  NOT   DIRTY
+                         4445                                                   .
+    EB20  0D022FD73      4446            LO       {FILE NAME   ADOR),IX      ;  POINTER  TO  FILE  NAME   IN  FCB
+    E831                 4447  WRITE TIMEOUT:
+    E831  DO7E17         4443            LO       A,[IX+FCB_DEVICE)      ;GET  THE DEVICE  NUMBER
+    EB34  DDSE 19        Shae            LD       E,(IX+FCB_  BLOCK]    ;GET THE  BLOCK  NUMBER
+    E837  DD561A         4450            LO       D,[IX+FCB_  BLOCK+1}
+    EBSA  DO4E 18        4451            LO       C,{IX+FCB  BLOCK+t2]
+    E830  0D461C         4452            LO       B.{IX+FCB  BLOCK+3}
+                         4453                                          ;HL STILL  HAS ADDRESS    OF BUFFER
+    EB40  COF 1E6        4454            CALL     WRITE BLOCK           :FLUSH  THE BLOCK  TO  TAPE
+    E843  2020           4455            JR       NZ,C ERROR           ;BRANCH  IF ERROR
+                         4456
+    E845                 4457  CLOSE4:
+    EB45  DD7E17         4458            LD       A,LIX+FCBR DEVICE}        GET  DEVICE  10
+    E648  DDES           4459            PUSH     IX
+    EB4A  E1             4460            POP      HL
+    E846  EDSBFD73       4461            Lo       DE,{FILE  NAME   ADDR}
+                         4462

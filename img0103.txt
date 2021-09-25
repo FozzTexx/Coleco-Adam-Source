@@ -1,0 +1,61 @@
+FILE:                                    HEWLETT-PACKARD:         DIR_HANDL      (c)   Coleco     1»vo03 Confidential                            Sat,      8   Sep    1984,     23:39           -  AGE       99
+
+LOCATION      OBJECT     CODE      LINE         SOURCE     LINE
+
+                                   3754
+      E730    FO7EOC               3755               LO          A,{IY+VOL_DIRSIZE)           ;GET   THE   DIR  SIZE    BYTE
+      E733    EG7F                 3756               AND         7FH                      ;ZERO   THE   PERM   BIT
+                                   3757               INC         A                        :BECAUSE    WE   START    IN  BLOCK    1
+                                   3758               DEC         a                        ;TO  SOLVE    PICKET    FENCE    PROBLEM
+      E735    007710               3759               LD          LIX+FCB_LAST       BLOCK),A      ;SET   THE   LAST   BLOCK    #
+      E738    DOD36  1E00          3760               LO          [IX+FCB_LAST_BLOCK+1],0             ;OTHER    BYTES    WILL   BE  ZERO
+      E73C    0036   1FOO          3761               LO          [ IX+FCB_LAST_BLOCK+2),0
+      E740    DD362000             3762               LD          [I1X+FCB_LAST_BLOCK+3],0
+                                   3763
+      E744    CDFO35               3764               CALL        CHECK_IF_DIRECTORY                  ;  CHECK    IF  DIRECTORY     EXISTS
+      E747    C2E989               3765               JP          NZ,MAKE_ERROR
+                                   3766
+      E74A    0626                 3767               LO          B,ENT_PER_BLOCK-       1    ;INIT   ENTRY    COUNT,    ALLOW   FOR   vOL   ID
+                                   3768
+      E74C                         3769   NEXT_ENT
+      E74C    DODGE 21             3770               LD          L,[IX+FCB_POINTER]           ;GET   CURRENT    POINTER
+      E74F    DO6622               3771               LD          H, [IX+FCB_POINTER+1)
+      E752    11001A               3772               LO          DE ,DIR_ENT_LENGTH         ;GET   LENGTH     OF  AN  ENTRY
+      E755    19                   3773               ADD         HL .DE                   ;ADVANCE    POINTER     TO  NEXT   ENTRY
+      E756    007521               3774               LO          [IX+FCB_POINTER],L           ;AND   SAVE   IT  AGAIN
+      E759    007422               3775               LD          [IX+FCB_POINTER+1],H
+                                   3776
+      E75C                         3777   CHECK_ENT
+      E7SC    DDOGE21              3778               LO          L,{IX+FCB_POINTER]           ;GET   POINTER    INTO    IY  THE   LONG   WAY
+      E75F    DD6622               3779               LO          H, [IX+FCB_POINTER+1]
+      E762    ES                   3780               PUSH        HL
+      E763    FDE1                 3781               PoP         IY                       sft!
+                                   3782
+      E765    FD7EOC               3783               LD          A,{IY+DIR_ATTR]          ;GET   THE  ATTRIBUTE      BYTE   FOR   THIS   ENTRY
+      E768    4F                   3784               LO          C,A                      ;SAVE   IT  HERE    FOR  NOW
+      E769    CB47                 3785               BIT         ATTR_HOLE     BIT,A      ; CHECK    IF  HOLE
+      E768    C2E807               3786               JP          NZ,  FOUND  _HOLE         ;BRANCH    IF   IT‘S   A  HOLE!!!    << ewereaxaz
+                                   3787
+      E76E    DDCB   186E         3788                BIT         MODE  REMAINDER      BIT,[IX+FCB_MODE]            ;  DO  WE   ALLOCATE     REST   OF   TAPE?
+      E772    2037                 3789               JR          NZ,0_FILE                ; YUP,   DON’T    BOTHER    CHECKING
+                                   3790
+      E774    CB51                 3791               BIT         ATTR_DEL_BIT,C           ;IS  IT  A  DELETED     FILE?
+      E776    2824                 3792               JR          Z, ACTIVE    FILE        ;NOPE,   AN   ACTIVE   ONE
+                                   3793
+                                   3794               LET’S     LOOK   FOR   DELETED     FILE   TO  USE
+                                   3795
+      E778    FDGE  11             3796               LD          L.{1¥+DIR_MAX_LENGTH]               ;  GET   ALLOCATED     SIZE
+      E77B    FD6612               3797               LD          H, [IY+DIR_MAX_LENGTH#1]
+                                   3798
+      E77E    EDSBFEOC             3799               LD          DE,  [BLOCKS   REQ]                 ;  MIN  NO  OF   BLOCKS    NEEDED
+      E782    87                   3800               OR          A                                   ;clear    carry    flag
+      E783    ED52                 3801               SBC         HL ,DE                              ;  WILL   WE  FIT?)
+      E785    3824                 3802               JR          C.D  FILE                           ;  NOPE,   LOOK    FOR  ANOTHER     ENTRY
+                                   3803
+      E787    21FODB               3804               iD          HL ,FOUND   AVAIL    _ENTRY         .  FLAG   BYTE
+      E78A    CB46                 3805               BIT         FOUND_ENTRY,      [HL]              ;  DO  WE  ALREADY     HAVE   FIRST    FIT?
+      E78C    201D                 3806               JR          NZ,D_FILE                              YUP,   DON’T    EVEN   CONSIDER     THIS   ONE
+                                   3807
+      E78E    CBC6                 3808               SET         FOUND    ENTRY,   [HL  ]
+      E790    DDSE   19            3809               LD          —,[1X+FCB     BLOCK]                ;GIT   BLOCK   NO   OF  THIS   DIRECTORY
+      E793    DDS61iA              3810               iGas?       DO,(1X+FCB    BLOCK+1}

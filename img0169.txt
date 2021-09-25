@@ -1,0 +1,52 @@
+            weoSe
+                                                                                  4
+
+FILE: «ABS:     EOSTF          HEWLETT-PACKARD:    EOS_KBD     (c)  Coleco i: uuConfidential                    Sat,    8 Sep  1984,  23:41         mut  165
+
+LOCATION  OBJE  CT CODE   LINE       SOURCE  LINE
+
+                          6770   ;REV O            (V/D  8-24-83)
+                          6771
+                          6772   SHASEREKKRKSKEKEEREEAEERAAE  REE      REE EEA          ERE       EEE REESE     REREKRERE REE
+                          6773   * THIS ROUTINE   WILL READ  A  CHARACTER  FROM THE KEYBOARD
+                          6774   E
+                          6775   *      INPUT:    NOTHING
+                          6776   %      OUTPUT:   CONDITION  FLAGS
+                          6777   s                Z:       NO  ERROR S
+                          6778   b                           z=2s>   CONTAINS THE KEY READ
+                          6779   s                NZ:      ERROR   OCCURED
+                          6780   s                                   ERROR CODE
+                          6781   *
+                          6782   s
+                          6783   sPRESSES       SEKEKEKRKES EHKRAKCEKHESEEKEEKTHEEKEKRKESEREKKRSHEESKSHEESEHKEHEREESESE
+                          6784
+                          6785          GLOBAL    __RD_KBD       .
+                          6786         sEXT       KEYBOARD_BUFFER
+                          6787         sEXT       __RD_CH_DEV
+                          6788
+    F4BA                  6789   __RD_KBD:
+    F4BA  C5              6790          PUSH      BC
+    F488  DS              6791          PUSH      DE
+                          6792
+    F4BC                  6793   RD_KBD_LOOP:
+                          6794
+    F4BC  CDF4  DO        6795          CALL        START_RD_KBD
+                          6796
+    F4BF   2007           6797          JR        NZ,ERROR_OCCURED
+                          6798
+    F4C1   4F             6799          LD        C,A                          PRESERVE THE  DEVICE   ID
+                          6800
+    F4C2                  6801   WAITING:
+    F4C2   79             6802          LD        A,C                          RESTOR THE  DEVICE   ID
+                          6803                                                 BC IS SAVED  IN  ALL  CALLED MODULES
+    F4C3  CDOF4 EO        6804          CALL        END_RD_KBD
+                          6805
+    F4C6   3OFA           6806          JR        NC,WAITING                   THE OPERATION   HAS  NOT COMPLETED   YET
+                          6807                                                 AT THIS POINT   WE EITHER  HAVE  THE
+                          6808                                                 KEY OR AN ERROR   CODE  IN A
+    F4C8                  6809   ERROR_OCCURED:
+    F4c8  Of              6810          Pop       DE
+    F4CS  Ci              6811          PoP       BC
+                          6812
+    F4CA  C9              6813          RET
+                          6814

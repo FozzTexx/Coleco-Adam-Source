@@ -1,0 +1,61 @@
+FILE: EQSABS:EOS   TF           HEWLETT-PACKARD:   DIR_HANDL   (c) Coieco    1983Confidential                        Sat,   8  Sep  i984,  23.39       PAGE  100
+
+LOCATION  OBJECT   CODE   LINE       SOURCE   LINE
+
+                          3811
+    E796  EDS3FDD9        3812            LD        {[OIR_BLOCK_NO]),DE         ; SAVE  IT
+    E79A   180F           3813            JR       0FILE
+                          3814
+                          3815
+                          3816   ; IF THIS  IS  A REAL FILE,  WE  CAN  SEE  IF  ITS NAME MATCHES    THE
+                          3817   ; ONE  WE ARE  ABOUT TO MAKE   --  IT’S AN  ERROR  IF SO.
+                          3818
+    E79C                  3819   ACTIVE_FILE:
+    E79C  DDSE21          3820            LD       E,[IX+FCB_ POINTER]    ;POINT TO  THIS  ENTRY
+    E79F  005622          3821            LD       OD(IX+FCB_POINTER+1]
+    E7A2  2AFE10          3822            LD       HL,[USER_NAME)     ;POINT  TO DESIRED  NAME
+    E7A5  CDFO54          3823            CALL                        ;COMPARE  THE  BASE OF  THE   FILENAMES
+    E7A8  CAE996          3824            UP       Z,FILE_EXISTS      ;BRANCH   IFTHEY’RE   THE  SAME
+    E7A8                  3825   DFILE
+    E7AB  109F            3826            DUNZ   = NEXT_ENT           ;ELSE  GO TO NEXT  ENTRY   (IF  IT  EXISTS)
+                          9827                                                                                   |
+    E7AD  2AFEO8          3828            LO       HL,(BUF_START]     ;IF NOT  RESET  FCB  FOR NEXT   BLOCK
+    E780  007521          3829            LD       (IX+FCB_POINTER),L
+    E7B3  007422          3830            LD       [IX+FCB_POINTER+1),H
+    E7B6  003419          3831            INC      [IX+FCB_BLOCK)     ;INC  THE BLOCK  -- NO  CARRY   OUT
+                          3832
+                          3833   ; DO 4-BYTE   COMPARE OF FCB BLOCK    VS FCB_LAST  BLOCK   TO SEE
+                          3834   ; IF THERE’S   MORE FILE LEFT.
+                          3835
+    E789  DD7E20          3836            LD       A,[IX+FCB_LAST_BLOCK+3]      ;COMPARE MS  BYTES
+    E7BC  ODBE 1C         3837            cP       [IX+FCB_BLOCK+3]
+    E7BF  DAE7FD          3838            uP       C,FULL_DIR          ;BRANCH  IF BLOCK   IS LARGER
+    E7C2  OD7E1F          3839            LD       A,[IX+FCB_LAST_BLOCK+2]     ;COMPARE  NEXT  BYTES
+    E7C5  DDBE1B     .    3840            cP       [IX+FCB_BLOCK+2]}
+    E7C8  DAE7FD          3841            JP       C,FULL_DIR          ;BRANCH  IF BLOCK   IS LARGER
+    E7CB  DO7E1E          3842            LO       A,[IX+FCB_LAST_BLOCK+1}     ;COMPARE  NEXT  BYTES
+    E7CE  DDBE1A          3843            cP       (IX+FCB_BLOCK+1)
+    E7D1  DAE7FD          3844            uP       C,FULL_DIR-         ;BRANCH  IF BLOCK  IS  LARGER
+    E7D4  DD7E1D          3845            i)       A,[IX+FCB_LAST_BLOCK+0]     ;COMPARE  LS  BYTES
+    E707  DDBE19          3846            cP       [1X+FCB_BLOCK+0]
+    E7DA  DAE7FD          3847            uP       C,FULL_DIR          ;BRANCH  IF BLOCK  IS  LARGER
+                          3848   ; IF WE  FALL  OUT, FCB_BLOCK  <=  FCB_LAST  BLOCK.
+    €700                  3849   DOREAD  AGAIN:
+                          3850
+    E7DD  OD7E17          3851            LD       A,{IX+FCB_DEVICE]    ;SET  UP THE  PARAMETERS
+    E7EO  DDG6E21         3852            LD       L,[IX+FCB_POINTER]
+    E7E3  DD6622          3853            LD       H,[IX+FCB_POINTER+1)
+    E7E6  DDSE19          3854            LD       E,{IX+FCB_BLOCK]
+    E7E9  DDS61A          3855            LO       D,[1X+FCB_BLOCK+1]
+    E7EC  DD4E18          3856            LD       C,{IX+FCB_BLOCK+2)
+    E7EF  DD461C          3857            LO       B,[IX+FCB_BLOCK+3]
+    E7F2  COF17B          3858            CALL     READ_BLOCK         ;AND READ  THE  NEXT BLOCK   OF  ENTRIES
+    E7F5  C2E989          3859            uP       NZ,MAKE_ERROR             ; NOPE,  A REAL  ERROR
+                          3860
+    E7F8                  3861   NOTIMEOUT:
+    E7F8  0627            3862            LD       B,ENTPER  BLOCK    ;SET  THE ENTRY  COUNTER
+    E7FA  C3E75C          3863            UP       CHECK_ENT          ;AND GO  CHECK  THE NEW  ENTRY
+                          3864
+    E7FD                  3865   FULLDIR:
+    E7FD  21FDDB          3866            LO       HL,FOUND AVAIL  _ENTRY
+    E800     §            3867            BIT      FOUND_ENTRY,  [HL]               ‘E WE FOUND   AN  ENTRY?

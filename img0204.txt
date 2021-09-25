@@ -1,0 +1,26 @@
+FILE:  EOSABS:EOS _TF        HEWLETT-PACKARD:    CONS  OUT    (c)   Coleco  1983  Confidential                       Sat,    8  Sep  1984,  23:41        PAGE   200
+
+LOCATION  OBJECT  CODE   LINE     SOURCE   LINE
+
+                         7843 ;
+                         7844 ; Subroutines
+                         7845 ; PUT_OLD  ON  SCREEN      - This  entry   point  puts the   char that the
+                         7846 ;                            cursor   was  on back  onto  the  screen
+                         7847 ;
+                         7848 ; PUT_CHAR_ON   SCREEN    _  This  entry   point  will put   the char in A
+                         7849 ;                            onto  the  screen  where  the   cursor currently    is
+                         7850 ;
+                         7851 ;
+     F7D7                7852 PUT_OLD_ON_SCREEN:
+     F7D7 3AFE79         7853                    LD         A,[OLDCHAR_}
+                         7654
+     FIDA                7855 PUT_CHAR_ON_ SCREEN:
+     FIDA ES             7856                    PUSH       HL
+     F7DB 2AFEAS         7857                    LD         HL,[CURSOR   }      ;Get location   to put  char
+     FIDE COFTFC         7658                    CALL       CONVERT  XY         :Convert   to a VRAM address
+     F7E1 21FE7E         7859                    LO         HL.LINEBUFFER_
+     F7E4 77             7860                    LO         {Hi]},A
+     F7ES 010001         7861                    LO         BC,OOO1H
+     FIES COFDIA         7862                    CALL       WRITE  VRAM
+     F7EB E1             7863                    POP        HL
+     F7EC C9             7864                    RET

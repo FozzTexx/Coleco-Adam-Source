@@ -1,0 +1,31 @@
+FILE: OS_7PRIME:pOS              HEWLETT-PACKARD:    INIT   SOUND  (c)   Coleco,  1982    CONFIDENTIAL                  Fri,  18  May   1984,   16:19       PAGE   25
+
+LOCATION   OBJECT   CODE   LINE        SOURCE  LINE
+
+    0222   19              1039            ADD  HL,DE                     spt  HL to  byte  0 next area   (10   bytes  away)
+    0223   10FB            1040            DJNZ  BI                       ;do  this for  the  n (passed   in  B)  data  areas
+                           1041   ;        *  store  end  of  data   area  code  (0)  at first  byte  after    last  song data   area
+    0225   3600            1042            LO  (HL),0                     sstore  end  of data  area  code   in  byte  0 data   area  n+    1
+                           1043   ;        *  set the  4  channel   data   area  pointers   to a dummy,   inactive    data  area
+    0227   21024C          1044            LD  WL ,OUMAREA                spoint  HL  to inactive  byte   below    [after  the  RET)
+    022A   227022          1045            LD  (PTR. TO. S OW  0),HL      ;store  addr  DUMAREA  at  PTR_TO   S ON   0
+    022D   227024          1046            LD  (PTR_ TO  SON    1)},HL    ;store  addr  DUMAREA  at  PTR 10S    ON  4
+    0230   227026          1047            LD  [PTR  TO  S ON  2),HL      ;store  addr  DUMAREA  at  PTR TO  S  OW  2
+    0233   227028          1048            LO  (PTR_ TO" SON  3),HL       ;store  addr  DUMAREA  at  PTR_TOos   ON  3
+                           1049   ;        *  initialize    SAVE “CTRL
+    0236   3EFF            1050            LD  A,OFFH                     snote:  this  is  only time  MSN   SAVE CTRL   will   be  non  zero,
+    0238   32702A          1051            LD  {(SAVE_CTRL),A             sthus  ensuring   PLAY SONGS   will   output  ist  real   CTRL data
+    0238                   1052   ALL_OFF
+                           1053 ;          *  turn off   all  4  sound   generators
+    0238   3E9F            1054            LD  A,OFF*¢SRIATN              3form  off  code  for tone  generator     1
+    0230   OSFF            1055            OUT  [SOUND _PORT)    ,A       ssend  it out
+    O23F   3EBF            1056            LD  A,OFF+SR2ATN               sform  off code   for tone  generator     2
+    0241   D3FF            1057            OUT  [SOUND _PORT),A           ssend  it out
+    0243   3EDF            1058            LD  A,OFF+SR3ATN               ;form  off code   for tone  generator    3
+    0245   D3FF            1059            OUT  [SOUND PORT),    A        ;send  it out
+    0247   SEFF            1060            LD  A,OFF+SRNATN               sform  off code   for noise  generator,     N
+    0249   D3FF            1061            QUT  [SOUND  PORT)  ,A         ssend  it out
+    0248   C9              1062            RET
+    O024C  FF              1063   DUMAREA  DEFB  INACTIVE
+                           1064   ;        ENO  ;INITSOU
+                           1065    PROG

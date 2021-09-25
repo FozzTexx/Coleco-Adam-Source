@@ -1,0 +1,61 @@
+FILE: ~-.ABS:E0S_TF         HEWLETT-PACKARD:    SOUND EQU¢S    (c)  Coleco, 1982     CONFIDENTIAL                 Sat,   8  Sep  1984,   23.39        AGE       31
+
+LOCATION  OBJECT CODE   LINE      SOURCE LINE
+
+                        3407
+    E5BD  2B            3408          DEC       HL                  ‘;pointHi back   to  ist  ROM  data   to move,  APS
+    E5BE  1£09          3409          LD        E,9                 ;point DE to  destination:     bytes   9,8,5  - 3
+    ESCO  CDE603        3410          CALL      DETO DEST
+    €5C3  010002        3411          LD        BC,2                ;move 2 bytes
+    E5C6  EDBB          3412          LDDR                          -when done,  DE  points   to  FSTEP,   HL to  ROM NLEN
+    E5C8  AF            3413          XOR       A
+    E5C9  12            3414          LD        [DE]),A             -FSTEP := O  for  no  freq  sweep
+    ESCA  16            3415          DEC       DE                  ;pt DE to RAM   NLEN
+    E5CB  1B     .      3416          DEC       DE
+    ES5CC OEO3          3417          LD        C,3              -        last  3 ROM  bytes    if this   is a noise  note,   garbage
+    ESCE  EDBS          3418          LDDR                          -will be loaded   into   byte  3,  buts  that’s  OK
+    E500  181A          3419          JR        MODBO
+        |               3420                  .
+                        3421;    |    ENOIF
+                        3422
+                        3423  ;       if here,   note  is  type  3:  swept fred,  swept   attenuation
+                        3424
+    E502                3425  TYPE3                                 ;set up NEXT NOTE   PTR
+    E502  110008        3426          LO        DE,8          .     ;snoteafter  this  note   is  8 bytes   away,
+    E5D5  19            3427          ADD       HL,DE               ;pt HL to  it
+    E506  007501        3428          LD        {IxX4+4),0          ;put addr  in NEXT_NOTE   PTR
+    E509  DD7402        3429          LD        {1X+2]),H
+                        3430
+                        3431  ;       * move  new  note  data   and  fill in bytes   where   necessary
+                        3432   .
+    E5DC  28            3433          DEC       HL                  ;point HL back   to  ist  ROM  data   to move,  APS
+    ESDD  DDES          3434          PUSH   ~=e'IK        |        ;point DE to  destination:     bytes   9 - 3
+    ESDOF FDE1          3435          POP       LY                  -I1Y:= addr  byte  O   [and DE  =  6]
+    ESE   1C            3436          INC       E      .            ;DE  :9
+    ESE2  FDIS          3437          ADD       IY,DE               -IY  :=addr  byte  9   [APS]
+    E5E4  FDES          3438          PUSH      ly         |                   a
+    ES5E6 D1            3439          POP       DE          :       ;DE  :=addr  APS
+    ESE7  010007        3440          LD        BC,7                ;move 7 bytes |
+    ESEA  EDBS          3441          LDDR
+                        3442                                              |
+                        3443  ;       * modify   byte O  basis   header  new note
+                        3444
+    ESEC                3445  MODBO
+    ESEC  DDES          3446          PUSH      IX                  ;pt HL to byte   O
+    ESEE  E1            3447          PoP       HL
+    ESEF  Fi            3448          POP       AF                  ;A := header  new  note
+    ESFO  Ci            3449          PoP       BC                  ;B :2=SONGNO                                             |
+    ESF1  FEFF          3450          cP        INACTIVE            -test for  inactive    [song  over,   as detected   above]
+    ESF3  C8            3451          RET       Z
+    ESF4  57            3452          LD        D,A                 ;save header   in D
+    ESFS  E63F          3453          AND       3FH                 ;Rid channel  bits
+    ESF7  FEO4          3454          cP        04                  -Special effect
+    ESF9  2002          3455          JR        NZ,L20_ LOAD  _NEX
+    E5FB  O63E          3456          LD        B,62
+                        3457
+    ESFD                3458  L20 LOAD_NEX:
+    ESFD  7A            3459          LD        A,D                 ;restore A  to  header
+    ESFE  E6CO          3460          AND       OCOH                -A  :=CHA    GOQOOO0OO00O
+    E600  BO            3461          OR        B                   ;A  :=mew CH#     SONGNO
+    E601  77            3462          LO        {[HL],A             ;store back  in  byte  O
+                        3463

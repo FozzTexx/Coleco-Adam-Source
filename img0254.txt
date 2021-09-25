@@ -1,0 +1,63 @@
+FILE: EOSABS:£0S     TF         CROSS  REFERENCE    TASLE             PAGE   250
+
+LINE®    SYMBOL             TYPE       REFERENCES
+
+ 6172   NOT_LAST  ENTRY
+ 7250   NOT_PR_NFK                7243
+ 5777   NOT _RENAMED              5746 ,5756.5770
+ 2406   NOT_SAME                  2403
+ 4371 NOT   SIZE  1               4363, 4366
+ 7469   NOT SPECIAL               7448
+ 4732   NOT TAPE
+ 8459 NOT   TIME!                 8448 8452
+ 8485 NOT   TIME2                 8474,8478
+ 1069   NODATE   ERR              5172
+ 9315   NODCB                     9301
+ 9274   NOOCB   DEFINED           9258
+ 8673   NODCB   FOUND             8658
+ 7195   NO_DCB_FOUNDt             7159
+ 8708   NODCB_FOUND2              8702
+ 8993   NO_DCB_FOUNDS             8974
+ 1091   NOOIR_ERR                 5476
+ 5415   NO ENT                    5325 ,5328,5331,5334,5366
+ 5951   NOERRORS                  5939
+ 4278 NO  FCBS
+ 1072   NO_FCB_ERR                4286
+ 1070   NO_FILE_ERR               5419,5628
+ 5540 NO  MATCH                   5518,5524  ,5533
+ 5625   NOMATCHi                  5636
+ 6900   NO_NAK                    6890
+ 4578 NO  READ                    4565
+ 5896 NO_READ_    ERRORS          5883, 5887
+ 6438   NO SECTORS   TO_!         6425
+ 3861   NOTIMEOUT
+ 6275   NO_TRIM                   6159,6241
+ 6032   NO_WRITE_ERRORS           6018 ,6022
+  656   NUM COLUMNS               7721,7818,  7839
+ 1062  NUM_FCBS                   4276 ,4426 ,4508  ,4647 ,4911,5217 ,5621
+  655  NUM_LINES                  7393,7599  ,7633,  7808
+ 7942  NUM _SPCL_CHARS            7446
+ 2476  OFF                        2932 ,2934 ,2936,  2938 ,3003,3011, 3019,  3027
+  649  OLDCHAR_                   7410, 7606, 7759,  7853, 7885
+ 8125  ONE  BLOCK
+ 4383  OPENS                      4357
+ 4395: OP_ERR                     4307, 4310, 4381
+ §828  OTHER_ERR                  5808 ,5819
+ 1307 OUTPUT    LOOP              1312, 1315
+ 1313  OUT_DEC_HI_BYTE            1306
+ 3486  OUT  TO SOUND    PO        2675 ,2691, 2704,  3033, 3059
+ 4264  O_NEXT_FCB                 4277
+ 3327   PASS                      3324
+ 5082   PAST _WRITE_ERR           5077
+  461   PATTRNGENTBL              1849
+  459   PATTRNNAMETBL
+  676   PCB                       8283,8291,8292
+ 1164   PCB_IDLE
+ 1175   PCB_RESET                 1176
+ 1176   PCB_RESET_ACK
+ 1172   PCB_SNA                   1173, 8610
+ 1173   PCB_SNA_ACK               8614
+ 1166   PCB SYNC}                 1167,8438
+ 1167   PCBS        _ACK          8461
+
+  >PrPrPrPrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr?rr?r                                 rrr      rrrrrrrrr                   PrPrPrYrrrrr>rrp           >»

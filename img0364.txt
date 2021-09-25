@@ -1,0 +1,63 @@
+FILE:  OS7PRIME:pOS            HEWLETT-PACKARD:     TIME   MANAGER    (c) Coleco,    1982   CONFIDENTIAL                 Fri,  18  May   1984, 16:20       PAGE     90
+
+LOCATION  OBJECT   CODE  LINE        SOURCE  LINE
+
+    106E   23            4366                 INC   WL                                        ;Go to  next  table   location
+    106F   73            4367                LD    s(WL) ,E                                   ;Store  timer   length
+    1070  23             4368               /INC    HL
+    1071   73            4369                LD     =(HL),€E                                 ;Store   timer   length  again   in  case  of  repeat
+    1072   1842          4370                JR  =  IWIT_TIMER_   EXIT                         zAll  done  so  let's  exit
+    1074.                4371   LONG TIMER:
+    1074  CBDE           4372                SET   LONG,   (HL)                              sSet   long  timer  bit
+    1076  79             4373                LD     3=6A,C                                   ;Check   for  a  long  repeat   timer
+    1077  87             4374                QR     A
+    1078  2818           4375                JR            _A_LONG  REPEAT                   ;If  zero  then   go to  section   for  non  repeating   timer
+    107A  05             4376                PUSH   DE                                       ;Store   timer   length  temporarily
+    1078  EB             4377                EX     DE,HL                                    ;Swap   regisers
+    107C  2A7305         4378                LD   =WL,  (WEXT_TIMER   DATA_BYTE)             ;To  get  free  space   in  long  timer   table
+    107F  EB             4379                EX     DE,HL                                    ;Then   swap  back
+    1080  CBF6           4380                SET    REPEAT,  (HL)                            ;Set  mode  byte   to repeating
+    1082  23             4381                INC    WL
+    1083  73             4382                LD   =s(WL)  ,E                                 ;Store   low  byte  of  timer  address    into  the  value  word
+    1084  23             4383                INC    HL
+    1085  72             4384                LO  =  [WL] ,D                        |         7Store   high  byte  of  timer   address
+    1086  EB             4385                EX     ODE,WL                                   ;Move  address    of data  area   into  HL
+    1087  01             4386                POP   DE                                        ;Get  back  the   length  of  timer
+    1088  73      |      4387                LO  =—-(WL) ,E                                  ;Store   that  in  the  data  table
+    1089  23             4388                Inc    WL
+    108A  72             4389                LD     =(WL),D.
+    1088  23             4390                INC    WL
+    108C  73             4391                LD   = (WL),E                                   ;Store   it again
+    108)  23             4392                INC    HL
+    108E  72            4393                 LD     =[(WL),0
+    108F  23            439%                 InC    HL
+   1090   227305        4395                 LD     (NEXT  TIMER  _DATA_BYTE),HL             ;Store   the next   available   data   area  for  future  use
+   1093   1821          4396                 JR  =  IMIT_TIMER__EXIT
+   1095                 4397   WOT_A_LONG   REPEAT:
+   1095   23            4398                 INC   HL
+   1096                 4399   TIMER2:                            |
+   1096   73            4400                 LD  =s_(WL) ,E                                  ;Store   it again
+   1097  23             4401                 Inc   WL
+   1098   72            4402                 LD  =s (HL) ,D
+   1099  23             4403                 INC   HL
+   109A   181A          4404                 JR    IWIT  TIMER    EXIT
+
+   109C                 4406   NEXT TIMER1:
+   109C  CB66           4407                BIT    €0OT, (HL)
+   109E  2006           4408                 JR              NEW  TIMER
+   10A0  23             4409                 «EWC  OWL                                       ;Go  to next  mode  byte
+   10A1  23             4410                 INC   WL                                        ;
+   10A2  23             4411                 INC   WL                                        ;
+   10A3  04             4412                 Inc  8B                                        ;Count   to next   offset
+   10A4  1884           4413                JR                                              ;Go  back  up  to  init.  tomer
+                        4414
+   10A6                 4415  MAKE  _WEW TIMER:                         ;Maximum    of 255  signals   allowed
+   10A6  DS             4416                PUSH   DE                                       ;Save  DE  for  a  work  register                                                    ‘
+   10A7  E5             4417                PUSH   HL                                       ;Save  current    timer  address
+   10A8  23             4418                INC    HL                                       ;Go  to  next  available   memory    location   in the  Timer  Table
+   1OA9  23             4419                INC    HL
+   10AA  23             4420                INC    HL
+   10AB  04             4421                Inc    B                                        ;Increment    the  Signal  count
+   10AC  3630           4422                LD     (HL)  ,30H                               ;Set  to  free  and  last  timer
+
+                                                                                                                4                                                                                            en =

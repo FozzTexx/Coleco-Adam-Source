@@ -1,0 +1,35 @@
+po
+
+               FILE: t-.ABS:EOS    TF           HEWLETT-PACKARD:      EOS CHAR     (c)  Coleco  1%..5  Confidential                   Sat,   8 Sep 1984,  23:42        1 nGE  237
+
+               LOCATION  OBJECT    CODE    LINE       SOURCE    LINE
+
+                                           QQZOT SHH HHS EHSHEHEHE   EEE  THEREEEE EEE EEEEOEERE EERE  HEHEHE   EEE  REE  EEEEEEERE   EKERHOR EERE:
+                                           9208  * WRITE   CHAR    DEV ALLOWS   THE  CALLER  TO  SEND   A PRINT  COMMAND  BY SPECIFYING
+                                           9209  * THE   BUFFER    OF THE  STRING   AND  THE NUMBER    OF BYTES  TO  PRINT.
+                                           9210  *        INPUT:     A  ==>    DEVICE   ID
+                                           9211»                     BC  =>    NUMBER   OF BYTES  TO   WRITE
+                                           9212  *                   HL  =>    SOURCE   OF DATA
+                                           9213  »        OUTPUT:
+                                           9214  *                   CONDITION   FLAGS
+                                           9215  *                             Zz:       NO ERRORS
+                                           9216  *                            NZ:        ERROR  OCCURED
+                                           9217  *                                       A ===>  ERROR   CODE
+                                           9218  SSSSCHRESSESKKKSHSKEHSKEESEHSEKEKKEKEHRSEKEEEEHSE       EHREKEEKREKEEHREKEEEREEEEHREEEEKEES
+                                           9219
+                                           9220           GLOBAL     __WR_CH_DEV
+                                           9221
+                   FB75                    9222  _wWR_CH_DEV:
+                   FB75  32FD72            9223           LD         [DEVICE_ID].A
+                                           9224                               |
+                   FB78  CDFBC2            9225           CALL       __START_WR_CH_DEV
+                   FB7B  2008              9226           UR         NZ,SO_LONG
+                                           9227
+                   FB7D                    9228  OCB_WRITE_LOOP:
+                   FB7D  3AF072            9229           LO         A,(DEVICE_ID]                ;  RESTORE   THE  ID FOR USE IN THE  CALL
+                   FB8O  CDFBE1            9230           CALL       __END WR  _CH_DEV
+                   FB83  30F8              9231           JR         NC ,OCB_WRITE_LOOP
+                                           9232
+                   FB85                    9233  SO_LONG:
+                   FB8S  C9                9234           RET
+                                           9235

@@ -1,0 +1,19 @@
+                                                                                      ~
+FILE: tuSABS:EOS TF          HEWLETT-PACKARD:       EOS COMN      (c)    Coleco    tbou   Confidential!                              Sat.     8  Sep   1984,  23  38        re)
+LOCATION OBJECT  CODE   LINE       SOURCE    LINE
+                         396  ;
+                         398  ;        NOTE:   See  PORT  TABLE
+                         399  -                     :GLB         MEM   SWITCH   PORT
+                         400  ;MEM_  SWITCH    PORT  EQU        $+40
+                         402   PORT _TABLE          EQUB        MEMRSWITCHLE  PORT
+                         403                        EQUB         NET  RESET   PORT
+                         405  :NET _RESET_   PORT   ;GLB        $VDP_CTRL_PORT
+                         406  ;VOP_ CTRL_PORT       EQU         $+42
+                         408  ;VDP _DATA_PORT       EQUB        $+43_DATA_PORT
+                         409                     PORTGLB         CONTROLLER     O PORT
+                         4it   CONTROLLER    _0_    ;GLBEQU     $CONTROLLER     _1PORT
+                         412  :CONTROLLER_     1_porT   EQU     $+45
+                         414  |STROBE   _SET_PORT   ;EQU        $+46OBE   SET   PORT
+                         415                        ;GLB         STROBE   RESET   PORT
+                         417  :STROBE   _RESET_ PORT;GLBEQU     $SOUNDPORT
+                         418  :SOUNDPORT            EQU         $+48

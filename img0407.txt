@@ -1,0 +1,61 @@
+FILE: OS 7PRIME :pOS       HEWLETT-PACKARD:  DRIVERS   FOR9928  VDG  (c)  Coleco  1982  CONFIDENTIAL        Fri,  18  May  1984,  16:21       PAGE  133
+
+LOCATION  OBJECT CODE LINE      SOURCE  LINE
+
+    1CED  011CE5      6521                   LD                BC, VRAM WRITE P
+    1CFO  11738A      6522                   LD                DE ,PARAM AREA
+    1CF3  CD0098      6523                   CALL              PARAM_
+    1CF6  2A73BA      6524                   LD                HL, [PARAM AREA]
+    1CF9  £D58738C    6525                   LD                DE, [PARAM AREA+2}
+    1CFD  ED4B73BE ©  6526                   LD                BC, [PARAM _AREA+t4)
+                      6527                           .-
+                      6528                   GLB              VRAM_ WRITE
+              <1D01>  6529  VRAMWRITE        EQu               $
+                      6530
+                      6531  * DEST  := DEST + 4000H
+    1D01 E5           6532                   PUSH              HL
+    1D02 05           6533                   PUSH              DE
+    1D03 €1           6534                   POP               HL
+    1004 114000       6535                   LD                DE,4000H
+    1007 19           6536                   ADD               HL,DE
+                      6537
+                      6538  * LOW BYTE  OF DEST  =; CTRLPORT
+    1008 7D           6539                   LD                A,L
+    1009 D38F         6540                   OuT               (CTRL_PORT],A
+                      6541
+                      6542  * HIGH BYTE  OF DEST  =; CTRLPORT
+   1008  7C           6543                   LD               A,W
+   100C  D38F         6544                   OUT               (CTRL_PORT] ,A
+                      6545
+                     6546   * DATA =;  DATAPORT
+   100€  C5          6547                    PUSH             BC
+   100F  01          6548                    PoP              DE
+   1010  £1          6549                    PoP              WL
+   1011  O&BE        6550         |          LO               C,DATA_PORT
+   1013  43          6551                    LO               B,E
+              <1D14> 6552  OUTPUT LOOP       EQu              $
+   1014  EDA3        6553                    OUT!
+   1016  00          6554                    woP
+   1017  00          6555                    NOP
+   1018  C21D14      6556                    JP               NZ,QUTPUT  LOOP
+   1018  15          6557                   DEC               D
+   1D1C  FA1D21      6558                    JP               M,END OUTPUT
+   ID1F 20F3         6559                    JR               NZ,QUTPUT  LOOP
+                     6560                                                                                                                                                          ,
+                     6561  * END  VRAMWRITE
+             <1D21>  6562  END OUTPUT       EQu               $
+   1021 C9           6563                   RET
+                     6564
+                     6565  * PROCEDURE  VRAM  READ   (VAR DATA:BUFFER;SRCE:   INTEGER; COUNT:  INTEGER)
+                     6566
+                     6567  * VAR DATA  (POINTER  TO DATA BUFFER)   IS PASSED  IW  HL
+                     6568  * SRCE  IS PASSED  IW DE
+                     6569  * COUNT  IS PASSED  IN BC
+                     6570  * DESTROYS:  ALL
+                     6571
+   1D22 OOO3FFFE   © 6572  VRAM READ P      DEFW              3,-2,2,2
+   1026 00020002               -
+                     6573  * THIS IS  THE PARAMETER  DESCRIPTOR  FOR  VRAM READQ
+                     6574
+                     6575  * BEGIN VRAM READ
+                     6576                   GLB               VRAMREADQ

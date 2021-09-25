@@ -1,0 +1,63 @@
+ HP 64560  Linker                                                        Tue,  10 Jul  1984,  2:32             Page    2
+
+ SYMBOL              R  VALUE       DEF BY                             REFERENCES
+
+ ADD816              P  FO4D        EOSCMNO6:N_EOS
+ BASECMP             P  FOS4        UTILS:N_EOS                        DIR_HANDL:N_EOS
+ BLK_STRT_PTR        D  FDDC        EOSCMN_O6:N_EOS                    DIRHANOL:N  EOS
+ BLOCKS REQ          D  FEOC        EOSCMN_O6:N_EOS                    DIR_HANDL :N_EOS
+ BUF_ENOD            D  FEOA        EOSCMN_O6:N_EOS                    RDWI:N_EOS    DIR_HANDL:N EOS
+ BUF_START           D  FEO8        EOSCMN_O6:N_EOS                    UTILS:N EOS   RD_WT:N_EOS    OPENS:N_EOS   DIR_HANDL:N_EOS
+ BYTESREQ            D  FEO2        EOSCMN_O6:N_EOS                    RD_WI:N_EOS
+ BYTESTO_GO          D  FEO4        EOSCMN_OG:N_EOS                    RDwT:N  EOS
+ CALC_OFFSET         P  FD32        EOSCMN_O6:N_EOS
+ CHECK_IF_DIRECT     P  FO35        UTILS:N_EOS                        DIR_HANDL:N_EOS
+ CHK_IF_IDLE         P  F4AE        EOS_GEN:N_EOS                      EOSCHAR:N_EOS     EOS_BLK:N_EOS
+ CHK_IF_INACTIVE     P  F496        EOS_GEN:N_EOS                      EQSCHAR:N  EOS    EOSBiK:N_EOS     EOS_UTIL:N_EOS    EOS_PRTR:N_EOS
+ CLEAR_RAM_SIZE      A  0147        EOSCMN_O6:N_EOS                    EOSSTART:N_EOS
+ CLEAR_RAM_START     D  FD6O        EOSCMN_O6:N_EOS                    EOSSTART:N_EOS
+ COLORTABLE          D  FDG6C       EOSCMN_06:N_EOS
+ CONTROLLER  _OPO    A  FC2B        EOSCMN_O6:N_EOS                    A_uOS OO:N_EOS   |
+ CONTROLLER_1  PO    A  FC2C        EOSCMN_O6:N_EOS                          |
+ CURRENT_DEV         D  FDGF        EOSCMN_O6:N_EOS
+ CURRENT _PCB        D  FD70        EOSCMN_O6:N_EOS                    EOSUTIL:N_EOS     £0S_GEN:N_EOS
+ CURSOR              D  FEAS        EQSCMNO6:N_EOS                  ~  CONS OUT:N_EOS
+ CUR_BANK            D  FOGE        EOSCMN_O6:N_EOS                    A_uOS_00:N_EOS
+ DCB_IMAGE           D  FD8B        EOSCMNO6:N_EOS
+‘DECLSN              P  FD44        EOSCMN_O6:N_EOS
+ DECMSN              P  FD47        EOSCMN_O6:N_EOS
+ DEFAULT_BT_DEV      D  FDG6F       EOSCMN_O6:N_EOS                    EOSSTART:N_EOS
+ DEVICE_ID           D  FD72        €EOSCMN_O6:N_EOS                   EOSCHAR:N_EOS     EOS_MKDIR:N_EOS
+ DIRECTORY_CHECK     P  F3E7        EOS MKDIR:N_EOS                    UTILS:N_EOS
+ DIR_BLOCK_NO        D  FODS        EOSCMN_O6:N_EOS                    DIR _HANDL:N_EOS
+ EFFECT _OVER        P  FDSC        EOSCMN_O6:N_EOS
+ EOS DAY             D  FDE2        EQSCMNO6:N_EQS                     DATES:N_EOS   ODIR_HANOL:N_EOS
+ EOS_MONTH           D FOE1         EOSCMN_O6:N_EOS                    DATES:N_EOS   DIR_HANDL:N_EOS
+ EOS_STACK           D  FES8        EOSCMN_O6:N_EOS                    EOSSTART:N_EOS
+ EOS_YEAR            D  FDEO        EOSCMN_O6:N_EOS                    DATES:N_EOS   OIR_HANOL:N_EOS
+ FCB_BUFFER          D  FDBA        EOSCMN_O6:N_EOS                    UTILS:N_EOS
+ FCB _DATA_ADOR    ODFOFF           EOSCMN_O6:N_EOS                    EOSMKDIR:N_EOS     UTILS:N_EOS    RD_WT:N_EOS   OPENS:N_  EOS   OIR_HANDL:N_EOS
+ FCB_HEAD  ADDR    OD   FOFD        EOSCMN_O6:N_EOS                    UTILS:N_EOS    RD_WT:N_EOS   OPENS:N_EOS   DIR_HANDL:N_EOS
+ FILENAME  _CMPS    OD  FDD8        EOSCMN_O6:N_EOS                    UTILS:N_EOS   DIR_HANOL:N_EOS
+ FILE COUNT          D  FDD4        EOSCMN_O6:N_EOS                    UTILS:N_EOS
+ FILE _NAME_ADOR    OD  FO73        EOSCMN_O6:N_EOS                    OPENS:N_EOS
+ FILE NUMBR          D  FDO7        EOSCMN_06:N_EOS                    UTILS:N_EOS
+ FILL_VRAM           P  FD26        EOSCMN_O6:N_EOS                    EOS_START:N_EOS
+ FMGR_DIR_ENT        D  FDE3        EOSCMN_O6:N_EOS                    OPENS:N_EOS
+ FNUM                D  FEO!        EOSCMN_O6:N_EOS                    RD_WT:N_EOS
+ FOUND AVAIL_ENT     D  FODB        EOSCMN_O6:N_EOS                    DIR_HANODL :N_EOS
+ GET_VRAM            P  FO2F        EOSCMN_O6:N_EOS
+ HOLE FILE_NAME      P  F428        EOS _MKDIR:N_EOS                   UTILS:N_EOS    DIR_HANDL:N_EOS
+ INIT TABLE          P  FD29        EOSCMN_O6:N_EOS
+ INT_VCTR_TBL        A  FBFF        EOSCMN_O6:N_EOS
+ KEYBOARD_BUFFER     D  F075        EOSCMN_O6:N_EOS           |        EOS _KBD:N_EOS                                                     ,
+ LINEBUFFER_         D FETE         EOSCMN_O6:N_EOS                    CONS OUT:N_EOS
+ LOAD ASCII          P  FD38        EOSCMN_O6:N_EOS
+ MEM _CNFGOO         A  FCI7        EOSCMN_O6:N_EOS                    EOS_UTIL:N_EOS    A_uOS 0O:N_EOS
+ MEM _CNFGO1         A   FC18       EOSCMN_O6:N_EOS                    EOSSTART:N_EOS
+ MEM CNFGO2          A   FC19       EOSCMN_O6:N_EOS
+ MEM_CNFGO3          A   FCIA       EOSCMN_O6:N_E0S                    EOSSTART:N_EOS     A uOSOO:N_EOS
+
+                                                                                     mca
+
+nH               aa                 lCealCrUaeaetlUcUAClC          aEeUlClC  UOC      ePeDUTlCaeOUTlC  ell     UDTlC    \ae       eel     iel     {el         |S       CU|

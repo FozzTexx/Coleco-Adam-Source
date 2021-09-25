@@ -1,0 +1,64 @@
+FILE:   EOSABS:   EOS TF            HEWLETT-PACKARD:       SOUND    EQU¢S     (c)  Coleco,    1982      CONFIDENTIAL                    Sat,     8   Sep   1984,    23:39          PAGE      64
+
+LOCATION     OBJECT   CODE    LINE         SOURCE   LINE
+
+                              2458
+                              2459   SESS   H SESS HEH HEHEHE HHS HEHEHE  HEHEHE  HEHE EEE EHH  HEHEHE   HEHEHE  EEESESEEHHEEEEE      HE HES
+                              2460
+                              2461                                NOTES     TO  SOUND   PROGRAMMERS
+                              2462
+                              2463   ; The   only   differences      between      the OS7   version     and  this   ADAM  version
+                              2464   ;     are  transparent      to  the    game   programmer     and   important    to  the
+                              2465   :     sound   programmer.      Formerly     CALL’s    to  PLAY  _SONGS    and  SND_MANAGER
+                              2466   ;     were  necessary      to update     the   sounds.    Now   a  CALL   to SOUNDS    runs
+                              2467   ;     the  same   code.   Formerly      CALL’s   to  LEAVE_EFFECT       and  EFXOVER     were
+                              2468   ;    needed    to  end   a  SPECIAL    EFFECT.     Now  EFFECT    OVER    runs  the  same    code.
+                              2469   :     Independent     CALL’s    to   PLAY  SONGS,    SNO  MANAGER,      LEAVE  EFFECT     and
+                              2470   ;     EFXOVER   do   not  run   in   this   module   as   before!!!!!
+                              2471
+                              2472    PAC  OOO  EEE   OOOO  EERE   SEE   EEEEERESESEDERESSEREHEREESSEOREFEEEE             ORES    EEE EEERS
+                              2473
+                              2474   ;          Operating     system     sound   routine    EQUATES
+                              2475
+                  <OOOF >     2476   OFF                   EQU               OFH   ;Off,  no   sound
+                              2477
+                              2478   ;          Special    byte   O  codes
+                              2479
+                  <OOF F>     2480   INACTIVE              EQU               OFFH
+                              2481   ;@@e@  SEFFECT               EQU               62
+                              2482   ENDSDATA              EQU               O
+                              2483
+                              2484   ;          Offsets    within    an   SxDATA    song  data    area
+                              2485
+                              2486   ;@ee@  CH                    EQU               Oo
+                              2487   ;@e@   SONGNO                EQU               O
+                              2488   ;@@@   NEXTNOTEPTR           EQU               1
+                  <0003>      2489   FREQ                  EQU               3
+                  <0004>      2490   ATN                   EQU               4
+                  <0004>      2491   CTRL                  EQU               4
+                  <0005 >     2492   NLEN                  EQU               5
+                              2493   ;@e@e  FPS                   EQU               6
+                              2494   FPSV                  EQU               6
+                  <0007>      2495   FSTEP                 EQU   |           7
+                              2496   Oe     ALLEN                 EQU               8
+                  <0008>      2497   ASTEP                 EQU               8
+                              2498   ;@@e@  APS                   EQU               9
+                  <0009>      2499   APSV                  EQU               9
+                              2500
+                              2501   :          song   end  codes
+                              2502
+                              2503   ;@ee@  CHOEND                EQU               000 100008
+                              2504   ;@ee@  CHIEND                EQU               010 100008
+                              2505   :@e@@  CH2END                EQU               100 100008
+                              2506   ;@e@e@ CH3END                EQU               110 100008
+                              2507   ;@@@   CHOREP                EQU               0001 10008
+                              2508   ;@e@e@ CHIREP                EQU               0101 100068
+                              2509   ;@@@   CH2REP                EQU               1001 10008
+                              2510   ;@@e@  CH3REP                EQU               1101 10008
+                              2511
+                              2512   °          channel    numbers,     87   -B6
+                              2513
+                              2514   ;@e@e@ CHO                   EQU               O
+
+                                    ee             ee”       ee”     ee             ee”    ee          ee       ee         ee         ee         ee                ee           ee     ee          ee
+                                                                                                                                                                       CRT     CT OCC  STTT

@@ -1,0 +1,62 @@
+     \
+FILE: .JSABS:EOS_TF        HEWLETT-PACKARD:  OPENS     (c) Coleco tyos Confidential                   Sat,  8  Sep 1984, 23:40        Feac  $15
+
+LOCATION OBJECT CODE   LINE     SOURCE LINE
+
+    EBBF OD7EOF        4546         LD       A,(IX+FCB_FIRST_BLOCK+2]}
+    EBC2 007718        4547         LD       [1X+FCB_BLOCK+2],A
+    EBCS DD7E10        4548         LO       A,[IX+FCB_FIRSTBLOCK+t3)
+    EBCS 00771C        4549         LO       {IX+FCB_BLOCK+3],A
+                       4550
+    EBCB 007521        4551         LO       [IX+FCB_POINTER+O),L                    ;reset pointer   for new  (first) block
+    EBCE 0D7422        4552         LD       [IX+FCB_POINTER+1).H
+                       4553
+    EBD1 OO7E18        4554         LD       A,(IX+FCB_MODE) ;GET THE MODE AGAIN
+    EBO4 E607          4555         AND      MODEMODE        ;LOOK AT MODE TYPE ONLY
+    EBDG FEO2          4556         cP       MODEWRITE       ;ARE WE WRITING?
+    EBOS 2012          4557    :    JR       NZ,READ_IT       ;NOPE, NEED TO PRE-READ
+                       4558
+    EBDA 0D361500      4559         LD       {IX+FCB_LAST_COUNT],0
+    EBDE 0D361600      4560         LO       [IX+FCB_LASTCOUNT+1],0                                                                             ‘
+                       4561
+    EBE2 DD361301      4562         LD       {IX+FCB_USEDLENGTH],1
+    EBEG DD361400      4563         LO       {IX+FCB_USED_LENGTH+1],0
+                       4564
+    EBEA 1814          4565         JR       NO_READ
+                       4566
+    EBEC               4567 READ_IT:
+    EBEC DD7E17        4568         LO       A,(IX*¢FCB_DEVICE];GET THE DEVICE NUMBER
+    EBEF DOSE19        4569         LO       E,(IX+FCB_BLOCK] ;GET THE BLOCK NUMBER
+    EBF2 DDSGIA        4570         LD       D,[1X+FCB_BLOCK+1]
+    EBFS DO4E18        4571         LD       C,[1X+FCB_BLOCK+t2)
+    EBFS DD461C        4572         LO       8,[IX+FCB_BLOCK+3)
+                       4573                                  ;HLESTILL HAS ADDRESS  OF BUFFER
+    EBFB CDFI7B        4574         CALL     READ_BLOCK      ;READ THE FIRST BLOCK
+                       4575
+    EBFE 2010          4576         JR       NZ,R_ERROR2     ;BRANCH ON ERROR
+   .                   4577
+    ECOO               4576 NO_READ
+    ECOO E1            4579         PoP      HL              ;RESTORE THE REGISTERS
+    ECO! Ct            4580         PoP      BC
+    ECO2 D1            4581         PoP      DE
+    ECO3 ODE!          4582         PoP      IX
+    ECOS AF            4563         XOR      A               ;SHOW NO ERROR
+    ECOG C9            4584    |    RET                    :         |
+                       4565
+    ECO7          |    4586 R_ERROR                         |
+    ECO7 E1            4587         PoP      HL             —;RESTORE THE REGISTERS
+    ECOS C1            4588         POP      BC
+    ECOS D1            4589         PoP      DE
+    ECOA DDE!          4590         POP      IX
+    ECOC 3€09          4591         LO       A,BAD_FNUM_ERR  ;SHOW THE ERROR
+    ECOE B7            4592         OR       A               ;SET CONDITIONS
+    ECOF C9            4593         RET
+    EC1O               4594 R_ERROR2
+    EC10 E1            4595         PoP      HL              ;RESTORE REGISTERS
+    ECi1 Ct            4596         PoP      BC
+    EC12 D1            4597         POP      DE
+    EC13 DDE           4598         POP      IX
+    EC15 87            4599         OR       &               >SET CONDITION
+    EC16 C9            4600         RET
+                       4601 ;
+                       4602  ,BSBSSERSARTES  ESSses rserssssssesrsssrsssssrsexesssas  seetrsetstszte

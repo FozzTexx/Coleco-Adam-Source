@@ -1,0 +1,61 @@
+FILE:  OS  7PRIME:pOS            HEWLETT-PACKARD:      CONTROLLER     SOFTWARE   (c)  Coleco,   1982    CONFIDENTIAL         Fri,  18  May  1984,   16:21         PAGE    97
+
+LOCATION    OBJECT   CODE  LINE         SOURCE  LINE
+
+      11A7  67             4727                 LD     H,A                            *RETURN    IT IN  HH
+      11A8  1816           4728                 JR     DECODERX
+                           4729    *
+                           4730    * SEGMENT   1  (ARM  BUTTON,    KEYBOARD)
+                           4731    *  RETURN   H=ARM   BUTTON,    L=KEYBOARD
+                           4732    *
+      11AA                 4733   DEC  SEG1
+      11AA  0380           4734                 QUT    {[STRB SET  PORT),A            ;STROBE   SEGMENT   1
+      11AC  CD1130         4735                 CALL   CONT READ                      ;READ  SEGMENT    1 PLAYER   DATA
+      1WAF  57             4736                 LD    D,A                             ;SAVE   IT
+      1180  D3CO           4737                 OUT    {STRB  RST  PORT)  ,A          ;RESET   BACK  TO  SEGMENT   0
+      1182  E60F           4738                 AND    KBD MASK                       ;MASK  OUT   KBD  DATA
+      11B4  2110F5         4739                 LO    4HL,DEC  KBD  TBL               >GET  DECODER   TABLE   ADDRESS
+      11B7  0600           4740                 LD     8,0
+      1189  4F             4741                 LD     C,A
+      118A  09             4742                 ADD    HL,BC                          ;COMPUTE   OFFSET
+      1188  6£            a743                  LDL,   CHL)                           ;RETURN   KBD  DATA   IN L
+                           4
+      11BC  7A             4745                 LD    A,D                            ;RESTORE    DATA
+     11BD   £640           4746                 AND   ARM  MASK                      ;MASK   OUT  ARM  BUTTON    DATA
+     11BF  67              «747                 LD     H,A                           sRETURN    IT  INH
+     11C0                  4748   DECODERK
+     110    C9             4749                 RET
+                           4750
+                           4751
+                           4752
+                          4753
+                          4754    *   POLLING   ROUTINE    FOR  ALL  DEVICES   IW  CONTROLLER    *
+                          4755    *
+                          4756    *
+                          4757
+                          4758                        GLB                  POLLER_
+     11C1                 4759    POLLER_
+     11C1  CD114A         4760                  CALL  CONT  SCAN                     ;GO  SCAN   ALL  THE  DATA   FIRST
+     V1C4  FD217307       4761                  LD    1Y,DBNCE   BUFF                ;DEBOUNCE    BUFFER   POINTER
+     11C8  DD2A8008       4762                  LD    1X,  (CONTROLLER   MAP)        >CONTROLLER    MEMORY    POINTER
+     11CC  DOES           4763                  PUSH  IX
+     11CE  DD7E00         4764                  LD   A,  {1X+0]            ;GET  PLAYER   O  STATUS
+     11D1  CB7F           4765                  BIT   7,A                  IF   PLAYER   O NOT   ACTIVE
+     11D3  281E           4766                  JR    2,CHK  PLYR    1     ;THEN  CHECK   PLAYER   1
+                          4767    *   PLAYER   O IS  ACTIVE                ELSE
+     11D5  47             4768                  LD    8B,A                 ;SAVE  STATUS
+     11D6  110002         4769                  LD    DE,PLYR_O            ;COMPUTE   ADDRESS    OF PLAYER  0
+     11D9  D019           4770                  ADD   IX,DE                ;CONTROLLER   MEMORY
+     1108  £607           4771                  AND   SEG 0                ;1F  SEGMENT   O  IS  NOT ACTIVE
+     11D0  2809           4772                  JR    2,CHK  SEG   01  =;   THEN  CHECK   SEGMENT    1
+                          4773    *   SEGMENT   O ACTIVE                   +ELSE
+     11DF  3A73EE         4774                  LO  A,{SO    CO}
+     11E2  2173EB         4775                  LD    HL,SPIN   SWO  CT
+     11E5  €D1220         4776                  CALL  DECODE  0            ;DECODE   DATA  FOR  SEGMENT    0
+     1168                 4777   CHK  SEG  01
+    11€8   78             4778                  LD    A,B                  ;RESTORE   PLAYER  O   STATUS
+    11E9   £618           4779                 AND  SEG   1                :1F  SEGMENT   1  1S NOT  ACTIVE
+    11EB   2806           4780                  JR    Z,CHK  PLYR   1  =;   THEN  CHECK   PLAYER   1
+                          4781   *   SEGMENT    1 IS  ACTIVE               7ELSE
+    11ED   3A73FO         4782                 LD     A, ($1 CO}
+    11FO   CD123F         4783                 CALL   DECODE  1            ;DECODE  DATA   FOR  SEGMENT    1

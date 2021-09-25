@@ -1,0 +1,61 @@
+                          FILE: OS_7PRIME:pOS         HEWLETT-PACKARD:    UTILITY  (c) Coleco,   1982  CONFIDENTIAL                    Fri, 18 May   1984,  16:19      PAGE   21
+
+                          LOCATION OBJECT  CODE  LINE       SOURCE  LIWE
+
+                                                  827   ;Without  affecting  the MSN,  decrement   the LSN  of the byte  pointed  to by  HL.  HL
+                                                  828   ;remains  the same.
+                                                  829   ;RET with  2 flag  set if dec  LSN  results  in 0,  reset otherwise.
+                                                  830   ;RET with  C flag  set if dec  LSN  results  in  -1, reset otherwise.
+                                                  831   ;)
+                                                  832           GLB  DECLSN
+                              0190 3£00           833  DECLSN   LD  A,O
+                              0192 E067           834           RRD                         ;A = 0  | LSW  (HL)
+|                             0194 D601           835           SUB  1                      ;Z flag  set  if dec to 0,  C flag  if dec  to -1
+                              0196 F5             836           PUSH  AF                    ;save Z  and C  flags
+|                             0197 ED6F           837           RLO                        ; (HL) =  old MSN  | new LSN
+|                             0199 F1             838           POP  AF                    ;restore   2 and  C flags, A  = 0  | new LSN
+|                             019A C9             839           RET
+                                                  840   eeasanaanadsageaanagggaessns
+                                                  841  ;*        DECMSN               *
+                                                  842   oRRERRERRAEAAAARARAAREKEARAAEHARE
+                                                  843  ;.COMMENT   )
+                                                  844  ;Without  affecting   the LSN,  decrement  the  MSN of  the byte  pointed  to by  HL.  HL
+                                                  845  ;remains  the  same.
+                                                  846  ;RET  with 2  flag  set if dec  MSN results   in 0, reset  otherwise.
+                                                  847  ;RET  with C  flag  set if dec  MSN results   in -1,  reset otherwise.
+                                                  848  ;)
+                                                  849           GLB  DECMSN
+                             0198 3E00            850  DECMSN   LD A,0
+                             0190 ED6F           851            RLD                        ;A  = 0  | MSN (HL)
+                             O19F 0601           852            sus  1                     32  flag  set if dec  to 0,  C flag  set if dec  -1
+                             O1A1 F5             853            PUSH  AF                   ;save  2  and C flags
+                             O1A2 ED67           854            RRD                        ;(HL)  = new  MSN  | old LSN
+                             O1A4 FI             855            POP  AF                    ;restore   Z and C  flags, A  = 0  | new MSN
+                             01A5 C9             856            RET
+                                                 857   shathansaassagaseranseesnnss
+                                                 858   ;*        MSNTOLSN             *
+                                                 859   shenendnanaasedancaanessnaes
+                                                 860   ;.COMMENT  }
+                                                 861   ;Copy  MSN of  the byte  pointed  to by  HL to  the LSN  of that  byte.   HL remains
+                                                 862   ;the  same.
+                                                 863   ;)
+                                                 864            GLB MSNTOLSN
+                             01A6                865  MSNTOLSN                                                                                                                                             ,
+                             O1A6 7E             866            LD A, (WL)               ;A = MSN  |  LSN to be  changed
+                             O1A7 E6FO          867             AND OFOH                   ;A =  MSN  | 0
+                             O1A9 47             868            LD 6,A                     save   in B
+                             O1AA OF             869            RRCA                       ;swap  nibbles
+                             O1AB OF             870            RRCA
+                             O1AC OF             871            RRCA
+                             O1AD OF             872            RRCA                       ;A =  0 | MSN
+                             O1AE 80             873            OR B                       ;A = MSN   |MSN
+                             OIAF 77             874            LD (HL),A                  ;(HL)  = MSN  i MSN
+                             0180 C9             875            RET
+                                                 876  seadaneeeakanagegansansasans
+                                                 877  ‘;*        ADD816              *                                                                                                 ‘
+                                                 878   oREEKKARARRAAERAAKKKKKKEKEKKE
+                                                 879  ;.COMMENT   }
+                                                 880  ;Adds  8  bit two's  complement   signed value  passed   inA  to the  16 bit  location
+                                                 881  ;pointed   to by  HL.
+                                                 882  ;)
+                                                 883            GLB ADD816

@@ -1,0 +1,14 @@
+FILE: -EusABS:EOTF         HEWLETT-PACKARD:  EOSUTIL   (c)   Coleco  19.5 Confidential                    Sat,   8  Sep  1984,  23:42       raGE  221
+
+LOCATION OBJECT CODE   LINE     SOURCE LINE
+
+                       8624
+                       8625 ; ENTRY:        __GET_PCB_ADDR
+                       8626
+                       8627       ;GLB      __GET_PCB_ADDR
+                       8628
+    FA4C               8629  GET _PCB_ADOR:
+    FA4C FD2AFD70      8630        LD       Ty,[CURRENTPCB]            ; ADDRESS OF PCB
+                       8631
+    FASO C9            8632        RET
+                       8633

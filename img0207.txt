@@ -1,0 +1,28 @@
+FILE: c-vn8S:E0S TF       HEWLETT-PACKARO: CONSOUT   (c) Coleco 1s2. Confidential                   Sat,   8  Sep  1984,  23:41       r. aE  203
+
+LOCATION OBJECT CODE  LINE     SOURCE LINE
+
+                      7920 ;
+                      7921 ; This is a table of chars that perform some function rather
+                      7922 ; than being printed out to the screen as is.  There is a
+                      7923 ; jump table that is asscociated with this table, but NOTE that
+                      7924 ; it has its entrys in reverse order of this table.  It would
+                      7925 ; be best to add to the end of this table and to the beginning
+                      7926 ; of the jump table.
+                      7927 ;
+    FOE               7928 SPECIAL_CHARS:
+    F8OE 08           7929                 DEFB    BS
+    FBOF OD           7930                 DEFB    CR
+    F810 OA           7931                 OEFBsLLF
+    F811 OC           7932                 DEFB  ssFF
+    F812 80           7933                 DEFB    HOME
+    F813 16           7934                 DEFB
+    F814 18           7935                 DEFB    CLRTO EOS
+    F815 1C           7936                 DEFB  § GOTO_XY_CHAR
+    F816 AO           7937                 DEFB    sup
+    FR17 A2           7938                 DEFB  § DOWN
+    F818 A3           7939                 DEFB =  LEFT
+    FR19 Al           7940                 DEFB    RIGHT
+                      7941
+             <OOOC>   7942 NUM_SPCL_CHARS  €EQU    $-SPECIAL_CHARS
+                      7943

@@ -1,0 +1,45 @@
+FILE: . vABS:EOS_TF       HEWLETT-PACKARD: EOSSTART   (c) Coleco  .-..Confidential                    Sat,   8  Sep  1984,   23:41          aE  207
+
+LOCATION OBJECT CODE  LINE     SOURCE LINE
+
+                      8049 SSHEHESSHEHSSEHSSSHEHESKEHEEKEESSEESHEHAESESEHSESEHHEKEEEREEEEEEHEEEE
+                      8050                                                                 %
+                      8051    MODULE NAME;                                                 *
+                      8052                                                                 *
+                      8053      EOS START                                                  *
+                      8054                                                                 ®
+                      8055    INPUTS:                                                      S
+                      8056                                                                 *
+                      8057      NONE                                                        *
+                      8058                                                                  *
+                      8059    FUNCTION(S):                                                  +
+                      8060        . SET STACK.                                              e
+                      8061          TO BANK SELECT OS7 AND 24K RAN.                         +
+                      8062        . CALL INIT_EOS TO ALLOW THE 1) THE Z280/6801SYNCH_UP,    *
+                      8063          POLL FOR NET DEVICES AND ESTABLISH DCB’S.               *
+                      8064        . CHECK FOR THE PRESENCE OF A TAPE. IF PRESENT THEN       +
+                      8065          LOAD IN A COLDSTART_LOADER  AND EXECUTE FROM THERE.     *
+                      8066          IF NO TAPE, THEN BRING UP THE ROM RESIDENT WORD        %
+                      8067          PROCESSOR BY JUMPING TO OS7.                           *
+                      8068                                                                  ¢
+                      8069    OUTPUTS:                                                     .
+                      8070                                                                 s
+                      8071       DEVICE ADDR REG   B                                       +
+                      8072                                                                 s
+                      8073    CALLS:                                                       &
+                      8074                                                                 *
+                      8075      EOSINIT                                                    &
+                      8076      EOSQUERY DEVICE                                            *
+                      8077      EOSREAD BLOCK                                              *
+                      6078                                                                 e
+                      8079    CALLED BY:                                                   *
+                      8060                                                                 ®
+                      8081      INVOKED BY EOSBOOT                                         e
+                      8082                                                                 ¢
+                      8083    NOTES:                                                       s
+                      8084                                                                 ©
+                      8085      NONE.                                                      cd
+                      8086                                                                 s
+                      80867SHSSHSSSSSESSSESESSSSESESSESSSESSEKSEKSESSSSSHSSESESHSESEEHEKEEESEHE
+
+                              oe  @8 @ & HHHHOeHeeneeeeee#ee#eneneee#tee#ee#reere#e#ete        ee@

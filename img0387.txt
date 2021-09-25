@@ -1,0 +1,61 @@
+FILE:OS 7PRIME:pOS        HEWLETT-PACKARD:    DISPLAY   LOGO    (c) Coleco, 1982  CONFIDENTIAL               Fri,  18  May  1984,   16:21        PAGE  113
+
+LOCATION OBJECT CODE  LINE     SOURCE  LINE
+
+    1793 0000205088   5518                    DEFB                 0,0,20H,50H,88H,0,0,0
+    1798 000000
+                      5519 * _=5F
+    1798 0000000000   5520                    DEFB                 0,0,0,0,0,0,0,0F8H
+    17A0 0000F8
+                      5521 * '=60                            |
+    17A3 4020100000   5522                    DEFR                 40H,20H,10H,0,0,0,0,0
+    17a8 000000
+                      5523 * a=61
+    17AB 00007088F8   5524                    DEFB                 0,0,70H,88H,OFSH,88H,88H,0
+    17B0 888800
+                      5525 * b=62                  .
+    17B3 0000F04870   5526                    DEFB                 0,0,OFOH,48H,70H,48H,OFOH,0
+    17B8 48F000
+                      5527 * c=63               |
+    17BB 0000788080   5528                    DEFB                 0,0,78H,80H,80H,80H,78H,0
+    17CO 807800
+                      5529 * d=64
+    17C3 0000F04848   5530                    DEFB                 0,0,0FOH,048H,048H,048H,OFOH, 0
+    17C8 48F000
+                      5531 * e=65
+    17CB OOOOFO80EO   5532                    DEFB                 0,0,OFOH,O80H,OOH, 80H,OFOH, 0
+    1700 80F000
+                      5533 * £=66
+    17D3 O000FO80EO   5534                    DEFB                 0,0,OFON,O80H,OEOH,O80H,80H, 0
+    17D8 808000
+                      5535 * g=67
+    1708 0000788088   5536                    DEFB                 0,0,78H,80H,OBSH,88H,70H,0
+    17E0 887000
+                      5537 * h=
+    17E3 00008888F8   5538                    DEFB                 0,0,88H,88H,OF8H,88H,88H,0
+    17E8 888800
+                      5539 * i=69
+    17EB 0000F82020   5540                    DEFB                 0,0,OFBH,20H,20H,20H,OFB8H0
+    17F0 20F800
+                      5541 * j=
+    17F3 0000702020   5542                    DEFB                 0,0,70H,20H,20H,OAOH,OEOH,0
+    17F8 AQEOOO
+                      5543 * k=6B
+    17FB OOOO90A0CO   5544                    DEFB                 0,0,90H,OAOH,OCOH,OAOH,90H,0
+    1800 A09000
+                      5545 * L=6C
+    1803 0000808080   5546                    DEFB                 0,0,80H,80H,80H,80H,OFBH,0
+    1808 80F800
+                      5547 * m=6D
+    180B O00088D8A8   5548                    DEFB                 0,0,88H,OO8H,OABH,88H,88H,0
+    1810 888800
+                      5549 * n=6E
+    1813 000088CBA8   5550                    DEFB                 0,0,88H,OCBH,OABH,98H,88H,0
+    1818 988800
+                      5551 * o=6F
+    1818 0000F88888   5552                    DEFB                 0,0,OF8H,088H,88H,88H,OFBH, 0
+    1820 88F800
+                      5553 * p=70
+    1823 OOOOFO8B8FO  5554                    DEFB                 0,0,OFOH,88H,OFOH,BOH,BOH,0
+    1828 808000
+                      5555 * q=71

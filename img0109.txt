@@ -1,0 +1,61 @@
+ FILE: ~-3ABS:E€0S_TF            HEWLETT-PACKARD:     DIR_HANOL   (c)  Coleco   1:._4Confidential                    Sat,   8  Sep  1984,  22.40       Aue    105
+
+ LOCATION   OBJECT   CODE   LINE       SOURCE   LINE
+
+     E971   DO7E17          4096            LO        A,[IX+FCB  DEVICE)     ;GET PARAMETERS  FROM  FCB
+     E974   2AFEOS          4097            LO       Hi,  (BUF START)
+     E977   DOSE19          4098            LO        E,(IX+FCB_BLOCK   }
+     E97A   ODSGIA          4099            LD       0, [1X+FCB_BLOCK+   1)
+     E970   DD4E 16         4100            LO       C,[1X+FCB_BLOCK+2)
+     E960  00461C           4101            LO        8B[IX+FCB_BLOCK+3]}
+     E983   COFIEG          4102            CALL     WRITE  _BLOCK        ;WRITE  THE BLOCK OUT
+                            4103
+     E9866  2001            4104            JR       NZ, MAKE ERROR           ; IT’S A BOO BOO! !
+:    E988   AF              4106            XOR      &                    ;SHOW NO  ERROR
+                            4106
+     E989                   4107  LETS  _GET_OuT:
+     E989                   4106  MAKE ERROR:
+                            4109                                          ;RESTORE  THE REGISTERS
+     E969  87               4110            OR       a                                                                                                             ‘
+     E9BA  Ci               4tit            PoP      BC
+     E988  D1               4112            POP      DE
+     E9SC   E1          —   «4193           PoP      HL
+     E98D  DDE I            4114            POP      Ix
+     ESGF  FDE1             41165           PoP       ry
+     E991  Ce               6-416           RET
+                       —
+     E992                   4118  TOO BIG
+     E982  3£08      .      4119            LO       A,TOO  BIG  ERR      ;SHOW AN  ERROR
+     E994   18F3            4120            JR       MAKE ERROR
+                            4121
+                            4122
+     E996                   4123  FILE_EXISTS
+     E996  3E06             4124            LO       A,FILE_ EXISTS   ERR
+     E988   1GEF            41265           JR       MAKE ERROR
+                            4126
+     cBBA                   4127  FULL_DIR_EXIT:
+     ESSA  3EOC             4126            LO       A,FULL_DIR_ERR
+     ESOC   18EB            4129            JR       MAKE ERROR
+                            4130
+     ESE         .          4131  TAPE _FULL
+     ESSE  3E0D             4132            LO       A,FULL_TAPE_ERR
+     ESAO   18E7            4133            JR       MAKE ERROR
+                            4134  «+
+                            4135  ¢
+                            4136  *    SUBROUTINE   NAME:  GET  FILE   NAME  LENGTH
+                            4137  *
+                            4138  «      ENTRY:   HL- POINTS   TO  TEXT  STRING
+                            4139  *      EXIT:    Z=1=FOUND   AND  PROPER   SIZE  (1-12)
+                            4140  *                 BC=BYTE   COUNT
+                            4141                    A=TRASHED
+                            4142  *
+                            4143  *               Z=O=ERROR
+                            4144  *                 BC=TRASH
+                            4145  »                 A=FILE  NAME  _TOO LONG
+                            4146  * DLS(8/28/83)
+                            4147  *
+     E9A2                   4148  GET FILE  NM_LEN:
+     E9A2  E5               4149                     PUSH       HL                         ;SAVE  THE POINTER  TO  FILE NAME
+     E9A3  O6OC             4150                     LO         B,12                       ;SCAN  UP TO 12 BYTE
+     E9A5  O£0!             4151                     LD         C,1                        ;SET COUNT  TO 1
+     ESAT                   4152  SRCH LOOP:

@@ -1,0 +1,52 @@
+      {                                                                                                                 8                            »nvE     199
+FILE: «©».A8S:E0STF          HEWLETT-PACKARD:    CONSOUT     (c) Coleco   1% _. Confidential                     Sat,      Sep   1984,  23:41
+
+LOCATION OBJECT  CODE   LINE      SOURCE   LINE
+
+                        7795  ;
+                        7796  ;Subroutine
+                        7797  ; SCROLL_UP    -   Scrolls   the entire   window  up 1 line and  puts  a  line
+                        7798  ;                  Of BLANKING  CHAR‘s    on the  last line
+                        7799  ;
+                        7800  ;   Caller   must  restore   cursor  to screen
+                        7801  ;
+    F794                7802  SCROLL_UP:
+    F794 CDF7D7         7803                     CALL      PUT_OLD ON_SCREEN
+    F797 2AFEAI         7804                     LO        HL,[UPPER _LEFT)
+    F79A E5             7805                     PUSH      HL
+    F798 CDFT7FC        7806                     CALL      CONVERTXY
+    F79E E1             7807                     POP       HL
+    F79F SAFESF         7808                     LO        A,(NUM LINES]
+    FIA2 47             7809     |               LD        B.A
+    F7A3 05     .       7810                     DEC       B
+                        7811                   |
+    F7A4 CS             7812  SCROLL_LOOP:       PUSH      BC                 ;Save number of  remaining    lines
+    F7AS DS             7813                     PUSH      DE                 ;Save next write  location
+    F7A6 2C             7814                     INC       L                  ;Poitntto next  line  below
+    F7A7 ES             7815                  .  PUSH      HL
+    F7A8 CDFT7FC        7816                     CALL      CONVERT_XY
+    F7AB DS             7817                     PUSH      DE                 ;Save address  of this   read
+    F7AC 3AFEAO         7818                     LO        A,[NUM COLUMNS ]
+    FI7AF4F             7819                     LO        C,A
+    F7BO 0600           7820                     LD        BOOH
+    F7B2 CS             7821                     PUSH      BC                 ;Save number of  chars   in  line
+    F7B3 21FE7E         7822                     LD        HL,LINEBUFFER_
+    F786 COFDID         7823                     CALL      READ_VRAM
+    F789 C1             7824                     PoP       BC                 -Get number of  bytes   that  were  read
+    F7BA D1             7825                     POP       DE                 -Get address of  last   read
+    F788 E1             7826                     PoP       HL                 ;Get X-Y coords
+    F7BC E3             7827                     EX        {SP},HL            ;Swap prev read  address   with   X-Y  coords
+    F7BO EB             7828                     EX        DE,HL              ;Swap last read  with   previous   address
+    F7BE ES             7829                     PUSH      HL                 ;  and save previous
+    FIBF 21FET7E        7830                     LD        HL,LINEBUFFER_
+    F7C2 CDOFDIA        7831                     CALL      WRITE_VRAM         ;Write line one  line   up
+    F7CS O1             7832                     PoP       DE                 ;Get address of  next   write
+    F7C6 E1             7833                     PoP       HL                 ;Get starting  X-Y of   last  read
+    F7C7 Ci             7834                     PoP       BC
+    F7C8 1tODA          7835                     DJNZ      SCROLLtooP
+                        7836
+    F7CA CDF73C         7837                     CALL      BLANKS
+    F7ICD21FET7E        7838                     LD        HL,LINEBUFFER_
+    F7D0 3AFEAO         7839                     LD        A,(NUMCOLUMNS  ]
+    F7D3 4F             7840                     LD        C,A                ;B is O from DUJUNZ
+    F7D4 C3FDIA         7841                     JP        WRITEVRAM          ;Return thru WRITE VRAM

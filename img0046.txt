@@ -1,0 +1,44 @@
+FILE:  EQSABS:EOS     TF           HEWLETT-PACKARD:       A&u0S OO    (c}  Coleco    1983  Conf   identia?                        Sat.    8 Sep   1984. 23 38      PAGE     42
+
+LOCATION    OBJECT    CODE    LINE       SOURCE    LINE
+
+                               1590 ;
+                               1591 ;   Name:                PUT _VRAM
+                               1592 ;
+                               1593 ;   Function:            Gets  a block   of  data   from   a  user    buffer   and  puts    itt into  VRAM.
+                               1594  ;                       The  following    table   codes   are   used    to identify     which   VRAM  table
+                               1595 ;                         isbeing   referenced:
+                               1596 ;
+                               1597 ;                          O  - SPRITE   ATTRIBUTE     TABLE      (SAT)
+                              1598  ;                           1 - SPRITE   GENERATOR     TABLE      (SGT)
+                              1599  ;                          2  - PATTERN    NAME   TABLE          (PNT)
+                              1600  ;                          3  - PATTERN    GENERATOR    TABLE    (PGT)
+                              1601  ;                          4  - PATTERN    COLOR   TABLE         (PCT)
+                              1602  ;
+                              1603  ;   Entry:               A -  table  code   (see   above)
+                              1604  ;                        DE -  starting    index   into   the   table
+                              1605  ;                        Hi -  address   of  user   buffer
+                              1606  ;                        IY -  block   size  (or   byte   count)
+                              1607  ;
+                              1608  ;   Exit:                None.
+                              1609  ;
+                              1610  ;   Registers    used:   AF, DE,  HL,   IY
+                              1611  ;
+                              1612  ;   Routines    used:    SETCOUNT
+                              1613  ;
+                              1614  ;   Size:                ROM -  O bytes
+                              1615  ;                        RAM -  O bytes
+                              1616  ;
+                              1617  ;   Comments:            This  version   of  PUT  _VRAM   is  provided    for   stand    alone  operation.
+                              1618  ;
+                              1619  ;   Comparision:         left  out  pascal   entry   point
+                              1620  ;                        took  out  the  mux   sprites    capablity
+                              1621  ;                        code  compacted
+                              1622  ;                        edited  for  documentation
+                              1623  ;
+    EOCS                      1624
+    EOCS    CDEODS            1625                      CALL     SET COUNT                        ;setup    the  actual    byte   count   and  the  absolute VRAM  address
+                              1626  *                   CALL     WRITE  VRAM                      ;VRAM    data  =  user   buffer
+                              1627  +                   RET
+    EOCC    C3FDIA            1628                      JP       WRITE  VRAM
+                              1629

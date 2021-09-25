@@ -1,0 +1,63 @@
+          FILE: .-5saBS:E0TF         CROSS REFERENCE TABLE                PAGE  24.
+
+          LINE#   SYMBOL          TYPE     REFERENCES
+
+           5171  GET_ERROR             5167
+           4148 GET FILE_NM_LEN        4185
+           6991 GET _NEXT_ASCII        7001
+           7168  GET_NEXT_ASCII2       7178
+           5651  GET_OUT_ERR           5630
+           5468  GET_OUT_HERE          5477
+           6075 GET STATUS  FLAG       5918,6056
+            302 GET _VRAM
+           9203  GOODBYE               9196
+           7650  GOTO_XY               7955
+           7364  GOTO_XY_CHAR          7936
+           3917  GOTBLOCK              3893,3903
+           2220  GOT_CORRECT_CON       2217
+           3689  GOTFILE SIZE          3676,3680
+           4167  GOT_IT                4155
+           4290  GOT_ONE               4267
+           8242  GO_TO_TAPECODE        8232
+           6714  GOK                   6708
+           1711  HAVE_CNT              1706
+           1724  HAVE_CNT2             1721
+           6904  HAVE_THE_KEY          6886
+            762  HI_AUXILLIARY_S       783,786,789,792
+            764  HI_COLECOVISION       807,810,813,816
+            763  HI_EXPANSION_80       795,798,801,804
+            761  HI_INTRINSIC_80       771,774,777,780
+           6520  WHOLFILE NAME         4091,6217
+           7365  WOME                  7933
+           2480  INACTIVE              2942,3201,3251,3298,3450
+           2438  INCREMENTO  DIR       2434
+           2453  INCREMENT 1_DIR       2449
+           6494  INITIAL_DIRECTO       6346,6529
+           6529  INIT_INFOSIZE
+           $221  INIT_LOOP             5224
+           1193  INIT_PCB_ADOR
+           -298  INIT_TABLE
+           15859 INIT_TABLE8O          1521,1528.
+           1571  INIT_TABLESO          1539,1542,15952,1555
+           1358  INPUT_LOOP            1363,1366
+           2425  INT_BIT               2431,2445
+           19364 IN_DEC_HI_BYTE        1357
+             90  IN_EOS
+           6372  ITS_AN_ETX            6360
+           7022. =ITS_ETX              6994
+           $632  ITS_ETX1              5611
+           7186  ITS_ETX2              7171
+           6244  ITS_HOLE              6195
+           2161  JOYMASK               2258
+           4746  JP_TOREAD3            4735,4738,4741,4744
+           2956  JUKEBOX               3292
+           2158  KBDMASK               2243                                                                                                        a
+           1205  KBD_NAK               6889
+           2157  KBD_NULL              2140,2155
+            497  KEYBOARDBUFFER        6854,6905
+           1151  KEYBOARD_ID           6831,6853,6881,8641,8685
+           3085  Li                    3098
+           3216  £10                   3207
+           328%  Lig                   3263
+
+>PPPPrPrPprprrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrPrrrrrrrr>rp>

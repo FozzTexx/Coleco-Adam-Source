@@ -1,0 +1,61 @@
+FILE: OS7PRIME:pOS           HEWLETT-PACKARD:    PUT  COMPLEX   (c)  Coleco,   1982     CONFIDENTIAL                 Fri,   18 May  1984,  16:20        PAGE    81
+
+LOCATION OBJECT  CODE  LINE        SOURCE  LINE
+
+                       3877   ;         .IDENT  PUTCOMP
+                       3878   ;         .20P
+                       3879   ;         .EPOP
+                       3880   ;         .1F1  ,.INSERT   8:SPZ80.ASM
+                       3881   ;         -COMMENT   }
+                       3882   ;                                                                               4/15/82
+                       3883   ;                                                                               10:40:00
+                      3884    stananenaeaneeenasee    PUT_  COMPLEX   SRACAACAAAAREKAKARAARARAAAAEAKEKAAARARRAARARKERKEE
+                       3885   ;                                                                                        |
+                      3886    “DESCRIPTION:      THE  POSITION   AND  FRAME   NUMBER  OF  EACH   OF  A COMPLEX   OBJECT'S
+                       3887   ;                  COMPONENT   OBJECTS   IS  UPDATED.     THEN  PUT  OBJECT    IS CALLED   FOR
+                       3888   ;                  EACH  OF  THE  COMPONENT   OBJECTS.
+                       3889   ;
+                       3890   ;INPUT:            IX  = ADDRESS   OF OBJECT    TO BE  PROCESSED
+                       3891   ;                  HL  = ADORESS   OF OBJECT'S    GRAPHICS    TABLES   IN ROM
+                       3892   ;                   B  = SELECTOR   FOR  METHODE   OF  COMBINING    OBJECT   GENERATORS
+                       3893   ;                        WITH  BACKGROUND    GENERATORS
+                       389%   ;
+                       3895   ;            |           1  = OBJECT  PATTERN    GENS  ORed   WITH  BACKGROUND    PATTERN   GENS
+                       3896   ;                             COLOR1  OF  BACKGROUND    CHANGED    TO  MOBILE  OBJECT'S   COLOR
+                       3897   ;                             IF  CORRESPONDING    PATTERN   BYTE   NOT  ZERO
+                       3898   ;
+                       3899   ;                        2  = REPLACE   BACKGROUND    PATTERN   GENS   WITH  OBJECT   PATTERN   GENS
+                      3900    ;                             TREAT  COLOR   SAME  AS  #1
+                       3901   ;
+                      3902    ;                        3  = SAME  AS #1  EXCEPT   COLORO   CHANGED    TO TRANSPARENT
+                       3903   ;
+                      3904    ;                        4  = SAME  AS #2  EXCEPT   COLORO   CHANGED    TO TRANSPARENT
+                      3905    ;                   |
+                      3906    .                   C  = OBJECT   TYPE,  AND  NUMBER   OF  COMPONENTS
+                      3907    ;
+                      3908    gARSERARERAESEAHESO    REAHAERAAHAREE  AAA ARA AEE RAEEAAAEAERER    ERA  AKAENEASRASR   AAA EEETE
+                      3909    ;)
+                      3910    ;        EXT
+                      3911             GLB       PUTCOMPLEX
+                      3912    ;
+  OEA2                3913   PUTCOMPLEX
+                      3914    ; UPDATE  THE  FRAME   NUMBER  AND  THE  X AND  Y  LOCATION    IN EACH   OF THE   COMPONTEN
+                      3915    ; OBJECT'S   STATUS  AREAS
+   OEA2 C5            3916             PUSH  BC                     ;SAVE   SELECTOR   AND   COMPONENT   COUNT   [COMP CWT)
+   OEA3 09            3917             EXX                          ;USE  PRIMED   REGS   FOR  XLOC    AND  YLOC
+   OEA4 0D6603        3918             LD H, [IX#3)                 “HIGH   BYTE  OF  STATUS
+   OEA7 DD6EO2        3919             LDL,  [1X+2)                 *LOW  BYTE   OF  STATUS
+   OEAA 7E            3920             LD A, (HL)                   cA  :=  FRAME
+   OEAB 23            3921             INC  HL
+   OEAC 4E            3922             LDC, [HL}                    BC’    := XLOCATION
+   DEAD 23            3923             INC  HL
+   OEAE 46            3924             LD B, (HL)
+   OEAF 23            3925             INC  HL
+   OEBO 5E            3926             LDE,  {HL}                   :DE'   := YLOCATION
+   OEB1 23            3927             INC HL
+   0EB2 56            3928             LD D, (HL)                                                                                                                           :
+   0EB3 09            3929             EXX
+   0EB4 87            3930             ADD  A,A                     *FRAME   :=  4*FRAME
+   0E85 87            3931             ADD  A.A
+   OEB6 5F            3932             LD E,A                       >FORM  POINTER    TO  FRAME  AND  OFFSET   POINTERS
+   0EB7 1600          3933             LD D,0

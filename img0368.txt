@@ -1,0 +1,66 @@
+GO                                         EE          EE                                             _____
+
+           ILE:  OS_7PRIME:pOs          HEWLETT-PACKARD:     CONTROLLER   SOFTWARE   (c) Coleco,   1982  CONFIDENTIAL         Fri,   18  May  1984,  16:20       PAGE   9%
+
+           OCATION  OBJECT   CODE LINE        SOURCE   LINE
+
+              10FC  OF            4557                 DEFB  KBD NULL           ; NULL  ENTRY
+              10FD  02            4558                 DEFB  2                  ; 2°
+              10FE  08            4559                 DEFB  11                 ; RESET
+              10FF  07            4560                 DEFB  7                    7
+              1100  OF            6561                 DEFB  KBD NULL           ; NULL  ENTRY
+              1101  05            4562                DEFB   5                  : 158
+              1102  04            4563                 DEFB  4                  + 14s
+              1103  08            4564                DEFB  8                   ; 8
+              1106  OF            4565                DEF®  KBD  MULL           ; NULL  ENTRY
+
+                                  cies
+                                         RERAAAARARARARRAARARKARAAAEAARES      BOOT   [NES**teeeekaaakeanaaanane
+                                  4568                   |
+                                  4569                      GLB                 CONTROLLER INIT
+              1105                4570   CONTROLLER   INIT                     INITIALIZE    CONTROLLER  TO  STROBE  RESET
+              1105  03c0          4571                QUT    [STRB_RST PORT],A
+              1107  AF            4572                MOR   A
+              1108  0D2A8008      4573                LD     1X, [CONTROLLER_MAP)
+              110C 0023          4574                 Inc    IX
+              110€  D023          4575      =i   (sstsé«i    EX
+              1110  FD217307      4576                LD     _1Y,DBNCE_BUFF
+              1114  060A      —   4577                LD    B,MUM  DEV*2
+                “2               4578    *  CLEAR   CONTROLLER   MEMORY  AND  DEBOUNCE   STATUS  BUFFER
+              1116                4579   CIMITI
+             1116  007700     =   «4580               LO     LIX#0},A
+             1119  DD23          4581                 INC    IX
+             1118   FD7700       4582                 LD     [1¥#0),A
+             111E   F023         4583                 Inc   1Y
+             1120   FD7700       4584                 LO     [1¥#0],A
+             1123   FD23         4585                 Inc   IY
+             112505         ©    4586.                pec   B~
+             1126  2066      =i‘ SB                   JR   |WZ,CINITI
+                                 4588   *  CLEAR  REMAINING    VARIABLES
+             1128  327368        4589                 LD    {SPIN  SWO CT),A
+             1128  3273EC        4590         |       LD    {SPIN  SW1_CT],A
+             112E  3273EE        4591                 LD    [S0_CO),A
+             1131  3273EF        4592                 LD    {S0_C1},A
+             1134  3273F0        4593                 LD    [S1_CO),A
+             1137  327361        4594                 LD    (S1_C1],A
+             113A  C9            4595                 RET
+                                 4596                                                                                                                                                                   ,
+                                 4597
+                                 4598
+             1138  00            4599   DELAY        NOP                       ;DELAY  AFTER   STROBE, BEFORE  READ
+             113C  C9            4600                RET
+                                 4601   *                            ,
+                                 4602   *   CONTROLLER    READ  ROUTINE
+                                 4603   *   -               INPUT:                          |
+                                 4604   *                         H  - CONTROLLER  NUMBER
+                                 4605   *                   OUTPUT:
+                                 4606   *                         A  - RAW DATA
+                                 4607   *                                                                 |                                                                          ,
+                                 4608
+             1130                4609   CONT READ
+             1130  7c            4610                 LD    A.W
+             113&  FEOO          4611                 cp    CONTROLLER  0               71   CONTROLLER<>0
+             1140  2004          4612                 JR    NZ,CONT  READ)              sTHEN  READ  PLAYER  1
+             1142  DBFC          4613                 IN    A, (CTRL O PORT)            sELSE  READ  PLAYER  0
+
+                                                                                                                      ’

@@ -1,0 +1,63 @@
+LE:  OS 7PRIME:pOS              HEWLETT-PACKARD:       TIME  MANAGER     (c)  Coleco,   1982    CONFIDENTIAL                Fri,  18  May   1984,  16:20        PAGE      86
+
+CATION   OBJECT    CODE   LINE        SOURCE    LIWE
+
+  OFB6    28              4140                         DEC                     HL
+  OF87    77              4141                         LD                      (HL ,A
+  OF88   28               4142                         DEC                     HL
+  OF89   £1               4143                         PoP                     HL
+  OFBA   E5               4144                         PUSH                    HL
+  OF88                    4145   SET DONE   BIT
+  OF8B   CBFE             4146                         SET                     7,(HL)
+  OF8D                    4147   TIMER  EXIT
+  OF8    €1               4148                         pap                     HL
+  OFBE   C9               4149                         RET
+                          4150
+                          4151
+                          4152
+  OFF                     4153   SAVE  2 BYTES
+  OFBF   72               4154                         LD                      (WL),D
+  0F90   28               4155                         DEC                     HL
+  OF91   73               4156                         tb                      (WL),E
+  OF92   18F9             4157                         IR        |             TIMER EXIT
+                          4158
+                          4159   ;Procedure     Init   Timer
+                          4160   ;WL  has  address     of  Timer   Table
+                          4161   ;0E  has  address     of  Timer   Data  Table
+                          4162
+                          4163   ;              COMN
+                          4164   ; INIT TIME  DATA:
+                          4165   ; TEMP1:
+                          4166   ;             DEFS    2
+                          4167   ; TEMP2:
+                          4168   ;             DEFS    2
+                          4169
+                          4170                  PROG
+  OF                      4171    IWITTIME   PAR:
+  0F94   00020002         4172                 DEFW    2,2,2
+  OF96   0002
+                          4173
+  OF9A                    4174   INIT  TIMERQ:
+  OF9A   010F94           4175                  LD     BC,INIT  TIME   PAR
+  OF9D   1173BA           4176                  LD     DE, INIT TIME   DATA
+  OFAO   C00098           4177                  CALL   PARAM_
+  OFA3   2A73BA           4178                  LD  ss WL, [TEMP 1)
+  OFA6   ED58738C         4179                  LD    CODE(TEMP2)
+  OFAA                    4180   INIT TIMER   :
+  OFAA   227303           4181                 LO      (TIMER  TABLE   BASE)  ,HL                sStore  given   base  address  for   timer   table
+  OFAD   3630             4182                 LD   =  (WL) ,30H                                 sSet  first byte    in timer  table   to  free  and  last  timer
+  OFAF   EB               4183                 EX     ODE,HL
+  OFBO   227305           4184                 LD      (NEXT TIMER   DATA   BYTE)  ,WL           ;Store  given   base  address  for  data   block
+  OFB3   C9               4185                 RET
+                          4186
+                          4187   ;Procedure    Free    Signal
+                          4188   ;Acc  has   signal   number    to  be  Freed
+                          4189   ;No  output    is  generated    .                             |                                     :                                                      ‘
+                          4190   ;             COMN                                              |
+                          4191   ; SIGNAL NUM:
+                          4192   ;             DEFS    1
+                          4193
+                          4194
+                          4195                 PROG
+
+                                                                                                                      ‘                         s

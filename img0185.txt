@@ -1,0 +1,23 @@
+FILE: ~ 2».ABS:EOS_TF     HEWLETT-PACKARD:   CONS OUT    (c) Coleco   1:_s4Confidential                     Sat,  8 Sep  1984,  23:41       vaGE  181
+
+LOCATION OBJECT CODE  LINE     SOURCE LINE
+
+                      7355 ;:
+                      7356 ;Local Equates
+                      7357 ;
+             <OOOA>   7358 LF                EQU       OAH
+             <OOOC>   7359 FF                EQU       OCH
+             <0008>   7360 BS                EQU       O8H
+             <OOOD>   7361 CR                EQU       OOH
+             <0O016>  7362 CLR_TO_EOL        EQU       16H
+             <0018>   7363 CLR_TO_EOS        EQU       18H
+             <OO01C>  7364 GOTO_XY_CHAR      EQU       1CH
+             <0080>   7365 HOME              EQU       80H
+             <OOAO>   7366 UP                EQU       OAOH
+             <OOA1>   7367 RIGHT             EQU       OA1H
+             <OOA2>   7368 DOWN              EQU       OA2H
+             <OOA3>   7369 LEFT              EQU       OA3H
+             <OOSF>   7370 CURSOR_CHAR       EQU       _                 ;Char  to emit as cursor
+             <0020>   7371 BLANKING CHAR               .s                ;Char  used when scrolling    to  fill screen
+             <FEAG>   7372 CURSOR_X          EQU       CURSOR+1
+                      7373

@@ -1,0 +1,15 @@
+FILE: ~.5ABS:E0S_TF       HEWLETT-PACKARD:  UTILS      (c)  Coleco 1t_s Confidential)
+                                                                                                       Sat,    8  Sep  1984,   23:40      ‘eat  135
+
+LOCATION OBJECT CODE  LINE     SOURCE LINE
+
+    FO7F E1           5537         PoP      HL
+    FOBO AF           §538         XOR      A                 ;SHOW THE MATCH
+    FO81 C9           5539         RET
+    FO62              5540 NO_MATCH
+    FOB2 Ci           5541         PoP      BC                ;RESTORE REG’S
+    FOB3 DI           8542        POP       DE
+    FOB4 E1           5843         PoP      HL
+    FOSS 3E08         5544         Lo       A,MATCH_ERR
+    F067 87           5545         OR       A
+    FOSS C9           5546         RET                        ;RETURN WITH NZ CONDITION

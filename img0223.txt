@@ -1,0 +1,31 @@
+FILE: ctJ3ABS:E0OS_TF       HEWLETT-PACKARD:   EOSUTIL   (c)   Coleco  1403 Confidential                     Sat,   8  Sep  1984,  23:42       teruE 219
+
+LOCATION OBJECT CODE   LINE      SOURCE  LINE
+
+    FA11 DO3503        8565         DEC       {IX+P_NUM_DCBS])           ; DON’T NEED LAST  DCB  WE  USED
+                       8566
+    FA14 1811          8567         JR        END_SA                     ; ALL DONE
+                       8568
+    FA16               8569  RECVDVALID  STAT:
+    FA16 DD3403        8570         INC       [1X+P_NUM_DCBS)            ;
+                       8571
+    FAIS 110015        8572         LD       DE .DSIZE                   ; ADVANCE TO NEXT  DCB
+    FAIC FDI9          8573         ADD       TY,DE                      :
+                       8574                               .
+    FAIE F1            8575         POP       AF                         ; ADVANCE TO NEXT  NET  ADDR
+                       8576
+    FAIF 3C            8577         INC       A                          :
+    FA20 FE10O         8578         cP       MAX _DEV_ADDR+1             ; NO MORE ?
+    FA22 2002          8579         JR       NZ, LOOPS                   ; MORE TO CHECK
+                       8580
+    FA24 0D3503        6581         DEC       {I1xX+P_NUM_DCBS]          ; DON’T NEED LAST  DCB  WE  USED
+                       8582
+    FA27               8S83  ENDS A:
+    FA27 ODE1          8584         POP.      IX                         ; RESTORE Ix
+    FA29 FDE1          8585         PoP    -~—sCmiéi'Y                   :         ly
+    FA2B E1            8586         POP      HL                          ;         Hi
+    FA2C D1            8587         PoP      DE                          :         DE
+    FA2D Ci            8588         POP      BC                                    BC
+                       8589
+    FA2E C9            8590         RET
+                       6S91

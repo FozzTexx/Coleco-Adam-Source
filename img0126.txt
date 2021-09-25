@@ -1,0 +1,61 @@
+FILE:  EOSABS:EOS_TF         HEWLETT-PACKARD: RD_WT       (c) Coleco  1983Confidential                    Sat,   @& Sep  i984,  23:40      PAGE  122
+
+LOCATION  OBJECT  CODE  LINE      SOURCE LINE                                                              /
+
+                        G4BBG  rrr                rrr       rrr    rrrn tn rn ertnn tenet       nenne
+                        4887   ;                    .
+                        4868   ; WRITE  FILE -- write  some  bytes  toa  file.
+                        4889   ;
+                        4890   ;ENTRY PARAMETERS:  file number   inA; byte count  in BC;  pointer
+                        4891  ;               to data  in HL.
+                        4892  ;
+                        4893  ; EXIT PARAMETERS: no  errors  -- 2 +  1;A#0O
+                        4694  ;                   if errors  -- Z * 0; A  *error  code
+                        4695  ;
+                        BBOR  prmen mm           rr      treet      ewemeeewenmsenceewe  nen ennnenne
+                        48697
+    EDSF                4698   WRITE _FILE
+    EOGF  C5            4889          PUSH    BC                ;SAVE REGISTERS
+    EDSO  05            4900          PUSH    DE                       |                                                                                  \
+    ED91  ES            4901         PUSH     HL
+    ED92  ODES          4902          PUSH    IX
+                        4903               |
+    ED94  22FE06        $904          LD      [USER_BUF),HL     ;SAVE USER’S BUFFER  ADDRESS
+    ED97  ED43FEO2      4908          LO      [BYTES REQ),.BC   ;SAVE REQUESTED COUNT
+    ED9B  32FE01        4o06          LD      (FNum).A          ;SAVE FILE NUMBER
+    EDSE  ED43FE04      4907          Lo      ([BYTES_TO_GO),BC  ;INIT COUNTER (COUNTS  DOWN)
+                        SPOS                _
+    EDA2  87            4909          OR      A                 ;CHECK FILE NUMBER
+    EDA3  CAEEBC        4910          ‘JP     2,WRITE ERR2      ;BRANCH IF ZERO
+    EDAG  FEOS3         4911          cP      NUM_FCBS          ;CHECK FOR MAX RANGE
+    EDAS  D2EEBC        4912          JP      NC WRITE ERR2     ;BRANCH IF TOO LARGE
+                        4913
+    EDAB  47            ata           LO      B.A               :PUT IT INTO B
+    EOAC  OD2AFOFO      4916          LD      IX,[FCB_HEAD_ADDR]}] ;GET ADDRESS OF  OTH FCB
+    EDBO  110023        4916          LD      DE,FCB_LENGTH     ;SET OFFSET
+    E063                4917  WRITE!
+    EDB3S 0D19          4918          ADD     Ix,DE             ;ADVANCE POINTER TO  NEXT  FCB
+    E0BS  10FC          4919          DJUNZ   WRITE1            ;UNTIL WE GET TO THE  ONE  WE WANT
+                        4920              :
+    E0B7  47            4921          LD      BA                ;POINT HL AT MY BUFFER
+    E0BB  110400        4922       ~   0d     DE,1024
+    E0BS  2AFOFF        4923          LD      Hi,(FCB_DATA_ADDR)
+    EDGE                4924  WRITE2
+    EDBE  19            4925          ADD     HL.DE
+    EOBF  10FD          4926          DUNZ    WRITE2
+                        4927
+    EDC!  22FE08        4928          LD      (BUF_START]),HL   ;SAVE ADDRESS OF MY  BUFFER
+    EO0C4 19            4320          ADO     HL,.DE            ;POINT HL PAST END OF  MY BUFFER
+    EDCS  22FEOA        4930          LO      (8UF_END],HL    ;SAVE IT TOO
+                        4931
+                        4932                                    ;*** CHECK FOR MODE  +
+    Eocs  DDES          49333         PUSH    Ix
+    EDCA  E1            4934          POP     HL
+                        4935
+    EDCB  CDOFODS       4936          CALL    MODECHECK
+    EODCE C2EEBE        4337          uP      NZ,WRITEERR!      ;JUMP IF WRONG MODE
+                        4938
+    EDD1                4939  WRITES
+    EDD1  DO7E14        4940          LD      A,(IX+FCB USED LENGTH+1]
+    EDD4  ODBE12        494i          cP      [IX+FCB_MAX_LENGTH+1]
+    EDD?  3°            4942          JR      C,SET_uP

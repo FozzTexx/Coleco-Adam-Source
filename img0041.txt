@@ -1,0 +1,32 @@
+FILE:  ct-35asS:EOS  TF           HEWLETT-PACKARD:        A_u0S  OO      (c)    Coleco    1tbus  Vonf  idential                           Sat,     8  Sep   1984,    23-38          - ok      37
+
+LOCATION   OBJECT    CODE    LINE        SOURCE     LINE
+
+                             1415
+                             1416       Name :                READ   REGISTER
+                             1417
+                             1418       Function:             Reads     a data     byte   value   from    the   Colecovision       CTRL  PORT.
+                             1419
+                             1420       Entry:                None.
+                             1421
+                             1422       Exit:                 A  -  data     byte   value    read   in
+                             1423
+                             1424       Registers     used:   A,C
+                             1425
+                             1426       Size:                 ROM   -   3 bytes
+                             1427                             RAM   -  O  bytes
+                             1428
+                             1429       Comments:             This   version       of  READ  REGISTER       is  provided     for   stand   alone     operation.
+                             1430                             This   routine       does   a direct    access      to  the   COLECOVISION       I/0   ports.
+                             1431
+                             1432       Comparision:          edited     for   documentation
+                             1433
+    EO4F                     1434    READ   REGISTER:
+    EO4F   3AFC29            1435                        LD         A,{VOP_CTRL_PORT}
+    EO52   4F                1436                        LO         C,A
+    £053   ED78              1437                        IN         A,{c]}                              :get    the   data   from   CTRL_PORT
+    E055   32FD063           1438                        LO         {VOP_STATUS      BYTE],A            ;Save    a  copy    of  VDP   status    data
+    EOo58  C9                1439                        RET
+                             1440
+
+                                                                          @e eeee @e @eee weee @e @e@e@ee se@ee@e @ewe ee ee

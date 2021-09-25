@@ -1,0 +1,18 @@
+FILE: EOSABS:EOS TF         HEWLETT-PACKARD: EOS COMN   {(c)Coleco   1983Conf tdential                 Sat.  68Sep 1984, 23:38       PAGE    16
+
+LOCATION OBJECT  CODE   LINE     SOURCE LINE
+
+                         598 .;            ;GiB      SAVEDCOUNT
+                         599                                                    : controller data area
+                         600               :GLB      SPIN SWOCT                 -THESE TWO BYTES MUST  GE IN THIS ORDER!!!
+                         60!               ;GLB      SPIN SwiCT
+                         602               -GiB      PERSONAL ODEBOUNCETABLE
+                         603               ;Gis      TEMP STACK                 ,Used Dy putascit  when  bank switching
+                         G04                                                    : sound data areas
+                         605               ;GLB      PTRTO LST  OF SND_ADORS
+                         606               ;GLB      PTRTO S GN_O
+                         607               ;GLB      PTR_TO_S_ON1
+                         608               ;GLB      PTR_TO_SON  2
+                         609               ;GLB      PTRTO S ON  3
+                         610               ;GLB      SAVECTRL
+                         611

@@ -1,0 +1,61 @@
+FILE: OS 7PRIME:p0S           HEWLETT-PACKARD:      PUT  MOBILE   (c)  Coleco,   1982   CONFIDENTIAL                     Fri,  18  May   1984,   16:20       PAGE    70
+
+LOCATION  OBJECT   CODE  LIWE        SOURCE  LIWE
+
+    OAF9  09             3273            ADD  HL ,BC
+    OAFA  010008         3274            LD  BC, 11                     sGET  9  NAMES  FROM   VRAM
+                         3275  ;         IF  (D,LT,   70H)              >THEN  OLD SCREEN     1S IN  VRAM
+    OAFD  7A             3276            LD  A,O
+    OAFE  FE70           3277            CP  70H
+    0800  3005           3278            JR  WC,ELSE2
+    0802  CDIFE2         3279               CALL  READ  VRAM
+    0805  1803           3260               JR END2
+                         3281  ;         ELSE                           ;OLD SCREEN    IN  CPU  RAN
+    0807  EB             3282  ELSE2        EXDE,  WL
+    0808  EDBO           3283               LDIR
+   OBA                   3284  END2    ;ENDIF
+                         3285
+                         3286 ;  AT  THIS  POINT,    IX  = GRAPHICS,    [SP] =   OLDSCREEN
+                         3287 ;  BACKGROUND    PATTERN   POSITION    AND  NAMES   STARTING   AT  YP  BK
+                         3268 ;  OLD   SCREEN  PATTERN    POSITION   AND  WAMES   STARTING   AT  YP OS
+                         3289 ;  FIND   ALL  NAMES   IN BACKGROUMD     WHICH  BELONG   TO  THIS  OBJECT'S    PATTERN   GENERATORS
+                         3290 ;  AND   REPLACE  WITH   NAME   FROM  OLD  SCREEN   WHICH  CORRESPONDS     TO  THAT  PATTERN   POSITION
+   OBOA   2A8006         3291  PMS       LD  HL, (WORK BUFFER)          SHL  :=  BUFFER  BASE
+   0800   110013         3292           LD   DE,YP  BK+1
+   0810   19             3293            ADD  WL ,DE                    sPOINT   TO FIRST   OF  BACKGROUND    NAMES
+   0811  D9             3294             EXX
+   0812  €D5B8006       3295             LD  DE, [WORK BUFFER)          sDE*  :=  BUFFER  BASE
+   0816  210008         3296             LD  WL,YP _OS+1
+   0819   19            3297            ADD   HL, DE
+   OB1A  EB             3298             EX  DE,WL                      ;POINTS   TO FIRST   OF  OLD SCREEN    NAMES
+   0818  D9             3299             EXX
+   OB1C  FD2A8006       3300             LD  IY, (WORK BUFFER)
+   0820  FD4E05         3301          .  UO  C,CIY+F_GEN)               ;C  := FIRST  GEN  NAME
+                        3302   ;         00 8,9
+   0823  0609           3303             LD 8,9
+   0825  7E             3304  DLP          LD A,  (WL)                    *GET  A  NAME
+   0826  91             3305               Sus                            -SUBTRACT   FIRST  GEN  NAME
+                        3306   ;           IF  (_A,LT,  18)               *THEN  NAME   FALLS   INRANGE    OF  NAMES   FOR OBJECT
+   0827  FEI2           3307               cP  1      |
+   0829  300€           3308               JR  WC, END3
+                        3309   >;             Ff  t A,GE,9)                  sTHEN  SUB  9 TO  FIND   CORRECT
+   0828  FEO9           3310                  cP 9°
+   0B2D  3802           3311                  JR C,END4
+   082F  0609           3312                    sus  9                      ;    POSITION    IN OLD  SCREEN                                                                                         ,
+   0831                 3313  END4            sENDIF
+   0831  D9             3314                 EXX
+   0832  6F             3315                  LD L.A                      ;FORM  A  POINTER   INTO  OLD SCREEN    NAMES
+   0833  2600           3316                  LD H,0
+   0835  19             3317                 ADD   HL,DE
+   0836  7E             3318                 LD  A, CHL}                  ;GET  OLD SCREEN    NAME
+   0837  09             3319                 EXX
+   0838  77             3320                 LD   {[WL),A                 ;REPLACE   BACKGROUND    NAME  WITH   OLD SCREEN    NAME
+  0839                  3321  END3         sENDIF
+   0839  23             3322             INC WL                        -POINT   TO NEXT   NAME  IN  BACKGROUND
+                        3323  ;         ENDDO
+   083A  10€9           3324            DJNZ   DLP1                                                                                                                            ‘
+                        3325
+                        3326  ;  NOW  NEW  VERSION   OF  BACKGROUND    NAMES  WILL   NOT  CONTAIN   ANY  WAMES   OF  THIS  OBJECT
+                        3327  ;  REPLACE   PREVIOUS   VERSION   OF  OLD SCREEN    WITH  THIS   NEW  BACKGROUND
+   OB3C  01             3328  PMG       POP  DE                        ;DE  :=  OLD  SCREEN  ADDRESS
+   0830  2A8006         3329            LO  HL, (WORK  BUFFER)         ;HL  :=  BUFFER  BASE

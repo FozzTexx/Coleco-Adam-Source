@@ -1,0 +1,65 @@
+‘ILE: EOSABS:EOSTF         HEWLETT-PACKARD: UTILS      (c) Cui eco 1983 Confidential                  Sat.    B  Sep  1984,  22 a         PAGE  136
+
+LOCATION OBJECT CODE   LINE     SOURCE LINE
+
+                       5548
+                       5549
+                       §550
+                       5551
+                       §552     THIS ROUTINE CHECKS TO  SEE  IF THE FILENAME (POINTED TO BY HL)
+                       §553     IS ALREADY OPEN AND EXIST   IN THE FCB
+                       §554
+                       5555                 INPUT:   HL        POINTER TO FILENAME (ETX TERMINATED)
+                       §556
+                       §557                 OUTPUT:  CONDITION   FLAGS
+                       5558                          NZ        NOT IN FCB (NOT OPENED)
+                       5559                                    A = ERROR CODE
+                       5560                                    HL = ORIGINAL POINTER TO FILENAME
+                       §561                           z        IN FCB
+                       §562                                    A = FILE NUMBER
+                       §563                                    B = MODE               |
+                       5564                                   HL = POINTER TO START OF FCB   *
+                       §565
+                       5566  SSSSSSSSSSSSSESESSSSESESSESSESSSSESHSESSESHEHSSEHSSHESSKSESHESHSSHSSHESESHESEEHESHEESTSESSHEHEE
+                       5567
+                       5568   GET_OUT             U_GET_OUT                    .
+                       5569   NEXT_FCB CHANGED TO U_NEXT_FCB   TO PREVENT CONFLICT WITH
+                       5570   IDENTICAL LABEL ELSEWHERE
+                       §571
+                       5572       ;GLB     __CHECK_FCB
+                       §573       >EXT     FILE_NUMBR
+                       5574
+    FO8S               §575 __CHECK_FCB:
+    FO8S DDES          5576        PUSH    IX
+    FO8B DS            5577        PUSH    DE
+                       5578 :      PUSH    BC
+    FOBC               5579        PUSH    HL
+                       §580
+    FO8D 2AFOFD        §581        LO      Hi,(FCB_HEAD_ADDR]
+    FO80 AF            §582        XOR     A                         ; ZERO OUT A
+    FO91               §583 U_NEXT_FCB:
+    FOS1 3c            5584        INC     A                         ; CONTAINS THE FILE NUMBER
+    FOS2 32FD07        5585        LD      [FILE _NUMBR).A           ; (THE POSITION  ON THE  TAPE)
+                       5586
+    FO95 110023        5587        LD      DE,FCB_LENGTH             ; NUMBER OF BYTES IN EACH  FCB
+    FOS8 19            §588        ADD     HL,DE                     ; POINT TO NEXT FCB ENTRY
+                       5589
+    FOS9 ES            §590        PUSH    HL
+    FOSA DOE1          5591        PoP     IX                        ; IX POINTS TO START OF  FCB
+                       §592
+    FOSC DD7E18        5593        LD      A,[IX+FCB_MODE)           ; GET MODE
+    FOSF E607          $594        AND     MODE_MODE
+    FOAt FEOO          5595        cp      Oo                        ; IT IS UNUSED?
+                       5896
+    FOA3 2812          §597        JR      Z.€ND_FCB                 ; YUP, LOOK AT NEXT FCB
+                       5598
+    FOAS EG            5599        EX      DE.HL                     ; DE = POINTER TO FCB NAME  STRING
+    FOAG6Et            5600        PoP     HL
+    FOA7  he           560i        PUSH    HL                        > HL   POINTER TO FILENAME  TO  SEARCH   FOR
+                       5602
+    FOAS ns            560%        PUSH    DE                           i* - er3Rkroe$f ee  . ; * AfAAas
+                       Sila
+
+  oo|    ee                                                                                                                    f          :        {          az
+                                                                                                                       |
+        i

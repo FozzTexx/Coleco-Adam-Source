@@ -1,0 +1,47 @@
+     \
+FILE: ~~SABS:EOS  TF         HEWLETT-PACKARD: DATES      (c) Coleco i._s Confidential                  Sat,   8  Sep  1984,  23:40       rnGE   127
+
+LOCATION OBJECT  CODE    LINE     SOURCE LINE
+
+                         BID  srr                          rrr      rr     rr   rerrrr    erence
+                         5140 ;
+                         5141 ; _GET_DATE  -- Reads the  current date.
+                         §142 ;
+                         $143 ; ENTRY PARAMETERS: none
+                         5144 ;
+                         6145 ; EXIT PARAMETERS: no errors   --Z2= 1; A=O
+                         $146 ;                                B = day
+                         6147 ;                                C = month
+                         6148 ;                                O = year
+                         6149 ;
+                         $150 ;                  error  (date never set) -- Z  =0; A = error code
+                         6151;                                 B=   O
+                         6152 ;                                cz   O
+                         §153 ;                                02   O
+                         6164 ;
+                         BISB scr  mt                    en  meet           ent      tment  ences
+                         6156
+    EED4                 $157  GET DATE
+    EED4 3AFDE2          $158         LO      A,{EOSDAY]
+    EEDT 47              §159         LO      B.A              ;GET THE DAY
+    EEDS SAFDE1          5160         LD      A,[EOSMONTH)
+    EEDS 4F              §161         Lo      C,A              ;GET THE MONTH
+    EEOC 3AFDEO          6162         LO      A.[EOSYEAR]
+    EEDF 87              8163         LD      DA               ;GET THE YEAR
+                         6164
+   ~€&EO BO              $165         OR      8
+    EEE  Bt              6166         OR      C                ;CHECK FOR ALL = O
+    EEE2 2802            §167         JR      Z,GET_ERROR      ;BRANCH IF ERROR
+    EEE4 AF              5168         XOR     A                ;SHOW NO ERROR
+    EEES CO              6169         RET
+                         6170
+    EEEG                 $171 GET_ERROR
+    EEEG 3EO4            8172         LD      A,NO_DATE_ERR    >SHOW AN ERROR OCURRED
+    EEES B7              §173         OR      A                ;CLEAR Z FLAG
+    EEES CO              $174         RET
+                         5175 ;
+                         $176 ,SESRATESSSSSHSTKSSRSSRESSERSHHTEESSH KRESSSSETHASSTSETASSESSBAEAERS
+                         6177 «sesaseseeSSSRRESEESERERSESARSEESSSETRRTTARSATI SERHETSERSRATRERABES
+                         8178 ;SSeeneeeseeseeeeceaseacenenasescaserensesroccesseacegeseenzesenees
+                         5179
+                         $180

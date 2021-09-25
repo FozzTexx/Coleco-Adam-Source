@@ -1,0 +1,61 @@
+FILE: OS_7PRIME:pOS       HEWLETT-PACKARD:   TABLE  MANAGER   (c) Coleco,   1982    CONFIDENTIAL             Fri,  18  May  1984,  16:21       PAGE  125
+
+LOCATION OBJECT CODE LINE      SOURCE LINE
+
+    1B9C FD2A73BF    6083                   LD                  1Y, [PARAM AREA+5]
+    1BA0 2A7380      6084                   LD                  HL, [PARAM AREA+3)
+                     6085
+                     6086
+    1BA3             6087  GETVRAM_                              ;GETS  A CERTAIN  NUMBER   OF BYTES   FROM  VRAM
+                     6088                               ;       ;AND  PUTS THEM   INA  BUFFER
+                     6089                                       ;IN:  TABLE  CODE  IN A
+                     6090                                       ;     O=SPRITE  NAME  TABLE
+                     6091                                       ;     T=SPRITE  GENERATOR   TABLE,  2=PATTERN   NAME
+                     6092                                       ;     TABLE ,3= PATTERN  GENERATOR    TABLE,  4=
+                     6093                                       ;     COLOR  TABLE
+                     6094                                       ; START_INDEX   IN DE,
+                     6095                                       ; DATA  BUFFER  IN HL,  AND  COUNT  IW  IY.
+                     6096
+    1BA3 CD1BAA      6097             CALL  SET COUNT
+    1BA6 CD1D3E      6098             CALL  VRAM  READ
+    1BA9 C9          6099             RET
+                     6100
+                     6101
+    1BAA             6102  SETCOUNT                             ;CALLED  BY PUT_VRAM_   AND  GET VRAM_
+                     6103                                       ;SETS  BYTE COUNT  AND  INDEX  FOR
+                     6104                                       ;WRITES  AND READS  TO  AND  FROM  VRAM
+                     6105                                       ; TABLE           BYTES/ITEM
+                    6106                                        ; SPRITE NAME           4
+                    6107                                        ; SPRITE GEN            8
+                    6108                                       ;  PATTERN NAME          1
+                    6109                                       ;  PATTERN GEN           8
+                    6110                                       ;  COLOR  (MODE  1)      1
+                    6111                                       ;  COLOR  (MODE  2)      8
+                    6112
+    IBAA FD2273FE   6113              LD    (SAVED  COUNT) ,IY                    ;SAVE  COUNT
+   1BAE 002173F2    6114              LD    IX,VRAM  ADOR_TABLE                   POINTER   TO  SAVED  VRAM   ADDRESSES
+   1BB2 4F          6115              tD    C,A                ;SAVE   TABLE CODE
+   1BB3 0600        6116              LD    8,0                *BC  USED  AS INDEX
+   1885 FE04        6117              cP    4                                     ;CHECK  FOR  CASE  OF  COLOR  TABLE
+   1887 2007        6118              JR           COUNTIO
+                   6119               3;**  COLOR  TABLE,   CHECK  IF MODE  1
+   1BB9 3A73C3      6120             LD     A,{VDP  MODE WORD)                    ;CHECK  FOR  VDP  GRAPHICS   MODE
+   1BBC CB4F        6121             BIT    1,A
+   1BBE 282C        6122             JR           COUNT20                                                                                                                           ,
+                    6123              ;**   WOT MODE   1, ADJUST   ITEM  COUNT AND  INDEX
+   1BCO             6124  SET_COUNT10
+   18CO FO211BFF    6125             LO  =IY,SHIFT   CT        ;GET  ITEM  COUNT  CONVERSION   FACTORS
+   1BC4 FO09        6126             ADD    1Y,8C
+   18C6 FD7E00      6127             LD  =A,  (1Y¥+0}          ;SHIFT  COUNT  FOR  MULTIPLICATION
+   1BC9 FEOO        6128             cp    60
+   18CB 281F        6129             JR    2,SET  COUNT20
+   1BCD             6130  ADJUST INDEX                         ;MULTIPLY   ITEM_INDEX  TO  GET BYTE  INDEX
+   1BCD CB23        6131             SLA   E
+   1BCF CB12        6132             RL    ODO
+   1801 30          6133             DEC   A
+   1BD2 20F9        6134             JR               INDEX
+   1804             6135  ENDADJ INDEX
+   1804 CS          6136             PUSH  BC                  ;SAVE  TABLE CODE/  INDEX
+   1BD5 ED4B73FE    6137             LD    BC, {SAVED COUNT]
+   1809 FO7E00      6138             LD    A, {1Y¥+0)          ;SHIFT  COUNT  FOR MULTIPLICATION
+   1BOC FEOO        6139             cP  (OO

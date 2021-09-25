@@ -1,0 +1,62 @@
+OEE    eoooreoereoeoeeeomrrsssssn                                               on    en oe
+
+         FILE: OS  7PRIME:pOS       HEWLETT-PACKARD:  DISPLAY   LOGO  (c) Coleco,  1982   CONFIDENTIAL             Fri,  18  May  1984,  16:21       PAGE  109
+
+         LOCATION QBJECT  CODE LINE      SOURCE  LINE
+
+             1543  FOFOFFFFFF  5364                   HEX                FO,FO,FF,FF,FF,FF,00,  00
+             1548  FF0000
+                               5365   *GR17
+             1548 O0O0COCOCO   5366                   HEX                00,00,C0,c0,C0,C0,00,00
+             1550 C00000
+                               5367  *GR18
+             1553 3FIFIFIFOE   5368                   HEX                3F,1F,1F,1F,0E,0E,00,00
+             1558 0£€0000
+                               5369  *GR19
+             1558 8000000000   5370                   HEX                80,00,00,00,00,00,00,00
+             1560 000000
+                               5371  *GR20
+             1563 FOFOFOFOFO   5372                   HEX                FO,FO,FO, F0,F0,F0,00,00
+             1568 F00000
+                               5373  *GR21
+             1568 1FOI797F3F   5374                   HEX                1F,01,79,7F,3F,1F,00,00
+             1570 1F0000
+                               5375  *GR22
+             1573 EQEOQEOEOCO  5376                   HEX                E0,E0,E0,£0,C0,80,00,00
+             1578 800000
+                               5377  *GR23
+             157B FFF7F7F7F3  5378                    HEX                FF,F7,F7,F7,F3,F3,00,00
+             1580 F30000
+                              5379   *GR24
+             1583 COCOCOCOCO  5380                    HEX                cO,cO,c0,C0,c0,C0,  00,00
+             1588 Cc00000
+                              5381
+                       <156B> 5382   ASCTABLE         EQU $
+                              5383   * c=1D
+             1588 7EBIBDAIA1  5384                    HEX                7E,81,B8D,A1,A1,80,81, 7E       ;COPYRIGHT
+             1590 80817E
+                              5385   * t=1E
+             1593 1F04040400  5386                    HEX                1F,4,4,4,0,0,0,0                ;tRADE
+            1598  000000      is
+                              5387   * miF
+            1598  446€545400  5388                    HEX               44,6C,54,54,0,0,0,0              ;MARK
+            15A0  000000
+                              5389   *   =20
+            15A3  0000000000  5390   SPACE           DEFB               0,0,0,0,0,0,0,0
+            15A8  000000
+                              5391   * §=21
+            15AB  2020202020  5392                   DEFB               20H, 20H,20H, 20H,20H,0,20H, OOH
+            1580  002000
+                              5393   * "=22
+            15B3  5050500000  5394                   DEFB               50H ,50H,50H,0,0,0,0,0
+            1588  000000
+                              5395   * #=23
+            15BB  5050F850F8  5396                   DEFB               50H, 50H,OF8H,50H, OF8H,50H,50H,0
+            15C0  505000
+                              5397   * $=24
+            15C3  2078A07028  5398                   DEFB               20H, 78H,OAOH, 70H,28H,OFOH ,020H,0
+            15C8  F02000
+                              5399   * %=25
+            15CB  C0C8102040  5400                   DEFB               OCOH,OC8H, 10H, 20H,40H,98H, 18H,0
+            1500  981800                                                      .
+            1503  40A0A040A8  5402  *  &=26          DEFB               40H,OAOH ,OAOH 40H, OABH,90H, 68H,0

@@ -1,0 +1,63 @@
+FILE:   EOSABS:EOS    TF            HEWLETT-PACKARD:     OPENS          (c)  Coleco    1983   Confidential                            Sat.     8  Sep   1984a,  23   40         PAGE     108
+
+LOCATION    OBVECT    CODE   LINE         SOURCE   LINE
+
+                             4223             ;GLB       _  OPEN  FILE,    CLOSE    FILE,    RESET     FILE
+                             4224             SEXT       FCB_HEAD_ADOR,FCB_DATA_ADOR
+                             4225             SEXT       BUF START,    FMGR  DIR_ENT
+                             4226             SEXT       __QUERY_   FILE,  MODE  CHECK   ,READ   BLOCK,    WRITE  BLOCK
+                             4227             ,EXT       __SET_FILE
+                             4228             sEXT       FILE   NAME  ADDR
+                             4229
+                             4290    Brrr                rrr                    tr  rr terre     reer  ern  reer rennet  e rene
+                             4231    ;
+                             4232    ;  _ OPEN_FILE    --  Sets   up  an  FCB  for   the   caller    to   access    a file.
+                             4233    ;
+                             4234    ;  CALLING  PARAMETERS:      device   number    in  A;   address    of   name   string
+                             4235    ;                    in HL;   mode   in  6.
+                             4236    ;
+                             4237    ;  EXIT  PARAMETERS:     if no   error   --  Z  =  1;  A  =  file   number                                                                                      '
+                             4238    ;                        if error    --  2  = 0;   A  =  error   code;    8  =  junk
+                             4239    ;
+                             AQ4O    Brrr rrr                            tr   rrr    rr grrr  rrr   rts   terres  erent   eee
+                             4241
+                             4242    ;  NEXT_FCB   CHANGED   TO  O NEXT   _FCB   TO  PREVENT    CONFLICT      WITH
+                             4243    ;  IDENTICAL    LABEL  ELSEWHERE
+                             4244
+     EAOO                    4245    _OPEN_FILE
+     EAOO   FDES.            4246              PUSH      ly                    ;SAVE    REGISTERS
+     €A02   ES               4247              PUSH      HL
+     EAO3   DDES             4248              PUSH      Ix
+     EAOS   0S               424%              PUSH      DE
+                             4250
+     EAOS   FS               4251              PUSH      AF                    ;SAVE   DEVICE     NUMBER
+     EAO7   CS               4282              PUSH      BC                    ;SAVE   MODE
+                             4253
+                             4254    ;  FIRST,  WE  HAVE  TO   LOCATE   A  FREE   FCB.
+     EAO@   DD2AFDOFO        4258              LO        IX, (FCB_HEAD_ADOR)        ;GET  POINTER     TO   FIRST   FCB’S   HEAD
+     EAOC   110023           4256              LD        DE .FCB_LENGTH
+     EAOF   0D19             4257              ADD       IX ,DE                ;  SKIP   OVER   IT   --  BELONGS     TO  SYSTEM
+                             4258
+     EA11   FD2AFOFF         4259              LO        I¥,[FCB_DATA_ADDR}        ;:GET  POINTER     TO   FIRST   FCB’S   BODY
+     EA1S   110400           4260              LO        DE ,1024
+     EA1I8  FD19             4261              ADO       IY .DE                ;  SKIP   OVER   IT   TOO
+                             4262
+     EA1IA  0601             4263              LD        Bi                    ;SET   FCB   NUMBER
+     EAIC                    4264    O_NEXT FCB
+     EAIC   DOTE1&8          4265              LO        A, {IX+FCB_   MODE]   ;GET   THE   MODE   BYTE    FROM   FCB
+     EAIF   87               4266              OR        A                     ;CHECK    IT
+     EA20   281C             4267              JR        Z,GOT_ONE             ;BRANCH     IF  THIS   ONE   IS  FREE
+                             4268
+     EA22   110023           4269              LO        DE,FCB_LENGTH         ;ELSE     SKIP   OVER    IT
+     EA25   DD19             4270              ADO       1X ,DE
+     EA27   110400           4271              LO        DE, 1024
+     EA2A   FD19             4272              ADD       IY ,DE
+                             4273
+     EA2C   04               4274              INC       8                     -INC   THE   FCB  NUMBER
+     EA2D   78               4275              LO        A.B
+     EA2E   FEOS             4276              cP        NUM FCBS              SARE   THERE    MORE   FCBS   TO  CHECK?
+     EA30   36EA             4277              JR        C.0 NEXT   FCB        ;LOOP   UNTIL    WE’VE    SEEM   THEM   Ait
+     EA22                    4278    NO _FCBS                :
+     EA32                    4279              pap       BC                    RESTORE      RP    §
+
+ne         ee

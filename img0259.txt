@@ -1,0 +1,73 @@
+                                                                                                             |_                                 =           =
+
+ FILE:                             CROSS  REFERENCE     TABLE               PAGE   25%
+
+ LINE        SYMBOL             TYPE      REFERENCES
+
+   5078    WRITE_ERR2                4910,4912
+   6061    WRITE   ERROR             6028 , 6050
+   3630    WRITE   _ERRORS           3627
+   6064    WRITE  _OK                6059
+    292    WRITE  REGISTER           1572
+   4447    WRITE  TIMEOUT
+    288    WRITE   VRAM              1628,  1910, 7729,7761,   7831, 7841,  7862
+  6869     WR_NOT_COMPLETE           8876
+    310    WR SPR_ATTRIBUT
+    651    X_MAX                     7402  ,7473, 7558  ,7588 ,7655,7779
+    650    X_MIN                     7399  ,7476,7512,   7568, 7578, 7638, 7651
+    653    Y_MAX                     7407  ,7479, 7537  ,7564, 7663
+    652    v_MIN                     7404 ,7522,7584,7631,7659
+  6454     ZERO_OUT_BUFFER           6344 ,6427
+ HP  64000    Linker
+                                                                          Tue,   10  Jul   1984,     2:32                           1
+
+ FILE/PROG     NAME
+                                                                                                           DATE                                   COMMENTS
+ “s“eccecerr  reer  eer ner ew   em mmmmn mmm mmm meme mm eee wwweee weeee  ee eeee ee eeee    ee   eeee  ee ee ee               Lett
+ A_uOS_00:N_EOS                                                                                                                                   -—-—e373ewrwmewwmOMeeewew~rewz—=—eXxeQXwwy
+                                                                                                           Thu,   14                             Rev   O7   - jkli
+ next   address                        E618
+
+ DIR_HANOL    :N_EOS
+                                       E618                                                                Thu,   14 Jun
+OPENS   :N_EOS                         EAOO
+                                                                                                           Thu,   14
+ RD_WT:N_EOS                           EC17                                                                Thu,   14 Jun
+DATES:N_EOS                            EECS                                                                Thu,   14 Jun
+UTILS:N_EOS                            EEEA                                                                       14
+                                                                                                           Thu,      Jun
+ EOS_MKDIR:N_EOS                       F323                                                                Thu,   14 Jun
+next    address                        F442
+
+ EOS_RET:N_EOS                         F442                                                                Thu,   14 Jun             14: 18     REV    1  - RPD
+EOS_GEN:N_EOS                          F446                                                                Thu,   14 Jun
+EOS_KBD:N_EOS                                                                                                                        14: 17
+                                       F4BA                                                                Thu,   14 Jun             14: 17
+EOS_PRTR:N     EOS                     F4FC                                                                Thu,   14 Jun             14: 18
+EOS_TAPE:N_EOS                         F507                                                                Thu,   14 Jun             14: 18
+CONS_OUT:N_EOS                         FSDC
+                                                                                                           Thu,   14 Jun             14: 15     Rev    18    - RPD
+next   address                         F832
+
+EOS
+    _START:N_EOS                       F832                                                                Thu,  14  Jun             14:18      Rev    O7  -  rfj
+EOS_UTIL:N_EOS                         FEF6                                                                      14
+EOS                                                                                                        Thu,      Jun             14:18
+     _BLK:N_EOS                        FASE                                                                Thu,  14  Jun             14:16
+EOS_CHAR:N_EOS                         FB64
+                                                                                                           Thu,  14  Jun             14:16
+next   address                         FBFE
+
+TABLES   :N_EOS                        FBFF
+                                                                                                           Thu,  14  Jun             14:19      Rev   OO   -  RPD
+next   address                         FC30
+
+EOSCMN_O6:N_EOS                       FC30           FD60                         FECO-FFFF                Thu,  14  Jun            14:32       Rev    12  -  rfj
+next   address                        FDSF           FEAT
+
+XFER   address=     0000         Defined  by   OEFAULT
+
+absolute     &  link_com    file  name=N_EOS:N_EOS
+Total#    of  bytes    loaded=   1FE5
+
+                                                                                          >?P>Prrrrr>r>r>       >>  PP    Pr

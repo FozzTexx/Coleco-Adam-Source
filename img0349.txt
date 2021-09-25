@@ -1,0 +1,61 @@
+FILE: OS 7PRIME:pOS           HEWLETT-PACKARD:     PUT  MOBILE  (c) Coleco,   1982   CONFIDENTIAL               Fri,  18  May  1984,   16:20       PAGE    75
+
+LOCATION   OBJECT  CODE  LINE        SOURCE  LINE
+
+    OcAS   08            3558            EX AF,AF!
+    OCAS                 3559   COMBINE LOOP
+    OCA6   E1            3560            POP  HL                      ;POINT  TO OBJECT   PATTERN  BYTE
+    OCA7   56            3561            LO D, (HL)                  ;GET  PATTERN   BYTE
+    OCA8   23            3562            INC  HL
+    OCA9  E5             3563            PUSH  HL
+    OCAA  01000F         3564            LD BC, 15
+    OCAD  09             3565            ADD  WL,BC                  ;POINT   TO ADJACENT   PATTERN  BYTE
+    OCAE  5E             3566            LD E, {WL}
+    OCAF  EB             3567            EX DE,HL                    HL   HAS  16  BIT ROW  OF OBJECT'S  PATTERN
+    OCBO   FD4601        3568            LD B, [I1Y*XDISP)           SHIFT    LEFT  PATTERN  BY  THIS AMOUNT
+    OCB3  AF             3569            XOR  A                      CLEAR
+    A     05             3570   SHFLP    DEC  B
+    OcBS   FAOCBC        3571            JP M, SHFEX
+    0CB8  29             3572            ADD  HL,HL .
+    ocB9   17            3573            RLA
+    OCBA   18F8          3574            JR SHFLP
+    OCBC  5F             3575   SHFEX    LD E,A                      ;SAVE  LEFT  BYTE   IN E
+    OCBD  CDOE2F         3576            CALL  COM PAT COL
+    OCCO  FO7E00         3577            LO A, {1Y*YDISP)            INCREMENT    YDISP
+    0cc3  3C             3578            INC A
+    Occé  FD7700         3579            LD  [1Y¥+YDISP},A
+            |            3580   ;        IF  {_A,EQ,8),OR,  {_A,EQ, 16)
+    OCC7  FEO8           3581            ce 8
+    OCC9  2804           3582            JR Z,1F11
+    OccB  FE10           3583            CP 16
+    OCCD  2005           3584            JR WZ,END11
+    OCCF  010010         3585   IF11       LD  BC,16
+   Ocb2   DD09           3586              ADD  1X,BC                   ;BEGINNING   OF NEXT  ROW
+    OcD4                 3587  END11  =;  ENDIF
+   OCb4   DD23           3588            INC  IX                     ;POINT  TO  NEXT  GEN  BYTE
+   0CD6   08             3589            EX AF,AF*
+   0CD7   30             3590            DEC A                       ;DECREMENT   LOOP  COUNTER
+   OcD8   2803           3591            JR Z,C_LP EXIT
+   OCDA   08            3592             EX AF,AF®
+   OcoB   1809          i(tié3593        JR COMBINE  LOOP
+   ocoD                 3594   C_LP EXIT
+   OcDD   1             3595             POP HL                     POP    POINTER  OFF  STACK
+   OCDE   FOCB037E      3596             BIT7,  [IY+FLAGS)           TEST   FOR  MODE  1_
+                        3597   ;         IF {(PSW,1S,ZERO)           ;THEN  UPDATE  MODE   1 COLOR GENs                                                                                   ,
+   OCE2   201F          3598            JR  NZ,END12
+   OCE4   2A8006        3599               LD HL, (WORK BUFFER)
+   OCE7   010084        3600               LD BC,BK CLR                OFFSET    FOR COLOR  BUFFER
+   OCEA   09            3601               ADD HL,BC                   HL   POINTS  TO  START  OF COLOR BUFFER
+   OCEB   FD5602        3602               LD D, [IY+COLR)             GET   OBJECT  COLOR
+   OCEE   FDCBO34E      3603               BIT  1,[IY*FLAGS)           =COLORO   = BACKGROUND   OR TRANSPARENT ?
+                        3604   ;           IF  (PSW,1S, ZERO}          THEN   USE  BACKGROUND   COLORO
+   OCF2   2004          3605               JR NZ,ELSE13
+   OCF4   OEOF          3606                 LD  C,OFH                   -MASK   FOR COLORO  OF  BACKGROUND
+   OCF6   1802          3607                 JR END13
+   OcF8                 3608   ELSE13—;    ELSE
+   OCF8   O£00          3609                 iD C,0                      ;MASK  REPLACE   COLORO  WITH TRANSPARENT                                                   .
+   OCFA                 3610   END13.   ss  ENDIF
+                        3611;              00 8,9                      ;CHANGE  ALL  9  COLOR BYTES
+   OCFA  0609           3612               LD B,9
+   OCFC   7E            3613   OLPS          LD A, CHL]                ;GET  BACKGROUND   COLOR  GEN
+   OCFD  Al             3614                 AND  C                    ;MASK  OUT  COLORI

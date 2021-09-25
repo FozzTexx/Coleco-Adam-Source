@@ -1,0 +1,61 @@
+FILE: OS 7PRIME:pOS            HEWLETT-PACKARD:     PUT  MOBILE    (c) Coleco,   1982    CONFIDENTIAL                   Fri,  18  May   1984,   16:20       PAGE    71
+
+LOCATION  OBJECT   CODE  LIWE         SOURCE  LINE
+
+    0840  010011         3330             LD BC,XP_  BK
+    0843  09             3331             ADD  HL,BC                    sHL  POINTS   TO  BACKGROUND    POSITION   AND  NAMES
+    0844  010008         3332             LO BC,11                      ;WUMBER   OF  BYTES   TO MOVE
+                         3333   ;         IF  {.D,LT,  70H)             ;THEN  MOVE   DATA   TO VRAM
+    0847  7A             3334             LD A,D
+    0848  FE7O           3335             CP 70H
+    084A  3005           3336             JR WC, ELSES
+    OB4C  CDIFDF         3337               CALL  WRITE   VRAM
+    OB4F  1802           3338             JR ENDS
+    0851                 3339   ELSES     ELSE                          ;MOVE   TO CPU  RAM
+    0851  EDBO           3340               LOIR
+   0853                  3341   ENDS   =  sENDIF
+                         3342   ; GET   THE PATTERN    AND  COLOR   GENERATORS   SPECIFIED    BY THE  NINE   BACKGROUND   NAMES
+                         3343   ;  IX  = GRAPHICS
+                         3344
+    0853  DDES           S345                       PUSH                Ix                   ;SAVE  GRAPHICS   POINTER
+                          346
+    0855  ED5B8006       3347   PMS       LD DE,  (WORK BUFFER)         ;DE  :=  BUFFER   BASE
+    0859  210013         3348             LD WL,YP  BK+1                sDISPLACEMENT     TO  BEGINNING   OF  BKGND  NAMES
+    0@sc  19             3349             ADDHL  ,DE
+    0850  EB             3350             EX DE, WL                     sDE  POINT   TO FIRST   BACKGROUND    NAME
+    0@5E  010014         3351             LD BC,BK  PTN-8               sHL  POINTS   TO  BACKGROUND   PAT   GEN STORAGE   AREA   -8
+    0861  09             3352             ADD HL, BC                    +  WILL   BE  INCREMENTED    BEFORE   FIRST  USE
+                         3353   ;         DO B,9
+    0862  0609           3354             LD 8,9
+   0864   1A             3355   DLP2        LD  A, (DE)                   GET    NAME
+   0865   13             3356               IWC  DE                       *POINT   TO  NEXT  NAME
+   086605               3357                PUSH  DE                      sSAVE   WAME  POINTER
+   0867   110008        3358:               LD DE,8                       ; INCREMENT   BUFFER   POINTER
+   0B6A   19            3359                ADD  HL,DE
+   0868  £5             3360                PUSH  HL                      sSAVE   BUFFER   POINTER
+   0B6C  5F             3361                LO E,A                        -INDEX   INTO  PATTERN    TABLE
+   0860   1600          3362                LO D,0
+   OB6F  4F             3363                LD C,A                        sSAVE   PATTERN   NAME  IN  C
+   0879  C5             3364                PUSH  BC                      SAVE    COUNTER
+   0871  3£09           3365                LD A,9                        ADD    [B-9]/3   TO  YPBK   TO  FIND
+   0873  90             3366                SUB  B                        >     CUT  WHICH   THIRD   OF TABLES   GENS  ARE  IN
+   0874  0600           3367                LD B,0
+   0876  0603  .        3368   PM52         suB  3
+   0878  3803           3369               JR  C,PMS1
+   OB7A  04             3370                INC  B
+   087B  18F9           3371                JSRPM52
+   087D  78             3372   PM51         LD A,B
+   OB7E  FO2A8006       3373                LD IY,  (WORK BUFFER]
+   0882  FD8612         3374                ADDA,   {IY+YP  BK)
+   0885  FOCBO37E       3375                BIT7,   (IY+FLAGS}            TEST   GRAPHICS    MODE
+   0889  FO210001       3376                LD 1Y,1                       *WUMBER   OF  ELEMENTS   TO  READ
+   0880                 3377   PMS          1F   (PSW, 1S, ZERO)          >THEN  MODE   1
+   0880  2029           3378                JR NZ, ELSE
+   OB8F  3E03           3379                  LD  A,3                     ;CODE  FOR  PATTERN    GENERATOR   TABLE
+   0891  CD1FBB         3380                  CALL   GET VRAM                                                                                                                  ‘
+   0894  C1             3381                  POP  BC                     :GET  COUNT   AND  NAME
+   0895  28006          3382                  LD  HL, [WORK  BUFFER)
+   0898  C5             3383                  PUSH  BC
+   0899  110084         3384                  LD  DE,BK CLR               :DISPLACEMENT     TO COLOR   GEN  AREA
+   OB9C  19             3385                  ADD  HL,DE    |             :POINT   TO  IT
+   0B90  59             3386                  LD  E,C                     :PATTERN   NAME

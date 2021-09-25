@@ -1,0 +1,63 @@
+ FILE:   OS7PRIME:pOS            HEWLETT-PACKARD:      PUT SEMI   (c)  Coleco,   1982    CONFIDENTIAL                        Fri,  18  May  1984,  16:19       PAGE    54
+
+LOCATION    OBJECT    CODE  LINE        SOURCE  LIWE
+
+                            2433
+                            2434                       GLB                PX TO  PTRN   POS
+      07E8                  2435  PX_TO_PTRN_POS
+                            2436
+      O7E8  £5              2437            PUSH   HL                     ;HL  USED   TO  TEST   MAGNITUDE
+      O7E9  CB2A            2438            SRA  D                        316  BIT   SHIFT   LEFT
+      O7EB  CB18            2439            RR  E                          :
+     O7ED   CB2A            2440            SRA  D
+     O7EF   CB1B            2441            RR  E
+     O7F1   CB2A            2442            SRA  D                        ;                    x3
+     07F3  CB1B             2443            RR E
+     O7F5  CB7A             2444            BIT  7,0         |            71S  RESULT    NEGATIVE
+     O7F7  2009             2445            JR  WZ,WEGTV
+     O7F9  21F FBO          2446            LD  HL,OFF8OH                 ;SEE   IF  RESULT   <  127
+     O7FC   19              2447            ADD  HL,OE.
+     O7FD  £1               2448            POP  HL
+     O7FE  DO               2449            RET  WC
+     O7FF  1E7F             2450            LD  E,7Fu                     sIF  >  128,   THEN  E  :=  MA)   u(GNED   + NUM.
+     0801  C9               2451            RET
+                            2452  ;XXXXX
+     0802  210080           2453  NMEGTV:   LD  HL,O80N                   s1S  RESULT    > -128
+                            2454  3XXX
+     0805  19               2455            ADD  WL,DE
+     0806  £1               2456            POP  HL
+     0807  08               2457            RET  C
+     0808  1£80             2458            LO  E,80H                     ;IF  <  -128,   THE  E  :=  MIN  SIGNED    - NUM.
+     080A  C9               2459            RET
+                            2460  &
+                           2661   SRRARAAERAAKAAAARERERERARK        PUT  FRAME   SRATTARKRCARAAKRAKKARAARAAAERAKKEKERKEKKEKEEEE
+                            2462  ;DESCRIPTION:        THE  WAMES  WHICH   CONSTITUTE     A FRAME   ARE   MOVED   TO  TWE  WAME  TABLE
+                           2463   ;                   IM  VRAM.   THE  UPPER   LEFT   HAND  CORNER   OF   THE  FRAME   IS  POSITIONED
+                           2664   ;                   AT  XPAT  _POS,  YPAT   POS.
+                           2465   ;INPUT:              WL  = ADDRESS   OF  LIST  OF   NAMES   [IN  CPU  RAM)
+                           2466   ;                    E  = X PAT POS
+                           2667   ;                    0  = Y_PAT_POS
+                           2468   ;                    C  = XEXTENT
+                           2469   ;                    B  = YEXTENT
+                           2470  SARAAASAARAARAEAAEARARAARRAAAAKAEAAERAAAAAEAEARAKAAERAAKKRERRARREREARERRREREEARE
+                           2471   ;
+                           2472                       GLB               PUT  FRAME                                                                                                                        >
+     08608 C5              2473  PUTFRAME:     PUSH   BC                 ;COPY   PARAMETERS     INTO   PRIMED   REGISTERS
+     O80C D5               2676            PUSH   DE
+    08600  £5              2475            PUSH   HL                     ;AND   FRAME   ADDRESS    INTO  DE'
+    O80E  D9               2476            EXX
+    O80F  £1               2477            POP  HL
+    0810  D1               2478            POP  DE
+    0811  C1               2479            POP  BC
+    0812  CDO8CO           2480            CALL  CALC  OFFSET
+    0815  D9               2481            EXX
+                           2482  ;XXXXX
+                           2483  ;  TEST  FOR  THE  FOLLOWING    CONDITION:    (XPAT   POS   SLE  32)   AND  (X PAT  POS    + X EXTENT
+                           2484  ;                                                  SGT  0)                                                                                         7
+    0816  78               2485  PFI:      LO  A,E                       ;1S  X_PAT  POS    < 0?
+    0817  CB7F             2486            BIT  7,A
+    0819  2003             2487            JR  NZ,XP_NEG
+    0818  FE20             2488            CP  32                        ;1S  X PAT  POS    < 32?
+    081D  00               2489            RET  NC                       s1F  NOT,   RET
+
+ma        &             GS          en          ese         Eee                       HF         HF           ee             SE        Hee                    eee                       ss                se       as            ae

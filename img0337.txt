@@ -1,0 +1,61 @@
+FILE: OS 7PRIME:pOS              HEWLETT-PACKARD:   PUT  SPRITE    RTN  (c)  Coleco,    1982   CONFIDENTIAL                 Fri,  18  May  1984,   16:20        PAGE    63
+
+LOCATION  OBJECT    CODE   LINE        SOURCE  LINE
+
+    0933   1A              2918                      LD                  A, (DE)
+    0934  6F               2919                      LD                  L,A
+    0935   13              2920                      Inc                 OE
+    0936   1A              2921                      LD                  A, (DE)
+    0937  67               2922                      Lo                  H,A                  ; [HL] =  FRAME   TABLE   PTR*
+    0938  E5              2923                      PUSH                 HL
+    0939  DD6E02           2926                      LD                  L, (THIS SPRITE+STATUS)
+    093C  006603           2925                      LD                  H, (THIS SPRITE*STATUS*1)
+    O93F  110000           2926                      LD                  DE ,FRAME
+    0942  19              2927                       ADD                 HL ,DE               ;CHL]  =  FRAME
+    0943  7E              2928                       LD                  A, (HL)              ;CALCULATE    OFFSET    OF
+    0944  CB27            2929                       SLA                 A                    ;COLOR  ENTRY
+    0946  010000         2930                        LD                  BC,0
+    0949  4F              2931                       LO                  C,A
+    O94A  E1             2932                       Pop                  ML
+    0948  09             2933           |           ADD                 HL ,BC                ;(HL)  =  COLOR
+    O94C  7E              2934                       LD                  A, (HL)              ;OR  IN BOH
+    0940  F680            2935                      OR                   80H
+    OF    FD7703          2936                       LD                  (SPRITE_PTR+COLOR_AND      TAG)  ,A
+                          2937                                      _-
+    0952  C30A00         2938                        JP                 PUT_Y_AND    NAME
+                          2939   *         ELSE
+                         2960    REKARRERAE  CONT  1NUE BELOW
+                          2941
+                          2942
+                          2943   *  BEGIN  PUTISPRITE
+               <0955>     2944   PUTISPRITE         EQU                 $
+                         2945                       |
+                          2946   *    SPRITE_PTR    := WORK  BUFFER                                 |
+   0955   FD2A8006        2947                )     LD                  SPRITE_PTR,    (WORK  BUFFER)
+  |                       2948
+                          2949   *    WITH  THIS SPRITE*,   SPRITE  PTR*   DO
+                          2950
+                          2951   *      IF  (STATUS*.X  LOCATION     > -32)  AND   (STATUS*.X   LOCATION     < 256)   AND
+                          2952   *          (STATUS*.Y_  LOCATION    > -32)  AND   (STATUS*.Y   LOCATION     <  192)  THEN
+   0959  DD6E02           2953                      LD                  L, (THIS  SPRITE*STATUS)
+   095C  006603           2954                      LD                  H, (THIS SPRITE*STATUS+1)
+   095F  110001           2955                      LD                  DE ,X_LOCATION
+   0962  19               2956                      ADD                 HL ,DE               ;  CHL] =  X_LOCATION
+   0963  4E             2957                        LD                  C, (HL)                                                                       |                                                     ,
+   0964  23               2958                      INC                 HL
+   0965  46               2959                      LD                  B, (HL)              ; BC  = X_ LOCATION
+   0966  78              2960                       LO                  A,B                  ; COMPARE   BC   WITH   -32
+   0967  FEOO            2961                       cP                  0
+   0969  2808           2962                        JR                  Z,0K_ 3
+   0968  FEFF           2963                        cP                  -1
+   0960  C20A54          2964                       JP                  NZ,DONT  PUT
+   0970  79              2965                       LD                  A,C
+   0971  FEE1           2966                        cP                  -31
+   0973  FAOAS4          2967                       JP                  M,DONT  PUT
+  0976                   2968  OK   3                                                                                                                                               .
+   0976  23              2969                       INC                 HL                  ;  CHL]  =  YLOCATION
+   0977  4E              2970                       LD                 C, (HL)
+   0978  23              2971                       INC                HL
+   0979  46              2972                       LD                 B, (HL)              ;  BC =  YLOCATION
+   O97A  78              2973                       LD                 A,8                  ;  COMPARE   BC  WITH   -32
+   097B  FEQO            2974                       Cp       |         0

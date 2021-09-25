@@ -1,0 +1,61 @@
+FILE:    OS  7PRIME:pOS               CROSS   REFERENCE      TABLE                   PAGE    157
+
+LINE®        SYMBOL              TYPE    —-   REFERENCES
+
+    81     NLEN                    A    677,680,    1371
+   485     WHI INTERRUPT           P
+   329     WMI_INT    VECT         A    328,486
+  3695     wOTOS                   P    3683,  3687
+ 4397    WOT    ALONG     REPE     P    4375
+ 4365     WOT  _A_REPEAT     TI    P    4363
+   448    WOT  ON                  P    443
+ 6495    NOT   REG   0             P    6492
+ 6503    NOT   REG   1             P    6500
+ 2026    NOT   TOO   BIG           P    2014
+ 5270    WO   CARTRIDGE                 5222,5226
+ 7340      WO OF  ROUTINES         A    7344
+   545   MO   TEST                 P    537,540
+ 1272      WSRHI                   A
+ 1274      WSRLOW                  A
+ 1273      NSRMED                  A
+ 1275      NWSRTG3                 A
+ 1626      WIZZZ_                  P    1621
+   503   WUMBER     TABLE          P    255
+ 5422    WUMBER     TBL            P    503,5081
+ 2813     WUMGEN                   A
+ 4525    WUM   DEV                 A    4577,4791,5050
+ 2810   OBJECT     TYPE            A
+ 3210    08)   PTW                 A    3452,  3475,  3554
+ 5586    OBJ   TABLE               Pp   5140
+    67    OFF                      A    1054,  1056,   1058,  1060,   1278,  1284,  1290,   1296
+ 2880     OK  1                    P    2874
+ 2893     OK   2                   P    2887
+ 2968    OK   3                    P    2962
+ 2981     OK   4                   P    2975
+ 1862   ONE    BYTE                P    1850
+ 1822   OS    IN VRAM              P    1817
+ 6552    OUTPUT    _LOOP          P    6556,6559
+ 6313   OUTPUT     _LOOP10        =P   6317
+ 6299   OUTPUT     LOOP   TAB     P    6322
+ 1854     0B  RET                 P     1892
+  649     PARAM.                  P    647,   1021,  1098,  1613,  2053,   2176,   4177, 4203,   4333,  4452,   5993,  6080, 6179,  6245  ,6272, 6472,  6523,  6580
+  584     PARAM  AREA             D     1097,  1099,  2052,  2054  , 2055,   2175,  2177,  2178,  5992,   5994  ,5995,  6079, 6081  , 6082, 6083 , 6084, 6178,  6180,    6181 6182,     6183
+                                       6244   6246,   6271,  6273,  6471,   6473,   6522,  6524  ,6525,   6526,  6579,  6581  ,6582, 6583
+5697      PARSE                   P    5231,5238,5242,5248,5250
+ 1416     PASS1                   P     1343,  1413
+6669   PATTERN      GEN           A    7017
+6336      PATTRNGENTBL            D    6329
+6335      PATTRNNAMETBL           D    6328
+1271      PERIOD                  A
+2485      PFI                     Pp
+2538      PF2                     P
+2561      PF3                     p
+2579      PFS                     P
+7394    PLAY   IT                 A    217
+7374    PLAY   ITP                A    221
+7346     PLAY  SONGS              A    219
+1276     PLAY  SONGS              P    1255,  7346
+4506     PLYR   0                 A    4769
+4507     PLYR  1                  A    4793
+3256     PMI                      P
+3513     PM10                     p

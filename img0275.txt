@@ -1,0 +1,58 @@
+Le                                                                      LLL  OLOLLLL
+&
+
+  FILE: OS7PRIME:pOS        HEWLETT-PACKARD: OS 7PRIME (c) Coleco  1982 Confidential                   Fri,   18  May  1984,  16:18      PAGE    1
+
+  LOCATION OBJECT CODE  LINE     SOURCE LIWE
+
+                           1 780"
+                           3  NAME “OS7PRIME~
+                           4
+                           5 DESCRIPTION MACRO
+                           6          -GOTOENDESCRIPTION
+                           7
+                           8  Author:         Coleco Industries  Inc.
+                           9                  Advanced Research &  Development  - Software  Engineering
+                          10  Userid:         Os
+                          11  Starting date:  A long long time ago  in a galaxy  far  far away...
+                          12
+                          13. Prom release Date: 24 Nov 1982. for  internal  use only
+                          14  Prom release Rev: 7B
+                          15
+                          16  Prom release Date: December 28, 1982
+                          17  Prom release Rev: 7PRIME
+                          18
+                          19  Header Rev: 2
+                          20
+                          21  SEEKS  AASAAAAAARAAAAREAAAEAEERKAAEARERKAEARAEEAAERARERACEAEREKREAKAEKKEKAKRERKERKEKRKKKEK
+                          22  *                                                                          *
+                         23   *                    ColecoVision Operating  System                        *
+                         24   *                   Absolute Listing ( Rev  7PRIME  )                      *
+                         25   *                     (c) Coleco Industries  1982                          *
+                         26   *                                                                          ®
+                         e7   *                        *** Confidential  ***                             *
+                         26   *                                                                          *
+                         29   SBESTARAKAAAEKAKAAEARKAAAEARAETKAKAEREHAAAAAAEAEKERERAEREREAEEZAEEERERKEEKAKEAR
+                         30
+                         31
+                         32         This listing has the actual addresses  of the  start  of OS routines
+                         33
+                         34         Rev History (one line note indicating  the change)
+                         35        |
+                         36         Rev.   Date                  Change
+                         37          4     14feb1983           Filler  locations changed   to OFFH to
+                         38                                    reflect OS 7PRIME.   Prom  release date
+                         39                                    changed  to December  28,  1982 from May
+                         60                                    1982.  Name  change  to OS7PRIME   to
+                         41                                    reflect majority  of  versions  in the                                                                        °
+                         42                                    field at  this date.
+                         43
+                         44          3     24nov1982           Timing change  to shorten   LOGO delay
+                         45                                    Title changes  to JMPTABLES   and OSSR EQU
+                         46          2     60ct1982            Minor comment  modifications
+                         47          1     23sept1982          OS7  as one  absolute  file
+                         48          0     May 1982            OS7  listing  by module
+                         49
+                         50 ENDESCRIPTION:
+                         51          MEND
+                         52  PROG                                                                                                                          .

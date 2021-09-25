@@ -1,0 +1,28 @@
+FILE: t-saBS:EOSTF         HEWLETT-PACKARD:  EOS_COMN  (c) Coleco  1s-s  vonf identia)                      Sat,    8  Sep  1984,   23:38       . all     9
+
+LOCATION OBJECT CODE   LINE     SOURCE LINE
+
+                        335
+                        336   NOTE:   See  INTERRUPTVECTORS
+                        337
+                        338                 ORG      EOS_GLB_TBL
+                        339                .<GLB     VECTOR_O8H
+                        340 ;VECTOR_OBH     EQU      $+0
+                        341                 -GLB     INT_VCTR_TBL
+                        342 ;INT_VCTR_TBL   EQU      VECTOR_O8H
+                        343 ;               ;GLB     VECTOR_10H
+                        344 ;VECTOR_10H     EQU      $+3
+                        345                 ;GLB     VECTOR_18H
+                        346 ;VECTOR_18H     EQU      $+6
+                        347                 ;GLB     VECTOR20H
+                        348 ;VECTOR_20H     EQU      $+9
+                        349                 ;GLB     VECTOR_28H
+                        350 ;VECTOR_28H     EQU      $+12
+                        351                 ;GLB     VECTOR_30H
+                        352 ;VECTOR_30H      EQU     $+15
+                        353                 ;GLB     VECTOR38H
+                        354 ;VECTOR_36H     EQU      $+18
+                        355                 ;GLB     VECTOR_66H
+                        356 ;VECTOR_66H     EQU      $+21
+
+                                                                                     @e@e@e@e@e

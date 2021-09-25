@@ -1,0 +1,64 @@
+                                                                                                                          ——                                    OO    EEe
+
+                                                                         =
+FILE:    andS:EOS TF          HEWLETT-PACKARD:   A_uOSOO    (c) Coleco  i.  |Conf  tdential                    Sat,   8  Sep  1984,  23:38         aGE    49
+
+LOCATION  OBJECT  CODE    LINE      SOURCE LINE
+
+                          1859 ;
+                          1860 ;  — PUT_ASCII
+                          1861 ;
+                          1862 ;       Copys ea specified  number of ASCII    character generators    into VRAM.
+                          1663 ;       Swaps  to ROM that  contains the  generators   then  swaps  back,  keeps
+                          1864 ;       track of  callers  stack and uses  a   tocal stack  that  is known  to
+                          1665 ;       be in RAM  when the  ROM is swapped    in.
+                          1866 ;
+                          1867 ;Input  Parameters:
+                          1868 ;  HL  - Character  to tst  load (generally    in rangeO.  .FFH)
+                          1869 ;  BC  - Number  of characters  to load  (Not   the number  of bytes)
+                          1870 ;  DE  - Address  in VRAM  to load the  ist  generator
+                          1871 ;
+                          1872 ;  A,  BC, HL,  DE, IX  are  destroyed
+                          1873 ;
+                          1874 ;  Calis  WRITE _VRAM
+                          1875 ;         SWITCH  _MEM
+                          1876 ;
+     E153                 1877
+     E153 29              1878                   ADD      HL,HL             ;multiply  char  to  start  loading  by  8
+     E154 29              1879                   ADD      HL,HL             ;SO  can use  it as  an offset   into the
+     E155 29          -   $880                   ADD      Ht HL             ;ASCII  generator
+     E156 C5              1881                   PUSH     BC                ;save  number  of chars   desired
+                          1882                   ;LD       BC,ASCII_GEN
+                          1883                   ;LD       BC,([LOC_IN_ALPHA})
+                          1884                   ;ADD      HL.BC              ;now HL points   to the  ist generator    desired
+     E157 E3              1885                   EX       {SP}.HL           ;get  number  of chars  desired
+     E158 29              1866                   ADD      HL,HL             ;and  multiply  by  8
+     E159 29              1887                   ADD      HL.HL             ;   since each  generator   is 8  bytes
+     E1SA 29              1888                   ADD      HL,HL             ;      long
+     E15B £3              1889                   EX       {SP),HL           ;get  back pointer   into  ASCII  generators
+     E1S5CCi              1890                   POP      BC                ;get  number  of chars  times  8
+                          1891
+     E15D 00210000        1892                   LOD      IX,OOOOH          ;   to use to  save  callers  SP
+     E161 DD39            1893                   ADD      IX,SP
+     E163 SIFEGE          1894  —                LD       SP,TEMP_STACK     ;set  stack  into known  RAM
+     E166 DDES            1835                   PUSH     IX                ;save  callers  SP
+                          1896    "
+     E168 3AFDGE          1897                   LD       A,[CUR_BANK]      ;remember  which  bank  setting   we
+     E16B FS              1898                   PUSH     AF                ;    are in
+     E16C 3AFCI7          1899                   LO       A,[MEM_CNFGOO]    ;get  value  to let  us get  at the  ALPHA   roms
+                          1900
+     E16F CS              1901                   PUSH     BC                ;count  would  get  destroyed  by  SWITCH MEM
+     E170 CDFD14          1902                   CALL     SWITCHMEM
+     E173 C1              1903                   POP     BC
+                          1904
+     E174 DS              1905                   PUSH    DE
+     E175 ED5B0102        1906                   LD      DE,{LOC_IN_ ALPHA}
+     E179 19              1907                   ADD     HL ,DE
+     E17A D1              1908                   PoP     DE
+                          1909    .
+     E178 CDOFDIA         1910                   CALL     WRITEVRAM
+                      °   1911
+     EI7E Fi              1912                   PoP      AF                ;get  back callers   mem configuration
+     E17F CDFDI4          1913                   CALL     SWITCHMEM
+                          1914
+     E182 €1              i915                   PoP     HL                 ;get  callers  SP

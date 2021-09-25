@@ -1,0 +1,17 @@
+FILE: EOSABS:EOS TF         HEWLETT-PACKARD:  EOSPRTR   (c) Coleco   1983 Confidential                     Sat,   8  Sep  1984,  23:41        PAGE  176
+
+LOCATION OBJECT  CODE   LINE     SOURCE LINE
+
+    FSAF C4FBC2         7193        CALL     NZ,__START_WR_CHDEV             ; NOPE,  WRITE  CHARACTER
+                        7194                                           ; IS PASSED  BACK TO  CALLER
+    F5B2                7195 NO_DCB_FOUND!:
+    FS5B2               7196 WRITE_CMND_SENT:
+                        7197
+    FSB2 FDE1           7198        pop      IY
+    FSB4 E1             7199        pop      HL
+    FSBS D1             7200        Pop      DE
+    FSB6 C1             7201        PoP      BC
+                        7202
+    F587 C9             7203        RET
+                        7204
+                        7205

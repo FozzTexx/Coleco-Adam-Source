@@ -1,0 +1,22 @@
+FILE: EQSABS:€0STF        HEWLETT-PACKARD: CONSOUT   (c) Coleco 1983 Confidential                   Sat,   8  Sep  1984,  23:41      PAGE  194
+
+LOCATION OBJECT CODE  LINE     SOURCE LINE
+
+                      7670 ;
+                      7671 :Internal Subroutines
+                      7672 ;
+                      7673 ;
+                      7674 ; Subroutine
+                      7675 ; BLANK_PORTION  -  Fills LINEBUFFER_ with number of chars  in  8
+                      7676 ;                from where HL points
+                      7677 ;
+                      7678 ; Input Parameters:
+                      7679 5   Hi - Potnter into LINEBUFFER_
+                      7680 ;   8  - Number of the BLANKINGCHAR’s  to stuff in
+                      7681 ;
+                      7682 ;   A is destroyed
+                      7683 ;
+    F738              7684 BLANKPORTION:
+    F736 E€5          76865                PUSH    HL
+    F739 CS           7686                 PUSH    BC
+    F734 1807         7687                 JR      BLANKREST

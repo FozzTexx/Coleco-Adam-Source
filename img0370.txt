@@ -1,0 +1,64 @@
+ FILE: OS 7PRIME:pOS           HEWLETT-PACKARD:     CONTROLLER     SOFTWARE  (c)  Coleco,   1982   CONFIDENTIAL       Fri,   18
+                                                                                                                                 May  1984,  16:20        PAGE   96
+
+ LOCATION  OBJECT    CODE LINE       SOURCE   LINE
+
+     117F  2009           4670                JR  = NZ,UPDATE   SPINX             ;THEN  NOT  SPINNER   1
+     1181  23             4671                INC   WL                            ;ELSE  SPINNER   1, BUMP  HL
+                          4672  *   CHECK  DIRECTION
+     1182  CBéF           4673                BIT   5,A                           ;  IF BIT  5 IS SET
+     1184  2003           4674                JR  =-NZ, UPDATE R1                 ; THEN  GOING  RIGHT
+                          4675                                                    3;ELSE  LEFT
+     1186  35             4676               DEC    [WL)                          ; DECREMENT   SPINNER  COUNTER
+    1187   1801           4677                JR    UPDATE  SPINX
+                          4678  ***   RIGHT  SPINMER    SWITCH
+     1189                 4679  UPDATE  R1
+     1189  34             4680                INC   [HL]                          ;RIGHT,  INCREMENT   COUNTER
+     118A                 4681  UPDATE  SPINX
+     118A  C9             4682               RET
+                          4683
+                          4684
+                          4685
+                         4686   RRAATREREREAAAK     DECODER   ROUT IME   RRRARRARAARARAAAARARAKEKAREE
+                          4687  *   THIS  ROUTINE   RETURNS   DECODED   RAW, UNDEBOUNCED    DATA                7
+                          4688  *   AND  MAY OR  MAY  WOT  BE  REQUIRED   BY 0/S                      *
+                          4689  *
+                          4690  *          - [NPUT:
+                          4691  *                   H -  CONTROLLER   WUMBER
+                          4692  *                   L -  SEGMENT   WUMBER
+                          4693  *            OUTPUT:
+                          4694  *                                    SEGMENT   0         SEGMENT  1
+                          4695  *                   H -  BYTE  1        FIRE               ARM
+                          4696  *                  L  - BYTE   2        JOYSTK             KBD
+                         4697   *                  E  - BYTE   3       SPINNER
+                         4698   *
+                         4699   *
+                         4700                      GLB                 DECODER
+    1188                 4701  DECODER_                                         _
+    1188  7D             4702                iD    A,L
+    118C  FEO            4703                CP    STROBE  SET                    ;1F L=1  THEN  DECODE  SEGMENT  1
+    118E  261A           4704                JR    2,DEC  SEG1
+                         4705  *
+                         4706  *   SEGMENT   O  (FIRE  BUTTON,   JOYSTICK)
+                         4707  *   RETURN   H=FIRE  BUTTON,    L=JOYSTICK,   E=SPINWER
+                         4708  *
+                         4709  *  DO  SPINNER  FIRST
+    1190 01738           4710                LD    BC,SPIN  SWO  CT
+    1193 7c              4711                to    A,H.
+    119% FEOO            4712                CP    CONTROLLER   0                7TF  PLAYER=0  THEN  GO DECODE
+   1196  2801            4713                JR  =2,DEC   PLYR   ©
+    1198 03              4714                Inc   BC                            ;ELSE  INCREMENT   BC TO  SPINNER  1
+    1199 OA              4715  DEC PLYR     LD   A,   (BC)                       ;GET  SPINNER  SWITCH  COUNT
+   119A  5F              4716               LD                                   ;RETURN  IT  INE
+   1198  AF              4717               XOR    A
+   119C  02                                 LD     (BC) ,A                       ;CLEAR  OUT  SPINNER  SWITCH  COUNT
+                         4719
+   1190  CD1130          4720               CALL   CONT READ                     ;GET  OTHER  DEVICE  DATA  FOR PLAYER
+   11A0  57              4721               iD     OD,A                          7SAVE  IT
+   11A1  E6OF            4722               AND    JOY MASK                      7MASK  OUT JOYSTICK   DATA
+   11A3  6F              4723               iD     L,A                           ;RETURN  IT  INL
+                         4724
+   11A4  7A              4725               LD    =A,D                          ;RESTORE   DATA
+   11A5  E640            4726               AND    FIRE MASK                    ;MASK   OUT FIRE  BUTTON  DATA
+
+mRmaDoe              ne                     et           ee           HEHEHE                          Ee          Ee           Ee            HE         HF           Ee         EF           EF               FF       EB

@@ -1,0 +1,63 @@
+FILE: OS_7PRIME  :pOS       HEWLETT-PACKARD:   TABLE MANAGER  (c) Coleco,   1982   CONFIDENTIAL           Fri,  18  May  1984,  16:21   =   PAGE  124
+
+LOCATION   OBJECT CODE LINE       SOURCE LINE
+
+    1844   2004        6029              JR    NZ,CASE OF GEN10
+    1846   0€03        6030              Lo    C,3              ;VALUE  TO WRITE  FOR VRAM  ADDRESS OF 00H
+    1848   1828        6031              JR    INIT_TABLE9O
+    1B4A               6032  CASE OF GEN10
+    184A  0€07         6033              LO    C,7              ;VALUE  TO WRITE  FOR VRAM  ADDRESS OF 2000H
+    1B4C   1824        6034              JR
+    1B4E               6035  CASE OF COLOR
+    1B4E  0603         6036              LD    B,3              ;REGISTER  TO  WRITE
+    1850  7D          6037               LD    =OA,L
+    1851  84          6038               OR    ou
+    1852  2004         6039              JR    NZ,CASE_OFCLR10
+    1854  0€7F         6040              LDC,  7FH              ;VALUE  TO WRITE  FOR VRAM  ADDRESS OF 00H
+    1856  181A         6041              JR     INIT_TABLE90
+    1858               6042  CASE OF CLR10
+    1858  OEFF         6043              LDC,    OFFH           ;VALUE  TO WRITE  FOR VRAM  ADDRESS OF 2000H
+    1B5A  1816         6044              JR    INIT_TABLE9O
+                      6045
+    1B5C              6046   INIT TABLE8O
+                      6047               ;**   COMPUTE BASE ADDRESS  (BASE_ADDRESS=TABLE_ADDRESS/FACTOR
+                      6048               ;**   GET BIT SHIFT COUNT
+    1B5C  FD211876    6049               LD    _1Y,BASE_FACTORS
+    1860  FDO9        6050              ADD    IY,BC
+    1862  FDO?        6051              ADD    1Y,BC
+    1864  FD7E00      6052               LD   A, [1Y+0)         ;SHIFT COUNT   NOW IN ‘A!
+    1867  FD4601      6053              LD    8, [1¥+1]         ;REGISTER  NUMBER  TO WRITE  IN 'B!
+    1B6A              6054   DIVIDE      ;**  COMPUTE  BASE ADDRESS
+    186A  CB3C        6055              SRL    H                ;SHIFT HI  BYTE
+    1B6C  CB10        6056              RRL                    ;SHIFT  LO  BYTE
+    1B6E  30          6057              DEC   A             _  }DECREMENT   SHIFT  COUNT
+    1B6F  20F9        6058              JR   =NZ,DIVIDE -
+                      6059               ;**  WRITE  TO VDP REGISTER
+    1B71  4D          6060              LO    C,L              ;VALUE  TO  WRITE  IN ‘C!
+   1872               6061   INIT TABLE9O
+   1B72   CDICCA      6062              CALL  REG WRITE
+   1875   C9          6063              RET
+                      6064
+   1876               6065   BASE FACTORS   |§;BASE_FACTOR,REGISTER  NUMBER
+                      6066
+   1876 070508060A    6067              DEFB  7,5,11,6,10,2,11,4,6,3
+   1B7B  0208040603
+                      6068
+                      6069   * PROCEDURE GET  VRAMQ  (TABLECODE:BYTE;START_INDEX:BYTE;    SLICE:BYTE;
+                      6070   *                        VAR DATA:BUFFER; ITEM COUNT:  INTEGER);
+                      6071
+                      6072   * THIS IS THE  PASCAL  ENTRY POINT TO  INITTABLE
+                      6073
+   1B80  00050001     6074   GETVRAM P        DEF              5,1,1,1,-2,2
+   1884  00010001
+   1888  FFFEOOO2
+                      6075   * THIS IS THE  PARAMETER  DESCRIPTOR  FOR INIT _TABLEQ
+                      6076
+   1B8C               6077   GETVRAMQ
+   1B8C  011880       6078                    LD               BC,GET  VRAM  P
+   188F  1173BA       6079                    LD               DE,PARAM AREA
+   1892  cd0098       6080                    CALL             PARAM.
+   1895  3A73BA       6081                    LD               A,[PARAM AREA}
+   1898  0587388      6082                    LD               DE, [PARAM AREA+ 1}
+
+                                                                                                  ~é

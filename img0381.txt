@@ -1,0 +1,61 @@
+FILE: OS7PRIME:pOS           HEWLETT-PACKARD:  DISPLAY  LOGO (c)  Coleco,   1982   CONFIDENTIAL             Fri,  18  May  1984,  16:21       PAGE  107
+
+LOCATION  OBJECT  CODE  LINE       SOURCE LINE
+
+    142C  218A00        5288                   LD HL,8A00H                          -DISPLAY 60 SECONDS
+    142F  (01968        5289                   CALL TIMER 1
+                        5290   * TURN OFF DISPLAY
+    1432 0601           5291                   LD B,1                               *BLANK SCREEN
+    1434 0€80           5292                   LD C,100000008
+    1436  CDIFD9        5293                   CALL WRITE REGISTER
+    1439  18FE          5294                   RS,                                  >SOFT HALT
+                        5295
+                        5296   BREWAEKASSATKAAREARAKAAARASERAERAAAAKARAAARARARAAAAKERAKRAARARAAREKAERAAKRAEEH
+                        5297   *                                                                     *
+                        5298   *                         DATA  TABLES                                *
+                        5299   *                                                                     *
+                        5300   SRREKCAACRAAREAAARARAAAARAEARAERAAAKKAARERAEKARKRARAKAARERKEKRAAERERARRERKRER
+                        5301
+                        5302   SRAKARAERAEAAAARAAHRAARAREKCOLOR MAME   TABLE  SRRARARAKAAAARAKAERKKRKEKKAR
+                        5303                                     OO
+    1438 OOOOOOFOFO     5304   LOGOCOLORS   =  HEX 00,00,00,F0,FO,FO,  FO, FO, FO,FO, FO,FO
+    1440 FOFOFOFOFO
+    1445 FOFO
+    1447 0080908030     5305                   HEX DO,80,90,B0, 30,40
+    144C 40
+                        5306
+                        5307   SRIERSRAAKAWTRAEETARASRAPATTERN  BARE  TABLE   SBRRLAAATKEREAEAARARRERAEKE
+                        5308                                   SO
+              <144D>    5309  LOGO NAMES       EQU $
+                        5310
+    144D 6061686970     5311                   HEX 60,61,68,69, 70,71, 78, 79,80,81,  88,89
+    1452 7178798081
+    1457 8889
+    1459 64656C7475     5312                   HEX 64,65,6C, 74,75, 7C,84,85,  8C,8D
+    145€ 7C84858C8D
+                        5313
+    1463 62636A6872     5314                   HEX 62,63,6A,68,72,73,7A,7B,82,83,8A
+   1468  737A7B8283
+   1460  GA
+   146€  8866676076     5315                   HEX 88,66,67,60,76,77,  7D ,86,87, 8E, BF
+   1473  777086878E
+   1478  8F
+                       5316
+   1479  5455524E20    5317                    DEFB “TURN GAME  OFF"                                                                                                                 ,
+   147E  4741404520
+   1483  44646
+   1486  4245464F52    5318                    DEFB “BEFORE  INSERTING  CARTRIDGE”
+   1488  452049453
+   1490  455254494E
+   1495  4720434152
+   149A  5452496447
+   149F  45
+   14A0  4F52204558    5319                    DEFB “OR EXPANSION  MODULE."
+   1405  5041465349
+   14AA  4F4E204D4F                                                                                                                                               ‘
+   VGAF  44554C452E
+   1484  1020313938    5320                    DEFB 1DH," 1982  COLECO"
+   14B9  3220434F4C
+   14BE  45434F
+                       5321
+   14C1  1E1F          5322   TRADEMARK        HEX  1E,1F

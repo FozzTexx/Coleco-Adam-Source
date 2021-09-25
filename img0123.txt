@@ -1,0 +1,62 @@
+      \
+FILE: c-.ABS:EOSTF        HEWLETT-PACKARD:  RDWT      (c) Coleco   1%u5 Confidential                   Sat,    8  Sep  1984,  23:40       raut  119
+
+LOCATION OBVECT CODE  LINE     SOURCE LINE
+
+    ECAE 2AFEO8       4722         LD       HL,[BUFSTART]              ;GET  ADDRESS  OF USERS BUFFER
+    ECBi DDSE19       4723         LD       E,[1X+FCBBLOCK]            ;GET  BLOCK NUMBER
+    ECB4 DOS6IA       4724         LD       D,([1X+FCBBLOCK+1)
+    ECB7 DD4E18       4725         LD       C,{1X+FCB_BLOCK+2)
+    ECBA DD461C       4726         LD       8,[1X+FCB_BLOCK+3)
+                      4727
+    ECBO CDF17B       4728         CALL    ~READBLOCK           ;READ THE NEXT  BLOCK
+                      4729
+    ECCO C2ED81       4730         JP       NZ,READ_ERR1      ;BRANCH IF ERROR
+                      4731
+    ECC3              4732 NOT_TAPE1:
+    ECC3 DO7E20       4733    :    LO       A,[IX+FCB_LAST_BLOCK+3)    ;SEE IF THIS  IS THE LAST BLOCK
+    ECC6 DDBEIC       4734         CP       (IX+FCB_BLOCK+3]
+    ECCS 201C         4735         JR       NZ,JP_TO_READ3          ;BRANCH  IF NOT
+    ECCB DOTEIF       4736         LD       A,(IX+FCB_LAST BLOCK+2]                                                                                  '
+    ECCE DDSE16       4737         cP       {IX+FCB_BLOCK+2]}
+    ECD1 2014         4738         JR       NZ,JP_TO_READ3
+    ECD3 DOTEIE       4739         LO       A,(IX+FCB_LAST_BLOCK+1)
+    ECD6 DOBEIA       4740         cP       (IX+FCB_BLOCK+1]}
+    ECD9 200C         4741         JR       NZ,JP_TO_READ
+    ECDB DO7T1D       4742         LD       A,(IX+FCB_LAST_BLOCK]
+    ECDE DDBE19       4743         cP       (1X+FCB_BLOCK]
+    ECE1 2004         4744         JR       NZ,JUP_TOREAD3
+    ECE3 DOCBIBFE     4745         SET      MODELAST BLOCK  BIT. [IX*FCB_ MODE]  ;ELSE  SET THE LAST  BLOCK   BIT
+    ECE7              4746 JP_TOREADS:
+    ECE7 C3ECSE       4747         JP       READ3            ;AND  DEAL WITH  THE NEXT  BLOCK
+                      4748
+                      4749 ; ARRIVE HERE  IF THIS BLOCK CONTAINS   ENOUGH BYTES  TO SATISFY
+                      4750 ; THIS CALL.
+                      4761
+    ECEA              4752 ENOUGH:
+    ECEA DD7E20       4753         LO       A,(IX+FCB_LAST_BLOCK+3]   ;SEE  IF THIS  IS THE LAST BLOCK
+    ECED DDBEIC       4754         cP       [IX+FCB_BLOCK+3])
+    ECFO 2018         4755         JR       NZ,READLAST!     ;BRANCH  IF NOT
+    ECF2 DD7E1F       4756         LD       A,[IX+FCB_LAST_BLOCK+2)
+    ECFS ODGE1B       4757         cP       [IX+FCB_BLOCK+2)
+    ECF8 2010         4758         JR       NZ,READ_LAST1
+    ECFA DOTEIE       4759         LD       A,[IX+FCB_LAST_BLOCK+1]
+    ECFD ODBE1A      4760          cP       [1X+FCB_BLOCK+?1)
+    EDOO 2006         4761         UR       NZ,READ_LAST1
+    EDO2 DD7E10       4762         LD       A,{IX+FCB_LASTBLOCK)
+    EDOS DOSE19       4763         cP       [IX+FCBBLOCK}
+    E008 2810         4764         JR       Z,LAST_BLOCK
+                      4765
+    EDOA              4766 READLAST1:
+    EDOA ED4BFE04     4767         LO       BC,[BYTESTO GO}       ; GET BYTE  COUNT TO  MOVE
+                      4768                     :
+                      4769
+    EDOE DDG6E21      4770         LO       L,{IX+FCBPOINTER}   ;POINT  INTO  MY BUFFER
+    ED11 0D6622       4771         LD       H,(IX+FCBPOINTER+1]
+    ED14 EDSBFEOG     4772         LO       DE,(USERBUF }    ;POINT  TO THE USER’S  BUFFER
+    ED18 EDBO         4773         LOIR                      ;MOVE  THE DATA
+                      4774
+    ED1A DD7521       4775         LO       [IX+FCBPOINTER].L   ;UPDATE  MY POINTER
+    ED1ID007422       4776         LO       [IX+FCBPOINTERt+i].H
+                      4777
+                      4778

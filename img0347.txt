@@ -1,0 +1,61 @@
+FILE: OS 7PRIME:pOS           HEWLETT-PACKARD: PUT  MOBILE   (c)  Coleco, 1982  CONFIDENTIAL                Fri, 18   May  1984,  16:20         PAGE    73
+
+LOCATION   OBJECT  CODE  LINE      SOURCE LINE
+
+    OBFA   0600          3444          LD B,0
+    OBFC   110006        3445          LD DE,6                     cFRAME POINTERS START AT  THIS  OFFEST
+    OBFF   19            3446          ADD HL,DE
+    0c00   09            3447          ADD WL,BC                   ;HL := POINTS TO FRAME POINTER   FOR FRAME
+    0CO1   5E            3448          LD E,CHL)
+    0co2   23            3449          INC HL
+    0C03   56            3450          LOD, CHL)                   ;DE := ADDRESS OF  FRAMENAMES
+    0C04   2A8006        3451          LD HL, (WORKBUFFER)         ;HL >= BUFFER BASE ADDRESS
+    0cO07 01007C         3452          LD BC,0B8JPTN+24            USE  LOCATION FOR LAST GEN  TO  STORE NAMES
+    OCOA  09             3453          ADD HL,BC
+    ocoB  £5             3454          PUSH HL                     ;SAVE FOR LATER USE
+    ococ  CS             3455          PUSH BC                     ;SAVE OFFSET
+    OCOD  010005         3456          LD BC,5
+                         3457  ;       IF ({_0,tT,70H)             ;THEN WAMES ARE IN VRAM
+    0C10   7A            3458          LD A,O
+    OC11   FE70          3459          CP 70H
+    0C13  3005           3460          JR WC,ELSES
+    0C15  COIFE2         3461            CALL READ VRAM               ;GET THE 4 NAMES
+    0C18   1803          3462            JR ENDS
+    OCIA                 3463  ELSES                               ;NAMES IN CPU MEMORY SPACE
+    OCIA  £8             3464            EX DE,WL
+    0C1B  £080           3465            LDIR
+    0C10                 3466  ENDS    sENDIF
+    OC10  FD2A8006       3467          LO IY, (WORKBUFFER)         GET  COLOR BYTE
+    0c21  C1             3468          POP BC                      ;OFFSET TO FIRST NAME
+    0C22  FDO9           3469          ADD IY,8C
+    0C24  FD7E04         3470          LD A,[1Y+4)                 sA := COLOR BYTE
+    0C27  FD2A8006       3471          LD IY,(WORK BUFFER)
+    Oc2B  FO7702        3472           LD [1Y¥+COLR),A             sCOLR := COLOR BYTE
+    OC2E  D1             3473  PMO     POP DE                      DE  := ADDRESS OF FIRST NAME  IN  BUFFER
+    OC2F  2A8006         3474          LD HL,(WORK BUFFER)         HL  := BUFFER BASE ADDRESS
+    OC32  010064         3475          LD BC,08J PTM               START  OF OBJECT'S PATTERN  BUFFER
+    0c35  09             3476          ADD HL,BC
+                         3477  ;       00 B,4                      ;GET 4 PATTERNS CORRESPONDING   TO THE FOUR  NAMES
+    0C36  0604           3478          LD B,4
+   0C38   1A             3479  DLP4    LO A,(DE)                     GET  NAME
+    0C39  DDBEO1         3480            CP [IX+1}                   sCOMPARE TO NUMGEN
+    Oc3c  D5             3481            PUSH DE                     *SAVE POINTER TO NAMES
+                         3482  ;         IF [PSW,1S, CARRY]          *THEN NAME < NUMGEN, THEREFORE
+    OC30  3016           3483            JR WC,ELSE9
+    OC3F  D9             3484              EXX                       ;     PATTERN PART OF GRAPHICS   TABLES
+    0C40  87             3485              ADD A,A
+    0C41  87             3486              ADD A,A
+    0C42  87             3487              ADD A,A                   7A := B*NAME
+    0C43  6F             3488              LD L,A
+    0044  2600           3489              LD H,0
+    0046  09             3490              ADD HL,BC                 sHL :  POINTER TO PATTERN
+   0C47   £5             3491              PUSH HL
+   0C48   09             3492              EXX
+   0C49   D1             3493              POP DE                    sDE :
+   OC4A   EB             3494              EX DE,HL
+   0c4B   C5             3495              PUSH BC
+   OC4C   010008         3496              LD BC,8                   ;NUMBER OF BYTES TO MOVE
+   OC4F   EDB0          3497               LDIR
+   0c51   C1             3498              POP BC
+   0C52   EB             3499              EX DE,HL
+   0C53   1830           3500              JR ENDY

@@ -1,0 +1,62 @@
+            FILE: OS 7PRIME:pOS            HEWLETT-PACKARD:     DISPLAY   LOGO  (c)  Coleco,   1982   CONFIDENTIAL                Fri,  18 May   1984,  16:21        PAGE   105
+
+            LOCATION   OBJECT  CODE   LINE        SOURCE  LINE
+
+                                      5174   stteeteeaneteneewee     YRTTE  OUT  PATTERN    NAME TABLE   *****eeeenenenen
+                                      5175
+                                      5176   *  WRITE   OUT  PATTERN NAME  TABLE
+                1359   211440         5177   WRITE  NAMES       LD  HL,LOGO NAMES                 WRITE   QUT  TOP  HALF
+                135C   110085         5178                      LD DE, 133                       ;OF  COLCOVISION
+                135F   FD210016       ©5179                     LO  1Y,22        |  |
+                1363   3602           5180                      LOA,2     |
+                1365   CD1FBE         5181                      CALL  PUT_VRAM
+                                      5182
+                1368   211463         5183                      LD HL,LOGO   NAMES+22            ;WRITE   OUT  BOTTOM   HALF
+                1368   1100A5         5184                      LD DE, 165                       OF   COLECOVISION
+                136E   FD210016  =:   5185                      LD  1Y,22
+                1372   3602           5186                      LD A,2
+                1374   CDIFBE        5187                       CALL  PUT VRAM
+                                     5188                          |
+                                      5189
+                1377   211401         5190                      LD HL, TRADEMARK                 ;WRITE   OUT  TM
+                137A   110098        5191                       LD DE, 155
+                137D   FO210002  =:  5192                       LD  1Y,2
+                1381  3602           5193                       LO A,2
+                1383  CD1FBE         5194                       CALL  PUT _VRAM
+                                     5195
+                                     5196    * SET  UP  DEFAULT  COPYRIGHT   MESSAGE
+                1386  211484         5197                       LO HL, LOGO NAMES+103            ;WRITE   OUT c  1982  COLECO
+                1389  1102AA         5198                       LD DE, 682
+                138C  FD210000       5199                       LO 1Y,13
+                1390  3602           5200                       LD A,2
+                1392  CD1FBE         5201                       CALL  PUTVRAM
+
+                                         8   SRERRARARAKREARAEARRKEWRITE   OuT   COLOR   NAME  TABLE  RREAEAKKAERARKAREKRERE
+                                     5204
+               1395   211438         5205                       LD HL,LOGO  COLORS
+               1398   110000         5206                       LD DE,0
+                1398  3E04           5207                       LO A,4
+                1390  FD210012       5208                       LD 1Y,18
+               13A1   COIFBE         5209                       CALL  PUT_VRAM
+                                     any    REARRAARKEAAARARHAEAKRARKKKARKEK  ENABLE    DISPLAY  RRARRARAAKAARHAREKKKRKKRE
+                                     5212
+                                     5213   *  ENABLE   DISPLAY
+               13A4   0601           5214                       LD B,1
+               13A6   OECO           5215                       LD C, 110000008
+               13AB   CD1FD9         5216                       CALL WRITE  REGISTER
+                                     5217
+                                     5218   *  CARTRIDGE   TEST
+               13AB   218000         5219                       LD HL, 8000H                     ;1F  A CARTRIDGE    IS PRESENT
+               13AE   7E             5220                       LDA,  [HL)                       >LOCATION   8000H  WILL   = OAAH
+               13AF   FEAA           5221                       CP OAAH                          AND   B001H  WILL  =  55H
+               1381   204C           5222                       JR NZ,NO CARTRIDGE               ;     NOT  PRESENT
+               1383   23             5223                       INC HL
+               1384   7E             5224                       LD A, (HL)                                                                                                                  ‘
+               1385   FESS           5225                       cp 55H
+               1387   2046           5226                       JR NZ,NO CARTRIDGE
+                                     5227                                                        ;     NOT  PRESENT
+                                     5228   *  CARTRIDGE   PRESENT
+                                     5229   *  DISPLAY   GAME  TITLE
+               1389   218024         5230                       LO WL,GAME  NAME
+
+BC                                                                                                                                          —_—                                         eee

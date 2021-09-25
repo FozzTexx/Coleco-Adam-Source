@@ -1,0 +1,31 @@
+FILE: EOSABS:EOS   TF         HEWLETT-PACKARD:  EOSPRTR   (c) Coleco   1983 Confidential                   Sat,   8  Sep  1984,  23:41        PAGE  172
+
+LOCATION   OBJECT  CODE   LINE     SOURCE  LINE
+
+                          TOH4 SHSKSREASSHEHE  REKEERHEEEEEE EAE TEEETHERS  SESEEAE   ERE  EKER  EERE EEE RS
+                          7055 *                            .
+                          7056 *                  SETS UP PRINT_BUFFER   AND THE  HL  REGISTER AND
+                          7057 * CALLS _START_PR_BUFF
+                          7058 *      INPUT:   A = ASCII CHARACTER
+                          7059 *      OUTPUT:   CONDITIONFLAGS
+                          7060 *                 Zz:   NO ERROR
+                          7061 *                NZ:    ERROR OCCURED
+                          7062 *                       A = ERROR  CODE
+                          7063 *
+                          TOSS SHSSSESS    SESHHHESHEERS  EEESESE   EHREEHEHEEEEEET   HTHESESEESE HEEEEROREE
+                          7065
+                          7066       ;GLB      __SETUP_PR_BUFF
+                          7067
+    FSSE        |         7068 _ SETUP_PR_BUFF:
+    FSS5E  32FO76         7069        LD       (PRINT_BUFFER],A
+    F561  3E03            7070        LD.      A,ETX
+    F563   32FD77     ~   7O71        LD       {PRINT_BUFFER+1],A
+       |                  7072
+    F566   21FO76         7073   .    Lo       HL,PRINT_BUFFER
+                          7074
+    FS69   CDOFS80        7075        CALL     __START_PR_BUFF
+                  |       7076                          |
+    FS6C   CO             7077        RET
+                          7078
+                          7079
+                         7080

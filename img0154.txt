@@ -1,0 +1,60 @@
+FILE:     EQSABS:EQS      TF              HEWLETT-PACKARD:           UTILS             {co}    Coleco     1982    Conf  identia?                                 Sot,        8   Se
+
+LOCATION       OBJECT     CODE     LINE          SOURCE      LINE
+
+                                   6160
+       F269    22FEIA              6161              LD            [NEW     _HOLE   SIZE),HL                 >  SAVE    THE     NUMBER     OF   EMPTY     BLOCKS
+       F26C    007311             6162               LD            [IX+FCB_MAX_LENGTH],E                     ;  ALLOCATED         = USED,        NOW
+       F26F    007212              6163              LD            [IX+FCB       MAX_LENGTH+1],D
+                                  6164
+       F272    3AFDD4             6165               LO            A, {FILE      COUNT}                      >  FILE    ENTRY      POSITION       IN   OIRECTORY
+       F275    0627               6166               LD            B,ENT     PER    BLOCK
+       F277                       6167     TRY_AGAIN:
+       F277    90                 6168               SUB           B                                         >; IS   IT   THE    LAST    ENTRY      IN   THIS    BLOCK
+       F278    2824               6169               JR            Z,LAST_ENTRY                              ;  YUP
+       F27A    30FB               6170               JR            NC,TRY_      AGAIN                        ;  NOPE,    MUST      BE   IN  NEXT     BLOCK
+                                  6171
+       F27C                       6172     NOT_LAST_ENTRY:
+       F27C    DDO2AFOFD          6173               LD            IX,   {FCB_HEAD_ADDR]                     ;  GET   START      OF   FCB’S
+       F280    DD5E21             6174               LD            E,[IX+FCB_POINTER]}                       ;  GET   ADDRESS       OF   THE    MODIFIED       FCB
+       F283    DD5622             6175               LO            D0, (I1X+FCB_POINTER+1]
+       F286    D5                 6176               PUSH          DE
+                                  6177
+       F287    O1001A             6178               LD            BC,DIR_ENT_LENGTH                 ;  OFFSET     TO   NEXT     DIR   ENTRY’S       ATTR    BYTE                                                                               |
+       F28A    C5                 6179               PUSH          BC                                                                                                                                                                           |
+                                  6180
+       F28B    21FDBA             6181               LO            HL,FCB      BUFFER
+       F28E    EDBO               6182               LOIR
+                                  6183
+       F290    D1                 6184               POP           DE
+       F291    E1                 6185               PoP           HL
+                                  6186
+       F292    19                 6187               ADD           HL  ,DE                                   ;  POINT    TO    ATTR    BYTE
+                                  6188
+       F293    E5                 6189               PUSH          HL
+       F294    FDE1               6190               POP           LY
+                                  6191
+       F296    FOCBOC46           6192               BIT           ATTR_HOLE       BIT,[IY+DIR_ATTR]                        ;   IS  IT   A  HOLE?
+       F29GA   285E               6193               JR            Z,NOT    HOLE                            ;   NOPE
+                                  6194
+       F29C    1483C              6195               JR            ITS_HOLE
+                                  6196
+                                  6197
+       F29E                       6198     LAST_ENTRY:
+       F29E    3AFDD4             6199               LD            A, {FILE     COUNT)
+       F2A1    32FDD5             6200               LO            [MOD_FILE_COUNT],.A                      ;   SAVE    IT
+                                  6201
+       F2A4    Fi                 6202               POP           AF
+       F2A5    D1                 6203               POP           DE
+                                  6204
+       FIA6    D5                 6205               PUSH          DE
+       FORT    F5                 6206               PUSH          AF
+                                  §207
+       F2AB    2i1FDBA            6208               LOD           HL.FCB     BUFFER
+                                  6209
+       F2AB    CDE65S1            6210               CALL          __SET_   FYLé                            >   PUT   CHANGEO       DIRECTOR:        AWAY
+                                  6211
+       F2AE    206A               62i2               JR            NZ,  ERRGR
+                                  6213
+       F2BO    Fi                 A244               POP           AF
+       F2B1    D°                 B245               POP           rf

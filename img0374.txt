@@ -1,0 +1,63 @@
+ILE: OS  7PRIME=:pOs       HEWLETT-PACKARD:     CONTROLLER    SOFTWARE    (c) Coleco,   1982    CONFIDENTIAL      Fri,  18  May  1984,  16:21        PAGE  100
+
+XCATION  OBJECT  CODE LINE        SOURCE  LINE
+
+                      4898   *  DECODE   KEYBOARD   DATA
+   126E  2110F5       4899                LD    WL,DEC  KBD  TBL     ;DECODE  TABLE   ADDRESS
+   1271  1600         4900                iD    D,0                 ;D/E   RAW DATA
+   1273  19           4901                ADD   HL,DE               ;COMPUTE   ADDRESS    INTO  TABLE
+   1274  7E           4902                iD    A, {HL}             700  TABLE   LOOKUP
+   1275  007704       4903                LD    {IX*KBD)  ,A        ;SAVE   IN  CONTROLLER   MEMORY  aKBD
+   1278  1808         4904                JR    KBD EXIT
+                      4905   *  STATE  =  1
+   127A               4906   KBD_ST1         |
+   127A  7B           4907                LD    A,E                 :GET  CURRENT   DATA
+   1278  88           4908                CP   8B                   7 IF OLD=NEW
+   127C  2807         4909                JR    2,KBD  EXIT         ;NO  CHANGE   IN  STATE
+   127E  FD7308       4910                LO    C[1IY*KBDOLD],E     ;ELSE   SAVE  CURRENT   DATA
+   1281  AF           4911                XOR   A                   sSET  STATE=0
+   1282  FD7709       4912                LD    [1Y+#KBD_STATE],A
+   1285               4913  K8D EXIT
+   1285  €1           4914                POP   HL
+   1286 D1            4915                POP   DE
+   1287  C1           4916                POP   BC
+   1288  C9           4917               RET
+                      4918
+                      4919  *   FIRE  BUTTON   DEBOUNCE   ROUTINE    *
+                      4920  *
+                      4921  *             INPUT:
+                     4922   *                   A  - RAW  DATA
+                     4923   *                  IX  - CONTROLLER    MEMORY  POINTER
+                     4924   *                  IY  - DEBOUNCE   STATE   BUFFER
+                     4925   *
+  1289               4926   FIRE DBNCE
+  1289  C5           4927                PUSH   BC
+  128A  D5           4928                PUSH   DE
+  1288  E640         4929                AND    FIRE MASK            7MASK  OUT   VALID  DATA
+  1280  5F           4930        |       LO     E,A                 ;SAVE   IT
+  128E  FD4600       4931                LD    8B,{IY+FIRE  OLD)     ;GET  OLD  DATA  AND  CURRENT   STATE
+  1291  FD7E01       4932                LD     A,CIY+FIRE_  STATE)
+  1294  FEOO         4933                cp     60                  sIF  STATE  <>  0
+  1296  2013         4934                JR   =WZ,FIRE  ST1          ;THEN  MUST   BE STATE   1
+                     4935   *   STATE  = 0                          sELSE
+  1298  78           4936                iD    A,E                  ;GET  CURRENT   DATA
+  1299  Bé  -        4937                CP    6B                   3iF  OLD=NEW                                                                                                             ’
+  129A  2805         4938                JR    Z, FIRE REG           sTHEN  SAW  DATA  TWICE   IN SEQUENCE
+  129C  FD7300       4939                LD     C(IY*FIRE OLD),E     ;ELSE  FIRST   TIME,  SAVE  CURRENT DATA
+  129F  1815         4940                «SR   CFERE_EXIT
+                     4941   *  SAW  DATA  TWICE   IN  SEQUENCE
+  12A1               4942   FIRE REG
+  12A1  3€01         4943                LD    A,1                  “SET  STATE=1
+  12A3  FD7701       4944                LD     CIY+FIRE  STATE)  ,A
+  12A6  DD7300       4945                LD     CIX+FIRE],E          sSAVE  IN  CONTROLLER   MEMORY  afIRE
+  1209  1808         4946                JR    FIRE EXIT
+                     4947  *   STATE  =  1
+  12AB               4948  FIRE ST1                                                                                                                                        .
+  12AB  7B           4949                LO    A,E                 *GET  CURRENT   DATA
+  12AC  88           4950                cP    OB                  -1F  OLD=NEW
+  12AD  2807         4951                JR    Z,FIRE  EXIT          ;NO CHANGE   IN  STATE
+  12AF  FO7300       4952                LD    (1Y*FIRE  OLD),E      sELSE  SAVE  CURRENT   DATA
+  12B2  AF           4953                KOR   A                   -SET  STATE=0
+  1283  FO7701       4954                LD    CIY+FIRE  STATE)  ,A
+
+                                      le                                                               ee            en                                  ee

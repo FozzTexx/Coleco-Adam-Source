@@ -1,0 +1,61 @@
+FILE: OS 7PRIME:    pos          HEWLETT-PACKARD: DISPLAY  LOGO   (c) Coleco, 1982   CONFIDENTIAL              Fri,  18  May  1984,  16:21        PAGE  115
+
+LOCATION  OBJECT    CODE    LINE      SOURCE LINE
+
+    1800  001718
+    1803   FF               5593                  HEX   FF                             sENWDOF TABLE INDICATOR
+
+                            then  ARAAAAAAAAAAARAAAAARAAAAARARAAAAAAAAAARAAAAERARAAAAAERATARERARAEAREE
+                            5596  *                                                                     ®
+                            5597  *                        _   SUBROUTINES                              *
+                            5598  *                      ;                                              *
+                            5599  SteeeaedeededeeRAeeeeeReeeAKeeeKeAAAKAKeKeAeAeARAAAAARAAAAAAAKAA
+
+                            are   Seetneakeakankaneeeeeeeek  OS  SUBROUTINES  ****eeeeaataneeneanenenen
+                            5602
+                            5603  * FILLVRAM    WRITES  TO VRAM  ADDRESS  POINTED  TO BY  HL THE VALUE IN A
+                            5604  *             DE TIMES.
+                            5605
+                            5606  *          VRAM STARTING  ADDRESS   IN HL
+                            5607  *          NO OF BYTES   INDE
+                            5608  *          VALUE TO  BE WRITTEN   IN A
+                            5609
+    18D4  4F                5610  FILL VRAM   LO   C,A
+    185   7D                5611              LD   =A,L
+    1806  DO38F             5612              OUT   (MODE 1 PORT) ,A
+    1808  7C                5613              LO   3=A,W
+    1809  F640              5614              OR   40H
+    1808  D38F              5615              OUT   [MODE _1PORT],A
+    18D   79                5616  FILL        Lb   36A,C
+    18DE  03BE              5617              OUT   {MODE 0PORT),A
+    18E0   18               5618              DEC  DE
+    18E1  7A                5619              iD   A,D
+    18E2  B83               5620              OR   €
+    18E3  20F8              5621              JR = WZ,FILL
+    18€5  CD1IFDOC          5622              CALL READ REGISTER
+    18€8  C9                5623              RET
+                            5624
+                            5625
+                            5626  * MODE 1.  SETS UP  GRAPHICS  MODE  1 WITH VRAM  ADDRESSES  AS IN THE TABLE
+                            5627  *         BELOW AND  EXITS WITH   THE VIDEO BLANKED   AND A BLACK BACKGROUND.
+                            5628
+                            5629  *                           VDP   MEMORY MAP
+                            5630  *               3800H-3FFFH    SPRITE  GENERATOR  TABLE
+                            5631  *               2000H-37FFH    PATTERN  COLOR TABLE
+                            5632  *               1BOOH-1B7FH    SPRITE  ATTRIBUTE  TABLE
+                            5633  *               1800H-1AFFH    PATTERN  NAME TABLE
+                            5634  *               OOOOH-17FFH    PATTERN  GENERATOR  TABLE
+                            5635
+    18E9  0600              5636  MODE1_          LD  8,0
+    18EB  O0E00             5637                  LD  C,0
+    18ED  CDIFD9            5638                  CALL  WRITEREGISTER
+                            5639
+    18FO0 0601              5640                  LO  8,1
+    18F2  O0E€80            5641                  LD  C,100000008
+    18F4  CD1FD9            5642                  CALL  WRITEREGISTER                                                                                               8
+                            5643
+                            5644  * SET UP TABLE ADDRESSES  IN  VRAM
+                            5645
+                            5646  * PATTERN NAME TABLE
+    18F7  3&02              5647                  LD  A,2
+    1BF9  211800            5648                  LD  HL,1800H

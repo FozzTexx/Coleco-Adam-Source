@@ -1,0 +1,63 @@
+FILE: EGSABS  <= YF        HEWLETT-PACKARD:     FOS UTIL  {c)  Collec    i983Confiadential                    2at,     8  Sep  1984,  23:41        PAGE   216
+
+LOCATION OBJECT CODE  LINE      SOURCE   LINE
+
+                      8415
+                      8416  ; ENTRY:           __SYNC
+                      8417  ; NEEDS:           (CURRENTPCB)   SET  TO  ADDRESS OF CURRENTLY  OPERATING   PCB
+                      8418  ; RETURNS:         NETWORK MASTER  NODE   IN SYNC WITH Z80
+                      8419  ;                  NUMBER OF DCB’S   = O  (SO MASTER NODE IS  NOT SCANNING
+                      8420  ;                   ANY DCB’S -  SO  A __SCAN ACTIVE  NEEDS TO  BE DONE
+                      8421  ;                   TO ESTABLISH  DCB’S)
+                      8422
+             <O0000>  8423  SYNC_DELAY_DE    EQU  0
+             <O002>   6424  SYNC DELAY  _B   €EQU 2
+                      8425
+                      8426         ;GLB        __SYNC
+                      8427
+    F970              8428  __SYNC
+    F970 FDES         8429          PUSH       lV                         ; SAVE TY
+    F972 ES           8430          PUSH   =   HL                         :      HL
+    F973 C5           8431          PUSH       BC
+    F974 05S          8432          PUSH       DE
+                      8433
+    F975 FO2AFO70     8434          LD         Ty,[CURRENT_PCB]           ; CURRENT PCB
+                      8435
+    F979 FO360300     8436          LD         (1¥+P_NuM_0DCBS].0         ; O 0CB’S
+                      8437
+    F970 FD360001     8438          LD         (lvy+P_COSTAT],PCB_SYNC1           ; START  SYNC WITH   FIRST
+                      8439                                                        ;  BYTE
+                      8440
+    F981 110000       8441          LO         DE,SYNC_DELAY_DE
+    F984 0602         8442          LD         B,SYNC_DELAY_B
+                      8443
+    F966              6444  LOOP1:
+    F986 1B           8445          DEC        DE
+    FO87 TA           8446          LO         A.D
+    F988 B3           8447          OR         E
+    F989 200A         8448          JR         NZ,NOTTIME 1
+                      8449
+    F98B 110000       8450          to         DE,SYNC_DELAY_DE
+                      8451
+    F98E 1005         8452          DUNZ       NOT_TIME1
+                      8453
+    F990 3E12         8454          LD         A,CANT_SYNC1
+    F992 B7           8455          OR         &                         ; ERROR
+                      8456
+    F993 18630        8457          JR         END_SYNC
+                      8458
+    F995              8459  NOT_TIME!:
+    F995 FD7EOO       8460          LD         A,{I¥+P_COMSTAT}             ; DID MASTER  NODE ACKNOWLEDGE     ?
+    F998 FEB1         8461          cP         PCB_SYNC1_ACK
+    FQ9A 20EA         8462          JR         NZ,LOOP1                   ; ****6 NEED PROTECTION   HERE
+                      8463
+    F99C FD360002     8464          LD         {Iy¥+P_COSTAT],PCB_SYNC2           ; CONTINUE  SYNC  WITH
+                      8465                                                        .  SECOND  BYTE
+                      8466
+    F9A0 110000       8467          LD         DE,SYNC_DELAY_DE
+    F9A3 0602         8468          LD         B,.SYNDELAY  6
+                      8469
+    F9OA5             8470  LOOP2:
+    F9A5 16           8471          DEC        DE
+
+                                                                                                                  {          j         i        f          i          f

@@ -1,0 +1,5 @@
+FILE: OS_7PRIME:pOS      HEWLETT-PACKARD:  OPERATING SYSTEM (c)  Coleco, 1982    CONFIDENTIAL       Fri, 18 May 1984, 16:19      PAGE   15
+LOCATION  OBJECTCODE LIWE     SOURCE LINE
+                      565  *  EXIT TO DISPLAY  LOGO AND TEST FOR  CARTRIDGE
+    0095  €31319     366                  JP               DISPLAY_LOGO
+                      568  *ENDBOOT -UP

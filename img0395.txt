@@ -1,0 +1,63 @@
+FILE: OS  7PRIME:pOS           HEWLETT-PACKARD: GAME OPTION  (c) Coleco,  1982    CONFIDENTIAL             Fri,  18  May  1984,  16:21         PAGE   121
+
+LOCATION   OBJECT  CODE   LIWE      SOURCE LINE
+
+                          5907  RRARARAAKAEKRAREKAKEKKKKAKKAKENABLE DISPLAY   SRARKAAEAKKARAAAKAAREKRKK
+                          5908
+                          5909  * ENABLE DISPLAY
+    1A74   0601           5910                  LD B,1
+    1A76   OECO           5911                  LD C,110000008
+    1A78   COIFD9         5912                  CALL WRITEREGISTER
+    1A7B   C9             5913                  RET
+                          5914
+                          5915  SREKAAAAAAAKAAAARASAAAERKARARERKEEARAAEAAAARAEARAAAAAAAAKAAKHAARKAAKEREH
+                          5916  *                                                                   *
+                          5917  *                          DATA  TABLES                             *
+                          5918  *                                                                   »
+                          5919  Steennenadeeaenenaaneeeeeneneeenenteneennaneneeneananenaaeaneeeehe
+                          5920
+                          5921  SEERERERARATAARAARAREERKPATTERN  MAKE TABLE  SRAERAKARAERERHKAERERAREKREE
+    TA7C   544F205345     5922  LINE 1 DEFB “TO SELECT GAME OPTION,”
+    1A81   4045435420
+    1A86   4741404520
+    1ABB   4F5054494F
+    1A90   4E2C
+    1A92   5052455353     5923  LINE2  DEFB “PRESS BUTTON ON  KEYPAD.”
+    1A97   2062555454
+    TASC   4F4E204F4E
+    1AA1   2048455950
+    1AA6   41442E
+    1AA9   3120302053     5924  LINE 3 DEFB “1 = SKILL 1/ONE  PLAYER”
+    TAAE   4B494C4C20
+    1AB3   312F4F4E45
+    1ABB   20504(4159
+    1ABD   4552
+    1ABF   32             5925  LINE 4 DEFB "2"
+    1aCO   33             5926  LINE_5 DEFB "3"
+    1AC1   34             5927  LINE 6 DEFB "4"
+    1ac2   35             5928  LINE 7 DEFB "5S"
+    1aC3   36             5929  LINE 8 DEFB "6"
+    1ac4   37             5930  LINE 9 DEFB "7"
+    1ac5   38             5931  LINE10  DEFB "8"
+    1AC6   54574F         5932  LINE_11 DEFB "TWO"
+    1aCc9  53             5933  LINE12  DEFB “S"
+                          5934
+                          5935  SRASAAAAEAKAAAAAERARRAERAARARAKARAERAEKEARAEAKRAKEEAERARKERARKRAREAKERRAKK
+                          5936  *                                                                   *
+                          5937  *                      LOCAL  SUBROUTINES                           *
+                          5938  *                                                                   *
+                          5939  SEKRAAKAAAAEAKAARAEAARAEARARAAEAEKKARAERAAAEAKAAEKKHAKKHAKREAKKKAKKRKEE
+                          5940
+    TACA  211AA9          5941  WRITE13         LD HL,LINE3
+    1ACD   FD210016       5942                  LO 1Y,22
+    1AD1  3E02            5943                  LD A,2
+    1AD3. CO1FBE          5944                  CALL PUTVRAM
+    1AD6  C9              5945                  RET
+                          5946
+   TAD?   211ABF          5947  WRITE14         LD HL,LINE4
+   TADA    1808           5948                  JR WRITECHAR
+                          5949
+   1ADC   211ACO          5950  WRITE15         LD HL,LINE5
+    TADF   1803           5951                  JR WRITECHAR
+
+                                               |   |

@@ -1,0 +1,5 @@
+FILE: w-ondS: EOSTF         HEWLETT-PACKARD:   EOSCOMN      (c)  Coleco  1b.   Confidential                       Sat,   8  Sep  1984,  23:38
+LOCATION  OBJECT CODE  LINE       SOURCE LINE
+              <FOO8>    272  £08  3                                EQU $§$
+    FDOB  C3F4<FDOE>    274  CV_A   JP      __€O0S3                EQU $
+    FDOE  C3F442        275         uP      _CV_A

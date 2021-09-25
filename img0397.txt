@@ -1,0 +1,63 @@
+8eerer                                                   -     OS                   ee
+
+       FILE:  OS_7PRIME:pOS          HEWLETT-PACKARD: TABLE MANAGER  (c)  Coleco, 1982   CONFIDENTIAL           Fri, 18  May   1984,  16:21       PAGE  123
+
+       LOCATION   OBJECT CODE  LINE       SOURCE LINE
+
+                               5973   ;TRUE            EQu               1
+                               5974             EXT   VRAMWRITE,REG   WRITE, VRAM READ
+                               5975             EXT   VDP_MODEWORD
+                               5976             EXT   MUX SPRITES
+                               5977             EXT   PARAM_
+                               5978             EXT   LOCALSPR   TBL,SPRITE ORDER
+                               5979              GLB  INIT TABLE  ,GETVRAM   ,PUTVRAM_,INIT SPR   ORDER   ,WSPR  NM TBL
+                               5980              GLB  INITTABLEG,GET_VRAMQ,PUT_VRAMQ,    INISPR   ORDERQ,WR SPR NM  TBLO
+                               5981
+                               5982                   PROG
+                               5983   * PROCEDURE INITTABLEQ   (TABLE CODE:BYTE; TABLE_ADDRESS: INTEGER)
+                               5984                    |
+                               5985   * THIS IS THE PASCAL ENTRY  POINT TO  INITTABLE_
+                               5986
+           1808  00020001      5987   INITTABLE  P    DEFW             2,1,2
+           180C  0002
+                               5988   * THIS 1S THE PARAMETER DESCRIPTOR   FOR INIT TABLEQ
+                               5989
+           1B0E                5990   INITTABLEQ
+           180E  011808        5991                   LO               BC, INITTABLE P
+           1811   1173BA       5992                   LD               DE, PARAMAREA
+           1814  CD0098        5993                   CALL             PARAM_
+           1817  3A73BA        5994                   LD               A, (PARAMAREA]
+           1B1A  2A738B        5995                   LD               HL, [PARAM _AREA+1]
+                            -  5996
+           1B1D                5997   INITTABLE_                         INIT  TABLE  INITIALIZES   THE TABLE ADDRESSES
+                               5998                                    ;FOR  VRAM TABLES. IT ALSO   WRITES THE APPROPRIATE
+                               5999                                    ;BASE  ADDRESS INTO THE  RESPECTIVE  VDP REGISTER.
+                               6000
+                               6001                                    =IN:  VRAM ADDRESS IN HL
+                               6002                                    ;     TABLE CODE IN 'A'  : O=SPRITE  NAME TABLE
+                               6003                                    ;              GENERATOR  TABLE,  2=PATTERN NAME
+                               6004                                    -     TABLE,3= PATTERN GENERATOR   TABLE, 4=
+                               6005                                    ;     COLOR TABLE
+                               6006
+           1B1D  4F            6007              LD   C,A
+           1B1E  0600          6008              LD   8,0              USE   TABLE CODE AS INDEX
+           1820  0D2173F2      6009              LD   1X,VRAMADDR  TABLE
+           1B24  DDO9          6010              ADD  IX,BC
+           1B26  DDO9          6011              ADD  1X,BC
+           1828  DD7500        6012              LD   [1X+0),L         ;SAVE  VRAM ADDRESS IW TABLE
+           1B2B  DD7401        6013              LD   (1X#1),H
+                               6014                                    ;CHECK  VDP GRAPHICS MODE
+           1B2E  3A73C3        6015              LD   A,[(VDP_MODEWORD)
+           1B31  CB4F          6016              BIT  1,A
+           1B33  2827          6017              JR   2,INIT TABLE8O
+                               6018              -#&  GRAPHICS MODE  2
+           1835  79            6019              LD   A,C              GET   TABLE CODE
+           1836  FEO3          6020              cp   OS               “CHECK  IF GENERATOR TABLE
+           1838  2806          6021              JR   2,CASE_OFGEN
+           1B3A  FEO4          6022              cp   4                ;CHECK  IF COLOR TABLE
+           1B3C  2810          6023              «JR  2,CASE_OF COLOR
+           1B3E  181C          6024              JR   INIT TABLE8O
+           1840                6025   CASEOF GEN
+           1840  0604          6026              LD   B,4              :VDP  REGISTER TO WRITE
+           1B42  7D            6027              LD   AL               “CHECK  FOR WHICH 8K BOUNDARY   IN 16K VRAM
+           1B43  B4            6028              oR   HH

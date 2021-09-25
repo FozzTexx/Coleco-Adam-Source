@@ -1,0 +1,32 @@
+FILE:  EOSABS: E0S_TF           HEWLETT-PACKARD:  DATES        (c) Coleco    1983  Confidential                           Sat.    8  Sep  1984,  23:40        PAGE  126
+
+LOCATION  OBJECT    CODE   LINE      SOURCE LINE
+
+                           5110          ;GLB     __SET_DATE,  GET   DATE
+                           Sitt         sEXT      EOS_YEAR,EOS    MONTH,EOS   DAY
+                           $112
+                           $113
+                           BUI   Sr rr             rr      nn   re       ee   ee      ee   ee         ee       eee
+                           $115  ;
+                           5116  ; _SET_DATE   -- Set  the  current   date.
+                           Sivi7 ;        |
+                           5116  ; ENTRY PARAMETERS:   B  = day  (1..31)
+                           $119  ;           |         C  = month  (1..12)
+                           §120  ;                     DO = year  (83. .99)
+                           $121  ;
+                           $122  ; EXIT PARAMETERS:   none
+                           $123  ;
+                           SIDE  fmmmmr            nn  en  nnnn  nn                   ee   ee     ee                      ;
+          7                $125                                                                                            .                               Lo                :
+    EECS                   $126   SET  DATE   |
+    EECS  FS               §127          PUSH     AF                  ;SAVE  THE   CURRENT   A
+                           5128
+    EEC6  78               §129   -:     LO       A.B                 ;STORE   THE  DAY
+    EECT  32FDE2           §130       |  LO       (EOS DAY),A
+    EECA  79              §131           LD       A.C                 ;STORE   THE  MONTH
+    EECB  32FDE1          §132           LD       [EOS MONTH),A
+    EECE  7A              $133           LO       A,D                 ;STORE   THE  YEAR
+    EECF  32FDEO          §134           LD       (EOS YEAR],A
+                          $135
+   EED2  F1          |    5136           POP      AF                  ;RESTORE   A
+    EEDS C9               $137           RET

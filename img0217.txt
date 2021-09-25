@@ -1,0 +1,49 @@
+FILE:  ~ ».ABS:EOTF         HEWLETT-PACKARD:   EOSUTIL   (c) Coleco  1tt_sConfidential                 sat,    8  Sep   1984,  23:41        ©aGE   213
+
+LOCATION  OBJECT CODE   LINE     SOURCE  LINE
+
+                        8312
+                        8313 ; ENTRY:         __SOFT_INIT
+                        8314 ; NEEDS:         HL = PCB ADDRESS  SET UP FOR USE
+                        8315 ; RETURNS:       {CURRENTPCB]  = HL
+                        8316 ;                HARD RESET APPLIED  TO NETWORK
+                        8317 ;                NETWORK MASTER NODE  IN SYNC WITH Z80         |
+                        8318 ;                1 DCB ALLOTTED FOR  EACH DEVICE ANSWERING A STATUS REQUEST
+                        8319 ;                 CORRECTLY
+                        8320 ;                MASTER NODE SCANNING  EACH OF THESE DOCB’SFOR WORK TO  DO
+                        8321
+                        8322        :GLB      __SOFT_INIT
+                        8323
+    F922                8324 SOFT_INIT
+    F922  C5            8325         PUSH     BC                       - SAVE BC
+    F923  DS            8326         PUSH     DE                       ;      DE
+    F924  E5            8327         PUSH     HL                       :      HL
+    F925  FDES          8328         PUSH     ly                       ;      ly
+                        8329
+    F927  22FD70        8330         LO       {CURRENTPCB] ,HL         ; ESTABLISH CURRENTPCB  ADDR
+                        8331
+    F92A  CDF94B        8332         CALL     __HARD_RESET_NET         ; HARD RESET NETWORK
+   |                    8333
+    F92D  COF9SF        8334         CALL     __DLY_AFT_HRD_RES
+                        8335
+    F930  2AFD70        8336         LD       HL,[CURRENTPCB]          : ZERO OUT PCB/OCB’‘S
+    F933  5D            8337         LD       E,L
+    F934  54            8338         LD       D.H
+    F935  13            8339         INC      DE
+    F936  01013E        8340         LO       BC,P_SIZE+(15*DSIZE)-1   ;
+    F939  3600          8341         LD       {Ht}.0                   :
+    F938  EDBO          8342         LDIR                              .
+                        8343
+    F93D                6344 REPEAT _SYNC2:
+    F93D  COF970        8345         CALL     __SYNC
+    F940  20FB          8346         JR       NZ.REPEAT SYNC2
+                        8347
+    F942  COF9CB        8348         CALL     __SCAN_ACTIVE              FIND ALL THE ACTIVE DEVICES  ON  THE  NET
+                        8349                                                                  |
+    F945  FDE1          8350         PoP      ly                       ; RESTORE IY
+    F947  E1            8351         Pop      HL                       .         HL
+    F948  D1            8352         Pop      DE                       :         DE
+    FO49  Ct            8353         PoP      BC                       :         BC
+                        8354
+    F94A  CO            8355         RET
+                        8356

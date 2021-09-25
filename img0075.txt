@@ -1,0 +1,33 @@
+                                                                                          “ee
+FILE:   .   »ABS:EOS_TF              HEWLETT-PACKARD:       SOUND    EQU€S    (c)  Coleco,    1482      CONFIDENTIAL                       Sat,     8   Sep   1984,    23.39           AGE       71
+
+LOCATION     OBJECT     CODE   LINE         SOURCE   LINE
+
+                               2678
+                              2679    ,F8teseseseeeeereseeeeeeeeese
+                              2680    ;*          UPFREQ                    *
+                              2681    ,Ses  eeeereseeeeeeereeeresesese
+                              2682
+                              2683    ;Perform    double    byte   update     of  a sound   chip    frequency      register.       IX   its passed
+                              2684    ;pointing     to  byteO   of   a  song   data  area,   MSN    register     D  =  formatted      channel!
+                              2685    ;frequency     code.
+                              2686
+     E339                     2687    UPFREQ
+     E339    DD7EO3           2688               LD         A, [IX+FREQ])          ;A =  F2  F3   F4  FS   F6   F7  FB  FIO
+     E33C    E60F             2689               ANO        OFH                    7A =   0   O     O   O  F6   F7  FB  FQ
+     E33E    B2               2690               OR         D                      ;A =   formatted      reg/#      F6  F7   FB  FO
+     E33F    CDE600           2691               CALL       OUT_TO_  SOUND    PORT     =;output   first    freq   byte
+     E342    DO7EO3           2692               LO         A,[IX+FREQ]            ;A =  F2  F3   F4  FS  F6    F7  F8  FO   again
+     E345    E6FO             2693               AND        OFOH                   :A =  F2  F3   F4  F5    0    0   0    O
+     E347    57               2694               LD         DA                     ;save  in  D
+     E348    DD7E04           2695               LD         A,(IX+FREQ+1])         ;LSN  A  =O     O  FO  Fi
+     E348    E6OF             2696               ANO        OFH                    “A=    0   0    0   0    0    OFO    FI!
+     E34D    82               2697               OR         D                      ;A =  F2  F3   F4  FS    O    O  FOF!
+     E34E    OF               2698               RRCA                              ;Swap  nibbles
+     E34F    OF               2699               RRCA
+     E350    OF               2700               RRCA                    |
+     E351   OF                2701               RRCA                              ;A =   O   O   FO  F1  F2   F3   F4  F5
+                              2702    *e%%       CALL       OUT_TO_SOUND     PORT     ;output     2nd   [most    significant]       freq    byte
+                              2703    eee        RET
+     E352    C3E600           2704               JP         OUT_TO_SOUND_PORT         ;output     2nd   [most    significant]       freq    byte
+                              2705

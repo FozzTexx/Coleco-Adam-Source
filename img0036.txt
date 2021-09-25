@@ -1,0 +1,14 @@
+FILE: EOSABS:EOSTF        HEWLETT-PACKARD: INCLUDE P_DCBEQuU                                      Sat,   8  Sep  1984,  23.38       PAGE   32
+
+LOCATION OBJECT CODE  LINE     SOURCE LINE
+
+                      1208
+             <Q0O0O03>1209 ETX                    EQU     03H     ; END OF DATA STRING INOICATOR
+                      1210
+             <OO9B>   1211 TIMEOUT                EQU     9BH     ; DEVICE TIMED OUT
+                      1212 ;
+                      1213 ,PSSSRSSTSSSSTETSSTTTSRTSSRSTITSSSTERSSOREARSTEKS SsESesserzsrst=s=
+                      1214 ,PSSSTSSSSSBSSESSSSSSSSBSESTSSFSSFSSSSSTSSSSSTSESASESSETSSSTSEsrzrere
+                      1215 “SSSSESERBRESESESSSSSSSseseserestsrerrsr=sesezsz2eserrerczresrrerzezcoersrses2erezrror=z=2
+                      1216 ;
+    FC30              1217 SKIP

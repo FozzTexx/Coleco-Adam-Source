@@ -1,0 +1,63 @@
+FILE:OS 7PRIME:pOS        HEWLETT-PACKARD: UTILITY  (c) Coleco, 1982  CONFIDENTIAL                  Fri, 18 May  198,  16:19      PAGE   22
+
+LOCATION OBJECT CODE  LINE      SOURCELINE
+
+    0181 0600          884 ADD816  LD 8,0                   ;set8 for  positive  value in A
+    0183 C87F          885         BIT 7,A                  :ifA  ispositive
+    0185 2802          886         JR 2,POS                 ;skip
+    0187 O6FF          887           LO 8,OFFH                ;A 1sneg:  extend  sign bit thru  B
+    0189 86            888 POS     ADDA,  (HL)              ;do8 bit  add [and  set Carry)
+    01BA 77           889          LD  {WL),A               ;Storeresult  into  LSB 16 bit number
+   0188  23            890         INC HL                   ;putMSB
+   018C  7E            891         LDA,  (HL)               sintoA
+   0180  &8            892         ADC A,B                  7A= 4SB +  Carry +  B [B is 0 or  FF)
+   018E  77            893         LD  [WL],A               store result  into MSB
+   O1BF  2B            894         DEC WL                   ;re-point HL to LSB  16 bit number
+   01C0  C9            895         RET
+                       896 atte   ieheaieiarhatniaineriababmiiniintel
+                       897 :*     PT 1X TO SxDATA     *
+                       898 -eaaeeannteneentensenenenans
+                       899 ;.COMMENT )
+                       900 ;SONGNO passed in B.
+                       901 ;Point IX to byte 0  inSONGNO's song data area.
+                       902 ;RET with both DE and IX pointing to SxDATA,
+                       903 ;HL pointing to MSB SXDATA entry in LST_OF SND ADORS.
+                       904 ;)
+                       905         GLB PT_IX_TO SxDATA
+   01C1                906 PT_1X_TOSxDATA
+                       907 ;       * IX & DE := addr of byte 0 in SONGNO’s  song  data  area,
+                       908 ;         HL pointing to MSB SxXDATAentry  in LST_OFSND  ADDRS.
+   01C1 2A7020         909         LD WL,{PTR_TOLST  OF SND_ADDRS) ;point  HL to start  LSTOF  SND ADDRS
+   01C4 2B             910         DEC WL                  sinit HL for  addition
+   01C5 2B             911         DEC HL
+   O1C6 48             912         tO C,8                  sform 4 * SONGNO  in C
+   01C7 0600           913         LD 8,0
+   01C9 CB01           914         RLC C
+   01cB CB01           915         RLC C
+   01CD 09             916         ADD HL,BC               ;HL pts to SXDATA's  entry  in LST_OF SND _ADDRS
+   OICE 5E             917         LD E,CHL)               ;move addr SxDATA  to  IX thru DE
+   O1CF 23             918         INC HL
+   0100 56             919         LD D(HL)
+   0101 05             920         PUSH DE
+   0102 ODE            921         POP IX
+   0104 C9             922         RET
+                       923 ;
+                       924 ;               LEAVE EFFECT
+                       925 34/19/82
+                      926  ;
+                       927 eAORORERERSEHESSENAHERSENATE
+                       928 ;*      LEAVE EFFECT       *
+                      929  -se#eaanaakanshantannareranne
+                      930  ;COMMENT  )
+                      931  ;LEAVEEFFECT,  called by a special sound effect  routine when  it's finished,
+                      932  ;restores the SONGNO of the song to which the effect  note belongs  to B5 - BO of
+                      933  sbyte 0 in the effect's data area, and loads bytes  1 and 2 with  the address of
+                      934  ;the next note in the song.  The address of the  1 byte SONGNO  (saved by the
+                      935  seffect when first cailed) is passed in DE.  The  2 byte address  of the next note
+                      936  ;in the song, also saved by the effect, is passed  in HL.  IX  is assumed to be
+                      937  ;pointing to byte 0 of the data area to which the  song number  is to be restored.
+                      938  ;Bits 7 and 6 of the saved SONGNO are ignored, and  therefore may  be used by the
+                      939  ;effect to store flag information during the course  of the note.
+                      240  ;)
+
+                                                                                              4

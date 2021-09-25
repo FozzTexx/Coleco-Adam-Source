@@ -1,0 +1,74 @@
+        COLECOVISION  PROGRAMMERS'MANUAL
+
+        Rev. 5
+        ©Coleco Industries,  Inc.1982
+
+        CONFIDENTIAL  DOCUMENTomDO  NOT COPY                  Page  4
+
+                    GLB PUT_VRAM          5     0S:0S
+                    GLB PUT_VRAMP         5     0S:OS
+                   GLB  RAND_GEN          5    0S:O0S
+                   GLB  RAND_NUM          5     0Ss:oOSs
+
+                   GLB  READ_REGISTER     5     Os:0s
+                   GLB  READ_VRAM         5     0s:oOSs
+
+                   GLB  READ_VRAMP        3    0Ss:O0S
+
+                   GLB REFLECT_HORIZON  |5     os:os
+                   GLB REFLECT_VERTICA  -5     Os:os
+                   GLB REQUEST_SIGNAL    5     0s:Oo0S
+                   GLE REQUEST_SIGNALP         os:os
+                                         }
+                   GLB ROTATE_90         5     Os:OS
+
+                   GLB RST_10H_RAM       3    -08:0S
+                   GLB RST_18H_RAM       5     os:os
+                   GLB RST_20H_RAM             os:os
+                                         j
+                   GLB RST_28H_RAM       5     0s:O0S
+                   GLE RST_30H_RAM       5     OSsS:0S
+                   GLB RST_8H_RAM        5     0s:O0S
+
+                   GLB SOUND_INIT        5     0s:os
+                   GLB SOUND_INITP       5     os:os
+                   GLE SOUND_MAN         5     os:os
+ 12
+                   GLB SPRITE_ORDER      5     Os:0oOs
+                   GLE STACK             5     0s:os
+18                 GLE
+                       START_GAME        5     os:os
+
+                   GLB TEST_SIGNAL       5     os:os
+14                 GLB TEST_SIGNALP      5     0S:OS
+
+                   GLE TIME_HMGR         5    0S:0Ss
+15  |              GLB TURN_OFF_SOUND    5     os:os
+                   GLE UPDATE_SPINNER    5     0s:os
+ 16 |              GLB
+                       VDP_MODE_WORD     5     Os;:OS
+
+                   GLB VDP_STATUS_BYTE   5     os:os
+17                 GLB WORK_BUFFER_      5     os:o0s
+                   GLB WRITER            5     0S:0Ss
+18                 GLB WRITE"REGISTER
+                                         5     os:o0Ss
+                   GLB WRITE_REGISTERP   5     0s:OS
+                   GLB WRITE_VRAM        5     os:os
+
+                   GLB:WRITE_VRAMP       b     OSs0S
+20                 GLB WR_SPR_NM_TBL     j     0s;os
+                  GLB  WR_SPR_NM_TBLP    5     Os:Os
+21
+
+22
+
+23
+
+24
+
+25
+
+26
+
+                                                                                       i\

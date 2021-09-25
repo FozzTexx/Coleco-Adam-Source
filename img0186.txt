@@ -1,0 +1,44 @@
+FILE: EOSABS:EOS_TF           HEWLETT-PACKARD:   CONSOUT   (c) Coleco  1983 Confidential                    Sat,     8  Sep  1984,  23:41        PAGE  182
+
+LOCATION OBJECT  CODE     LINE     SOURCE  LINE
+
+                          7375 ;
+                          7376 ;__CONS_INIT
+                          7377 ;
+                          7378 ;      Sets  up  the window sizes for  the CONSOLE_OUT  routine
+                          7379 ;
+                          7380 ;Input Parameters:
+                          7381 ;  8B- number   of columns in the window  - 1, 0..31
+                          7382 ;  C - number   of lines in the window  - 1, 0..23
+                          7383 ;  D - Absolute   (0 based) X coord of  upper left corner  of. window,  0O..31
+                          7384 ;  E - Absolute   (0 based) Y coord of  upper left corner  of  window,  0O..23
+                          7385 ; HL - Pattern   Name Table (PNT) starting  address
+                          7386 ;
+                          7387 :NOTE- User  must  initialize the vVOP
+                          7388 ;
+                          7389                  ;GLB     __CONS_INIT
+    FSDC                  7390 __CONS_INIT:
+    FSDC 04               7391                   INC     B                ;Adjustfor   old calling   convention
+    FSDD OC               7392                   INC     Cc
+    FSDE ED43FE9SF        7393                   LD      [NUM_LINES],BC   ;Set num  lines, cols  in  window
+    FSE2 EDS3FEA1         7394                   LD      [UPPERLEFT),DE   ;Set upper  left corner   of window
+    FSE6 EDS3FEAS         7395                   LD      [CURSOR],DE
+    FSEA 22FEA3           7396                   LD      [PTRN_NAME_TBL],HL  ;Save  address  of Pattern  name    table
+                      _   7397
+    FSED 7A   |           7398                   LD     'A,D              ;Calc min/max  coords  of  window
+    FSEE 32FE7A           7399                   LD      [X_MIN],A
+    FSF1 80               7400                   ADD     A.B
+    FSF2 3D               7401                   DEC     A
+    FSF3 32FE7B           7402                   LD      [X_MAX],A
+    FSF6 78               7403                   LD      A,E
+    FSF7 32FE7C           7404                   LD      {Y_MIN],A
+    FSFA 81               7405                   ADD     A.C
+    FSFB 3D          -    7406                   DEC     A
+    FSFC 32FE7D           7407                   LD      [Y_MAX],A
+                          7408
+    FSFF 3E&20            7409                   LO      A,BLANKINGCHAR
+    F601 32FE79           7410                   LD      [OLDCHAR_),A
+    F604 3ESF             7414                   LD      A,CURSOR_CHAR
+    F606 CDOF7DA          7412      |            CALL    PUT_CHAR_ON_SCREEN
+                          7413
+    F6O9 C9               7414                   RET

@@ -1,0 +1,63 @@
+FILE: OS  7PRIME:pOS                HEWLETT-PACKARD:      LOAD   NEXT   NOTE  (c)   Coleco,    1982    CONFIDENTIAL                Fri,   18  May   1984,     16:19         PAGE    33
+
+LOCATION    OBJECT    CODE    LINE        SOURCE   LINE
+
+                              1334               -IDENT  LOADNEX      ;includes     LOAD NEXT   NOTE
+                              1335   ‘deeeeeeehenenereneneneneane
+                              1336   ;*       LOAD  NEXT NOTE            *
+                              1337   -RAaReReAAaReaReAReeeeatease
+                              1338   - .COMMENT   )
+                              1339   ;see  Users'   Manual    for  description
+                              1340   ;SFX  refers   to  the  beginning      address   of  a  special    sound    effect   routine
+                              1341   ;).
+                              1342             GLB  LOAD  NEXT  NOTE     ,REST,ENDREP,ENDNOREP       EFFECT,   TYPEO,  TYPE1,  TYPE2,  TYPES
+                              1343             GLB  MODBO,DE    TO DEST,PASS1
+                              1344            EXT   JUKE _BOX, UP  _CH “DATA  _PTRS
+                              1345            ;INCLUDE   OSSR_EQU:0S:0        ;equates
+    O35F                      1346   LOAD _NEXT _WOTE
+                              1347             *deactivate      area,    save            on  stack
+    O35F    DD7E00            1348   ;         LD A,  [1X+*0)                     pea= byte   0
+    0362    E63F              1349             AND  001111118                  rest    Cu#,    if any
+    0364    F5                1350             PUSH  AF                        ssave   SONGNO    on  stack
+    0365   DD3600F   F       1351              LD  (1X+0) , INACTIVE           deactivate       area
+                             1352    ;         * A  :=  header    new  note
+    0369   DD6E01            1353              LD L,  {1X+1)                   HL    :=  addr   new  note    in ROM
+    036C   0D6602            1354              LDH,   (IX+2)
+    O36F   7E                1355              LOA,   (HL)                     sA   := header    new  note
+                             1356    ;         * save   header    of  new  note   in  song   on  stack   and   load   its  data   CASE  note   type
+   0370    47                1357              LD B,A                          ssave   header    new  note    in  B
+      |                      1358    ;         - test   for  rest
+   0371    CBéF              1359              BIT  5,A                        stest   for   rest
+                             1360    ;         IF  (PSW,1S,NMZERO)             snote   is  a  rest
+   0373    281C              1361              JR 2,113
+                             1362                3--CASE--     rest
+   0375    C5           "1363       REST         PUSH  BC                         ssave   header    on  stack
+   0376    E61F              1364                AND  000111118                   smask   all  but   duration    bits
+                             1365    ;           *  set  up  NEXT  NOTE   PIR
+   0378    23                1366                INC  WL                          sHL  =  address    of  the   header   of  the  note   after   this    note
+   0379    DD7501            1367                LD  (IX+1),L                     zstore   in  NEXT  NOTE   PTR
+   037C    0D7402            1368                LD  (IX+2),H
+                             1369    ;           ® move   this   note's    data   and  fill   in  bytes   where    necessary
+   037F    DD3604F0          1370                LD  (IX+ATN)   ,OFOH             sset  atn   off
+   0383    007705            1371                LD  (IX*NLEN)   ,A               sWLEN   :=  5  bit  duration
+   0386    00360700          1372                LD  (IX+FSTEP)   ,0              ;indicate    freq   not   to  be  swept
+   038A    00360800          1373                LO  (IX+ASTEP]   ,O              ;indicate    atn   not   to be   swept                                                                                               ,
+   O38E    C30461            1374                JP  MODBO                                                  |
+                             1375   ;         ENDIF
+                             1376   ;          - test  for   end   of  song
+   0391    CB67              1377   L13       BIT  4,A                         stest   for  end
+                             1378   ;          IF (PSW,1S,NZERO)               send   of  song
+   0393    280F              1379             JR  Z,L14
+   0395    CB5F              1380                BIT  3,A                         ;test   for  repeat
+                             1381   ;            IF  (PSW,1S,NZERO)               repeat    song
+   0397    2805              1382                JR  2,ENDNOREP
+                            1383                   ;--CASE--     end   of  song,   repeat
+   0399   C1                 1384   EWOREP         POP   BC                         7B  :=  SONGNO                                                                                               ‘
+   039A   CD025E            1385                   CALL   JUKE  BOX                 ;to   reload   ist   note   of  this  song
+   0390   C9                1386                   RET                              ;to  PROCESS   DATA   AREA,     don't   save  header
+                            1387    ;            ENDIF
+                            1388                   ;°-CASE--     end   of  song,   no  repeat
+   O39€   3EFF              1389    ENDNOREP       LD  A, INACTIVE
+   O3A0    FS               1390                   PUSH   AF                        s;save  Inactive     code   to  end  song
+
+                                                                                                                                                                  Se Se

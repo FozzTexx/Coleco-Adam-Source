@@ -1,0 +1,52 @@
+FILE: EOSABS:EOS   TF          HEWLETT-PACKARD:   UTILS      {c) Coleco  1983Confidential)                  Sat,  8  Sep  1984,   23:40       PAGE  142
+
+LOCATION  OBJECT   CODE   LINE      SOURCE  LINE
+
+                          5787
+                          5788
+                          5789  “SESSSSSSSS SSSSTSESSSSSSSS SSHSSSSESSESSESSSHSSSSSSSSSESSSESHESHESHSESTSESETSEREBES
+                          5790   SSSSSSESSSSSseSVssess EOSDELETE_FILE    SSSSSSESSHSESSHSSSSSSES Sees seeessays
+                          $791
+                          §792      ON ENTRY:    A = DEVICE NUMBER  (8=TAPE1)
+                          $793                  HL = POINTER  TO FILENAME
+                          $794
+                          $795      ON EXIT:     Z =  1,FILE  DELETED, A = 0
+                          5796                   Z=  QO,FILE  NOT DELETED, A = ERROR CODE
+                          $797
+                          5798
+                          5799         ;GLB       __DELETE_FILE
+                          5800
+    F14E                  5801  __OELETE_FILE:
+    F14E  05              $802          PUSH      DE
+    F14F  E5              $803          PUSH      HL                    HL = POINTER TO  FILENAME
+    F150  FS              $804          PUSH      AF                  . A  = DEVICE  ID
+    F151  EB              5805          EX        DE,HL               ; DE = POINTER TO  FILENAME
+    F152  21FDAO                        LD        HL,QUERYBUFFER      ; HL = POINTER TO  BUFFER
+    F155  CDE618          $807          CALL        __QUERY_FILE
+    F158  2010            5808          UR        NZ,OTHER_ERR
+    FISA  3AFDAC          $809          LD        A,[QUERYBUFFER+FCB  ATTR]   ;GET ATTRIBUTE  BYTE
+    F150  CB7F            5810          BIT       7,4                 ;see if permanent  protected
+    FISF  2013            5811          UR        NZ,NOT_DELETED
+    F161  F604            5812          OR        ATTR_OELETED                  >SET “DELETED®   BIT
+    F163  32FOAC          $813          LO        [QUERY_BUFFER+FCB_ATTR],A
+    F166  F1              5814          Pop       AF                    ; OEVICE 10
+    F167  01              $815          PoP       DE                    ; GET FILENAME POINTER
+    F168  DS              5816          PUSH      DE
+    F169  FS              $817          PUSH      AF
+    F1GA  CDE651          $818          CALL        __SET_FILE
+    F160  2006            $819          JR        NZ,OTHER_ERR
+    FIGF  AF              $820          XOR       A                   ; GOOD RETURN
+    F170  E1              $821          PoP       HL                    REALLY AF BUT PRESERVE  NEW   AF
+    F171  Et              $822          PoP       HL
+    F172  01              $823         -POP       DE
+    F173  c9              $824          RET
+    F174                  5825  NOT_DELETED:
+    F174  3E10            5826          LO        A,DELETE_ERR          ERROR RETURN
+    F176  87              $827          OR        A
+    F177                  5828  OTHER_ERR:
+    F177  E1              $829          POP       HL                    REALLY AF BUT PRESERVE  ERR   CONDITION
+    F178  E1              $830          PoP       HL
+    F179  01              $831          POP       DE
+    FI7A  c9              5832          RET
+                          §833
+                          5834

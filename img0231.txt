@@ -1,0 +1,58 @@
+FILE: .vSABS:EOS_TF            HEWLETT-PACKARD:    EOS BLK     (c) Coleco  1ivu3Confidential                        Sat,    8   Sep  1984,   23:42         taGE    227
+
+LOCATION  OBJECT   CODE   LINE      SOURCE  LINE
+
+                          BBEIO FEFSSSA SHHEKER     EEE   EERE    EERE  SEE EEEEEE    ETHERS EKEEEEEHEEEEEHEHEE REEERE
+                          8831  *
+                          8832  *      __WR_1_  BLOCK   WILL WRITE   ONE BLOCK OF DATA   TO  A  BLOCK   ORIVER
+                          8833  +      FORM   A  LOCATION  SPECIFIED   BY REGISTER  HL
+                          8834  =
+                          8835  €       INPUT:
+                          8836  2                 A        DEVICE   ID
+                          8837  ez                         LOW  NIBBLE  - DEVICE ADDRESS
+                          8838  ¥                          HI NIBBLE    - SECONDARY  DEVICE    ID
+                          8839  ®&
+                          8840  ©                 HL       SOURCE  ADDRESS  IN RAM
+                          6841  #
+                          8842  he                REGISTER  PAIR:
+                          8843  «                          BC DE   -   SECTOR NUMBER  ON  DEVICE
+                          8844  +
+                          8845  s      THE  TRANSFER    BYTE COUNT   IS DEFINED BY  “DCB_MAX   MESS  LEN“
+                          8846  %      WHICH   IS  FOUND  IN THE  DEVICE  DCB
+                          8847  a
+                          88468 &      OUTPUT :
+                          8849  s                 CONDITION  BITS:
+                          6850  e                          Z:   NO ERRORS
+                          8851  S                         NZ:   ERRORS  OCCURED
+                          8852  @                                    A - ERROR CODE
+                          8853  &
+                          8854  &      ALL  REGISTERS     ARE PRESERVED
+                          8855  ¢
+                          aB55  €SSSHSSHSSESSSESCSSESSS SSSSCS SSHSS SSSKEHESESSCHSESSHESHASESHESSEHESSEKCEKEKEEEHEHS
+                          8857
+                          aase        :GLB        __wWR_1_BLOCK
+                          8859
+    FAB2                  8860  __WR_1_BLOCK:
+    FAB2  FOES            8861         PUSH       iY
+                          8862
+    FAB4  FS              8863         PUSH   =   AF                         ; SAVE  DEVICE    ID
+                          8864
+    FABS  COFAFF          8865         CALL     __START_WR_1_   BLOCK
+                          8866
+    FAB8  2007            8867         JR         NZ,ERROR WITH  DCB2        ; DCB  NOT  FOUND   OR  NOT   IDLE
+              )           8868
+    FABA                  8869  WR NOTCOMPLETED:
+    FABA  F1              8870         PoP        AF                         ; GET  DEVICE   IO
+                          8871                                                |
+    FABB  F5              8872         PUSH   =   AF
+                          8873
+    FABC  COFB18          8874         CALL       __END WR_1_BLOCK
+                          8875
+    FABF  30F9            8876         UR         NC,WR_NOT COMPLETED        ; COMMAND  NOT    COMPLETED,CHECK     STATUS   AGAIN
+                          8877
+    FAC1                  8878  ERRORWITH  _DCB2:
+    FAC!  FDE1            8879         POP        ly                 - IS REALLY AF  BUT  NEED   TO  PRESERVE    A REG  IN  CASE«OF     ERRORS
+                          8880
+    FAC   FDE             88st         Pop        ly
+                          8882
+    FACS  C9              8883         RET

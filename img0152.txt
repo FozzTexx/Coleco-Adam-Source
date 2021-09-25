@@ -1,0 +1,34 @@
+FILE: EOSABS:E0S  TF           HEWLETT-PACKARD:    ViLLS       fo}   Cy
+
+LOCATION  OBJECT  CODE    LINE      SOURCE   LINE
+
+                          6074
+    F225                  6075  GET_STATUS_FLAG:
+                          6076
+    F225  CB3F            6077          SRL       A                   ; GET SECONDARY  DEVICE  ID (HI NIBBLE)
+    F227  CB3F            6078          SRL       A
+    F229  CB3F            6079          SRL
+    F22B  CB3F            6080          SRL       A
+                          6081
+    F22D  FEOO            6082          cP        oO                  ; WAS IT UNIT  0?
+                          6083
+    F22F  FO7E14          6084          LD        A,{I1¥+D_STATUS  FLAGS]     ; BY  THE WAY, GET  THE STATUS
+                          6085
+    F232  2004            6086          JR        NZ,UNIT1            ; NOPE, UNIT   1
+                          6087
+    F234  EGOF            6088          AND       OFH                 ; MASK OUT  STATUS OF UNIT  1
+                          6089
+    F236  1808            6090          JR        CHECK_STATUS
+                          6091
+    F238                  6032  UNIT1:
+    F238  CB3F            6093          SRL
+    F23A  CB3F            6094          SRL
+    F23C  CB3F            6095          SRL
+    F23E  CB3F            6096          SRL
+                          6097
+    F240                  6098  CHECK_STATUS:                           RETURN WITH  THE STATUS  NIBBLE IN  A
+                          6099
+    F240  c9              6100          RET
+                          6101
+
+                                                                             > > Pr>

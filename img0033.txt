@@ -1,0 +1,31 @@
+FILE: .-3ABS:E0S_TF        HEWLETT-PACKARD:     INCLUDE EOS _ERRS                                              Sat,   8 Sep   1984,  23.38       PAGE    29
+
+LOCATION OBJECT CUDE  LINE      SOURCE   LINE
+
+             <O001>   1065  DCB_NOT_FOUND              EQU       1          ;  THERE WAS NO DCB FOR  THE  DEVICE  REQUESTED.
+             <0002>   1066  DCB_BUSY                   EQU       2          ;  OCB IS BUSY
+             <0003>   1067  OCB_IDLE_ERR               EQU       3          ;  OCB IS IOLE
+                      1068
+             <0004>   1069  NO_DATE_ERR                EQuU      4
+             <0005>   1070  NO_FILE_ERR                EQu       5
+             <O006>   1071  FILE_EXISTS_ERR            EQU       6
+             <0007>   1072  NO_FCB_ERR                 EQU       7
+             <O008>   1073  MATCH_ERR                  EQu       8
+             <0009>   1074  BAD_FNUM_ERR               EQu       9
+             <OOOA>   1075  EOF_ERR                    EQu       10
+             <0008>   1076  TOOBIG_ERR                 EQU       11
+             <OOOC>   1077  FULL_DIR_ERR               EQu       12
+             <O00D>   1078  FULL_TAPE_ERR              EQu       13
+             <OOOE>   1079  FILE_NM_ERR                EQU       14                   ;0LS(8/28/83)
+             <OOOF>   1080  RENAME_ERR                 EQU       15                   ;DLS(8/30/83)
+             <OO10>   1081  DELETE_ERR                 EQu       16                   ;DLS(8/30/83)
+             <OO11>   1082  RANGE_ERR                  EQu       17                   ;DLS(8/31/83)
+                      1083
+             <0012>   1084  CANT_SYNC1                 EQu       18
+             <0013>   1085  CANT_SYNC2                 EQu       19
+             <0014>   1086  PRT_ERR                    EQU       20
+                      1087
+             <0015>   1088  RQTP_STAT_ERR              EQu       21
+             <O016>   1089  DEVICE_DEPD_ERR            EQU       22       .
+             <0017>   1090  PROG_NON_EXIST             EQU       23               ; PROGRAM DOES NOT  CURRENTLY   EXIST
+             <OO18>   1091  NO_DIR_ERR                 EQU       24               ; NO DIRECTORY ON  TAPE

@@ -1,0 +1,27 @@
+FILE: 2  »ABS:EOS_TF         HEWLETT-PACKARD:    DIR_HANOL  (c)Coleco  1ty_Confidential                   Sat,  8  Sep  1984,  23:39         «GE   95
+                                                                                                                                            _
+LOCATION  OBJECT  CODE  LINE       SOURCE LINE
+
+    E634  2017          3559           JR        NZ,Q_ERROR      ;BRANCH IF ERROR RETURNED
+                        3560
+    E636  D5            3561           PUSH      DE              >SAVE START BLOCK OF FILE
+    E637  C5            3562           PUSH      BC
+                        3563
+    E638  EDSBFEOG      3564           LD        DE,[USERBUF )   ;GET BUFFER ADDRESS IN DOE
+    E63C  DDGE21        3565           LO        L,{1IX+FCPOINTER]  ;GET ADDR OF ENTRY IN  HL
+    E63F  DD6622        3566           LO        H,[IX+FCB_POINTER+1]
+    E642  010017        3567           LD        BC,OIR_ENT_LENGTH-3  ; SET BYTE COUNT TO  LOAD  ONLY  VALID INFO  THAT
+                        3568                                     ; THAT WAS STORED ON THE  DEVICE
+                        3569
+    E645  EDBO          3570           LDIR                      ;COPY DATA TO CALLER’S BUFFER
+                        3571
+    E647  C1            3572           POP       BC              ;GET FILE’S START BLOCK
+    E648  D1            3573           PoP       DE
+                        3574
+    E649  AF            3575           XOR       A               ;SHOW NO ERROR
+    E64A  32FD08        3576           LD        (FILENAME_CMPS].A  ; DEFAULT FOR SCAN FOR  FILE
+    E64D                3577  Q_ERROR:
+    E64D  DDE!          3578           POP       Ix              ;sRESTOREREG‘S
+    EG4F  E1            3579           POP      HL
+    E650  C9            3580           RET
+                        3581

@@ -1,0 +1,61 @@
+       HP 6G40.uLinker                                          Tue, 10 vul 1984,  2:32           Page
+
+       MEM_CNFGO4        FC1B      EOSCMN_O6:N_EOS
+       MEM_CNFGOS        FCIC      EOSCMN_O6:N_EOS
+       MEMCNFGOG         FC1D      EOSCMN_O6:N_EOS
+       MEM_CNFGO7        FCIE      EOSCMN_O6:N_EOS
+       MEMCNFGOS         FCIF      EOSCMN_O6:NEOS
+       MEM_CNFGOS        FC20      EOSCMN_O6:NEOS
+       MEM_CNFGOA        FC21      EOSCMN_O6:N_EOS
+       MEM_CNFGOB        FC22      EOSCMN_O6:N_EOS
+       MEM_CNFGOC        FC23      EOSCMN_O6:N_€0S
+       MEM_CNFGOD        FC24      EOSCMN_O6:N_EOS
+       MEM_CNFGOE        FC25      EOSCMN_06:N_EOS
+       MEM_CNFGOF        FC26      EOSCMN_O6:N_EOS
+       MEMSWITCH PORT    FC27      EOSCMN_O6:N_EOS             A_uO0O:N_EOS
+       MODE_CHECK        FODS      UTILS:N_EOS                 RWT:N_EOS   OPENS:N_EOS
+       MOD_FILECOUNT     FODS      EOSCMN_O6:N_EOS             UTILS:EOS
+       MSNTOLSN          FD4A      EOSCMN_O6:N_EOS
+       NET_RESETPORT     FC28      EOSCMNO6:N_EOS              EO_UTIL:N_EOS
+       NEWHOLE SIZE      FEA       EOSCMN_06:N_EOS             UTILS:N_EOS OIR_HANDL:N_EOS
+       NEW_HOLESTART     FE16      EOSCMN_O6:N_EOS             DIR_HAND:N_EOS
+       NUM_COLUMNS       FEAO      EOSCMN_O6:N_EOS             CONOUT:N EOS
+       NUM_LINES         FESF      EOSCMN_O6:N_EOS             CONOUT:N EOS
+       OLDCHAR_          FE79      EOSCMN_06:N_EOS             CON_OUT:N_EOS
+       PATTRNGENTBL      FOG6A     EOSCMN_06:N_EOS             A_uOS_0O:N_EOS
+       PATTRNNAMETBL     FOG68     EOSCMN_O6:N_EOS
+       PCB               FECO      EOSCMN_O6:N_EOS             EO_UTIL:N_EOS
+       PERSONAL_DEBOUN   FESA      EOSCMN_O6:N_EOS             A_uO0S_0O:N_EOS
+       PLAY_IT           FOS6      EOSCMN_O6:N_EOS
+       POLLER            FD3E      EOSCMN_O6:N_EOS
+       PORTCOLLECTION    FD11      EOSCMN_O6:N_EOS             EOSTART:N_EOS
+       PORT_TABLE        FC27      EOSCMN_O6:N_EOS             A_u0S_00:N_EOS
+       PRINT_BUFFER      FD76      EOSCMN_O6:N_EOS             EOPRIR:N_EOS
+       PTRN_NAME_TBL     FEA3      EOSCMN_O6:N_EOS             CONOUT:N_EOS
+       PTR_TOLST  OF_S   FEGE      EOSCMN_O6:N_EOS             A_u0S_00:N_EOS
+       PTR_TO_S   ON_O   FE7O      EOSCMN_0O6:N_EOS            A_u000:N_EOS
+       PTR_TO_S   O1_    FE72      EOSCMN_O6:N_EOS             A_u0S_00:N_EOS
+       PTR_TO_S   O2_    FE74      EOSCMN_O6:N_EOS             A_u000:N_EOS
+       PTR_TOS    O3_    FE76      EOSCMNO6:N_EOS              A_u0S_00:N_EOS
+       PuT_ASCII         FO17      EOSCMN_O6:N_EOS
+       PUT_VRAM          FD2C      EQSCMN_O6:N_EOS
+       PXTO_PTRN POS     FD35      EOSCMN_06:N_EOS
+       QUERYBUFFER       FDAO      EOSCMN_O6:N_EOS             UTILS:N_EOS
+       READ_BLOCK        F178      UTILS:N_EOS                 RDWT:NEOS  OPENS:N EOS   DIR_HANDL:N_EOS
+       READREGISTER      FD23      EOSCMN_O6:N_EOS
+       READ_VRAM         FD1D      EOSCMN_O6:N_EOS             CONOUT:N_EOS   A_uOS_00:N_EOS
+       RETRY_COUNT       FDD6      EOSCMN_O6:N_EOS             UTILS:N_EOS
+       REV_NUM           FD6O      EOSCMN_O6:N_EOS             EOSTART:N_EOS
+       SAVE_CTRL         FE78      EOSCMN_06:N_EOS             A_u0S_00:N_EOS
+       SCAN_FOR_FILE     EFO8      UTILS:N_EOS                 DIR_HANOL:N_EOS
+       SECTORSTO_INIT    FD86      EOSCMN_O6:N_EOS             EOMKDIR:N_EOS
+       SECTORNO          FD87      EOSCMN_O6:N_EOS             EOMKDIR:N_EOS
+       SOUNOPORT         FC2F      EOSCMN_06:N_EOS             A_uO0S_00:N_EOS
+       SOUNDS            FDS9      EOSCMN_O6:N_EOS
+       SOUNO_INIT        FD50      EQSCMN06:N_EOS
+       SPIN SWOCT        FES8      EOSCMN_O6:N_EOS             Au0S0O:N_EOS
+       SPIN_SW1_CT       FE59      EOSCMN O0:N_EOS
+       SPRITEATTRIBL     FD64      EQSCMNO6:N_EOS              Au0SOO:N EOS
+       SPRITEGENTBL      FOGG      EQSCMNO6:N_EOS
+
+ceooovurnoovocoevvvovvwvecoeoevcveorvupvpvUOEPpPOoOoccC            occ  orvI8Tvurrrr    rv? vrrPrrr>r>>             I

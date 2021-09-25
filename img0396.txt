@@ -1,0 +1,24 @@
+FILE:OS 7PRIME:pos         HEWLETT-PACKARD: GAME OPTION (c)  Coleco,  1982    CONFIDENTIAL             Fri,  18  May  1984,  16:21       PAGE  122
+
+LOCATION OBJECT  CODE  LINE     SOURCE LINE
+
+                       5952
+    TAE1 211AC1        5953 WRITE L6        LD WL,LINE6
+    1AE4 FD210001      5954 WRITECHAR       LD 1Y,1
+    TAE8 3E02          5955                 LD A,2
+    TAEA COTFBE        5956                 CALL PUT_VRAM
+    TAED C9            5957                 RET
+                       5958
+    1AEE 211AC6        5959 WRITE_L11       LO WL,LINE 11
+    1AF1 FO210003      5960                 LD 1Y,3
+    1AF5 3€02          5961                 LD A,2
+    1AF7 COIFBE        5962                 CALL PUTVRAM
+    1AFA C9            5963                 RET
+                       5964
+    1AFB 211AC9        5965 WRITE 112       LO HL,LINE12
+    TAFE F0210001      5966                ‘to 1Y,1
+    1802 3€02          5967                 LD A,2
+    1804 CDIFBE        5968                 CALL PUT_VRAM
+    1807 C9            5969                 RET
+                       5970
+                       5971  PROG

@@ -1,0 +1,42 @@
+ FILE:  EOSABS:EOS    TF          HEWLETT-PACKARD:     SOUND   EQU#S    (c)  Coleco,  1982    CONF IDENT IAL              Sat,    8 Sep   1984,   23.39        PAGE    BO
+
+ LOCATION   OBJECT    CODE   LINE       SOURCE  LINE
+
+                            2947
+                            2948    eeeeeeeeeeeresereseeeeereees
+                            2949   ;*        JUKE  _BOX               ‘
+                            2950   ,eee eeereeesreeeseeereeereees
+                            2951
+                            2952   ;see  Users’  Manual!   for  description
+                            2953   ;SONGNO  passed  in   B
+                            2954
+     E3€7                   2955    PLAY  _IT
+     E3€7                   2956   JUKE BOX
+                            2957
+                            2958   ;        * RET   if  song   already    in progress
+                            2959
+     E3SE7  C5              2960            PUSH      BC                    ;save  SONGNO  on  stack
+     E3E8   CDE383          2961            CALL      PT_IX_TO_SxDATA       ;point   IX to SONGNO’s   song  data  area
+     EIJEB  DO7EOO          2962            LD        A,[1xX+0])            ;A  := CH#  [if any]     SONGNO   [if any]
+     E3EE   EGSF            2963            AND        3FH                  >A  := 0 O SONGNO
+     ESFO   Ci              2964            POP     =—BC                    ;B  := SONGNO
+     E3Fi   B88             2965      .     cP        8                     ;test   ifalready    in progress
+     E3F2   C8              2966            RET       2                 '   if   so, leave
+                            2967   |
+                            2968   ;        *  load  first   note   and  set  NEXT_NOTE  PTR   [thru  LOAD  NEXT_NOTE]
+                     :      2969
+     E3F3  DD7000           2970            LD         {1X+0],B             ;store  SONGNO  in  byte  O
+     ESF6   2B              2971            DEC       HL                    >-HL  left by  PT_IX_TO_SxDATA     pointing   to  MSB  SxDATA
+     E3SF7  2B              2972            DEC       HL                    ;-entry   in LST_OF_SNO_ADDRS     point  Ht  to  note  list
+     E3F8  56               2973            LO        D, (Ht)               ;"Starting  addr  entry   in  LST_OF_SND_ADDRS     and  save   this
+     E3F9  28               2974            DEC       HL                    ;-addr  in DE
+     E3FA  SE               2975            LD        E, (HL)               ;DE  now has  the  initial   value  for  NEXT _NOTE_PTR
+     E3FB  007301           2976            LD        [IX+1),€              ;set  NEXT_NOTE PTR   for  first   note  in  song
+     E3FE  007202           2977            LO        {I1X+2]}.D0
+     E401  CDE4F2           2978            CALL      LOAD  _NEXT_NOTE      ;load  note,  byte  0 :=  CH#  SONGNO,   set  new  NEXT NOTE  PTR
+     E404   1874            2979            JR        UP_CH_DATA_PTRS       ;new  song, so  update   channel!  data  ptrs
+                            2980                              :
+                            2981   ;        END  JUKEBOX
+                            2982
+
+anne     ene  tncereteretait                           ca

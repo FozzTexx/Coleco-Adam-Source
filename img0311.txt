@@ -1,0 +1,61 @@
+FILE: OS7PRIME:pOS        HEWLETT-PACKARD:  ACTIVATE  (c)  Coleco,  1982  CONFIDENTIAL                 Fri, 18 May  1984,  16:19      PAGE   37
+
+LOCATION OBJECT CODE LINE       SOURCE LINE
+
+                     1545   ;       -IDENT  ACTIVATE
+                     1546   ;       .ZOP
+                     1547   ;       -EPOP
+                     1548 ;         -COMMENT )
+                     1549   seetanskeannaanngeanes  ACTIVATE  RRTRAAAKARARAKARAAKARAERARKKARARRAAHAERKRERREREEK
+                     1550   ;
+                     1551   ;                                                                    4/22/82
+                     1552   ;                                                                    13:50:00
+                     1553   ;
+                     1554   ;THE FOLLOWING CHANGES/REVISIONS   WERE MADE:
+                     1555   ;
+                     1556   ;       1. ELIMINATE  CODE PLACING  OLD.SCREEN  ADDRESS  IN STATUS AREA
+                     1557   ;       2. INIT X.PAT.POS  IN OLD.SCREEN  WHEN  IN VRAM  AS WELL AS  WHEN IN CRAM
+                     1558   ;       3. USE VDP.MODE.WORD  TO TEST  GRAPHICS  MODE
+                     1559   ;       4. ADD CODE  TO EXPAND OWE  COLOR GENERATOR  BYTE  10 8
+                     1560   ;       5. ADDED CBUFF   DEFS 8 FOR  COLOR EXPANDING   CODE
+                     1561  ;  5/02  6. FIX COLOR  GEN MOVE IN MODE  |
+                     ar    ;        7. USE CONTROLER MAP  FOR BUFFER  AREA
+                     1563  ;
+                     1564  *   ACTIVATE is used  to initialize  the RAM status  area  for the passed
+                     1565  *object  and move its  pattern and color  generators  to  the PATTERN  and
+                     1566  *COLOR  GENERATOR tables  in VRAM_   The second  function  is enabled  or
+                     1567  “disabled  by setting  or resetting  the carry  flag  in the PSW_  this  is
+                     1568  *necessary  to prevent  sending the  same graphics  data  to VRAM more  than
+                     1569  *once  when creating  identical objects    The  calling  sequence for  act-
+                     1570  *ivating  an object  is as follows:
+                     1571  *
+                     1572  *                LO               Hi ,OBUn          ;-208J  TO ACTIVATE
+                     1573  *                SCF                                ;SIGNAL  MV TO VRAM
+                     1574  *                CALL             ACTIVATE
+                     1575  *
+                    1576   *
+                    1577   *oR
+                    1578   *
+                    1579   *                LD               HL,OBJ n          ;-20BJ  TO ACTIVATE
+                    1580   *                OR               A                 ;DON'T  MV TO VRAM
+                    1581   *                CALL             ACTIVATE
+                    1582   *
+                    1583   *)
+                    1584                   sEXT              PUT VRAM_,VRAM_WRITE,VDP_MOOE   WORD                                                                           ’
+                    1585                   EXT               WORK BUFFER
+                    1586   ;
+                    1587                    GLB              ACTIVATE _
+                    1588   ;
+                    1589   ;REGISTER USAGE:  FOLLOWING  WILL BE CHANGED  BY ACTIVATE,   ADDITIONAL
+                    1590   :MAY BE CHANGED BY  CALLED  SUBR
+                    1591   :               AF ,HL,DE,BC,1Y
+                    1592   ;
+                    1593
+                    1594
+                    1595   ; PROCEDURE ACTIVATEQ[VAR  OBJ:OBJECT ;MOVE: BOOLEAN);                                                                        °
+                    1596
+                    1597  ;  ACTIVATEQ  ISTHE  PASCAL ENTRY  POINT  TOACTIVATE
+                    1598
+                    1599                  sEXT      PARAM
+                    1600  ;  THE PASCAL PARAMETER  PASSING  PROCEDURE
+                    1601   ;               COMN

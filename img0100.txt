@@ -1,0 +1,60 @@
+FILE: EQSABS:EOS    TF           HEWLETT-PACKARD:      DIR_HANDL    (c)  Coleco    1983 Confidential                             Sat,    8  Sep  1984,  23:39         PAGE    96
+
+LOCATION   OBJECT   CODE   LINE        SOURCE  LINE
+
+                           3OBQ   5 r rr                  rrr       rts     tern          ttre              ~atte
+                           3584   ;
+                           3585   ;   SET FILE    --   Re-write    the  file’s   directory    entry.
+                           3586   ;
+                           3587   ; CALLING  PARAMETERS:      Device    number    in A
+                           3588   ;                           address    of  name   string   in DE
+                           3589   ;                           address    of  buffer    in HL
+                           3590   ;
+                           3591   ; EXIT  PARAMETERS:      tf no  errors    --  2  = 1; A  =  0;
+                           3592   ;                             directory    entry   updated
+                           3593   ;                        if errors    --  2  = 0;  A =  error   code;
+                           3594   ;                             directory    entry   unchanged
+                           3595   ;
+                           SSDG   5mm                       rr   rn       re  mere   ees crest e reece  sow mere teen
+                           3597
+    E651                   3598    SET  FILE
+    —€651  C5              3599            PUSH        BC                   ;SAVE  REG’S
+    E652   D5              3600            PUSH       DE
+    E653   E5              3601            PUSH       HL
+    E654   DDES            3602            PUSH        IX
+    E656   22FEO6          3603            LD          [USER BUF)  ,HL      ;SAVE  ADDR  OF   USER’S   DATA
+                           3604
+    E659   DD2AFDFD        3605            LD          IX,{FCB_HEAD_ADDR]       ;POINT  TO  SYSTEM’S     FCB
+                           3606
+    E65D   62              3607            LD         H,D                   ;GET  STRING   ADDRESS    IN  HL
+    E6SE   68              3608            LD          ae
+    E6SF   CDEFOS          3609            CALL        SCAN_FOR  FILE       ;GET  THE  DIR  ENTRY
+    E662   2026            3610            JR         NZ,S_ ERROR           ;BRANCH   IF ERROR
+                           36 11
+    E664   2AFEOG6         3612            LD         HL, [USER  BUF  ]     ;GET  BUFFER   ADDRESS
+    E667   DDSE21          3613            LD         E,(IX+FCB_   POINTER]     ;GET  ENTRY  ADDR    IN  DE
+    E66A   DD5622          3614            LD         D, (IX+FCB_POINTER+1]
+    E660   010017          3615            LO         BC ,DIR_ENT_LENGTH-3          ;SET BYTE   COUNT
+    E670   EDBO            3616            LOIR                             ;COPY  THEIR   BUFFER   TO   BLOCK   BUFFER
+                           3617
+    E672                   3618   TAPE TIMED OUT:
+    E672   DD7E17          3619            LD         A, (IX+FCB_  DEVICE]    ;SET   DEVICE  NUMBER
+    E675   2AFDOFF         3620            LO         Hi, (FCB_DATA_ADOR]       ;GET  ADDR  OF  MY  BUFFER
+    E678   DDSE19          3621            LD         E,{IX+FCB_   BLOCK]    ;GET  BLOCK   ADDRESS    IN  BCDE
+    E67B   DOSGIA          3622            LO         D,[IX+FCB_BLOCK+1]
+    EG7E   DD4E1B          3623            LD         C,{IX+FCB_BLOCK+2]
+    E681   DD461C          3624            LD         B,[1X+FCB_   BLOCK+3]}
+    €684   CDFIE6          3625            CALL       WRITE  BLOCK           ;RE-WRITE   THE   DIRECTORY     BLOCK
+                           3626
+    E687   2001            3627            JR         NZ,WRITE   ERRORS
+    E689   AF              3628            XOR        A                     ;SHOW  NO  ERRORS
+                           3629
+    EG8A                   3630   WRITE ERRORS:
+    E68A                   3631   SERROR
+                           3632
+    E68A   DDE!            3633            POP        IX                    ;RESTORE   REG‘S
+    E68BC  Et              3634            POP        HL
+    E68D   Di              3635            POP        DE
+    E68E   C1              3636            PoP        BC
+    E68F   CS              3637            RET
+                           3638

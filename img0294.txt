@@ -1,0 +1,63 @@
+FILE:  OS7PRIME:pos          HEWLETT-PACKARD:     UTILITY    (c) Coleco,   1982    CONFIDENTIAL                       Fri,  18  May  1984,   16:19       PAGE    20
+
+LOCATION  OBJECT  CODE  LINE       SOURCE   LINE
+
+                         770  ;          - IDENT  UTIL                  ;Includes   UPATNCTRL  ,UPFREQ,
+                         771                                          ;DECLSM,  DECHSN,  MSNTOLSN  ,ADD816,  PT_IX_TO   SxDATA,
+                         772                                          ;LEAVE _EFFECT,  AREA SONG.   is
+                         773  oRAVATRAARAAARUAARAARAAAAARARRE
+                         TT   ;*        UPATNCTRL               .
+                         775  :RERATARARARRAARARSEAARARAARE
+                         776   COMMENT    )
+                        77    “Perform   single   byte  update   of  the  snd  chip  noise  control    register   or  any
+                        778   ;attenuation    register.    IX  is passed   pointing   to  byte  0  of  a song  data   area,  MSN
+                        779   sregister   C  = formatted    channel   attenuation    code.
+                        780   ;)
+                        761             GLB  UPATNCTRL
+                        782           ; INCLUDE   OSSR_EQU:0S:0      ;equates
+    0164                783  UPATWCTRL
+    0164  DD7E04        784             LD A, (IX*4)                  ;MSN  A  = ATN,  LSN  may  be  CTRL  data
+    0167  CB61          785            BIT   4,C                      stest  for  ATN
+                        786   ;         IF  (PSW,1S,NZERO)            ;ATW  is  to be  sent,  move   it  to  the  LSN
+    0169  2804          787             JR 2,124                                            .
+    0168  OF            788               RRCA                          ;swap   nibbles
+    016C  OF            789               RRCA
+    0160  OF            790               RRCA
+   O16E   OF            791               RRCA                          ;LSN  A  = ATN
+                        792  ;         ENDIF
+   O16F  E60F           793  L264      AND  OFH                       mask   @Se
+   0171  Bi            79%             OR  C                             =  formatted   register#    | ATM  or  CTRL
+   0172  O3FF           795            QUT   [SOUND PORT)  ,A         -output  ATW  or  CTRL  data
+   0174  C9            796             RET
+                        797  stenaeannehaanaNnewasansNane
+                       798   ;*        UPFREQ                  7
+                        T99  eRRRRKAEKARARAAARAARAKEARKEKE
+                        800  ;.COMMENT    >
+                        801  ;Perform   double   byte   update   of  a sound  chip  frequency    register.     IX  is passed
+                        802  ;pointing    to byteO   of  a  song  data  area,  MSN  register   D  =  formatted   channel
+                        803  ;frequency    code.
+                       804   ;)
+                        805            GLB  UPFREQ
+   0175                 806  UPFREQ
+   0175  DD7E03         807            LDA,   (IX+FREQ)                     F2 F3  F4  FS F6  F7  FB  FO
+   0178  E60F           808            AND  OFH                              0  0   O   O F6  F7  FB  F9
+   O17A  B2             809            OR  D                                 formatted   reg#  |  F6  F7  FB FO
+   0178  D3FF           810            QUT  [SOUND  PORT)  ,A            tput  first   freq  byte
+   0170  007E03         811            LD  A, (IX+FREQ)                    F2  F3  F4  F5 F6  F7  FB  FO  again
+   0180  E6FO           812            AND  OFOH                           F2  F3  F464F5  0   0   O   O
+   0182  57             813            LD  D,A                       ;sa   ae   D
+   0183  DD7E04         814            LDA,   (IX*FREQ+1)            “LS      =0    O  FOF!
+   0186  E60F           815            AND  OFH                      “A    7    000        0   O  FO  FI
+   0188  82             816            OR  D                         cA =  F2  F3  F4  FS  O   OFO  F1
+   0189  OF             817            RRCA                          78wap   nibbles
+   O18A  OF             818            RRCA
+   0188  OF             819            RRCA
+   018C  OF            820             RRCA                          ;A =   O   OFO   FI  F2  F3 F4 FS
+   0180  D3FF          821             OUT  [SOUND  PORT)  ,A        ;output   2nd  [most  significant]     freq  byte
+   O18F  C9            822             RET
+                       823   oRRERKEKRAAARKANHRKRARKKRKKAKEKE
+                       824 ;            DECLSN                 *
+                       B25   Sette  eee deere  eee
+                       826    ;.COMMENT  )
+
+                         te   »2E”eguoteBe euw@e@ou

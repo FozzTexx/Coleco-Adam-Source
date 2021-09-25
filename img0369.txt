@@ -1,0 +1,61 @@
+FILE: OS7PRIME:pOS         HEWLETT-PACKARD:   CONTROLLER   SOFTWARE  (c) Coleco,  1982   CONFIDENTIAL      Fri,  18  May  1984,  16:20       PAGE   95
+
+LOCATION OBJECT  CODE LINE       SOURCE LINE
+
+    1144 1802         4614              JR    CONT READX
+    1146              4615   CONTREAD1
+    1146 DBFF         4616              IN  =A,  {CTRL_1 PORT)
+    1148              4617   CONTREADX
+    1148 2F           4618              CPL                              ;COMPLEMENT  DATA   SO O=NO DATA
+    1149 C9           4619              RET                                                    ;1= DATA
+                      4620
+                      4621
+                      4622   *
+                      4623   *  CONTROLLER  SCANNER  ROUTINE
+                      4624   *
+                      4625                    GLB               CONT SCAN
+    114A              4626   CONTSCAN
+    114A DBFC         4627              IN  =A, CCTRL_O PORT)            ;READ  SEGMENT  0, BOTH  PLAYERS
+    114C 2F           4628              CPL
+    1140 3273EE       4629              LD    [SO CO),A
+    1150 DBFF         4630              IN  =A, (CTRL_1_ PORT)
+    1152 2F           4631              CPL
+    1153 3273EF       4632              LD    [SO C1),A
+    1156 0380         4633              OUT   (STRB SET PORT],A          ;STROBE  SEGMENT  1
+    1158              4634              DELAY 10                         ;WAIT  10 MICROSECS
+    1158 Co1138          +              CALL DELAY
+    1158 OBFC         4635              IN   A, {CTRL_O PORT)            ;READ  SEGMENT  1, BOTH  PLAYERS
+    1150 2F           4636              CPL
+    115E 3273F0       4637              LD  = [(S1_CO),A
+    1161 DBFF         4638              In  =A, (CTRL_1_ PORT]
+    1163 2F           4639              CPL
+    1164 3273F1       4640              LD    =[S1_C1},A
+    1167 D3C0        4641              OUT    [STRB_RST PORT],A          ;RESET  TO SEGMENT  0
+    1169 C9          4642              RET
+                     4643
+                     4644
+                     4645   *
+                     4646   *                UPDATE   SPINNER  SWITCH ROUTINE                       *
+                     4647   *
+                     4648   *
+                     4649
+                     4650
+                     4651
+                     4652                    GLB               UPDATE SPINNER  _
+   116A              4653   UPDATE SPINNER
+   116A DBFC         46546             IN    A, [CTRL_O PORT)           GET   DATA
+   116C 2173E8       4655              LD    WL,SPIN  SWO CT            ADDRESS   OF  SPINNER   O COUNT
+   116F CB67         4656              BIT   4,A                        7 IF INT BIT  SET
+   1171 2008         4657              JR               S1              ; THEN SPINNER  1
+                     4658   *  CHECK DIRECTION                          > ELSE  SPINNER  O
+   1173 CB6F         4659              BIT   5,A                        ;  IF BIT 5  IS  SET
+   1175 2003         4660              JR  = NZ, UPDATE RO              ; THEN  GOING  RIGHT
+                     4661                                               - ELSE  LEFT
+   1177 35           4662              DEC   [HL]                       ; DECREMENT  SPINNER   COUNTER
+   1178 1801         4663              JR    UPDATE S1                  ; GO  CHECK SPINNER   1
+                     4664   ***  RIGHT SPINWER   SWITCH
+   117A              4665  UPDATE RO
+   V17A 34           4666              INC   (HL)                       FRIGHT,  IENCREMENT  COUNTER
+                     4667   * CHECK SPINNER  1
+   117B DBFF         4668  UPDATE  S1  IN    A, {CTRL 1 PORT)           ;LOOK  AT SPINNER   1 DATA
+   117D CB67         4669              BIT   4,A                        7IF  INT BIT  SET

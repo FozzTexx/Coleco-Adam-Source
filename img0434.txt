@@ -1,0 +1,64 @@
+            ‘ILE: OS 7PRIME:pOS          CROSS REFERENCE  TABLE            PAGE 160
+
+            .INE#    =SYMAOL          TYPE     REFERENCES
+
+            4508    SEG 0               A  4771,4795
+            4509    SEG 1               A  4779,4803
+            1750  SEMI   BOT            P  1748
+            1755   SEMI EXIT            P  1711,1753
+            1759    SEMI GRI            Pp 1715
+            1745    SEMI MID            P  1743
+             452    SET                 P  446     .
+            6102    SET COUNT           P  6097,6229
+            6124    SET COUNT10         P  6118
+            6150    SET COUNT20         P  6122,6129
+            6160  SET  COUNTX           P
+            4145    SETDONE  BIT        P  4103,4128,4136
+            2035    SET UP ENDIF        P  2024
+            1991    SETUP  WRITE        P  2186
+            2824    SHAPE               A
+            3575    SHFEX               Pp 3571
+            3570    SHFLP               P  3574
+            6164    SHIFT_CT            P  6125
+            4475    SIGMAL_FALSE        P  4465,4472
+            4470  SIGNAL  MATCH         P  4461
+             594    SIGNAL NUM          )  4202,4204
+            4480    SIGNAL TRUE         ©  4474
+            4484    SIGNAL_TRUE1        P  4482
+            7199    SKIPZZ              P  7197
+            2317    SKIP_OLD            P  2293
+            1825    SMBY OLD            P  1814,1820
+            1138    SNDMANAGER          P  1135,7395
+              76    SONGNO              A
+            7393    SOQUND_INIT         A  215
+            7373    SOUND INITP         A  220
+\           7395    SOUNDMAN            A  218
+              69  SOUND  PORT           A  795,810,821,1055, 1057,1059,1061, 1303,1324
+            7108    SOURCE              Ss
+            5390    SPACE               P  5688
+            4503    SPIN   .,           A  4834,4838,4839
+            4514    SPINOLD             A
+            4515    SPINSTATE           a
+            5051    SPINSWO  CT         D  4589,4655,4710,4775
+            5052  SPIN  SW1  CT         D  4590,4799
+            6524    SPWR_MASK           A
+            5334    SPRITEGENTBL        D  6327
+            $333    SPRIFENAMETBL       D  6326
+            2807    SPRITE INDEX        A  3112,3129,3147
+             275 SPRITE    ORDER        A  274,6254,6283
+            2796    SPRITEPTR           S
+             997    SRIAIN              A  1054,1278,1279
+             996    SRIFRO              A  1280—
+             999    SR2AIN              A  1056,1284,1285
+             99B    SR2FROQ             A  1286
+            1001    SR3ATN              A  1058,1290,1291
+            1000    SR3FRQ              A  1292
+            1004    SRNAIN              A  1060,1296,1297
+            1003    SRNCTL              A  1314
+             578    STACK               D  233,371
+            290     STARTGAME           A  289,541,5266
+            2806    STATUS              A  2865,2866,2924,2925 ,2953,2954 ,3012,3013,3034,3035,3053,3054,3070,3071,3090, 5091
+            4532    STRB_RST PORT       A  4571,4641,4737
+
+  mn        eee                               Fenmiemieie                                       Se       =e        ee          ee           =           =           =           on           —                    j
+                              ae

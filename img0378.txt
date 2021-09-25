@@ -1,0 +1,66 @@
+FILE:  OS 7PRIME:  pos         HEWLETT-PACKARD:  DISPLAY    LOGO  (c) Coleco,  1982    CONFIDENTIAL                 Fri,  18  May 1984,  16:21       PAGE  104
+
+LOCATION   OBJECT   CODE LINE       SOURCE  LINE
+
+                         5117   *                  OOOOH-17FFH     PATTERN  GENERATOR   TABLE
+                                ®
+                         se     SRAAAAARTAAAAAARARAAAACAAAAARAKAAKAAAAARAAKKEKKEAAKARRAKCARAERAAATAAKARAERKERAARER
+
+                         aaa                                                    RECKAAAAERARKAAKKERKAARTAKRKKAK
+                                ARARAAARAAAAAARAERAERAEREETE     DISPLAY   LOGO
+                         5122
+                         5123                    PROG
+                         5124
+                         5125   *  FILL VRAM  WITH  O'S
+    1319   210000        5126   DISPLAY LOGO     —sLDHL, 0
+    131C   114000        5127                    LD DE,  16384
+    131F   3€00          5128                    LD  A,O
+    1321   CD18D4        5129                    CALL   FILL_VRAM_
+                         5130
+                         5131   *  SET UP  VDP WITH  MODE 1
+    1324  CD1BE9         5132                    CALL   MODE 1_
+                         aie
+                                RECARAARAEAARAAKAAREEWRITE   OUT   PATTERN GEN  TABLE   RRARARAARARRARKAKER
+                         5135
+                         5136   *  WRITE OUT  ASCII  GENERATOR   TABLES
+    1327  €D1927         5137                    CALL   LOAD_ASCII_
+                         5138
+                         5139   *  WRITE OUT  GRAPHICS   GENERATORS
+    132A  2118A3         5140                    LO  HL,OBJ  TABLE               ;POINT   TO  TABLE  OF  PTN  GEN  NUMBERS
+    132D  110060         5141                    LO DE, 60H         |            ITEM    LOCATION   IN  VRAM  PATTERN  GEN  TABLE
+    1330  £5             5142   WRITE_LOOP       PUSH   HL                       ;SAVE   LOCATION   OF  CURRENT   CONSTRUCTION
+    1331  D5             5143               _    PUSH  DE                        ;SAVE   VRAM  ITEM  #
+                        5144    *  CALCULATE  GENERATOR   LOCATION     —
+    1332  7E            5145                     LD  A,CHL)
+    1333  FEFF          5146                     CP  OFFH                        ;HAVE  WE  PROCESSED    ALL  GENERATORS?
+    1335  2818          5147                     JR  2,DONE  LOGO                ; YES.    WE'RE  ALL  DONE
+    1337  47            5148                     LD  B,A                         ; NO.  B=NUMBER    FROM  OBJ TABLES
+    1338  04            5149                     INC  B
+    1339  2114C3        5150                     LD  HL,LOGO  GEN                ;POINT   TO ROM  GENERATOR    TABLE
+    133C  110008        5151                     LD  DE,8                        ;WE'RE   GOING  TO  ADD  8  FOR  EVERY
+    133F  1015          5152   ADDR ADJ       _  DJNZ  ADD_8                     ;GENERATOR    INTO  THE  ROM  GEN  TBL
+                        5153
+                        5154   *   DONE ADJUSTING  ROM   GENERATOR   ADDRESS
+                        5155
+   1341   D1            5156                     POP  DE                         ;RESTORE   ITEM  #  IN  VRAM                                                                               :
+   1342   D5            5157                     PUSH  DE                        ;SAVE   IT
+   1343   FD210001      5158                     LD  IY,1                        ;NUMBER   OF GENERATORS
+   1347   3€03          5159                     LD A,3                          ;PATTERN  GEN  TABLE    CODE
+   1349   CDIFBE        5160                     CALL  PUT _VRAM                 ;HL=ROM   ADDRESS
+   134C   01            5161                     POP  DE                         RESTORE    ITEM  #  IN VRAM
+   1340   E1            5162                     POP  HL                         ;RESTORE   CONSTRUCTION    ADDRESS
+   134E   13            5163                     INC  DE                        ;SET   UP  FOR  NEXT  ITEM
+   134F   23            5164                     INC  HL
+   1350   18DE          5165                     JR WRITE  LOOP                 ;KEEP   GOING   UNTIL  DONE
+                        5166
+   1352   D1            5167   DONE LOGO         POP DE                         ;GOT   TO  POP  FOR  EVERY  PUSH                                                         .
+   1353   £1            5168                     POP  HL
+   1354   1803          5169                     JR WRITE  NAMES                ;HOP   AROUND  ADD 8
+                        5170
+   1356   19            5171   ADD 8            ADD HL  ,DE                     ;POINT   TO  NEXT  GENERATOR
+   1357   1866          5172                     JR ADDR  ADJ
+                        5173
+
+                                                                                                                                                                                                          j
+
+                                                                                    f                                              é          ‘                       “             \                         4i

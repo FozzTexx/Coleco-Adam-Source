@@ -1,0 +1,29 @@
+_—  rs      EOSE
+
+            FILE:  ctuSABS:EOS_TF       HEWLETT-PACKARD:    EOS TAPE     (c)  Coleco  1buJ  Confidential                    Sat,    8  Sep  1984,  23:41           reuc   179
+
+            LOCATION  OBJECT CODE   LINE      SOURCE LINE
+
+                                    7283
+                                    7284 ;REV  O             (v/D     8-24-83)
+                                    7285
+                                    7286         GLOBAL    _REQ  _TAPE_STAT
+                                    7287
+                                    7288        SEXT       __REQUEST_STATUS
+                                    7289
+                                    T2QGOSeeee eee  HEHEHE   EES EEE  HEHE HEHEHE   HEHEHE  EEE  TEESE    EEREREEREHESS
+                                    7291 *  THIS ROUTINE   REQUESTS   THE  STATUS   ON THE  TAPE  DRIVE
+                                    7292 *       INPUT:    NONE
+                                    7293 *       OUTPUT:
+                                    7294 *         |       CONDITION   FLAGS
+                                    7295 *                           Zz:       NO  ERROR
+                                    7296 *                           NZ:       ERROR  OCCURED
+                                    7297 *                                     A  ===> ERROR  CODE
+                                    7298
+                 F507               7299 __REQ_TAPE_STAT:
+                 FSD7 3E08          7300         LO        A,TAPE_ID
+                 FSD9 C3F473        7301         JP        __REQUEST_STATUS
+                                    7302 ;
+                                    7303 ;st esseseesereweesssssesssssesssssssssssssssssssrssesssssssssssszse=
+                                    7304 ;,sesssssreasees  esseseseeesses   reseresesrsessrsssssesersesssssssssssssse
+                                    7306  Ses Seeseeese ser esas  ssesesesssssssrssrsersssesessssseesesssssrsss=

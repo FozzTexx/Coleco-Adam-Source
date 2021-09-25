@@ -1,0 +1,64 @@
+FILE: OS_7PRIME:pOS        HEWLETT-PACKARD:      PUT  MOBILE   (c)  Coleco,   1982    CONFIDENTIAL                   Fri,   18  May   1984,  16:20       PAGE    68
+
+LOCATION OBJGCT CODE  LINE        SOURCE  LIWE
+
+                      3159   ;
+                      3160   eRSERRRKRAARE  MODIFIED    VERSION    TO RUN  ON   He ASSEMBLER    SRACACACAACAAAAAKKEARERRERREK
+                      3161   ;
+                      3162   ;                                                                      4/16/82
+                     3163    ;                                                                      13:50:00
+                     3164    osvadneesearasesenns     PUT  MOBILE    RERERAKEARAAAAKAAERARAAAKRARRAERAARAEKAARAREKRAREKREEK
+                     3165    ;
+                     3166    ;DESCRIPTION:       THIS  PROCEDURE    PLACES   A MOBILE   OBJECT   ON  THE  PATTERN   PLANE
+                     3167    ;                  AT  THE  X,Y   PIXEL  LOCATION    SPECIFIED    IN THAT   OBJECT'S   RAM  STATUS
+                     3168    ;                  AREA_
+                     3169    ;
+                     3170    ;                  A  BUFFER   AREA  OF  204  BYTES   (GRAPHICS    MODE  II)  OR  141  BYTES
+                     3171    ;                   (GRAPHICS   MODE   1)  IS REQUIRED    FOR  FORMING   THE  NEW  GENERATORS
+                     3172    ;                  REPRESENTING     THE  OBJECT   ON  IT'S  BACKGROUND       THE  PROCEDURE
+                     3173    ;                  USES   RAM  STARTING   AT  (F BUF  SPACE)    FOR  THIS   BUFFER
+                     3174    ;
+                     3175    ;INPUT:             IX =  ADDRESS   OF  OBJECT   TO  BE PROCESSED
+                     3176    ;                  HL  =  ADDRESS   OF  OBJECT'S   GRAPHICS    TABLES   IN  ROM
+                     3177    ;                    B =  SELECTOR   FOR  METHOD   OF  COMBINING    OBJECT   GENERATORS
+                     3178   ;                          WITH  BACKGROUND    GENERATORS
+                     3179    ;
+                     3180   :                          1 =  OBJECT   PATTERN   GENS  ORed   WITH  BACKGROUND    PATTERN   GENS
+                     3181   ;                               COLOR1   OF  BACKGROUND    CHANGED   TO  MOBILE  OBJECT'S    COLOR
+                     3182   ;                               IF  CORRESPONDING     PATTERN   BYTE  NOT  ZERO
+                     3183;
+                     3184   ;                          2 =  REPLACE   BACKGROUND    PATTERN   GENS   WITH  OBJECT  PATTERN    GENS
+                     3185   ;                               TREAT  COLOR   SAME   AS #1
+                     3186   ;
+                     3187   ;                          3 =  SAME  AS  #1  EXCEPT   COLORO   CHANGED   TO  TRANSPARENT
+                     3188   ;
+                     3189   ;                          4 =  SAME  AS  #2  EXCEPT   COLORO   CHANGED   TO  TRANSPARENT
+                     3190   ;
+                     3191   gRARARAEAAEAREAEREREAAEERAREREEARAAEEREEAEREEERREERREREAREEAREERARERRERER                   REARS
+                     3192   ;                                                               .
+                     3193   ;)
+                     3194   ;         EXT       READ VRAM,WRITE     VRAM,WORK   BUFFER,GET    VRAM,PUT    VRAM
+                     3195   ;         EXT       PX TO  PTRN  POS,GET   BKGRND,   VDP MODE   WORD,  PUTFRAME
+                     3196             GLB       PUT  MOBILE
+                     3197   ;  THE  FOLLOWING   ARE OFFSETS    FROM   THE  START  OF  THE   FREE  BUFFER   AREA
+                     3198   ;  THESE  LOCATIONS    USED  TO  STORE  VARIABLES    AND  PATTERN   AND  COLOR   DATA
+            <0000>   3199   YDISP     EQU       0         7Y  DISPLACEMENT
+            <0001>   3200   XDISP     £QU       1         7X  DISPLACEMENT
+            <0002>   3201   COLR      QU        2         +COLOR
+            <0003>   3202   FLAGS    QU         3         ;BITS   0,1  = SELECTOR    #,  BIT  X =  GRAPHICS   MODE   [1/11]
+            <0004>   3203   FRM       EQU       *         ;FRM  =  TO  BE  DISPLAYED
+            <0005>   3204   FGEN     €EQU       5         ;NAME   OF  FIRST  GENERATOR    IN  OBJECT'S   GEN  TABLE
+            <0007>   3205   YP_OS    E&QU       7         ;¥ PAT  POS   OF  OLD SCREEN
+            <0006>   3206   XP  OS   EQU        6         ;X_PAT_POS    OF  OLD  SCREEN
+            <0012>   3207   YP_BK    £QU        18        7Y_PAT_POS    OF  BACKGROUND
+            <0011>   3208   XP BK    £QU        17        ;X_PAT_POS    OF  BACKGROUND
+            <001C>   3209  BK   PIN  EQU        28        ;START   OF  BACKGROUND    PATTERN   GENERATORS                                                                    ‘
+            <0064>   3210  08/  PIN  EQU        100       ;START   OF  OBJECT'S   PATTERN   GENERATORS
+            <0084>   32117 BK   CLR  EQU        132       ;START   OF  BACKGROUND    COLOR  GENERATORS
+   0A87              3212  PUT  MOBILE
+                     3213   ; GET  X AND   Y LOCATIONS,    CONVERT   TO  X  AND  Y PATTERN   POSITIONS    AND  X AND  Y
+                     3214   ; DISPLACEMENTS     (AMOUNT   BY  WHICH  OBJECT   SHIFTED   OFF  PATTERN    POSITION   BOUNDARY)
+   O0A87FD2A8006     3215            LD  IY, (WORK  BUFFER}         ;GET  START   OF  FREE  BUFFER   AREA
+
+wg      —  §                                                                                                       t                                                                                      aici
+                                                                                                        q                                               q                        4            ql           \            \

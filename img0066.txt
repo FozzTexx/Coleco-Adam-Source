@@ -1,0 +1,57 @@
+FILE: EOSABS:EQS    TF         HEWLETT) -PACKARD:   A uOS   OU     {cj  Coleco  1985 Confidenttal                       Sat,   8  Sep   1984,   339  34%      PAGE     6.
+
+LOCATION  OBJECT    CODE   LINE      SOURCE   LINE
+
+                           2357 ;
+                           2358 ;:DEBOUNCE
+                           2359:            This  wil!  check     for  equal  data on two passes,    and  if
+                           2360 ;           the  data  its  the   same  then  the users buffer   is  updated.
+                           2361 ;
+                           2362 :           This  ts  done   by   check  for  equal data, if   the  data  is
+                           2363 ;           different   on   each    call  then the data on   this  call  is
+                           2364 ;           stored  so  that    the   next  call can use this   new  data.
+                           2365 ;           If the  data    is  equa!   then  the data is stored    with  the
+                           2366 ;           ni bit  (bit    7)  set   so that  the next calli  will  yield
+                           2367 ;           different   data    (IE   there  could never be   a match  on  the
+                           2368 :           next  cal)).
+                           2369 ;
+                           2370 :Stack   Usage:
+                           2371 ;   1 word   (subroutine     cali)
+                           2372 ;
+                           2373 ;Input    Parameters:
+                           2374 ;   HL  -  Potnter   to debounce      buffer
+                           2375 ;   IX  -  Potnter   to users     controller   map
+                           2376 ;   A   -  joystick   data
+                           2377 ;   B   -  arm data
+                           2378 ;   C   -  fire  data
+                           2379 ;   D   -  keyboard   data
+                           2380 ;
+                           2361 ;Returns:
+                           2382  ;: HL    - Potnting   to   next   buffer   (entry value +  4)
+                           2383 ;   IX    - Pointing   to   next   data  area  (entry value   + 4)
+                           2384 ;   A  is  changed
+                           2385 ;   No  others   are  modified
+                           2386 ;
+                           2387 ;   Calls   self  as  a nested     subroutine   CHECK
+                           2388 ;
+                           2389 ;Date:
+                           2390 ; 9/24/83       11:14       JKL
+                           2391 ;                                                               |                 °
+                           2392 ;
+    —E28B                  2393 DEBOUNCE  :
+    E288  CDE297           2394           CALL      CHECK                                   ;debounce    joystick   data
+    E28E  79               2395           LD        A,C                                     ;debounce    fire  data
+    E26F  CDE297           2396           CALL      CHECK
+    E292  78               2397           LO        A.B                                     ;debounce    arm  data
+    E293  CDE297           2398           CALL      CHECK
+    E296  7A               2399           LD        A,D                                     ;debounce    keyboard   data
+                           2400                                                             -fall   thru  to  check   (return   imp!ied)
+    E297                   2401 CHECK
+    E297  BE               2402           cP         {HL}                                   ;see  if  data   was the   same  as  last   time
+    E298  2005             2403           JR        NZ,NOT   SAME
+    E29D  F680             2405           OR        80H                                     :set  hi_order    bit  if  same,  so  not  equal    on   next   cal!
+    E29F                   2406 NOT SAME
+    E29F  77               2407           LD         {HL).A                                 ;update   local   debounce   buffer
+    E2A0  DD23             2408           INC        IX                                     :point   to  next  buffer   location
+    E2A2  23               2409           INC       HL             .                        :        in  debounce   buffer   as  wel!
+    E2A3  C9               2410           RET

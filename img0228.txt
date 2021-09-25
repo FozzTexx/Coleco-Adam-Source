@@ -1,0 +1,29 @@
+FILE: EOSABS:EOSTF        HEWLETT-PACKARD: EOSUTIL   (c) Coleco  1983 Confidential                Sat,   8 Sep  1984,  23:42       PAGE  224
+
+LOCATION OBJECT CODE  LINE     SOURCE LINE
+
+                      8714 ;WP              EQU O2000H              ; WHERE TO GO TO START WP
+             <O100>   8715 WP              EQU O0100H              ; WHERE TO GO TO START wP
+                      8716                ;GLB _GOTO_WP
+                      8717                ;EXT MEM_CNFGOO
+             .        8718                ;EXT SWITCH MEM
+    FA94              8719  GOTO WP:
+    FA94 3AFC17       8720        LD      A,{MEM CNFGOO])          ;get configuration byte for 32K ROM  and 32  RAM
+    FAS7 CDFD14       8721        CALL    SWITCH_MEM
+                      8722
+                      8723 :;WP_CODESTART  EQU 2000H
+                      8724 ;wP_SIZE        EQU 3*8*1024
+                      8725 ;WP_DEST        EQU 8000H
+                      8726 ;      LD      A,O                      ; BANK SWITCH IN THE BOOT ROMS
+                      8727 ;      OuT     (7FH]A                   ;  (1 HOPE)
+                      8728 ;
+                      8729 ;      LO      HL,WP_CODESTART          ; WHERE DOES WP SIT IN BOOT ROMS
+                      8730 ;      LD      DE,WP_DEST               ; WHERE WP GOES
+                      8731 ;      LD      BC,WPSIZE                ; HOW BIG WP IS
+                      8732 ;      LDIR                             ; MOVE WP INTO PLACE
+                      8733 ;
+                      8734 ;      LO      A,3                      ; BANK SWITCH IN OS7
+                      6735 ;      OUT     (7FH]A                   ;  (IrKNOW)
+                      8736
+    FAQA C30100       8737        JP      wP                       ; GOTO wP
+                      8738

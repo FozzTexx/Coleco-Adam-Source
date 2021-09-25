@@ -1,0 +1,61 @@
+“}LE:  OS7PRIME:pOs          HEWLETT-PACKARD:    OPERATING   SYSTEM  (c)  Coleco,   1982    CONFIDENTIAL         Fri,  18  May  1984,  16:18       PAGE   10
+
+-OCATION  OBJECT  CODE  LINE       SOURCE  LINE
+
+                         408
+                         409  * MASKABLE   INTERRUPT   VECTORING   SOFTWARE
+                         410
+                         411  * A MASKABLE   INTERRUPT   OCCURRING   IN  THE SYSTEM   IS EQUIVALENT   TO  A
+                         412  * RESTART  TO  38H.  THUS,  THE  MASKABLE   INTERRUPT   IS VECTORED   IN EXACTLY
+                         413  * THE  SAME WAY  AS  THE  VARIOUS  RESTARTS   GIVEN  ABOVE.   IN ORDER  TO  USE
+                         414  * THE  INTERRUPT,   TWE CARTRIDGE   MUST  PLACE   THE  ADDRESS  OF  HIS/HER
+                         415  * INTERRUPT   HANDLER  IN  THE  IRQ INT VECT   LOCATION   IN  CARTRIDGE  ROM.
+                         416
+                         417 *  THE  CARTRIDGE  PROGRAMMER    IS RESPONSIBLE    FOR  SAVING  ANY  REGISTERS
+                         418 *  WIS/HER  OWN  INTERRUPT   HANDLERS   MAY  USE,  AND  FOR RE-ENABLING
+                         419 *  INTERRUPTS   IF WE/SHE   WEEDS  THEM  TO  BE RE-EWABLED.
+                         420
+                         421 *  MASKABLE  INTERRUPT
+   0033  FFFFFFFFFF      422                    HEX                FF, FF,FF,FF,  FF          Filler
+   0038                  423  IRQINTERRUPT                         :38H
+   0038  C3801E          426                    JP                 (1RQ_INT_VECT)
+                         425
+                         426 RRAAKAAEARARARAAREARKEKARE   RANDOM   LIME   GENERATOR    RRRARAARRAKARERARKAKRKARKRKEKREK
+                         427
+                         428 *  (PLACED  HERE  FOR  PURPOSES  OF  CODE  COMPACTION)
+                         429
+                        430  *  Random  mmber   generator   (psuedo)   for  a 16  bit  value
+                        431  *  This  routine  ‘exclusive   or's  the  15th  and  8th bit
+                        432  *  together.    It then  rotates   the entire   quantity   to the
+                        433  *  left and  inserts   the  ‘exclusive  or'ed   bit  into  the rightmost
+                        434  * bit.    Upon  leaving  it stores   the  random  #  in a  specified
+                        435  * memory   location.
+                        436
+                        437  * The  random  number   can be  accessed   from  the  global  location
+                        438  * RAND _NUM  or  the HL  pair  or the  Accumulator.
+                        439
+   0038                 440  RAND GEN :
+   0038  2A73C8         441               LD  =HL,  [RANDNUM)
+   003C  CB7C           442               BIT   7,H
+  0040   2806           443               JR          ON
+                        444                                        715th  bit  is on
+  0042  CB44            445               BIT   O,H
+  0044  2806            446               JR  = 2,SET              ;For  10 quantity   then  set
+  0046   1807           447               JR   =RESET              ;For  11 reset                                                                                                       ,
+  0048                  448  WOTON:
+  0048  CB44            449              BIT   O,H
+  004A  2803            450              JR                        ;For 00  reset
+                        451                                       For   01  fall  through   to set
+  004C                  452  SET:
+  004C  37              453              SCF
+  0040  1801            454              JR    CARRY READY
+  004F                 455  RESET:
+  004F  B87            456               OR    A
+  0050                 457  CARRY  READY:
+  0050  cB15           458               RL    L
+  0052  CB14           459               RL    oH                                                                                                                     ,
+  0054  2273C8         460               LD    {RAND NUM)  ,HL
+  0057  7D             461               LD    A,L
+  0058  C9             462               RET
+  0059                 463  AFTER  RANDOM
+                       464

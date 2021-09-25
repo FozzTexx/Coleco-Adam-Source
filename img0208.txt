@@ -1,0 +1,60 @@
+FILE: EOSABS:EOS TF          HEWLETT-PACKARD:    CONSOUT    (c) Coleco   1983 Confidential                  Sat,   8  Sep  1984,  23:41        PAGE  204
+
+LOCATION OBJECT  CODE    LINE      SOURCE  LINE
+
+                         7945 ;
+                         7946 :NOTE  -  This  table is  in the reverse   order of the chars so
+                         7947 ;         any  additions  to the end  of  the chars goes at the top
+                         7948 ;         of this  table
+                         7949 ;
+    FOIA                 7950 SPCL_VECTOR_TBL:
+    FOIA FESE            7951                    DEFW     MOVERIGHT
+    F81ICFEBS            7952                    DEFW     MOVELEFT
+    FEIE FEB3            79583                   DEFW     MOVEDOWN
+    F820 F673            7954                    DEFW     MOVEUP
+    F822 F710            7955                    DEFW     GOTOXY
+    F824 FEF2            7956                    DEFW     ERASETO_EOS
+    F826 FGEEC           7957                    DEFW     ERASETO  EOL
+    FB28 FEES            7958                    DEFW     MOVEHOME
+    FR2A FED4            7959     -              DEFW     FORMFEED
+    FB2C F683            7960                    DEFW     MOVEDOWN
+    FE2E F664            7961                    DEFW     RETURN
+    F830 F6BS            7962                    DEFW     MOVELEFT
+                         7363
+                         7964 ;
+                         7965 ;    CODE  FROM  HERE TO  END OF CONS OUT   WAS INSERTED AFTER THE
+                         7966 ;    REV.  O6  ROM WAS BURNED  AND  HAS  BEEN COMMENTED OUT TO MAINTAIN
+                         7967 ;    COMPATIBILITY   WITH  THAT ROM.
+                         7968 ;
+                         7969 ;                  END
+                         7970 ;   SKIP
+                         7971 3;
+                         7972 ;;  RETURN_CURSOR    -   Will return   the current cursor position
+                         7973 ;;                       to the caller.    It is in absolute screen
+                         7974 ;;                     - coordinates   (0 based).
+                         7978 3;
+                         7976  ;:;:InputParameters:
+                       . 7977 ;;   None
+                         7978  ;;
+                        7979   ;;Returns:
+                         7980  :;  ODO- X coord  of cursor,  absolute   based on upper left of screen   not window
+                         7981  ;:; E  - Y¥coord  of cursor
+                         7982  ;::
+                         7983  ;                 ;GLB      RETURN_CURSOR
+                         7984  ;RETURN_CURSOR:
+                         7985  ;                  LOD      DE [CURSOR  }
+                         7986  ;                  RET
+                         7987  ;  SKIP
+                         7988  :;
+                         7989  ;; RETURN  RELATIVE  CURSOR   - Returns   the current cursor position   relative
+                         7990  ;;                               to the  window.  0,0 wil! be returned   for the
+                         7991  ;;                              upper    leftcorner of the window.
+                         7992  :;
+                         7993  ;;Input  Parameters:
+                         7994  ;;  NONE
+                         7995  ;;
+                         7996  ;;Returns:
+                         7997  ;;   D   -  xX cursor position   relative  to window
+                         7998  ;;   E—E -   Y¥cussor position   relative  to window
+                         7999  ;;
+                         8000  ;;   Destroys   A

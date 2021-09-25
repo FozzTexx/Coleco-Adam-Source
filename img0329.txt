@@ -1,0 +1,61 @@
+FILE:  OS 7PRIME:pOS          HEWLETT-PACKARD:   PUT  SEMI   (c)  Coleco,  1982   CONFIDENTIAL                    Fri,  18  May  1984,  16:19       PAGE   55
+
+LOCATION   OBJECT  CODE  LINE       SOURCE LINE
+
+    O81E   81            2490   XP_NEG: ADD  A,C                     ;A  := X PAT POS   + X_EXTENT
+    O81F   CB7F          2491           BIT  7,A                     31S A  NEG?
+    0821   CO            2492           RET NZ                       YES,   RETURN
+    0822   87           2493            OR A                         *A =  0?
+    0823   C8           2694            RET  Z                       sRETURN   IF 0
+                        2495    ;XXXKX
+                        2496    ;X.1N.BOUNDS::
+                        2497
+   0824                 2498    X_IN_BOUNDS
+                        2499
+                        2500    ;       IF  (.£,1S, MINUS)           ;1F X_PAT_POS    < 0  , FRAME  BLEEDING   ON  FROM LEFT
+                        2501
+    0824   CB7B        2502                      BIT                 7,€
+    0826   2820        2503                      JR                  Z,ELSE 8
+                       2504                         .
+    0828   79          2505               LD  A,C                      sCALCULATE   AMOUNT  OF  FRAME  ON  SCREEN
+    0829   83          2506               ADD  A,E                     ;A  := X_EXTEWT   + X PAT  POS
+    082A   D5          2507               PUSH  DE
+                        2508    ;XXX
+    0828   FE21        2509               cp  33                       IF   MUMBER  OF  NAMES  > 32
+    082D   3802        2510               JR  C,LT33
+    O82F   3E&20       2511               LD  A,32                     sTHEN  NUMBER   OF NAMES   := 32
+    0831   5F           2512   L133:      LO  E,A                      SMUMBER  OF  NAMES  ON  SCREEN  EACH  ROW
+                        2513    >XXXX
+    0832   1600        2514               LD  D,0
+    0834   05          2515               PUSH  DE                     3;GET COUNT  INTO  IY
+    0835   FOE}        2516               POP  IY
+    0837   D1          2517               POP  DE                      sRESTORE   DE
+    0838   7B          2518               LD  A,E                      ;A  := X PAT _POS
+    0839   09          2519               EXX                          sWOW  ADJUST  STARTING   POINTS   IN FRAME  LIST  AND
+                       2520                                            sWAME  TABLE
+    083A   C5          2521               PUSH  BC                     sSAVE  X AND  Y  EXTENT
+   0838    ED44        2522              NEG                           72'S  COMPLIMENT   OF X PAT  _POS
+   0830    4F          2523               LD  C,A
+   O83E    0600        2524               LD  B,0
+   0840   09           2525               ADO  HL,BC                   sADD  DISPLACEMENT   TO  FRAME  POINTER
+   0841   EB            2526              EX  DE,HL
+   0842   09           2527               ADD  HL,BC                   ;ADD  DISPLACEMENT   TO  WAME  TABLE  POINTER
+   0843   EB           2528               EX  DE,WL
+   0844   C1           2529               POP  BC             .                                                                                                                              ’
+   0845   D9           2530               EXX
+                        2531
+   0846    181C        2532                      JR                  ENDIF  8
+                        2533
+                        2534   ;        ELSE
+                        2535
+   0848                 2536   ELSE 8
+                        2537
+   0848   7B            2538   PF2:       LD  A,E                      ;1S  XPAT  POS   + XEXTENT    > 31
+   0849   81            2539              ADD  A,C
+                        2540   ;          If  (.A,GT,31)                                                                                                              ‘
+                        2541
+   O84A   FEIF          2542                     CP                  31
+   O84C   280F          2543                     JR                  2,ELSE 9
+   084E   3800          2544                     JR                  C,ELSE 9
+                        2545
+   0850   3&20          2546                LD A, 32                     ;SUBTRACT   X PAT POS   FROM  31

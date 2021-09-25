@@ -1,0 +1,61 @@
+FILE: OS  7PRIME:pOS           HEWLETT-PACKARD:    PUT/DEFRD    PUT 08/  (c)Coleco    1982 CONFIDENTIAL          Fri,  18  May  1984,   16:19        PAGE   47
+
+LOCATION   OBJECT  CODE  LINE       SOURCE   LINE
+
+    0667   3&00          2064                      LO                 A,0
+    0669   3273CB        2065                      LD                  [QUEUE HEAD)   ,A
+    066C   3273CC       2066                       Lo                  [QUEUE TAIL],A
+                         2067
+                         2068   *   BUFFER   := TAIL_ADDRESS     := HEAD ADDRESS    :=  LOCATION
+    066F   227301        2069                      Lo                  (BUFFER)  ,HL
+    0672   227300       2070                       LD                  [HEAD ADDRESS}   ,HL
+    0675   2273CF       2071                       LD                  (TAIL ADDRESS)   ,HL
+                         2072
+                         2073   * END  INIT QUEUE
+    0678  C9             2074                      RET
+                         2075
+                         2076   * PROCEDURE    WRITER_
+                         2077
+                         2078   * TAKES  NO  PARAMETERS
+                         2079   * DESTROYS:   ALL
+                         2080
+                         2081   * BEGIN  WRITER.
+                         2082                      GLB                WRITER,
+               <0679>    2083 WRITER,               EQU                $
+                         2084
+                        2085   *    SAVE  DEFERAL   FLAG
+   0679   3A73C6        2086                      LD                  A, (DEFER_WRITES)
+   067C   F5            2087                      PUSH                AF
+                        2088
+                        2089   *    DEFER WRITES    :=  FALSE
+   0670   3€00          2090                      Lo                  A, FALSE
+   067F   3273C6        2091                      LD                 (DEFER   WRITES)   ,A
+                        2092
+                        2093   *    WHILE  QUEUE  TAIL   <>  QUEUE HEAD   DO
+               <0682>   2094  WRTR  WHILE         EQU                 $
+   0682   3A73CC        2095                      LD                  A, (QUEUE TAIL)
+   0685   21735CB       2096                      LD                  HL QUEUE  HEAD
+   0688   BE            2097                      cp                  (HL)
+   0689   2831          2098                      IR                  Z,WRTR_END  WHILE
+                        2099
+                        2100   *      WRITE  DATA  AT  QUEUE  TAIL   TO VRAM
+   0688   2A73CF        2101                      LD                  WL, [TAIL_ADORESS)
+   068E   5E            2102                      LO                  E, (HL)             ;GET  OBJECT POINTER
+   068F   23            2103                      INC                 WL
+   0690   56            2104                      LO                 D, (HL)
+   0691   23            2105                      INC                 HL
+   0692   46            2106                      LD                 B, (WL)              ;GET  PARAMETER
+   0693   23            2107                      Inc                HL
+                        2108
+                        2109   *      PROCESS   OBJECT   IN QUEUE
+   0694  D5             2110                      PUSH               DE
+   0695  DDE1           2111                      POP                 Ix
+   0697  5              2112                      PUSH               WL                  ;SAVE  QUEUE TAIL ADDRESS
+   0696  CD06E3         2113                      CALL               DO PUTOBJ
+                        2114
+                        2115   *      INCREMENT   QUEUE TAIL
+   0698  3A73CC         2116                      LD                 A, (QUEUE TAIL)
+   O69E  3C             2117                      INC                A
+                        2118
+                        2119   *      IFQUEUE   TAIL   = QUEUE  SIZE  THEN
+   O69F  2173CA         2120                      LD                 HL ,QUEUE SIZE

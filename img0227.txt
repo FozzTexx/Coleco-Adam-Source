@@ -1,0 +1,38 @@
+FILE: «© »,ABS:EOS TF           HEWLETT-PACKARD:  EOS UTIL    {c)  Coleco   tt » Confidential)                   Sat,     8  Sep  1984,   23:42         aGE  223
+
+LOCATION  OBJECT   CODE    LINE      SOURCE LINE
+
+                           8679
+                           8680  ; READ OCB RETURN   CODE  (FIRST  BYTE  OF  DCB)
+                           868 1
+                           8682        :GLB      __RD_KBD RET   CODE,   RD  _PR_RET_CODE, RD  TAPE _RET_CODE
+                           8683
+    FA7B                   B684   RD KBD RET  CODE:
+    FA7B  3E01             8685         LD       A,KEYBOARD_ID                ; RESET KBD
+    FA7D  1808             8686         JR       __RD_RET_ CODE
+                           8687
+    FATF                   8688   RD PR_RET CODE:
+    FA7F  3E02             8689         LO       A.PRINTER_ID                 ; RESET PRINTER
+    FAa81 1804             8690         UR       __RD_RET_CODE
+                           8691
+    FA83                   8692   RD _TAPE_RET_CODE:
+    FAB3  3£08             8693         Lo       A, TAPE_ID                   ; RESET TAPE
+    FA85  1800             8694         JR       __RD_RET_CODE
+                           #695                :
+                           8696        ;GLB      __RD_RET_CODE
+                           8697
+    Faas?                  8698  _RD_RET_CODE:
+    FAG7  FDES             8699         PUSH     =si‘TY                       ; SAVE IY
+                           8700
+    FASO  CDF446           8701         CALL     __FINO_DCB                   ; FIND APPROPRIATE  DEVICE
+    FASC  2003             8702         UR       NZ.NO_DCB_FOUND2             ; BAD DEVICE 1.D.
+                           8703
+                           8704                                               ; Z CONDITION  CODE PRESENT |
+                           8705
+    FASE  FO7E00           8706         LD       A. [1V¥+0_COMSTAT)           ; COMMAND/STATUS  BYTE FROM  DCB
+                           8707
+    Fag!                   8708  NO_DCB_FOUND2:
+    Fag!  FDE1             8709         Pop      IY
+                           8710
+    FA93  C9               e711         RET
+                           8712

@@ -1,0 +1,39 @@
+FILE: EOSABS:EOS   TF          HEWLETT-PACKARD:     A_uOS  O00 (c)  Coleco   1983Conf identia}!                Sat,  8 Sep  1984,  23.38         PAGE    38
+
+LOCATION   OBJECT  CODE   LINE       SOURCE   LINE
+
+                          1442  ;
+                          1443  ;   Name:               FILLVRAM
+                          1444  ;
+                          1445  ;   Function:           Fill a VRAM  memory  buffer  with a constant  byte value.
+                          1446  ;
+                          1447  ;   Entry:              A - constant  byte  vaiue to  be written
+                          1446  ;                       DE - number  of  bytes itnthe  VRAM memory  buffer
+                          1449  ;                       HL - starting   VRAM address  to be written  to
+                          1450  ;
+                          1451  ;   Exit:               None.
+                          1452  ;
+                          1453  ;   Registers    used:  AF, C, DE
+                          1454  ;
+                          1455      Size:               ROM - 18 bytes
+                          1456                          RAM - O bytes
+                          1457                       -
+                          1458      Comments:           This version  of  FILL_VRAM  is provided  for stand alone operation.
+                          1459                          This routine  does  a direct  access to  the COLECOVISION I/O ports.
+                          1460
+                          1461      Comparision:        edited for  documentation
+                          1462                          uneeded call   to READREGISTER   taken  out
+                          1463
+                          1464
+    E053                  1465   FILL  VRAM:
+    EO59   F5             1466                     PUSH     AF                         -Save the  data to fill with
+    EOSA   CDEIES         1467                     CALL     SET_WRITE                  ;Sets the  ctrl port data and
+    EOSD   E1             1468                     POP      HL                         ;popping  AF into HL to restore the  fill  data
+    EOSE                  1469  FILL:     .                                            ;repeat
+                          1470                                                         ;  get back  a copy of the saved constant
+    EOSE   ED61           1471                     ouT      {[C],.H                    ;  write  the constant out to the VRAM  buffer
+    EO6O   18             1472                     DEC      DE                         ;  byte  count = byte count - 1
+    EOG1   7A             1473                     LD       A,O                        suntil byte  count = O
+    E062   B83            1474                     OR       E
+    EO63   20F9           1475                     JR       NZ,FILL
+    EO65S  C9             1476                     RET                                 ;all done

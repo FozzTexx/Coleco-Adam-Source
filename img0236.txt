@@ -1,0 +1,8 @@
+FILE: EQSABS:EOS TF         HEWLETT-PACKARD:  EOSBLK      (c)  Coleco 1983  Confidential                    Sat,   8  Sep  1984,  23:42      PAGE  232
+
+LOCATION OBVECT  CODE   LINE     SOURCE LINE
+
+                        9058
+    FBIA C9            9059         RET
+
+ asaeHa          ae        ae   at       See               a        aS      Ss         Se     SF        SF       Se        Sw       Ww              eS        FD

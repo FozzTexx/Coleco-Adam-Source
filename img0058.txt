@@ -1,0 +1,35 @@
+FILE: EQSABS:EOS   TF          HEWLETT-PACKARD:  A_u0S  00   (c) Coleco   1983Confidential                    Sat,  8 Sep 1984,  23.39         PAGE    54
+
+LOCATION  OBJECT   CODE   LINE      SOURCE LINE
+
+    E100                  2056  LOOP_EVERYSPRITE:
+                          2057
+                          2058  *                Index  to sprite   with the next  highest  priority
+                          2059
+    E1IDO 7E              2060             LD    A, [HL]            ;Get current sprite   as defined  by the  priority table
+    E1D1  87              206 1            ADD   A.A                ;*2 Multiply by  an  attribute  entry (4)
+    —E1D2 87              2062             ADD   A.A                ;*4
+                          2063
+    E1D3  23              2064             INC   HL                 ;Index to next  location   in priority table
+    E1ID4 E€5             2065             PUSH  HL                 ;Save for next  sprite
+                          2066
+    E1D5S 6F              2067             LO    L.A                ;Offset into the  Local  Sprite  Table by  the current priority
+    E1D6  2600            2068             LO    H,O
+    E1Ds  19              2069             ADD   HL,DE
+                          2070
+                          2071
+    E1D9  78              2072             LO    A.B                ;Save sprite count   tm Acc.
+    E1DA  O604            2073             to    8.4                ;Set count for  write  to VRAM
+                          2074                                      ;C has port address
+                          2075                                      ;HL has the pointer   to a sprite’s  attributes
+    E1DC                  2076  LOOPEVERY BYTE
+    E1DC  EDAS3           2077             OUTI                     ;Output a byte
+    EIDE  OO              2078             NOP                      ;Wait for VDP to  catch  up  (worst case)
+    E1DF  OO              2079             NOP
+    E1EO  20FA            2080             JR    NZ,LOOP_EVERY  BYTE
+                          2081
+    EI1E2 47              2082             iD    B,A                ;Restore sprite  count  to 8B register
+    EIE3  Ef              2083             POP   HL                 ;Restore index  into  the priority  table
+    E1E4  10€A            2084             DJNZ  LOOP_EVERY SPRITE    ; If more sprites   left then  loop back
+                          2085
+    E1E6  C9              2086             RET                      ;Else exit

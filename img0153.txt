@@ -1,0 +1,61 @@
+FILE: -ELoABS:EOS  TF         HEWLETT-PACKARD:      UTILS        (c)  Coleco    19.4  Confidential}                       sat,    8 Sep  1984,  23:40         rAGE  149
+
+LOCATION  OBJECT   CODE   LINE       SOURCE  LINE
+
+                          G1IODKe eeee eae aKa               EKER    EERE    ETRE   EERREE  EKER EERE      ERE       RR  RR
+                          C104 Hee   eeeee RE EERE    EEE  EERE     EEE   EEE    ERE REEREE    EEE REE  ER EKKO   REE   EERE RE EEE
+                          6105 «
+                          6106 *
+                          6107 *        TRIM  FILE    RELEASES   THE  UNUSED    BLOCKS  IN  THE  SPECIFIED    FILE
+                          6108 *
+                          6109 *«  NOTE:    IF  FILE   BEING   TRIMMED   IS  THE   LAST FILE,   THE UNUSED    BLOCKS    ARE
+                          6110 *            ALLOCATED     AS PART   OF  THE  REMAINING   AVAILABLE    BLOCKS    (RETURNED
+                          6111 *            TO  THE   HOLE).
+                          6112 *
+                          6113 *        INPUT:     A         DEVICE    ID
+                          6114 *                 DE          POINTER    TO  FILE   NAME STRING
+                          6115 *
+                          6116 *        OUTPUT:
+                          6117 *                   CONDITION    FLAGS
+                          6118 *                   Z:        NO   ERRORS
+                          6119 *                 NZ:          ERRORS
+                          6120 *                             A  -  ERROR  CODE
+                          6121 *
+                          F122 Seeee  eae KKK   EREREKE   EEE   EEE REKEREK  EERE    REET EEE   EEEEEKER  EERE  ERE  EE EERE RE KEEED
+                          G1QD  Hee   SHEESH          EEE  HERES  EEE EERE   EEE  EREEERE  ETEKE RHEE  EERE  EE EE EEEREE  EEEKE DEHS
+                          6124
+                          6125 ©       ;GLB       __TRIM_FILE
+                          6126              :
+                          6127          EXT        FCB_BUFFER
+                          6128         sEXT       NEW   HOLE  SIZE
+                          6129         sEXT       HOLE  FILE   NAME
+                          6130
+    F241                  6131 __TRIM_FILE:
+                          6132
+    F241   E5             6133          PUSH       HL
+    F242   DDES           6134          PUSH       IX
+    F244   FDES           6135          PUSH       IY                      .
+    F246   DS             6136          PUSH       DE
+    F247   FS             6137          PUSH       AF
+                          6138
+    F248   21FDBA         6139          LD         HL,.FCB BUFFER
+                          6140
+    F24B   CDE61B8        6141          CALL      __QUERY_FILE                     ; FIND  FILE  IN DIRECTORY
+                          6142
+    F24E   C2F31A    |    6143          JP         NZ,ERROR                        ; HAD TROUBLE   FINDING    IT
+                          6144
+    F251   OD21FOBA       6145          LO         IX,FCB_BUFFER                   ; POINT  TO  THE BUFFER
+                          6146
+    F255   DOSE13         6147          LD         E,[IX+FCB   USED  LENGTH]
+    F258   005614         6148          LD         D,[IX+FCB_USED_LENGTH+1]           ;GET  THE  NO OF  USED    BLOCKS
+                          6149
+    F25B   DD6E11         6150          LO         L,({IX+FCB_  MAX_LENGTH]
+    F25E   DD6612         6151          LD         H,[IX+FCB   MAX   _LENGTH#+1]      >GET  THE  NO ALLOCATED
+                          6152
+    F261   B7             6153          OR         A
+    F262   ED52           6154          SBC        HL ,OE                          - FIND  OUT  HOW MANY   EMPTY
+                          6155
+    F264   7C             6156          LD         A,H
+    F265   B5             6157          OR         L
+                          6156
+    F266   CAF311         6159          JP         Z,.NQ_7RIM                       -ArltYSen

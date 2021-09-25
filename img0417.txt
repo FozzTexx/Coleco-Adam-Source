@@ -1,0 +1,61 @@
+FILE: OS 7PRIME:pOS          HEWLETT-PACKARD: EXPANSION ROUTINES (c) Coleco, 1982  CONFIDENTIAL      Fri,  18  May  1984,  16:22       PAGE  143
+
+LOCATION  OBJECT  CODE  LINE      SOURCE LINE
+
+                        7085
+                        7086  * THE ROUTINES IN THIS MODULE TAKE A SINGLE 8-BYTE BLOCK AS INPUT AND
+                        7087  * PRODUCE 4 8-BYTE BLOCKS AS OUTPUT. THEY PERFORM A 2-TO-1 EXPANSION
+                        7088  * AND A SIMPLE QUADRUPLING OPEATION RESPECTIVELY.
+                        7089
+                        7090                           ;
+                        7091
+                        7092                  GLB             MAGNIFY
+                        7093                  GLB             QUADRUPLE
+                        7094  * NAMES OF ENTRY POINTS
+                        7095
+                        7096
+                        7097
+                        7098
+    1EAB                7099  MAGNIFY                         ; PERFORM A 2-TO-1 EXPANSION ON AN
+                        7100                                  ; 8-BYTE BLOCK OF DATA.
+                        7101
+                        7102                                  ; SOURCE POINTER IN HL, DESTINATION
+                        7103                                  ; POINTER IN DE.
+                        7104
+                        7105                                  ; DESTROYS IX,1Y,AF,B8C,DE,WL
+                        7106                                              |
+               <OOOA>   7107  BYTECOUNT       EQU             BC
+               <OO0E>   7108  SOURCE          EQU             Ix
+               <O00F>   7109  DESTINATION     EQU             ly
+                        7110  * STANDARD NAMES FOR REGISTERS IN THIS ROUTINE
+                        7111
+                        7112  * BEGIN
+    1EAB  E5            7113                  PUSH            HL              ; SET UP POINTERS
+    TEAC  DDE1          7114                  POP             SOURCE
+    TEAE  05            7115                  PUSH            DE
+    1EAF  FDE1          7116                  POP             DESTINATION
+                        7117
+                        7118  *  BYTE COUNT  := 8
+    1EB1  010008        7119                  LD              BYTECOUNT,8
+                        7120
+                        7121  *   REPEAT
+    1EB4                7122  MAG_LOOP
+                        7123
+                        7124  *     EXPAND A BYTE FROM SOURCE
+    1E84  DD7E00        7125                  LD              A,[SOURCE+0)
+    1E87  DD23          7126                  INC             SOURCE
+    1EB9  57            7127                  LO              D,A
+    1EBA  1£04          7128                  LD              E,4
+    1EBC  CB17          7129  EXP_1           RL              A               ; DOUBLE BITS IN HIGH
+    1EBE  CB14          7130                  RL              H               ; ORDER NIBBLE
+    1ECO  CB12          7131                  RL              D
+    1EC2  CB14          7132                  RL              H
+    1EC4  10            7133                  DEC             E
+    1ECS  205           7134                  JR              WZ,EXP1
+    1EC7  1604          7135                  LO              E,4
+    1EC9  CB17          7136  EXP2            RL              A               ; DOUBLE BITS IN LOW
+    1ECB  CB15          7137                  RL              L               ; ORDER NIBBLE
+    1ECD  CB12          7138                  RL              D
+    1ECF  CB15          7139                  RL              L
+    1ED1  1D            7140                  DEC             E
+    1ED2  20F5          7141                  JR              NZ,EXP2

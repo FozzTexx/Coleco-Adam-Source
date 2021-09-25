@@ -1,0 +1,44 @@
+                                                 EES
+as       eS      ese       See                  eS       SE       eee                        CUeeElUlUeElUlUcaeetlUlUcreselUlLreelOUelOellUeelle
+
+           \
+     FILE: .+5ABS:E0S_TF            HEWLETT-PACKARD:      EQS START    (c) Coleco    .-a4  Confidential                       Sat,    8 Sep  1984,  23:41           .  «aE  209
+
+     LOCATION  OBJECT   CODE   LINE        SOURCE  LINE
+
+                               8129                     ;GLB      __EOS START
+         F832                  8130    EOS  START:
+         F832  31FESS8         8131                      LD       SP,EOS STACK                    ;  SET THE  STACK
+                               8132
+         F835  010147          8133                      LD       BC,CLEAR_RAM_SIZE               ;  Clear  EOS ram
+         Fe38  11F061          8134                      LD       DE .CLEAR_RAM_START+1
+         F838  21FD60          8135                     LD        HL,CLEAR  RAM START
+         FQ3E  AF              8136                     XOR       A
+         FE3F  77              8137                     LO        {HL],A
+         F840  EDBO            8138                     LDOIR
+                               8139
+         F842  3E0S            8140                     LD        A,EOS REV                       ;  init  REV_NUM
+         F844  32FD60          8141                     LD        [REV_NUM],A
+                               8142
+         F847  COFDI1          8143                     CALL      PORTCOLLECTION                  ;  collect  the  port  addresses    from OS7
+                               8144
+         F84A  CDOFDS3         8145                     CALL      TURN_OFF_ SOUND                 ; KILt   SOUNDS
+                               8146
+         FB4D  3E00            6147                     LD        A.O                             ; CLEAR   VRAM
+         F84F  210000          8148                     LD        HL,O
+         F852  114000          8149                   . tO        DE,16*1024
+         F855  CDFD26          8150                     CALL      FILLVRAM
+                               8151
+         FESS  3AFCIS          8152                     LD        A,[MEM CNFGO1])                 ;get  the  data  for configuration     1 (64K  RAM)
+         F8SB  CDFD14          8153                     CALL      SWITCH_MEM                      ;select   this configuration
+                               8154  ;
+                               8155  ;   EOSINIT   WILL   PERFORM  THE 6801/280    SYNCH  _UP,    PERFORM   A ROLL CALL
+                               8156  ;   POLL  ON THE  NET,   AND ESTABLISH  THE   DCB’‘S
+                               8157  ;
+         FESE  CDOFSFE6        8158                     CALL      __HARD_INIT
+                               8159  ;
+                               8160  ;   setup  the FCB’‘s
+                               8161  ;
+         F861  110400          8162                     LD        DE,THREE 1KBLKS                 ; START   ADDRESS  OF  THREE   1tK BLOCKS
+         FB64  210390          8163                     LD        HL,FCBS                         ; START   AODRESS  OF  3  FCB  BLOCKS
+         F867  COEEEA          8164                     CALL                                      ; TELL  THE  FILE  MANAGER

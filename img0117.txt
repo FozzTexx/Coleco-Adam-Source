@@ -1,0 +1,30 @@
+FILE:'. 2.ABS:EOS_TF       HEWLETT-PACKARD:   OPENS     (c) Coleco 1. s Confidential                        Sat,   8  Sep  1984,  23:40       rrat  119
+
+LOCATION OBJECT CODE   LINE     SOURCE  LINE
+
+    EB4F CDEGS1        4463          CALL     __SET_FILE
+          |            4464
+    EBS2               4465 CLOSE3
+    E852 00361800      4466          LD       [IX+FCB_MODE],MODE_UNUSED ;MARK  THE  FCB  EMPTY
+                       4467                       ,
+    EBS6 C1            4468          Pop      Bc              ;RESTORE
+    REGISTERS
+         Of            4469          PoP      DE
+   -EBS8 E1            4470  -       Pop      HL
+    EBS9 DOE!          4471          PoP      IX
+    EBSB CO            4472          RET
+    EBSC               4473 C_ERROR                  |
+    EBSC C1            4474  Ct      PoP      BC              ;RESTORE REGISTERS
+    EBSD D1            4475          PoP      DE
+    EBSE £1            4476          PoP      HL
+    EBSF ODE!          4477          Pop      Ix                                                                                                         '
+    EB61 3E09          4478          ‘Lo      A,BAD_FNUM_ERR  ;SET THE ERROR
+    E863 B7            4479          OR       A               :SET THE CONDITIONS
+    E864 C9            4480          RET            :
+    EB6S               4481 C_ERROR2       |
+    EB65 C1            4482          PoP      BC              ;RESTORE REGISTERS
+    EB66 D1            4483          PoP      OE
+    EB67 Et            4484          POP)   ssHL
+    E868 ODE!          4485          PoP      IX
+    EB6A B7            4486          OR       A               ;SET CONDITIONS
+    E868 C9            4467          RET .

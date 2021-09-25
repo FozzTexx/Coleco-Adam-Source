@@ -1,0 +1,8 @@
+       f
+                                                               wv
+FILE: . JABS:E0OTF       HEWLETT-PACKARD:SOUND EQU€S(c) Coleco, 202   CONFIDENTIAL         Sat.  8 Sep 1984, 23:39       .é  65
+
+LOCATION OBJECT CODE LINE    SOURCE LINE
+                     2515 ;@eeCHI             EQU        010000008
+                     2517 ;ee@CH3             EQU        110000008
+                     2518

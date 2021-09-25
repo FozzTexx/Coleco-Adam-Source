@@ -1,0 +1,61 @@
+FILE:  OS 7PRIME:pOS            HEWLETT-PACKARD:    TIME  MANAGER    (c)  Coleco,   1982   CONFIDENTIAL                  Fri,  18 May   1984,  16:20        PAGE    89
+
+LOCATION    OBJECT  CODE  LINE        SOURCE  LINE
+
+                          4310    ;           RES  LONG,   (HL)                              sReset   repeat  bit   just  in case
+     1030                 4311    FREEEXIT:                                                 ;Return
+     1030   C9            4312                RET
+                          4313
+                          4314
+                          4315    ;Procedure  Request   Signal
+                          4316    ;WL pair has   length  of  timer
+                          4317    ;Acc has  zero  for  repeating   timer   any  other  value   for  a non repeating      type
+                          4318    ;Signal number   is  returned   in  the  Accumulator
+                          4319    ;           COMN
+                          4320    ;REPEATSIG  CODE:
+                          4321    ;           DEFS  1
+                          4322    ;TIMERLENGTH:
+                          4323    ;           DEFS  2
+                          4324
+                          4325                PROG
+                          4326
+    103E                  4327   REQUEST SIG  PARAM:
+    103€   00020001       4328                DEFW  2,1,2
+    1042   0002
+                          4329
+    1044                  4330   REQUEST SIGMALQ:
+    1044   01103€         4331                LD    8C,REQUEST   SIG  PARAM
+    1047   11738F         4332                LD    DE,REPEAT   SIG  CODE
+    104A   CD0098         4333                CALL  PARAM_
+    1040   2A73C0         4334                LD  =soML,(TIMER  LENGTH)
+    1050   3A738F         ats,                LD    A, {REPEAT  SIG  CODE)
+                          4336                    :
+    1053                  4337   REQUEST SIGNAL
+    1053   4F             4338                iD  : C,A                                     ;Put  Repeat   Code   into  C  register
+    1054   €8             4339                EX    DE,HL                                   ;Put  length   of  timer   into  DE
+    1055   2A7303         4340                LD =  WL, (TIMER  TABLE  BASE)                ;Get  Timer   Base  Address
+    1058   AF             4341                XOR   A                                       sInit   offset   to  First  Table   value
+    1059   47             4342                iD    =B,A
+    105A                  4343   TIMER1:
+    105A   CB6E           4344                BIT  FREE,  (HL)                              s;See if  current    timer  free
+    105C   283E           4345                JR  = 2,WEXT_TIMER1                           sIf  not  go  get  the  next   timer
+    105€   E5             4346                PUSH  HL
+                          4347   ;            PUSH  AF
+    105F   7E             4348                LD    A, CHL)                                                                                                                                             ,
+    1060  £610            4349                AND   10H
+    1062   F620           4350                OR    20H
+    1064   77             4351                LD    {WL),A
+    1065  AF              4352                XOR   A
+                          4353   ;            POP   AF
+    1066  B2              4354                oR   OD
+    1067  2008            4355                JR    WZ,LONG  TIMER
+                          4356   ;            RES   FREE, (HL)                              ;Reset   Free  bit
+                          4357   ;            oR    O                                       ;Check   for  zero
+                          4358   ;            JR             TIMER                          ;If  non_zero   then   its  a  long  timer
+                          4359   ;            RES   REPEAT,  (HL)                           ;Set  for  a  NON Repeating     timer                                                 ‘
+                         4360    ;            RES LONG,   (HL)
+                          4361   ;            LD    =A,C                                    ;Check   for  a short   repeating    timer
+   1069   B1             4362                 OR    oC
+   106A   2802            4363                JR          A  REPEAT  TIMER                  ;Don't   reset  repeat   bit   in mode  byte   if  non_repeating
+    106C  CBF6            4364                SET   REPEAT,  {HL}                           -Set  repeat   bit
+    106€                 4365    NOT A REPEAT  TIMER:

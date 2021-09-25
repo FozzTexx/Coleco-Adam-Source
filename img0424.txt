@@ -1,0 +1,61 @@
+“ILE:   OS7PRIME:pOS           CROSS  REFERENCE   TABLE                PAGE   150
+
+-INE#  =   SYMBOL           TYPE      REFERENCES
+
+ 7396    ACTIVATE             A  242
+ 7347    ACTIVATEP            A  248
+ 1610    ACTIVATEQ            P  1609, 7347
+ 1627    ACTIVATE_            P  1587, 1683, 7396
+ 1607    ACTIVATE  P          P  1611
+ 1915    ACT OSPRI            P  1648
+ 1917    ACT_1SPRT            P  1650
+ 1662    ACT _CMPLX           P  1652
+ 1903    ACT MOBILE           P  1646
+ 1694    ACT SEMI             P  1644
+  884    ADDB16               P  703,883
+ 5152    ADDR ADJ             pP 5172
+ 5171    abd8                 P  5152
+ 6141    ADJUST  COUNT    =   P6145
+ 6130    ADJUST  INDEX           6134
+ 3723    ADEXIT               p  3719
+ 3718    AD_LP                pP 3721
+  463    AFTER  RANDOM   =    P
+   85    ALEN                 A
+ 1052    ALL_OFF              P 992,  7385
+ 6797    ALL_X                P
+  492    AMERICA              P  236
+   87    APS                  A
+   88    APSV                 A  733
+  964    AREA SONG   IS          963,1216
+4504     ARM                  A  4856,5027
+ 5008    ARM DBNCE            P  4859
+ 5037    ARM EXIT             P  5022,5028,5033
+4522     ARM_MASK             A  4746,5011
+4516     ARM_OLD              A  5013,5021,5034
+5024     ARM_REG              P  5020
+5030     ARM ST1              P  5016
+4517     ARM STATE            A  5014,5026,5036
+  499    ASCII_TABLE          P  254
+5458     ASCII_TBL            P  499,5080
+5382     ASC_TABLE            P  5681
+   86    ASTEP                A  1373, 1445, 1464
+   79    ATN                  A  1370
+  724    ATWSWEEP             P 721,  1229
+ 1038    BI                   P  1040
+6065  BASE    FACTORS         P  6049
+3211     BKCLR                A  3384,3413,  3600,3658,  3744  , 3833
+3209     BKPIN                A  3351, 3413, 3547, 3650,  3735,  3744, 3833
+  368    BOOT UP              P
+ 1980    BUFFER               D  2021,2069,2129
+ 7107    BYTE COUNT           S
+2689   CALC   OFFSET          P  2480, 2644
+  457    CARRY READY          P  454
+  261    CARTRIDGE            A  260,534
+6042   CASE   OF  CLRI10      P  6039
+6035     CASE OF  COLOR       P  6023
+6025     CASE OF GEN          P  6021
+6032     CASE OF  GEN10       P  6029
+5705     CENTER PRT           P  5234,5244
+   7S    CH                   A
+   99    CHO                  A
+   90    CHOEND               A

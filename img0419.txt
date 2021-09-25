@@ -1,0 +1,14 @@
+FILE: OS 7PRIME:pOS        HEWLETT-PACKARD:  EXPANSION  ROUTINES (c) Coleco,  1982   CONFIDENTIAL         Fri,  18  May  1984,  16:22      PAGE  145
+
+LOCATION  OBJ&CT CODE  LIWE     SOURCE LINE
+
+    1EFB               7199 SKIPZ22
+                       7200
+                       7201 *   UNTIL BYTECOUNT   = 0
+    1EFB  79           7202                  Lo               A,c
+    1EFC  BO           7203                  OR               8
+    1EFD  20€F         7204                  JR               WZ,QUADLOOP
+                      7205                              |
+                       7206 * END
+    1EFF  C9           7207                  RET
+                       7208  PROG

@@ -1,0 +1,6 @@
+FILE: EOSABS:EOS TF          HEWLETT-PACKARD:    A_uO0S00   (c)  Coleco  1983 Confidential                     Sat,   8  Sep  1984,  23:38       PAGE   50
+
+LOCATION OBJECT  CODE   LINE      SOURCE  LINE
+
+    €183 F9             1916                     LD       SP.HL             -and restore it
+    E1864C9             1917                     RET                         >;and back to  caller

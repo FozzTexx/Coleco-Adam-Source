@@ -1,0 +1,43 @@
+FILE: OS 7PRIME:pOs            HEWLETT-PACKARD:    LOAD  NEXT NOTE (c)  Coleco,   1982   CONFIDENTIAL               Fri,  18 May 1984,  16:19        PAGE   36
+
+LOCATION   OBJECT  CODE  LIWE        SOURCE  LINE
+
+    0440   007402         1505           LD  {IX+#2),H
+                          1506  ;        * move  new  note  data and  fill  in bytes   where  necessary
+    0450   28             1507           DEC  HL                     point   WL back   to Ist  ROM  data  to  move,   APS
+    0451  DDE5            1508           PUSH  IX                    point   DE  to destination:    bytes  9   - 3
+    0453   FDE1           1509           POP  IY                     ;1Y¥ := addr  byte  0  [and  DE =  6)
+    0455   1£09          1510            LD E,9                     DE    := 9
+    0457   FD19          1511            ADO  IY,DE                 slY  :=  addr  byte  9  [APS]
+    0459   FDES          1512            PUSH  IY
+    0458  01             1513            POP  DE                    ;DE  :=  addr  APS
+    045C  010007         1514            LO BC,7                    smove   7 bytes
+    045F  E088           1515            LDOR
+                         1516   ;        * modify   byte 0  basis header  new  note
+    0461  DOES           1517   MOOBO    PUSH  IX                   ;pt  WL  to byte  0
+    0463  £1             1518            POP  HL
+    0464  Fi             1519            POP AF                     3A  := header   new  note
+    0465  C1             1520            POP  BC                    38  := SONGNO
+    0466  FEFF           1521            CP  INACTIVE               stest  for  inactive   [song   over,  as  detected   above]
+   0468   C8             1522              RET  2
+   0469   57             1523            LO D,A                     ssave  header   in D
+   046A   E63F           1524            AND 3FH                    sRid  channel   bits
+   046C   FEO4           1525            CP 04                      ;Special   effect
+   046E   2002           1526            JR WZ,L20  LOAD NEX
+   0470   063€           1527              LD  B,62
+   0472                  1528  120  LOAD NEX:
+   0472   7A             1529            iD A,D                     srestore   A to  header
+   0473   E6CO           1530            AND OCOH                   sA  := CH#  000000
+   0475   B80            1531            OR B                       ;A  := new  CH#  | SONGNO
+   0476   77             1532            LD {HL} ,A                 ;store  back  in  byte  0
+                         1533  ;         ENDIF
+   0477   C9             1534  119       RET
+   0478                  1535  DE_TO  DEST                         ;DE passed   = offset   from  byte  0, RETed    w addr  byte offset
+   0478   DDES           1536            PUSH  IX
+   047A   FDE1           1537            POP IY                     ;1Y  := addr  byte  0  [and  DE  = offset)
+   047C   FD19           1538            ADO IY,DE                  slY  := addr  byte  0  + offset
+   047E   FDES           1539            PUSH  IY
+   0480  01              1540            POP DE                     ;DE  := addr  of  destination   byte   in  SxDATA
+   0481   C9            1541             RET
+                        1542   ;         END ;LOADNEX
+                        1543    PROG

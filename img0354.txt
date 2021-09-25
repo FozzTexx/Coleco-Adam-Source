@@ -1,0 +1,37 @@
+FILE:O7PRIME:pOS    HEWLETT-PACKARPUTMOBILE(c)Coleco1982 CONFIDENTIAL         Fri,  18May 1984, 16:20   PAGE  80
+
+LOCATIOOBJECTCODELINE    SOURCLINE
+
+   078           3843END23   sENDIF
+   0€7878       3844         LOA,E              ;GETFIRSTOBJECT'PATTERNBYTE
+   OE7C87       3845         ORA                gARETHEREANY‘1'BITS?
+                3846  ;      IF (PSW,1S,NZERO)
+   OE7D2808     3847         JR2,END24
+   OE7FDD7E00   3848          LDA, (1X+0]         7;GEBACKGROUNCOLOGEN
+   OE82Al       3049   —.     AND C               ;MASKOUTCOLOR1
+   0€83BO       3850          OR B                ;ADDOBJECCOLOR1
+   0E84DD7700   3851          LD [IX+0,A          ;UPDATCOLORGENERATOR
+   0€87         3852 END24   sENDIF
+   0€877C       3853         LDA,H              ;SAMEFORMIDDLEBYTE
+   OE8887       3854         ORA
+        .       3855 ;       IF(PSW,1S,NZERO)
+   O0E82808     3856  |      JRZ,END25
+   OE8BDD7E08   3857          LD A,[1X+8)
+   OEBEAi       3858          AND C
+   OESFBO       3859          OR B
+   0€90DD7708   3860          LD [1X+8,A
+  0E93         _3861 END25   sENDIF
+   0E937D    .  3862         LDA,L              RIGHT HANDBYTE
+   0E9B87       3863         ORA
+                3864 ;       IF(PSW,1S,NZERO)
+   0E92808      3865         JR2,END26
+   0G9DD7E10  . 3866          LD A,(1X+16)
+   OE9Al |      3867          AND C
+   OE9BO        3868          OR B
+   OE9007710    3869          LD (1X+1,A)
+   COE9F        3870 END26   ENDIF
+   OE9DDE1      3871         POPIX              RESTOREBACKGROUNPOINTER
+  OEA1      .   3872 END2=; ENDIF                |
+   OEAC9        3873       RET
+                3874 ;     END          ;PUMOBILE
+                3875  PROG

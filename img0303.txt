@@ -1,0 +1,61 @@
+FILE: OS 7PRIME:pOS           HEWLETT-PACKARD:   SOUND  MANAGER   (c)Coleco,   1982   CONFIDENTIAL                Fri,   18 May  1984, 16:19       PAGE   29
+
+LOCATION   OBJECT  CODE  LINE       SOURCE LIWE
+
+    0289   E6C0           1184                AND  OCOH                   3B7  - B6    in A   = CHA
+    0288   07             1185                RLCA                        sform  CH#    * 2   inA,    i.e.,  the  offset   from
+    028C   07            1186                 RLCA                        ;PTR_TO.S   ON 0    of  the   channel   data  area  pointer
+    0280   07            1187                 RLCA                        sthat  points    to  channel     Cha
+    O2BE   5F            1188                 LO £,A                      sadd  offset   to  addr  of  PTR  TO   SOw  0
+    O2BF   1600          1189                 LD 0,0
+    02C1   217022        1190                 LD WL,PTR_TO.S   Ow  0
+    02C4   19            1191                 ADD  WL,DE                  ;HL  points   to  proper   channel     data  area  pointer
+    02C5  ODES           1192                 PUSH  IX                    sstore   this  song  data  area's    byte   0   addr  there
+    02C7  01             1193                 POP  DE
+    02c8   73            1194                 LD  (WL),€
+    02C9   23            1195                 INC  WL
+    O2CA   72            1196                 LD  [WL],D
+                         1197   ;           ENDIF
+                         1198   ;           * point  IX  to byte  0 next  song  data  area
+    O2CB   1E0A          1199   L9          LD €,10
+    02CD   1600          1200               LD 0,0
+    O2CF  0019           1201               ADD IX,DE
+    02D1   1808          1202             JR L2 ;REPEAT   LOOP
+    0203                 1203  DOWE SNDMAN
+    02D3  DDE!           1204           POP IX                     srestore   IX
+    0205  C9             1205           RET
+                         1206   ;Keeeeekeeeaeeeeenerereeeere
+                         1207   ;*.  PROCESS DATA_AREA       *
+                         1208   ;SKSTAAATAREAAEARARKAAAREAARARKE
+                         1209   ;.COMMENT )
+                         1210   ;See Users' Manual  for  description
+                         1211   Terminology:  SFX  = address  of  sound effect   routine
+                         1212   ;)
+                         1213           GLB PROCESS DATA_AREA,EFXOVER
+                         1214          ;EXT LOADNEXT  WOTE  ,ATN_SWEEP, FREQ SWEEP
+    0206                 1215  PROCESS DATA AREA
+    02D6  CDOIE9         1216           CALL AREASONG  IS          ;return  area's   SONGNO   in A  [and  addr   SFX  in HL)
+    02D9  FEFF           1217           CP INACTIVE                stest for   inactive  code
+    02D8  C8             1218           RET 2                      sRET, no  processing    if area   inactive
+                         1219  ;          * if special   effect,  call it  to process   the  data   area
+    O20C  FESE           1220             cP 62                      ;test  for  special   sound  effect
+                         1221  ;          IF (PSW,1S,ZERO)             ;data  area  used  by  sound   effect
+    O2DE  2006           1222             JR NZ,L10                                                                                                                                        ’
+    O2E€0 1€07           1223               LO E,7                       spt  HLto   SFX+7,  starting    adr  of  the  effect's   code
+    02E2  1600           1224               LD 0,0
+    02E4  19             1225               ADD HL,DE
+    O2E5  £9             1226               JP CHL)                      ;do  1  pass  thru  effect,   RET   from  effect
+                         1227  ;          ENDIF
+                         1228  ;            * else  process  a non-effect   note
+    02E6  CDO12F         1229  110          CALL ATN SWEEP               ;process   atn  sweep   data,   if any
+    02E9  COOOFC         1230               CALL FREQ SWEEP              ;proc   frq  sweep  data,   if  any,  &  note  dura  timer  s
+                         1231  ;            IF (PSW, 1S,ZERO)            :note   is over
+    O2EC  2011           1232               JR WZ,L12
+    O2EE  0D7£00         1233  EFXOVER        LDA,  (1X+0)               ;A  :=  CH#  | SONGNO   this  note                                                            .
+    O2F1  F5             1234                 PUSH  AF                   ssave   on stack
+    O2F2  CDO35F         1235                 CALL  LOAD NEXT NOTE       ; toad data   for  next  note
+    O2F5  C1             1236                 PoP BC                     ;B  := CH# |   SONGNO   previous   note
+    02F6  DD7E00         1237                 LD A, (1X+0)               ;A  := CH#  |  SONGNO   new  note   [may  be  inactive]
+    02-9  B8             1238                 cP B                       ;check   against   new  note's   CH#  |  SONGNO
+                         1239  ;              1F (PSW,1S,NZERO}          s;change  to/from   tone/efx/noise
+    O2FA  2803           1240                 JR Z,L12

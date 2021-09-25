@@ -1,0 +1,61 @@
+ FILE:   .uSaBS:£0S    TF           CROSS   REFERENCE    TABLE                PAGE  25.
+
+ LINE#      SYMBOL              TYPE       REFERENCES
+
+  1169     PCB_SYNC2              A    1170, 8464
+  1170     PCB_SYNC2_ACK          A   8487
+  1178     PCB WAIT               A    1179
+  1179     PCB WAIT   _ACK        A
+   619     PERSONAL   _DEBOUN     A   2321
+   328    PLAY_IT                 A
+   312     POLLER                 A
+  2329    POLL  CONTROLLER        A   2355
+   277    PORT   COLLECTION       A   8143
+   839    PORT_TABLE              A   1971
+ 2786     POS                     A   2783
+ 9137     PREP_DCB                A   8930 ,9048
+  1152    PRINTER_ID              A   6978  ,7007 ,7030,  7156,7181,7192,7233,7274,8645,          8689
+   503    PRINT  BUFFER           A   6942  ,6944 ,6945  ,7069.  7071, 7073,  7097, 7099, 7101
+ 7042     PRINT_CMND    FAIL      A   7013
+ 7043     PRNT_CMNO_FAILE         A
+ 3199     PROCESS   DATA_AR       A   3092
+  1090    PROG_NON_EXIST          A   6551
+ 5711     PROTECT                 A   5708
+ 5706     PROTECT   FAULT         A   5700
+ 71044    PRTR_DCB   ACTIVE       A   6984  ,7162
+  1086    PRT_ERR                 &   5707
+ 6977     PR_BUFF2                A
+' 1207    PR_NAK                  A   7012,7035,7241
+   658    PTRN_NAME_TBL           A   7396 ,7915
+   626    PTR_TO_LST_OF     S     A   2812,2890
+   627    PTR_TO_S   ONO          A   2914, 3029,3116,3139
+          PTR_TO_S   ON  1        A   2915, 3006  ,3117
+   629    PTR_TO_S   ON  2        A   2916 ,3014,3118
+   630    PTR_TO_S   ON  3        A   2917, 3022,3119
+ 2807     PT_IX_TO_SxDATA         a   2961, 3083,3121
+   281    PUT_ASCII               A
+ 7855     PUT_CHAR_ON_    SCR     A   7412,7470,   7492
+ 7490     PUT_CURSOR_ON           A   7619,7636,   7641
+ 7852     PUT  OLD  ON  SCRE      A   7511,7527,   7608, 7803
+   300    PUT_VRAM                A
+ 1805     PX  2PP1                A   1808
+   306    PX_TO_PTRN    POS       A
+ 1100     P_COM_STAT              A   8438 ,8460,  8464  ,8486 ,8610,  8613
+ 1106     P_NUM_DCBS              A   6589 ,8436  ,8539, 8565  ,8570,  8581
+ 1102     P_REL_ADOR              A   1103,  1104
+ 1104     P_REL_ADOR_HI           &   8494, 8608
+ 1103     P_REL_ADDR_LO           A   8493, 8607
+ 1109     P_SIZE                  A   677 ,6594  ,8294 ,8340,  8525,  8535
+ 3539     QUEER                   A   3534
+   520    QUERY  BUFFER           A   5744 ,5754,5757,5768     ,5806,  5809 ,5813
+ 3577     Q_ERROR                 A   3559
+ 1082     RANGE  ERR              A   5710
+ $709     RANGE  _NONO            A   5686 ,5688
+ 9198     RO_DEV_LOOP             A   9201
+ 6793     RD_KBD_LOOP             A
+ 6615     RD_NOT_  COMPLETE       A   8821
+ §273     RD_TMEOUT               A
+ 5336     RD_TMEOUT1              A
+ 4653     READ1                  A    4658
+ 4671     READ3                  A    4747
+ 4719     READ4                  A    4712,4714,4716

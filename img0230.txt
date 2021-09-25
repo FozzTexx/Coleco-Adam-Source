@@ -1,0 +1,61 @@
+FILE: EOSABS:£0S    TF        HEWLETT-PACKARD:  EOSBLK    (c} Coleco  1983 Confidential                      Sat,   8  Sep  1984,  23°42        PAGE  226
+
+LOCATION  OBJECT   CODE   LINE     SOURCE LINE
+
+                          8774 ; REV O           8/24/83  Vv/D
+                          8775 SSSSSSSSHKSKSKSSEHKHESSKESKSHEE  ESHEESKEKEKSERSKEKEKSESESEEKEKESHKEAEEEEEEHEKEEREHS
+                          8776 &
+                          8777 °   __RD_1_BLOCK  WILL READ ONE  BLOCK OF DATA FROM  A  BLOCK  DEVICE
+                          8778 a   TO A LOCATION  SPECIFIED BY  REGISTER HL
+                          8779 *
+                          8780 *      INPUT:   A       DEVICE  ID
+                          8781 ’                       LOW NIBBLE  - DEVICE ADDRESS
+                          8782 *                       HI NIBBLE   - SECONDARY DEVICE   ID
+                          8783 &
+                          8784 ¢               HL      DESTINATION  ADDRESS IN RAM
+                          8785 *
+                          8786 *               REGISTER PAIR.
+                          8787 *                       BC DE       - SECTOR NUMBER  ON  DEVICE
+                          8788 x
+                          8789 *      THE TRANSFER  BYTE COUNT  IS DEFINED BY "“DCB_MAX_MESS   LEN"   WHICH
+                          8790 *      IS FOUND  IN THE DEVICE DCB.
+                          8791 &
+                          8792 ¢      OUTPUT:
+                          8793 *               CONDITION BITS:
+                          8794 *                       Z: NO ERRORS  —
+                          8795 .                      NZ: ERRORS  OCCURED
+                          8796 *                                A - ERROR CODE
+                          8797 *
+                          8798 *      ALL REGISTERS  ARE PRESERVED
+                          8799 &
+                          8800 SSSESHKSSESSHESESEKSESSESSESSESSSESSESHESSESSHEHEHSESEEHEHESEKEHKSESSEHEEKEKCSEHEESESESCEHKEKEEKEESCEEEEHEEEH
+                          6801
+                          8802       ;GLB      __RO_1_BLOCK
+                          8803        EXT      __FIND_DCB
+                          8804       EXT       CHK_IF_INACTIVE
+                          8805
+    FASE                  8806 __RO_1BLOCK:
+    FASE  FDES            8807        PUSH     ly
+                          8808
+    FAAO  FS              8809        PUSH     AF                       ; SAVE DEVICE   ID
+                          8810
+    FAA   COFAC6          6811        CALL     __START_RD_1_BLOCK
+                          8812
+    FAA4  2007            8813        JR       NZ,ERRORWITH DCB
+                          8614
+    FAAG                  6815 RD_NOTCOMPLETED:
+    FAAG  F1              8816        PoP      AF               ; GET DEVICE ID
+    FAAT  FS              88617       PUSH     AF               ; SAVE IT AGAIN
+                          8616
+    FAAS  CDFAE2          8819        CALL     __ENORD_1_BLOCK          ; LOOK FOR  STATUS
+                          8820
+    FAAB  30F9            8821        JR       NC,RD_NOTCOMPLETED       ; COMMAND  NOT  COMPLETED,   CHECK   STATUS  AGAIN
+                          8822
+    FAAD                  8823 ERROR_WITH_DCB:
+    FAAD  FOE1            8824        PoP      ly               ; REALLY IS AF BUT  NEED  TO  SAVE  IF  AN  ERROR
+                          8825
+    FAAF  FDE1            8826        POP      ly
+                          8827
+    FAB1  ce              8828        RET
+
+      (                    /                                              (        j                  ‘                                    ‘                        s

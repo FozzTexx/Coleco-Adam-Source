@@ -1,0 +1,60 @@
+FILE: OS_7PRIME:pOS        HEWLETT-PACKARD:   DISPLAY  LOGO  (c)  Coleco,   1982  CONFIDENTIAL               Fri,  18 May 1984,   16:21        PAGE   103
+
+LOCATION OBJECT CODE  LINE       SOURCE  LINE
+
+                       eee   RAERAAAAAARAARAEKARARAARKEAEEEXTERNAL   SYMBOLS   RRAEAARAAAEARKAEKEARAKRKKKKKKKE
+                      5062
+                      5063   * EXTERNAL  ROUTINES  FROM OS
+                      5064
+                      5065                   EXT   INIT TABLE
+                      5066                   EXT   PUT _VRAM
+                      5067                   EXT   GAMENAME
+                      5068                   EXT   WRITEREGISTER
+                      5069                   EXT   READREGISTER
+                      5070                   EXT   WRITE _VRAM
+                      5071                   EXT  ‘START GAME
+                      5072
+                      5073   RIARARAAKAAEKERKRARAKKARARARRAEDEFINITIONS   RESKKRAAARAKERAHEAKAKEAKKAKKE
+                      5074
+             <OOBE>   5075  MODE O PORT       EQU  OBEH
+             <OOBF>   5076  MODE 1 PORT       EQU  OBFH
+
+                      orn   SEKATARARRAEKARAREREARAKERNEEE    EXPORTS  RAERRRRERKAREKAAEEAKEREKKKKRKKEK
+                      5079
+                      5080                    GLB  ASCII TBL                        ;POINTER  TO UPPERCASE   ASCII  GENERATORS
+                      5081                    GLB  NUMBER TBL                       POINTER   TO 0-9  GENERATORS
+                      5082                    GLB DISPLAY LOGO.                     :DISPLAY  COLECOVISION   LOGO
+                      5083                    GLB  LOADASCII_                       ;LOAD PATTERN  GEN  TABLE   WITH FULL ASCII   SET
+                      5084                    GLB  FILL VRAM_                       FILL  VRAM  WITH  A VALUE
+                      5085                    GLB MODE  1_                          ;SET UP  MODE 1  GRAPHICS
+
+                    aoar    REERERAAARARAEARAAAEARAARKRAK    DESCRIPTION   RARAARARAKKEAAARARAARAAARRAKARRARKKE
+                            *
+                      5088  * DISPLAY                    THE  COLECO  LOGO  SCREEN  WITH  COLECOVISION
+                      5089  *           LOGO   DISPLAYS    BACKGROUND.     THE  GAME
+                      5091  *                  ANDA COPYRIGHT  YEAR  ARE OBTAINED    FROMLTHE MCARTRIDGEER,
+                      5092  *                  AND  OVERLAYED  ONTO  THE  LOGO  SCREEN.   THE  LOGO  IS THEN
+                      5093  *                  DISPLAYED  FOR  10 SECONDS   AFTER  WHICH  TIME  A JUMP  TO
+                      50%   *                  THE  GAME START  ADDRESS   IS EXECUTED.
+                      5095  *                    |
+                      5096  *                  IF NO  CARTRIDGE  IS  PRESENT  A  DEFAULT  MESSAGE  1S
+                      5097  *                  DISPLAYED,   INSTRUCTING   THE OPERATOR   TO:
+                      5098  *
+                      5099  *                          “TURN  GAME OFF"
+                      5100  *                          “BEFORE  INSERTING   CARTRIDGE"
+                      5101  *                          “HOREXPANSION   MODULE."
+                      5102  *                          "[COPYRIGHT   SYMBOL]   1982 COLECO"
+                      5103  *                  THIS  MESSAGE  IS DISPLAYED   FOR  60  SECONDS,  THE SCREEN
+                      5104  *                  1S THEN  BLANKED  AND  FINALLY   A SOFT  HALT  (JP $)  IS
+                      5105  *      |           EXECUTED  LOCKING  UP  THE  PROGRAM  UNTIL  THE  UNIT  IS
+                     5106   *                  RESET.
+                     5107   *                             |
+                     5108   *                  DISPLAY LOGO   EXITS WITH   THE  VDP IN  MODE  1, THE  SCREEN
+                     5109   *          |       BLANKED,  AND  THE ASCII  CHARACTER    SET IN  VRAM.
+                     5110   *                  THE  MEMORY MAP  IS AS  FOLLOWS:            |                 |                                                        ‘
+                     5111   *        |
+                            *                              VDP  MEMORY  MAP
+                     5113   *                  3800H-3FFFH    SPRITE  GENERATOR   TABLE
+                            *                  2000H-37FFH    PATTERN  COLOR  TABLE
+                            *                  1BOOH-187FH    SPRITE  ATTRIBUTE   TABLE
+                            *                  1800H-1AFFH    PATTERN  NAME  TABLE

@@ -1,0 +1,24 @@
+                                                                       ‘ge
+FILE: ~  ».ABS:EOSTF         HEWLETT-PACKARD:  A_uOS OO   (c) Coleco  isu4   Confidential                   Sat,    8 Sep 1984, 23:38        rAGE    45
+
+LOCATION  OBJECT  CODE   LINE     SOURCE LINE
+
+    EOF7                 1727 ADD_TOBASE:
+    EOF7  79             1728                 LO       A,C                            ;Get table code back
+    EOF8  O1FD64         1729                 LD       BC,VRAMADDR_ TABLE             ;Get top of address table
+    EOFB  E5             1730                 PUSH     HL                             ;Save RAM buffer on stack
+    EOFC  2600           1731                 LO       H,OOH                          ;Put table code tnto HL
+    EOFE  6F             1732                 LO       L,A
+    EOFF  29             1733                 ADD      HL,HL                          ;*2 to offset for addresses   in table
+   E100   O9             1734                 ADD      Ht,BC                          ;Add to top of table
+    E101  7E             1735                 LO       A,(HL)                         ;Low byte of VRAM table address
+    €102  23             1736                 INC      HL
+    E103  66             1737                 LD       H.(HL]                         ;High byte of VRAM table  address
+    E104  6F             1738                 LO       L.A
+    E105   19            1739                 AOD      HL,DE                          ;Add offset from start of  table
+    E106  EB             1740                 EX       DE,HL                          ;Absolute VRAM address  in DE
+    E107  E1             1741                 PoP      HL                             ;Restore RAM buffer address
+    E108  C1             1742                 POP      BC                             ;Restore Count into BC
+                         1743                                                         ;Registers are now ready  for
+                         1744                                                         ; a call to the basic READ/WRITE   VRAM routines
+    E109  C9             1745                 RET                                     ;Exit

@@ -1,0 +1,18 @@
+                                                                                                                           IDE          ee          EEEOO
+
+                                                                     “
+                                                                    Soyer
+FILE: c-.ABS:E0S TF        HEWLETT-PACKARD: SOUND EQU€S  (c)  Coleco,  t2      CONFIDENTIAL              Sat,   8  Sep  1984,  23:39              69
+
+LOCATION OBJECT  CODE  LINE     SOURCE LINE
+
+    E325               2636 123
+    E325 3600          2637         LO      (HL},0            ;set byte 8  to  O to indicate  end  sweep
+                       2638
+                       2639 ;       ENDIF
+                       2640 ;       ENDIF
+                       2641
+                       2642 ;@ee@122
+    E327 C9            2643         RET
+                       2644
+                       2646 ;       END ATNSWEE

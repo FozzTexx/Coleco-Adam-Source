@@ -1,0 +1,26 @@
+FILE: EQSABS:EOS  TF         HEWLETT-PACKARD:    UTILS       (c)  Coleco 1983 Confidential                        Sat,    on Sep  1984,   23:40       PAGE  132
+
+LOCATION OBJECT   CODE   LINE     SOURCE  LINE
+
+                         5402
+    FOF  FOE1            5403          Pop       Ty                 ;RESTORE REGISTERS
+    FO21 DDE1            5404          POP       IX
+    FO23 Et              5405          PoP       HL
+    FO24 AF              5406          XOR                          ;SHOW NO ERROR
+    FO2S oe              5407          RET
+                         $408
+    FO26                 5409 SCAN_ERROR
+    FO26 FDE1            5410          PoP       ly                 ;RESTORE REGISTERS
+    FO28 DDE1            S411          pop
+    FO2A Et              5412          PoP       HL
+    FO28 ce              5413          RET
+                         5414
+    FO2C                 5415 NO_ENT
+    FO2C FDE1            5416          POP       Iv                 sRESTORE REGISTERS
+    FO2E DOE1            $417          PoP       IX
+    FO30 E1              5418          POP       HL
+    FO31 3E0S            5419          LD        A,NO_FILE_ERR
+    F033 87              5420          oR        A
+    F034 ce              $421          RET
+                         5422
+                         5423

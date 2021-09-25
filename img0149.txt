@@ -1,0 +1,28 @@
+    &       &       &       O&O   &         &        &       &       &      |        F&F     F&F     FE       F&F      &          F&F   &          FE
+
+.        —                                                              \                                                              ff
+
+ FILE:               -     HEWLETT-PACKARD:  UTILS      (c) Coleco 1%us8Confidential                 Sat,   8  Sep  1984,  23:40        PAGE  145
+
+ LOCATION OBJECT CODE LINE      SOURCE  LINE
+
+     F1D6 B7          5950         OR       A                       ; NZ CONDITION
+     F1D7             5951  NO_ERRORS:
+     F1D7 C1          5952         POP      BC
+     FiD8 C1          5953         PoP      BC
+                      5954
+     F1D9 C9          5955         RET
+                      5956
+     FADA             5957  READ_ERROR:
+     FIDA FDE1        5958         PoP      ly                  ;POP AF INTO IY TO PRESERVE FLAGS
+     FDC  FDE1        5959         PoP      1Y
+     FIDE ODE1        5960         Pop      IX
+     FIEO E1          5961         PoP      HL
+     FIE1 D1          5962         Pop      DE
+     FiE2 C1          5963         PoP      BC
+                      5964                             |
+     FIE3 3616        5965         LD       A,DEVICE_DEPD_ERR        ; INDICATE ERROR, LET APPL.  HANDLE IT
+                      5966
+     F1IESC9          5967         RET
+                      5968
+                      5969

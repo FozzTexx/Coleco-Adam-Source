@@ -1,0 +1,61 @@
+FILE: .  ».ABS:EOS TF          HEWLETT-PACKARD:    EOSBLK      (c)  Coleco  1._s4Confidential                     Sat,   8 Sep  1984,   23:42       .aGE   233
+
+LOCATION   OBJECT  CODE   LINE       SOURCE   LINE
+
+                          9061
+                          QOG2   FHSAA        EESSHEHREEK       HEHEHE      EERE       EERE        EEE EEE EERE  EE
+                          9063   *
+                          9064   *       __ENO_WR_1 BLOCK   WILL   CHECK THE STATUS   OF  THE LAST OPERATION
+                          9065   «       EXECUTED
+                          9066   +
+                          9067   *       INPUT:
+                          9068   «+               A        DEVICE   ID
+                        . 9069   ¢                         LOW  NIBBLE  - DEVICE  ADDRESS
+                          9070   *                         HI  NIBBLE   —=SECONDARY   DEVICE   ID
+                          9071   *
+                          9072   *      'OUTPUT:
+                          9073   *                CONOITON  FLAGS
+                          9074   *                         C         OPERATION  COMPLETED
+                          9075   +                        NC         OPERATION NOT   COMPLETED
+                          9076   *                         Z         NO ERRORS
+                          9077   «                        NZ         ERRORS
+                          9078   +                                   A = ERROR CODE
+                          9079   ¢
+                          9080   *       ALL REGISTERS  ARE   PRESERVED
+                          9081   +
+                          GORD   SESE  SESESSSE SETS SSESE SSSEEHEESHEHEHEHEEHEAREEEERE    HEHEHE  REECE    ESETES
+                          9083
+                          9084   ;NO_DCB_FOUND4              B_ NODCB_FOUND4
+                          9085   ;0CB_IS IDLE4   CHANGED  TO BLK_DCB_IS  IOLE4   TO  AVOID  CONFLICT  WITH
+                         9086    ;IDENTICAL   LABEL ELSEWHERE
+                          9087
+                          9088          ;GLB      __END_WR_1  BLOCK
+                          90839
+    FB1B                  9090   __END_WR_1 BLOCK:
+    FB1B   FDES           9091           PUSH     ly
+                          9092
+    FB1D   CDF446         9093           CALL     __FIND_DCB
+                          9094
+    FB20   37             9095           SCF
+    FB21   2012           9096           UR       NZ,8NO  DCB  _FOUND4     ; CONDITION   FLAGS:  C,NZ   A=ERROR  CODE
+                          9097            |
+    F823   CDF4AE         9098           CALL     CHK_IF_IOLE                ;  IS DEVICE   IDLE?
+    FB26   2000          9099            JR       NZ,BLK_DCB_IS_IDLE4        ; YUP
+                         9100
+    FB28  B7             9101            OR       A                          - RESET   CARRY  FLAG
+                         9102
+    FB29   FDCBOO7E      9103            BIT      CMND_COMPLETE  BIT,  [IY+DCOM  STAT]    ; WAS COMMAND  COMPLETE?
+    FB2D   2806          9104            JR       Z,CMND_NOT COMPLETED        ;  NOPE,
+                         9105
+    FB2F   FO7E0O        9106            LD       A,{1Y¥+OCOM  STAT)       ; YUP
+                         9107
+                         9108
+    FB32   FE8O          9109            cp       CMND_FIN STATUS            ; ANY  ERRORS?
+    FB34   37            9110            SCF                                 ; INDICATE    COMMAND COMPLETED                 ‘
+                         9111                                                ; CONDITION    FLAGS: IF  NO ERRORS:   C,2Z
+                         9112                                                                      IF  ERRORS:  C,NZ,   A=ERROR  CODE
+                         9113
+                         9114
+    FB35                 9115   BLK DCB_IS  IDLE4:
+    FB35                 9116   B _NO_DCB_FOUND4:
+    F835                 9117   CMNO_COMPLETED:

@@ -1,0 +1,25 @@
+FILE: EQSABS:EOS_TF         HEWLETT-PACKARD:  CONS OUT   (c) Coleco  1983 Confidential                  Sat,   8  Sep  1984,  23:41        PAGE  192
+
+LOCATION  QBJECT  CODE  LINE     SOURCE LINE
+
+                        7621 ;
+                        7622 ; ERASE_TO_EOS   -  Wil)  erase the  screen (window) from the current
+                        7623 ;                   cursor  postion  to the end of the window. The
+                        7624 ;                   cussor  position  is also blanked.
+                        7625 ;
+                        7626 ;
+    FGF2                7627 ERASETO EOS:
+    F6F2  COF766        7628                  CALL     ERASETHIS  LINE    ;Erase to end of current  line
+    FGFS  2AFEAS        7629                  LD       HL,[CURSOR}
+    FGFB  2C            7630                  INC      L                ;Move down
+    FGFS  3AFET7C       7631                  LD       A.{Y¥_MIN]
+    FGFC  4F            7632                  LD       C,A
+    FGFD  3AFEOF        7633                  LD       A,[NUMLINES]
+    F700  81            7634                  AOD      A,C
+    F701  95            7635                  SUB      L                ;Number of lines left to blank
+    F702  CAF656        7636                  JP       Z,PUT_CURSOR_ON
+    F705  47            7637                  to       B.A
+    F706  3AFETA        7638                  LO       A,(X_MIN)
+    F709  67            7639                  LD       HA
+    F7OA  CDF74C        7640                  CALL     BLANKSCREEN
+    F70D  C3F656        7641                  JP       PUT_CURSOR_ON

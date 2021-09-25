@@ -1,0 +1,61 @@
+“ILE: EGSAGS:€05_TF           HEWLETT-PACKARD:   RD_WT      {c})Ceieco  1983 Confidantiai                                   1984,              PAGE  120
+
+-OCATION  OBJECT  CODE   LINE       SOURCE  LINE
+
+    ED20  DDE1           4779           Pop      IX                ;RESTORE REGISTERS
+    ED22  Et             4780           PoP      HL
+    E023  01             4781           Pop      DE
+    ED24  ci             4782           PoP      BC
+    E025  AF             4783           KOR      a                 SHOW NO  ERROR
+    ED26  ce             4784           RET
+                         4785
+                         4786   ; ARRIVE HERE  IF THIS IS THE  LAST BLOCK  OF THE  FILE.
+    E027                 4787   LAST_BLOCK:
+    E027  OOCB 18FE      4788           SET      MODE_LASTBLOCK  _BIT,[IX+FCB_MODE J
+                         4789
+    E028                 4790   READ_LAST
+    E028  2AFE06         4791        "1p         HL,[BUF_START]    ;POINT TO MY BUFFER
+    ED2E  DOSE 15        4792           Lo       E,(IX+¢FCB_LAST_COUNT]  ;GET # BYTES  IN  IT
+    ED31  0086 16        4793           rT)      0,[IX+FCB_LAST_COUNT+1]
+    €034  19             Age            ADO      HLDE             ;CALC ADOR  OF LAST  BYTE  +  1
+    ED3S  OOSE21         4798           rT)      E,[IX+FCB_POINTER]   ;GET CURRENT POINTER
+    E038  DO8622         4796          to        0,[IX¢FCB_POINTER+1)
+    ED38  87             4797           Om       &                ;CLEAR CARRY
+    ED3C  E052           4708           SBC      Ht DE            ;CALC # BYTES  LEFT  IN BUFFER
+    EDSE  ae             4788           ip       B.H              SAVE   IT IN CASE  IT’S NEEDED
+    ED3F  4a.            4800           Lo       C.L
+    E040  262A           4801           JR       2,_0BYTES LEFT
+                         4802
+    £042  EDSBFEO4       4803           LO       DE.[BVTES_TO_GO)  ;GET REQUESTED  COUNT
+    ED46  87             2806           oR       a                ;CLEAR CARRY  (UGLY  280)
+    £047  E0S2           4808           SBC      HL.OE            ;SEE IF WE  HAVE ENOUGH  BYTES
+    £049  308F           4806           JR       NC,READ_LAST!1   ;BRANCH  IF SO -- NO  SWEAT
+                         4807
+    EG46  2AFEO4         4808           LO       HL,(BYTES TO_GO)  ;UPDATE NUMBER  OF  BYTES  TO  GO
+    ED4E  67      |      4809           OR       A
+    ED4F  E042           4810           Sac      Ht BC            ;SUBTRACT  NUM OF BYTES  WE  ARE  SENDING  HERE
+    EDS1  22FE04         4811           LO       (BYTESTO_GO]},HL
+                         4812
+    E084  DOGE21         4813           LD       L,{IX*¢FCB_POINTER) ;GET POINTER  TO  MY BUFFER
+    E067  006622         4814           LD       H,[IX¢FCB_POINTER+1)
+    LOBA  EDSBFEOS       4815           LO       DE,(USER_BUF}         POINTER  TO USER’S  BUFFER
+                         4816                                     ;BC HAS COUNT  FROM  ABOVE
+                         4817           LOIR                      ;MOVE WHAT  WE HAVE  TO USER
+                        4818
+    ED6O  2AaFEO2       4819            LO       HL.(BYTES_REQ)   ;GET # BYTES  REQUESTED
+    EDG3  ED48FE04      4820            Lo       BC,(BYTESTO_GO)   ;GET # BYTES  WE DION’T  00
+    E067  87            4621            OR       A
+    EDGS  ED42          4822            SBC      Ht,8C            ;CALC. # OF  BYTES WE  DID  00
+    EOGA  se            4823            Lo       BH               ;PUT IT INTO  BC
+    £068  4G            4824            LD       C.L
+                        4825
+    ED6C                4826   0  BYTES LEFT:
+    ED6C  3EOA          4827            LO       A,EOF_ERR        ;SHOW AN ERROR
+    EDGE                4828   R_GET_OUT:
+    EDGE  DOE1          4829            PoP      IX               ;RESTORE REGISTERS
+    ED70  Et            4830            PoP      HL
+    ED1   01            4631            PoP      DE
+    E072  33            4832            INC      SP               ;DISCARD OLD  BC
+    ED73  33            4833            INC      SP      |
+                        4834
+    ED74  67            4835            OR       A

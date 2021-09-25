@@ -1,0 +1,61 @@
+  LE:  OS7PRIME:pOS            CROSS   REFERENCE   TABLE              PAGE  154
+
+  NE#    SYMBOL            TYPE       REFERENCES
+
+ 1942   FIRE_REG              P  4938
+ 948    FIRE ST1              P  4934
+  511   FIRE STATE            A  4932, 4944, 4954
+ ‘811   FIRST  GEN  NAME      A  3104
+ 1202   FLAGS                 A  3225,3375,  3596, 3603 , 3644 ,3798,3829 ,3836
+   82   FPS                   A
+   83   FPSV                 A   686
+ ‘817   FRAME                A  2926,3014,   3055,  3092
+ ‘B14   FRAME TABLE   PTR    A   2915,3003,3044,3081
+ 050   FREE                  A   4071, 4222, 4224 ,4248  ,4344 ,4432,4471, 4483
+ 214   FREE                  P   4219
+ 237   FREE  COUNTER         P
+ 311   FREE  EXIT            P   4216
+ 221   FREE  MATCH           P   4212
+ 309   FREE SET              P   4223, 4226,4228
+ 381   FREE  SIGNAL          A   224
+ 366   FREE  SIGNALP         A   229
+ 200  FREE   SIGNALQ         P   4041, 7366
+ 206   FREE  SIGNAL          P   4040, 7381
+ 197   FREE _SIG PAR         P   4201
+  78   FREQ                  A   807,811,814
+ 671   FREQ  SWEEP           P  668, 1230
+ 203   FRM                   A  3230,3441,   3624
+  84   FSTEP                 A  673,702,  1372, 1444
+ 204   FGEN                  A  3269, 3301,  3623
+ 333   GAME NAME             A  332,5230,5232,5237,5247
+ 355  GAME  OPT              A  250
+ 777  GAME  OPT              P  5761,7355
+ 643  GET  BKGRND            P  2377,  2642,3262
+ 055  GET  COLOR             P  6822,6860,  6908  ,6958
+ 278  GET  NEXT              P  4249,  4253, 4258, 4263, 4277
+ 294  GET  OLD               P  2291
+ 376  GET  VRAM              A  189,3132,  3380, 3398, 3411,  3418
+ 361  GET  _VRAMP            A  19%
+ 977  GET  VRANQ             P  5980, 7361
+ 387   GET VRAM_             P  2659,5979,6776,    7066, 7376
+ 174   GETVRAM   P           P  6078
+ 305  GRAPHICS              A   2913,2914,  3001,  3002, 3042, 3043,3079, 3080,  3102,3103
+ 972 ~WEAD  ADDRESS         D   1997, 2022, 2032, 2070
+ 85    1F11                 P   3582                                                                                                                                                             ,
+ 71“   IMACTIVE             A   1063, 1180, 1217, 1351,  1389, 1521
+ 321   INIT 80              P   1822
+ 58    INIT QUEUE           P   2057, 7390
+ 50    INIT QUEUEQ          P   2049, 7372
+ 45   INIT  QUEUE  P        P   2051
+126   INIT  SOUND           P   992,7393
+118   INIT  SOUND           P   1011, 7373
+985   INIT  SOUND  DATA     D   1020, 1022, 1024
+)12,  INIT  SOUND   PAR     P   1019
+255   INIT SPR10            P   6260
+578 =INIT  SPR   ORDER      A   191
+563   INIT SPR   ORDERP     A   196
+“42   INIT SPR   ORDERQ     P   5980, 7363
+48    INIT SPR   ORDER      P   5979,7378
+40    INIT  SPRP      ==—   Ps 6243
+S75   INIT TABLE            A   188,5649, 5654  ,5659, 5664 ,5669
+446   INIT TABLEBO          P  6017,6024

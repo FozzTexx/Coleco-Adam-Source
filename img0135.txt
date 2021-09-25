@@ -1,0 +1,61 @@
+FILE: .sSABS:EOSTF          HEWLETT-PACKARD:   UTILS     (c) Coleco   1suJ3Confidential                    Sat,   8  Sep   1984,  23:40        PaGE  131
+
+LOCATION OBJECT CODE    LINE     SOURCE LINE
+
+                        5345
+    EFCS                5346 GETBUFF _ADDR1:
+                     :  §347
+                        $348
+    EFCS EDSBFDFF       5349         LO        DE,(FCB_DATA_ADDR]   ;GET BUFFER ADDRESS
+    EFC9 007321         $350         LO        {IX+FCBPOINTER],E    ;PUT IT INTO THE FCB
+    EFCC 007222         §351         LO        (IX+FCB_POINTER+1).D
+                        $352
+    EFCF 0627           $353         LD        B,ENT_PER_BLOCK  ;SEi .NTRY  COUNT
+                        $354
+    EFD1                $355 SCAN2           :
+    EFD1 21FDD4         $356         LO        Ht,FILECOUNT
+    EFD4 34             $357         INC       (Ht)
+                        5358
+    EFDS DDSE21         $359         LO        E,[IX+FCB_POINTER)  ;GET  POINTER INTO DE
+    EFD8 005622         5360         LO        D,[1X+FCB_POINTER+1)
+                        5361
+    EFOB 2E0C           5362         LD        L,OIR_ATTR          ; OFFSET  (FOR ATTR)  INTO DIR  ENTRY
+    EFODO2600           5363         LO        H,O                 ; NOT  USED
+    EFOF 19             5364         ADO       HL,DE               ; SET  UP HL TO POINT  TO IT
+    EFEO CB46           $365         BIT       ATTR_HOLEBIT, (HL]  ; IS  IT THE HOLE?
+    EFE2 2048           5366         JR        NZ.NO_ENT           ; YUP,  OON’T BOTHER SEARCHING   ANY  MORE
+    EFE4 CBS6           $367         BIT       ATTR_DEL_BIT,(HL]   ; IS  THIS FILE DELETED?
+    EFE6 2013           $368         JR        NZ,FILEDELETED      ; YUP,  DON’T EVEN BOTHER  CHECK   FILE  NAMES
+                        5369
+    EFES 2AFE10         5370         LD        HL,[USER_NAME}
+                        5371
+    EFEB 3AFDDS         8372         LO        A,[FILENAME _CMPS]  ;
+    EFEE 87             6373         OR        A                  ; IS  IT ZERO?
+    EFEF 2806           5374         UR        Z,FULL_FILENAME    ; YUP,  COMPARE THE FULL  FILE  NAME
+    EFF1 COFOS4         5375         CALL      BASECMP            ; NOPE,  COMPARE JUST THE  BASE
+    EFF4 18603         6376          JR        ERROR_CHECK
+    FFG                 S377 FULL_FILENAM:
+    EFFE COFOS3         6378         CALL      STRCMP           ; COMPARE  THE FULL FILE NAME  (BASE   PLUS  EXTENSION)
+    EFF®                S379 ERROR_CHECK:
+    EFFOS2815           8380         JR        2,SCAN3          BRANCH   IF YES
+                        8381
+    EFFB                $382 FILEDELETED:
+    EFFB OD7E21         6383         LD        A.[IX+FCB_POINTER]  ;ADVANCE  POINTER TO NEXT  ENTRY
+    EFFE C61A           5384         ADD       A,OIR_ENT_LENGTH
+    FOOO 007721         5385         LO        [IX¢FCBPOINTER],A
+    FOO3 DD7E22         5386         LD        A,[IX+FCB_POINTER+1)
+    FOO6 CEOO           $387         ADC       A.O
+    FOOS 007722         $368         LD        {IX+FCB_POINTER+1],A
+                        6389
+    FOOB 10C4           5390         DUNZ      SCAN2            ;LOOP  IF MORE ENTRIES TO  CHECK  IN  THIS  BLOCK
+                        $391
+    FOOD C3EF86         8392         JP        SCAN1            ;ELSE GET  NEXT BLOCK
+                        $393
+    F010                6394 SCAN3
+    FO1O D5             §395         PUSH      DE               ; GET DIR  ENTRY PTR INTO  IY
+    FO11 FDE1           5396         PoP       ly
+                        5397
+    FO13 FDSEOD         5396         LO        E,[1Y¥+DIR_STARBLOCK+tO]
+    FO16 FOS60E         5399         LD        D,{1Y+DIRSTART BLOCK+1)
+    FO19 FO4EOF         54090        LD        C,[1Y¥+DISTART BLOCK+2?
+    FOIC FD4610         5403         LD        B.[1Y¥+#DSTART BLOCK?  3:

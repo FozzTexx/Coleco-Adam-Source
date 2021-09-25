@@ -1,0 +1,31 @@
+FILE:OS_7PRIME:pOS     HEWLETT-PACKARPUT/DEFRDPUT OBJ(c)Coleco 1982 CONFIDENTIAL       Fri, 18 May 1984, 16:19     PAGE  49
+
+LOCATIONOBJECTCODE LINE    SOURCELIWE
+
+    0600DD2A73B=   2177       LD   1X,[PARAAREA]
+    06043A738C     2178       LD   =A[PARAM_AREA+2)
+    060747         2179       LD   B,A
+                   2180
+           <0001>  2181DEFER         EQuU            1
+   06D8            2182PUTOBJ_
+    06D83A73C6     2183       LD     A,(DEFERWRITES) ;CHECK IF DEFERRED WRITEISDESIRED
+    0608FEO1       2184       CP     DEFER
+    06002004       2185       JR     N2,00PUTOBJ       NOT, PROCESS OBJECT
+    O60FCD0623     2186       CALL   SET_UP_WRITE   s1FSO, SET UP FOR DEFERREDWRITE
+    O6E2C9         2187       RET
+    06E3006601     2188DOPUTOBJ LDH, (IX+1]          sGET ADDRESS OF GRAPHICSFOROBJn
+    06E6DD6E00     2189       LD L,(1X+0)
+    06E97E         2190       LD A,(WL)             ;A:=OBJ TYPE
+    O6EA4F         2191       LD C,A                sSAVECOPY
+    O6EBE60F       2192       AND OFH               ;MASKFOROBJ TYPE  NUMBER
+    O06ECAO6FF     2193       JP 2,PUTSEM!          30=SEMI MOBILE
+    06FO3D         2194       DEC A
+    06F1CAOA87     2195       JP Z,PUTMOBILE         31= MOBILE
+    06F43D         2196       DEC A
+    06F5CAO8DF     2197       JP Z,PUTOSPRITE       32= SPRITEO
+    06F830         2198       DEC A
+    06F9CA0955     2199       JP Z,PUTISPRITE       33= SPRITE1
+   O6FC C3OEA2     nat        JP PUTCOMPLEX         3>3= COMPLEX
+                    201;
+                   2202;      END    ;pname
+                   2203 PROG

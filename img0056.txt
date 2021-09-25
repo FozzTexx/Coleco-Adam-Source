@@ -1,0 +1,46 @@
+FILE: EQSABS:EOS TF         HEWLETT-PACKARD: A_uOS_00   (c)  Coleco  1983 Confidenia}                     Sat,   8  Sep  1984,  23.39        PAGE    52
+
+LOCATION OBJECT  CODE   LINE     SOURCE LINE
+
+                        1960 ;
+                        1961 ;    Port collection must  be  calied  during initialization
+                        1962 ;    It switches to OS7 ROM  grabs  the  ports and switches back
+                        1963 ;
+                        1964
+    E191                1965  PORT COLLECTION:
+    E191 3AFDGE         1966          LO     A,([CUR_BANK}                -GET THE CURRENT BANK
+    E194 FS             1967          PUSH   AF
+                        1968 ;
+    E195 SAFCIA         1969          LD     A,[MEMCNFGO3]                ;SWAP IN THE OS
+    E198 CDFD1I4        1970          CALL   SWITCH_MEM
+    E19B 21FC29         1971          LD     HL.PORTTABLE+2               ;HL POINTS TO THE PORT   TABLE
+                        1972 ;
+    E19E 3A1D43         1973          LD     A,(01043H)                   ;VDP CONTROL PORT
+    EtA1 77             1974          LO     {HL}.A
+    E1A2 23             1975          INC    HL
+                        1976 ;
+    E1A3 3A1D47         1977          LD     A,(01D47H]                   ;VDP DATA PORT
+    E1AG 77             1978          LD     {HL).A
+    E1A7 23             1979          INC    HL
+                        1980 ;
+    E1A8 3A114B         1981          LD     A,[0114BH]                   ;CONTROLLER O
+    E1AB 77             1982          LO     {HL}.A
+    E1AC 23             1983          INC    HL
+                        1984 ;
+    E1AD 3A1151         1985          LO     A,{01151H]                   ;CONTROLLER 1
+    E1BO 77             1986   .      LD     (HL],A
+    E181 23             1987          INC    HL
+                        1988 ;
+    E1B2 3A1157         1989          LD     A,(01157H})                  ;CONTROLLER STROBE SET
+    E1B5 77             1990          LD     [HL).A
+    E186 23             1991          INC    HL
+                        1992 ;
+    E1B7 3A1168         1993          LD     A,{01168H]                   ;CONTROLLER STROBE RESET
+    E1BA 77             1994          LD     (HL},A
+    E1BB 23             1995          INC    HL
+                        1996 ;
+    E1BC 3A0O1BE        1997          LD     A,[O018EH]                   ;SOUND PORT
+    E1BF 77             1998          LD     [HL],A
+    E1CO Ff             1999          poe    AF
+    E1IC1CDFD14         2000          CALL   SWITCHMEM
+    E1C4 C9             2001          RET

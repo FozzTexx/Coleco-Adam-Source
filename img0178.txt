@@ -1,0 +1,29 @@
+FILE:  EOSABS:  EOS_TF          HEWLETT-PACKARD:     EOS  PRTR      (c)  Coleco    1983   Confidential                   Sat,    8  Sep  1984,    23:41         PAGE    174
+
+LOCATION   OBJECT    CODE  LINE       SOURCE  LINE
+
+                           7110  EKSKEEKKESKRESKESKEKKSEEKEKKSSEKKRKEKKKEKKEKKEKEKESESCREREKEARKESEKEERKEEKERRKEKEEKKEEEKEKEKES
+                           7194  e
+                           7112  .       __END_PR_CH        CALLS    _END  PR_BUFF     TO  CHECK   THE  DCB STATUS BYTE AND
+                           7113  ‘       RETURNS    THE   RESULT    TO  THE  CALLER
+                           7114  a
+                           7115  .       INPUT:     NONE
+                           7116  8
+                           7117  .       OUTPUT:    CONDITION     FLAGS
+                           7118  “                  C:         COMMAND     COMPLETED
+                           7119  °                NC:          COMMAND     NOT  COMPLETED
+                           7120  ©                  z:         NO   ERRORS   OCCURED
+                           7121  2                NZ:          ERRORS
+                           7122  °                             A  =  ERROR   CODE
+                           7123  .             |
+                           7124  ‘       ALL        REGISTERS     ARE   PRESERVED
+                           7125  .                                       |
+                           7126  SRPSSSESESKSESSSSSHESSSESHSEKSKSSSSKESSESSSEHASHKSHKSESSSSESEHSSSESKSESEHKSSESESEKSEHSKEESHKSESEEESSESEEEESE
+                           7127
+                           7128         :GLB        __END_PR_CH
+     FS7C                  7129  __END_PR_CH:
+     FS7C  CDOFSB8         7130          CALL       __E€ND_PR_BUFF
+                           7131
+     FS7F  C9              7132          RET
+                           7133
+                           7134

@@ -1,0 +1,45 @@
+                                                                     \
+FILE: ~.sacS:E€OSTF         HEWLETT-PACKARD: A_uOS OO  (c) Coleco   fJo confidential                 Sat,  8  Sep  1984, 23:38       PAGE    33
+
+LOCATION OBJECT CODE   LINE      SOURCE LINE
+
+                       1219   NAME “Rev O7 - jki*
+                       1220
+                       1221  DeA_uOS  OO MACRO               ;Header Rev. 5
+                       1222                  .GOTO EdeA_uOS  00
+                       1223
+                       1224   Project:      ADAM, 83-101
+                       1225
+                       12326      SRSSHKSHAAKSHSESAEARSSAERSESEESH   EKHEKESHRSHEHEKERERE EEES
+                       1227       sees                                                    eeee
+                       1228       eeee             A_uO000              RPD               seee
+                       12293      eee                                                     ess
+                       1230       SSHSHAKHSESHSARHESS ERHSEEHE EHTS             EEREREKERETESS
+                       1231
+                       1232
+                       1233         Rev History
+                       1234         Rev.  Date         Name       Change
+                       1235          7    O8oct1545    jk         make  LOAD ASCII  load chars from  O to 7F
+                       1236          6    O8oct0003    rfj        Fixed 100H bug with Bob Greenberg's
+                       1237                                        algorithm
+                       1238          5    O7oct1708    rfj        __EFXOVER changed to _ EFFECT_OVER
+                       1239          4    OSoct10:40   rfj        Decoder now saves Acc before getting
+                       1240                                        interrupt data
+                       1241                                        Removed excess documentation on Put/Load   Ascii
+                       1242                                        Commented out all unreferenced symbols  with  ;eee
+                       1243                                        Renamed WRSPR_NM_TBL  to WR_SPR_ATTRIBUTE
+                       1244                                        globalized  UPDATE SPINNER
+                       1245                                        new address fcr the ASCII table  referenced
+                       1246          3    28septi3i7   rfj        Multy changes after personal review
+                       1247                                        but not approved
+                       1248          2    25sept900a   RPD        made ram externa!
+                       1249          1    24septi250p  RPO        addition of more routines & new port  accessing
+                       1250          O    24aug430p    RPO        Initial creation date (READ & WRITE  VRAM)
+                       12514
+                       1252   A_u0SOO  stands for ADAM micro  Operating System version O. This file
+                       1253   contains a scaled down mode! of  COLECOVISION OS 7. Primary routines from
+                       1254   OS 7 are duplicated for ADAM application  programs use. The functional  areas
+                       1255   that are supported by these routines  are the VDP, the controllers, the  sound
+                       1256   chip, memory bank switch, port  collection.
+                       1257
+                       1258  EdeA_u0S OO   MEND

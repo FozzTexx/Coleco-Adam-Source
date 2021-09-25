@@ -1,0 +1,60 @@
+FLLE:e    EOSABS:   EOS TF           HEWLETT?    -PACKARD:     A_uOS  OO      (c)  Coleco      1983   Confidential                               Sat,    8 Sep   1984,   23.2%         bagi      "8
+
+LOCATION      OBJECT    CODE    LINE        SOURCE     LINE
+
+       E206                    2205    DECODER:
+       E206   4F               2206              LD           CA                                                 ;Save   controller      #
+       E207   EDS7             2207              LD           A,!                                                ;get   current    state    of   interupts,    on/off,     into   P/V   flag
+       E209   F5               2208              PUSH         AF                                                 ;and   save   for   later    so  can   turn  them   back   on   if  needed
+       E208   79               2210              LD           A.C                                                ;Restore     controller     #
+      E20C    ED4B8FC2D        2211              LO           BC,  (STROBE   SET   PORT]                         ;C<--SET     PORT   ,B<--RST     PORT
+      E210    ED79             2212              OUT           {C].A                                             ;STROBE    10   SEGMENT     1 (SET)
+      E212    5O               2213              LD           0.B                                                ;SAVE   RESET    PORT
+      E213    21FE5S8          2214              LD           HL,SPIN    SWO   CT                                ;potnt   at   spinner     count    for  controller     O
+      E216    ED4BFC2B8        2215              LD           BC,  [CONTROLLER     _O PORT}                      ;C<--PORT    O,   B<--PORT    1
+      E21A    B7               2216              OR           A                                                  ;A contains      controtter      number
+      E218    2002             2217              JR           NZ,GOT   CORRECT     CONTROLLER       INC       =;
+      E21D    23               2218               INC         HL                                                 ;Point    to  spinner     for  ctrir    1
+      E21E    48               2219              LD           c,.B                                               ;C<--PORT   1
+      E2tF                     2220    GOT CORRECT     CONTROLLER_IN        C:
+      E21F    AF               2221              xOR          A
+      E220    SE               2222              LD           E, {HL}                                           ;HAVE    SPIN   SWITCH    COUNT
+      E221    77               2223              LD           {HL}.A                                            >RESET    COUNT
+      E222    42               2224              LD           B.D                                               ;>B<--RST    PORT
+      E223    £078             2225              IN           A,(C]                                             ;READ    DATA   FROM   SEG    1
+      E225    2F               2226              CPL
+                               2227    ;
+      E226    2600             2228              LD           H,O
+      E228    6F               2229              LD           LA                                                ;HL<--offset       into   DEC  _KBD_TBL
+      E229    79               2230              LD           A,C                                               ;Swap    RST  PORT/DATA_    PORT
+      E22A    48               2231              LD           C.8
+      —€228   €079             2232              OUT          {C}.A                                             ;STOBE    TO   SEG O    (reset)
+      E22D    4F               2233              LD           C,A                                               ;C<--DATA      PORT
+      E22E    Fi               2234              PoP          AF                                                :get   back    entry   state    of   interupt    reg
+      E22F    E2E233           2235              JP           PO,LEAVE    THEM    OFF
+      E232    FB               2236              2 |                                                            ;turn    interupts     back    on  only   if  they   were   on  entry
+      E233                     2237    LEAVE   THEM   _OFF:
+      E233    7D               2238              LD           A,L
+      E234    FS               2239              PUSH      —s AF                                                ;save    raw   data   seg   !
+      E235    E640             2240              ANO          ARM_MASK                                          ;Test    sleeve
+      E237    47               2241              LD           B.A                                               ;>HAVE  ARM   DATA       (in  B)
+      —€238   70               2242              LO           A,L
+      E239    EGOF             2243              ANO          KBD_MASK                                          ;isolate     KBD   data
+      —E23B   6F               2244              LD           L.A
+      E23C    DS               2245              PUSH         DE                                                ;Save   spin    switch    count    on  stack   (reg   E)
+      E23D    11&1F6           2246              LO           DE ,DEC_KBD_TBL                                   ;Get   top   of  keypad     decoder    table
+      E240    19               2247              ADD          HL ,DE                                            ;point    to  DEC  KBD_TBL      entry
+      £241    DI!              2248              Pop          DE                                                :Restore     Spinner     count    (reg  EF)
+      E242    56               2249              LD           D, [HL]                                           ;sHAVE  KEYBOARD      DATA
+      —€243   E078             2250              IN           A,[(C]                                            ;segment     O  data
+      £245    2F               2251              CPL
+                               2252    ;
+      E246    FS               2253              PUSH         AF                                                ;save   raw   data
+      E247    6F               2254              LD           L.A
+      E248    E640             2255              AND          FIRE  MASK                                        ;isolate     fire   data
+      E24A    67               2256              LD           H,A                                               ;HAVE   FIRE  DATA
+      E248    70               2257              LD           A,L
+      E24C    EGOF             2258              AND          JOY MASK                                          ;isolate     joystick     data
+      E24E    GF               2259              LD           L.A                                               -HAVE   JOY   DATA
+      E24F    Fit              2260              POP          AF                                                ;get   back   raw   data   for   seg   0
+      E250    4F               226 1             LD           C,A                                               ;C  =  raw   data   segment     O

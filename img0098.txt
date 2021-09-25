@@ -1,0 +1,63 @@
+FILE:      €GSABS:EOS_TF                    HEWLETT-PACKARD:          DIR_HANDI       (c}    Coleco      1983    Conf  identia!                               sat,      8  Sep        a4,    323  35
+
+LOCATION        OBJECT       CODE    LINE        ~  SOURCE    LINE
+
+                                     3502               ;GLB         _  QUERY    FILE,       SET    FILE,      MAKE    FILE
+                                     3503               ;GLB         __FILE    QUERY
+                                     3504               “EXT          FCB  _HEAD   _ADDR,FCB_       DATA_ADOR
+                                     3505                EXT          SCAN_FOR    FILE
+                                     3506               ;EXT         BLOCKS    REQ,USER        BUF   ,USER    NAME
+                                     3507               ;EXT         BUF  START    ,BUF    END
+                                     3508               ;EXT         STRCMP    ,BASECMP
+                                     3509               ;EXT         NEW   HOLE   SIZE,NEW         HOLE   START,HOLE        FILE    NAME
+                                     3510               ;EXT         EOS   YEAR,EOS      MONTH,EOS        DAY
+                                     3511               ;EXT         BLK_STRT_PTR,VOL            BLK   S2           -DLS(8/29/83)
+                                     3512               ;EXT         READ_BLOCK.,WRITE           BLOCK,CHECK        IF   OIRECTORY
+                                     3513               sEXT         DIR_BLOCK_NO,FOUND             AVAIL    ENTRY
+                                     3514               ;EXT         FILENAME     CMPS
+                                     3515                           .
+                                     SENG    3m        nm  ee        enenn       we  me  mn      ee me re  mem ewe  nee  ree       nee     ee eneeen
+                                     3517    ;
+                                     3518    ;    QUERY    FILE     --  Read     the   file’s      directory        entry.     (USES     STRCMP     FOR   FILE    NAME     COMPARISIONS)
+                                     3519    ;    FILE    QUERY     --   SAME   AS   ABOVE      BUT    SETS    UP   SCAN  _FOR_FILE       FOR    BASE    COMPARES        (  USES      BASECMP    )
+                                     3520    ;
+                                     3521    ;  CALLING     PARAMETERS:        Device     number       in  A
+                                     3522    ;                                 address     of     name    string      in  DE
+                                     3523    ;                                 address       of   buffer      in  HL
+                                     3524    ;
+                                     3525    ;  EXIT    PARAMETERS:       if   no  errors       --   Z  =   1;  A   =  0;  BCDE     =  file’s     start     block:
+                                     3526    ;                                  Girectory         entry     in  caller’s      buffer
+                                     3527    ;                            if   errors      --   Z  =   0;  A   =  error    code;      DE  =   junk;
+                                     3528    ;                                  caller’s        buffer     undef    ined
+                                     3529    ;
+                                     3BIO    seer  ccc  ccc  rr rrr rte         et        rt      er rr          er    re          ee er re     eee
+                                     3531                                             |
+       E618                          3532     FILE    QUERY:
+       E618     37                   3533                SCF                                   ;  THIS    ENTRY    DOES    NOTHING      MORE     THAN    SET   CARRY     FLAG
+       E619     1802                 3534                JR          QUEER                                                                   .                      |
+            |                        3535
+       E618                          3536     QUERY    FILE
+       E61B     37                   3537                SCF                                    ;  THIS    ENTRY     CLEARS     CARRY     FLAG
+       E61C     3F                   3538                CCF
+       —E61D                         3539    QUEER:                                                    |
+       E610     ES                   3540                PUSH        HL                         ;SAVE     REG’‘S
+       E61E     DOES                 3541                PUSH        IX
+                                     3542
+       E620     FS                   3543                PUSH        AF                                              ]
+                                     3544
+       E621     3801                 3545                JR          C,SET     UP_A      -      ;  DID    WE  COME     IN  AT   FILE   QUERY
+                                 -   9546
+       E623     AF                   3547                XOR         A                               ;  USE   STRCMP     FOR    FILE    NAME     COMPARE
+       £624                          3548    SET _UP_A:                                              :                               !
+       E624     32FDOD8              3549                LD          [FILENAME     CMPS),A           ;  O  =  COMPARE      COMPLETE       FILE    NAME
+                  |                  3550                                                            ;  NOT   O   -  COMPARE      ONLY    THE    BASE
+       E627     Fi         |         3551                POP         AF
+                          .          3552
+       E628     22FEO6               3553                LD          [USER   _BUF  ]},HL        ;SAVE     USER’S     DATA    ADDRESS
+                                     3554
+       —E62B    OD2AFDFD             3555                LO          IX,  (FCB_HEAD      ADDR]       ;POINT     TO   SYSTEM’S       FCB
+       E62F     62                   3556                LO          H,D                        ;GET    NAME    POINTER      IN   HL
+       E630     68                   3557                LD          L,E
+       E631     Cf       B           3558                CALL        SCAN_FOR_FILE              ;LOOK     IN  TH’     ‘RECTORY
+
+                                                                                                                ~~

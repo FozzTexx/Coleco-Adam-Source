@@ -1,0 +1,64 @@
+ILE: OS 7PRIME:pOS            HEWLETT-PACKARD:     DISPLAY   LOGO   (c)  Coleco,   1982  CONFIDENTIAL                Fri,   18  May  1984,   16:21         PAGE   106
+
+OCATION  OBJECT   CODE  LINE        SOURCE   LINE
+
+    13BC CD1946         5231                       CALL  PARSE                 ;GET LENGTH  OF  STRING
+    13BF  118024        5232.                      LO  DE,GAME  NAME           ;STARTING  LOCATION   OF  1ST  STRING
+   13C2  210201         5233                       LD  HL,513                  ;LOCATION  (0767)    TO  START  PRINTING
+   13C5  CD1951         5234                       CALL  CENTER  PRT           PRINT  IT
+                        5235
+                        5236   * DISPLAY   COMPANY   NAME
+   13CB  218024         5237                       LD  HL,GAME  NAME           ;GET PAST  1ST  STRING
+   13CB  CD1946         5238                       CALL  PARSE
+   13CE  23             5239                       INC  HL
+   13CF  54             5240                       LD  D,H                     ;STARTING  LOCATION   OF  2ND  STRING
+   1300  5D             5241                       LO  E,L                     SAVED  IN  DE
+   1301  CD1946         52462                      CALL  PARSE                 GET  LENGTH  OF  STRING
+   1304  2101C1         5243                       LD  HL,449                  ;LOCATION  (0767)   TO   START  PRINTING
+   1307  CD1951         5264                       CALL  CENTER  PRT           PRINT  IT
+                        5245                         |
+                        5246  *  CHANGE   DATE
+   130A  218024         5247                       LD  HL,GAME  NAME           ;USE PARSE  TO  ADVANCE   HL TO
+   1300  CD1946         5248                       CALL  PARSE                 ;COPYRIGHT  YEAR
+   13E0  23             5249                       INC  HL
+   13E1  CD1946         5250                       CALL  PARSE
+   13E4  23             5251                       INC  HL
+   13E5  1102AC         5252                       LD   DE, 684                ;SCREEN LOCATION
+   13E8  FD210004       5253                       LD  I¥,4                    :# OF DIGITS
+   13EC  3€02           5254                       LD A,2
+   13EE  CD1IFBE        5255                       CALL  PUT _VRAM
+                        5256
+                        5257  * DISPLAY    10  SECONDS
+   -13F1 001968         5258                       CALL  DELAY_ 10
+.                       5259
+                        5260  * TURN   OFF  DISPLAY
+   13F4  0601           5261                      LO  B,1
+   13F6  0E80           5262                      LD  C, 100000008
+  13F8  CD1FD9         5263                       CALL   WRITE REGISTER
+           |           5264
+                       5265   * EXIT   LOGO
+  13F8  2A800A         5266                       LD  HL, [START  GAME)                  ;A  CARTRIDGE   WAS  PRESENT
+  13FE  E9             5267                       JP  CHL]                               ;SO  JUMP  TO  IT
+                       5268
+                       5269   *  WRITE   OUT  PATTERN   NAME  TABLE
+  I3FF  211479         5270   NOCARTRIDGE         LD HL,LOGO   NAMES+44                  ;NO  CARTRIDGE   PRESENT
+  1402  1101AA         5271                       LD  DE, 426                            DISPLAY    DEFAULT
+  1405  FD210000       5272                       LO  1,13                               +MESSAGE
+  1409  3602           5273                       LD  A,2                             |
+  1408  CD1FBE         5274                       CALL  PUT  VRAM
+                       5275
+  1460E 211486         5276                       LD  HL, LOGO NAMES+57                  ;"TURN  GAME   OFF"
+  1411  110164         5277                       LD DE,  484                            "TO   INSERT   CARTRIDGE"
+  1414  FD21001A       5278                       LD  1Y,26                              "OR   EXPANSION   MODULE"
+  1418  3E02           5279                       LD  A,2
+  141A  CD1FBE         5280                       CALL  PUT  VRAM                      :
+                       5281                                                                                                                                                       ‘
+  141D  2114A0         5282               |       LD  HL,LOGO  NAMES+83
+  1420  110227         5283                       LD  DE,551           :
+  1423  FD210014       5284                       LD  1¥,20
+  1427  3€02           5285               |       LD  A,2
+  1429  CD1FBE         5286                       CALL  PUT VRAM
+                       5287
+
+                                                                                                           a]                                                                                                 hamagoe
+    4                                                q           y           |         {           |           q           t           f            fd                                      ‘

@@ -1,0 +1,61 @@
+ FILE:   OS 7PRIME:pOS             CROSS   REFERENCE    TABLE               PAGE  156
+
+ LINE#      SYMBOL             TYPE        REFERENCES
+
+  1318     16                    P   1304,  1312
+  1327     17                    P   1323
+  1330    18                     P   1325
+  1199    19                     P   1182
+   942    LEAVE  EFFECT          P   941
+  5922    LINE_1                 Pp  5797
+  5931    LINE  10               P   5854
+ 5932     LIWE  11               Pp  5959
+ 5933     LINE 12                P   5965
+ 5923     LINE 2                 P   5803
+ 5924     LINE 3                 P   5941
+ 5925     LIME 4                 P   5947
+ 5926     LINE 5                 P   5950
+ 5927     LINE 6                 P   5953
+ 5928     LINE 7                 P   5842
+ 5929     LINE 8                 P   5846
+ 5930     LINE 9                 P   5850
+ 7356     LOAD ASCII             A   251,5792
+ 5681     LOAD ASCII_            P   5083,5137,   7356
+ 1346     LOAD WEXT    NOTE      P   1120,  1235, 1342
+  268     LOCAL_SPR    TBL       A   267,6207,6300
+ 5304     LOGO COLORS            P  5205
+ 5329     LOGO GEN              Pp  5150
+ 5309     LOGO NAMES            P   5177,5183    ,5197,5270,5276,5282
+ 4052     LONG                  A   4088,  4227,  4372
+ 4371     LONG TIMER            P   4355
+ 3961     LPI                   P   4002
+ 4009     LP2                   P   4022
+ 2512     L133                  P   2510
+ 7099    MAGNIFY                P   6935,  7092
+ 7122    MAG_LOOP               P   7157
+ 6763    MAIN_LOOP              P   6794
+4415    MAKE   NEW  TIMER       P   4408
+ 7221    MIRROR_L   R           P   6811,7216
+ 7279    MIRROR   U D           P  6849,6869,    7218
+ 7228    MIR_L  R10             P   7239
+ 7231    MIR  L R20             P   7234
+ 7240    MIR_L  RX              P
+ 1517    MoDB0                  P   1343,  1374, 1391,  1419,  1446, 1465, 1496
+5075     MODE  _0PORT           A   5617,6312                                                                                                                                                               ,
+7358     MODE  1                A   253,5783
+5636   MODE    1_               P   50855132,    7358
+5076     MODE  1 PORT           A   5612,5615   6293   ,6296
+4285     MOVE_IT                P   4247
+ 865     MSNTOLSN               P   693,739,  864
+ 636     MUX_SPRITES            D   237,562,6199
+23046    M_XY                   P   2303,2305
+2411     M_XY2                  P   2410,2412
+2829     NAME                   A   3107
+2453     WEGTV                  P   2445
+4245     WEXT                   P   4284
+   77    WEXTWOTEPTR            A
+1868     NEXT COLOR             P   1891
+2820     NEXT GEN               A
+4070     NEXT   TIMERO          P   4078
+4406     WEXT TIMER             P   4345
+4496     WEXT   TIMER     “4    D   4031,4184,4291,4303,      4378, 4395

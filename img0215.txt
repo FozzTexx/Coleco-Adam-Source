@@ -1,0 +1,40 @@
+FILE: «-~sABS:E0TF         HEWLETT-PACKARD:   EOSSTART   (c) Coleco  :-43  Confidential                Sat.  8 Sep  1984, 23:41         raGe—  211
+
+LOCATION OBJECT CODE   LINE     SOURCE  LINE
+
+    FEC2               8217 CALL_WP:                                           ;Gevices disk 4,  5 and tape are not  active
+                       8218 ;                LO      A,[MEMCNFGO3}             ;get the data for  configuration 3  (8K 0S7  and   56K  RAM)
+                       8219 ;                CALL    SWITCHMEM                 :select this configuration
+    FE8C2C3FCE7        8220                  JP      _GOTO_WP                  ;default to ALPHA
+    Facs               8221 DEVOOK:
+    FSCS Fi            8222                  POP     AF
+    FEC6 3EO8          8223                  LD      A,TAPE_ID
+    F8Cs               8224 DEV1OK:
+    FEC8 32FO6F        8225                  LO      [DEFAULTBT _DEV),A
+    F8CcB              8226 READ_AGAIN:
+    F8CB 21C800        8227                  LD      Hi,COLDSTART  ADDR
+    F8CE 010000        8228                  LD      BC,O
+    FBD1 3AFOGF        8229                  LO      A,(DEFAULTBT  DEV]
+    F8D4 110000        8230                  LD      DE,BLOCK_ZERO
+    F8D7 COFASE        8231                  CALL    __RD_1_BLOCK
+    F8DA CAFSEF        8232                  JP      Z,GO_TO_TAPECODE
+    F800 4F            8233                  LO      CA
+    FEDE 3AFDG6F       8234                  LD      A,{DEFAULT_BT_DEV}
+    FRE1 E6GOF         8235                  AND     OFH
+    FEE3 FEOB          8236                  cP      TAPE_ID
+    FEES 20€4          6237  |               JR      NZ,READAGAIN
+    F8E7 79            8238                  LD      A.C
+    FEES FES8B         8239                  cP      TIMEOUT
+    FREA 28D0F         6240                  JR      Z,READ_AGAIN
+    FBEC C3F8C2        6241                  JP      CALL_WP
+    FSEF               8242 GO_TO_TAPECODE:
+                       8243
+    FSEF 3AFOGF        8244                  LD      A,(DEFAULTBT  DEV]
+    FBF2 47            8245                  LO      B.A
+    FEF3 C3C800        8246                  JP      COLD_START_ADDOR
+                       8247 ;
+                       8248 SESS  STS SSSSTSS SSSssssSssrsrssessssssssrsssssssssesessesrseserssszs
+                       8249 ,SSP SSSHSSSSSSSSSS  SSTSSSSSSSSSSSSSS SSSSSS SSSSSSSTseSsrssssssssssss==
+                       8250 SSSSSASRSSSSSSSSSSSSSSSST SSSSSSSSTSSSSS SSS SSSSSSSSSSSSSTSSSS SSsesae
+                       8251 ;
+                       8252

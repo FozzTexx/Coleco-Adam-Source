@@ -1,0 +1,61 @@
+FILE:  OS7PRIME:pOS             HEWLETT-PACKARD:  ATTENUATION   SWEEP   RTN  (c)  Coleco,   1982     CONFIDENT       Fri,   18 May   1984,  16:19         PAGE   19
+
+LOCATION   OBJECT   CODE  LINE        SOURCE LINE
+
+                            712   ;        IDENT  ATNSWEE              ;Includes   ATN_SWEEP
+                            713   oRRRAAAARAAEAKRARAAAEATERAKREK
+                            714   :*       ATN.SWEEP           *
+                            715   oRERARAERAAAARRERAERERARERES
+                            716   ;.COMMENT )
+                            717   ;See User's Manual  for  description
+                            718   ;RETs 2 SET: if byte  8  is O  [means  sweep   is over,  or  note   was  never   swept)
+                            719   ;RETs 2 RESET:  if sweep  in progress
+                            720   ;)
+                           721            GLB ATNSWEEP
+                           722           sEXT DECLSN,DECMSN  ,MSNTOLSN
+                           723           ;INCLUDE OSSR_EQU:0S:0     ;equates
+    012F                   724   ATN SWEEP
+                           725    ;       * RET with  Z  SET if byte  8  = 00
+    012F   DD7E08          726            LD A,(1X+8)                ;Check  byte  8  for  no  sweep   code
+    0132   FEOO            727            cp 0                       sZ  is set   if byte  8  =  0
+    0134   C8              728            RET 2                      leave    if Z  set,  sweep   not  going
+                           729    ;         * sweep  going,  so dec  APSV
+    0135  DOES             730              PUSH IX                    ;point   HL  to APSV
+    0137  €1              731               POP HL
+    0138   1600            732              to 0,0
+    O13A   1609            733              LO E,APSV
+    013C   19              734              ADD HL,DE
+    0130  CD0190           735              CALL DECLSN                sdec  APSV   [LSN  of  byte  9]
+                           736   ;          IF (PSW, 1S,ZERO)          sAPSV   has  timed  out
+    0140  2021             737              JR NZ,L22
+                           738   ;            * dec ALEN   to see  if sweep  over
+    0142  CDO1A6           739                CALL MSNTOLSN               sreload  APSV   from  APS
+    0145  28               740                DEC WL                      spoint  to  ALEN   [# of  steps   in  the  sweep)
+    0146  €D0190           741                CALL DECLSN                 ;dec  ALEN  [LSN  byte   8)
+                           742   ;            IF (PSW,1S,NZERO)           ;sweep  not  over   yet
+    0149  2816             743                JR 2,123
+                           The   ;              * add  ASTEP  to ATN
+   0148   7E               745                  LDA,  (HL)                  ;MSN  A =  ASTEP
+   014C   E6FO             746                  AND OFOH                    smask  LSN
+   O14E   5F               747                  LD E,A                      7E  = ASTEP   | 0
+   O14F   2B               748                  DEC HL                      point   HL  to  ATN
+   0150   28               749                  DEC HL
+   0151   28               750                  DEC HL
+   0152   2B               751                  DEC HL
+   0153   7E               752                  LD A, (HL)                  sMSN  A =  ATN
+   0154   E6FO             753                  AND OFOH                    ;A  = ATN  | O
+   0156   83               754                  ADD A,E                     ;MSN  A =  [ASTEP   +  ATN]  |  0
+   0157   5F               755                  LD E,A                      ;E  = [ASTEP   + ATN)   |  0
+   0158   7E               756                  LD A, (HL)                  ;A  = ATW  | freq   or  CTRL
+   0159   E60F             157                  AND OFH                     ;mask  old  ATIN   A =  0  | freq   or CTRL
+   015B   B3               758                  OR E                        sOR  in new  ATN
+   015C   77               759                  LO (HL],A                   ;store  updated    value  back   into  song   data  area
+   015D   F6FF             760                  OR OFFH                     ;RESET  2  flag,   sweep  not   over  yet
+   O1SF   1802             761                  JR L22
+                           762   ;            ELSE                        ;2 flag  is  SET:  sweep   over
+   0161   3600             763   L23            LD {Hi} ,0                  ;set  byte  8  to  0 to  indicate    end  sweep
+                           764   ;            ENDIF
+                           765   ;          ENDIF
+   0163   C9               766   122      RET
+                           767   ;        END ;ATNSWEE
+                                  PROG

@@ -1,0 +1,58 @@
+                                                                                                                        %
+FILE:     .   »ABS:EOS_TF                     HEWLETT-PACKARD:                PORT   TBL       (c)    Coleco        1.   s  Confidential                                     Sat,       8   Sep     1984,     23:38               aE       23
+
+LOCATION       OBJECT        CODE      LINE            SOURCE        LINE
+
+                                         819
+                                         820    ;
+                                         821    ;  NOTE:       these      are    defined       global       in    E0S_COMN
+                                         822    ;
+                                         823    ;                                       ;GLB            PORT    TABLE                             ;port      value      memory       locations
+                                         824    ;                                       ;GLB           MEM    SWITCH       PORT
+                                         825    ;                                       ;GLB           NET    RESET      PORT
+                                         826    ;                                       :GLB            VOP_CTRL_       PORT
+                                         827    ;                                       ;GLB            VOP_DATA_PORT
+                                         828    ;                                       ;GLB            CONTROLLER         _O PORT
+                                         829    ;                                       :GLB            CONTROLLER         1  PORT
+                                         830    ;                                       ;GLB            STROBE      _SET   PORT
+                                         831    ;                                       ;GLB            STROBE      RESET     PORT
+                                         832    ;                                       ;GLB            SOUNODPORT
+                                         833    ;                                                                                         -
+                                       ‘6234                 SHHSSSSHSSHESEHKEHSHESHREKREKSHEHHESE                 KRESS     SSHKEEE   REESE    ES
+                                         835                 *¢*¢    VDP    ports     must     remain      next       to   each    other       *+*-+
+                                         836                 eos        and     in   CTRL     ->   DATA    order                               eee
+                                         837                 SHRSESCHSHSHHHEHEHEHEEREHHSHKE             HEHEHE                     EERE   HEEHREES
+                                         838
+       FC27                              839    PORT   TABLE:
+                                         840
+       FC27                              841    MEM  SWITCH        PORT
+       FC27     TF                       842                                              DEFB          O7FH                                      ;MEM_    SWITCH     PORT                      defined       here
+                                         843
+       FC28                              644    NET  RESET       PORT
+       FC28     3F                       845                                              OEFB          O3FH                                      ;Adam_net         reset      port             def   ined    here
+                                         846
+       FC29                              847    VOP_CTRL_PORT
+       FC29    BF                        848                                              DEFB         OBFH                                       ;VDP     ctrl     port                        01D43H
+                                         849
+       FC2A                              850    VDP_DATA_PORT
+       FC2A     BE                       851                                              DEFB         OBEH                                       ;VOP     data    port                         01D47H
+                                         852
+       FC2B8                             853    CONTROLLER         O   PO
+       FC2B     FC                       854                                              DEFB         OF  CH                                     ;Controller          O                        0114BH
+                                         855
+       FC2C                              856    CONTROLLER         1   PO
+       FC2C     FF                       857                                              DEFB         OF  FH                                     ;Controller           1                       O1151H
+                                         858
+       FC2D                              859    STROBE     SET     PORT
+       FC20     80                       860                                              DEFB         O80H                                       ;Controller          strobe        set       Q01157H
+                                         861
+       FC2E                              862    STROBE_RESET           PO
+       FC2E     CO                       863                                              DEFB         OCOH                                       -Controller          strobe        reset      01168H
+                                         864
+       FC2F                              865    SOUNODPORT
+       FC2F     FF                       866                                              OEFB         OF  FH                                     ;Sound      port                             OO   18EH
+                                         867    ;
+                                         868    [SS  SPR   ESS   SSSA    AREST   SSO   SSEAERERTRNC         Ber   stzssrsssezeeesssassesstesrssseesece
+                                         B69     sewer   eee   et  ewer  eee     HS  ESTRAETETERCEST          Rs  essere     eszesxesesnsezsstessesszz2=2
+                                         870      SRBsBssewasestesesseseeesreeseseseasaseeeetesese      eee   sserrrsezesas2ezrzseee@esesezeenz3resazezrrrsrrresez2se2
+                                         871

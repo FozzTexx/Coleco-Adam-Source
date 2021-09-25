@@ -1,0 +1,49 @@
+                                                                  »
+      «-sa0S:E&0S_TF      HEWLETT-PACKARD: EOQS_COMN (c) Coleco 1buo vonfidenttial               Sat,   8 Sep 1984, 2338         ya
+FILE:
+
+LOCATION OBJECT CODE  LINE     SOURCE LINE
+
+                        69  NAME “Rev 11 - RPD*
+                        70 ;
+                        71°; Rev  Date          Made by    Change
+                        72;  11   1Soct425p     RPD        changed E0S_4 to CV_A
+                        73;  10   130ct1000p    RPD        made only OS7 jump entries conditionally assembled
+                        74;   9   120¢t2300     vsb        Added                  POSIT FILE,  FILE  QUERY  plus         thru   a  FO“G4
+                        75;   8   O7oct!710     rfj   .    __EFXOVER changed to _EFFECT _OVER
+                        76 ;                               Added _UPDATE_SPINNER
+               ;        77;   7   £«,Ooct1725   rt         Renamed WRSPR_NM_TBL  to WR_SPR_ATTRIBUTE
+                        78;   6   O30ct1207     rt)        Increased TEMP_STACK to  12bytes,
+                        79 ;                                Removed SAVED_COUNT
+                        80;   &   WNsepts25p    RPD        replaced CONSOUT  data area with new CONSOUT2
+                        61;   4   29sept235p    RPD        replaced PLAYSONGS  with SOUNDS
+                        82;   3   26sept1005a   RPD        added conditional assembly stuff for super  games
+                        $3;   2   25sept660a    RPD        merged all of EOS ram together into this file
+                        84;   1   20septi00sa   RPD        new memory mapping
+                        866;  O   aid-sept      vB         original map @ E8OO0H
+                        86 ;
+             <FFFF>   | 87 TRUE           EQU     OFFFFH
+             <0000>     66 FALSE          EQU     OOO00H
+                        89
+             <FFFEF>    90 IN_EOS         EQU     TRUE                                                        ‘
+             <0000>     91 SUPERGAME      EQU     FALSE
+                        92 ;
+                        93 ; CURRENT EOS MEMORY MAPPING
+                        94 ;
+                        95 ;FCB_S         EQU     0D390H.                 ;FCB area
+                   .    96 ;THREE1K BLKS  EQU     00400H                  ;3 FCB 1K buffers
+             <E000>     97 EOSCODE        EQuU    OEOOOH                  ;address of EOS code segment
+             <FBFF>     96 EOS GLBTBL     EQU     OFBFFH                  ;address of EOS global tables
+             <FC30>     99 EOS UMP_TBL    EQU     OFC30H                  ;address of EOS jump table
+             <FO6O>    100 EOSGLB RAM     EQU     OFDG6OH                 ;address of EOS global data  area
+             <FECO>    101 EOSPCB_OCB     EQU     OFECOH                  ;address of EOS PCB/DCB areas
+                       102
+                       103  ;
+                       104  ;  These are key record sizes, used  invarious EOS routines.
+                       105  ;  See “INCLUDE FMGR_EQUS* AND “INCLUDE P_DCB_EQU* for details.
+                       106  ;             |
+                       107
+             <OO1A>    108 DIR_ENT_LENGTH    OEFL    26
+             <0004>    109 P_SIZE            DEFL    4        ;THE NUMBER OF BYTES IN THE PCB
+             <00 15>   110 DSIZE             DEFL    21       ;THE NUMBER OF BYTES  INTHE DCB
+                       41;                    .

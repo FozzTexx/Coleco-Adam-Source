@@ -1,0 +1,61 @@
+FILE:OS  7PRIME:pOS             HEWLETT-PACKARD:      GRAPHICS    PRIM   PKG  (c)  Coleco   1982  CONFIDENTIAL            Fri,  18 May  1984,   16:21         PAGE   135
+
+LOCATION  OBJECT   CODE    LINE        SOURCE   LINE
+
+                          6631
+                          6632    * THIS   IS A  PACKAGE    OF  ROUTINES   THAT   ALLOW   APPLICATIONS   PROGRAMMERS   TO
+                          6633    * OPERATE   ON  SHAPE   GENERATORS.     EACH  OF  THEM   TAKES,  AS  INPUTS,   AN AREA
+                          6634    *  IN OWE  OF  THE  GENERATOR     TABLES   IN WHICH   THE  GENERATORS    TO BE  OPERATED
+                          6635    * UPON   RESIDE,   A  COUNT  OF  THE   GENERATORS    TO  BE USED,  AND  AN  AREA  OF THE
+                          6636    * SAME   TABLE   INTO  WHICH   THE  RESULTS   ARE   TO  BE PUT.TWE   ONLY  RAM  AREA THEY
+                          6637    *  IS IN  THE WORK   BUFFER    A POINTER    TO  WHICH   IS DECLARED   AS  AN EXTERNAL
+                          6638    * AND  DEFINED    IN  THE  CARTRIDGE.
+                          6639
+                         6640    SAAAAKKRARRAR    WOTE:                                             SRRAAAAKARKAKARAAKKRE
+                         6641    RSRKARRARKRERE          THESE   ROUTIWES  WRITE    TO  AND  READ   RARRAKAAARAKRAERAKARRAK
+                         6642    SHeeakararnae           WITHOUT   POSSIBILITY     OF  DEFERAL       SRRAKAAARAAERAAEKREEKKE
+                         6643    RRARKRAARAAREE         AND   SHOULD   NOT  BE  USED   IN  ANY      RReKeRReeeakkaxankak
+                         6644    Raekaeaakeaene          SITUATION   WHERE    THEY MAY    BE        SRAkakakaanaaakaank
+                         6645    WHEERKAKARKRER          INTERRUPTED.                               RRRARAKARAAKAARKKAKKE
+                         6646    RARAARARARAARAAARARARAAAARERAERAAAAERAARAEARAAERAAERERERRAREAARARKEARKAE
+                          6647
+                          6648    ;                   EXT                 WORK   BUFFER
+                          6649   *  POINTER   TO  THE  WORK   BUFFER   DEFINED    BY THE   CARTRIDGE   PROGRAMMER
+                          6650
+                          6651   ;                    EXT                  VOP_MODE  WORD
+                          6652   *  THE  WORD  IN  OS  RAM   THAT  DESCRIBES    THE  CURRENT   GRAPHICS   MODE.
+                          6653
+                          6654   ;                    EXT                  GET_VRAM_
+                          6655   ;                    EXT                 PUT  VRAM_
+                          6656   *  EXTERNAL   OS  ROUTINES    IN  TABLE  MANAGER    MODULE
+                         6657
+                         6658    ;                    EXT                  MIRROR  L_R
+                         6659    ;                    EXT                  MIRROR  U D
+                         6660    ;                    EXT                  ROTATE
+                         6661    ;                    EXT                  MAGNIFY
+                         6662    ;                    EXT                  QUADRUPLE
+                         6663    *  EXTERNAL   ROUTINES    THAT   PERFORM   BLOCK   OPERATIONS
+                         6664
+                         6665    ; TRUE                EQU                  1
+                         6666    ;FALSE                EQU                  0
+                         6667    *  VALUES   FOR  BOOLEAN    FLAGS
+                         6668
+              <0003>     6669    PATTERN  GEN         EQU                  3
+              <0004>     6670    COLOR  TABLE         EQuU                4
+                         6671    *  VALUES   FOR  TABLE   CODE
+                         6672
+                         6673    *  PROCEDURE   REFLECT   VERTICAL     (TABLE  CODE(A),   SOURCE{DE)  ,DESTINATION{HL),    COUNT(BC}))
+                         6674
+                         6675    *  REFLECT   REFLECTS    EACH  OF  A  BLOCK  OF  GENERATORS    FROM  VRAM  AROUND
+                         6676    *  THE  VERTICAL   AXIS.    IF THE  GENERATORS     ARE  FROM  THE  PATTERN  PLANE
+                         6677    *  AND  THE  GRAPHICS    MODE  IS  2,  THEN  THE   ROUTINE   ALSO  COPIES  THE
+                         6678    *  CORRESPONDING    COLOR    GENERATORS.,    OTHERWISE     IS ASSUMES   THAT  THE COLOR
+                         6679    *  DATA  HAS  ALREADY    BEEN  SET  UP.
+                         6680
+                         6681    *  BEGIN  REFLECT  VERTICAL
+                         6682                        GLB                  RFLCT  VERT
+   1D5A                  6683   RFLCT   VERT                              ;  ACTUAL   ROUTINE   NAME  EXISTS   IN OS
+                         6684                                             ;  JUMP  TABLE   OWLY
+                         6685
+                         6686    *   SET  OPERATION    CODE
+   1D5A  DD211D96        6687                        LD                   1X,RFLCT   VERT_

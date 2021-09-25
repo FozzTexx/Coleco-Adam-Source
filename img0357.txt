@@ -1,0 +1,38 @@
+FILE: OS 7PRIME=:pOS           HEWLETT-PACKARD:  PUT  COMPLEX  (c) Coleco, 1982   CONFIDENTIAL             Fri,   18 May   1984,   16:20       PAGE   83
+
+LOCATION  OBJECT   CODE   LINE      SOURCE LINE
+
+    OFO2  D9              3991          EXX
+    OFO3   13             3992          INC DE                     :POINT TO YOFFSET
+    OFO4   1A             3993          LD A, (DE)
+    OFOS  09              3994          EXX
+    OFO6  6F              3995          LD L,A
+    OFO7  2600            3996          LD ,0                      sHL := Y_OFFSET
+    OFO9  19              3997          ADD HL,DE                  HL  := Y_OFFSET + YLOCATION
+    OFOA  FD7503          3998          LD  (1¥+#3),L
+    OFOD  FD7404          3999          LD  {1Y+4),H               ;COMPONENT'S YLOCATION   := YOFFSET   + YLOCATION
+    OF10  D9              4000          EXX
+    OF11  13              4001          INC DE                     ;POINT TO NEXT OFFSET PAIR
+    OF12  108F            4002          DJN2ZLP1
+                          4003  ;
+                          4004  ; CALL PUTOBJECT    FOR EACH  OF THE COMPONENT OBJECTS, PASS  SELECTOR  IN B
+    OF14  FDE1            4005          POP  IY                    ;GET OBJECT ADDRESS BACK
+    0F16  010004          4006          LD BC,4
+    0F19  FDO9            4007          ADD  1Y,BC                 :1Y POINTS TO POINTER TO  FIRST COMPONENT  OBJECT
+    OF1B  1               4008          POP DE                     sDE := COUNTER AND SELECTOR
+    OFIC  FO6E00          4009  LP2     LDL,  (1Y+0)
+    OF1F  FD6601          4010          LOH,  [1Y+1]               sHL := ADDRESS OF COMPONENT  OBJECT
+    OF22  FD23            4011          INC IY
+    OF24  FD23            4012          INC IY                     s1Y POINTS TO NEXT COMPONENT  OBJECT  POINTER
+    OF26  £5              4013          PUSH HL                                                                    :
+    OF27  DEI             4014          POP IX                     ;1X := ADDRESS OF COMPONENT  OBJECT
+    OF29  FDES            4015          PUSH IY                    SAVE  POINTER              |
+    OF28  05              4016          PUSH DE           |        SAVE  COUNTER AND.SELECTOR
+    OF2C  43              4017       (<séitCBE                     7B := SELECTOR
+    OF2D  CDIFFA          4018      i   CALL PUTOBJ
+    OF30  D1              4019          POP DE                     ;GET COUNTER AND SELECTOR
+    OF31  FDE1            4020          POP IY                     GET  ADDRESS OF NEXT COMPONENT  OBJECT  POINTER
+    OF33  15              4021          DECD
+    OF34  2066  -         4022          JR WZ,LP2
+    OF36  C9              4023          RET
+                          4024   PROG

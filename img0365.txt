@@ -1,0 +1,61 @@
+FILE: OS  7PRIME:pOS           HEWLETT-PACKARD:   TIME  MANAGER   (c)  Coleco,  1982  CONFIDENTIAL              Fri,  18 May  1984,  16:20        PAGE    91
+
+LOCATION   OBJGCT   CODE  LINE      SOURCE  LINE
+
+    10AE   EB             4423              EX   DE,HL                                 ;Save momentarily
+    10AF   E1             4424              POP   HL      ,                            ;Get back original   timer
+    1080   CBA6           4425              RES  €0OT, (HL)                            ;Reset previous   last  timer
+    1082   EB             4426              EX   DE,WL                                 ;Get back  current  last  timer
+    1083   01             4427              POP  ODE                                   sRestore DE  register
+    1084   18A4           4428              JR    TIMER!         |                     ;Go back up  and  initialize   counter  for  use
+                          4429
+    1086                  4430  INITTIMER   EXIT:
+    1086   £1             4431              POP   HL
+    1087   CBAE           4432              RES   FREE, (WL)
+    1089   78             4433              Lo   3=6—A,B              sPut the  offset into the Accumulator    for  the user  of  routine
+    10BA   C9             4434              RET
+                          4435
+                         4436
+                          4437  ;Procedure  Test  Signal
+                          4438  “ACC has  the Signal   number   to be  tested
+                          4439  A  value of  True(1)   or False(0)    is returned  in the Accumulator   for the   —
+                         4440   |                 Signal  given.
+                          4441  ;           Conn
+                          4442  ;TESTSIG  NUM:
+                          4443  ;           DEFS  1
+                          44h
+                          4445              PROG
+    1088                  4446  TEST_SIG_ PARAM:
+    1068   00010001       4447              DEFW  1,1
+                   .      4448
+    10BF                  4449  TEST SIGNALQ
+    10BF   011088         4450              LO             SIG  PARAM
+    10€2   11732          4451              LD    DE,TEST  SIG  NUM
+   —10C5   c00096         4452              CALL  PARAM_
+    10C8   3A73C2         4453              LD    A, (TEST _SIG_NUM)
+          ;               4454
+    10cB                  455   TEST SIGNAL_
+    10c8   4F             4456              LD    C,A                                  ;Put Signal  Code  into  C register
+    10CC   2A7303         4457              LO    HL, (TIMER  TABLE BASE)              ;Get Timer  Base Address
+    10CF   47             4458              to    «6A,                                 ;Save Signal
+    1000   110003         4459              LD   DE, 3                                 ;Set up offset  for  next  timer
+    1003   87             4460              oR    A                                    ;See if first  timer   is a match
+    1004   2808           4461              JR                                         s1f so go check   it
+                          4462                                                                                                                                                              ,
+    1006                  4463  TESTI:                                                 ;Loop to match  timer  table   to desired   timer
+    1006   CB66           4664              BIT EOT,   (WL)                            ;Check for  end of  table
+    1008   200C           4465              JR               FALSE                     ;If so then  return  a not  done
+    100A   19             4466              ADD   WL,DE                                3;Nowindex  to next  timer
+    1008   0D             4467              DEC   C                                    ;Decrement  to the  timer  desired
+    100C   20F8           4468              JR  = WZ,TESTI                             sIf not a timer  desired   timer   then go  back
+                          4469
+    100€                  4470  SIGNAL_MATCH:                                          ;Here with  a timer  match
+    100E   CB6E           4471              BIT   FREE, (HL)
+    10€0   2004           4472              JR               FALSE
+    10€2   CB7E           4473              BIT DONE,   (HL)                           ;Check for  timer  done
+    10€4   2003           4474              JR    WZ,SIGMAL  TRUE                      ;1f so then  go return   a True                                                 ‘
+    10€6                  4475  SIGNAL_FALSE:                                          ;Here to return  a  false  for  either
+                          4476                       |       |                         sa not done  or non  existent   timer
+    10E6   AF             4477              XOR   A                                    sPut a false  in Acc
+    10€7   180A           4478              JR    TEST EXIT                            ;Go to the  exit
+                        * 4479

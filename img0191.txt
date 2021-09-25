@@ -1,0 +1,23 @@
+FILE: .-sABS:EOS_TF        HEWLETT-PACKARD:   CONS OUT   (c) Coleco   1~~ Confidential                  Sat,   8  Sep  1984,  23:41        »   «ac 187
+
+LOCATION OBJECT CODE   LINE     SOURCE  LINE
+
+                       7530 ;
+                       7531 ; MOVE_ODOWN  -   Moves  the cursor  down if will stay in window, except
+                       7532 ;                 if used  by linefeed  when the screen is scrolled
+                       7533 ;
+    F683               7534 MOVE_DOWN:
+                       7535
+    F683 2AFEAS        7536                   LO       HL,{CURSOR}
+    F686 3AFE7D        7537                   LD       A,[Y_MAX]        -See if at bottom of window
+   F689  BD            7538                   cP       L
+    F6E8A2304          7539                   JR       Z,SCROLL_POSIBLE
+    FE8C 2C            7540                   INC      L                ;Move down
+    F68D C3F67D        7541                   JP       RESTOREOLD
+                       7542 ;
+    F690 3EOA          7543 SCROLL_POSIBLE:   LO       A,LF             ;See if linefeed, and if it  is
+    F692 B88           7544                   CP       B                ;   then scroll up, else leave
+    F693 20C6 .        7545                   JR       NZEXIT           ;     cursor and screen as  is
+    F695 CDF794        7546                   CALL     SCROLL_UP
+    F698 2AFEAS        7547                   LO       HL,[CURSOR]
+    F69B C3F653        7548                   JP       NEWCURSOR

@@ -1,0 +1,60 @@
+       FILE:  EOSABS:E0OS  TF            HEWLETT-PACKARD:    EOS BLK      (c)  Coleco   1983 Confidential                       Sat,    8  Sep  1984,   23:42        PAGE  230
+
+       LOCATION   OBJECT   CODE    LINE        SOURCE  LINE
+
+                                   8944   SSSKeESKCSSCSHSESKHSS SH SKSSSHKSHH SESE HEKESSSEKESKRESS     SEKESHEAEKEEHERE  KEKE ESD
+                                   8945   +
+                                   8946   +       __END_RD_1_   BLOCK  CHECKS   THE  STATUS  AFTER  A __START_RD_1    BLOCK
+                                   8947   *        IS EXECUTED
+                                   8948   +
+                                   8949   +        INPUT:   A         DEVICE   ID
+                                   8950   +                           LOW  NIBBLE   - DEVICE  ADDRESS
+                                   6951                               HI  NIBBLE    - SECONDARY   DEVICE   ID
+                                   6952   *
+                                   8953   *       OUTPUT:   CONDITION    FLAGS
+                                   8954   *                 C:   OPERATION    COMPLETED
+                                   8955   *«               NC:   OPERATION    NOT COMPLETED
+                                   8956   *                 Z:   NO  ERRORS
+                                   8957   *                NZ:   ERRORS
+                                   8958   «                           A  = ERROR  CODE
+                                   8959   «+
+                                   8960   *       ALL  REGISTERS    ARE  SAVED
+                                   8961   *
+                                   BISD   SHSSeSeSSSSSS   SESESESESS SESESSSHHETEHSETEEE   KEREESEEHSEREKEHEEEHEEEE EEE EKEEE  EES
+ “       .                         8963
+                                   8964          ;GLB       __END_RD_1_BLOC1
+                                   8965          sEXT       CHK_IF_IDLE
+                                   8966
+            FAEQ                   8967    END  _RD_1 BLOCK:
+            FAE2  FDES             8968           PUSH      ly
+                                   8969
+            FAE4  CDF446           8970           CALL      __FIND_DCB
+                                   8971
+            FAE7  37               8972           SCF                                     ; SET CARRY   FLAG  TO  INDICATE   OPERATION     COMPLETED
+                                   8973                        |
+            FAEB  2012             8974           JR        NZ,NO DCB  _FOUNDS            ; NO DCB  FOUND
+                     |             8975
+            FAEA  CDF4AE           8976           CALL      CHK_IF_IDLE                   ; IS DEVICE   IDLE?
+                                   8977              .
+            FAED  2000             8978           JR        NZ,0CB_IS_IDLES
+                                   8979                                                                                                                           .
+            FAEF  B7               8980           OR        &                             ; CLEAR  CARRY  FLAG
+            FAFO  FOCBOOTE         8981           BIT       CMND_COMPLETE    BIT,[I¥+D_   COMSTAT)    ; WAS  COMMAND   COMPLETE?
+            FAF4  2806             8982           JR        Z,COMMAND  NOT   COMPLETED    ; NOPE,
+                                   86983
+                                   8984
+            FAF6  FO7EOO           8985           LD        A,{1IY¥+D_COM STAT}           ; GET STATUS   OF  LAST  OPERATION
+                                   8966
+            FAFS  FE8O             8987           CP        CMND_FIN_  STATUS             ; ANY ERRORS?
+            FAFB  37               8988           SCF                                     ; INOICATE  COMMAND   COMPLETED
+                                   8989                                                   ; CONDITON  FLAGS:   IF  NO  ERRORS:    C,2
+                                   8990                                                   °                    IF  ERRORS:    C,NZ    A=ERROR    CODE
+                                   8991
+|           FAFC                   8992   DCB_IS_IDLES:
+            FAFC                   8993   NODCB_FOUNDS:
+|           FAFC                   8994   COMMAND COMPLETED:
+            FAFC                   8995   COMMAND NOT  COMPLETED:
+            FAFC  FODE1            8996           POP       Iy
+                                   8397
+            FAFE  C9               8998           RET
+                                   8939

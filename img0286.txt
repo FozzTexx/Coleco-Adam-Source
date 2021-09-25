@@ -1,0 +1,24 @@
+FILE: OS  7PRIME:pOs          HEWLETT-PACKARD:  OPERATING SYSTEM (c)  Coleco,  1982   CONFIDENTIAL          Fri,  18  May  1984,  16:18       PAGE    12
+
+LOCATION  OBJECT  CODE   LINE       SOURCE LINE
+
+                          468
+                          469  *  THE WMI VECTORING SOFTWARE AND DEFAULT  HANDLER
+                          470
+                          471  *  WHEN AN NMI IS RAISED BY THE VDP  IN THE  COLECOVISION SYSTEM,   IT
+                          472  *  CAUSES THE CPU TO RESTART TO 66H.  THE VECTORING  SOFTWARE FOR  THE
+                          473  *  WMI IS IDENTICAL TO THAT FOR THE MASKABLE   INTERRUPT EXCEPT  THAT
+                          474  *  IT GETS ITS VECTOR FROM WMIINT VECT   INSTEAD  OF IRQ_INT_VECT.
+                          475
+                          476  *  AGAIN THE CARTRIDGE PROGRAMMER IS RESPONSIBLE,   IN HIS/HER OWN
+                          477  *  INTERRUPT HANDLERS FOR SAVING AND RESTORING   THE PROCESSOR STATE
+                          478  *  WHEN NECESSARY, AND FOR CLEARING THE  VDP  CONDITION BY READING   THE
+                          479  *  VDP STATUS REGISTER.
+                          480
+    0059 FFFFFFFFFF       481                   HEX             FF,FF,FF, FF, FF        sFiller
+   OOSE  FFFFFFFFFF       482                  HEX              FFLFF, FF,FF, FF        Filler
+   0063  FFFFFF           483             |    HEX              FF,FF, FF               Filler
+                          484  *  NON-MASKABLE INTERRUPT
+  0066                    485 NMI_  INTERRUPT
+   0066  ¢38021          686                    JP              (WHI INT VECT)
+                          487

@@ -1,0 +1,76 @@
+                                                                               ‘e
+FILE:  t-_  3S:E€OSTF         HEWLETT-PACKARD:    A_uOS  OO     (c)  Coleco  1s.   Confidential
+                                                                                                                   Sat,   8 Sep  1984,  23:39        'aGF    t1
+
+LOCATION  OBJECT   CODE  LINE       SOURCE  LINE
+
+    E253                 2320   __POLLER:
+
+    E253  21FESA         2321                     LO         HL
+                                                                ,PERSONAL_DEBOUNCE_TABLE             ;pointto controller  O  debounce   buffer
+    E256  4F             2322                     LD         CA
+                                                                                                     >Saveenabled controller    input
+    E257  E601           2323                     AND                    _O
+                                                             CONTROLLER    MASK                      ;see {icontroller  O  is enabled
+    E259  2823           2324                     JR          Z,NOT
+                                                                    CONTROLLER  O                    ,Ifnot  thencheck   to see  if controller    1  is
+    E258  3D             2325                     DEC        A
+                                                                                                     ;toO for parameter   to DECODER
+    E25¢  CDE264         2326                     CALL       READ_N_DEBOUNCE
+                                                                                                     :get thedata and  debounce   it
+    E25F  CB49           2327                    BIT                       BIT.C
+                                                             CONTROLLER_1                            ;see ifcontroller   1 is active
+    E261  cs             2328                    RET         z
+                                                                                                     ;return tfnot
+    E262                 2329   POLL_CONTROLLER_  1:
+                                                                                                     ;getdata for controller    1
+    E262  3EO1           2330                    LO          A,O1H
+
+    E264                 2331  READ_N_DEBOUNCE  :
+
+    E264  cs             2332                    PUSH        BC
+                                                                                                    ;Save input parameter
+    E265  ES             2333                    PUSH        HL
+                                                                                                    ;Save debounce buffer  ptr
+   E266   COE206         2334                    CALL        __DECODER
+
+   E269   4c             2335                    LO          C.H
+                                                                                                    ;COpy over raw data
+   E26A   70             2336                    LD          A,L
+                                                                                                     >;with fire and  joystick  data
+   E268   Et             2337                    PoP         HL
+                                                                                                    ;get pointer to debounce   buffer
+   E26C   CDE28B         2338                    CALL        DEBOUNCE
+                                                                                                    ;debounce the data  (on  second  ca)!)
+   E26F   ci             2339                    POP         BC
+                                                                                                    ;get back input parameter
+   E270   cB879          2340                    BIT         SPINNER
+                                                                      ENABLE  BIT,C                 ;see if spinners  are enabled
+
+   E272   2807           2341                    JR          2.NEXT_IX
+
+   E274   78             2342                    LD          A,E
+                                                                                                    ;if so add
+   E275  DD8600          2343                    ADD         A,[IXto]
+                                                                                                    ;     new data to  that  in
+   E278  DD7700          2344                    LO          [IX+0O],A
+                                                                                                    ;                    users  buffer
+   E27B  DD23            2345  NEXT_IX:          INC         IX
+                                                                                                    ;point to next users  buffer
+   E270  c9             2346                     RET
+
+                        2347
+
+   E27E  CB49           2349                     BIT                     1
+                                                             CONTROLLER    BIT,C                    ;see if controller  1 itsenabled
+   E260  c8             2350                     RET         Z
+                                                                                                    ;sreturnif not
+   E281   110004        235 1                    LD          DE,0004H
+
+   E284   19            2352                     ADD        HL ,DE
+                                                                                                    ;point to next.debounce  buffer
+   E265   13            2353                     INC        DE
+
+   E286  DD19           2354                     ADD         IX,DE
+                                                                                                    ;point to next user  buffer
+   E288  C3E262         2355                     JP         POLL_CONTROLLER   1

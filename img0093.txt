@@ -1,0 +1,65 @@
+—
+
+ FILE:  c+ sABS:EOS   TF          HEWLETT-PACKARD:   SOUND   EQU¢S  (c)  Coleco,    :982    CONFIDENTIAL                 Sat,   8  Sep  1984,   53:39        “AGE   89
+
+ LOCATION    OBJECT   CODE  LINE       SOURCE  LINE
+
+                            3293
+                            3294   ;       RET                           ; to PROCESS  DATA   _AREA,  don’t   save  header
+                            3295   ;       ENDIF
+                            3296
+     E530                   3297   ENONOREP
+     E530    SEFF           3298           LD        A, INACTIVE
+     E532    F5             3299           PUSH      AF                  ;Save   inactive   code   to end  song
+     E533   C3ES5EC         3300           JP        MODBO               ;to  load  byte   O
+                            3301
+                            3302   ;       ENDIF
+                            3303   ;       -  test  for  special   sound  effect
+                            3304
+     £536                   3305   114
+     E536   E63C            3306           AND       001111008           smask   irrelevant    bits
+     ES38   FEO4            3307           cP        00000  1008         ;test   for  BS  - B2  = OOO!
+     ES3A   2027            3308           JR        NZ,L15              ;1f  PSW  is  zero  note   is a  special   effect
+                            3309   ;e@@ EFFECT
+     E53C   FDE1            3310           PoP       ly                  ;TY  :=  SONGNO
+     ES3E   FOES            3311           PUSH      ly                  ;put  SONGNO   back  on  stack
+     E540   CS              3312           PUSH      BC                  ;Save  header   on  stack   NEXT_NOTE  PTR    := SFX,  DE  :=  SFX
+     E541   23             3313            INC       HL                  ;-pt  HL  to  next  byte   [LSB  addr  SFX]
+     E542   SE              3314           LO        E, {Ht}             ;-E  :*  LSB  SFX
+     E543   DD7301          3315     |     LO        {IxX+1]),€          ;-put  LSB  of  SFX   in byte   1 of  SxDATA   ([NEXT_NOTE_PTR]
+     E546   23              3316           INC       HL                  ;"pt  HL  to  MSB  SFX
+     E547   56              3317           LO        D, {HL}             ;-D  :=  MSB  SFX
+     E548   DD7202          3318           LO        {IxX+2],D           ;-put  MSB  SFX   in byte   2 of  SxDATA
+     E548   23       |      3319           INC       HL                  ;point   HL  to next   note  [after   this  new  note]
+     E54C   FDES           3320            PUSH      ly                  ;A  :2 SONGNO
+     ES4E   Fi             3321            PoP       AF
+    ES4F    D5             3322            PUSH     DE                   ;1Y  :=  SFX
+    ESSO    FDE1           3323            PoP       ly
+    E552    11&€558        3324            LD       DE ,PASS1            ;create   “CALL   [IV]"  with  RET  to  PASS1  by  storing
+    E555    D5             3325            PUSH     DE                   ;PASS1  on  the  stack
+    E556    FDES           3326            JP        {ly}                ;ist  7 bytes   SFX  will  save   addr  next  note  &  SONGNO
+    E558                   3327   PASS!
+    E558    110007         3328            LO       DE ,7                ;in same   fashion,   create   a  “CALL  (1Y+7)*
+    E558    FD1I9          3329           ADD        IY,DE               ;to allow   SFX  to  load   initial  values
+    ES5D    11ES5EC        3330            LD       DE ,MODBO           ;RET   to  MODBO
+    E560   05      .       3331           PUSH      DE
+    E561    FDES           3332           JP         {Iy]
+                           3333
+                           3334    ;      ENDIF
+                           3335
+                           3336    ;       - 1f  here,  note   is type  0  - 3
+                           3337
+    E563                   3338   L15
+    E563   C5              3339           PUSH      BC                  ;Save   header   on  stack
+    E564   78              3340           LO        A.B                 ;A  :=  fresh  copy   header
+    E565   E603            3341           AND       000000  1 1B        ;mask   all  but  type  number
+    E567   87              3342           OR        A                   ;test   for  type  O
+    E568   2020            3343           JR        NZ,L16              7;if PSW   is zero  note   is  type  O: fixed   freq  and  atn
+                           3344
+                           3345   ;@ee TYPEO                                   ;5e@t up NEXT_NOTE   PTR
+    ES6A   23              3346           INC       HL                  ;next   note  [after   this  new  note]   ts 4 bytes   away,
+    E56B   23              3347           INC       HL                  ;point   HL  to  it     .
+    ES6C   23              3348           INC       HL
+    ES6D   23              3249           INC       HL
+
+ra

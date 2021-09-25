@@ -1,0 +1,41 @@
+FILE: EOSABS:EOS TF        HEWLETT-PACKARD: EOS COMN  (c) Coleco  1983  Confidential                   Sat,   8  Sep  1984,  23:38      PAGE   10
+
+LOCATION OBJECT  CODE  LINE     SOURCE LINE
+
+                        358 ;
+                        359 ;     NOTE: See SWITCHTABLE
+                        360 ;
+                        361°;               ;GLB     MEMCNF GOO
+                        362 ;MEM_CNFGOO     EQU     $+24       |
+                        363 ;;              ;GLB     SWITCHTABLE
+                        364 ;SWITCH_TABLE   EQU     MEMCNFGOO
+                        365 ::              ;GLB     MEMCNFGOI
+                        366 :MEM_CNFGO1     EQU     $+25
+                        367 ;;              ;GLB     MEMCNFGO2
+                        368 ;MEM_CNFGO2     EQU     $+26
+                        369 :;              ;GLB     MEMCNFGO3
+                        370 ;MEM_CNFGO3     EQU     $+27
+                        371 3;              ;GLB     MEMCNFGO4
+                        372 ;MEM_CNFGO4     EQU     $+28
+                        373 ;;      |       ;GLB     MEMCNFGOS
+                        374 ;MEM_CNFGOS     EQU     $+29
+                        375 ;;              ;GLB     MEM_CNFGO6
+                        376 ;MEM_CNFGO6     EQU     $+30
+                        377 5;              ;GLB     MEM_CNFGO7
+                        378 ;MEM_CNFGO7     EQU     $+31
+                        379 ;;              ;GLB     MEMCNFGOS8
+                        380 ;MEM_CNFGOS     EQU     $+32
+                        381 ;;              ;GLB     MEMCNF GOS
+                        382 ;MEM_CNFGOS     EQU     $+33
+                        383 ;;              ;GLB     MEMCNFGOA
+                        384 ;MEM_CNFGOA     EQU     $+34
+                        385 ;;              ;GLB     MEMCNF GOB
+                        386 ;MEM_CNFGOS     EQU     $+35
+                        387 ;;              ;GLB     MEM_CNFGOC
+                        388 ;MEM_CNFGOC     EQU     $+36
+                        389 ;;              ;GLB     MEM_CNFGOD
+                        390 ;MEM_CNFGOD     EQU     $+37
+                        391 5;              ;GLB     MEM_CNFGOE
+                        392 ;MEM_CNFGOE     EQU     $+38
+                        393 ;;              ;GLB     MEM_CNFGOF
+                        394 ,;MEM_CNFGOF    EQU     $+39

@@ -1,0 +1,56 @@
+FILE: ~.5A8S:EOS_TF          HEWLETT-PACKARD:      RD_WT      (c)  Coleco   1._. Confidential                        Sat,   8  Sep  1984,  23:40        ticue  125
+
+LOCATION  OBJECT  CODE  LINE       SOURCE   LINE
+
+                        5057   ; INTO  THE BUFFER    AND  GO AWAY.
+                        5058
+    EE93                5059   ROOM OK
+    EES3  ED4BFEO4      5060            LD         BC, (BYTES TO GO)   ;GET  THE BYTE  COUNT
+    EES7   DODG15       5061            LD         L,{IX+¢FCB_LAST COUNT  }
+    EESA  DODGEIG       5062            LO         H,[IX+FCB_LAST_COUNT+1]
+    EE9D  O09           5063            ADO        Hi ,BC
+    EESE  007515        5064            LD         [1X+FCB_LAST COUNT],L
+    EEA’  007416        5065            LO         (I1X+FCB_LAST_COUNT+1),H
+    EEA4  DOSE21        5066            LD         E,([1X+FCB_POINTER)   ;GET  POINTER   INTO   BUFFER
+    EEA?  D0DS622       5067            tb         D,[IX+FCB_POINTER+1]
+    EEAA  2AFEO6        5068      .     LO         Hi,[USER _BU)     ;GET  POINTER   TO  USER’S   DATA
+    EEAD  EDBO          5069            LDOIR                        ;MOVE  THE  DATA
+                        $070
+    EEAF  007321        5071            LD         (IX+FCB_POINTER]),E   ;UPDATE   THE POINTER                                                                      :
+    EEB2  007222        §072            LD         [IX+FCB_ POINTER+1],0                                         .
+    EEBS  DOCBISFE      §073            SET        MODEDIRTY_BIT,[IX+FCB_    MODE]   ;SET   THE  DIRTY   BIT
+                        5074
+    EEBS                5075  ROOM! OK:                                                    ;
+   EEBS   AF            5076            XOR        A
+    EEBA  1803          $077            JR         PAST_WRITE_ERR
+    EEBC      |         S078  WRITE _ERR2:
+    EEBC  3E09          5079            LD         A,BAD_FNUM_ERR
+    EEBE                5080  WRITE _ERRI:
+    EEBE  B7            $06|            OR         A
+    EEBF                S082  PAST_WRITE  ERR:
+    EEBF  ODE           $083            POP        Ix                ;sRESTORE  REGISTERS
+    EEC1  E11           $064            POP        HL
+    EEC2  Di      |     $085            POP        DE
+    EECS  Ci            $066            POP       BC
+    EEC4  CO            $087            RET
+                        6068   *WRITEERR
+                        S069   +        PoP        IX                ;RESTORE   REGISTERS
+                        6080   +        POP       HL
+                        6091   ¢        PoP       DE
+                        5082   +        POP       BC
+                        5093  +         OR        A                  >SET  CONDITIONS
+                        $094  «+        RET
+                        6095  *WRITE  ERR2
+                        6096  «+        POP        Ix                ;sRESTORE  REGISTERS
+                        6097  «+      — POP       HL
+                        $098  +         PoP       DE
+                        5099  *         POP       BC
+                        $100  +         LO        A,BAD_FNUM_ERR     ;SHOW  AN  ERROR
+                        5101  -         OR        A                  ;SET  CONDITIONS
+                        $102  *         RET
+                        §103   ;
+                        5104   ,BSRSSRKESSESSSSSSSTSSSSESRSERSSETESEXCZTOST ASECTARSTSCSKECSKRERSERRAESESEESBSA
+                        §105   ,BSSSRSRHRKEBBSTESESTCTSERSESRAHASSESTRECSSA  BASHSSC RSKRSESHSRSEABKRESBBTRZKRET
+                        §106   ,BSSSCSCSHSHRSSEKSSHERSRESSCSTSSSESRESESRSSESSTOERTSSAE STRESSES SKRRBET SBEKKEE
+                        $107   ;
+                        5108

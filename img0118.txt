@@ -1,0 +1,61 @@
+FILE:  EQSABS:E0S  TF          HEWLETT-PACKARD:     OPENS        (c)  Coleco    1983  Confidentiai                        Sat,   8  Sep  1984,  23:40        PAGE  114
+
+LOCATION   OBJECT  CODE   LINE       SOURCE   LINE
+
+                          4489  ;------7  rrr--  Pe           rr          rt   nnn  en ne  eeen ne eeeee eee    eee
+                          4490  ;
+                          4491  ;  _RESET   FILE   --  rewinds   the  file   back  to  the  first  byte.
+                          4492  ;
+                          4493  ;  ENTRY  PARAMETERS:    file   number   in  A
+                          4494  ;
+                          4495  ;  EXIT  PARAMETERS:    no  error   --  Z =  1; A=O
+                          4496  ;                       if  error   --  2 = OO; A  = error   code
+                          4497  ;
+                          AMDD  5mm  mn             rn         ttt              nr    nt  rent      nent   ce cceee
+                          gAOg                                                                                                                                 -
+    EBEC            :     4500  _RESET_FILE
+    EB6C   DDES5          4501            PUSH      IX                   ;SAVE  REGISTERS
+    EBGE   05             4502            PUSH      DE
+    EBG6F  C5             4503            PUSH   =  BC                                                                                                                       ;
+    E870   ES            .4604            PUSH      HL                                   :
+                          4505
+    —B71   87             4506     |      oR        a                    ;CHECK   FILE  NUMBER
+    E872   CAECO7         4507            uP        Z,R_ERROR            ;BRANCH   IF  ZERO   -
+    EB7S   FEOS3          4508            cP        NUM _FCBS            ;>CHECK  FOR MAX   RANGE
+    E877  D2ECO7          4509            JP        NC ,R_ERROR          ;BRANCH   IF TOO   LARGE
+                          4510
+    EB7A   47          _  4511            LO        B.A                  ;PUT  IT  INTO  B
+    EB7B  DD2AFDFD        4512           ~Lo        IX, [FCB_HEAD_ADOR])     ;GET  ADORESS   OF  OTH  FCB
+    EB7F   2AFOFF         4513            LO        HL, (FCB _DATA_ADDR]     ;GET  ADORESS   OF OTH   BUFFER
+    EB82                  4514  RES!                                         |       |                         -
+    EBB2   110023         4515            LO        DE,FCB_LENGTH      ;SET    OFFSET
+    Eses  D019            4516            ADD       IX,DE                ;ADVANCE   POINTER   TO  NEXT   FCB
+    E887   110400         4517         -  Lo        DE, 1024             ;SET  BUFFER   SIZE
+    EBSA   19             4518            ADD       HL .DE               ;ADVANCE   POINTER   TO  NEXT  BUFFER
+    E888   10F5           4519            DuUNZ     RES1                 ;UNTIL  WE  GET  TO  THE  ONE  WE  WANT
+                        _ 4820
+    EB8D  DO7E18          4521            LD        A,[IX+FCB_  MODE}    ;LOOK  AT  THE  MODE  BYTE
+    E890  B87             4822            OR        &
+    E88!  2874            4523            wv        Z,R_ERROR            ;BRANCH   IF FCB  NOT   IN USE
+                          4524
+    EB93  E640            4525          _ AND       MODE DIRTY           ;ZERO  UNWANTED   BITS
+    EB9S  2818            4526            JR        2,RES2               ;BRANCH   IF BUFFER   NOT  DIRTY
+                          4527
+    EB97                  4528  TIMED OUT:           .
+    E897  DO7E17          4529            LO        A,{IX+FCB  DEVICE]     ;GET  THE  DEVICE   NUMBER
+    EBSA  DOSE 19         4530            LD       -E,[IX¢FCB_BLOCK]      ;GET  THE  BLOCK  NUMBER
+    EBSD  DDS61A          4531            LO        D,[IX+FCB_BLOCK+1]
+    EBAO  DD4E  1B        4532            LO        C,{IX+*FCB_BLOCK+2]
+    EBA3  DD461C          4533            LO        B,[IX+FCB_BLOCK+t3]
+                          4534                                           sHL STILL   HAS  ADDRESS   OF  BUFFER
+    EBAG  CDF 1E6         4535            CALL      WRITE BLOCK          ;FLUSH  THE  BLOCK   TO  TAPE
+    EBAQ  2065            4536            JR        NZ,R_ERROR2          ;BRANCH   IF ERROR
+                          4837
+    EBAB                  4538  RESET BIT:
+    EBAB  DDCB 1886       4539            RES       MODE DIRTY  _BIT,{IX+FCB_MODE]       :CLEAR   THE  DIRTY   BIT
+    EBAF                  4540  RES2
+    EBAF  DOCBI1SBE       4541            RES       MODE LAST  BLOCK   BIT,  [IX+FCBR MODE]     ;  BACK   TO  FIRST   BLOCK
+    EBB3  OD7EOD          4542            Lo        A,{IX+FCB_FIRST_    BLOCK]   ;SET  BLOCK   TO  FIRST  BLOCK
+    EBBE  007719          4543            LO        {1X+FCB BLOCK]),A
+    E889  ONT’            4544            LO        A,{IX+FCB  FIRST   BLOCK+?   |]
+    EBBC                  A545            LD        [1X+FCB BLOCK+1].A

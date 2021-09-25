@@ -1,0 +1,30 @@
+FILE: \-oapS:€0S_TF           HEWLETT-PACKARD:    CONSOUT     (c) Coleco   15.4 Conf identia}                      Sat,   8  Sep  1984,    23:41         crut  197
+
+LOCATION  OBJECT   CODE   LINE     SOURCE  LINE
+
+                          7736 ;
+                          7737 ; Subroutine
+                          7738 ; ERASETHIS   LINE    -   This  routine   will erase  the   current  line
+                          7739 ;                         from  the  cursor  position   to  the  right edge
+                          7740 ;                         of  the window,   the char  under    the cursor   is
+                          7741=;                         also  blanked.
+                          7742 ;
+                          7743 :Input Parameters:
+                          7744 ;   None
+                          7745 ;
+                          7746 ;  Destroys   al!  registers
+                          7747 ;  Sets OLDCHAR_    to BLANKING  CHAR
+                          7748 ;
+    F766                  7749 ERASE_THIS_ LINE:
+    F766  CDOFT779        7750                    CALL     READ _FROM_CURSOR_TO_  EOL
+    F769  ES              7751                    PUSH     HL           :
+    F76A  CS              7752                    PUSH     BC
+    F768  41              7783                    LO       B,C
+    F76C  CDF738          7754                    CALL     BLANK  PORTION
+    FIGF  Ci              7755                    POP      BC
+    F770  E1          _   7786                 -  POP      HL
+     .                    7787
+    F771  3E20            7788                    LD        A,BLANKING  CHAR
+    ‘F773 32FE79          7789                    LD        {OLDCHAR_}.A
+                          7760
+    F776  C3FDIA          7761                    JP       WRITE  _VRAM       write    line   with blanks,    return  thru  WRITE  _VRAM

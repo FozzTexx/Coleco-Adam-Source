@@ -1,0 +1,8 @@
+FILE: EOSABS:E0S_TF       HEWLETT-PACKARD: OPENS     (c) Coleco 1983 Confidential                 Sat,   8  Sep  1984, 23:40      PAGE  116
+
+LOCATION OBJECT CODE  LINE     SOURCE LINE
+
+                      4603 ,SSSSSSSSCSHSSSSHBSASTRESSSSSTSSSSSSPSSSSSSRHSSTSSSSERSSSSESSCSesezss
+                      4604
+                      4605 ;
+                      4606

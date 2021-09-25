@@ -1,0 +1,63 @@
+ILE:  OS_7PRIME:pOS           WEWLETT-PACKARD:      TIME   MANAGER   (c)  Coleco,     1982    CONFIDENTIAL                  Fri,   18  May   1984,  16:20        PAGE    84
+
+OCATION   OBJECT   CODE  LINE        SOURCE   LINE
+
+                        4026
+                        4027
+                        4028    ;                   Ken     Lagace   and  Rob   Jepson    3/82
+                        4029
+                        4030                             GLB                     TIMER   TABLE   BASE           71S  THIS  NECESSARY    ??
+                        4031                             GLB                     NEXT  TIMER   DATA    BYTE     ; OR  THIS???
+                        4032
+                        4033                            sEXT                     PARAM_        ;Parameter     passing   routine    needed
+                        4034                                                                   :for   setting    up  pascal  interfaces
+                        4035
+                      — 4036                   |                         ;Global    routine    labels    are  the   routines   to  call
+                        4037                                             ;from   pascal
+                        4038                             GLB                     INIT  TIMER,
+                        4039                             GLB                     INIT  TIMERQ
+                        4040                             GLB                     FREE  SIGNAL
+                        4041        |                    GiB                     FREE  SIGNALQ
+                        4042                             GLB                     REQUEST   SIGNAL
+                        4043                             GLB                    REQUEST   SIGNALQ
+                        4044       |                     GLB                     TEST  SIGNAL_
+                        4045                             GLB                     TEST  SIGNALQ
+                        4046                             GLB                     TIME  _MGR_
+                        4047                             GLB                     TIME_MGRQ
+              <0007>    4048   DONE                      EQu                     7
+              <0006>    4049   REPEAT                    EQu                    6
+              <0005>    4050   FREE                      EQu                    5
+              <0004>    4051   EOT                       EQU                    48
+              <0003>    4052   LONG                      EQu                    3
+                |       nace ME SEETTETTETETESTSESTTSTESTESTATELESTEEEET             ETE   TESTE   EST  EET
+                        4054   ;                                                                                                 ;
+                        >                                          MODE  BIT   --------------                                    :
+                        4056   ;     =  10  CWECK  BIT  =====     BIT ?    JR  Z  =  JUMP   IF  BIT   IS  0!                     ;
+                       4057    ;                                                                                                ;
+                       9       COOOL                     EEE CECE        CECE         ELE
+                       4059    ;           ;          ;           ;          33              ;            ;           ;         ;
+                       4060    ;  DONE     ; REPEAT   ;   FREE    ;  EOT;;         LONG      ;            :           :         :
+                       4061;        7      >;  6      >;   5      7     4    3;     3        ;    2          en|     ;    O     :
+                       4062   COCO  TOEEOEEOOEEEEOHOEHEETHOOEEEHEEEEEEHEEHOEEEEEeeeeeseseneaEEOeneeeeEREsseseocceeeeoce    eka
+                       4063
+                       5064
+                       4065                        PROG                                                                                                                                                       ,
+                :      4066
+  0F37                 4067   TIME  MGRQ
+  0F37                 4068   TIME  MGR_
+  OF37  2A7303         4069                        LO                     HL,  (TIMER  TABLE   BASE];Current        timer  addr.
+  OF3A                 4070   NEXT  TIMERO
+  OF3A  CB6E           4071                        BIT                    FREE,   (HL)           7Free?
+  OF3C  CCOF49         4072                        CALL                   Z,DCR   TIMER          sIf  not,   decr.
+ OFSF   CB66           4073                        BIT                    EOT,  (HL)             3End   of table?
+ OF41   2005           4074                        JR                     NZ, SCRAM              ;  If  it  is,  we're  done.
+ OF43   23             4075                        INC                    HL                     Otherwise      get  next  timer
+ OF44   23             4076                        INC                    HL                    3  and   start   over.                                                                  «
+ OF45   23             4077                        INC                    HL
+ OF46   18F2           4078                        JR                     WEXT  TIMERO
+ OF48                  4079   SCRAM
+ OF48   C9             4080                        RET
+                       4081
+                       4082
+
+                                                                                                                     é                                                                                                 rasp

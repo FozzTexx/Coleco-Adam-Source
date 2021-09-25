@@ -1,0 +1,61 @@
+FILE:   ~-5ABS:EOS  TF         CROSS  REFERENCE  TABLE              PAGE  24.
+
+LINE      SYMBOL            TYPE      REFERENCES
+
+ 2401    CHECK                   2394, 2396,2398
+ 3777    CHECK ENT               3863
+ 6986    CHECK FOR_ETX           7019
+ 3981    CHECK HOLE  SIZE        3972
+ 5448    CHECK_IF_DIRECT         3764 ,5300
+ 4985    CHECK _LAST_BLOC        4967
+ 6098    CHECK STATUS            6090
+ 8184    CHK_05                  8174
+ 6746    CHK_IF_IDLE             8976 ,9098,9303 ,9389
+ 6702    CHK_IF_INACTIVE         6983,7161,8660,  8927 9045,  9260, 9346
+ 1408    CHK REG 1               1403
+ 8195    CHK TAPE                8186
+ 7655    CHK_X_WITH  MAX         7653
+ 7659    CHK_Y_COORD             7657
+ 7663    CHK_Y_WITH  MAX         7661
+ 5020    CLEAR DIRTY  BIT
+  663    CLEAR_RAM  SIZE         8133
+  434    CLEAR_RAM  START        663,8134,8135
+ 4432    CLOSE2                  4437
+ 4465    CLOSE3                  a4aa
+ 4487    CLOSE4
+ 7362   CLR_TO_EOL               7934
+ 7363   CLR_TO_EOS               7935
+ 9117   CMND_COMPLETED
+ 1201   CMND_COMPLETE   B        6654 ,6710,8552, 8666 8981, 9103, 9307  9393
+ 1203   CMND_FIN  STATUS         6658 ,8556,8670, 8987 9109 ,9311, 9397 ,
+ 9118   CMND_NOT_ COMPLE         9104
+ 7251   CMND_NOT  PROCES         7237
+ 8122   COLD_START_ADDR         8227  ,8246
+  463   COLORTABLE
+ 8994   COMMAND  COMPLET
+ 7041   COMMAND  _FINISHE       7033
+ 8995   COMMAND  _NOT_COM       8982
+ 2316   CONTROLLER  _O MA       2323
+  853   CONTROLLER   _OPO       2215,2428
+ 2317   CONTROLLER  1  BI       2327, 2349
+  856   CONTROLLER  _1 PO
+7905    CONVERT_XY              7726 ,7783,7806, 7816, 7858  7883
+7361    CR                      7930                        ,
+2491    CTRL                    3040
+ 478    CURRENT DEV
+ 483    CURRENT  PCB            6588 ,8284 8330, 8336  8434, 8524  8534,8538  8605,8617,8630
+ 659    CURSOR                  7372,7395, 7471, 7488 ,7514,7521, ,7536,7547,,7557,7577,7629,7778,7857, 7880
+7370    CURSOR CHAR             7411,7491
+7372    CURSOR_X                7513
+ 468    CUR_BANK                1897, 1957,1966
+4473    C_ERROR                 4425,4427, 4441
+4481    C_ERROR2                4455
+9357   C_NO_OCB_FND3            9344
+9401   C_NO_DCB_FND4            9387
+ 679   DCBS
+1066   OCB_BUSY                 6721
+6665   OCB_CMND_  LOOP          6667
+1185   DCB_IDLE                 6707
+1067   DCB_IDLE  ERR            6753
+ 516   DCB_IMAGE
+9273   DCB_IS  ACTIVE           9262

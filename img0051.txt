@@ -1,0 +1,43 @@
+                                                                               eS
+FILE: «© .ABS:EOS  TF          HEWLETT-PACKARD:     Au0S  OO    ({c)Coleco   tSuo  Confidential                        Sat,    8 Sep   1964,  23  38
+
+LOCATION  OBJECT   CODE   LINE      SOURCE   LINE
+
+                          179D  eeeeeeeeeeeeeeeeese     PX TO.PTRN.  POS  *e eeeeee eeeee eee eeeeereseeeeeeeeeeesene
+                          1791  ;DESCRIPTION:        DIVIDES   REG DE BY  8B, IF SIGNED   RESULT   >  127  THEN   E  >=  MAX  SIGNED
+                          1792  ;                   POSITIVE   NUMBER.  IF RESULT   <  -128,  THEN  E      MIN   NEGATIVE    NUM
+                          1793  ;INPUT:              DE =  16  BIT SIGNED  NUMBER
+                          1794  ;OUTPUT:             DE/8  <  -128     —E =  -128
+                          1795  ;        -128   <= DE/8   <=+127      E  = DE/8
+                          1796  ;        +127   <  DE/8               E  = +127
+                          17QD7 Seeeeeee SESH  EHHEHEH  EHH   EHEHEERE  EEEEEE HEHEHE REESE   EAREEHE HEHEHE  HERES  EEE EES
+                          1798  ;
+    E129                  1799          PTRN  POS:
+                          1800
+    E129  ES              1801           PUSH    HL                   ;HL  USED  TO  TEST  MAGNITUDE
+                          1802  ;
+    E12A  cs              1803           PUSH    BC                   ;B  WILL  BE  USED  AS  A  COUNTER   IN  THE   DIVIDE
+    —12B  0603            1804           LO      B,3
+    E120                  1805  PX_2P_P_?:                            :(THIS   IS  THE START   OF  THE   DIVIDE   LOOP)
+    E120  CB2A            1806           SRA     D                    ;16  BIT  SHIFT  LEFT
+    E12F  CB18            1807           RR      E
+    E131  1OFA            1808           DJNZ    PX_2 P_P_1           ;DIVIDE   BY  8 LOOP
+    E133  ci              1809           POP     BC                   ;RESTORE   BC  TO  OLD  VALUE
+                          1810  ;
+    E134  21FF80          1811           LD      HL ,OFF80H           -SET   HL TO  -128
+    E137  CB7A            1812           BIT     7,0                  ;1S  RESULT   OF DIVIDE    NEGATIVE?
+    E139  2006            1813           JR      NZ ,NEGTV
+                          1814  ;
+    E138  19              1815           AOD     HL ,DE                >IF DE-128   < O  (Frnc)  RETURN
+    E13C  E1              1816           POP     HL                   -same   as (IF  DE<=127    RETURN)
+    E130  00              1817           RET     NC
+    E13€  1E7F            1818           LO      E,7FH                ;1F  >  128,  THEN  E  >=  MAX  SIGNED   +  NUM.
+    E140  c9              1819           RET
+                          1820  ;
+    E141  2600            1821  NEGTV:   LD      H,OOH                ;SET   HL TO  128
+                          1822  ;
+    E143  19              1823           ADD     HL ,DE                IF  DE+128   >= O  RETURN
+    E144  Ei              1824           POP     HL                   ;same   as (IF  DE>=-128    RETURN)
+    E145  08              1825           RET     C
+    E146  1€80            1826           LO      E.80H                ;IF  <  -128,  THE  E      MIN  SIGNED   -  NUM.
+    E148  c9              1827           RET

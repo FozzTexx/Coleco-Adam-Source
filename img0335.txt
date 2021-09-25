@@ -1,0 +1,61 @@
+FILE: OS 7PRIME:pOS          HEWLETT-PACKARD: PUT SPRITE    RIN  (c)  Coleco,   1982   CONFIDENTIAL               Fri,  18  May  1984,   16:20       PAGE    61
+
+LOCATION  OBJECT  CODE  LINE      SOURCE LINE
+
+                        2804
+               <0000>   2805  GRAPHICS         EQU                0
+               <0002>   2806  STATUS           EQU                2
+               <0004>   2807  SPRITE_INDEX   § EQU                4
+                        2808  * FIELD OFFSETS  FOR SPRITE  OBJECT    RECORDS
+                        2809
+               <0000>   2610 OBJECT TYPE       EQU                0
+               <0001>   2811  FIRSTGEN  NAME   EQU                1
+               <0002>   2812  PIRN POINTER     QU                 2
+               <0004>   2813  NUMGEN           EQU                4
+               <0005>   2814  FRAMETABLE PTR   EQU                5
+                        2815  * FIELD OFFSETS  FOR SPRITE   GRAPHICS   RECORDS
+                        2816
+               <0000>   2817  FRAME            EQU                0
+               <0001>   2818  X_LOCATION       EQU                1
+               <0003>   2819  YLOCATION        EQU                3
+               <0005>   2820 WEXT GEN          EQU                5
+                        aH    * FIELD OFFSETS  FOR SPRITE_STATUS    RECORDS
+               <0000>   2823  COLOR            EQU                0
+               <0001>   2824  SHAPE            EQU                1
+                              * FIELD OFFSETS  FOR FRAME  RECORDS
+                        ee
+               <0000>   2827  Y                EQu                0
+               <0001>   2828  x                EQU                1
+               <0002>   2829  NAME             EQu                2
+               <0003> 2830    COLOR AND TAG    €&QU               3
+                        2831  * FIELD OFFSETS  FOR SPRITE   RECORDS
+                        2832  SEARARAAEKAARARAARKAARE   EXTERNAL  PROCEDURES     RRAAERAEAEAKKAEEARKAREAEE
+                        2833
+                        2834  ; EXTPUT  VRAM,GET  VRAM
+                        2835  * EXTERNAL PROCEDURE PUT   VRAMP   (TABLE CODE:BYTE;     START_INDEX,SLICE:BYTE;
+                        2836  *                                  VAR  DATA: BUFFER;  ITEMCOUNT:   INTEGER);
+                        2837
+                        2838  * EXTERNAL PROCEDURE GET  VRAMP    (TABLE CODE:BYTE;     START INDEX,SLICE:BYTE;
+                        2839  *                                  VAR  DATA: BUFFER;  ITEM COUNT:  INTEGER);
+                        2840
+                        2841  *PUT VRAM  SENDS  A BLOCK  OF  DATA  TO  THE  TABLE  SPECIFIED    BY TABLE CODE.
+                        2842  * THE SLICE, START  INDEX,  AND   ITEM COUNT   ARE  TABLE  DEPENDANT.  GET  _VRAM
+                        2843  * DOES THE INVERSE OPERATION.                                                                                                                                      :
+                        2844
+                        2845  *   - TABLE CODE  IS PASSED   IN A
+                        2846  *   - STARTINDEX,SLICE    IN  DE
+                        2847  *   - DATA BUFFER  ADDRESS   IW HL
+                        2848  *   ~-BYTE COUNT  PASSED  IN  IY
+
+                        ne    SERAKRAAAKEKAKEAEKREKRAAAREAKEK                 RAAKAKERRAARKARARKRAKAKKAKEKEK
+                                                          PROCEDURE    BODY
+                        2851
+                        2852                   PROG
+                        2853    GLB PUTOSPRITE,PUTISPRITE
+                        2854                                                                                                                                               ‘
+                        2855  * BEGIN PUTOSPRITE
+               <O8DF>   2856  PUTOSPRITE       EQU                $
+                        2857
+                        2858  *   SPRITE_PTR  :=WORK  BUFFER
+    O80F  FD2A8006      2859                   LD                 SPRITE PTR,   (WORK BUFFER]
+                        2860

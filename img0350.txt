@@ -1,0 +1,61 @@
+FILE:OS  7PRIME:pOS           HEWLETT-PACKARD:   PUT  MOBILE   (c) Coleco,  1982   CONFIDENTIAL                  Fri,  18  May  1984,   16:20       PAGE   76
+
+LOCATION   OBJECT  CODE  LINE       SOURCE  LIWE
+
+    OCFE   82           3615                OR  D                      ;ADD OBJECT   COLOR1
+    OCFF   77           3616                 LD  {HL},A               ;UPDATE   COLOR  GENERATOR
+    0000   23           3617                 INC WL                   ;POINT   TO WEXT  COLOR  GEN
+                         3618   ;         ENDDO
+    0001   10F9         3619              DJNZ  DLPS
+   0003                  3620  END12  =; ENDIF
+                         3621
+                         3622  ; DECIDE  WHICH  PART  OF  OBJECT'S  PATTERN  AND  COLOR  TABLES   TO USE
+    0003   FD7E05       3623            LD A, (IY+F GEN)            ;GET  NAME  OF FIRST  GENERATOR    IN OBJECT'S   TABLE
+    0006   FDCB047E     3624            BIT 7, (IY+FRM)           TEST  WHICH   PART OF  TABLE  TO  USE
+             |           3625  ;        IF  (PSW,1S,NZERO)          -THEN  USE  UPPER  HALF  OF TABLES
+    OD0A   2802          3626           JR 2,END14
+    op0c  C609          3627              ADD  A,9
+   0D0€                  3628  END14    ENDIF
+                         3629  ; CHANGE  NAMES  IN BACKGROUND    BUFFER TO  THOSE  OF  THE OBJECT'S   PATTERNS
+                         3630  ; THIS  WILL THEN  CONSTITUTE    A NEW FRAME  DISPLAYING   THE  OBJECT   AT PATTERN   PLANE
+                         3631  ; LOCATION   {YP_BK], (XP_BK]
+    OD0E  4F            3632            LD C,A                      ;SAVE  INDEX
+    OD0F  2A8006        3633            LD HL, [WORK BUFFER)        HL   := BUFFER  BASE
+    0012   110013       3634            LD DE,Y¥P_BK+1              ;POINT  TO  FIRST BACKGROUND    NAME
+   0015   19            3635            ADD HL,DE
+                         3636  ;        DO 8,9
+   0016   0609          3637            LB B,9
+   0018   77             3638  DLP6       LD  (WL],A
+   0019   3c            3639              INC  A
+   OO1A   23            3640              INC  WL
+                         3641  ;        ENDDO
+   0018   10FB          3642            DJNZ DLP6
+                         3643  ; MOVE  NEWLY FORMED   GENERATORS   TO OBJECT'S   PATTERN  AND  COLOR  GEN  TABLES
+   0D1D   FDCBO37E       3644  PMI2     BIT 7, (IY+FLAGS)           7TEST  WHICH  MODE
+                         3645  ;        IF [(PSW,1S, ZERO)          7THEN MODE   1
+   0021   2073          3646            JR WZ, ELSEOS
+   0023   59            3647              iD E,C
+   0024   1600          3648              LD 0,0                      ;DE  := INDEX  INTO  PATTERN   GENERATOR   TABLE
+   0026   2A8006        3649              LD HL, (WORK BUFFER]
+   0029   01001C        3650              LD BC,BK PTN
+   Oo2c   09            3651              ADD HL,BC                   sHL POINTS   TO FIRST   GENERATOR
+   002D   FD210009      3652              LD 1Y,9                     39 ELEMENTS   TO  SEND
+   0031   3&03          3653              LO A,3                      ;CODE  FOR  PATTERN  GENERATOR   TABLE
+   0033   CDIFBE        3654              CALL PUT VRAM
+                        3655   ; SET  UP POINTERS  TO  OBJECT'S   PATTERN WAMES   AND TO  COLOR  GEN  BYTES
+   0036   FO2A8006      3656              LO 1Y, (WORK BUFFER]
+   OD3A   2A8006        3657              LD HL, (WORK BUFFER)        sHL  := BUFFER  BASE
+   0030   010084        3658              LD BC,BK CLR                ;OFFSET  TO  COLOR  BUFFER
+   0040   09            3659              ADD HL ,BC                  sHL POINTS   TO COLOR  BUFFER
+   0041  002A8006       3660              LD IX, (WORK BUFFER)        3;1X := BUFFER  BASE
+   0045  010013         3661              LD BC, YPBK+!               sOFFSET  TO  FIRST  NAME  FOR  OBJECT
+   0048  D009           3662              ADD 1X,BC                   31X POINTS   TO FIRST  NAME
+   004A  0609           3663              LD B,9
+  004C                  3664   RPT1       ;REPEAT                     sMOVE  COLORS  TO  COLOR  GENERATOR   TABLE
+   004c  DD7E00         3665                LD  A,(1X+0)                ;GET  NAME
+   004F  DD23           3666                INC  IX                     sPOINT  TO  NEXT  NAME
+   0051  CB3F           3667                SRL  A                      :DIVIDE   BY 8
+   0053  CB3F           3668                SRL  A
+   0055  CB3F           3669                SRL  A
+   0057  5F             3670                LD  E,A
+   0058   1600          3671                LO 0,0                      ;DE  := OFFSET   INTO  COLOR  GEN  TABLE

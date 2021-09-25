@@ -1,0 +1,63 @@
+FILE: EOSABS:EOS  TF          HEWLETT-PACKARD:     DIR_HANOL   (c)  Coleco     1983 Confidential                         Sat,     8  Sep  1984,  23.33          PAGE   104
+
+LOCATION  OBJECT  CODE   LINE      SOURCE   LINE
+
+                         4039
+    ESOF  C2E989         4040           uP         NZ,MAKE_ERROR                              ;NOPE,    A REAL  LIVE    ERROR
+                         4041
+                         4042
+    E912                 4043  RESET THE POINTER:
+    E912  2AFEOS         4044           LO         HL, [BUF_START]    ;RESET   THE  POINTER
+    E915  007521         4045           LD         [IX¢FCB_POINTER],L
+    E918  007422         4046           LD         [ IX+FCB_POINTER+1].H
+                         4047
+    E91B  003419         4048           INC        (IX¢FCB_BLOCK)      ;INC   BLOCK   -- NO  CARRY  OUT
+                         4049
+    ES1E                 4050  TIMEOUT_IN_READ:
+    E91E  DO7E17         4051           LO         A,[IX+FCB_DEVICE]      ;GET  PARAMETERS    FROM   FCB
+    E921  DDGE21         4052           LD         L,( IX+FCB_POINTER)
+    E924  006622         4053           LD         H,(IX+FCB_POINTER+1)                                                                                                           '
+    E927  DOSE19         4054           LD         E,(IX+FCB_BLOCK])                        |
+    E92A  DOSGIA         4055           LD         DO[IX+FCB_BLOCK+1]
+    E92D  DD4E18         4056           LD         C,[ IX+FCB_BLOCK+2]
+    E930  0D461C         4057           LD         8B[IX+FCB_BLOCK+3]
+    E933  CDF17B         4058           CALL       READ BLOCK          ;AND   READ  THE  NEXT  BLOCK
+                         4059
+    E936  2051           4060           UR         NZ,MAKE_ERROR           ;  NOPE,  ERRORIIIII!
+                         4061
+     |                   4062
+    E938  DDGE21         4063           LO         L,({IX*FCB_POINTER]     ;GET  POINTER    INTO  IY  THE   LONG WAY
+    E938  006622         4062           i)         H,[IX+FCB_POINTER+    1]
+                         4065
+    E93E                 4066  NOT_END:
+    EQ3E  £5             4067           PUSH       HL
+    EQ3F  FDE1           4068           PoP        IY                  stat
+          °              4069                .
+                         4070  *
+                         4071  *  STILL  TRYING    TO CALC  THE  NEW   START   ADOR
+                         4072  =                    .
+    E941  2AFEIA         4073           LO         HL,[NEW _HOLE SIZE)
+    E944  FD7S11         4074           LD    =——t—i‘4DL:TR_MMAX_LLENGGTH]  LL            ;  BLOCKS   LEFT   ON TAPE
+    E947  FD7412         4075           LD         [1¥*DIR_MAX_LENGTH+1],H
+               :         4076
+    EQ4A  3AFE16         4077           LD         A,(NEW_HOLE  START]
+    E94D  FD7700         4078           LD         (I1¥*DIR_START_BLOCK),A
+    E950  3AFE17         4079           LD         A,(NEW_HOLE  START+1)
+    E953  FD770E         4080           LO         [1¥*DIR_START_BLOCK+1],A
+    E956  3AFE18         4081           LD         A,(NEW HOLE  START+2)
+    E959  FO770F         4082           LO         [1¥Y¢DIR_START_BLOCK+2],A
+    E9SC  3AFE19         4083           LD         A.(NEW_HOLE  START+3]
+    E9SF  FO7710         4084           LD         [1¥+DIR_ START  BLOCK+3],A
+                         4085
+    E962  FD360C01       4086           LD         [1¥*DIR_ATTR),ATTR_HOLE                  ; SET  HOLE   UP
+                         4087
+    E966  FDES           4088           PUSH       LY
+    E968  D1             4089           POP        DE
+                         4090
+    E969  21F428         4091           LD         HL,HOLE FILE  NAME
+    E96C  01000C         4092           LO         BC,12
+    E96F  EDBO           4093           LDIR
+                         4094
+    E971                 4095  TIMETO  WRITE:
+
+               iaanaemia                a                                           acerca                                                         cc   mcmmmcammammanmaaemamaamaaaaaaaatacaaamaaaaasaaaacaaamaaaaaaasaaaaaaaaaaaaaaasaaaamasmaamaaaaasaacammcasmmaaammaaasaaaaaaacstisa

@@ -1,0 +1,60 @@
+FILE:  OS 7PRIME:pos           HEWLETT-PACKARD:    OPERATING   SYSTEM   (c) Coleco,   1962    CONFIDENTIAL           Fri,  18  May  19864,  16:18       PAGE   14
+
+LOCATION   OBJECT   CODE  LINE      SOURCE   LINE
+
+                           200  REASARAAATAAAARARERARERES                                  RRREKEARAAAERRALRARKRAEE
+                                                              POWER   On BOOT  SOF  TWARE
+                           510  ;
+                           511  ;B00TUP            SINCE  THE  VIDEO  GAME  SYSTEM   MAY  BE STARTED  UP  WITH  A
+                           512  ;                 GAME   CARTRIDGE,   KEYBOARD   MODULE,   OR BOTH  (OR  NOTHING)
+                           513  ;                  INSTALLED   AT  BOOT UP,  THE  SOFTWARE   MUST  PERFORM  THE
+                           514  ;                  FOLLOWING;
+                           515  >
+                           516  ;                        A.   IMITIALIZE   THE  INTERRUPT   VECTORS.
+                           517  ;
+                           518  ;                        B.   IMITIALIZE   RESTART   VECTORS
+                           519  ;
+                           520  ;                        C.   TURN  OFF THE  SOUND   CHIP.
+                           521  ;                                   |
+                           522  ;                        D.   DETERMINE   IF A  CARTRIDGE   IS PLUGGED   IN.
+                           523  ;                             IF SO,  BRANCH  TO  THE  CARTRIDGE   PROGRAM
+                           524  ;                             ELSE,  WAIT  FOR CARTRIDGE.
+                           525
+                <0000>     526  FALSE             EQU                 0
+                <0001>     527  TRUE              EQu                 1
+                           528  * VALUES  FOR  BOOLEAN    FLAGS
+                           529
+                           530  * BEGIN POWER  _UP
+                <O06E>     531 POWER UP           EQU                 $
+                           532
+                           533  *   IF  CARTRIDGE   = 55AAH   THEN   EXIT  TO START  GAME   (TEST)
+    O06E   2A8000          534                    LD                  HL, (CARTRIDGE)
+    0071   7D              535                    i)                  A,L
+    0072   FESS            536                    cp                  55H
+    0074   C20081          537                    JP                  NZ,NO TEST.
+    0077   7C              538                    LD                  A,l
+    0078   FEAA            539                    cP                  OAAH
+    007A   C20081          540                    JP                  NZ,MO TEST.
+    0070   2AB800A         541                    LO                  HL, [START GAME)
+    0080   E9              542                    JP                  {Wt}
+                           543
+                           544  *   ELSE
+   0081                    545  MO_TEST_
+                           546
+                           547  *   TURN  OFF  SOUND  CHIP                                                                                                                                       ,
+    0081   CD1FD6          548                    CALL   TURN OFF  SOUND
+                           549
+                           550  *   INITIALIZE   RANDOM   NUMBER  GENERATOR
+    0084   210033          551                    LD                  HL,33H
+    0087   2273C8          bi                     LD                  (RAND NUM)  ,HL
+                             3
+                           554  *   CLEAR  CONTROLLER   BUFFER   AREAS
+    008A   CD1105          555                   CALL                CONTROLLER   _INIT
+                           556
+                           557  *  DEFER   WRITES   := FALSE
+    008D   3£00            558                    LD                  A,FALSE                                                                                                ‘
+    OO8F   3273C6          559                    LD                  (DEFER WRITES)   ,A
+                           560
+                           561  *   MUX SPRITES   :=  FALSE
+    0092   3273C7          562                    LO                  [MUX SPRITES)  ,A
+                           563

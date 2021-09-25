@@ -1,0 +1,63 @@
+     FILE:  EOSABS:EOS  TF         HEWLETT-PACKARD:     RD_WT       (c) Coleco   1983 Confidential                    Sat,   8  Sep   1984,  23:40       PAGE  118
+
+     LOCATION   OBVECT  CODE   LINE      SOURCE   LINE
+
+         EC4D   DDES           4665           PUSH      IX
+         EC4F   E1             4666           PoP       HL
+                               4667
+         ECS50  CDFODS         4668           CALL      MODE CHECK         ;SEE  IF THE  MODE  IS OK
+         ECS3   C2ED81        4669            JP        NZ,READ_ERR1       ;BRANCH  IF NOT
+                              4670        |                                     |
+         ECS6                 4671   READ3
+         ECS6  DDCB187E       4672            BIT       MODE LAST BLOCK_BIT,[IX+FCB_MODE]       ;LOOK AT  LAST BLOCK  BIT
+         ECSA  C2ED2B         4673            JP       NZ,READ_LAST        ;BRANCH  IF THIS   IS THE LAST  FILE BLOCK
+                         :    4674         |
+         EC5D  2AFEOA         4675            LO       HL, (BUF_END])      ;GET END  ADDRESS  OF  BUFFER
+         EC60  DDSE21         4676            LD        E,(IX+FCB_ POINTER]   ;GET  POINTER  INTO  BUFFER
+         EC63  DDS622         4677        ~   to        DO(1X+FCB_POINTER+1)
+         EC66  87             4676            oR       |
+         EC67  E052           4679            SBC      HL ,DE              ;CALC.  BYTES  LEFT  IN BUFFER                                                             ,
+         EC69  2825           4680            UR       Z,_0  BYTES  LEFT2                                                            |
+                  |           4681
+         EC6B  44             4682            LD       B.H                 ;SAVE BYTES  LEFT  IN  CASE WE  NEED  IT
+         EC6C  4D      |      4683            LO     6k
+                              4684
+         EC6D  EDSBFEO4       4685            LO       DE, [BYTES  TO_GO)   ;GET BYTES  LEFT  TO  SEND
+         EC71  B7             4686           OR        A             |         |
+         EC72  EDS2           4687            SBC      HL ,DE              ;COMPARE  TO WHAT  WE  HAVE
+         EC74  D2ECEA   |     4688           JP        NC ,ENOUGH          ;BRANCH  IF WE HAVE   ENOUGH DATA  HERE
+                              4689
+                              4690   : IF WE FALL   THROUGH  HERE,  WE  KNOW  WE WILL  HAVE  TO  GET ANOTHER
+                              4691   ; BLOCK AFTER   THIS  ONE.   FIRST,  LET’S  TRANSFER   WHAT  WE HAVE.
+                    :         4692
+        EC77   2AFEO4         4683           LO        HL, [BYTES  TO_GO)   ;UPDATE  NUMBER  OF  BYTES TO  GO
+        AC7A   87             4694           oR
+               ED42           4695           SBC       HL .BC             ;SUBTRACT   NUM OF  BYTES  WE ARE  SENDING
+        HERE   22FE04         AGG            LO    3=——sBY TESS_TO_GO},HL
+                              4697
+        EC8O   DDGE21         4638           LO        L,({IX+FCB_POINTER])   ;POINT  INTO MY  BUFFER
+        EC83   006622         4699           LD        H, [IX+FCB_POINTER+  1}
+        EC86   EDSBFEO6       4700   _.      LO        DE,(USER_BUF]              INTO  THE  CALLER’S  BUFFER
+                    :      —  4701                           :            ;BC  HAS COUNT  FROM  ABOVE
+        EC8A   EDBO           4702           LOIR                         ;GIVE  WHAT  WE HAVE
+                              4703         .                 |
+        EC8C   EDS3FEO6       4704           LO        (USER_BUF],DE              TO  NEXT SPOT
+          .                   4705                                |
+        EC90                  4706  _O BYTES LEFT2:
+        EC9O   2AFEOS         4707           LO        HL,(BUF_START]     ;RESET  THE  POINTER
+        EC93   007521         4708           LO        [IX+FCB  POINTER]  ,L
+        EC96   007422         4709           LO        [IX+FCB_POINTER+1],H
+                              4710
+        EC99   003419         4711           INC       {IX+FCB. BLOCK)    ;INC  THE BLOCK  NUMBER
+        ECSC   2000           4712           JR        NZ,READ4           ;BRANCH  IF  NO CARRY  QuT
+        ECSE   DD341A         4713           INC       [IX+FCB BLOCKt1]
+        ECA!   2008           4714           UR        NZ,READ4
+        ECA3   0D341B         4715           INC       {IX+FCB_BLOCK+2]
+        ECA6   2003           4716           JR        NZ,READ4
+        ECA8   DD341C         4717           INC       [I1X+FCB_BLOCK+3]
+                              4718
+        ECAB                  4719  READ4
+                              4720
+        ECAB   [              4721           LO        A,[IX+FCB  DEVICE}          ;      “EVICE   ID
+
+ee                  cert                                                                                                               2                                     ee

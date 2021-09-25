@@ -1,0 +1,63 @@
+            FILE:  OS7PRIME:pOS             HEWLETT-PACKARD:     PUT SPRITE     RIN (c)   Coleco,    1982   CONFIDENTIAL                Fri,  18  May  1984,  16:20       PAGE     64
+
+            LOCATION   OBJECT   CODE  LINE        SOURCE   LINE
+
+                097D   2808           2975                       JR                   Z,0K_ 4
+                OO7F   FEFF           2976                       cP                   4
+                0981   C20A54        2977                        JP                  NZ,DONT_PUT
+                0984   79             2978                       LD                  a,C
+                0985  FEE1           2979                        cP                   -31
+                0987  FAOAS4          2980                       JP                  M,DONT   PUT
+               098A                   2981  OK   4
+                                      2962
+                                      2983   *         IF  STATUS*.X  LOCATION     < O  THEN
+                O98A  2B             2984                       DEC                  HL
+                0988  28              2985                       DEC                 HL                    ; (HL)   =  HI(X_LOCATION)
+                098C  7E              2986                       LD                  A, (HL)               ; COMPARE    WITH  0
+                098D  FEO             2987                       cP                  0
+                O98F  CAOSCA          2988                       JP                  Z, CONTINUE
+                                     2989                           ;                            |
+               |                      2990   *           X  := BYTE(STATUS*.X     LOCATION)     +  32
+                0992  28              2991                       DEC                 HL                    ;(HL)  =  *X_LOCATION
+                0993 4E   .          2992                        LO                  C, (HL)
+               0994   23             2993                        INC                 HL
+               0995   46              2994                       LD                  B, (HL)
+               0996   210020         2995                        LO                  HL ,32
+               0999   09             2996                       ADD                  HL ,BC
+               099A   7D             2997                        LO                  A,L
+               0998   FD7701         2998                        LD                  [SPRITE_PTR+X]    ,A
+                                     2999
+                                     3000    *           COLOR  AND  TAG   :=  GRAPHICS*.FRAME    TABLE   [STATUS*.FRAME]     .COLOR   OR  80H
+               O99E  DD6E00          3001                       LD                   L, (THIS SPRITE+GRAPHICS)
+               O9A1  006601          3002                       LD         |         H, (THIS SPRITE+GRAPHICS+1)
+               O9A4   110005         3003                       LO                   DE, FRAME  TABLE  PTR
+               O9A7   19             3004                       ADD                  HL ,DE               ; (HL)  =  FRAME  TABLE  PTR
+               O9AB  EB              3005                       EX                   DE,HL
+               O9AD   1A .           3006                       LO                   A, (DE)
+               O9AA  6F              3007                       LD                   LA
+               O9AB   13            3008                         INC                 DE
+               OPAC   1A            3009                        LD                   A, (DE)
+               O9AD  67              3010                       LO                   H,A                  ;(HL]   = FRAME   TABLE  PTR*
+               OOAE  E5              3011           |           PUSH                 HL
+               O9AF  DDSED2          3012                       LD                   L, (THIS SPRITE+STATUS)
+               0982  0D6603          3013                       LD                   WH,(THIS SPRITE+STATUS#1)
+               0985  110000         3014                        LD              |   DE , FRAME
+               0988  19              3015                       ADD                  HL,DE                ;(HL)   = FRAME
+               0989  7E              3016                       LD                  A,  (HL)              ;CALCULATE    OFFSET   OF
+               O9BA  CB27            3017                       SLA                 A                     ;COLOR   ENTRY
+               O9BC  010000         3018                        LO                  BC ,0
+               OOBF  4F              3019                       LO        .         C,A
+               09CO  E1              3020                      POP                  HL
+               09C1  09              3021                       ADD                 HL ,BC                ;(HL)   = COLOR
+               09C2  7E              3022                       LD                  A, (HL)               :OR  IN  80H
+               09C3  F680            3023                       mR                  80H
+               09C5  FD7703        anes                         uo                   [SPRITE  PTR+COLOR    AND  TAG)  ,A
+                                      02
+               O9CB  1836            3026                       JR                  PUT_Y_AND_   NAME                                                                                           .
+                                     3027   *         ELSE
+              |                      3028   ****eeaees    CONTINUE   FROM  HERE
+               O9CA                  3029   CONTINUE                  |
+                                     3030
+                                     3031
+
+{             ‘           f                                                 ;                                                             |                                                 f                                      4

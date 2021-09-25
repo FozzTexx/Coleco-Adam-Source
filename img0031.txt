@@ -1,0 +1,61 @@
+FILE: ..sABS:EOSTF        HEWLETT-PACKARD:  INCLUDE   FMGREQUs                                        Sat,    8 Sep  1984, 23:38        Chuk    27
+
+LOCATION OBJECT CODE  LINE     SOURCE  LINE
+
+                       981 ; Offsets  into a volume   descriptor  (the first entry in the directory).
+             <0000>    982 VOLNAME          EQU       O         ;LOGICALVOLUME NAME
+             <OO0C>    983 VOLDIRSIZE       EQU       12        ;*ee7 BITS ONLY *** # BLOCKS IN DIRECTORY
+             <QO0O>C   9684VOL_ATTR         EQU       12        ;**eTOP BIT ONLY ¢**+SET FOR DELETE  PROTECTION
+             <0000>    985 VOL_DIR_CHECK    EQU       13        ;CONTAINS 4 UNIQUE BYTES FOR DIRECTORY   EXISTENCE   VERIFICATION
+             <O011>    986 vOLSIZE          EQU       17        ;VOLUMESIZE (IN BLOCKS) (4 BYTES)
+             <0017>    987 VOL_YEAR         EQU       23        :;CREATIODATE -- YEAR
+             <0018>    988 VOL_MONTH        EQU       24        :                MONTH
+             <0019>    989 VOLDAY           EQU       25        ;                & DAY
+             <OO1A>    99C VOL_DESLENGTH    EQU       26
+                       991
+                       992 ; Offsets  into a directory   entry.
+             <0000>    993 DIR_NAME         EQU       O        ;FILE NAME
+             <OO0C>    994 DIR_ATTR         EQU       12       ;FILE ATTRIBUTE BYTE
+             <0000>    995 DIR_START_BLOCK  EQU       13       ;STARTING BLOCK4
+             <0011>    996 DIRMAX_LENGTH    EQU       17       ;TOTAL #4BLOCKS ALLOCATED
+             <0013>    997 DIR_USEDLENGTH   EQU       19        ;#OF BLOCKS USED (FULL + 1 PARTIAL)
+             <001£)>   998 DIR_LASTCOUNT    EQU       21       ;NUMBER OF BYTES IN LAST PARTIAL BLOCK
+             <0017>    999 DIR_VEAR         EQU       23       ;CREATION DATE -- YEAR
+             <0018>   1000 DIR_MONTH        EQU       24        ;                MONTH
+             <O0O19>  1001 DIR_DAY          EQU       25        ;                & DAY
+             <OO1A>   1002 DIR_ENT_LENGTH   DEFL      26
+                      1003
+             <O027>   1004 ENT_PER_BLOCK    EQU       1024/26   ;NUMBEROF ENTRIES PER DIR BLOCK
+                      1005
+                      1006 ; Offsets  into an FCB  header.
+                      1007
+                      1008 ; Copy of  DIR entry
+                      1009
+             <O00O>   1010 FCB_NAME         EQU       O        ;FILE NAME
+             <OOOC>   1011 FCB_ATTR         EQU       12       ;FILE ATTRIBUTE BYTE
+             <OOOD>   1012 FCB_START BLOCK  EQU       13       ;STARTING BLOCK ¥#
+             <O00D>   1013 FCB_FIRSTBLOCK   EQU       FCBSTART  BLOCK
+             <OO11>   1014 FCBMAX_LENGTH    EQU       17       ;TOTAL # BLOCKS ALLOCATED
+             <OO13>   1015 FCB USEDLENGTH   EQU       19       ;# OF BLOCKS USED (FULL + 1 PARTIAL)
+             <OO15>   1016 FCB_LAST COUNT   EQU       21       ;NUMBER OF BYTES IN LAST PARTIAL BLOCK
+                      1017
+             <OO16>   1018 FCB STORED BYTES  EQU      FCB_LAST COUNT+1  ; NUMBER OF BYTES STORED  ON DEVICE
+                      1019                                             ; ... THE UPPER HALF OF THIS  FCB  EQU  LIST
+                      1020
+             <OO17>   1021 FCB_DEVICE       EQU       26-3             ;NUMBER OF DEVICE CONTAINING  FILE
+             <OO18>   1022 FCB_MODE         EQU       27-3             ;FILE MODE (UNUSED, READ,  WRITE,APPEND)
+             <O019>   1023 FCBBLOCK         EQU       28-3             ;>BLOCKNUMBER CURRENTLY IN  BUFFER
+             <OO01D>  1024 FCB_LAST_BLOCK   €&QU      32-3             ;LAST BLOCK NUMBER IN FILE
+             <0021>   1025 FCBPOINTER       EQU       36-3             ;-POINTERINTO BLOCK BUFFER
+             <0023>   1026 FCB_LENGTH       EQU       38-3
+                      1027
+                      1028 ; Possible  FCB modes.
+                      1029 *
+                      1030 * PROTECTED  MODE EQUATES
+                      1031 *
+             <O000>   1032 MODEUNUSED       EQU       O        ;MANY PEOPLE ASSUME THIS IS ZERO!
+             <OO0O1>  1033 MODEREAD         EQU       MODEUNUSED+  1
+             <0002>   1034 MODEWRITE        EQU       MODEREAD+1
+             <0003>   1035 MODEUPDATE       EQU       MODEWRITE+1
+             <O004>   {1036MODEEXEC         EQU       MODEUPDATE +1
+             <0004>   1037 MODEMAX          EQU       MODEEXEC+0O

@@ -1,0 +1,60 @@
+ILE:  OS 7PRIME:pOS          HEWLETT-PACKARD: OPERATING  SYSTEM  (c) Coleco, 1982   CONFIDENTIAL        Fri,  18  May  1984,  16:18       PAGE     3
+
+OCATION   OBJECT  CODE  LINE      SOURCE LINE
+
+                         107
+                         108  ;               Modified  February  14, 1983.  Filler areas  were  changed
+                         109  ;               to OFFH  to reflect  OS7PRIME.   Also minor  comment  changes
+                         110  ;               were made  to clarify  O55AAH for test cartridge   condition.
+                         Me   RERARAAAAAAAAKAARAEKAREUKEREXTERNAL   SYMBOLS RAREERARRAKEARAEEKKAGKAAKARK
+                         113
+                         114  * EXTERNAL ROUTINES LINKED  INTO OS
+                         115                                  |
+                         116                 sEXT REG WRITE                     ;VIDEO  DRIVERS
+                         117                 ;EXT REG READ
+                         118                 ;EXT VRAM WRITE
+                         119                 ;EXT VRAM READ
+                         120                 ;EXT INIT QUEUE
+                         121                 sEXT WRITER_
+                         122                 ;EXT REGWRITEQ                     PASCAL   CALLS
+                         123                 ;EXT VRAM WRITEQ
+                         124                 ;EXT VRAM_READQ
+                         125                 ;EXT INIT QUEUEQ
+                         126
+                         127                 sEXT POLLER                        ; CONTROLLER   ROUTINE
+                         128                 ;EXT UPDATESPINNER
+                         129                 ;EXT CONTSCAN
+                         130                 ;EXT DECODER_
+                         131
+                         132                 EXT  INIT SOUND                    ; SOUND  ROUTINES
+                         133                 ;EXT ALL_OFF
+                         134                 sEXT JUKEBOX
+                         135                 ;EXT SNOMANAGER
+                         136                 ;EXT PLAYSONGS
+                         137                 sEXT INITSOUNDQ                    ; PASCAL  CALLS
+                         138                 sEXT JUKEBOXQ
+                         139
+                         140                 sEXT INITTIMER  |                  ; TIME   MGMT ROUTINES
+                         141                 sEXT FREESIGNAL  _
+                         142                 sEXT REQUESTSIGNAL   _
+                         143     |           sEXT TESTSIGNAL
+                         144                 sEXT TIMEMGR_
+                         145                 sEXT INITTIMERQ                    ; PASCAL  CALLS
+                         146                 sEXT FREESIGNALQ                                                                                                                      ;
+                         147                 sEXT REQUEST SIGNALQ
+                         148                 sEXT TESTSIGNALQ
+                         149
+                         150                 sEXT INITTABLE  _                  7TABLE MA
+                         151                 sEXT GETVRAM_
+                         152                 ;EXT PUTVRAM_
+                         153                 sEXT INITSPR  ORDER_
+                         154                 sEXT WRSPR  NM TBL_
+                         155                 sEXT INITTABLEQ                    ;PASCAL  CALLS
+                         156                 ;EXT GETVRAMQ
+                         157                 ;EXT PUTVRAMQ                                                                                                      .
+                         158                 -EXT INITSPR ORDERQ
+                         159                 sEXT WRSPR NM  TBLQ
+                         160
+                         161                 sEXT ACTIVATE                      ; GRAPHICS  ROUTINES
+                         162                 -EXT PUTOBJ
+                         163                 7EXT RFLCTVERT

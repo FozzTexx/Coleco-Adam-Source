@@ -1,0 +1,61 @@
+FILE: EOQSABS:EOS  TF           HEWLETT-PACKARD:     DIR_HANDL    (c)})Coleco    1983  Confidential                         Sat,    8  Sep  1984,  23:39        PAGE    98
+
+LOCATION  OBJECT   CODE   LINE        SOURCE   LINE
+
+    E6BE  CB39            3697             SRL       Cc                   ;THEN  ONE   LAST   TIME
+    E6CO  CBIA            3698             RR        a)
+    E6C2  CB1B            3699             RR        E
+                          3700
+                          3701    ; FOR THIS   TO BE  A LEGAL   FILE   SIZE,   IT  MUST  FIT   INTO  DE.
+                          3702
+    E6C4  79              3703             LO        A,C                  ;CHECK   FOR  TOO  BIG
+    E6CS  B7              3704             oR        A
+    E6C6  C2E992          3705             uP        NZ,TOO  BIG          ;JUMP   IF TOO   BEEG,   SENOR
+    E6C9  13              3706             INC       DE                   ;ROUND   UP  IN  CASE  THERE   WAS   A FRACTION
+    E6CA  78              3707             LD        A,E                  ;CHECK   FOR  TOO  BIG  AGAIN
+    E6CB  B2              3708             OR        D
+    E6CC  CAE992          3709             uP         Z2,T0BIG
+    E6CF  EDS3FEOC        3710             LD        [BLOCKS  REQ),DE     ;ELSE  SAVE   THE  BLOCK   COUNT
+                          3711
+    E6D3                  3712    SET_UP_DIR:
+    E603  110000          3713             LD        DE,O                         ; ZERO  OUT   HI  ADDRESS
+    E6D6  EDS3FEOE        3714             LD        [BLOCKS  _REQ+2].DE
+    EGDA  EDS3FDD9        3715             LO        [DIR_BLOCK_NO),DE
+    EGDE  AF              3716             xOR       A
+    EGDF  32FDDB.         3717             LD        [FOUND  _AVAIL_ENTRY].A
+                 |        3718                    |
+    EGE2  DD361901        3719             Me)       [IX+FCB_BLOCK]),1     ;INIT  NUMBER    OF  FIRST   DIR  BLOCK
+    EGEG  DD771A          3720             LO        [IX+FCB_BLOCK+1],A          ZERO   IT  OUT
+    EGES  0D771B          3721             LD        [IX+FCB_BLOCK+2),A
+    EGEC  DD771C          3722             LD        [IX+FCB_BLOCK+3],A
+                          3723
+    EGEF  DD360001        3724             LD        [IX+FCB_START_BLOCK],1        ;INIT  NUMBER    OF  FIRST   DIR  BLOCK
+    EGF3  DD770E          3725             LD        [IX+FCB_START_BLOCK+1],A
+    EGF6  D0D770F         3726             LD        [IX+FCB_START   BLOCK+2],A
+    E6F9  0D7710          3727             LO        [IX+FCB_START   BLOCK+3),A
+    7                     3728
+    EGFC  EDSBFOFF        3729             LD        DE,[FCB_DATA_ADDR]      ;INIT   POINTER    TO BUFFER
+    E700  007321          3730             LD        [IX+FCB_POINTER],€
+    E703  007222          3731             LD        [IX+FCB_POINTER+1],0
+                          3732
+    E706  EDS3FEO8        3733             LD        [BUF_START],DE      ;ALSO   INIT   HERE  WITH   SAME
+    E70A  210400          3734             LD        HL,1024             ;CALC   ADDR   OF  END  OF  BUFFER   TOO
+    E700  19              3735             ADD       HL,DE
+    E7OE  22FEOA          3736             LD        (BUF_END],HL        ;AND   SAVE  IT
+                          3737
+                          3738    ;THIS LABEL   NOT  USED  IN THIS   ROUTINE,    NOT  DECLARED    GLOBAL
+                          3739    ;REMOVED  BECAUSE   IT CONFLICTS    WITH   IDENTICAL    LABEL   ELSEWHERE
+                          3740    ;READ_TIMEOUT:
+    E711  DD7E17          3741             LD        A,[IX+FCB_DEVICE]      ;GET  PARAMETERS     FROM  FCB
+    E714  DDGE2!          3742             LD        L,[IX+FCB_POINTER]
+    E717  DD6622          3743             LD        H,[IX+FCB  POINTER+1]
+    E71A  DDSE19          3744             LD        E,{IX+FCB  BLOCK]
+    E710  DDS6IA          3745             LD        0,{1X+FCB_BLOCK+1]}
+    E720  DD4E18          3746             LO        C,{IX+FCB_BLOCK+2]
+    E723  DD461C          3747             LD        B,[IX+FCB_BLOCK+3]
+    E726  COF178          3748             CALL      READBLOCK           ;THEN   READ   THE  FIRST   BLOCK
+                          3749
+    E729  C2E989          3750             uP        NZ,MAKE_ERROR                  IF  ERROR
+                          3751
+    E72C                  3752   SET_UP_FCB:
+    E72C      \FOFF       3753             LD        IY,[FCB _DATA_ADDR]     ;POINT       THE  BUFFER

@@ -1,0 +1,61 @@
+"ILE: OS_7PRIME   :pOS       HEWLETT-PACKARD: TABLE MANAGER  (c)Coleco,  1982  CONFIDENTIAL          Fri,  18 May  1984,  16:21        PAGE  126
+
+OCATION   OBJECT  CODE  LINE      SOURCE LINE
+
+    1BDE  2808          6140             JR   2,END_ADJ_COUNT
+    1BEO                6141  ADJUST COUNT                    sMULTIPLY  ITEMCOUNT TO GET  BYTE COUNT
+    1BE0  CB21          6142             SLA  C
+    1BE2  CB10          6143             RL   OB
+    1BE4  3D            6144             DEC  A
+    1BE5  20F9          6145             JR   NZ,ADJUST COUNT
+    1BE7  ED4373FE      6.146            LO   [SAVEDCONT)  ,BC                ;SAVE ADJUSTED  COUNT
+    1BEB                6147  ENDADJ COUNT
+                        6148
+    1BEB  C1            6149             Pop  BC              RESTORE  TABLECODE/INDEX
+    1BEC                6150  SETCOUNT20
+    1BEC  E5            6151             PUSH HL
+    1BED  DDO9          6152             ADD  IX,BC           ;GET TABLE ADDRESS IN VRAM
+    1BEF  DDO9          6153             ADD  1X,BC
+    1BF1  DD6E00        6154             LDL, [1X+0)          ;LOW ORDER OF VRAM ADDRESS
+    1BF4  DD6601        6155             LOD oH, LIX#1]       sHIGH ORDER OF VRAM ADDRESS
+    1BF7  19            6156             ADD  HL,DE           ;ADD BYTE  INDEXTO GET VRAM  START ADDRESS
+    1BFB  EB            6157             EX  DE, HL           :VRAM DESTINATION NOW IN DE
+    18F9  E1            6158             POP  HL              “RESTORE DATA POINTER
+    1BFA  ED4B73FE      6159             LD   BC, [SAVECOUNT]  ;RESTORE ADJUSTED COUNT
+    1BFE                6160  SET_COUNTX
+    1BFE  C9            6161             RET
+                        6162
+                        6163
+    18FF                6164  SHIFTCT
+    18FF  0203000303    6165                  DEFB            2,3,0,3,3
+                        6166
+                        6167
+                        6168  * PROCEDURE PUTVRAMQ  (TABLE CODE :BYTE;START_INDEX:BYTESLICE  :BYTE;
+                        6169  *                      VAR DATA:BUFFER;ITEM COUNT:INTEGER);
+                        6170
+                        6171  * THIS 1S THE PASCAL ENTRY POINT TO INIT_TABLE_
+                        6172
+    1€04  00050001      6173  PUT_VRAMP       DEFW            5,1,1,1,-2,2
+    1€08  00010001
+    1COC  FFFEOOO2
+                        6174  * THIS IS THE PARAMETER DESCRIPTOR FOR INIT TABLEQ
+                        6175
+    1C10                6176  PUT_VRAMQ
+    1€10  011004        6177                  LD              BC,PUTVRAM  P
+    113   1173BA        6178                  LD              DE,PARAM_AREA
+    1C16  CD0098        6179                  CALL            PARAM
+    1019  3A73BA        6180                  LD              A,[PARAMAREA]
+    1C1C  €D587388      6181                  LD              DE,(PARAMAREA+1)
+    1020  FO2A73BF      6182                  LD              1Y,(PARAM_AREA+5)
+    1024  2A73B0        6183                  LD              HL,[PARAMAREA+3]
+                        6184
+    1027                6185  PUTVRAM_                         WRITES  A CERTAIN NUMBER OF  BYTES TO VRAM
+                        6186                                  ;FROM A BUFFER.
+                        6187                                  IN:  TABLE CODE IN A
+                        6188                                  ;             NAME TABLE
+                        6189           :                      -             GENERATOR TABLE,  2=PATTERN NAME
+                        6190                                  -    TABLE3=  PATTERN GENERATOR  TABLE, 4=
+                        6191                                  -    COLOR TABLE                        |
+                        6192                                  - START INDEX IN DE,
+                        6193                                  : DATA BUFFER IN HL, AND COUNT  IN IY.
+                        6194

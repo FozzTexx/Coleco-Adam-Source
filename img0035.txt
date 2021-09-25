@@ -1,0 +1,61 @@
+FILE:  ..  .S:EOS_TF       HEWLETT-PACKARD:    INCLUDE   P_DCBFQU                                           Sat,  8  Sep 1984,  23.38               er
+
+LOCATION OBJECT  CODE  LINE     SOURCE  LINE
+
+              <O001!>  1151 KEYBOARD_ID                 EQuU     {        :KYBD   ID
+              <0002>   1152 PRINTER ID                  EQU      2        -PRINTER  ID
+              <0008>   1153 TAPE_ID                     EQU      8        ;TAPE DRIVE  ID
+                       1154
+              <0002>   1155 ERRORRETRY                  EQU      2        ;MAX RETRYS ON  ERRORS,   READ BLOCK  AND  WRITEBLOCK
+                       1156
+              <OOOF>   1157 MAX_DEV_ADDR                EQu      15       -HIGEST POSSIBLE  DEVICE   ADDRESS
+                       1158                                               ; ON NETWORK
+                       1159
+                       1160
+                       1161 :PCB COMMAND   EQUATES
+                       1162
+                       1163
+              <OOO0O>  1164 PCB_IDLE                    EQU      oO       ;THIS  ISAN  IDLE STATE
+                       1165
+              <O001>   1166 PCB_SYNC1                   EQu      {        ;SYNC BYTE  1
+              <O081>   1167 PCB_SYNC1_ACK               EQU      PCB_SYNC1+80H
+                       1168
+              <0002>   1169 PCB_SYNC2                   EQU      2        ;SYNC BYTE 2
+              <O082>   1170 PCB_SYNC2_ACK               EQU      PCB_SYNC2+80H
+                       1171
+              <0003>   1172 PCB_SNA                     EQU      3       ; SET NEW PCB ADDRESS
+              <0083>   1173 PCB_SNA_ACK                 EQu      PCB_SNA+80H
+                       1174
+              <O004>   1175 PCB_RESET                   EQU      4       ; RESET ALL NODES
+              <O0084>  1176 PCB_RESET_ACK               EQU      PCB_RESET+80H
+                       1177
+              <O005>   1178 PCBWAIT                     EQU      5       :
+              <0085>   1179 PCB_WAIT_ACK                EQU      PCB_WAIT+80H
+                       1180
+                       1181
+                       1182
+                       1183 ;0CB COMMAND   EQUATES
+                       1184
+              <O00O>   1185 DCB_IOLE                    EQU     00       :
+              <O001>   1186 DCBSTATUS                   EQU     O1       ; REQUEST STATUS
+              <0002>   1187 DCB_RESET                   EQU     02       ; RESET NODE
+              <0003>   1188 DCB_WR                      EQU     03       ; WRITE DATA TO DEVICE
+              <0004>   1189 DCBRD                       EQU     04       ; READ DATA FROM DEVICE
+                       1190
+                       1191
+                       1192
+              <FECO>   1193 INIT_PCB_ADDR               EQU     OFECOH   : INITIAL ADDRESS  OF  THE PCB
+                       1194
+              <D390>   1195 FCB_S                       EQU     OD390H   ; FCB HEADER AREA
+              <D400>   1196 THREE1KBLKS                 EQU     OD400H   ; 3K FCB DATA AREA
+                       1197
+                       1198
+                       1199 ;GENERAL  USAGE  EQUATES    FOR USE WITH  DCB INFO
+                       1200
+              <O007>   1201 CMND_COMPLETE  BIT          EQU     7        - THIS IS THE BIT  THAT  INDICATES   THE
+                       1202                                              ; COMMAND HAS BEEN  PROCESSED.
+              <O080>   1203 CMNDFIN  STATUS             EQU     80H      ; THIS IS THE STATUS  OF  A COMMAND
+                       1204                                              ; THAT COMPLETED WITH  NO  ERRORS
+              <OO8C>   1205 KBD_NAK                     EQU     BCH      ; INDICATES NO KEY  READY
+                       1206
+              <GO86>   1207 PR_NAK                      EQU     86H      - INDICATES THE PRINTER   IS BUSY

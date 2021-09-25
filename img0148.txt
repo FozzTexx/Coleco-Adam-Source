@@ -1,0 +1,62 @@
+FILE: EQSABS:£0S_TF              HEWLETT-PACKARD:     UTILS         fo}  Coieco   i583 Confidentia}                           Sat.   .   em  '554,   33:40        PAGE    144
+
+LOCATION  OBJECT   CODE    LINE       SOURCE    LINE
+
+    F199  283F             5893           JR         2,READ_ERROR                   -NO  RETRY’S   LEFT
+    F1i9B 18£B             5894           JR         READ LOOP                     ; TRY  AGAIN
+                           5895
+    F49D                   5896   NO_READ_ERRORS:
+    F1i9D 0602             5897           LD         B,ERROR_RETRY                   ;NUMBER   OF  TIMES   TO   RETRY
+                           5898
+    F19F                   5899   RETRY_FOR_ERRORS:
+    FIOF  F1               5900           PoP        AF                              ;RESTORE   DEVCIE   ID
+    FiAO  FS               5901           PUSH       AF
+                           5902
+    FIA’  CDF473           §903           CALL       __REQUEST_STATUS                ;GET  STATUS
+                           5904
+    FiA4  2808             5905           JR         Z,READ_ COMMANDO   COMPLETED;            READ  ALL  DONE
+                           5906
+    FiAG  FESB             5907           cP         TIMEOUT                         ;WAS  IT  A TIMEOUT?
+    FIA8  28F5             5908           JR         Z,RETRY_FOR_ERROR               ;NOT  A  REAL  ERROR,    DON’T   NEED    TO DEC   COUNTER
+                           5909               |
+    FIAA  10F3             5910           DUNZ       RETRY_FOR_ERROR                 ;IT’S  A  REAL  ERROR,     TRY  AGAIN
+                           5911
+    F1iAC 182C             5912           JR         READ_ERROR                      ;CAN’T  GET   STATUS    ,  GET  OUT
+                           5913
+    F1AE                   5914   READ_COMMAND_COMPLETE:
+    FIAE  Fi               5915           PoP        AF                              ;RESTORE   DEVICE   ID
+    FIAF  FS               5916           PUSH       AF
+                           5917
+    FiBO  CDF225           5918           CALL       GET_STATUS_FLAG                 ;GET  THE  STATUS   FOR    THE  PROPER
+                           5919                                                      ; DEVICE   IN  THE  A   REGISTER
+                           5920
+    F1iB3 FEOO             §921           cP         0                              ; ANY  ERRORS   WITH  ORIVE?
+                           5922
+    FIBS  2023             §923           JR         NZ,READ_ERROR                  ; YUP
+                           5924
+    F1B7  3£02             5925           LD         A,ERROR_RETRY
+    F1B9  32FDD6           5926           LD         {RETRY  _COUNT],A
+                           5927
+    FIBC  F1               5928           PoP        AF
+    FiBD  FDE1             5929           PoP        ly
+    FIBF  DDE              5930           PoP        IX
+    FiCi  €1               5931           PoP        HL
+    Fic2  D1               §932           POP        DE
+    FiC3  Ci               5933           POP        BC
+    FiC4  C5               5934           PUSH       BC
+    F1C5                   5935   _2ND_READ:
+    FICS  FS               5936           PUSH       AF
+                           5937
+    FiC6  CDFASE           5938           CALL       __RD_1_8LOCK                   ; SEND  ANOTHER    READ   COMMAND
+    F1iC9 280C             5939           JR         Z2,NO_ERRORS
+    FICB  ES               5940           PUSH        Hi
+    FICC  21FOD6           5941           LD          HL ,RETRY_COUNT
+    FICF  35               5942           DEC         [Hi]                         ; THE  NO OF  RETRY’S
+    FIDO  E1               5943           PoP         Hi
+    FID’  2803             5944           UR          Z,_2ND_  READ  ERROR         ; NO  RETRY’S  LEFT
+    FIDG  Ft               5945           PoP         AF
+                           5346
+    F4Dg  «TRF             5947           JR         _2ND_READ                     : GO  TRY AGAIN
+                           5aag
+    FIDG                   RE@Q    ONT  READ  ERROF-
+           me

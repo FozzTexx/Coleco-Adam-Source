@@ -1,0 +1,33 @@
+FILE: EOSABS:EOS TF          HEWLETT-PACKARD:    A_uOS  00  {(c)Coleco 1983 Confidential                    Sat,    8  Sep  1984,  23:38        PAGE    48
+
+LOCATION  OBJECT CODE   LINE      SOURCE   LINE
+
+              <OO7F>    1829  DEL                EQU      7FH             ;ASCII code for   it
+                        1830  ;ASCII_GEN          EQU      LOC_INALPHA      ist byte of  generator  for  NUL
+                        1831  ;
+                        1832  ; _ LOAD  ASCII
+                        1833  ;
+                        1834  ;     Loads  the  ASCII  character generators into VRAM at  the
+                        1835  ;     current  pattern   generator table (NOTE - INITTABLE   must
+                        1636  ;    have   been  called  prior to this).  Only the characters
+                        1837  ;     from  the space   to the DEL (20h to 7Fh) are loaded.
+                        1838  ;
+                        1839  ;Input   Parameters:
+                        1840  ;   NONE
+                        1841  ;
+                        1842  ;Returns:
+                        1843  ;   A,   8C, HL,  DE are  destroyed
+                        1844  ;
+                        1845  ;  Falls   into _PUT_ASCII
+                        1846  ;
+    E149                1847                                                                     :
+                        1848                     ;LO       HL,([PATTRNGENTBL];get base of  current  generator    table
+    E149  EDSBFOGA      1849                     LO       DE,{PATTRNGENT8L] ;get base of  current  generator    table
+                        $850                     ;LD       DE,OOH+8        ;Offset into  it where  SPACE  will   be
+                        1851                     ;ADD      HL.DE
+                        1852                      EX       DE.HL           ;leave VRAM address   in DE
+    E140  210000        1853                     LOD      HL,OOH          ;want to start  with  the nu)!
+    E150  010080        1854                     LD       BC,(DEL-OOH+1)  ;load the entire  ASCII  set (0. .7F)
+                        1855  ;
+                        1856  ; fall   thru to  PUT_ASCII
+                        1857 ;:

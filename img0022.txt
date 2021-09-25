@@ -1,0 +1,34 @@
+FILE: EOSABS :EOS TF          HEWLETT-PACKARD:     EOS COMN     (c)  Coleco    1983Confidential!                           Sat.    8  Sep  1984,  23  38        PAGE    18
+
+LOCATION  OBJECT CODE    LINE      SOURCE   LINE
+
+                          634   ;
+                          635  ; data  area  for   CONS OUT
+                          636  ;
+                          637                     ;GLB       OLDCHAR  _
+                          638                     ;GLB       XMIN
+                          639                     ;GLB       XMAX
+                          640                     GLB        YMIN
+                          641                     ;GLB       Y_ MAX
+                          642                     ;GLB       LINEBUFFER_
+                          643                     ;GLB       NUM LINES
+                          644                     ;GLB       NUM COLUMNS
+                          645                     ;GLB       UPPER  LEFT
+                          646                     ;GLB       PTRN_NAME   TBL
+                          647                     ;GLB       CURSOR
+                          648
+    FE79                  649  OLDCHAR_            DEFS      1                   ;Storage   of   char  under   cursor
+    FETA                  650  X_MIN               DEFS      1                   ;Absolute    X  coord  of   window
+    FE7B                  651  X_MAX               DEFS      {
+    FE7C                  652  YMIN                DEFS      1
+    FE7D                  653  YMAX                DEFS      1
+    FETE                  654  LINEBUFFER_         DEFS      33
+    FESF                  655  NUMLINES            DEFS      1
+    FEAO                  656  NUM_COLUMNS         DEFS      1
+    FEA1                  657  UPPER_LEFT          DEFS      2
+    FEA3                  658  PTRN_NAME  TBL      ODEFS     2
+    FEAS                  659  CURSOR              DEFS      2
+                          660
+                          661         ;GLB        CLEAR_RAM  SIZE
+                          662
+              <O147>      663  CLEAR_RAM  SIZE              EQU       ($-CLEAR_RAM   START)

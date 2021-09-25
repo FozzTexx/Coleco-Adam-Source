@@ -1,0 +1,62 @@
+FILE:   sa0$:£0S_TF           HEWLETT-PACKARD.   SOUND  FOUS    (Cc)Cofeco,    +42     CONFIDENTIAL                   at     FR Sep  fafa    99   ag
+      ~
+
+LOCATION  OBVECT  CODE   LINE      SOURCE  LINE
+
+                         2984
+                         2985   FSSeeeeeeee eee eeaeeee eeeeese
+                         2986  ;*      PLAY SONGS  _          *
+                         2987  ,Seeeeeseseseseeseeeeseseeeseeeens
+                         2988
+                         2989  ;       **¢  Sound  chip  register   code  EQUATES
+                         2990
+                         2991  ;@@@ WHITE        EQU        00000 1008     ;BIT2  =  1, white  noise   code
+                         2992  ;@@e@PERIOD       EQU        000000008      ;BIT2  = O,  periodic   noise   code
+                         29933 ;@@e@NSRHI        EQU        000000008      :B:TO-1  Set  for  highest   noise    shift   rate   {N/512]
+                         2994  ;ee@@NSRMED       EQU        0000000  18    ;BITO-1  Set  for  medium   noise   shift    rate   [N/1024]
+                         2995  ;ee@ NSRLOW       EQU        000000  108    ;BITO-1  Set  for   lowest  noise   shift    rate   [N/2048]
+                         2996  ;ee@ NSRTG3       EQU        000000  11B    :BITO-1  Set  for  shift   from   tone  gen   3  output
+                         2997
+    E406                 2998  SOUNDS
+                         2999  ;@e@@PLAYSONGS   _
+                         3000
+                         3001  ;       * output   CH! attenuation     and frequency
+                         3002
+    E406  3€9F           3003          LD        A,OFFtSRIATN        ;format  CH!  OFF  byte   into A
+    E408  OF90           3004          LD.       C,SR1IATN           ;format  MSN  C  for  CH1iattenuation
+    E40A  1680           3005          LD        D,SRIFRO            ;format  MSN  O  for  CHi frequency
+    E40C  DD2AFE72       3006          LO        IX,[PTR_TO_S   ON  _1) ;point   IX  to byte  O  data  area   of  song   for  CH!
+    E410  CDE456         3007          CALL      TONEOUT
+                         3008
+                         3009  ;       * output   CH2 attenuation     and frequency
+                         3010          |
+    E413  3EBF           3011          LO        A,OFF+SR2ATN        ;format  CH2  OFF  byte   into A
+    E415  OEBO           3012          LO        C,SR2ATN            :format  MSN  C  for CH2. attenuation
+    E417  16A0           3013          LD        D,SR2FRO            ;format  MSN  D  for CH2  frequency
+    E419  DD2AFE74       3014          LO        IX,{PTR_TO_S   ON 2]   ;point  IX  to  byte  O  data  area   of  song   for  CH2
+    E410  CDE456         3015          CALL      TONE_OUT
+                         3016
+                         3017  ;       * output   CH3 attenuation     and frequency
+                         3018
+    E420  3EDF           3019          LD        A,OFF+¢SR3ATN       ;format  CH3  OFF  byte  into  A
+    E422  OEDO           3020          LD        C,SR3ATN            >format  MSN  C  for CH3  attenuation
+    E424  16CO           3021          LD        D,SR3FROQ           >format  MSN  D  for CH?  frequency
+    E426  OD2AFE76       3022          LD.       IX,{PTR_TO_S  ON  3)   ;potnt  IX  to  byte  O data   area   of  song   for  CH3
+    E42A  CDE456         3023          CAL       TONE_OUT
+                         3024
+                         3025  ;       * output   CHO [noise]   ATN   [and CTRL,   if  different   from   last   time]
+                         3026                                                           .
+    E42D  3EFF           3027          LO        A,OFF+SRNATN        ;>format CHO  OFF  byte  into  A
+    E42F  OEFO           3028          LO        C,SRNATN            ;format  MSN  C for  CHO  attenuation
+    E431  DD2AFE70       3029          Lo        IX,[PTR_TO_S_  ON _O]) ;point  IX  to  byte  O data   area   of  song   for  CHO
+    E435  DDSEOO         3030          LD        E,{1X+0]            ;look for  inactive    code,  OFFH
+    E436  1C             3031          INC       3=€                ;this  sets  Z  flag   if E  = OFFH
+    E439  2005           3032          JR        NZ,LS               ;{f PSW  1s zero   song  data  area  is   inactive
+    E43B  CDE60D         3033          CALL      OUTTO  SOUND   PORT    ;turn  off  CHO
+    E43E  1825           3034          JR        L6                 ; SND_MANAGER
+                         3035
+                         3036  ;       ELSE
+                         3037
+    E440                 3038  L5
+    E440  CDE328         3039          CALL      UPATNCTRL          ;send  out  current   ATN
+    E443  DD7EO4         3040          LD        &,EIUX4+CTRL]      ;LSN  A  = current   CTRL  data

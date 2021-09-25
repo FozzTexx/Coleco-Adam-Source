@@ -1,0 +1,57 @@
+                                                                         2
+FILE: w-oncS:EOS  TF         HEWLETT-PACKARD:    A_uOSOO    (c) Coleco  1s-.  confidential                     Sat    B  Sep  1984, 23 39         -AGE     53
+
+LOCATION OBJECT  CODE    LINE     SOURCE   LINE
+
+                         2003 ;
+                         2004 ;  Name:              WRSPR_ATTRIBUTE
+                         2005 ;
+                         2006 ;  Function:          Transfers  the  loca!  copy of  the sprit¢ attribute     table
+                         2007 ;                      to VRAM.   WR_SPR_ATTRIBUTE    will also reorder    the
+                         2008 ;                      sprite  table  to reduce  Sth  sprite priority  problems.
+                         2009 ;
+                         2010 ;  Entry:             DE - address  of  Loca:  Sprite  Table
+                         2011 ;                     HL - address  of  Priority  table
+                         2012 ;                      & - mumber  cf  sprites  to he  transfered (length    of  Loca!   Sprite
+                         2013 ;                            table divide    by 4
+                         2614 :  Exit:              None.
+                         2015 ;
+                         2016 ;  Registers   usec:  AF, BC,  DE, Hi.
+                         2017 ;
+                         2018 ;  Data   structures  accessed:
+                         2019 ;                     VRAM_ADDR_TABLE   (SPRITEATTRIBL)   for the starting     address
+                         2020 ;                     of the  sprite  attribute  table  in VRAM.
+                         2021 ;
+                         2022 ;                     PORT PTR_TABLE   (CTRL_PORT_ PTR,  DATAPORT_PTR)     for
+                         2023 ;                     VDP port  access.
+                         2024 ;
+                         2025 ;                     Local  Sprite  Table  - User defined  memory  image   of
+                         2026 ;                     the sprite  attribute   table
+                         2027 ;
+                         2028 ;                     Priority  Table  - User  defined  sprite priority    list
+                         2029 ;                     for the  transfer  of  the sprite  attributes
+                         2030 ;
+                         2031 ;  Size:              ROM  - xx bytes
+                         2032 ;                     RAM  - xx bytes
+                         2033 ;
+                         2034 ;  Comments:
+                         2035 ;
+                         2036 ;  Comparision:       left out  pascal  entry  point
+                         2037 ;                     added  register  parameters   in place of defined    memory  pointers
+                         2038 ;                     code compacted
+                         2039 ;                     edited  for documentation
+                         2040 ;
+    E1C5                 2041  WR _SPR_ATTRIBUTE
+                         2042                                                       Initialize  VOP  address    pointer
+    E1CS F5              2043                   PUSH    AF
+    E1IC6E5              2044                   PUSH    HL
+    E1C7 2AFD64          2045                   LO      HL, (SPRITEATTRTBL }
+    E1ICACDEIES          2046                   CALL    SET WRITE
+    E1CD Et              2047                   POP  HL
+    EICE Fi              2048                   POP  AF
+    EICF 47              2049                   LD   B.A                                        |
+                         2050                                                       -B = Sprite Count
+                         2051                                                       -C = port address
+                         2052                                                       -DE = address  of  Local   Sprite   Attribute  Table
+                         2053                                                       -HL = address  of  Priority   table
+                         2054                                                       -VDOPis initialized    to  appropriate    address

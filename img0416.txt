@@ -1,0 +1,58 @@
+LE:  OS7PRIME:pOS           HEWLETT-PACKARD:   GRAPHICS   PRIM  PKG  (c)  Coleco  1982  CONFIDENTIAL              Fri,   18  May  1984,   16:22       PAGE  142
+
+CATION  OBJECT   CODE LINE       SOURCE  LINE
+
+   1E6F 3€00          7030   EXITFALSE         LD                 A, FALSE
+   1€71 C9            7031                     RET
+                      7032
+                      7033
+                      7034
+  1E72                7035   PUTTABLE
+                      7036                                    ‘PUTS        THE CONTENTS    OF WORK BUFFER[8..15)
+                      7037                                  _     ;  IW VRAM  AT  THE  GIVEN  DESTINATION.
+                      7038
+  1€72  08            7039                     EX                 AF,AF?
+  1E73  F5            7040                     PUSH               AF
+  1E74  08            7041                     EX                 AF,AF!
+  1675  F1            7042                     POP                AF
+  1€76  D9            7043                     EXX
+  1€77  E5            7044                     PUSH               HL
+  1E78  09            7045                     EXX
+  1E79  01            7046                     POP                bE
+  1E7A  2A8006        7047                     LD                 HL, (WORK BUFFER)
+  1€7D  010008        7048                     LD                 BC,8
+  1£80  09            7049                    ADD                 HL,BC
+  1681  FD210001      7050                     LO                 1y,1
+  1€85 CD1C27        7051                      CALL               PUT _VRAM_
+  1E88 C9            7052                      RET
+                     7053
+                     7054
+  1E89               7055   GET COLOR
+                     7056                                         ; GETS  THE  COLOR   INFORMATION   FROM
+                     7057                                         ; THE  APPROPRIATE    PLACE  IN  VRAM
+                     7058
+ 1E89  3E04          7059                     LD                 A, COLOR TABLE
+ 1E88  09            7060                     EXX
+ 1E8C  05            7061                     PUSH               OE
+ 1E80  D9            7062                     EXX
+ 1E8E  01            7063                     POP                DE
+ 1EBF  248006        7064                     LD                 HL, [WORK BUFFER)
+ 1E92  FD210001      7065                     LD                  ly,1
+ 1E96  CD1BA3        7066                     CALL               GET _VRAM_
+ 1E99  C9            7067                     RET
+                     7068
+                     7069
+ 1E9A                7070   PUTCOLOR
+                     7071                                        ;  PUTS  COLOR  INFORMATION    IN  THE
+                     7072                                        ;  APPROPRIATE   PLACE   IN  VRAM
+                     7073
+ 1E9A  3E04          7074                     LD                 A, COLOR TABLE
+ 1E9C  09            7075                     EXX
+ 1€90  £5            7076                     PUSH               HL
+ 1E9E  D9            7077                     EXX
+ 1E9F  D1            7078                     POP                DE
+ 1EA0  2A8006        7079                     LD                 HL, [WORK BUFFER)
+ 1EA3  FD210001      7080                     LD                 1y,1
+ 1EA7  CD1C27        7081                     CALL               PUT _VRAM_
+ 1EAA  C9            7082                     RET
+                     7083    PROG

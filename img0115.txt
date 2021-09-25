@@ -1,0 +1,16 @@
+                                           |
+FILE: c-sABS:E0OTF         HEWLETT-PACKARD:  OPENS     (c) Coleco 15.5 Confidential                    Sat,   8  Sep  1984,  23:40       rect  11
+
+LOCATION OBJECT CODE  LINE      SOURCE LINE
+
+        |             4394
+    EAF8              4395  OP_ERR
+    EAF@ 00361600     4396          LD       (1X+FCB_MODE],MODE_UNUSED ;MAKE THE FCB  UNUSED  AGAIN
+                      4397
+    EAFC C1           4398          PoP      BC              SRESTORE REGISTERS
+    EAFD              4399  REST_REGS:
+    EAFD D1           4400          POP      OE
+    EAFE ODE!         4401          Pop      IX
+    EBOO €1           4402          PoP      HL
+    E801 FOE!         4403          POP      Iv
+    EBO3 C8           4404          RET

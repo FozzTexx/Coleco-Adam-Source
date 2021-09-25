@@ -1,0 +1,34 @@
+FILE:  EOSABS:EOS TF         HEWLETT-PACKARD: SOUND FQU¢S (c) Coleco, 1982   CONFIDENTIAL             Sat.  8 Sep  1984,  23:39       PAGE   76
+
+LOCATION  OBJECT  CODE   LINE     SOURCE LINE
+
+                         2797
+                         279G  eeeeeeveseereseereseresretes
+                         2799 ;*     PT_IX_TO_SxDATA     +
+                         2800 ,Seeeeeeeeseraeeeeseseeeresers
+                         2801
+                         2802 :SONGNO passed in 8.       |
+                         2803 :Potnt IX to byte O tn SONGNO‘s song data area.
+                         2804 ;:RETwith both DE and IX potnting to SxDATA,
+                         2805 ;HL pointing to MSB SxDATA entry itnLST_OFSND ADORS.
+                         2806
+     E383                2807 PT_IX_TO_SxDATA
+                         2808
+                         2809 ;       * IX & DE := addr of byte O itnSONGNO’s song  data  area,
+                         2610 ;       HL pointing to MSB SxDATA entry in LST_OFSND_ADDRS.
+                         2811
+     E363 2AFEGE         2812         LD      HL,{PTR_TO_LST_OF_SNOD_ADDRS];poftntHL to  start  LST_OF_SNO_ADORS
+     E386 26             2813         DEC     HL              ;init HL for addition
+     E387 28             2814         DEC     Hi
+     E386 48             2815         LD      c,.8            :form 4 ¢ SONGNO in C
+     E389 0600           2816         LD      B.O
+     E368 CBO!           2817         RLC     C
+     —E386CBO!           2818         RLC     Cc
+     E36F O98            2819         ADD     HL.BC           :HL pts to SxDATA’s entry  in LST_OF SND ADORS
+     E390 SE             2820         LO      E,{Ht}          ;move addr SxDATA to IX thru  DE
+     E391 23             2621         INC     HL
+     E392 56             2822         LD      D,{Ht]
+     E393 05             2823         PUSH    DE
+     E394 DD|            2824         PoP     IX
+     E396 CS             2825         RET
+                         2826

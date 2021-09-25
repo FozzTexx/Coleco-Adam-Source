@@ -1,0 +1,64 @@
+FILE:  EQSABS: EOSTF          HEWLETT-PACKARSG:    EOS COMN     {caa Co }PD    1983  Conf identi{ia!
+
+LOCATION  G&UECT  CGDE  LINE        SOURCE   LINE
+
+                          215   ;
+                          216   ;FILE  MANAGER    ENTRIES
+                         217    ;
+              <FCBA>     218   _FMGR_INIT                              EQU   $
+    FCBA  C3EEEA         219          JP        __FMGR_INIT
+              <FCBD>     220   _INIT_TAPE_DIR                          EQU   $
+    FCBD  C3F323         221          JP        __INIT_TAPE    OIR
+              <FCCOQ>    222   _OPEN_FILE                              EQU   $
+    FCCO  C3IEAOO        223          JP        __ OPEN FILE
+              <FCC3>     224   _CLOSE FILE                             EQU   $
+    FCC3  C3EBO4         225          JP        __CLOSE  FILE
+              <FCC6>     226   _RESET_FILE                             EQU   $
+    FCC6  C3EBEC         227          up        __RESET_FILE
+              <FCC9>     228   _MAKE_FILE                              EQU   $
+    FCC9  C3E690         229          JP        __MAKE FILE
+              <FCCC>     230   _QUERY_FILE                             EQU   $
+    FCCC  C3E61B         231     ,    JP        __QUERY_ FILE
+              <FCCF>     232   _SET_FILE                               EQU   $
+    FCCF  C3E651         233          JP        __SET_FILE
+              <FCD2>     234   _READ_FILE                              EQU   $
+    FCD2  C3EC1i7        235          JP        __READ  _FILE
+              <FCDS5>    236   _WRITE FILE                             EQu   $
+    FCDS  C3EDSF         237         JP         __WRITE  FILE
+              <FCD8>     238   _SET_DATE                               EQU   $
+    FCD8  C3IEECS        239         JP         __SET_DATE
+              <FCDB>     240   _GET_DATE                               EQU   $
+    FCOB  C3EED4         241         JP         __GET_DATE
+              <FCDE>     242   _RENAME FILE                            EQU   $
+    FCDE  C3F10F         243         JP         __RENAME_ FILE
+              <FCE{>     244   DELETE  FILE                            EQU   $
+    FCE1  C3F14E         245         JP         __DELETE  FILE
+              <FCE4>     246   _RO_DEV_DEP_STAT                        EQU   $
+    FCE4. C3F488         247         JP         __RD_DEV_DEP_STAT
+              <FCE7>     248   _GOTO_wP                                EQU   $
+    FCE7  C3FA94         249         JP         __GOTO_wP
+              <FCEA>     250   _READ_EOS                               EQU  $
+    FCEA  C3FA9D         251         JP         __READ_EOS
+              <FCED>     252   _TRIM_FILE                              EQU  $
+    FCED  C3F241         253         SP         __TRIM_FILE
+              <FCFO>     254   _CHECK_FCB                              EQU  $
+    FCFO  C3FO89         255         JP         __CHECK_FCB
+              <FCF3>     256   _READ_BLOCK                            EQU   $
+    FCF3  C3F178         257         uP      —  __READ_BLOCK
+              <FCFE>     258   _WRITEBLOCK                            EQU   $
+    FCF6  C3F1E6         259         JP         __WRITE_BLOCK
+              <FCF9>     260   _MODECHECK                             EQU   $
+    FCF9  C3FODS         261         JP         __MODE CHECK
+              <FCFC>     262  _SCAN_FOR_FILE                          EQU   $
+    FCFC  C3EFOS         263         JP         __SCAN_FOR_FILE
+         |    <FCFF>     264  _FILE QUERY                             EQU   $
+    FCFF  C3E618         265         JP         __FILE QUERY
+              <fDO2>     266  _POSIT_FILE                             EQU   ¢$
+    F002  C3F442         267         JP         __POSIT_ FILE
+              <FDOS>     268  _EOS 1                                  EQU   $
+    FDOS  C3F442         269         JP         __EOS 1
+              <FDO8>     270  _EOS 2                                  EQU   $
+    FOOS  C3i   ,        271         JP           EOS 2
+                                                ems
+
+                                                                                                                                              ae

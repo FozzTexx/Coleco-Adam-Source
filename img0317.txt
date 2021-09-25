@@ -1,0 +1,61 @@
+FILE: OS  7PRIME:pOS             HEWLETT-PACKARD:    ACTIVATE    (c) Coleco,   1982   CONFIDENTIAL                       Fri,   18  May  1984,    16:19        PAGE    43
+
+LOCATION    OBJECT   CODE   LINE      SOURCE   LIWE
+
+    OSDF    03              1886           IwC  BC                       ;INCREMENT   COLOR   POINTER
+    O5€0    £1              1887           POP  HL                       ;GET  ITEM  COUNTER
+    05E1    28              1888           DEC  WL
+    O5E2    7C              1889           LD  A,
+    05E3    B5              1890           OR  L
+    O5SE4   200C            1891           JR  WZ,WEXT  COLOR
+    05€6    18CD            1892           JR  O B RET
+                            1893  ;Internal   rout  to  update   to next  VRAM  index   screen  area
+                 <05E8>     1894 SUP UPDATE        EQu                 $
+    05€8    C5              1895                    PUSH                 BC
+    05E9    010100          1896                     LO                  BC,100H
+    OSEC    EB              1897                     EX                  DE,HL
+    OSED    09              1898                     ADD                 HL,BC
+    OSEE    EB              1899                     EX                  DE,WL
+    OSEF    Ci              1900                     POP                 Bc
+    OSFO    C9              1901                     RET
+                            1902  ;
+                 <O5F1>     1903  ACTMOBILE          -EQU                $
+                            1904  ; SUBCASE   Mobile
+    O5F1    cD0572          1905                     CALL                INIT XP_OS          ;X_PAT_POS    := 80H
+                            1906  ; INSERT   NEW GENERATOR     ADDRESS  IN OBJECT  CRAM
+    O5F4    13              1907                      INC                dE
+    O5F5    1A              1908                     LD                  A,(DE)
+    05F6    FO7705          1909                     LD                  (1¥+5),A
+   O5F9    13               1910                      imc                DE
+    OSFA    1A              1911                     LD                  A,(DE)
+    O5FB    FO7706          1912                     LD                  (1Y¥*6),A            INIT NEW  GEN    IN  STATUS
+    OSFE    Fi              1913                     POP                 AF
+    OSFF    C9              1914                     RET
+                 <0600>     1915  ACT OSPRT    EQU                 $
+                            1916  ; SUBCASE   Sprite   size   0
+                 <0600>     1917  ACT_1SPRT    EQU                 $
+                            1918  ; SUBCASE   Sprite   size   1
+    0600    03              1919                      inc                BC                  ;->WEXT_GEN    IN  CRAM
+    0601    03              1920                      1uCc               BC
+    0602    03              1921                      INC                BC
+    0603    03              1922                      INC                BC
+    0604    03              1923                      INC                BC
+    0605    £8              1924                     EX                  DE,HL               ;HL->FIRST   GEN  NAME
+    0606    23              1925                      INC                HL
+    0607    7E              1926                     LD                  A,(HL)
+    0608    5F              1927                     LO                  E,A                 3;SVINDEX   TO  VRAM
+    0609    1600            1928                     LD                  D,0
+    0608   05               1929                    PUSH                 DE
+    060C    23              1930                      INC                HL                  ;DE=PTRN PTR
+    0600    5E              1931                     LO                  E,(HL)
+    060E    23              1932                      INC                HL
+    O60F    56              1933                     LD                  D,(HL)
+    0610    23              1934                      INC                HL                  ;CALC &  SET   NEXT -GEN  CRAM
+    0611   86               1935                     ADD                 A,[HL]
+    0612    02              1936                     LO                  (8C),A                                                                                                      ‘
+    0613   4E               1937                     LD                  C,CHL)
+    0614    0600            1938                     LO                  B,0
+    0616    C5              1939                    PUSH                 BC
+    0617    FDE1            1940                     POP                 lY
+    0619    EB              1941                     EX                  DE,HL               ;HL->SOURCE    PTRN  GEN
+    O61A   D1               1942                     POP                 DE                  ;DE=INDEX   TO  PTRN   GEN VRAM

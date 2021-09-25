@@ -1,0 +1,45 @@
+FILE: OS 7PRIME:pOS           HEWLETT-PACKARD: UTILITY  (c) Coleco, 1982  CONFIDENTIAL                Fri, 18 May  1984,   16:19       PAGE    23
+
+LOCATION  OBJECT   CODE  LINE      SOURCE LINE
+
+                          941          GLB LEAVEEFFECT
+    0105                  942  LEAVEEFFECT
+    0105  0D7501          943          LD (IX¢1),L              ;LSB NEXTNOTE PTR  := LSB addr next note in song
+    0108  007402          944          LO [IX*2),W              “MSB NEXTNOTE PTR  := MSB addr next note in song
+    0108   1A             945          LD A,(DE)                “A s= x xSONGNO  (i.e., the saved, original SONGNO)
+    010C  E63F            946          AND O3FW                 sA  :=0 0 SONGNO
+    O1DE  47              947          LO B,A                   3B  :=0 0 SONGNO (B now = original SONGNO)
+    01DF  0D7E00          948          LD A,(1X+0)              cA  :=CH# | 62 (all effect notes have SONGNO = 62)
+    01€2  E6CO            949          AND OCOH                 sA  :=CHA   000000
+    O1E4  80              950          OR B                     7A  :=CH#  |SONGNO
+    01€5  007700         951           LD [I1X+0),A             srestore the song number
+    O1E8  C9              952          RET
+                          953                     |
+                         954   sanaahsanansnabeaneneragases
+                          955  ;*      AREA_SONGIS         *
+                         956   shhaansaganasaananeaneasesen
+                          957  ;.COMMENT )
+                          958  ;The address of byte  0 of a song data area is passed in IX.  The song number of
+                          959  ;the song using that  area is returned in A [OFFH if inactive).  If a special
+                          960  ;effect was using that  area, 62 is returned in A and WL is returned with the
+                          961  ;address of the special  sound effect routine.
+                          962  ;)
+                          963          GLB AREA_SONG_IS
+    O1E9                  964  AREASONG 1S
+    01E9  DD7E00          965          LDA, (1X+0)              3A := CH# | SONGNO or 62, or A := FF
+    O1EC  FEFF            966          CP OFFH
+    O1EE  C8              967          RET 2                    sleave with A = FF if area inactive
+    O1EF  E63F            968            AND 001111118            smask CH#
+    O1F1  FE3E            969            CP 62
+    01F3  CO              970            RET WZ                   leave  with A = SONGNO if not a special effect  (62)
+                          971  ;           special effect,  so set HL to addr effect, stored in bytes 1&2
+    01F4  DDES            972              PUSH IX                  z;pointHL to byte 1
+    01F6  E1              973              POP WL
+    O1F7  23              974              INC HL
+    O1F8  SE              975              LOE, (HL)                ssave LSB effect addr inE
+    O1F9  23              976              INC WL                   sHL to byte 2
+    O1FA  56              977              LDD, (HL)                s;saveMSB effect addr in D
+    O1FB  EB              978              EX DE,HL                 sHL := addr special effect
+    O1FC  C9              979              RET
+                          980;         END ;UTIL
+                          981  "PROG

@@ -1,0 +1,35 @@
+FILE: EOSABS:EOS_TF       HEWLETT-PACKARD: CONSOUT   (c) Coleco 1983 Confidential                  Sat,   8  Sep  1984,  23.41        PAGE  202
+
+LOCATION OBJECT CODE  LINE     SOURCE LINE
+
+                      7888
+                      7889;  Subroutine
+                      7890
+                      7891;  CONVERTXY   - Converts X-Y coordinates on the screen to a
+                      7892                 VRAM address for that char position
+                      7893                 Calculates (( Y * 32) + X ) + base of pattern name   table
+                      7894                 to yield the absolute address in VRAM of the char
+                      7895
+                      7896  Input Parameters:
+                      7897    H - X coord
+                      7898    tl- ¥ coord
+                      7899
+                      7900 ;Returns:
+                      7901 ;  OE - VRAM address
+                      7902 :  HL - Address of Pattern Name Table (side effect)                                      .
+                      7903 ;: No Others are altered                                                                                                   ‘
+                      7904 ;
+    FTEC              7905 CONVERTXY:
+    F7FC SC           7906                 LD      E,H             ;Save X coord
+    F7FD 2600         7907                 LD      H,OOH
+    FT7FF29         - 7908                 ADD     HL,HE            -CalcY coord * 32
+    F800 29           7309                 ADD     HL,HE
+    F8O1 29           7910                 ADD     HL,HL
+    F802 29           7911                 ADO     HL,HL
+    F803 29           7912                 ADD     HL,HE
+    F804 1600         7913                 LD      D,OOH
+    FBO6 19           7914                 ADD     Hi,DE            ;Addin X coord
+    F807 EDSBFEAS     7915                 LD      DE,(PTRN_NAME_TBL})
+    F8OB 19           7916                 ADD     HL,DE
+    FBOC EB           7917                 EX      DE,HL
+    FBOD C9           7918                 RET

@@ -1,0 +1,30 @@
+                                                                    Saat.
+FILE: w3ABS:E€0S_TF         HEWLETT-PACKARD: SOUND EQU€S (c) Coleco, 1982   CONFIDENTIAL              Sat,   8  Sep  1984,   23:39       1 aGE
+
+LOCATION  OBJECT CODE   LINE     SOURCE LINE
+
+                        2771
+                        2772 5SSSSeSHEHESSSHEHHEHEHEHHEEE
+                        2773 ;*       LOC_aDD816        e
+                        2774  SSS     SSSHSHEHEEHEEEEE HE
+                        2775
+                        2776 ;Adds 8 bit two’s complement signed vaiue passed in A to the 16 bit    location
+                        2777 ;pointed to by HL.
+                        2778
+    E374                2779  ADDB16
+    E374                2780 LOC_ADDB16
+    E374  0600          27861        LO                      ;set B for positive value inA
+    E376  CB7F          2782         BIT                     ;1f A is positive
+    E378  2801          2783         JR                      ;skip
+                        2784 eee8    LD                      7A 16 neg: extend sign bit thru 8
+    ESTA                2785         DEC                     ;Added u0S
+    E378                2786 POS
+    E376  BE            2787         ADD                     ;do 8 bit add [and set Carry]
+    E37C  77            2788         LD                      ;store result into LSB 16 bit number
+    E370  23            2789         INC                     ;put SB
+    ESTE  TE            2790         LO                      ;into A
+    EST7F 88            2791         AOC                     ;A = MSB + Carry + B [8B{tsO or FF)
+    E380  77            2792         LO                      ;store result into MSB
+    E381  28            2793         DEC                     ;re-point HL to LSB 16 bit number
+    E382  c9            2794         RET
+                        2795

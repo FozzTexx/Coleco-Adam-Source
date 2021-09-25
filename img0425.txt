@@ -1,0 +1,61 @@
+FILE:  OS  7PRIME:pOS            CROSS  REFERENCE   TABLE             PAGE   151
+
+LINE#      SYMBOL            TYPE       REFERENCES
+
+    94   CHOREP                A
+   100   CH1                   A
+    91   CHIEND                A
+    %    CHIREP                A
+   101   C2                    A
+    92   CH2END                &
+    96   CH2REP                A
+   102   CH3                   A
+    93   CH3END                A
+    97   CH3REP                A
+ 4784    CHK PLYR  1           P   4766, 4780
+ 4777    CHK SEG  01           Pp  4772
+ 4801    CHK  SEG 11           P   4796
+ 4579    CINITI                Pp  4587
+ 1677    CHMPLX4               )   1690
+ 1691    CMPLX9                Pp  1676
+ 2823    COLOR                 A
+ 6337    COLORTABLE            Dd  5902, 6330
+ 2830    COLOR  AND TAG        A   2936, 3024, 3064, 3141
+ 6670    COLOR TABLE           A   6970, 7059, 7074
+ 6997    COLOR TEST            P  6817  ,6855 ,6903, 6953
+ 3201    COLR                  A   3472, 3602, 3835
+ 3559    COMBINE  _LOOP        Pp  3593
+ 3797    COM  PATCOL           P   3576
+ 3029    CONTI NUE             P   2900, 2988
+ 6755   CONTINUE   _GRAPHI     Pp  6690 ,6709, 6730
+ 4534    CONTROLLER   0       a    4611, 4712
+ 4535    CONTROLLER   1        *
+ 4570    CONTROLLER    INIT    P   555, 4569
+  285    CONTROLLER   MAP     A    284 ,4573, 4762
+ 7353    CONTROLLER   SCAN    4    212               |
+         CONT  READ            P   4720, 4735
+ 4615    CONT  READ1           Pp  4612
+ 4617    CONT  READX           P   4614
+ 4626    CONT  SCAN            P   4625 ,4760, 7353
+         CTRL                 A    1307
+4531     CTRL_O  PORT         A    4613, 4627, 4635, 4654
+4530     CTRL_1  PORT         &    6616, 4630, 4638, 4668
+6432     CTRL_PORT            A    6433 ,6482 ,6487 ,6540, 6544 ,6590,6594 ,6624
+3594     CLP EXIT             P    3591
+643)     DATA PORT            A    6433, 6550, 6599
+5050     DBNCE_BUFF           D    4576, 4761
+4092     DCR L MODE  TBL      P
+4104     OCR L_RPT  TBL       Pp   4091
+4129     DCR S MODE  TBL      Pp   4089
+4086     DCRTIMER             P    4072
+  833    DECLSN               P   689,  735,741,832
+  850    DECMSN               P   849
+7354    DECODER               A    213
+4748    DECODERX              Pp  4728
+4701    DECODER               P   4700,  7354
+4820    DECODE  0             P   4776 , 4800
+4842    DECODE  OX            P   4835
+4854    DECODE 1              P   4783 , 4807
+4866    DECODE  1X            Pp  4863
+4827    DEC FIRE              Pp  4823
+4861    DEC KBD               Pp  4857

@@ -1,0 +1,61 @@
+FILE:  OS_7PRIME:pOS         HEWLETT-PACKARD:     TABLE  MANAGER   (c) Coleco,    1982    CONFIDENTIAL               Fri,  18  May  1984,   16:21    =   PAGE  127
+
+LOCATION   OBJECT  CODE LINE       SOURCE  LINE
+
+     1€27  F5           6195               PUSH    AF
+                        6196  *    IF  (TABLE CODE   = SPRITE  WAME  TABLE)    AND  (MUX SPRITES    =  TRUE)   THEN
+    1C28   FEOO         6197               cP  0
+    1C2A  2022          6198               JR  NZ, ELSEZZ
+    1C2C  3A73C7        6199               LD  A, [MUX SPRITES)
+    1C2F   FEO          6200               CP  1
+    1031  2018          6201               JR  WZ,ELSEZZ   |.
+                        6202
+                        6203  *      WRITE  ENTRY   TO LOCAL   TABLE
+    1€33  Fi            6204               POP   AF                     ; CLEAR   STACK
+    1034  €5            6205               PUSH    WL  ;  (SP)  = DATA  BUFFER
+                        6206
+    1€35  2A8002        6207               LD   HL,{LOCAL  SPR  TBL)   ; CALCULATE    ADDRESS   IN  TABLE
+    1C38  78            6208               LD   A,E
+    1€39  CB27          6209               SLA   A>
+    1€38  CB27          6210               SLA   A
+    1C30  5F            6211               LD   E,A
+    1C3E  19            6212               ADO  HL,DE
+    1C3F  EB            6213               EX   DE,HL
+                        6214
+    1040  FDES          6215               PUSH    IY                   ; CALCULATE    BYTE  COUNT
+    1€42  C1            6216               POP   BC
+    1€43  79            6217               LD   A,C
+    1044  CB27          6218               SLA   A
+    1046  CB27          6219               SLA   A
+    1048  4F            6220               LD   C,A
+                        6221
+   1€49   E1           6222                POP   HL                     ; STACK   CLEAR
+   1C4A   EDBO         6223                LDIR                         ; PERFORM   WRITE   FROM  BUFFER
+                       6224
+   1C4C   1807         6225                JR END  I1F2ZZ
+                       6226   *   ELSE
+   1C4E                6227   ELSE2Z
+   1C4E   F1           6228                POP   AF
+   1C4F  CDIBAA        6229                CALL  SET COUNT
+   1€52  CD1D01        6230               CALL   VRAM WRITE
+                       6231  *    END   IF
+   1€55                6232  END IF22
+   1€55  C9            6233               RET
+                       6234
+                       6235
+                       6236  *  PROCEDURE   INIT SPR  ORDERQ    (SPRITE  COUNT:BYTE);
+                       6237
+                       6238  *  THIS  IS THE  PASCAL  ENTRY  POINT   TO THE   INIT SPR  ORDER    ROUTINE.
+                       6239
+   1€56  00010001      6240  INIT SPR  P        DEFW                1,1
+                       6241
+              <1C5A>   6242  INIT SPR  ORDERQ   EQU                 &
+   1C5A  011C56        6243                     LD                  BC,INIT SPR  P
+   1C5D  1173BA        6244                     LO                 DE ,PARAM AREA
+   1C60  CD0098        6245                     CALL                PARAM
+   1C63  3A73BA        6246                     LD                 A, (PARAM AREA)
+                       6247
+   1066                6248  INIT SPR  ORDER  |                      INITIALIZES     THE SPRITE   DISPLAY    ORDER.
+                       6249                                         LIST  IN  RAM  TO  DEFAULT   ORDER   (0...31)
+                       6250                                         7IN: NUMBER   OF  SPRITES   TO ORDER    IN ‘A!
+                       625)

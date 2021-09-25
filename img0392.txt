@@ -1,0 +1,59 @@
+‘ILE: OS_7PRIME  :pOS          HEWLETT-PACKARD:      GAME  OPTION   (c)  Coleco,   1982    CONFIDENTIAL                 Fri,  18  May  1984,  16:21        PAGE  118
+
+OCATION  OBJECT   CODE    LINE        SOURCE   LINE
+
+                         5736
+                         5737    RRSARRAARAAAAAARRAAAAARRARE      EXTERNAL   SYMBOLS   RRRRARAARAAARAAAARRAKKERRERKKER
+                         sp      RAAATATKAAATAARAERCALAKARAAKCAATRAAAEAKCKCAAAAKARRAKAAARAAAKKARAAKAKAKKAKRAKAKRAKKAEKR
+                         5740
+                         5741    * EXTERNAL   ROUTINES    FROM  OS
+                         5742                                   oo
+                         5743                      EXT    INIT TABLE
+                         5744                      EXT   PUT  VRAM
+                         5745                      EXT   WRITE  REGISTER
+                         5746                      EXT   WRITE  _VRAM
+                         5747                      EXT   VRAM  ADDR TABLE
+                         5748                      EXT    SPRITENAMETBL
+                         5749                      EXT    SPRITEGENTBL
+                         5750                      EXT   PATTRNNAMETBL
+                         5751                      EXT   PATTRNGENTBL
+                         5752                      EXT   COLORTABLE
+                         5753                      EXT   LOAD  ASCII
+                         5754                      EXT    FILL VRAM
+                         5755                      EXT   MODE 1
+                         5756
+                         5757    SBEEAKAAARAAARARAREKARERRAAK      DEF IN] TIONS  RRMRRAAKARARAARAKEARAAAARKKEAKRKRER
+                           ae   SRRAAAAALAARRKEAARAAEAKAKRAARAKKKE   EXPORTS   RERRAAKAAKRARKAAAAARAEKAKRARAKRKKRE
+                         5760
+                         5761                       GLB  GAME  OPT_
+                         5762
+                         5763    SRREAARKAARREARARARRAAAEER DISPLAY  GAME  OPT  ION SCREEN   BHEAEARAKAKAERARKEKKEKERE
+                         5764
+                         5765   *   GAME OPT      DISPLAYS   THE  GAME  OPTION  SCREEN   WITH  WHITE   LETTERS   ON  A
+                         5766   *                 BLUE  BACKGROUND.     VDP  IS LEFT   IN MODE   1 WITH   THE VRAM
+                         5767   *                 MEMORY  MAP  AS  FOLLOWS.
+                         5768   *
+                         5769   ;                          |      VDP  MEMORY  MAP
+                         5770   ;                   3800H-3FFFH     SPRITE   GENERATOR   TABLE
+                         571    ;                   2000H-37FFH     PATTERN   COLOR  TABLE
+                         S772   ;                   1BOOH-1B7FH     SPRITE   ATTRIBUTE   TABLE
+                         5773   ;                   1800H-1AFFH     PATTERN   NAME  TABLE
+                         5774   ;                   OOOOH-17FFH     PATTERN   GENERATOR   TABLE
+                        5775
+                        5776                        PROG
+    1979210000          5777    GAME OPT_           LD  HL,O                               ;ZERO   VRAM
+    197¢ 114000         5778                        LD  DE, 16384
+    197F3€00            5779                        LD  A,0
+    1981CD1F82          te   1                      CALL  FILL_VRAM
+                        5782    *   SET  UP  VDP  WITH  MODE 1
+    1984CD1F85          5783                        CALL  MODE 1
+                        5784
+                        5785    *   SET  UP  BACKGROUND   COLOR
+   1987 060F            5786                        LD  B,OFH                                                                                                                    .
+   1989 0E04            5787                        LO  C,4
+   1988 CD1FD9          5788                        CALL  WRITE REGISTER
+                        ome     Renkenennennaeweeee      URTTE  OUT  PATTERN   GEN  TABLE  ********eeeennnan
+                        5791
+   198E CD1F7F          5792                        CALL  LOAD ASCII
+
+                                                                                                              A

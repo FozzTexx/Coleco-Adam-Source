@@ -1,0 +1,48 @@
+FILE:   .sSsABS:EOS   TF             HEWLETT-PACKARD:         DIR_HANDL     (c)    Coleco    isu    Confidential                              Sat,     8   Sep   1984,   23:40           PAGE    107
+
+LOCATION     OBJECT   CODE     LINE         SOURCE    LINE
+
+                              4178
+      ESBF                    4179    LOAD  NEW  _ENTRY_INFO:
+      ESBF   FOES             4180               PUSH         IY                      ;GET   NAME   ADORESS     INTO    DE
+     E9Ci    Di               4181               PoP          DE
+                              4182
+     E9C2    2AFE10           4183               LD          HL,[USER_    NAME]       ;GET   USER’S    STRING    ADDRESS
+                              4184    «
+     E9CS    CDE9A2           4185               CALL                                 ; DLS(8/28/83)
+     ESC     C2ESFF           4186               uP          NZ,  MAKE  ERR   1
+                              4187    *
+     E9CB    EDBO             4188               LOIR                                 ;COPY   USER’S    NAME    INTO   DIR   ENTRY
+                              4189
+     E9CD    3E10             4190               LO          A,ATTR_USER              ;SET   THE  DEFAULT     ATTRIBUTE
+     E9CF    FD770C           4191               LD           [1Y+OIR_ATTR),A
+                              4192              |                                                                                                                                                       é
+     E902    ED4BFEOC         4193               LO          BC,  (BLOCKS   REQ]       ;GET   NEW   FILE’S    MAX   SIZE
+     E906    FD7111           4194               LO           {I¥+DIR_MAX_LENGTH),C           ;PUT   INTO    DIR
+     E909    FO7012—i(s‘«C    195                LD           [1Y¥*DIR_MAX_LENGTH+1],8
+                              4196,
+                              4197
+     E90C    FD361301         4198               LD           {1¥+DIR_USED_LENGTH],1            ;INIT   COUNT    OF   BLOCKS    USED
+     E9EO    FD361400         4199               LD           [1¥*DIR_USED_LENGTHt1],0
+                os            4200
+     E9E4    FD361500         4201               LO          (I¥+DIR_LAST_COUNT],O              ;INIT   BYTECOUNT      IN   LAST   BLOCK
+  .  E9EB    FD361600         4202               LD          (1 ¥*#DIR_LAST_COUNT+1]},0
+     |              |         4203                |
+     ESEC    3AFDEO           4204               LD          A. [EOS  YEAR]           >INSERT    THE   DATE
+     ESEF    FDO7717          4205               LO          (IV+DIR_VEAR],A
+     ESF2    3AFDE1           4206               LD          A, {EOS  MONTH]
+     E9FS    FD7718           4207               ‘LO         (1¥*#DIR_  MONTH)    ,A
+     ESFS    3AFDE2           4208               LD          A, [EOS  DAY)
+     E9FB    FD7719           4209               LD          [1V¥+DIR_DAY],A
+                              4210
+     EQFE    AF               4211.                          A
+                    |         4212
+     EFF                      4213    MAKE  _ERR_1:
+     ESFF    C9               4214               RET
+                         -    4215
+                              4216    ;
+                              4217    ;SSSSSSSKSSHSSSSKSSSCSSSCESSSSSSSREKSTERSETS              SE SSRRSTRARRERRERESEREERTC         EEE
+                              4218    ,SSSSSSSSHTESSSSSESTTSSSSSSHTESSSSSSSSE               SESE  SERS   SRESKEERREERRETEBERKE
+                              4219    ,BESSSKSSESESSSSSEESSSSHESCHSSSTCRERSEESTCE             ESRC ERSSRERREREREBRESEESEREBEE
+                              4220    ;
+                             4221

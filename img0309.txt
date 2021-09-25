@@ -1,0 +1,61 @@
+FILE: OS 7PRIME:pOS           HEWLETT-PACKARD:   LOAD  NEXT  NOTE   (c) Coleco,    1982   CONFIDENTIAL               Fri,   18 May   1984,  16:19        PAGE   35
+
+LOCATION  OBJECT   CODE  LINE      SOURCE  LINE
+
+    O3FA   FEO1           1448 116      cP 1                         ;test  for  type   1
+                         1449  ;        IF  (PSW,1S, ZERO)           snote   is type   1: swept   freq,   fixed  attenuation
+    O3FC  2018           1450           JR W2,L17
+                         1451  ;          --CASE--  note   type  1
+                         1452  ;          * set  up NEXT  MOTE  PTR
+    O3FE   1€06          1453  TYPE1      LO E,6                        snote  after   this  note   is 6 bytes   away,
+    0400   1600          1454             LD 0,0                        spt HL  to  it
+    0402   19            1455             ADD  WL,DE
+    0403  007501         1456             LD  (IX+1),L                 zstore   in  NEXT_NOTE  PTR
+    0406  007402         1457             LD  (1X+#2),H
+                         1458  ;          * move  new  note  data   and fill   in bytes   where   necessary
+    0409  28             1459             DEC  WL                      spoint   HL  back  to  ist  ROM  data   to move,   FSTEP
+    040A  1C             1460             INC E                        7B:  =  7; point   DE  to  destination:    bytes   7-3
+    0408  CD0478         1461             CALL  DE TO  DEST
+    040€  010005         1462             LO BC,5                      gmove  5  bytes
+    0411  E0B8           1463             LDOR
+    0413  00360800       1464             LD  (IX+ASTEP) ,O            ;set  for  no  atn  sweep
+    0417  1848           1465             JR MODBO
+                         1466  ;        ENDIF
+    0419  FEO2           1467  L17      CP 2                         stest  for  type  2
+                         1468  ;        IF  (PSW,1S,ZERO}            snote  is  type  2:  fixed   freq,  swept   attenuation
+    0418  2028           1469           JR MZ,TYPES
+                         1470  ;          --CASE--  note   type  2
+                         1471  ;          * set  up NEXT NOTE   PTR
+    041D  1&06           1472  TYPE2      LD E,6                       spt  HL  to note   after   this  note;   since   it's  6  bytes  away,
+    041F  1600           1473             LD D,0                       spt  HL  to  it by  adding   6
+    0421  19             1474             ADD  Ht,DE
+    0422  Fi             14675            POP AF                       ;A  := header   this   note   (CH#  | SONGNO)
+    0423  F5             1476             PUSH  AF                     ;put  back  on  stack
+    0424  E6CO           1477             ANDO 110000008               smask  SONGNO,    leaving   CH#
+                         1478  ;          IF  (PSW,1S,Z2ERO)     ~~    sthis   is a  noise  note,   which   is  only  5  ROM  bytes   long
+    0426  2001           1499             JR WZ,L18
+    0428  28             1480               DEC  HL                      3:80 move   WL  back  1 byte
+                         1481  ;          ENDIF
+    042°  907501         1482  118        LD  {1X+1),L                 ;put  addr   in NEXT  NOTE  PTR
+    042C  007402         1483             LD  (1M+2),H
+                         1484  ;          * move  new  note  data   and fill  in  bytes   where  necessary
+    042F  28             1485             DEC WL                       spoint   HL back   to  Ist  ROM  data  to  move,   APS
+    0430  1£09           1486             LD E,9                       spoint  DE  to  destination:     bytes  9,8,5   -  3
+    0432  CD0478         1487             CALL  DE_TO  DEST
+    0435  010002         1488             LD BC,2_                     smove  2  bytes
+    0438  E€D88          1489             LDOR                         swhen  done,   DE  points   to  FSTEP,  HL  to  ROM   NLEN
+    043A  3€00           1490             LD A,O
+    043C  12             1491             LD  {0E&),A                  ;FSTEP   := 0  for  no  freq  sweep
+    0430  18             1492             DEC DE                       ;pt  DE  to RAM   NLEN
+    O43€  18             1493             DEC DE
+    O43F  0€03           1494             LO C,3                       smove  last   3 ROM  bytes;    if this   is a  noise   note,   garbage
+    0441  E088           1495             LOOR                         swill  be  loaded   into  byte   3,  buts  that's   OK
+    0443  181C           1496             JR 40080
+                         1497  ;        ENDIF
+                         1498  ;        if here,  note  is  type  3:  swept  freq,   swept  attenuation                                                                     e
+                         1499  ;        --CASE--  note  type  3
+                         1500  ;        * set up  NEXT NOTE  PIR
+    0445  1£08           1501  TyPE3    LD E,8                       ;note  after  this   note  is  8  bytes  away,
+    0447  1600           1502           LD 0,0                       spt HL  to  it
+    0449  19             1503           ADD HL,DE
+    044A  DD7501         1504           LO (IX+#1),L                   ;put  addr  in  NEXT NOTE   PTR

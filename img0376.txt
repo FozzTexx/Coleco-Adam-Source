@@ -1,0 +1,51 @@
+ILE: OS _7PRIME : pos          HEWLETT-PACKARD:     CONTROLLER    SOFTWARE    (c) Coleco,    1982    CONFIDENTIAL         Fri,  18  May  1984,  16:21        PAGE  102
+
+OCATION  OBJECT   CODE   LINE        SOURCE   LINE
+
+   12ED  5F              5012                 LD    E,A                 SAVE    IT
+   12EE  FD4606          5013                 LD    B,{IY+ARM  OLD)     ;GET  OLD  DATA  AND   CURRENT   STATE
+   12F1  FD7E07          5014                 LD    A, [IY+ARM_ STATE)
+   12-4  FEOO            5015                 cp    0                   SIF  STATE   <> 0
+   12F6  2013            5016                 JR    NZ,ARM STI          >THEN   MUST  BE  STATE   1
+                         5017   *   STATE   = 0                         ;ELSE
+   12F8  7B              5018                 LD    A,E         _'            CURRENT   DATA
+   12F9  B8              5019                 cP    B                   TF   OLD=NEW
+   12FA  2805            5020                 JR    2,ARM_REG           ;THEN   SAW DATA   TWICE   IN  SEQUENCE
+   12FC  F07306          5021                 LD    {IY*ARM  OLD],E     ;ELSE   FIRST  TIME,   SAVE   CURRENT   DATA
+   12FF  1815            5022                 JR    ARMEXIT
+                         5023   *   SAW  DATA  TWICE   1N SEQUENCE
+   1301                  5024   ARM REG
+   1301  3€01            5025                 LD    A,1                 ;SET  STATE=1
+   1303  FD7707          5026                 LD    (IY*ARM_STATE],A
+   1306  007303          5027                 LO    (IX*ARMJ,E          ;SAVE   IM CONTROLLER    MEMORY   @ARM
+   1309  1808            5028                 JR   ARM  EXIT
+                         5029   *   STATE   = 1
+   1308                  5030   ARM ST1
+   1308  78              5031                 LD   A,E                  GET   CURRENT   DATA
+   130C  88              5032                 cp   B                    IF   OLO=NEW
+   1300  2807            5033                 SR    2,ARM_EXIT          ;WO  CHANGE   IN STATE
+   130F  FD7306          5034                 LD             OLD),E     ;ELSE  SAVE   CURRENT   DATA
+   1312  AF              5035                 KOR  A                    SET   STATE=0
+   1313  FD7707          5036                 LD    [IY+ARM STATE)   ,A
+   1316                  5037   ARM EXIT
+   1316  D1              5038                 POP  DE
+   1317  C1              5039                 POP  BC
+   1318  C9              5040                 RET
+                         5041
+                         5042
+                         5043   ;                  EXT                  CONTROLLER  MAP
+                         5044   * THIS   1S  AN EXTERNAL   POINTER   (  DEFINED   IN  THE CARTRIDGE)     TO  THE
+                         5045   * CARTRIDGE    PROGRAMMER'S    CONTROLLER    MAP  AREA.
+                         5046
+                         5047   * THE  CARTRIDGE   PROGRAMMER    IS  RESPONSIBLE    FOR  MAINTAINING     THIS  AREA.
+                         5048
+                         5049                      DATA
+                         5050   DBNCE BUFF         DEFS                 NUM DEV*4
+                         5051   SPIN SwO  CT       DEFS                 1
+                         5052   SPIN SW1  CT       DEFS                 1
+                         5053   STROBE FLG         DEFS                 1
+                         5054   $0CO               DEFS                 1
+                         5055   sOC1               DEFS                 1
+                         5056   $1CO               DEFS                 1
+                         5057   $1 C1              DEFS                 1
+                         5058    PROG

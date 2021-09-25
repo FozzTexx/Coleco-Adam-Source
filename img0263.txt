@@ -1,0 +1,63 @@
+                                                                                        =   =   Sn        ae     ee   —_—_———Deniualee
+
+      HP 640LU                                                  Jue,  10wvul1984,   2:32           Page  5
+
+      _GET_OCB_ADOR     FC57      EQSCMN_O6:N_EOS
+      _GET_PCB_ADDR     FCSA      EOSCMN_O6:N_EOS
+      _GOTO_wP          FCE7      EOSCMN_O6:N_EOS             EOS_START:N_EOS
+      ~HARD_INIT        FCSD      EOSCMNO06:N_EOS
+      ~HARD_RESET_NET   FC6O      EOSCMNO6: N_EOS
+      _INIT_TAPE_DIR    FCBD      EOSCMN_O6:N_EOS
+      _MAKE_FILE        FCCS      EOSCMN_O6:N_EOS
+       MODE_CHECK       FCF9      EOSCMN_O6:N_EOS
+        PENFILE         FCCO      EOSCMN_O6:N_EQOS
+      “POSIT_FILE       FOO2      EOSCMNO6: N_EOS
+      ~PR_BUFF          FC63      EOSCMNO6: N_EOS
+      _PR_CH            FC66      EOSCMN_O6:N_EOS
+      ~QUERY_FILE       FCCC      EOSCMN_O6:N_EOS
+       RD_1 BLOCK       FC69      EOSCMNO6: N_EOS
+      _RD_DEV_DEP_STA   FCE4      EOSCMN_O6:N_EOS
+      _RD_KB8D          FC6C      EOSCMN_O6:N_EOS
+      _RD_KBD_RET_COD   FC6F      EOSCMN_O6:N_EOS
+      _RD_PR_RET_CODE   FC72      EOSCMN_O6:N_EOS
+      ~RD_RETCODE       FC75      EOSCMN_O6:N_EOS
+       RD_TAPE_RET_CO   FC78      EOSCMN_O6:N_EOS
+        EAD_BLOCK       FCF3      EOSCMN_O6:N_EOS
+        EAD_EOS         FCEA      EOSCMN_O6:N_EOS
+        EAD_FILE        FCD2      EOSCMN_O6:N_EOS
+        ELOCPCB         FC7B      EOSCMN_O6:N_EOS
+        ENAMEFILE       FCDE      EOSCMN_O6:N_EOS
+      ~REQUEST_STATUS   FC7E      EOSCMN_O6:N_EOS
+      ~REQ_KBD_STAT     FC81      EOSCMNO6: N_EOS
+      ~REQ_PR_STAT      FC84      EOSCMN_O6:N_EOS
+      ~REQ_TAPE_STAT    FC87      EOSCMN_O6:N_EOS
+      "RESETFILE        FCC6      EOSCMN_O6:N_EOS
+      _SCAN_ACTIVE      FCBA      EOSCMN_O6:N_EOS
+      ~SCAN_FOR_FILE    FCFC      EOSCMN_O6:N_EOS
+      x ET_DATE         FCD8      EOSCMN_O6:N_EOS
+      = ETFILE          FCCF      EOSCMN_O6:N_EOS
+      _SOFT_INIT        FC8D      EOSCMNO6: N_EOS
+      ~SOFT_RES_DEV     FC9O      EOSCMN_O6:N_EOS
+      ~SOFT_RESKBD      FC93      EOSCMN O06N_EOS
+      ~SOFT_RESPR       FC96      EOSCMN_O6:N_EOS
+      ~SOFT_RESTAPE     FC9S      EOSCMNOG: N_EOS
+      ~START_PR_BUFF    FC9OC     EOSCMN_O6:N_EOS
+      ~START_PR_CH      FCOF      EOSCMN_O6:N_EOS
+      ~START_RD_1BLO    FCA2      EOSCMN_O6:N_EOS
+      _START_RD_CH_DE   FCAS      EOSCMNO06:N_EOS
+      _START_RD_KBD     FCA8      EOSCMN_O6:N_EOS
+      _START_WR1 BLO    FCAB      EOSCMN_O6:N_EOS
+      ~START_WR_CH_DE   FCAE      EOSCMNO06:N_EOS
+      _>YNC             FCB1      EOSCMN_O6:N_EOS
+      _TRIM_FILE        FCED      EOSCMNO6: N_EOS
+      “WRITEBLOCK       FCF6      EOSCMNO06:NEOS
+      “WRITE_FILE       FCDS      EQSCMN_0O6N_EOS
+      ~WR_1_BLOCK       FCB4      EQSCMNO06:N_EOS
+      ~WR_CH_DEV        FCB7      EOSCMN O6:N_EOS
+        ADD616          E374      A_u0S_00:N_EOS              EOSCMNO6:N_E0S
+        CALCOFFSET      E10A      A_u0S_00:N_EOS              EOSCMN_O6:NEOS
+        CHECK_FCB       FO89      UTILS:N_EOS                 EOSCMNO6:N_EOS
+        CLOSEFILE       EBO4      OPENS:N_EOS                 EOSCMNO6:N EOS
+        CONS_DISP       F627      CONSOUT:N_EOS               EOSCMN_O6:NEOS
+
+|VTEVVVGTVVVVVVVVVVVV             VV  UVUVUVV  VUVV  VU  VV  VVU  VU  VUV  VUVVV   VUV  UU  VV  VV UV  VY

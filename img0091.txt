@@ -1,0 +1,50 @@
+         “                                                                               s
+                                                                                        -
+FILE:       ~   »:€0S_TF           HEWLETT-PACKARD:      SOUND    EQU€S   (c)  Coleco,        _2    CONF  IDENTIAL                   Sat,    8  Sep   1984,    23-39             aE      a?
+
+LOCATION     OBJECT    CODE  LINE        SOURCE   LINE
+
+                             3191
+                             31G2Q  ;eeeeeeeeereaeeseseeresereees
+                             3193   ;*    PROCESS   DATA_AREA           *
+                             31Q4   ,Steerer eserregeeseoeueeeeees
+                             3195
+                             3196   ;See  Users’   Manual    for   description
+                             3197   ;Terminology:     SFX   2  address    of  sound  effect     routine
+                             3198
+      E4CD                   3199   PROCESS  DATA_AREA                               |
+      E4CD   CDE397          3200             CALL       AREA_SONG_IS          ;return    area’s    SONGNO     in A   [and   addr   SFX  in  HL]
+      E4D0   FEFF            3201             cP         INACTIVE              ;test   for   inactive     code
+      E4D2   C8.             3202             RET        Z                     ;RET,   no   processing      if  area   inactive
+                             3203
+                             3204   ;         *  if special     effect,    call   it to   process     the  data   area
+                             3205
+      E403   FESE            3206             cP         62                    ;test   for   special     sound   effect
+      E4D5   2005            3207             JR         NZ,L10                ;1f  PSW    is zero    data   area   used   by  sound   effect
+      E4D7   110007          3208             LO         DE ,7                 ;pt  HLto    SFX+7,    starting    adr   of   the  effect’s     cod  e
+      E4DA   19              3209             ADD        HL ,DE
+      E4DB   £9              3210.            JP         {HL )                 -do  1  pass   thru    effect,    RET   from   effect
+                             3211
+                             3212   ;          ENDIF
+                             3213
+                             3214   ;         * else   process     a non-effect     note
+                             3215              |
+      E4DC                   3216   L10
+      E40C   CDE2F7          3217             CALL       ATN_SWEEP             ;process     atn  sweep    data,    if  any
+      E4DF   CDE2C7          3218             CALL       FREQ  SWEEP           ;proc   frq   sweep   data,     if any,    &  note  dura    timer  s
+       :                     3219   see       JR      |  NZ,L12                ;'f  PSW   {ts zero    note   is  over
+      E4E2   CO              3220             RET        NZ
+      E4E3                   3221   EFXOVER
+      E4E3   DD7EOO          3222             LO         A,[IX+O]              ;A  := CH#                 this   note
+      E4E6   F5              3223             PUSH       AF                    ;save  on    stack
+      E4E7   CDE4F2          3224             CALL       LOAD_NEXT   NOTE     ;load  data    for   next   note
+      E4EA   C1              3225             PoP        BC                    ;B  := CHA       SONGNO    previous     note
+      E4EB   DDO7EOO         3226             LO         A,[1X+0])             ;A  :® CHA#      SONGNO    new   note   [may   be  inactive]
+      E4EE   B88             3227             cP         8                     ;check    against    new   note’s    CHé#     SONGNO
+                             3228   ese       JR         Z,L12                 >1f  PSW   is  non-zero     change    to/from     tone/efx/noise
+      E4EF   C8              3229             RET        Z
+      E4FO   1888            3230             JR         UP_CH_DATA_PTRS       ;to  maintain     data   area    priority     system
+                             3231
+                             3232   ;         ENDIF
+                             3233   ;         END  SNOMAN
+                             3234
